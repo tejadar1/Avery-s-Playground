@@ -94,12 +94,12 @@ struct MathView: View {
     /// A plate of food; tapping a piece counts it, carrying on from the first plate into the second.
     private func plate(count: Int, startingAt start: Int, label: String) -> some View {
         VStack(spacing: 6 * uiScale) {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 46 * uiScale), spacing: 4 * uiScale)], spacing: 4 * uiScale) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 62 * uiScale), spacing: 4 * uiScale)], spacing: 4 * uiScale) {
                 ForEach(start..<(start + count), id: \.self) { piece in
                     Button { tapPiece(piece) } label: {
                         Text(problem.food.emoji)
-                            .font(.system(size: 38 * uiScale))
-                            .frame(width: 46 * uiScale, height: 46 * uiScale)
+                            .font(.system(size: 52 * uiScale))
+                            .frame(width: 62 * uiScale, height: 62 * uiScale)
                             .overlay(alignment: .topTrailing) {
                                 if let order = counted.firstIndex(of: piece) {
                                     Text("\(order + 1)")
