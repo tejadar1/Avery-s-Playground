@@ -53,6 +53,7 @@ struct ColorsView: View {
             }
             .padding()
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
+            .frame(maxWidth: 560 * uiScale)  // wider makes the circles too tall for a landscape iPad
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
