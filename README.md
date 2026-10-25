@@ -26,6 +26,8 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 - **No ads, no in-app purchases, no accounts, no internet.** Nothing is collected or sent anywhere.
 - Words are read aloud with the iPhone's built-in voice, so no recordings are needed. Speech still plays
   when the silent switch is on.
+- For a more natural voice, download a Premium or Enhanced one: Settings → Accessibility → Spoken Content →
+  Voices → English (and Spanish for the Spanish games). The app uses the best voice it finds.
 - Big buttons, haptic "taps", and no text you need to read to get around.
 - Follows Apple's design guidelines for kids' apps: buttons at least 44 points, standard back navigation, and
   Reduce Motion (Settings → Accessibility → Motion) stills the wagging, twinkling and spinning.
@@ -54,8 +56,9 @@ Then in Xcode:
 ## TestFlight (no Mac needed)
 
 GitHub builds the app on every push (`.github/workflows/build.yml`) and runs the unit tests on an iPhone
-simulator. Mac build minutes are costly on a private repo, so the screenshots of every game and the TestFlight
-upload only run for pushes to main, or when started by hand (Actions → Build → **Run workflow**). The upload
+simulator. Mac build minutes are costly on a private repo, so the TestFlight upload only runs for pushes to
+main, or when started by hand (Actions → Build → **Run workflow**). Screenshots of every game on iPhone and iPad
+take about 10 more minutes, so they only run when you tick **Take screenshots** on a manual run. The upload
 needs these one-time steps, all doable in Safari on an iPhone.
 
 1. Join the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
@@ -65,14 +68,12 @@ needs these one-time steps, all doable in Safari on an iPhone.
    any SKU. The name must be unused on the App Store, so use something like "Avery's Play: Kids Games".
    The name under the icon is "Avery's Play" either way (set in `project.yml`).
 4. In App Store Connect → Users and Access → Integrations → **App Store Connect API**, generate a team key
-   with **Admin** access. Note the Key ID and Issuer ID, and download the `.p8` file (Apple lets you download
-   it only once).
-5. Find your **Team ID** under Membership details on [developer.apple.com/account](https://developer.apple.com/account).
-6. In this GitHub repo → Settings → Secrets and variables → Actions, add four repository secrets:
-   - `APP_STORE_CONNECT_KEY_ID`: the Key ID
-   - `APP_STORE_CONNECT_ISSUER_ID`: the Issuer ID
-   - `APP_STORE_CONNECT_KEY`: the full text of the `.p8` file, including the BEGIN and END lines
-   - `APPLE_TEAM_ID`: the Team ID
+   with **Admin** access and download the `.p8` file (Apple lets you download it only once).
+5. Put the key's Key ID, the Issuer ID and your Team ID (Membership details on
+   [developer.apple.com/account](https://developer.apple.com/account)) in the `testflight` job in
+   `.github/workflows/build.yml`. They aren't secret.
+6. In this GitHub repo → Settings → Secrets and variables → Actions, add one repository secret,
+   `APP_STORE_CONNECT_KEY`: the full text of the `.p8` file, including the BEGIN and END lines.
 7. In GitHub → Actions → Build → **Run workflow**. When it finishes, Apple takes 10–30 minutes to process the
    build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
    install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
@@ -88,7 +89,7 @@ AverysPlayground/
   Support/      Speech, haptics, fonts and shared styles
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
-AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (main and manual builds)
+AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (manual builds with screenshots ticked)
 Art/            SVG sources for Coco, the hand, the game icons (Art/icons), and the app icon
 project.yml     XcodeGen project definition
 ```

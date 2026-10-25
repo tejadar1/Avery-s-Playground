@@ -27,6 +27,16 @@ enum HairTool: CaseIterable, Hashable {
         case .scissors: "Scissors"
         }
     }
+
+    var sound: Sound {
+        switch self {
+        case .shampoo: .bubbles
+        case .rinse: .water
+        case .dryer: .dryer
+        case .comb: .brush
+        case .scissors: .snip
+        }
+    }
 }
 
 /// The customer's hair. Points are 0...1 across and down the drawing.
@@ -288,7 +298,10 @@ struct HairSalonView: View {
 
     private func work(at location: CGPoint, side: CGFloat) {
         guard !isShowingOff, tray == .wash else { return }
-        if !isWorking { Haptics.tap() }
+        if !isWorking {
+            Haptics.tap()
+            Sounds.shared.play(tool.sound)
+        }
         isWorking = true
         toolTip = location
         hair.use(tool, at: CGPoint(x: location.x / side, y: location.y / side))
@@ -296,6 +309,7 @@ struct HairSalonView: View {
 
     private func finishWork() {
         toolTip = nil
+        Sounds.shared.stop()
         guard isWorking else { return }
         isWorking = false
         switch tool {
@@ -315,6 +329,7 @@ struct HairSalonView: View {
 
     private func showOff() {
         Haptics.success()
+        Sounds.shared.play(.sparkle)
         withAnimation(.spring) { isShowingOff = true }
         say("Ta-da! She looks beautiful! Holy guacamole!")
     }

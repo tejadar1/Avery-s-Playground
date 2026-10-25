@@ -226,8 +226,10 @@ struct ColorsView: View {
     private func color(at point: CGPoint) {
         guard let index = page.region(at: point) else { return }
         Haptics.tap()
+        Sounds.shared.play(.pop)
         withAnimation(.easeOut(duration: 0.3)) { fills[pageIndex][index] = selected.color }
         if !fills[pageIndex].contains(.white), selected.color != .white {
+            Sounds.shared.play(.sparkle)
             say("Wowza! You colored the whole \(page.name)!")
         }
     }

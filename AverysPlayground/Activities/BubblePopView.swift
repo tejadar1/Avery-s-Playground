@@ -93,6 +93,7 @@ struct BubblePopView: View {
     private func pop(_ bubble: Bubble, in size: CGSize) {
         let spot = Pop(position: bubble.position(at: .now, in: size))
         Haptics.pop()
+        Sounds.shared.play(.pop)
         withAnimation(.easeOut(duration: 0.2)) {
             bubbles.removeAll { $0.id == bubble.id }
             pops.append(spot)

@@ -125,6 +125,7 @@ struct ReadingView: View {
         guard !isSolved else { return }
         if choice == word {
             Haptics.success()
+            Sounds.shared.play(.sparkle)
             withAnimation(.spring) {
                 isSolved = true
                 stars += 1
