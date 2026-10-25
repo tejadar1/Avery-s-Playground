@@ -39,12 +39,9 @@ struct HomeView: View {
                 activity.destination
                     .navigationTitle(activity.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbarBackground(activity.color, for: .navigationBar)
-                    .toolbarBackground(.visible, for: .navigationBar)
-                    .toolbarColorScheme(.dark, for: .navigationBar)
             }
         }
-        .tint(.white)
+        .tint(Color.outline)
     }
 }
 

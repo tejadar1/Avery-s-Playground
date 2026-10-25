@@ -70,9 +70,6 @@ struct StoriesView: View {
         NavigationLink {
             destination()
                 .navigationTitle(title)
-                .toolbarBackground(color, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarColorScheme(.dark, for: .navigationBar)
         } label: {
             HStack(spacing: 16 * uiScale) {
                 Text(cover).font(.system(size: 60 * uiScale))

@@ -64,6 +64,7 @@ struct CocoSays: View {
         "I have lots and lots of teeth, and I brush every one!",
     ]
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var joke: String?
     @State private var spins = 0
 
@@ -78,7 +79,7 @@ struct CocoSays: View {
                 } animation: { _ in
                     .spring(response: 0.2, dampingFraction: 0.5)
                 }
-                .rotationEffect(.degrees(Double(spins) * 360))
+                .rotationEffect(.degrees(reduceMotion ? 0 : Double(spins) * 360))
                 .animation(.spring(response: 0.6, dampingFraction: 0.6), value: spins)
                 .onTapGesture(perform: beSilly)
                 .accessibilityLabel("Coco")
