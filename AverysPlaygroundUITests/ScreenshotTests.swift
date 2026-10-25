@@ -70,7 +70,8 @@ final class ScreenshotTests: XCTestCase {
     }
 
     private func snap(_ name: String, to dir: String) throws {
+        let device = UIDevice.current.userInterfaceIdiom == .pad ? "iPad" : "iPhone"
         try XCUIScreen.main.screenshot().pngRepresentation
-            .write(to: URL(fileURLWithPath: dir).appendingPathComponent("\(name).png"))
+            .write(to: URL(fileURLWithPath: dir).appendingPathComponent("\(device) \(name).png"))
     }
 }
