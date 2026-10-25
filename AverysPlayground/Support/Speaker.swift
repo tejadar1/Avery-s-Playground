@@ -27,11 +27,28 @@ final class Speaker {
         speak(AVSpeechUtterance(attributedString: sound))
     }
 
-    private func speak(_ utterance: AVSpeechUtterance) {
+    /// Says the Spanish, the English meaning, then the Spanish again with a pause so the child can repeat it.
+    func say(spanish: String, english: String) {
+        let first = AVSpeechUtterance(string: spanish)
+        let meaning = AVSpeechUtterance(string: english)
+        let again = AVSpeechUtterance(string: spanish)
+        for utterance in [first, again] {
+            utterance.voice = AVSpeechSynthesisVoice(language: "es-MX")
+        }
+        meaning.preUtteranceDelay = 0.3
+        again.preUtteranceDelay = 0.6
+        speak(first, meaning, again)
+    }
+
+    private func speak(_ utterances: AVSpeechUtterance...) {
         synthesizer.stopSpeaking(at: .immediate)
-        utterance.rate = 0.42
-        utterance.pitchMultiplier = 1.15
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        synthesizer.speak(utterance)
+        for utterance in utterances {
+            utterance.rate = 0.42
+            utterance.pitchMultiplier = 1.15
+            if utterance.voice == nil {
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            }
+            synthesizer.speak(utterance)
+        }
     }
 }
