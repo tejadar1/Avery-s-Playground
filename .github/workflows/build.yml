@@ -73,7 +73,9 @@ jobs:
         name: Sign and upload to TestFlight
         run: |
           mkdir -p ~/private_keys
-          echo "$KEY" > ~/private_keys/AuthKey_$KEY_ID.p8
+          # Rebuild the key's lines, since pasting it on a phone can join them or add spaces.
+          body=$(printf '%s' "$KEY" | sed 's/-----[A-Z ]*-----//g' | tr -d ' \t\r\n')
+          printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$body" | fold -w 64)" > ~/private_keys/AuthKey_$KEY_ID.p8
           cat > build/ExportOptions.plist <<PLIST
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
