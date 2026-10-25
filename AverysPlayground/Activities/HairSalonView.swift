@@ -242,7 +242,7 @@ struct HairSalonView: View {
                             } label: {
                                 Circle()
                                     .fill(color)
-                                    .overlay(Circle().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
+                                    .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                                     .frame(width: 60 * uiScale, height: 60 * uiScale)
                             }
                         }
@@ -370,7 +370,7 @@ private struct ToolPicture: View {
 private enum HairArt {
     static func draw(_ hair: Hairdo, skin: Color, in context: inout GraphicsContext, size: CGSize) {
         let s = size.width
-        let line = 0.012 * s
+        let line = 0.008 * s
         let outline = Color.outline
         let wetShade = Color.black.opacity(0.25 * hair.wetness)
 

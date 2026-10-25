@@ -91,7 +91,7 @@ project.yml     XcodeGen project definition
 
 ### Art
 
-The art is flat, bright cartoon color with a thick dark-brown outline (`Color.outline` in code).
+The art is soft cartoon color with a thin dark-brown outline (`Color.outline` in code), a darker second tone for shading, and small dot eyes.
 Coco and the hand are SVGs in `Art/`. After editing one, re-render the PNGs into the asset catalog:
 
 ```sh

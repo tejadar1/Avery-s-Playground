@@ -163,7 +163,7 @@ struct NailSalonView: View {
                 ZStack(alignment: .top) {
                     Capsule()
                         .fill(Color(red: 1.0, green: 0.86, blue: 0.78))
-                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 8 * uiScale))
+                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
                         .frame(width: size.width * 1.45, height: size.height * 2.4)
                     NailView(nail: nails[index], size: size)
                         .matchedGeometryEffect(id: index, in: zoom)
@@ -380,7 +380,7 @@ private struct NailView: View {
             }
         }
         .frame(width: size.width, height: size.height)
-        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: max(2, size.width * 0.09)))
+        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: max(1.5, size.width * 0.06)))
     }
 }
 
@@ -439,7 +439,7 @@ struct PolishBottle: View {
                 .overlay(alignment: .topLeading) {
                     Capsule().fill(.white.opacity(0.6)).frame(width: 7 * uiScale, height: 18 * uiScale).padding(9 * uiScale)
                 }
-                .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 4 * uiScale))
+                .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
         }
     }
 }

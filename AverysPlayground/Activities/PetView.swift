@@ -97,7 +97,7 @@ struct PetView: View {
             ZStack {
                 Ellipse()
                     .fill(Color(red: 0.62, green: 0.85, blue: 0.72))
-                    .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
+                    .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                     .frame(width: geo.size.width * 0.85, height: geo.size.height * 0.22)
                     .position(x: geo.size.width / 2, y: geo.size.height * 0.86)
 
@@ -177,7 +177,7 @@ struct PetView: View {
                         Capsule().fill(color).frame(width: bar.size.width * value)
                     }
                 }
-                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
                 .frame(width: 50 * uiScale, height: 16 * uiScale)
                 .animation(.spring, value: value)
         }

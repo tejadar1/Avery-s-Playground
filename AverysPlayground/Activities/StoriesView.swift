@@ -76,7 +76,7 @@ struct StoriesView: View {
                 Text(name)
                     .font(.kid(26))
                     .foregroundStyle(.white)
-                    .shadow(color: Color.outline, radius: 0, x: 2, y: 2)
+                    .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
                     .multilineTextAlignment(.leading)
                 Spacer(minLength: 0)
             }
