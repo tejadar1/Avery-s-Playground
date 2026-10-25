@@ -6,7 +6,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 | | Game | What happens |
 |---|---|---|
-| 💅 | **Nail Salon** | Tap a nail to zoom in, then paint it with a brush by dragging a finger. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. Coco cheers you on. |
+| 💅 | **Nail Salon** | A big open hand with natural nails. Tap a nail to zoom in, then paint it with a brush by dragging a finger. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. A "Copy this!" card shows a look to try (tap it for another), and a button changes the skin tone. |
 | 💇 | **Hair Salon** | Shampoo, rinse, blow dry, comb and cut a girl's hair by dragging each tool over it. Then pick a style (ponytail, pigtails, space buns, afro puff, curly), a hair color and a bow. |
 | 👗 | **Dress Up** | Dress a doll: a t-shirt, gown, party dress, tutu, overalls or pajamas in any color, plus shoes, a hat and a purse, wand, sunglasses or necklace. Tap Done for a fashion show. |
 | 🐶 | **Mochi** | Take care of Mochi, a Shiba Inu puppy. Feed her, rub her to pet her (hearts float up), play fetch, scrub her in the bath, and put her down for a nap. Her food, love, energy and clean meters slowly drop while the app is closed, like a Tamagotchi, but never to zero. |
@@ -90,20 +90,20 @@ AverysPlayground/
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
 AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (manual builds with screenshots ticked)
-Art/            SVG sources for Coco, the hand, the game icons (Art/icons), and the app icon
+Art/            SVG sources for Coco, Mochi, the game icons (Art/icons), and the app icon
 project.yml     XcodeGen project definition
 ```
 
 ### Art
 
 The art is soft cartoon color with a thin dark-brown outline (`Color.outline` in code), a darker second tone for shading, and small dot eyes.
-Coco and the hand are SVGs in `Art/`. After editing one, re-render the PNGs into the asset catalog:
+Coco and Mochi are SVGs in `Art/`. After editing one, re-render the PNGs into the asset catalog:
 
 ```sh
 node Art/render.js   # needs Playwright with Chromium
 ```
 
-The nail positions in `NailSalonView.spots` must match the guide nails in `Art/hand.svg`.
+The Nail Salon hand is drawn in code (`Hand` in `NailSalonView.swift`) so its skin tone can change.
 
 ### Building with Claude Code
 

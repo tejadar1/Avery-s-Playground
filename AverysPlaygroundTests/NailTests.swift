@@ -25,4 +25,22 @@ final class NailTests: XCTestCase {
         nail.apply(.remover)
         XCTAssertEqual(nail, Nail())
     }
+
+    func testPaintedNailIsOneColorAllOver() {
+        let nail = Nail.painted(.red)
+        XCTAssertEqual(Set(nail.strokes.map(\.color)), [.red])
+        XCTAssertTrue(nail.strokes.allSatisfy { $0.points.first?.y == 0 && $0.points.last?.y == 1 })
+    }
+
+    func testNailsSitAtTheFingertipsInsideTheHand() {
+        let canvas = CGRect(origin: .zero, size: Hand.canvas)
+        let middle = Hand.fingers[2]
+        XCTAssertEqual(middle.nailCenter.x, middle.base.x, accuracy: 0.01)
+        XCTAssertEqual(middle.base.y - middle.nailCenter.y + middle.nailSize.height / 2, middle.length - 6, accuracy: 0.01)
+        for finger in Hand.fingers {
+            let size = finger.nailSize
+            let nail = CGRect(x: finger.nailCenter.x - size.height / 2, y: finger.nailCenter.y - size.height / 2, width: size.height, height: size.height)
+            XCTAssertTrue(canvas.contains(nail), "\(finger.base)")
+        }
+    }
 }
