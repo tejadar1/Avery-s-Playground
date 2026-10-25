@@ -118,6 +118,7 @@ struct DressUpView: View {
                 }
                 Button {
                     Haptics.success()
+                    Sounds.shared.play(.sparkle)
                     withAnimation(.spring) { isShowingOff = true }
                     say("Ta-da! Fashion show! She looks amazing!")
                 } label: {

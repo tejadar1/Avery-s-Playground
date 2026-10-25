@@ -228,6 +228,7 @@ struct PianoView: View {
         lesson = current
         if current.isFinished {
             Haptics.success()
+            Sounds.shared.play(.sparkle)
             say("You played \(current.song.name)! Holy guacamole, what a song!")
             Task {
                 try? await Task.sleep(for: .seconds(3))

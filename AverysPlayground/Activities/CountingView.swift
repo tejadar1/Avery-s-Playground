@@ -73,6 +73,7 @@ struct CountingView: View {
         }
         if isDone {
             Haptics.success()
+            Sounds.shared.play(.sparkle)
             Speaker.shared.say("\(number)! Great counting!")
         } else {
             Haptics.tap()

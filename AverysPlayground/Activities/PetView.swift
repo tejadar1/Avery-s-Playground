@@ -107,7 +107,10 @@ struct PetView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .named("room"))
                             .onChanged { rub(at: $0.location) }
-                            .onEnded { _ in isRubbing = false }
+                            .onEnded { _ in
+                                isRubbing = false
+                                Sounds.shared.stop()
+                            }
                     )
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Mochi")
@@ -217,9 +220,11 @@ struct PetView: View {
         isRubbing = true
         if firstTouch { Haptics.tap() }
         if isBathing {
+            Sounds.shared.play(.bubbles)
             needs.scrub()
             float("🫧", at: point, every: 0.12)
             if needs.clean >= 1 {
+                Sounds.shared.stop()
                 isBathing = false
                 jumps += 1
                 say("Squeaky clean! Shake shake shake!")

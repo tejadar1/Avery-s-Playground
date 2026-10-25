@@ -136,6 +136,7 @@ struct MathView: View {
         guard !isSolved else { return }
         if choice == problem.answer {
             Haptics.success()
+            Sounds.shared.play(.sparkle)
             withAnimation(.spring) {
                 isSolved = true
                 stars += 1

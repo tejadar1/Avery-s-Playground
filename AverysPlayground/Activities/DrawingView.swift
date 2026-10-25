@@ -37,12 +37,14 @@ struct DrawingView: View {
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
                         if current == nil {
+                            Sounds.shared.play(.brush)
                             current = Stroke(points: [value.location], color: color)
                         } else {
                             current?.points.append(value.location)
                         }
                     }
                     .onEnded { _ in
+                        Sounds.shared.stop()
                         if let current { strokes.append(current) }
                         current = nil
                     }
