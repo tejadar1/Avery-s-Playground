@@ -163,7 +163,7 @@ struct NailSalonView: View {
                 ZStack(alignment: .top) {
                     Capsule()
                         .fill(Color(red: 1.0, green: 0.86, blue: 0.78))
-                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 8 * uiScale))
+                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
                         .frame(width: size.width * 1.45, height: size.height * 2.4)
                     NailView(nail: nails[index], size: size)
                         .matchedGeometryEffect(id: index, in: zoom)
@@ -380,7 +380,7 @@ private struct NailView: View {
             }
         }
         .frame(width: size.width, height: size.height)
-        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: max(2, size.width * 0.09)))
+        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: max(1.5, size.width * 0.06)))
     }
 }
 
@@ -439,13 +439,15 @@ struct PolishBottle: View {
                 .overlay(alignment: .topLeading) {
                     Capsule().fill(.white.opacity(0.6)).frame(width: 7 * uiScale, height: 18 * uiScale).padding(9 * uiScale)
                 }
-                .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 4 * uiScale))
+                .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
         }
     }
 }
 
 /// Twinkling hearts and stars around a finished look.
 struct Sparkles: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     private static let spots: [(x: CGFloat, y: CGFloat, emoji: String)] = [
         (0.1, 0.2, "✨"), (0.85, 0.12, "💖"), (0.5, 0.05, "⭐️"), (0.92, 0.35, "✨"),
         (0.08, 0.55, "💖"), (0.95, 0.65, "⭐️"), (0.3, 0.12, "✨"), (0.72, 0.05, "✨"),
@@ -458,7 +460,7 @@ struct Sparkles: View {
                 Text(spot.emoji)
                     .font(.system(size: 40 * uiScale))
                     .phaseAnimator([CGFloat(0.6), 1.3]) { content, scale in
-                        content.scaleEffect(scale).opacity(scale > 1 ? 1 : 0.5)
+                        content.scaleEffect(reduceMotion ? 1 : scale).opacity(reduceMotion || scale > 1 ? 1 : 0.5)
                     } animation: { _ in
                         .easeInOut(duration: 0.5 + Double(i) * 0.08)
                     }

@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <path d="M100 24 C160 24 190 62 184 104 C178 140 146 132 132 146 C118 160 140 182 104 182 C50 182 14 146 16 100 C18 56 54 24 100 24Z" fill="#F6D7A7" stroke="#4A2C2A" stroke-width="8" stroke-linejoin="round"/>
-  <ellipse cx="96" cy="150" rx="15" ry="12" fill="#BDE7FF" stroke="#4A2C2A" stroke-width="6"/>
-  <g stroke="#4A2C2A" stroke-width="6">
-    <circle cx="58" cy="70" r="17" fill="#FF4D5E"/><circle cx="100" cy="54" r="17" fill="#FFD84D"/>
-    <circle cx="144" cy="70" r="17" fill="#3D8BFF"/><circle cx="50" cy="116" r="17" fill="#34C759"/>
-    <circle cx="150" cy="108" r="14" fill="#B38CFF"/>
+  <path d="M100 24 C160 24 190 62 184 104 C178 140 146 132 132 146 C118 160 140 182 104 182 C50 182 14 146 16 100 C18 56 54 24 100 24Z" fill="#F6D7A7" stroke="#4A2C2A" stroke-width="5.2" stroke-linejoin="round"/>
+  <ellipse cx="96" cy="150" rx="15" ry="12" fill="#BDE7FF" stroke="#4A2C2A" stroke-width="3.9"/>
+  <g stroke="#4A2C2A" stroke-width="3.9">
+    <circle cx="58" cy="70" r="17" fill="#E9646E"/><circle cx="100" cy="54" r="17" fill="#F9D56E"/>
+    <circle cx="144" cy="70" r="17" fill="#4D8FD6"/><circle cx="50" cy="116" r="17" fill="#62B866"/>
+    <circle cx="150" cy="108" r="14" fill="#B9A0F0"/>
   </g>
-  <g transform="rotate(40 150 150)" stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round">
+  <g transform="rotate(40 150 150)" stroke="#4A2C2A" stroke-width="3.9" stroke-linejoin="round">
     <rect x="142" y="96" width="16" height="84" rx="8" fill="#C98B4E"/>
-    <path d="M142 100 L144 78 Q150 62 156 78 L158 100Z" fill="#FF5FA2"/>
+    <path d="M142 100 L144 78 Q150 62 156 78 L158 100Z" fill="#F07BAA"/>
   </g>
 </svg>

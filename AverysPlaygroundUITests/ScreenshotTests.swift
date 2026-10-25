@@ -19,6 +19,8 @@ final class ScreenshotTests: XCTestCase {
 
     private func playEveryGame(saving dir: URL, as device: String) throws {
         app.launch()
+        try snap("00a-Getting ready", device, dir)
+        XCTAssertTrue(app.descendants(matching: .any)["Getting ready"].waitForNonExistence(timeout: 5))
         try snap("00-home", device, dir)
 
         let games: [(title: String, play: () -> Void)] = [
@@ -53,6 +55,16 @@ final class ScreenshotTests: XCTestCase {
                 words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
                     .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.3)))
             }),
+            ("Dress Up", {
+                for item in ["Gown", "Shoes", "Boots", "Hats", "Crown", "Extras", "Wand"] { self.tap(self.app.buttons[item]) }
+            }),
+            ("Piano", {
+                self.tap(self.button("Twinkle Twinkle"))
+                for key in ["C", "C", "G", "G"] { self.tap(self.app.buttons[key]) }
+            }),
+            ("Math", {
+                self.tap(self.app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Answer'")).firstMatch)
+            }),
             ("Español", { self.tap(self.button("Gracias")) }),
             ("ABC", {}),
             ("1 2 3", {}),
@@ -82,6 +94,15 @@ final class ScreenshotTests: XCTestCase {
             game.play()
             sleep(1)
             try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
+            if game.title == "Read" {
+                app.navigationBars.buttons.element(boundBy: 0).tap()
+                tap(button("Cucarachita"))
+                sleep(1)
+                let words = find("Words")
+                words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
+                    .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.3)))
+                try snap(String(format: "%02db-Read en español", index + 1), device, dir)
+            }
             if game.title == "Hair Salon" {
                 tap(app.buttons["Styles"])
                 tap(app.buttons["Pigtails"])

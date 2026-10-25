@@ -159,10 +159,10 @@ struct ColorsView: View {
                         ForEach(page.regions.indices, id: \.self) { index in
                             UnitShape(path: page.regions[index])
                                 .fill(fills[pageIndex][index])
-                                .overlay(UnitShape(path: page.regions[index]).stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.012, lineJoin: .round)))
+                                .overlay(UnitShape(path: page.regions[index]).stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.009, lineJoin: .round)))
                         }
                         UnitShape(path: page.details)
-                            .stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.012, lineCap: .round, lineJoin: .round))
+                            .stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.009, lineCap: .round, lineJoin: .round))
                     }
                     .frame(width: side, height: side)
                     .contentShape(Rectangle())
@@ -184,7 +184,7 @@ struct ColorsView: View {
                         Button { choose(item) } label: {
                             Circle()
                                 .fill(item.color)
-                                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
+                                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                                 .frame(width: 60 * uiScale, height: 60 * uiScale)
                                 .offset(y: item.id == selected.id ? -10 * uiScale : 0)
                                 .scaleEffect(item.id == selected.id ? 1.15 : 1)

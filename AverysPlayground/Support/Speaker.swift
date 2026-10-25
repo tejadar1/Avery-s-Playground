@@ -12,8 +12,10 @@ final class Speaker {
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
     }
 
-    func say(_ text: String) {
-        speak(AVSpeechUtterance(string: text))
+    func say(_ text: String, language: String = "en-US") {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: language)
+        speak(utterance)
     }
 
     /// Speaks a sound written in IPA, like "æ" for the a in "cat". `text` is what's read if the voice can't do IPA.

@@ -39,12 +39,9 @@ struct HomeView: View {
                 activity.destination
                     .navigationTitle(activity.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbarBackground(activity.color, for: .navigationBar)
-                    .toolbarBackground(.visible, for: .navigationBar)
-                    .toolbarColorScheme(.dark, for: .navigationBar)
             }
         }
-        .tint(.white)
+        .tint(Color.outline)
     }
 }
 
@@ -63,7 +60,7 @@ private struct ActivityTile: View {
             Text(activity.title)
                 .font(.kid(24))
                 .foregroundStyle(.white)
-                .shadow(color: Color.outline, radius: 0, x: 2, y: 2)
+                .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
         }
         .frame(maxWidth: .infinity, minHeight: 160 * uiScale)
         .cartoonCard(activity.color)

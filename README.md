@@ -8,8 +8,11 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 |---|---|---|
 | 💅 | **Nail Salon** | Tap a nail to zoom in, then paint it with a brush by dragging a finger. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. Coco cheers you on. |
 | 💇 | **Hair Salon** | Shampoo, rinse, blow dry, comb and cut a girl's hair by dragging each tool over it. Then pick a style (ponytail, pigtails, space buns, afro puff, curly), a hair color and a bow. |
+| 👗 | **Dress Up** | Dress a doll: a t-shirt, gown, party dress, tutu, overalls or pajamas in any color, plus shoes, a hat and a purse, wand, sunglasses or necklace. Tap Done for a fashion show. |
 | 🐶 | **Mochi** | Take care of Mochi, a Shiba Inu puppy. Feed her, rub her to pet her (hearts float up), play fetch, scrub her in the bath, and put her down for a nap. Her food, love, energy and clean meters slowly drop while the app is closed, like a Tamagotchi, but never to zero. |
-| 📖 | **Read** | A shelf of storybooks: The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each word is read aloud as the finger reaches it, so she can follow along word by word; the last word stays lit. Tap the picture to hear the whole page. The shelf also has Sound it out: tap each letter of a word like "cat" to hear its sound, then pick the matching picture. |
+| 🎹 | **Piano** | A rainbow keyboard. Pick Twinkle Twinkle, Mary Had a Little Lamb or Hot Cross Buns and a bouncing star shows the next key while the words light up, or play freely. Slide a finger across the keys to glide up and down. |
+| 📖 | **Read** | A shelf of storybooks: The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each word is read aloud as the finger reaches it, so she can follow along word by word; the last word stays lit. Tap the picture to hear the whole page. A Spanish shelf, Cuentos en español, has La Cucarachita Martina, Juan Bobo y la puerca and La Ciguapa del bosque, read word by word in a Spanish voice. The shelf also has Sound it out: tap each letter of a word like "cat" to hear its sound, then pick the matching picture. |
+| 🍕 | **Math** | Adding with food: "Coco has 2 slices of pizza. Mochi brings 1 more. How many now?" Tap the slices to count them, then pick the answer. Sums up to 10. |
 | 🗣️ | **Español** | Spanish words and phrases in six sets: greetings, Dominican family sayings ("Bendición, mami"), animals, colors, numbers, and food. Tap a card to hear the Spanish, the English, then the Spanish again so your child can say it back. |
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A. A is for Apple!" |
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
@@ -24,6 +27,9 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 - Words are read aloud with the iPhone's built-in voice, so no recordings are needed. Speech still plays
   when the silent switch is on.
 - Big buttons, haptic "taps", and no text you need to read to get around.
+- Follows Apple's design guidelines for kids' apps: buttons at least 44 points, standard back navigation, and
+  Reduce Motion (Settings → Accessibility → Motion) stills the wagging, twinkling and spinning.
+- The app opens with Coco getting ready (about 2 seconds; tap to skip).
 - Tip: turn on **Guided Access** (Settings → Accessibility → Guided Access) to keep your child inside the app.
 
 ## Building and running
@@ -47,15 +53,17 @@ Then in Xcode:
 
 ## TestFlight (no Mac needed)
 
-GitHub builds the app on every push (`.github/workflows/build.yml`). The **test** job compiles it and runs the
-unit tests on an iPhone simulator. The **testflight** job uploads a build to TestFlight once these one-time
-steps are done. Everything works in Safari on an iPhone.
+GitHub builds the app on every push (`.github/workflows/build.yml`) and runs the unit tests on an iPhone
+simulator. Mac build minutes are costly on a private repo, so the screenshots of every game and the TestFlight
+upload only run for pushes to main, or when started by hand (Actions → Build → **Run workflow**). The upload
+needs these one-time steps, all doable in Safari on an iPhone.
 
 1. Join the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
 2. On [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list), add an
    **Identifier** → App IDs → App, with the explicit bundle ID `com.tejadar1.averysplayground`.
 3. In [App Store Connect](https://appstoreconnect.apple.com/apps), tap **+ New App**: iOS, pick that bundle ID,
-   any SKU. The name must be unused on the App Store, so "Avery's Playground" may need a twist.
+   any SKU. The name must be unused on the App Store, so use something like "Avery's Play: Kids Games".
+   The name under the icon is "Avery's Play" either way (set in `project.yml`).
 4. In App Store Connect → Users and Access → Integrations → **App Store Connect API**, generate a team key
    with **Admin** access. Note the Key ID and Issuer ID, and download the `.p8` file (Apple lets you download
    it only once).
@@ -69,7 +77,7 @@ steps are done. Everything works in Safari on an iPhone.
    build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
    install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
 
-After that, every push uploads a new build, and TestFlight offers the update.
+After that, every change merged to main uploads a new build, and TestFlight offers the update.
 
 ## Project layout
 
@@ -80,14 +88,14 @@ AverysPlayground/
   Support/      Speech, haptics, fonts and shared styles
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
-AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch on each build
+AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (main and manual builds)
 Art/            SVG sources for Coco, the hand, the game icons (Art/icons), and the app icon
 project.yml     XcodeGen project definition
 ```
 
 ### Art
 
-The art is flat, bright cartoon color with a thick dark-brown outline (`Color.outline` in code).
+The art is soft cartoon color with a thin dark-brown outline (`Color.outline` in code), a darker second tone for shading, and small dot eyes.
 Coco and the hand are SVGs in `Art/`. After editing one, re-render the PNGs into the asset catalog:
 
 ```sh

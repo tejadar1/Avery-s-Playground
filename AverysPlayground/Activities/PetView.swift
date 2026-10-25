@@ -47,6 +47,7 @@ struct PetView: View {
         let point: CGPoint
     }
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @AppStorage("mochi") private var saved = Data()
     @State private var needs = PetNeeds()
     @State private var isBathing = false
@@ -96,7 +97,7 @@ struct PetView: View {
             ZStack {
                 Ellipse()
                     .fill(Color(red: 0.62, green: 0.85, blue: 0.72))
-                    .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
+                    .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                     .frame(width: geo.size.width * 0.85, height: geo.size.height * 0.22)
                     .position(x: geo.size.width / 2, y: geo.size.height * 0.86)
 
@@ -132,7 +133,7 @@ struct PetView: View {
                     Text("💤")
                         .font(.system(size: 70 * uiScale))
                         .phaseAnimator([CGFloat(1), 1.3]) { content, scale in
-                            content.scaleEffect(scale)
+                            content.scaleEffect(reduceMotion ? 1 : scale)
                         } animation: { _ in .easeInOut(duration: 0.8) }
                         .position(x: geo.size.width * 0.72, y: geo.size.height * 0.15)
                 }
@@ -150,7 +151,7 @@ struct PetView: View {
                 .scaledToFit()
                 .phaseAnimator([-14.0, 14.0]) { content, angle in
                     // The tail pivots where it meets the body (292, 318 in Art/shiba.svg's 400×420 box).
-                    content.rotationEffect(.degrees(isSleeping ? 0 : angle), anchor: UnitPoint(x: 292 / 400, y: 318 / 420))
+                    content.rotationEffect(.degrees(isSleeping || reduceMotion ? 0 : angle), anchor: UnitPoint(x: 292 / 400, y: 318 / 420))
                 } animation: { _ in
                     .easeInOut(duration: happy ? 0.18 : 0.45)
                 }
@@ -176,7 +177,7 @@ struct PetView: View {
                         Capsule().fill(color).frame(width: bar.size.width * value)
                     }
                 }
-                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
                 .frame(width: 50 * uiScale, height: 16 * uiScale)
                 .animation(.spring, value: value)
         }

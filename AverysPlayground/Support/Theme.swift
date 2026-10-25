@@ -25,14 +25,14 @@ struct SquishyButtonStyle: ButtonStyle {
 }
 
 extension View {
-    /// Flat color, thick outline, and a solid drop shadow, like a cartoon sticker.
+    /// Soft color, a thin outline, and a gentle drop shadow, like a cartoon sticker.
     func cartoonCard(_ color: Color, cornerRadius: CGFloat = 28 * uiScale) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         return background(
             shape.fill(color)
                 .background(shape.fill(.white))  // keeps see-through colors light over the shadow
-                .overlay(shape.strokeBorder(Color.outline, lineWidth: 5 * uiScale))
-                .background(shape.fill(Color.outline).offset(y: 6 * uiScale))
+                .overlay(shape.strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                .background(shape.fill(Color.outline.opacity(0.25)).offset(y: 5 * uiScale))
         )
     }
 }
@@ -64,6 +64,7 @@ struct CocoSays: View {
         "I have lots and lots of teeth, and I brush every one!",
     ]
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var joke: String?
     @State private var spins = 0
 
@@ -78,7 +79,7 @@ struct CocoSays: View {
                 } animation: { _ in
                     .spring(response: 0.2, dampingFraction: 0.5)
                 }
-                .rotationEffect(.degrees(Double(spins) * 360))
+                .rotationEffect(.degrees(reduceMotion ? 0 : Double(spins) * 360))
                 .animation(.spring(response: 0.6, dampingFraction: 0.6), value: spins)
                 .onTapGesture(perform: beSilly)
                 .accessibilityLabel("Coco")

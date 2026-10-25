@@ -4,6 +4,16 @@ on:
   push:
   workflow_dispatch:
 
+# A newer push to the same branch stops the build it replaces.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+# Mac build minutes are costly, so every push only builds and runs the fast unit tests on one iPhone.
+# Screenshots of every game (iPhone and iPad) and the TestFlight upload run on main, or when started by hand.
+env:
+  FULL: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+
 jobs:
   test:
     runs-on: macos-latest
@@ -16,15 +26,19 @@ jobs:
         run: |
           udid() { xcrun simctl list devices available | grep -m1 -E "^ +$1" | grep -oE '[0-9A-F-]{36}'; }
           mkdir -p screenshots
+          if [ "$FULL" = true ]; then
+            where=(-destination "id=$(udid iPhone)" -destination "id=$(udid iPad)")
+          else
+            where=(-destination "id=$(udid iPhone)" -only-testing:AverysPlaygroundTests)
+          fi
           TEST_RUNNER_SCREENSHOTS_DIR="$PWD/screenshots" xcodebuild test -project AverysPlayground.xcodeproj \
-            -scheme AverysPlayground -destination "id=$(udid iPhone)" -destination "id=$(udid iPad)" \
-            -resultBundlePath TestResults.xcresult CODE_SIGNING_ALLOWED=NO
+            -scheme AverysPlayground "${where[@]}" -resultBundlePath TestResults.xcresult CODE_SIGNING_ALLOWED=NO
       - name: Show why tests failed
         if: failure()
         run: |
           xcrun xcresulttool get test-results tests --path TestResults.xcresult | grep -B1 '"nodeType" : "Failure Message"'
       - name: Publish screenshots to the screenshots branch
-        if: always()
+        if: always() && env.FULL == 'true'
         working-directory: screenshots
         run: |
           git init -q -b screenshots && git add .
@@ -33,6 +47,7 @@ jobs:
 
   testflight:
     needs: test
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     env:
       KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
