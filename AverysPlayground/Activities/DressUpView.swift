@@ -95,7 +95,6 @@ struct DressUpView: View {
         .background(Color(red: 0.99, green: 0.93, blue: 0.96).ignoresSafeArea())
         .onAppear {
             newDoll()
-            Speaker.shared.say(cheer)
         }
     }
 
@@ -210,15 +209,17 @@ struct DressUpView: View {
             tray = .clothes
             isShowingOff = false
         }
-        say("Let's get her dressed! Pick some clothes.")
+        say("", hint: "Let's get her dressed! Pick some clothes.")
     }
 
     /// Speaks only when the message changes, so taps don't repeat the same line.
-    private func say(_ text: String) {
-        guard text != cheer else { return }
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        guard line != cheer else { return }
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 

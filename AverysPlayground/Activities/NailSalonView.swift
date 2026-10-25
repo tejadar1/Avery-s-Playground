@@ -117,7 +117,7 @@ struct NailSalonView: View {
             }
         }
         .background(Color(red: 1.0, green: 0.9, blue: 0.94).ignoresSafeArea())
-        .onAppear { Speaker.shared.say("Welcome to Coco's nail salon! I only have claws, so let's paint your nails! " + cheer) }
+        .onAppear { Speaker.shared.say("Welcome to Coco's nail salon! I only have claws, so let's paint your nails!") }
     }
 
     private var hand: some View {
@@ -282,13 +282,13 @@ struct NailSalonView: View {
     private func zoom(into index: Int) {
         Haptics.tap()
         withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) { zoomed = index }
-        say(tray == .polish ? "Paint it with the brush!" : "Tap the nail!")
+        say("", hint: tray == .polish ? "Paint it with the brush!" : "Tap the nail!")
     }
 
     private func zoomOut() {
         Haptics.tap()
         withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) { zoomed = nil }
-        say("Pick another nail!")
+        say("", hint: "Pick another nail!")
     }
 
     private func brush(_ index: Int, at location: CGPoint, in size: CGSize) {
@@ -345,13 +345,15 @@ struct NailSalonView: View {
             isShowingOff = false
         }
         pick(.polish)
-        say("Tap a nail to paint it!")
+        say("", hint: "Tap a nail to paint it!")
     }
 
-    private func say(_ text: String) {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 

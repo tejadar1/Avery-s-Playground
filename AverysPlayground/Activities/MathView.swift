@@ -150,7 +150,7 @@ struct MathView: View {
             Haptics.tap()
             wrongPick = choice
             shakes += 1
-            say("Hee hee, not \(choice)! Tap the \(problem.food.many) to count them.")
+            say("Hee hee, not \(choice)!", hint: "Tap the \(problem.food.many) to count them.")
         }
     }
 
@@ -164,10 +164,12 @@ struct MathView: View {
         say(problem.question)
     }
 
-    private func say(_ text: String) {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 

@@ -199,14 +199,14 @@ struct ColorsView: View {
             }
         }
         .background(Color(red: 1.0, green: 0.95, blue: 0.85).ignoresSafeArea())
-        .onAppear { Speaker.shared.say("Let's color! " + cheer) }
+        .onAppear { Speaker.shared.say("Let's color!") }
     }
 
     private func pageButton(_ emoji: String, by step: Int) -> some View {
         Button {
             Haptics.tap()
             pageIndex = (pageIndex + step + ColoringPage.all.count) % ColoringPage.all.count
-            say("A \(page.name)! What color should it be?")
+            say("A \(page.name)!", hint: "What color should it be?")
         } label: {
             Text(emoji)
                 .font(.system(size: 32 * uiScale))
@@ -234,10 +234,12 @@ struct ColorsView: View {
         }
     }
 
-    private func say(_ text: String) {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 
