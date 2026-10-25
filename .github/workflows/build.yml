@@ -57,7 +57,7 @@ jobs:
     runs-on: macos-latest
     # Only the .p8 key is a secret; the IDs just say which account and key to use.
     env:
-      KEY_ID: NGR5XJU744
+      KEY_ID: LRDVNT6QAA
       ISSUER_ID: 6e584ffe-8197-4f9f-8aa6-7541bb2bc445
       TEAM_ID: 7T84UMWQFK
       KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
