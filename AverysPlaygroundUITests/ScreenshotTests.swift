@@ -40,10 +40,12 @@ final class ScreenshotTests: XCTestCase {
                     .press(forDuration: 0.05, thenDragTo: hair.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.62)))
             }),
             ("Read", {
-                let letters = self.app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Letter'"))
-                for i in 0..<letters.count { letters.element(boundBy: i).tap() }
+                self.button("Three Little Pigs").tap()
+                sleep(1)
+                let words = self.app.descendants(matching: .any)["Words"]
+                words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
+                    .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.3)))
             }),
-            ("Stories", { self.button("Three Little Pigs").tap() }),
             ("Español", { self.button("Gracias").tap() }),
             ("ABC", {}),
             ("1 2 3", {}),

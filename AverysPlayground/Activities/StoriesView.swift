@@ -51,32 +51,43 @@ struct StoriesView: View {
         ScrollView {
             VStack(spacing: 20 * uiScale) {
                 ForEach(Story.all, id: \.title) { story in
-                    NavigationLink {
+                    shelfItem(story.cover, story.title, story.color, title: story.cover) {
                         StoryReader(story: story)
-                            .navigationTitle(story.cover)
-                            .toolbarBackground(story.color, for: .navigationBar)
-                            .toolbarBackground(.visible, for: .navigationBar)
-                            .toolbarColorScheme(.dark, for: .navigationBar)
-                    } label: {
-                        HStack(spacing: 16 * uiScale) {
-                            Text(story.cover).font(.system(size: 60 * uiScale))
-                            Text(story.title)
-                                .font(.kid(26))
-                                .foregroundStyle(.white)
-                                .shadow(color: Color.outline, radius: 0, x: 2, y: 2)
-                                .multilineTextAlignment(.leading)
-                            Spacer(minLength: 0)
-                        }
-                        .padding(20 * uiScale)
-                        .cartoonCard(story.color)
                     }
-                    .buttonStyle(SquishyButtonStyle())
-                    .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(story.title) })
+                }
+                shelfItem("🔤", "Sound it out: cat, dog, pig", .teal, title: "Sound it out") {
+                    ReadingView()
                 }
             }
             .padding(20 * uiScale)
         }
         .background(Color(red: 0.93, green: 0.92, blue: 1.0).ignoresSafeArea())
+    }
+
+    private func shelfItem<Destination: View>(
+        _ cover: String, _ name: String, _ color: Color, title: String, @ViewBuilder destination: () -> Destination
+    ) -> some View {
+        NavigationLink {
+            destination()
+                .navigationTitle(title)
+                .toolbarBackground(color, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarColorScheme(.dark, for: .navigationBar)
+        } label: {
+            HStack(spacing: 16 * uiScale) {
+                Text(cover).font(.system(size: 60 * uiScale))
+                Text(name)
+                    .font(.kid(26))
+                    .foregroundStyle(.white)
+                    .shadow(color: Color.outline, radius: 0, x: 2, y: 2)
+                    .multilineTextAlignment(.leading)
+                Spacer(minLength: 0)
+            }
+            .padding(20 * uiScale)
+            .cartoonCard(color)
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(name) })
     }
 }
 
@@ -87,6 +98,7 @@ private struct StoryReader: View {
     @State private var pageIndex = 0
     @State private var frames: [Int: CGRect] = [:]
     @State private var current: Int?
+    @State private var isSwiping = false
 
     private var page: Story.Page { story.pages[pageIndex] }
     private var words: [String] { page.text.split(separator: " ").map(String.init) }
@@ -118,11 +130,13 @@ private struct StoryReader: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .coordinateSpace(.named("words"))
             .contentShape(Rectangle())
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("Words")
             .onPreferenceChange(WordFrames.self) { frames = $0 }
             .gesture(
                 DragGesture(minimumDistance: 0, coordinateSpace: .named("words"))
                     .onChanged { read(at: $0.location) }
-                    .onEnded { _ in current = nil }
+                    .onEnded { _ in isSwiping = false }  // the last word stays lit so she can look at it
             )
             .id(pageIndex)
 
@@ -178,7 +192,9 @@ private struct StoryReader: View {
                 height: frame.height + FlowLayout.lineSpacing
             ).contains(point)
         }
-        guard let index = hit?.key, index != current else { return }
+        // Read each word once per swipe; a new swipe can start on the same word to hear it again.
+        guard let index = hit?.key, !(isSwiping && index == current) else { return }
+        isSwiping = true
         current = index
         Haptics.tap()
         Speaker.shared.say(words[index].trimmingCharacters(in: .punctuationCharacters))
