@@ -58,7 +58,7 @@ final class ScreenshotTests: XCTestCase {
             ("1 2 3", {}),
             ("Coloring", {
                 let picture = self.app.descendants(matching: .any)["Picture"]
-                for (crayon, x, y) in [("Pink", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {
+                for (crayon, x, y) in [("Red", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {
                     self.app.buttons[crayon].tap()
                     picture.coordinate(withNormalizedOffset: CGVector(dx: x, dy: y)).tap()
                 }
