@@ -43,3 +43,36 @@ struct PlayfulBackground: View {
         .ignoresSafeArea()
     }
 }
+
+/// Coco with a speech bubble. Coco hops each time `hops` changes.
+struct CocoSays: View {
+    let text: String
+    let hops: Int
+
+    var body: some View {
+        HStack(alignment: .center, spacing: 4) {
+            Image("Coco")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 100)
+                .phaseAnimator([CGFloat(0), -14], trigger: hops) { content, lift in
+                    content.offset(y: lift)
+                } animation: { _ in
+                    .spring(response: 0.2, dampingFraction: 0.5)
+                }
+                .accessibilityHidden(true)
+
+            Text(text)
+                .font(.kid(22))
+                .foregroundStyle(Color.outline)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .cartoonCard(.white, cornerRadius: 22)
+                .id(text)
+                .transition(.scale.combined(with: .opacity))
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
+    }
+}

@@ -13,8 +13,22 @@ final class Speaker {
     }
 
     func say(_ text: String) {
+        speak(AVSpeechUtterance(string: text))
+    }
+
+    /// Speaks a sound written in IPA, like "æ" for the a in "cat". `text` is what's read if the voice can't do IPA.
+    func say(_ text: String, ipa: String) {
+        let sound = NSMutableAttributedString(string: text)
+        sound.addAttribute(
+            NSAttributedString.Key(rawValue: AVSpeechSynthesisIPANotationAttribute),
+            value: ipa,
+            range: NSRange(location: 0, length: sound.length)
+        )
+        speak(AVSpeechUtterance(attributedString: sound))
+    }
+
+    private func speak(_ utterance: AVSpeechUtterance) {
         synthesizer.stopSpeaking(at: .immediate)
-        let utterance = AVSpeechUtterance(string: text)
         utterance.rate = 0.42
         utterance.pitchMultiplier = 1.15
         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")

@@ -7,6 +7,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 | | Game | What happens |
 |---|---|---|
 | 💅 | **Nail Salon** | Paint each nail, add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. Coco cheers you on. |
+| 📖 | **Read** | Tap each letter of a word like "cat" to hear its sound, then pick the matching picture. Earns a star for each word read. |
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A. A is for Apple!" |
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Colors** | Tap a color and the whole screen turns that color while it's named aloud. |
@@ -24,7 +25,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 ## Building and running
 
-You need a Mac with **Xcode 15 or newer**. The app runs on iOS 17 or newer.
+You need a Mac with **Xcode 16 or newer**. The app runs on iOS 17 or newer.
 
 The Xcode project is generated from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen):
 
