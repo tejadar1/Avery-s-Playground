@@ -66,11 +66,26 @@ node Art/render.js   # needs Playwright with Chromium
 
 The nail positions in `NailSalonView.spots` must match the guide nails in `Art/hand.svg`.
 
-### Agent skills
+### Building with Claude Code
 
-`.claude/skills/` holds two skills that Claude Code picks up automatically in this repo:
-[ponytail](https://github.com/DietrichGebert/ponytail) (write the smallest change that fully works) and
-[no-ai-slop](https://github.com/petergyang/no-ai-slop) (plain writing). Both are MIT licensed.
+Two tools from GitHub are part of how this app gets built. Claude Code loads both when it opens this repo:
+
+- [ponytail](https://github.com/DietrichGebert/ponytail) keeps code changes small: reuse what's in the
+  project, skip features nobody asked for, and add a test for new logic. It's a plugin, turned on in
+  `.claude/settings.json`; Claude Code offers to install it the first time you trust the folder. Switch
+  levels with `/ponytail lite`, `/ponytail ultra`, or turn it off with `stop ponytail`.
+- [no-ai-slop](https://github.com/petergyang/no-ai-slop) keeps writing plain: the README, text kids see
+  in the app, and commit messages. It has no Claude Code plugin, so a copy of the skill lives in
+  `.claude/skills/no-ai-slop` (MIT licensed). Run it on any text with `/no-ai-slop`.
+
+To get both on your own machine for every project, run these in Claude Code:
+
+```
+/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail
+```
+
+and in a terminal: `npx skills add petergyang/no-ai-slop --skill no-ai-slop --global --yes`.
 
 ### Adding a new game
 
