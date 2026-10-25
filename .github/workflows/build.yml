@@ -13,8 +13,14 @@ jobs:
       - name: Build and run tests
         run: |
           DEVICE=$(xcrun simctl list devices available | grep -m1 -oE 'iPhone [^(]+' | sed 's/ *$//')
-          xcodebuild test -project AverysPlayground.xcodeproj -scheme AverysPlayground \
-            -destination "platform=iOS Simulator,name=$DEVICE" CODE_SIGNING_ALLOWED=NO
+          mkdir -p screenshots
+          TEST_RUNNER_SCREENSHOTS_DIR="$PWD/screenshots" xcodebuild test -project AverysPlayground.xcodeproj \
+            -scheme AverysPlayground -destination "platform=iOS Simulator,name=$DEVICE" CODE_SIGNING_ALLOWED=NO
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: screenshots
 
   testflight:
     needs: test

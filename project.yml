@@ -13,6 +13,7 @@ targets:
     scheme:
       testTargets:
         - AverysPlaygroundTests
+        - AverysPlaygroundUITests
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.tejadar1.averysplayground
@@ -36,6 +37,17 @@ targets:
     platform: iOS
     sources:
       - AverysPlaygroundTests
+    dependencies:
+      - target: AverysPlayground
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+  AverysPlaygroundUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - AverysPlaygroundUITests
     dependencies:
       - target: AverysPlayground
     settings:
