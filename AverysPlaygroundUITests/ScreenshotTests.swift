@@ -39,6 +39,13 @@ final class ScreenshotTests: XCTestCase {
                 hair.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.7))
                     .press(forDuration: 0.05, thenDragTo: hair.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.62)))
             }),
+            ("Mochi", {
+                self.app.buttons["Feed"].tap()
+                sleep(2)
+                let mochi = self.app.descendants(matching: .any)["Mochi"]
+                mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.35))
+                    .press(forDuration: 0.05, thenDragTo: mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)))
+            }),
             ("Read", {
                 self.button("Three Little Pigs").tap()
                 sleep(1)

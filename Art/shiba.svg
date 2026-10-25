@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420">
+  <!-- Rendered as three images: Shiba (awake), ShibaSleep, ShibaTail. ShibaTail wags around (292, 318). -->
+  <g id="tail" transform="translate(30 -14)" stroke="#4A2C2A" stroke-width="10" stroke-linejoin="round">
+    <path d="M270 330 C300 330 340 300 338 262 C336 224 296 214 280 236 C266 256 290 274 304 262" fill="#E9A15A"/>
+    <path d="M300 244 C318 246 322 270 308 280" fill="none" stroke="#FFF2DC" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g id="body">
+    <g stroke="#4A2C2A" stroke-width="10" stroke-linejoin="round">
+      <ellipse cx="112" cy="384" rx="40" ry="24" fill="#E9A15A"/>
+      <ellipse cx="288" cy="384" rx="40" ry="24" fill="#E9A15A"/>
+      <ellipse cx="200" cy="318" rx="98" ry="82" fill="#E9A15A"/>
+      <ellipse cx="200" cy="330" rx="56" ry="64" fill="#FFF2DC"/>
+      <rect x="148" y="318" width="44" height="86" rx="20" fill="#E9A15A"/>
+      <rect x="208" y="318" width="44" height="86" rx="20" fill="#E9A15A"/>
+      <ellipse cx="170" cy="398" rx="26" ry="14" fill="#FFF2DC"/>
+      <ellipse cx="230" cy="398" rx="26" ry="14" fill="#FFF2DC"/>
+      <path d="M96 128 L112 26 Q118 14 130 22 L190 82 Z" fill="#E9A15A"/>
+      <path d="M304 128 L288 26 Q282 14 270 22 L210 82 Z" fill="#E9A15A"/>
+      <path d="M114 104 L122 46 L160 86 Z" fill="#FFC7C2" stroke-width="6"/>
+      <path d="M286 104 L278 46 L240 86 Z" fill="#FFC7C2" stroke-width="6"/>
+      <ellipse cx="200" cy="168" rx="124" ry="104" fill="#E9A15A"/>
+    </g>
+    <path d="M200 270 C122 270 84 238 86 196 C112 220 150 214 168 196 Q200 182 232 196 C250 214 288 220 314 196 C316 238 278 270 200 270Z" fill="#FFF2DC"/>
+    <ellipse cx="200" cy="168" rx="124" ry="104" fill="none" stroke="#4A2C2A" stroke-width="10"/>
+    <ellipse cx="160" cy="128" rx="13" ry="9" fill="#FFF2DC"/>
+    <ellipse cx="240" cy="128" rx="13" ry="9" fill="#FFF2DC"/>
+    <ellipse cx="128" cy="210" rx="22" ry="13" fill="#FF8FB1" opacity=".75"/>
+    <ellipse cx="272" cy="210" rx="22" ry="13" fill="#FF8FB1" opacity=".75"/>
+    <ellipse cx="200" cy="192" rx="17" ry="12" fill="#4A2C2A"/>
+    <ellipse cx="195" cy="188" rx="5" ry="3" fill="#fff" opacity=".7"/>
+    <path d="M150 262 Q200 282 250 262" fill="none" stroke="#FF4D5E" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="200" cy="282" r="13" fill="#FFD84D" stroke="#4A2C2A" stroke-width="6"/>
+    <g id="awake">
+      <circle cx="158" cy="160" r="15" fill="#2B1B1A"/><circle cx="242" cy="160" r="15" fill="#2B1B1A"/>
+      <circle cx="163" cy="154" r="5" fill="#fff"/><circle cx="247" cy="154" r="5" fill="#fff"/>
+      <path d="M186 214 Q200 240 214 214Z" fill="#FF7A8C" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M176 204 Q188 218 200 206 Q212 218 224 204" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linecap="round"/>
+    </g>
+    <g id="sleep">
+      <path d="M144 162 Q158 174 172 162 M228 162 Q242 174 256 162" fill="none" stroke="#2B1B1A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M184 208 Q192 214 200 208 Q208 214 216 208" fill="none" stroke="#4A2C2A" stroke-width="6" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

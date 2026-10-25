@@ -8,6 +8,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 |---|---|---|
 | 💅 | **Nail Salon** | Tap a nail to zoom in, then paint it with a brush by dragging a finger. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. Coco cheers you on. |
 | 💇 | **Hair Salon** | Shampoo, rinse, blow dry, comb and cut a girl's hair by dragging each tool over it. Then pick a style (ponytail, pigtails, space buns, afro puff, curly), a hair color and a bow. |
+| 🐶 | **Mochi** | Take care of Mochi, a Shiba Inu puppy. Feed her, rub her to pet her (hearts float up), play fetch, scrub her in the bath, and put her down for a nap. Her food, love, energy and clean meters slowly drop while the app is closed, like a Tamagotchi, but never to zero. |
 | 📖 | **Read** | A shelf of storybooks: The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each word is read aloud as the finger reaches it, so she can follow along word by word; the last word stays lit. Tap the picture to hear the whole page. The shelf also has Sound it out: tap each letter of a word like "cat" to hear its sound, then pick the matching picture. |
 | 🗣️ | **Español** | Spanish words and phrases in six sets: greetings, Dominican family sayings ("Bendición, mami"), animals, colors, numbers, and food. Tap a card to hear the Spanish, the English, then the Spanish again so your child can say it back. |
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A. A is for Apple!" |

@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, reading, spanish, abc, counting, colors, animals, drawing, bubbles
+    case nails, hair, pet, reading, spanish, abc, counting, colors, animals, drawing, bubbles
 
     var id: String { rawValue }
 
@@ -9,6 +9,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .nails: "Nail Salon"
         case .hair: "Hair Salon"
+        case .pet: "Mochi"
         case .reading: "Read"
         case .spanish: "Español"
         case .abc: "ABC"
@@ -27,6 +28,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .nails: .pink
         case .hair: Color(red: 0.85, green: 0.4, blue: 0.9)
+        case .pet: .brown
         case .reading: .teal
         case .spanish: .mint
         case .abc: .red
@@ -43,6 +45,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .nails: NailSalonView()
         case .hair: HairSalonView()
+        case .pet: PetView()
         case .reading: StoriesView()
         case .spanish: SpanishView()
         case .abc: ABCView()
