@@ -27,6 +27,7 @@ extension View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         return background(
             shape.fill(color)
+                .background(shape.fill(.white))  // keeps see-through colors light over the shadow
                 .overlay(shape.strokeBorder(Color.outline, lineWidth: 5))
                 .background(shape.fill(Color.outline).offset(y: 6))
         )

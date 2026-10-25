@@ -138,6 +138,7 @@ struct SpanishView: View {
                                 Text(word.emoji).font(.system(size: 52))
                                 Text(word.spanish)
                                     .font(.kid(24))
+                                    .lineLimit(1)
                                     .foregroundStyle(Color.outline)
                                 Text(word.english)
                                     .font(.system(size: 16, weight: .semibold, design: .rounded))
