@@ -7,11 +7,12 @@ struct SpanishWord: Hashable {
 }
 
 enum SpanishLesson: CaseIterable {
-    case phrases, animals, colors, numbers, food
+    case phrases, dominican, animals, colors, numbers, food
 
     var title: String {
         switch self {
         case .phrases: "¡Hola!"
+        case .dominican: "Dominicano"
         case .animals: "Animales"
         case .colors: "Colores"
         case .numbers: "Números"
@@ -22,6 +23,7 @@ enum SpanishLesson: CaseIterable {
     var english: String {
         switch self {
         case .phrases: "Hello!"
+        case .dominican: "Dominican"
         case .animals: "Animals"
         case .colors: "Colors"
         case .numbers: "Numbers"
@@ -32,6 +34,7 @@ enum SpanishLesson: CaseIterable {
     var emoji: String {
         switch self {
         case .phrases: "👋"
+        case .dominican: "🇩🇴"
         case .animals: "🐶"
         case .colors: "🎨"
         case .numbers: "🔢"
@@ -54,6 +57,21 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "Te quiero", english: "I love you", emoji: "❤️"),
             SpanishWord(spanish: "Tengo hambre", english: "I'm hungry", emoji: "😋"),
             SpanishWord(spanish: "¡Vamos a jugar!", english: "Let's play!", emoji: "⚽️"),
+        ]
+        case .dominican: [
+            SpanishWord(spanish: "Bendición, mami", english: "Bless me, Mom", emoji: "🙏"),
+            SpanishWord(spanish: "Bendición, papi", english: "Bless me, Dad", emoji: "🙏"),
+            SpanishWord(spanish: "Bendición, abuela", english: "Bless me, Grandma", emoji: "👵"),
+            SpanishWord(spanish: "Dios te bendiga", english: "God bless you", emoji: "😇"),
+            SpanishWord(spanish: "¿Qué lo que?", english: "What's up?", emoji: "😎"),
+            SpanishWord(spanish: "¡Qué chévere!", english: "How cool!", emoji: "🤩"),
+            SpanishWord(spanish: "Ven acá, mi amor", english: "Come here, my love", emoji: "🤗"),
+            SpanishWord(spanish: "Dame un abrazo", english: "Give me a hug", emoji: "🫂"),
+            SpanishWord(spanish: "¡Ay, mi madre!", english: "Oh my goodness!", emoji: "😱"),
+            SpanishWord(spanish: "Cógelo suave", english: "Take it easy", emoji: "😌"),
+            SpanishWord(spanish: "Ahorita", english: "In a little bit", emoji: "⏳"),
+            SpanishWord(spanish: "¿Quieres mangú?", english: "Do you want mangú?", emoji: "🍌"),
+            SpanishWord(spanish: "Ponte las chancletas", english: "Put on your flip-flops", emoji: "🩴"),
         ]
         case .animals: [
             SpanishWord(spanish: "el perro", english: "dog", emoji: "🐶"),
