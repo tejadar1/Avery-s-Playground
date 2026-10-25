@@ -21,7 +21,8 @@ jobs:
             -resultBundlePath TestResults.xcresult CODE_SIGNING_ALLOWED=NO
       - name: Show why tests failed
         if: failure()
-        run: xcrun xcresulttool get test-results tests --path TestResults.xcresult | grep -B2 -A8 -i '"failureMessage\|"result" : "Failed'
+        run: |
+          xcrun xcresulttool get test-results tests --path TestResults.xcresult | grep -B2 -A8 -i 'failureMessage\|"result" : "Failed'
       - name: Publish screenshots to the screenshots branch
         if: always()
         working-directory: screenshots
