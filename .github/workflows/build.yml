@@ -49,26 +49,27 @@ jobs:
     needs: test
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
+    # Only the .p8 key is a secret; the IDs just say which account and key to use.
     env:
-      KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
-      ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      KEY_ID: NGR5XJU744
+      ISSUER_ID: 6e584ffe-8197-4f9f-8aa6-7541bb2bc445
+      TEAM_ID: 7T84UMWQFK
       KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
-      TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
     steps:
-      - if: env.KEY_ID == ''
-        run: echo "App Store Connect secrets aren't set, so nothing is uploaded. See README > TestFlight."
-      - if: env.KEY_ID != ''
+      - if: env.KEY == ''
+        run: echo "The APP_STORE_CONNECT_KEY secret isn't set, so nothing is uploaded. See README > TestFlight."
+      - if: env.KEY != ''
         uses: actions/checkout@v4
-      - if: env.KEY_ID != ''
+      - if: env.KEY != ''
         run: brew install xcodegen && xcodegen
       # Archive unsigned; the export step signs with Apple's cloud-managed certificate, so no certificates live in this repo.
-      - if: env.KEY_ID != ''
+      - if: env.KEY != ''
         name: Archive
         run: |
           xcodebuild archive -project AverysPlayground.xcodeproj -scheme AverysPlayground \
             -destination generic/platform=iOS -archivePath build/App.xcarchive \
             CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM="$TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }}
-      - if: env.KEY_ID != ''
+      - if: env.KEY != ''
         name: Sign and upload to TestFlight
         run: |
           mkdir -p ~/private_keys

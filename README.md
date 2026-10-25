@@ -65,14 +65,12 @@ needs these one-time steps, all doable in Safari on an iPhone.
    any SKU. The name must be unused on the App Store, so use something like "Avery's Play: Kids Games".
    The name under the icon is "Avery's Play" either way (set in `project.yml`).
 4. In App Store Connect → Users and Access → Integrations → **App Store Connect API**, generate a team key
-   with **Admin** access. Note the Key ID and Issuer ID, and download the `.p8` file (Apple lets you download
-   it only once).
-5. Find your **Team ID** under Membership details on [developer.apple.com/account](https://developer.apple.com/account).
-6. In this GitHub repo → Settings → Secrets and variables → Actions, add four repository secrets:
-   - `APP_STORE_CONNECT_KEY_ID`: the Key ID
-   - `APP_STORE_CONNECT_ISSUER_ID`: the Issuer ID
-   - `APP_STORE_CONNECT_KEY`: the full text of the `.p8` file, including the BEGIN and END lines
-   - `APPLE_TEAM_ID`: the Team ID
+   with **Admin** access and download the `.p8` file (Apple lets you download it only once).
+5. Put the key's Key ID, the Issuer ID and your Team ID (Membership details on
+   [developer.apple.com/account](https://developer.apple.com/account)) in the `testflight` job in
+   `.github/workflows/build.yml`. They aren't secret.
+6. In this GitHub repo → Settings → Secrets and variables → Actions, add one repository secret,
+   `APP_STORE_CONNECT_KEY`: the full text of the `.p8` file, including the BEGIN and END lines.
 7. In GitHub → Actions → Build → **Run workflow**. When it finishes, Apple takes 10–30 minutes to process the
    build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
    install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
