@@ -9,13 +9,27 @@ enum NailTool: Hashable {
 }
 
 struct Nail: Equatable {
-    var color: Color?
+    struct Stroke: Equatable {
+        var points: [CGPoint]  // 0...1 across and down the nail
+        let color: Color
+    }
+
+    var strokes: [Stroke] = []
     var design: NailDesign?
     var sticker: String?
 
+    /// Adds a brush point; `startsStroke` begins a new stroke where the finger touched down.
+    mutating func brush(_ color: Color, at point: CGPoint, startsStroke: Bool) {
+        if startsStroke || strokes.isEmpty {
+            strokes.append(Stroke(points: [point], color: color))
+        } else {
+            strokes[strokes.count - 1].points.append(point)
+        }
+    }
+
     mutating func apply(_ tool: NailTool) {
         switch tool {
-        case .polish(let color): self.color = color
+        case .polish: break  // polish goes on with brush(_:at:startsStroke:)
         case .remover: self = Nail()
         case .design(let design): self.design = design
         case .sticker(let sticker): self.sticker = sticker
@@ -71,14 +85,22 @@ struct NailSalonView: View {
     @State private var nails = Array(repeating: Nail(), count: 5)
     @State private var tray = Tray.polish
     @State private var tool = NailTool.polish(NailSalonView.polishes[0])
-    @State private var cheer = "Pick a color, then tap a nail!"
+    @State private var cheer = "Tap a nail to paint it!"
     @State private var cheerCount = 0
     @State private var isShowingOff = false
+    @State private var zoomed: Int?
+    @State private var isBrushing = false
+    @State private var brushTip: CGPoint?
+    @Namespace private var zoom
 
     var body: some View {
         VStack(spacing: 0) {
             CocoSays(text: cheer, hops: cheerCount)
-            hand
+            if let zoomed {
+                bigNail(zoomed)
+            } else {
+                hand
+            }
             if isShowingOff {
                 Button(action: reset) {
                     Text("🖐️ New nails")
@@ -108,8 +130,9 @@ struct NailSalonView: View {
 
                 ForEach(nails.indices, id: \.self) { index in
                     let spot = Self.spots[index]
-                    Button { paint(index) } label: {
+                    Button { zoom(into: index) } label: {
                         NailView(nail: nails[index], size: CGSize(width: spot.width * scale, height: spot.height * scale))
+                            .matchedGeometryEffect(id: index, in: zoom)
                             .padding(12)
                             .contentShape(Rectangle())
                     }
@@ -127,6 +150,57 @@ struct NailSalonView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding(.horizontal)
+    }
+
+    /// One fingertip, zoomed in, painted by dragging a brush over the nail.
+    private func bigNail(_ index: Int) -> some View {
+        GeometryReader { geo in
+            let spot = Self.spots[index]
+            let width = min(geo.size.width * 0.5, (geo.size.height - 90) * 0.55 * spot.width / spot.height)
+            let size = CGSize(width: width, height: width * spot.height / spot.width)
+            VStack {
+                Spacer(minLength: 0)
+                ZStack(alignment: .top) {
+                    Capsule()
+                        .fill(Color(red: 1.0, green: 0.86, blue: 0.78))
+                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 8))
+                        .frame(width: size.width * 1.45, height: size.height * 2.4)
+                    NailView(nail: nails[index], size: size)
+                        .matchedGeometryEffect(id: index, in: zoom)
+                        .overlay(alignment: .topLeading) {
+                            if let brushTip {
+                                Text("🖌️")
+                                    .font(.system(size: 64))
+                                    .position(x: brushTip.x + 26, y: brushTip.y - 26)
+                                    .allowsHitTesting(false)
+                            }
+                        }
+                        .padding(.top, size.width * 0.22)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("Nail")
+                        .accessibilityIdentifier("Big nail")
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { brush(index, at: $0.location, in: size) }
+                                .onEnded { _ in finishBrush(index) }
+                        )
+                }
+                .frame(height: size.height * 1.7, alignment: .top)
+                .clipped()
+                Spacer(minLength: 0)
+                Button(action: zoomOut) {
+                    Text("🖐️ All nails")
+                        .font(.kid(24))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 24)
+                        .frame(height: 56)
+                        .cartoonCard(.pink, cornerRadius: 28)
+                }
+                .buttonStyle(SquishyButtonStyle())
+                .padding(.bottom, 12)
+            }
+            .frame(maxWidth: .infinity)
+        }
     }
 
     private var toolTray: some View {
@@ -168,7 +242,7 @@ struct NailSalonView: View {
                     case .design:
                         ForEach(NailDesign.allCases, id: \.self) { design in
                             toolButton(.design(design)) {
-                                NailView(nail: Nail(color: .pink, design: design), size: CGSize(width: 44, height: 58))
+                                NailView(nail: Nail(design: design), size: CGSize(width: 44, height: 58))
                                     .frame(height: 72)
                             }
                         }
@@ -205,9 +279,36 @@ struct NailSalonView: View {
         .buttonStyle(SquishyButtonStyle())
     }
 
-    private func paint(_ index: Int) {
+    private func zoom(into index: Int) {
         Haptics.tap()
-        withAnimation(.easeOut(duration: 0.45)) { nails[index].apply(tool) }
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) { zoomed = index }
+        say(tray == .polish ? "Paint it with the brush!" : "Tap the nail!")
+    }
+
+    private func zoomOut() {
+        Haptics.tap()
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) { zoomed = nil }
+        say("Pick another nail!")
+    }
+
+    private func brush(_ index: Int, at location: CGPoint, in size: CGSize) {
+        guard case .polish(let color) = tool else { return }
+        if !isBrushing { Haptics.tap() }
+        brushTip = location
+        nails[index].brush(color, at: CGPoint(x: location.x / size.width, y: location.y / size.height), startsStroke: !isBrushing)
+        isBrushing = true
+    }
+
+    private func finishBrush(_ index: Int) {
+        brushTip = nil
+        if isBrushing {
+            isBrushing = false
+            // Cheer on the first stroke and every few after, not on every one.
+            if nails[index].strokes.count % 4 == 1 { say(Self.cheers.randomElement()!) }
+            return
+        }
+        Haptics.tap()
+        withAnimation(.spring) { nails[index].apply(tool) }
         say(tool == .remover ? "All clean!" : Self.cheers.randomElement()!)
     }
 
@@ -224,7 +325,10 @@ struct NailSalonView: View {
 
     private func showOff() {
         Haptics.success()
-        withAnimation(.spring) { isShowingOff = true }
+        withAnimation(.spring) {
+            zoomed = nil
+            isShowingOff = true
+        }
         say("Ta-da! Your nails look amazing!")
     }
 
@@ -235,7 +339,7 @@ struct NailSalonView: View {
             isShowingOff = false
         }
         pick(.polish)
-        say("Pick a color, then tap a nail!")
+        say("Tap a nail to paint it!")
     }
 
     private func say(_ text: String) {
@@ -252,15 +356,19 @@ private struct NailView: View {
     var body: some View {
         ZStack {
             Capsule().fill(Color(red: 1.0, green: 0.79, blue: 0.84))
-            if let color = nail.color {
-                Capsule()
-                    .fill(color)
-                    .id(color)
-                    .transition(.asymmetric(insertion: .paint, removal: .opacity))
+            Canvas { context, canvas in
+                for stroke in nail.strokes {
+                    var path = Path()
+                    path.addLines(stroke.points.map { CGPoint(x: $0.x * canvas.width, y: $0.y * canvas.height) })
+                    if stroke.points.count == 1, let dot = path.currentPoint { path.addLine(to: dot) }
+                    context.stroke(path, with: .color(stroke.color), style: StrokeStyle(lineWidth: canvas.width * 0.35, lineCap: .round, lineJoin: .round))
+                }
             }
+            .clipShape(Capsule())
             if let design = nail.design {
+                let top = nail.strokes.last?.color
                 DesignView(design: design)
-                    .foregroundStyle(nail.color == Color.white ? Color.pink : Color.white)
+                    .foregroundStyle(top == nil || top == Color.white ? Color.pink : Color.white)
                     .clipShape(Capsule())
             }
             Capsule()
@@ -359,21 +467,6 @@ private struct Sparkles: View {
         }
         .allowsHitTesting(false)
     }
-}
-
-private struct PaintMask: ViewModifier {
-    let progress: CGFloat
-
-    func body(content: Content) -> some View {
-        content.mask {
-            Rectangle().scaleEffect(x: 1, y: progress, anchor: .bottom)
-        }
-    }
-}
-
-private extension AnyTransition {
-    /// Polish brushes on from the cuticle up to the tip.
-    static let paint = AnyTransition.modifier(active: PaintMask(progress: 0.001), identity: PaintMask(progress: 1))
 }
 
 #Preview {

@@ -13,11 +13,13 @@ final class ScreenshotTests: XCTestCase {
 
         let games: [(title: String, play: () -> Void)] = [
             ("Nail Salon", {
-                ["Nail 1", "Nail 2", "Nail 3", "Nail 4", "Nail 5"].forEach { self.app.buttons[$0].tap() }
-                self.app.buttons["Designs"].tap()
-                self.app.buttons["Nail 2"].tap()
-                self.app.buttons["Stickers"].tap()
-                self.app.buttons["Nail 5"].tap()
+                self.app.buttons["Nail 3"].tap()
+                sleep(1)
+                let nail = self.app.descendants(matching: .any)["Big nail"]
+                for (from, to) in [((0.2, 0.05), (0.25, 0.95)), ((0.5, 0.05), (0.5, 0.95)), ((0.8, 0.05), (0.7, 0.9))] {
+                    nail.coordinate(withNormalizedOffset: CGVector(dx: from.0, dy: from.1))
+                        .press(forDuration: 0.05, thenDragTo: nail.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
+                }
             }),
             ("Read", {
                 let letters = self.app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Letter'"))
@@ -45,6 +47,10 @@ final class ScreenshotTests: XCTestCase {
             sleep(1)
             try snap(String(format: "%02d-%@", index + 1, game.title), to: dir)
             if game.title == "Nail Salon" {
+                app.buttons["Stickers"].tap()
+                app.descendants(matching: .any)["Big nail"].tap()
+                app.buttons["🖐️ All nails"].tap()
+                sleep(1)
                 app.buttons["Done!"].tap()
                 sleep(1)
                 try snap("01b-Nail Salon done", to: dir)

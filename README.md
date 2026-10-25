@@ -6,7 +6,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 | | Game | What happens |
 |---|---|---|
-| 💅 | **Nail Salon** | Paint each nail, add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. Coco cheers you on. |
+| 💅 | **Nail Salon** | Tap a nail to zoom in, then paint it with a brush by dragging a finger. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. Coco cheers you on. |
 | 📖 | **Read** | Tap each letter of a word like "cat" to hear its sound, then pick the matching picture. Earns a star for each word read. |
 | 📚 | **Stories** | The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each one is read aloud as you pass it. Tap the picture to hear the whole page. |
 | 🗣️ | **Español** | Spanish words and phrases in five sets: greetings, animals, colors, numbers, and food. Tap a card to hear the Spanish, the English, then the Spanish again so your child can say it back. |
