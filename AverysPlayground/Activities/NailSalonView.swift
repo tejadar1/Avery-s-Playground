@@ -5,13 +5,14 @@ enum NailDesign: CaseIterable, Hashable {
 }
 
 enum NailTool: Hashable {
-    case polish(Color), remover, design(NailDesign), sticker(String)
+    case polish(Color), glitter(Color), remover, design(NailDesign), sticker(String)
 }
 
 struct Nail: Equatable {
     struct Stroke: Equatable {
         var points: [CGPoint]  // 0...1 across and down the nail
         let color: Color
+        var glitter = false
     }
 
     var strokes: [Stroke] = []
@@ -19,22 +20,22 @@ struct Nail: Equatable {
     var sticker: String?
 
     /// Adds a brush point; `startsStroke` begins a new stroke where the finger touched down.
-    mutating func brush(_ color: Color, at point: CGPoint, startsStroke: Bool) {
+    mutating func brush(_ color: Color, glitter: Bool = false, at point: CGPoint, startsStroke: Bool) {
         if startsStroke || strokes.isEmpty {
-            strokes.append(Stroke(points: [point], color: color))
+            strokes.append(Stroke(points: [point], color: color, glitter: glitter))
         } else {
             strokes[strokes.count - 1].points.append(point)
         }
     }
 
     /// A nail painted all over in one color.
-    static func painted(_ color: Color) -> Nail {
-        Nail(strokes: [0.2, 0.5, 0.8].map { Stroke(points: [CGPoint(x: $0, y: 0), CGPoint(x: $0, y: 1)], color: color) })
+    static func painted(_ color: Color, glitter: Bool = false) -> Nail {
+        Nail(strokes: [0.2, 0.5, 0.8].map { Stroke(points: [CGPoint(x: $0, y: 0), CGPoint(x: $0, y: 1)], color: color, glitter: glitter) })
     }
 
     mutating func apply(_ tool: NailTool) {
         switch tool {
-        case .polish: break  // polish goes on with brush(_:at:startsStroke:)
+        case .polish, .glitter: break  // polish goes on with brush(_:glitter:at:startsStroke:)
         case .remover: self = Nail()
         case .design(let design): self.design = design
         case .sticker(let sticker): self.sticker = sticker
@@ -170,6 +171,12 @@ struct NailSalonView: View {
         .white,
         Color(red: 0.32, green: 0.16, blue: 0.42),
     ]
+    private static let glitters: [Color] = [
+        Color(red: 0.85, green: 0.86, blue: 0.9),
+        Color(red: 0.95, green: 0.78, blue: 0.35),
+        Color(red: 1.0, green: 0.55, blue: 0.75),
+        Color(red: 0.55, green: 0.7, blue: 1.0),
+    ]
     private static let stickers = ["🌸", "⭐️", "💖", "🦋", "🍓", "💎", "🌈", "🐊"]
     private static let cheers = ["Holy guacamole, so pretty!", "Wowza bowza!", "So sparkly my tail is wiggling!", "Snap snap! I love it!", "Ooh la la!", "Crocodile-tastic!"]
 
@@ -177,7 +184,7 @@ struct NailSalonView: View {
     private static func randomIdea() -> [Nail] {
         let colors = Array(polishes.shuffled().prefix(2))
         return (0..<5).map { i in
-            var nail = Nail.painted(colors[i % 2])
+            var nail = Nail.painted(colors[i % 2], glitter: i == 1 || i == 3 ? Bool.random() : false)
             if i == 2 {
                 nail.sticker = stickers.randomElement()
             } else if Bool.random() {
@@ -317,52 +324,104 @@ struct NailSalonView: View {
     /// One fingertip, zoomed in, painted by dragging a brush over the nail.
     private func bigNail(_ index: Int) -> some View {
         GeometryReader { geo in
-            let nail = Hand.fingers[index].nailSize
-            let width = min(geo.size.width * 0.5, (geo.size.height - 90 * uiScale) * 0.55 * nail.width / nail.height)
-            let size = CGSize(width: width, height: width * nail.height / nail.width)
-            VStack {
-                Spacer(minLength: 0)
-                ZStack(alignment: .top) {
-                    Capsule()
-                        .fill(Skin.all[skin].light)
-                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
-                        .frame(width: size.width * 1.45, height: size.height * 2.4)
-                    NailView(nail: nails[index], size: size)
-                        .matchedGeometryEffect(id: index, in: zoom)
-                        .overlay(alignment: .topLeading) {
-                            if let brushTip {
-                                Text("🖌️")
-                                    .font(.system(size: 64 * uiScale))
-                                    .position(x: brushTip.x + 26, y: brushTip.y - 26)
-                                    .allowsHitTesting(false)
-                            }
+            let shape = Hand.fingers[index].nailSize
+            let width = min(geo.size.width * 0.42, geo.size.height * 0.62 * shape.width / shape.height)
+            let size = CGSize(width: width, height: width * shape.height / shape.width)
+            let top = geo.size.height * 0.06
+            ZStack(alignment: .top) {
+                // The finger rises from the bottom edge.
+                Capsule()
+                    .fill(Skin.all[skin].light)
+                    .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
+                    .frame(width: size.width * 1.45, height: geo.size.height * 1.3)
+                    .padding(.top, top)
+                NailView(nail: nails[index], size: size)
+                    .matchedGeometryEffect(id: index, in: zoom)
+                    .overlay(alignment: .topLeading) {
+                        if let brushTip {
+                            Text("🖌️")
+                                .font(.system(size: 64 * uiScale))
+                                .position(x: brushTip.x + 26, y: brushTip.y - 26)
+                                .allowsHitTesting(false)
                         }
-                        .padding(.top, size.width * 0.22)
-                        .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("Nail")
-                        .accessibilityIdentifier("Big nail")
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { brush(index, at: $0.location, in: size) }
-                                .onEnded { _ in finishBrush(index) }
-                        )
-                }
-                .frame(height: size.height * 1.7, alignment: .top)
-                .clipped()
-                Spacer(minLength: 0)
-                Button(action: zoomOut) {
-                    Text("🖐️ All nails")
-                        .font(.kid(24))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 24 * uiScale)
-                        .frame(height: 56 * uiScale)
-                        .cartoonCard(.pink, cornerRadius: 28 * uiScale)
-                }
-                .buttonStyle(SquishyButtonStyle())
-                .padding(.bottom, 12 * uiScale)
+                    }
+                    .padding(.top, top + size.width * 0.22)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Nail")
+                    .accessibilityIdentifier("Big nail")
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { brush(index, at: $0.location, in: size) }
+                            .onEnded { _ in finishBrush(index) }
+                    )
             }
-            .frame(maxWidth: .infinity)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
+            .clipped()
+            .overlay(alignment: .topLeading) { sideTools(index) }
+            .overlay(alignment: .topTrailing) { goalCard(index, width: min(120 * uiScale, geo.size.width * 0.26)) }
         }
+    }
+
+    /// Round buttons down the side: back to the whole hand, and a cotton pad that wipes the nail clean.
+    private func sideTools(_ index: Int) -> some View {
+        VStack(spacing: 16 * uiScale) {
+            Button(action: zoomOut) {
+                Text("🖐️")
+                    .font(.system(size: 30 * uiScale))
+                    .frame(width: 60 * uiScale, height: 60 * uiScale)
+                    .cartoonCard(Color(red: 0.93, green: 0.55, blue: 0.85), cornerRadius: 30 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+            .accessibilityLabel("All nails")
+
+            Button {
+                Haptics.tap()
+                Sounds.shared.play(.pop)
+                withAnimation(.spring) { nails[index].apply(.remover) }
+                say("All clean!")
+            } label: {
+                Circle()
+                    .fill(.white)
+                    .overlay(Circle().fill(Color(red: 0.78, green: 0.93, blue: 0.93)).padding(9 * uiScale))
+                    .frame(width: 60 * uiScale, height: 60 * uiScale)
+                    .cartoonCard(Color(red: 0.55, green: 0.55, blue: 0.95), cornerRadius: 30 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+            .accessibilityLabel("Remover")
+        }
+        .padding()
+    }
+
+    /// This nail from the "Copy this!" look, with Coco cheering it on.
+    private func goalCard(_ index: Int, width: CGFloat) -> some View {
+        let nail = CGSize(width: width * 0.62, height: width * 0.62 * 1.25)
+        return ZStack(alignment: .top) {
+            Capsule()
+                .fill(Skin.all[skin].light)
+                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
+                .frame(width: nail.width * 1.4, height: width * 1.6)
+                .padding(.top, width * 0.12)
+            NailView(nail: idea[index], size: nail)
+                .padding(.top, width * 0.12 + nail.width * 0.2)
+        }
+        .frame(width: width, height: width * 1.15, alignment: .top)
+        .background(Color(red: 0.84, green: 0.93, blue: 1.0))
+        .clipShape(RoundedRectangle(cornerRadius: 16 * uiScale, style: .continuous))
+        .cartoonCard(Color(red: 0.84, green: 0.93, blue: 1.0), cornerRadius: 16 * uiScale)
+        .overlay(alignment: .topLeading) {
+            Image("Coco")
+                .resizable()
+                .scaledToFit()
+                .padding(4 * uiScale)
+                .frame(width: width * 0.42, height: width * 0.42)
+                .background(Circle().fill(.white))
+                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
+                .offset(x: -width * 0.18, y: -width * 0.12)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Copy this nail")
+        .padding()
+        .padding(.top, 8 * uiScale)
     }
 
     private var toolTray: some View {
@@ -397,10 +456,10 @@ struct NailSalonView: View {
                         ForEach(Self.polishes, id: \.self) { color in
                             toolButton(.polish(color)) { PolishBottle(color: color) }
                         }
-                        toolButton(.remover) {
-                            Text("🧽").font(.system(size: 40 * uiScale)).frame(height: 72 * uiScale)
+                        ForEach(Self.glitters, id: \.self) { color in
+                            toolButton(.glitter(color)) { PolishBottle(color: color, glitter: true) }
+                                .accessibilityLabel("Glitter")
                         }
-                        .accessibilityLabel("Remover")
                     case .design:
                         ForEach(NailDesign.allCases, id: \.self) { design in
                             toolButton(.design(design)) {
@@ -425,7 +484,12 @@ struct NailSalonView: View {
             }
         }
         .padding(.top, 12 * uiScale)
-        .background(Color.white.opacity(0.7).ignoresSafeArea(edges: .bottom))
+        .background(
+            // A pink shelf for the bottles.
+            LinearGradient(colors: [Color(red: 1.0, green: 0.84, blue: 0.92), Color(red: 0.95, green: 0.68, blue: 0.83)], startPoint: .top, endPoint: .bottom)
+                .overlay(alignment: .top) { Rectangle().fill(.white.opacity(0.8)).frame(height: 4 * uiScale) }
+                .ignoresSafeArea(edges: .bottom)
+        )
     }
 
     private func toolButton<Label: View>(_ item: NailTool, @ViewBuilder label: () -> Label) -> some View {
@@ -454,10 +518,15 @@ struct NailSalonView: View {
     }
 
     private func brush(_ index: Int, at location: CGPoint, in size: CGSize) {
-        guard case .polish(let color) = tool else { return }
+        let paint: (color: Color, glitter: Bool)
+        switch tool {
+        case .polish(let color): paint = (color, false)
+        case .glitter(let color): paint = (color, true)
+        default: return
+        }
         if !isBrushing { Haptics.tap() }
         brushTip = location
-        nails[index].brush(color, at: CGPoint(x: location.x / size.width, y: location.y / size.height), startsStroke: !isBrushing)
+        nails[index].brush(paint.color, glitter: paint.glitter, at: CGPoint(x: location.x / size.width, y: location.y / size.height), startsStroke: !isBrushing)
         isBrushing = true
     }
 
@@ -528,7 +597,17 @@ private struct NailView: View {
                     var path = Path()
                     path.addLines(stroke.points.map { CGPoint(x: $0.x * canvas.width, y: $0.y * canvas.height) })
                     if stroke.points.count == 1, let dot = path.currentPoint { path.addLine(to: dot) }
-                    context.stroke(path, with: .color(stroke.color), style: StrokeStyle(lineWidth: canvas.width * 0.35, lineCap: .round, lineJoin: .round))
+                    let style = StrokeStyle(lineWidth: canvas.width * 0.35, lineCap: .round, lineJoin: .round)
+                    context.stroke(path, with: .color(stroke.color), style: style)
+                    if stroke.glitter {
+                        var sparkle = context
+                        sparkle.clip(to: path.strokedPath(style))
+                        for i in 0..<160 {
+                            let r = canvas.width * (0.012 + 0.012 * speckle(i + 900))
+                            let dot = CGRect(x: speckle(i) * canvas.width - r, y: speckle(i + 500) * canvas.height - r, width: 2 * r, height: 2 * r)
+                            sparkle.fill(Path(ellipseIn: dot), with: .color(.white.opacity(0.35 + 0.55 * speckle(i + 1300))))
+                        }
+                    }
                 }
             }
             .clipShape(Capsule())
@@ -542,10 +621,15 @@ private struct NailView: View {
                     .foregroundStyle(top == nil || top == Color.white ? Color.pink : Color.white)
                     .clipShape(Capsule())
             }
+            // Two glossy streaks.
             Capsule()
-                .fill(.white.opacity(0.5))
-                .frame(width: size.width * 0.16, height: size.height * 0.35)
-                .offset(x: -size.width * 0.22, y: -size.height * 0.12)
+                .fill(.white.opacity(0.55))
+                .frame(width: size.width * 0.07, height: size.height * 0.3)
+                .offset(x: size.width * 0.2, y: -size.height * 0.15)
+            Capsule()
+                .fill(.white.opacity(0.55))
+                .frame(width: size.width * 0.05, height: size.height * 0.5)
+                .offset(x: size.width * 0.3, y: size.height * 0.02)
             if let sticker = nail.sticker {
                 Text(sticker).font(.system(size: size.width * 0.62))
             }
@@ -553,6 +637,12 @@ private struct NailView: View {
         .frame(width: size.width, height: size.height)
         .overlay(Capsule().strokeBorder(Color.outline, lineWidth: max(1.5, size.width * 0.06)))
     }
+}
+
+/// The same scatter of glitter specks on every redraw: a number in 0..<1 for each index.
+private func speckle(_ i: Int) -> CGFloat {
+    let v = sin(Double(i) * 12.9898) * 43758.5453
+    return CGFloat(v - v.rounded(.down))
 }
 
 private struct DesignView: View {
@@ -598,6 +688,7 @@ private struct DesignView: View {
 
 struct PolishBottle: View {
     let color: Color
+    var glitter = false
 
     var body: some View {
         VStack(spacing: -5) {
@@ -610,6 +701,7 @@ struct PolishBottle: View {
                 .overlay(alignment: .topLeading) {
                     Capsule().fill(.white.opacity(0.6)).frame(width: 7 * uiScale, height: 18 * uiScale).padding(9 * uiScale)
                 }
+                .overlay { if glitter { Text("✨").font(.system(size: 20 * uiScale)) } }
                 .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
         }
     }
