@@ -110,7 +110,7 @@ struct PetView: View {
                     )
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Mochi")
-                    .accessibilityIdentifier("Mochi")
+                    .accessibilityIdentifier("Puppy")
 
                 if showBowl {
                     Text("🥣")

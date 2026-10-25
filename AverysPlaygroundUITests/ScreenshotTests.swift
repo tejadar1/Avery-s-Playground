@@ -42,7 +42,7 @@ final class ScreenshotTests: XCTestCase {
             ("Mochi", {
                 self.app.buttons["Feed"].tap()
                 sleep(2)
-                let mochi = self.app.descendants(matching: .any)["Mochi"]
+                let mochi = self.app.descendants(matching: .any)["Puppy"]
                 mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.35))
                     .press(forDuration: 0.05, thenDragTo: mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)))
             }),
@@ -65,8 +65,12 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Animals", { self.button("Cow").tap() }),
             ("Draw", {
-                let from = self.app.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.3))
-                from.press(forDuration: 0.05, thenDragTo: self.app.coordinate(withNormalizedOffset: CGVector(dx: 0.85, dy: 0.5)))
+                let canvas = self.app.descendants(matching: .any)["Canvas"]
+                for (crayon, from, to) in [("Coral", (0.2, 0.3), (0.8, 0.35)), ("Navy", (0.3, 0.6), (0.7, 0.8)), ("Teal", (0.15, 0.85), (0.85, 0.15))] {
+                    self.app.buttons[crayon].tap()
+                    canvas.coordinate(withNormalizedOffset: CGVector(dx: from.0, dy: from.1))
+                        .press(forDuration: 0.05, thenDragTo: canvas.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
+                }
             }),
             ("Bubbles", { sleep(3) }),
         ]
