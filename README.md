@@ -41,9 +41,34 @@ Then in Xcode:
 
 1. Select the **AverysPlayground** target → **Signing & Capabilities** → choose your **Team**
    (a free Apple ID works for running on your own phone).
-2. If Xcode complains about the bundle ID, change `com.example.averysplayground` to something unique,
-   like `com.yourname.averysplayground`.
+2. The bundle ID is `com.tejadar1.averysplayground`. If Xcode says it's taken, change it in `project.yml`.
 3. Plug in the iPhone (or pick a simulator) and press **Run** (⌘R).
+
+## TestFlight (no Mac needed)
+
+GitHub builds the app on every push (`.github/workflows/build.yml`). The **test** job compiles it and runs the
+unit tests on an iPhone simulator. The **testflight** job uploads a build to TestFlight once these one-time
+steps are done. Everything works in Safari on an iPhone.
+
+1. Join the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
+2. On [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list), add an
+   **Identifier** → App IDs → App, with the explicit bundle ID `com.tejadar1.averysplayground`.
+3. In [App Store Connect](https://appstoreconnect.apple.com/apps), tap **+ New App**: iOS, pick that bundle ID,
+   any SKU. The name must be unused on the App Store, so "Avery's Playground" may need a twist.
+4. In App Store Connect → Users and Access → Integrations → **App Store Connect API**, generate a team key
+   with **Admin** access. Note the Key ID and Issuer ID, and download the `.p8` file (Apple lets you download
+   it only once).
+5. Find your **Team ID** under Membership details on [developer.apple.com/account](https://developer.apple.com/account).
+6. In this GitHub repo → Settings → Secrets and variables → Actions, add four repository secrets:
+   - `APP_STORE_CONNECT_KEY_ID`: the Key ID
+   - `APP_STORE_CONNECT_ISSUER_ID`: the Issuer ID
+   - `APP_STORE_CONNECT_KEY`: the full text of the `.p8` file, including the BEGIN and END lines
+   - `APPLE_TEAM_ID`: the Team ID
+7. In GitHub → Actions → Build → **Run workflow**. When it finishes, Apple takes 10–30 minutes to process the
+   build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
+   install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
+
+After that, every push uploads a new build, and TestFlight offers the update.
 
 ## Project layout
 
