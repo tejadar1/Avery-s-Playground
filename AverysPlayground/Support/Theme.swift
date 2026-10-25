@@ -48,10 +48,24 @@ struct PlayfulBackground: View {
     }
 }
 
-/// Coco with a speech bubble. Coco hops each time `hops` changes.
+/// Coco with a speech bubble. She hops each time `hops` changes, and she's silly: tap her for a spin and a joke.
 struct CocoSays: View {
     let text: String
     let hops: Int
+
+    private static let sillyLines = [
+        "Snap snap! I'm Coco, the silliest crocodile!",
+        "Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!",
+        "Did you know crocodiles can't stick out their tongues? Blehhh!",
+        "I ate a crayon once. It tasted purple!",
+        "Wiggle wiggle wiggle! That's my happy dance!",
+        "Hee hee! That tickles!",
+        "Boop! You booped my nose!",
+        "I have lots and lots of teeth, and I brush every one!",
+    ]
+
+    @State private var joke: String?
+    @State private var spins = 0
 
     var body: some View {
         HStack(alignment: .center, spacing: 4 * uiScale) {
@@ -64,19 +78,32 @@ struct CocoSays: View {
                 } animation: { _ in
                     .spring(response: 0.2, dampingFraction: 0.5)
                 }
-                .accessibilityHidden(true)
+                .rotationEffect(.degrees(Double(spins) * 360))
+                .animation(.spring(response: 0.6, dampingFraction: 0.6), value: spins)
+                .onTapGesture(perform: beSilly)
+                .accessibilityLabel("Coco")
+                .accessibilityAddTraits(.isButton)
 
-            Text(text)
+            Text(joke ?? text)
                 .font(.kid(22))
                 .foregroundStyle(Color.outline)
                 .padding(.horizontal, 16 * uiScale)
                 .padding(.vertical, 10 * uiScale)
                 .cartoonCard(.white, cornerRadius: 22 * uiScale)
-                .id(text)
+                .id(joke ?? text)
                 .transition(.scale.combined(with: .opacity))
             Spacer(minLength: 0)
         }
         .padding(.horizontal)
         .padding(.top, 8 * uiScale)
+        .onChange(of: text) { joke = nil }
+    }
+
+    private func beSilly() {
+        Haptics.tap()
+        spins += 1
+        let line = Self.sillyLines.filter { $0 != joke }.randomElement()!
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { joke = line }
+        Speaker.shared.say(line)
     }
 }

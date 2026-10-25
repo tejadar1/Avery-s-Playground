@@ -143,7 +143,7 @@ struct HairSalonView: View {
         .background(Color(red: 0.98, green: 0.92, blue: 1.0).ignoresSafeArea())
         .onAppear {
             newCustomer()
-            Speaker.shared.say("Welcome to the hair salon! " + cheer)
+            Speaker.shared.say("Welcome to Coco's hair salon! I don't have any hair, so let's do hers! " + cheer)
         }
     }
 
@@ -268,7 +268,7 @@ struct HairSalonView: View {
         .background(Color.white.opacity(0.7).ignoresSafeArea(edges: .bottom))
     }
 
-    private static let cheers = ["Ooh, pretty!", "So stylish!", "I love it!", "Fancy!", "Gorgeous!"]
+    private static let cheers = ["Holy guacamole, so stylish!", "Wowza bowza!", "Ooh la la!", "I wish I had hair like that!", "Crocodile-tastic!"]
 
     private func choice<Label: View>(
         _ name: String, isSelected: Bool, action: @escaping () -> Void, @ViewBuilder label: () -> Label
@@ -303,7 +303,7 @@ struct HairSalonView: View {
         case .rinse: say(hair.foam.isEmpty ? "All rinsed! Now blow dry it." : "Rinse off all the bubbles!")
         case .dryer: say(hair.wetness == 0 ? "All dry! Now comb it." : "Keep blowing!")
         case .comb: say(hair.tangles == 0 ? "So smooth! Want a haircut?" : "Comb out the tangles!")
-        case .scissors: say("Snip snip! Now pick a style.")
+        case .scissors: say("Snip snip! Don't cut my tail! Now pick a style.")
         }
     }
 
@@ -316,7 +316,7 @@ struct HairSalonView: View {
     private func showOff() {
         Haptics.success()
         withAnimation(.spring) { isShowingOff = true }
-        say("Ta-da! You look beautiful!")
+        say("Ta-da! She looks beautiful! Holy guacamole!")
     }
 
     private func newCustomer() {
@@ -448,12 +448,25 @@ private enum HairArt {
             context.fill(circle(x, 0.47, 0.03), with: .color(Color(red: 0.17, green: 0.11, blue: 0.1)))
             context.fill(circle(x + 0.01, 0.46, 0.01), with: .color(.white))
         }
+        // Eyelashes fan up and out from the outer corner of each eye.
+        for (x, side) in [(0.42, -1), (0.58, 1)] as [(CGFloat, CGFloat)] {
+            var lashes = Path()
+            for degrees in [20.0, 50.0, 80.0] {
+                let dx = side * CGFloat(sin(degrees * .pi / 180)), dy = -CGFloat(cos(degrees * .pi / 180))
+                lashes.move(to: pt(x + dx * 0.03, 0.47 + dy * 0.03))
+                lashes.addLine(to: pt(x + dx * 0.055, 0.47 + dy * 0.055))
+            }
+            context.stroke(lashes, with: .color(outline), style: StrokeStyle(lineWidth: line * 0.8, lineCap: .round))
+        }
+        fill(circle(0.3, 0.53, 0.014), Color(red: 1.0, green: 0.84, blue: 0.3))
+        fill(circle(0.7, 0.53, 0.014), Color(red: 1.0, green: 0.84, blue: 0.3))
         for x in [0.36, 0.64] as [CGFloat] {
             context.fill(Path(ellipseIn: CGRect(x: (x - 0.035) * s, y: 0.53 * s, width: 0.07 * s, height: 0.04 * s)), with: .color(Color(red: 1.0, green: 0.56, blue: 0.69).opacity(0.7)))
         }
         var smile = Path()
         smile.addArc(center: pt(0.5, 0.53), radius: 0.07 * s, startAngle: .degrees(25), endAngle: .degrees(155), clockwise: false)
-        context.stroke(smile, with: .color(outline), style: StrokeStyle(lineWidth: line, lineCap: .round))
+        smile.closeSubpath()
+        fill(smile, Color(red: 0.95, green: 0.38, blue: 0.5))
 
         // Top of the hair with bangs
         var cap = Path()

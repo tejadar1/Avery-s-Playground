@@ -47,7 +47,13 @@ final class ScreenshotTests: XCTestCase {
             ("Español", { self.button("Gracias").tap() }),
             ("ABC", {}),
             ("1 2 3", {}),
-            ("Colors", {}),
+            ("Coloring", {
+                let picture = self.app.descendants(matching: .any)["Picture"]
+                for (crayon, x, y) in [("Pink", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {
+                    self.app.buttons[crayon].tap()
+                    picture.coordinate(withNormalizedOffset: CGVector(dx: x, dy: y)).tap()
+                }
+            }),
             ("Animals", { self.button("Cow").tap() }),
             ("Draw", {
                 let from = self.app.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.3))

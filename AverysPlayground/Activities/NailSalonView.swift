@@ -80,7 +80,7 @@ struct NailSalonView: View {
         Color(red: 0.32, green: 0.16, blue: 0.42),
     ]
     private static let stickers = ["🌸", "⭐️", "💖", "🦋", "🍓", "💎", "🌈", "🐊"]
-    private static let cheers = ["Ooh, pretty!", "So sparkly!", "I love it!", "Wow!", "Beautiful!", "Fancy!"]
+    private static let cheers = ["Holy guacamole, so pretty!", "Wowza bowza!", "So sparkly my tail is wiggling!", "Snap snap! I love it!", "Ooh la la!", "Crocodile-tastic!"]
 
     @State private var nails = Array(repeating: Nail(), count: 5)
     @State private var tray = Tray.polish
@@ -117,7 +117,7 @@ struct NailSalonView: View {
             }
         }
         .background(Color(red: 1.0, green: 0.9, blue: 0.94).ignoresSafeArea())
-        .onAppear { Speaker.shared.say("Welcome to the nail salon! " + cheer) }
+        .onAppear { Speaker.shared.say("Welcome to Coco's nail salon! I only have claws, so let's paint your nails! " + cheer) }
     }
 
     private var hand: some View {

@@ -14,7 +14,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .spanish: "Español"
         case .abc: "ABC"
         case .counting: "1 2 3"
-        case .colors: "Colors"
+        case .colors: "Coloring"
         case .animals: "Animals"
         case .drawing: "Draw"
         case .bubbles: "Bubbles"

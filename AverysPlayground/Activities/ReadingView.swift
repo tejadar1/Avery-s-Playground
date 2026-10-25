@@ -128,10 +128,10 @@ struct ReadingView: View {
             withAnimation(.spring) {
                 isSolved = true
                 stars += 1
-                cheer = "\(word.text.capitalized)! You read it!"
+                cheer = "\(word.text.capitalized)! You read it! Snap snap!"
             }
             cheerCount += 1
-            Speaker.shared.say("\(word.text)! You read it!")
+            Speaker.shared.say("\(word.text)! You read it! Snap snap!")
             Task {
                 try? await Task.sleep(for: .seconds(2.5))
                 next(intro: "Tap each letter!")
@@ -140,8 +140,8 @@ struct ReadingView: View {
             Haptics.tap()
             wrongPick = choice
             shakeCount += 1
-            withAnimation { cheer = "That's a \(choice.text). Try again!" }
-            Speaker.shared.say("That's a \(choice.text). Try again!")
+            withAnimation { cheer = "Hee hee, that's a \(choice.text)! Try again!" }
+            Speaker.shared.say("Hee hee, that's a \(choice.text)! Try again!")
         }
     }
 
