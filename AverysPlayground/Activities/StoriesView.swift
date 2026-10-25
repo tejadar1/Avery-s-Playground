@@ -10,6 +10,7 @@ struct Story: Hashable {
     let cover: String
     let color: Color
     let pages: [Page]
+    var language = "en-US"
 
     static let all = [
         Story(title: "The Three Little Pigs", cover: "🐷", color: .pink, pages: [
@@ -44,6 +45,35 @@ struct Story: Hashable {
             Page(picture: "🐔🐣🍞", text: "No, said the hen. My chicks and I will eat it!"),
         ]),
     ]
+
+    /// Retold in simple Spanish. Juan Bobo and La Ciguapa come from Dominican folklore;
+    /// La Cucarachita Martina is told all over the Spanish-speaking Caribbean.
+    static let spanish = [
+        Story(title: "La Cucarachita Martina", cover: "🎀", color: Color(red: 0.95, green: 0.47, blue: 0.6), pages: [
+            Page(picture: "🧹🪙", text: "La Cucarachita Martina barría su casa y encontró una moneda."),
+            Page(picture: "🎀", text: "Con la moneda compró una cinta roja y se puso muy bonita."),
+            Page(picture: "🐶", text: "Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!"),
+            Page(picture: "🐱", text: "Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!"),
+            Page(picture: "🐭", text: "Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!"),
+            Page(picture: "🐭💕🎀", text: "Martina y el Ratoncito Pérez se casaron y fueron muy felices."),
+        ], language: "es-MX"),
+        Story(title: "Juan Bobo y la puerca", cover: "🐷", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
+            Page(picture: "👦🐷", text: "Juan Bobo vivía con su mamá y una puerca."),
+            Page(picture: "⛪️👩", text: "Un domingo, mamá se fue a misa. Juan, cuida la puerca."),
+            Page(picture: "🐷😢", text: "La puerca quería ir a misa también."),
+            Page(picture: "👗📿🐷", text: "Juan Bobo le puso el vestido de mamá y un collar muy lindo."),
+            Page(picture: "🐷💨🟤", text: "La puerca salió corriendo y se metió en el lodo."),
+            Page(picture: "👩😂", text: "Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!"),
+        ], language: "es-MX"),
+        Story(title: "La Ciguapa del bosque", cover: "🌙", color: Color(red: 0.36, green: 0.62, blue: 0.5), pages: [
+            Page(picture: "⛰️🌳🌙", text: "En las montañas vive la Ciguapa, con su pelo largo y negro."),
+            Page(picture: "👣", text: "Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás."),
+            Page(picture: "👧👣", text: "Una niña vio unas huellas en el bosque y las siguió."),
+            Page(picture: "🏡", text: "¡Las huellas la llevaron de vuelta a su casa!"),
+            Page(picture: "🐦🌳🏞️", text: "La Ciguapa cuida el bosque, los pájaros y los ríos."),
+            Page(picture: "🌙⭐️😴", text: "Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!"),
+        ], language: "es-MX"),
+    ]
 }
 
 struct StoriesView: View {
@@ -58,6 +88,17 @@ struct StoriesView: View {
                 shelfItem("🔤", "Sound it out: cat, dog, pig", .teal, title: "Sound it out") {
                     ReadingView()
                 }
+
+                Text("Cuentos en español 🇩🇴")
+                    .font(.kid(28))
+                    .foregroundStyle(Color.outline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 12 * uiScale)
+                ForEach(Story.spanish, id: \.title) { story in
+                    shelfItem(story.cover, story.title, story.color, title: story.cover, language: story.language) {
+                        StoryReader(story: story)
+                    }
+                }
             }
             .padding(20 * uiScale)
         }
@@ -65,7 +106,8 @@ struct StoriesView: View {
     }
 
     private func shelfItem<Destination: View>(
-        _ cover: String, _ name: String, _ color: Color, title: String, @ViewBuilder destination: () -> Destination
+        _ cover: String, _ name: String, _ color: Color, title: String, language: String = "en-US",
+        @ViewBuilder destination: () -> Destination
     ) -> some View {
         NavigationLink {
             destination()
@@ -84,7 +126,7 @@ struct StoriesView: View {
             .cartoonCard(color)
         }
         .buttonStyle(SquishyButtonStyle())
-        .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(name) })
+        .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(name, language: language) })
     }
 }
 
@@ -103,7 +145,7 @@ private struct StoryReader: View {
 
     var body: some View {
         VStack(spacing: 24 * uiScale) {
-            Button { Speaker.shared.say(page.text) } label: {
+            Button { Speaker.shared.say(page.text, language: story.language) } label: {
                 Text(page.picture)
                     .font(.system(size: 90 * uiScale))
                     .frame(maxWidth: .infinity, minHeight: 200 * uiScale)
@@ -154,7 +196,7 @@ private struct StoryReader: View {
                 Spacer()
                 if isLastPage {
                     pageButton("🏠", hidden: false) {
-                        Speaker.shared.say("The end!")
+                        Speaker.shared.say(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!", language: story.language)
                         dismiss()
                     }
                 } else {
@@ -164,7 +206,7 @@ private struct StoryReader: View {
         }
         .padding(20 * uiScale)
         .background(Color(red: 1.0, green: 0.98, blue: 0.92).ignoresSafeArea())
-        .onAppear { Speaker.shared.say(story.title) }
+        .onAppear { Speaker.shared.say(story.title, language: story.language) }
     }
 
     private func pageButton(_ emoji: String, hidden: Bool, action: @escaping () -> Void) -> some View {
@@ -194,7 +236,7 @@ private struct StoryReader: View {
         isSwiping = true
         current = index
         Haptics.tap()
-        Speaker.shared.say(words[index].trimmingCharacters(in: .punctuationCharacters))
+        Speaker.shared.say(words[index].trimmingCharacters(in: .punctuationCharacters), language: story.language)
     }
 
     private func turn(by delta: Int) {

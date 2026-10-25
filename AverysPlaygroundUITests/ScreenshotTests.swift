@@ -94,6 +94,15 @@ final class ScreenshotTests: XCTestCase {
             game.play()
             sleep(1)
             try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
+            if game.title == "Read" {
+                app.navigationBars.buttons.element(boundBy: 0).tap()
+                tap(button("Cucarachita"))
+                sleep(1)
+                let words = find("Words")
+                words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
+                    .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.3)))
+                try snap(String(format: "%02db-Read en español", index + 1), device, dir)
+            }
             if game.title == "Hair Salon" {
                 tap(app.buttons["Styles"])
                 tap(app.buttons["Pigtails"])
