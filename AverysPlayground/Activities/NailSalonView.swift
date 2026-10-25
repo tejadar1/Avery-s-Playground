@@ -293,10 +293,7 @@ struct NailSalonView: View {
 
     private func brush(_ index: Int, at location: CGPoint, in size: CGSize) {
         guard case .polish(let color) = tool else { return }
-        if !isBrushing {
-            Haptics.tap()
-            Sounds.shared.play(.brush)
-        }
+        if !isBrushing { Haptics.tap() }
         brushTip = location
         nails[index].brush(color, at: CGPoint(x: location.x / size.width, y: location.y / size.height), startsStroke: !isBrushing)
         isBrushing = true
@@ -304,7 +301,6 @@ struct NailSalonView: View {
 
     private func finishBrush(_ index: Int) {
         brushTip = nil
-        Sounds.shared.stop()
         if isBrushing {
             isBrushing = false
             // Cheer on the first stroke and every few after, not on every one.
