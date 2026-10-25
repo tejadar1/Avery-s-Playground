@@ -106,12 +106,12 @@ struct NailSalonView: View {
                     Text("🖐️ New nails")
                         .font(.kid(30))
                         .foregroundStyle(.white)
-                        .padding(.horizontal, 32)
-                        .padding(.vertical, 16)
-                        .cartoonCard(.pink, cornerRadius: 40)
+                        .padding(.horizontal, 32 * uiScale)
+                        .padding(.vertical, 16 * uiScale)
+                        .cartoonCard(.pink, cornerRadius: 40 * uiScale)
                 }
                 .buttonStyle(SquishyButtonStyle())
-                .padding(.vertical, 24)
+                .padding(.vertical, 24 * uiScale)
             } else {
                 toolTray
             }
@@ -133,7 +133,7 @@ struct NailSalonView: View {
                     Button { zoom(into: index) } label: {
                         NailView(nail: nails[index], size: CGSize(width: spot.width * scale, height: spot.height * scale))
                             .matchedGeometryEffect(id: index, in: zoom)
-                            .padding(12)
+                            .padding(12 * uiScale)
                             .contentShape(Rectangle())
                     }
                     .buttonStyle(SquishyButtonStyle())
@@ -156,21 +156,21 @@ struct NailSalonView: View {
     private func bigNail(_ index: Int) -> some View {
         GeometryReader { geo in
             let spot = Self.spots[index]
-            let width = min(geo.size.width * 0.5, (geo.size.height - 90) * 0.55 * spot.width / spot.height)
+            let width = min(geo.size.width * 0.5, (geo.size.height - 90 * uiScale) * 0.55 * spot.width / spot.height)
             let size = CGSize(width: width, height: width * spot.height / spot.width)
             VStack {
                 Spacer(minLength: 0)
                 ZStack(alignment: .top) {
                     Capsule()
                         .fill(Color(red: 1.0, green: 0.86, blue: 0.78))
-                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 8))
+                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 8 * uiScale))
                         .frame(width: size.width * 1.45, height: size.height * 2.4)
                     NailView(nail: nails[index], size: size)
                         .matchedGeometryEffect(id: index, in: zoom)
                         .overlay(alignment: .topLeading) {
                             if let brushTip {
                                 Text("🖌️")
-                                    .font(.system(size: 64))
+                                    .font(.system(size: 64 * uiScale))
                                     .position(x: brushTip.x + 26, y: brushTip.y - 26)
                                     .allowsHitTesting(false)
                             }
@@ -192,26 +192,26 @@ struct NailSalonView: View {
                     Text("🖐️ All nails")
                         .font(.kid(24))
                         .foregroundStyle(.white)
-                        .padding(.horizontal, 24)
-                        .frame(height: 56)
-                        .cartoonCard(.pink, cornerRadius: 28)
+                        .padding(.horizontal, 24 * uiScale)
+                        .frame(height: 56 * uiScale)
+                        .cartoonCard(.pink, cornerRadius: 28 * uiScale)
                 }
                 .buttonStyle(SquishyButtonStyle())
-                .padding(.bottom, 12)
+                .padding(.bottom, 12 * uiScale)
             }
             .frame(maxWidth: .infinity)
         }
     }
 
     private var toolTray: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 14) {
+        VStack(spacing: 10 * uiScale) {
+            HStack(spacing: 14 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button { pick(item) } label: {
                         Text(item.emoji)
-                            .font(.system(size: 30))
-                            .frame(width: 60, height: 54)
-                            .cartoonCard(item == tray ? .pink : .white, cornerRadius: 20)
+                            .font(.system(size: 30 * uiScale))
+                            .frame(width: 60 * uiScale, height: 54 * uiScale)
+                            .cartoonCard(item == tray ? .pink : .white, cornerRadius: 20 * uiScale)
                     }
                     .buttonStyle(SquishyButtonStyle())
                     .accessibilityLabel(item.name)
@@ -221,48 +221,48 @@ struct NailSalonView: View {
                     Text("Done!")
                         .font(.kid(24))
                         .foregroundStyle(.white)
-                        .frame(height: 54)
-                        .padding(.horizontal, 18)
-                        .cartoonCard(.green, cornerRadius: 20)
+                        .frame(height: 54 * uiScale)
+                        .padding(.horizontal, 18 * uiScale)
+                        .cartoonCard(.green, cornerRadius: 20 * uiScale)
                 }
                 .buttonStyle(SquishyButtonStyle())
             }
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 14) {
+                HStack(spacing: 14 * uiScale) {
                     switch tray {
                     case .polish:
                         ForEach(Self.polishes, id: \.self) { color in
                             toolButton(.polish(color)) { PolishBottle(color: color) }
                         }
                         toolButton(.remover) {
-                            Text("🧽").font(.system(size: 40)).frame(height: 72)
+                            Text("🧽").font(.system(size: 40 * uiScale)).frame(height: 72 * uiScale)
                         }
                         .accessibilityLabel("Remover")
                     case .design:
                         ForEach(NailDesign.allCases, id: \.self) { design in
                             toolButton(.design(design)) {
-                                NailView(nail: Nail(design: design), size: CGSize(width: 44, height: 58))
-                                    .frame(height: 72)
+                                NailView(nail: Nail(design: design), size: CGSize(width: 44 * uiScale, height: 58 * uiScale))
+                                    .frame(height: 72 * uiScale)
                             }
                         }
                     case .sticker:
                         ForEach(Self.stickers, id: \.self) { sticker in
                             toolButton(.sticker(sticker)) {
                                 Text(sticker)
-                                    .font(.system(size: 36))
-                                    .frame(width: 60, height: 60)
-                                    .cartoonCard(.white, cornerRadius: 30)
-                                    .frame(height: 72)
+                                    .font(.system(size: 36 * uiScale))
+                                    .frame(width: 60 * uiScale, height: 60 * uiScale)
+                                    .cartoonCard(.white, cornerRadius: 30 * uiScale)
+                                    .frame(height: 72 * uiScale)
                             }
                         }
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 14)
+                .padding(.vertical, 14 * uiScale)
             }
         }
-        .padding(.top, 12)
+        .padding(.top, 12 * uiScale)
         .background(Color.white.opacity(0.7).ignoresSafeArea(edges: .bottom))
     }
 
@@ -430,16 +430,16 @@ struct PolishBottle: View {
 
     var body: some View {
         VStack(spacing: -5) {
-            RoundedRectangle(cornerRadius: 6, style: .continuous)
+            RoundedRectangle(cornerRadius: 6 * uiScale, style: .continuous)
                 .fill(Color.outline)
-                .frame(width: 20, height: 28)
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .frame(width: 20 * uiScale, height: 28 * uiScale)
+            RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous)
                 .fill(color)
-                .frame(width: 46, height: 46)
+                .frame(width: 46 * uiScale, height: 46 * uiScale)
                 .overlay(alignment: .topLeading) {
-                    Capsule().fill(.white.opacity(0.6)).frame(width: 7, height: 18).padding(9)
+                    Capsule().fill(.white.opacity(0.6)).frame(width: 7 * uiScale, height: 18 * uiScale).padding(9 * uiScale)
                 }
-                .overlay(RoundedRectangle(cornerRadius: 14, style: .continuous).strokeBorder(Color.outline, lineWidth: 4))
+                .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 4 * uiScale))
         }
     }
 }
@@ -456,7 +456,7 @@ private struct Sparkles: View {
             ForEach(Self.spots.indices, id: \.self) { i in
                 let spot = Self.spots[i]
                 Text(spot.emoji)
-                    .font(.system(size: 40))
+                    .font(.system(size: 40 * uiScale))
                     .phaseAnimator([CGFloat(0.6), 1.3]) { content, scale in
                         content.scaleEffect(scale).opacity(scale > 1 ? 1 : 0.5)
                     } animation: { _ in

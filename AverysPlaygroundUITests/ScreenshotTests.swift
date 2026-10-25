@@ -8,8 +8,18 @@ final class ScreenshotTests: XCTestCase {
         guard let dir = ProcessInfo.processInfo.environment["SCREENSHOTS_DIR"] else {
             throw XCTSkip("Set TEST_RUNNER_SCREENSHOTS_DIR to save screenshots")
         }
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        // iPad is where the app is mostly played, so it's checked both ways up.
+        for orientation in isPad ? [UIDeviceOrientation.portrait, .landscapeLeft] : [.portrait] {
+            XCUIDevice.shared.orientation = orientation
+            let device = !isPad ? "iPhone" : orientation == .portrait ? "iPad" : "iPad landscape"
+            try playEveryGame(saving: URL(fileURLWithPath: dir), as: device)
+        }
+    }
+
+    private func playEveryGame(saving dir: URL, as device: String) throws {
         app.launch()
-        try snap("00-home", to: dir)
+        try snap("00-home", device, dir)
 
         let games: [(title: String, play: () -> Void)] = [
             ("Nail Salon", {
@@ -45,7 +55,7 @@ final class ScreenshotTests: XCTestCase {
             sleep(1)
             game.play()
             sleep(1)
-            try snap(String(format: "%02d-%@", index + 1, game.title), to: dir)
+            try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
             if game.title == "Nail Salon" {
                 app.buttons["Stickers"].tap()
                 app.descendants(matching: .any)["Big nail"].tap()
@@ -53,7 +63,7 @@ final class ScreenshotTests: XCTestCase {
                 sleep(1)
                 app.buttons["Done!"].tap()
                 sleep(1)
-                try snap("01b-Nail Salon done", to: dir)
+                try snap("01b-Nail Salon done", device, dir)
             }
             goHome()
         }
@@ -69,9 +79,7 @@ final class ScreenshotTests: XCTestCase {
         }
     }
 
-    private func snap(_ name: String, to dir: String) throws {
-        let device = UIDevice.current.userInterfaceIdiom == .pad ? "iPad" : "iPhone"
-        try XCUIScreen.main.screenshot().pngRepresentation
-            .write(to: URL(fileURLWithPath: dir).appendingPathComponent("\(device) \(name).png"))
+    private func snap(_ name: String, _ device: String, _ dir: URL) throws {
+        try XCUIScreen.main.screenshot().pngRepresentation.write(to: dir.appendingPathComponent("\(device) \(name).png"))
     }
 }

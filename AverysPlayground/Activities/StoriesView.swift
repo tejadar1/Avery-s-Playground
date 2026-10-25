@@ -49,7 +49,7 @@ struct Story: Hashable {
 struct StoriesView: View {
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 20 * uiScale) {
                 ForEach(Story.all, id: \.title) { story in
                     NavigationLink {
                         StoryReader(story: story)
@@ -58,8 +58,8 @@ struct StoriesView: View {
                             .toolbarBackground(.visible, for: .navigationBar)
                             .toolbarColorScheme(.dark, for: .navigationBar)
                     } label: {
-                        HStack(spacing: 16) {
-                            Text(story.cover).font(.system(size: 60))
+                        HStack(spacing: 16 * uiScale) {
+                            Text(story.cover).font(.system(size: 60 * uiScale))
                             Text(story.title)
                                 .font(.kid(26))
                                 .foregroundStyle(.white)
@@ -67,14 +67,14 @@ struct StoriesView: View {
                                 .multilineTextAlignment(.leading)
                             Spacer(minLength: 0)
                         }
-                        .padding(20)
+                        .padding(20 * uiScale)
                         .cartoonCard(story.color)
                     }
                     .buttonStyle(SquishyButtonStyle())
                     .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(story.title) })
                 }
             }
-            .padding(20)
+            .padding(20 * uiScale)
         }
         .background(Color(red: 0.93, green: 0.92, blue: 1.0).ignoresSafeArea())
     }
@@ -93,11 +93,11 @@ private struct StoryReader: View {
     private var isLastPage: Bool { pageIndex == story.pages.count - 1 }
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 24 * uiScale) {
             Button { Speaker.shared.say(page.text) } label: {
                 Text(page.picture)
-                    .font(.system(size: 90))
-                    .frame(maxWidth: .infinity, minHeight: 200)
+                    .font(.system(size: 90 * uiScale))
+                    .frame(maxWidth: .infinity, minHeight: 200 * uiScale)
                     .cartoonCard(story.color.opacity(0.3))
             }
             .buttonStyle(SquishyButtonStyle())
@@ -106,10 +106,10 @@ private struct StoryReader: View {
             FlowLayout(spacing: FlowLayout.wordSpacing, lineSpacing: FlowLayout.lineSpacing) {
                 ForEach(Array(words.enumerated()), id: \.offset) { index, word in
                     Text(word)
-                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .font(.system(size: 34 * uiScale, weight: .bold, design: .rounded))
                         .foregroundStyle(index == current ? .white : Color.outline)
-                        .padding(.horizontal, 4)
-                        .background(index == current ? story.color : .clear, in: RoundedRectangle(cornerRadius: 8))
+                        .padding(.horizontal, 4 * uiScale)
+                        .background(index == current ? story.color : .clear, in: RoundedRectangle(cornerRadius: 8 * uiScale))
                         .background(GeometryReader { geo in
                             Color.clear.preference(key: WordFrames.self, value: [index: geo.frame(in: .named("words"))])
                         })
@@ -151,7 +151,7 @@ private struct StoryReader: View {
                 }
             }
         }
-        .padding(20)
+        .padding(20 * uiScale)
         .background(Color(red: 1.0, green: 0.98, blue: 0.92).ignoresSafeArea())
         .onAppear { Speaker.shared.say(story.title) }
     }
@@ -159,9 +159,9 @@ private struct StoryReader: View {
     private func pageButton(_ emoji: String, hidden: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(emoji)
-                .font(.system(size: 36))
-                .frame(width: 76, height: 64)
-                .cartoonCard(.white, cornerRadius: 22)
+                .font(.system(size: 36 * uiScale))
+                .frame(width: 76 * uiScale, height: 64 * uiScale)
+                .cartoonCard(.white, cornerRadius: 22 * uiScale)
         }
         .buttonStyle(SquishyButtonStyle())
         .opacity(hidden ? 0 : 1)

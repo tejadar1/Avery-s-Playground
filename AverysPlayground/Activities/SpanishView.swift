@@ -127,45 +127,45 @@ struct SpanishView: View {
     @State private var cheerCount = 0
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount)
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
+                HStack(spacing: 12 * uiScale) {
                     ForEach(SpanishLesson.allCases, id: \.self) { item in
                         Button { pick(item) } label: {
                             Text("\(item.emoji) \(item.title)")
                                 .font(.kid(20))
                                 .foregroundStyle(item == lesson ? .white : Color.outline)
-                                .padding(.horizontal, 16)
-                                .frame(height: 50)
-                                .cartoonCard(item == lesson ? .mint : .white, cornerRadius: 25)
+                                .padding(.horizontal, 16 * uiScale)
+                                .frame(height: 50 * uiScale)
+                                .cartoonCard(item == lesson ? .mint : .white, cornerRadius: 25 * uiScale)
                         }
                         .buttonStyle(SquishyButtonStyle())
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 8)
+                .padding(.vertical, 8 * uiScale)
             }
 
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 16)], spacing: 20) {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 16 * uiScale)], spacing: 20 * uiScale) {
                     ForEach(lesson.words, id: \.self) { word in
                         Button { say(word) } label: {
-                            VStack(spacing: 6) {
-                                Text(word.emoji).font(.system(size: 52))
+                            VStack(spacing: 6 * uiScale) {
+                                Text(word.emoji).font(.system(size: 52 * uiScale))
                                 Text(word.spanish)
                                     .font(.kid(24))
                                     .lineLimit(1)
                                     .foregroundStyle(Color.outline)
                                 Text(word.english)
-                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                    .font(.system(size: 16 * uiScale, weight: .semibold, design: .rounded))
                                     .foregroundStyle(.secondary)
                             }
                             .multilineTextAlignment(.center)
                             .minimumScaleFactor(0.6)
-                            .frame(maxWidth: .infinity, minHeight: 150)
-                            .padding(.horizontal, 8)
+                            .frame(maxWidth: .infinity, minHeight: 150 * uiScale)
+                            .padding(.horizontal, 8 * uiScale)
                             .cartoonCard(word == selected ? .yellow : .white)
                         }
                         .buttonStyle(SquishyButtonStyle())

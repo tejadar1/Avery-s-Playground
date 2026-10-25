@@ -52,7 +52,7 @@ struct BubblePopView: View {
                     ZStack {
                         ForEach(bubbles) { bubble in
                             BubbleView(color: bubble.color)
-                                .frame(width: bubble.size, height: bubble.size)
+                                .frame(width: bubble.size * uiScale, height: bubble.size * uiScale)
                                 .position(bubble.position(at: timeline.date, in: geo.size))
                                 .onTapGesture { pop(bubble, in: geo.size) }
                         }
@@ -61,7 +61,7 @@ struct BubblePopView: View {
 
                 ForEach(pops) { pop in
                     Text("✨")
-                        .font(.system(size: 60))
+                        .font(.system(size: 60 * uiScale))
                         .position(pop.position)
                         .transition(.scale(scale: 2).combined(with: .opacity))
                         .allowsHitTesting(false)
@@ -72,10 +72,10 @@ struct BubblePopView: View {
             Text("🫧 \(score)")
                 .font(.kid(40))
                 .foregroundStyle(.white)
-                .padding(.horizontal, 24)
-                .padding(.vertical, 8)
+                .padding(.horizontal, 24 * uiScale)
+                .padding(.vertical, 8 * uiScale)
                 .background(.cyan, in: Capsule())
-                .padding(.top, 8)
+                .padding(.top, 8 * uiScale)
                 .contentTransition(.numericText())
         }
         .background(
@@ -123,7 +123,7 @@ private struct BubbleView: View {
                     endRadius: 60
                 )
             )
-            .overlay(Circle().strokeBorder(.white.opacity(0.8), lineWidth: 2))
+            .overlay(Circle().strokeBorder(.white.opacity(0.8), lineWidth: 2 * uiScale))
             .contentShape(Circle())
     }
 }

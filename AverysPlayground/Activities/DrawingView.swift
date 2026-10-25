@@ -32,7 +32,7 @@ struct DrawingView: View {
                             current = Stroke(
                                 points: [value.location],
                                 color: isErasing ? .white : color,
-                                width: isErasing ? brushSize * 2 : brushSize
+                                width: (isErasing ? brushSize * 2 : brushSize) * uiScale
                             )
                         } else {
                             current?.points.append(value.location)
@@ -71,9 +71,9 @@ struct DrawingView: View {
     }
 
     private var toolbar: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 12 * uiScale) {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12) {
+                HStack(spacing: 12 * uiScale) {
                     ForEach(Self.crayons, id: \.self) { crayon in
                         Button {
                             Haptics.tap()
@@ -82,8 +82,8 @@ struct DrawingView: View {
                         } label: {
                             Circle()
                                 .fill(crayon)
-                                .frame(width: 48, height: 48)
-                                .overlay(Circle().strokeBorder(.white, lineWidth: 4))
+                                .frame(width: 48 * uiScale, height: 48 * uiScale)
+                                .overlay(Circle().strokeBorder(.white, lineWidth: 4 * uiScale))
                                 .scaleEffect(!isErasing && color == crayon ? 1.2 : 1)
                                 .shadow(radius: 2)
                         }
@@ -95,8 +95,8 @@ struct DrawingView: View {
                         isErasing = true
                     } label: {
                         Text("🧽")
-                            .font(.system(size: 34))
-                            .frame(width: 48, height: 48)
+                            .font(.system(size: 34 * uiScale))
+                            .frame(width: 48 * uiScale, height: 48 * uiScale)
                             .background(.white, in: Circle())
                             .scaleEffect(isErasing ? 1.2 : 1)
                             .shadow(radius: 2)
@@ -105,10 +105,10 @@ struct DrawingView: View {
                     .accessibilityLabel("Eraser")
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 6)
+                .padding(.vertical, 6 * uiScale)
             }
 
-            HStack(spacing: 24) {
+            HStack(spacing: 24 * uiScale) {
                 ForEach(Self.brushSizes, id: \.self) { size in
                     Button {
                         Haptics.tap()
@@ -116,8 +116,8 @@ struct DrawingView: View {
                     } label: {
                         Circle()
                             .fill(isErasing ? Color.gray : color)
-                            .frame(width: size + 8, height: size + 8)
-                            .frame(width: 52, height: 52)
+                            .frame(width: (size + 8) * uiScale, height: (size + 8) * uiScale)
+                            .frame(width: 52 * uiScale, height: 52 * uiScale)
                             .background(
                                 Circle().fill(.white.opacity(brushSize == size ? 1 : 0.5))
                             )
@@ -126,7 +126,7 @@ struct DrawingView: View {
                 }
             }
         }
-        .padding(.vertical, 12)
+        .padding(.vertical, 12 * uiScale)
         .frame(maxWidth: .infinity)
         .background(Color.blue.opacity(0.85).ignoresSafeArea(edges: .bottom))
     }

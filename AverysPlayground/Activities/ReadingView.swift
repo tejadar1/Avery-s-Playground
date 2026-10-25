@@ -47,7 +47,7 @@ struct ReadingView: View {
     @State private var cheerCount = 0
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 20 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount)
 
             Text("⭐️ \(stars)")
@@ -55,13 +55,13 @@ struct ReadingView: View {
                 .foregroundStyle(Color.outline)
                 .contentTransition(.numericText())
 
-            HStack(spacing: 12) {
+            HStack(spacing: 12 * uiScale) {
                 ForEach(Array(word.text.enumerated()), id: \.offset) { index, letter in
                     Button { sound(index) } label: {
                         Text(String(letter))
                             .font(.kid(80))
                             .foregroundStyle("aeiou".contains(letter) ? Color.red : Color.blue)
-                            .frame(width: 92, height: 112)
+                            .frame(width: 92 * uiScale, height: 112 * uiScale)
                             .cartoonCard(tapped.contains(index) ? .yellow : .white)
                     }
                     .buttonStyle(SquishyButtonStyle())
@@ -78,12 +78,12 @@ struct ReadingView: View {
 
             Spacer()
 
-            HStack(spacing: 16) {
+            HStack(spacing: 16 * uiScale) {
                 ForEach(choices, id: \.text) { choice in
                     Button { pick(choice) } label: {
                         Text(choice.emoji)
-                            .font(.system(size: 64))
-                            .frame(width: 100, height: 100)
+                            .font(.system(size: 64 * uiScale))
+                            .frame(width: 100 * uiScale, height: 100 * uiScale)
                             .cartoonCard(isSolved && choice == word ? .green : .white)
                     }
                     .buttonStyle(SquishyButtonStyle())
@@ -95,7 +95,7 @@ struct ReadingView: View {
                     .accessibilityLabel(choice.text)
                 }
             }
-            .padding(.bottom, 40)
+            .padding(.bottom, 40 * uiScale)
         }
         .padding(.horizontal)
         .background(Color(red: 0.88, green: 0.96, blue: 1.0).ignoresSafeArea())

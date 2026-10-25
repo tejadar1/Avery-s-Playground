@@ -5,10 +5,13 @@ extension Color {
     static let outline = Color(red: 0.29, green: 0.17, blue: 0.16)
 }
 
+/// Sizes are designed in iPhone points; the iPad, where Avery mostly plays, draws everything 1.6× bigger.
+@MainActor let uiScale: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 1.6 : 1
+
 extension Font {
     /// Big, round, easy-to-read type for little readers.
-    static func kid(_ size: CGFloat) -> Font {
-        .system(size: size, weight: .heavy, design: .rounded)
+    @MainActor static func kid(_ size: CGFloat) -> Font {
+        .system(size: size * uiScale, weight: .heavy, design: .rounded)
     }
 }
 
@@ -23,13 +26,13 @@ struct SquishyButtonStyle: ButtonStyle {
 
 extension View {
     /// Flat color, thick outline, and a solid drop shadow, like a cartoon sticker.
-    func cartoonCard(_ color: Color, cornerRadius: CGFloat = 28) -> some View {
+    func cartoonCard(_ color: Color, cornerRadius: CGFloat = 28 * uiScale) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         return background(
             shape.fill(color)
                 .background(shape.fill(.white))  // keeps see-through colors light over the shadow
-                .overlay(shape.strokeBorder(Color.outline, lineWidth: 5))
-                .background(shape.fill(Color.outline).offset(y: 6))
+                .overlay(shape.strokeBorder(Color.outline, lineWidth: 5 * uiScale))
+                .background(shape.fill(Color.outline).offset(y: 6 * uiScale))
         )
     }
 }
@@ -51,11 +54,11 @@ struct CocoSays: View {
     let hops: Int
 
     var body: some View {
-        HStack(alignment: .center, spacing: 4) {
+        HStack(alignment: .center, spacing: 4 * uiScale) {
             Image("Coco")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 100)
+                .frame(height: 100 * uiScale)
                 .phaseAnimator([CGFloat(0), -14], trigger: hops) { content, lift in
                     content.offset(y: lift)
                 } animation: { _ in
@@ -66,14 +69,14 @@ struct CocoSays: View {
             Text(text)
                 .font(.kid(22))
                 .foregroundStyle(Color.outline)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .cartoonCard(.white, cornerRadius: 22)
+                .padding(.horizontal, 16 * uiScale)
+                .padding(.vertical, 10 * uiScale)
+                .cartoonCard(.white, cornerRadius: 22 * uiScale)
                 .id(text)
                 .transition(.scale.combined(with: .opacity))
             Spacer(minLength: 0)
         }
         .padding(.horizontal)
-        .padding(.top, 8)
+        .padding(.top, 8 * uiScale)
     }
 }

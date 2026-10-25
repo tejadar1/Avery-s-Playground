@@ -1,26 +1,26 @@
 import SwiftUI
 
 struct HomeView: View {
-    private let columns = [GridItem(.adaptive(minimum: 150), spacing: 20)]
+    private let columns = [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 20 * uiScale)]
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    HStack(spacing: 8) {
+                VStack(spacing: 24 * uiScale) {
+                    HStack(spacing: 8 * uiScale) {
                         Image("Coco")
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 130)
+                            .frame(height: 130 * uiScale)
                             .accessibilityLabel("Coco the crocodile")
                         Text("Avery's Playground")
                             .font(.kid(36))
                             .foregroundStyle(Color.outline)
                             .multilineTextAlignment(.leading)
                     }
-                    .padding(.top, 8)
+                    .padding(.top, 8 * uiScale)
 
-                    LazyVGrid(columns: columns, spacing: 20) {
+                    LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         ForEach(Activity.allCases) { activity in
                             NavigationLink(value: activity) {
                                 ActivityTile(activity: activity)
@@ -32,7 +32,7 @@ struct HomeView: View {
                         }
                     }
                 }
-                .padding(20)
+                .padding(20 * uiScale)
             }
             .background(PlayfulBackground())
             .navigationDestination(for: Activity.self) { activity in
@@ -52,15 +52,15 @@ private struct ActivityTile: View {
     let activity: Activity
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 8 * uiScale) {
             Text(activity.emoji)
-                .font(.system(size: 64))
+                .font(.system(size: 64 * uiScale))
             Text(activity.title)
                 .font(.kid(24))
                 .foregroundStyle(.white)
                 .shadow(color: Color.outline, radius: 0, x: 2, y: 2)
         }
-        .frame(maxWidth: .infinity, minHeight: 160)
+        .frame(maxWidth: .infinity, minHeight: 160 * uiScale)
         .cartoonCard(activity.color)
     }
 }

@@ -26,10 +26,10 @@ struct ColorsView: View {
     @State private var selected = ColorsView.palette[0]
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 20 * uiScale) {
             Spacer()
             Text(selected.example)
-                .font(.system(size: 120))
+                .font(.system(size: 120 * uiScale))
                 .id(selected.id)
                 .transition(.scale.combined(with: .opacity))
             Text(selected.name)
@@ -38,7 +38,7 @@ struct ColorsView: View {
                 .shadow(color: .black.opacity(0.15), radius: 2, y: 2)
             Spacer()
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 14), count: 5), spacing: 14) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 14 * uiScale), count: 5), spacing: 14 * uiScale) {
                 ForEach(Self.palette) { item in
                     Button { choose(item) } label: {
                         Circle()
@@ -52,7 +52,7 @@ struct ColorsView: View {
                 }
             }
             .padding()
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

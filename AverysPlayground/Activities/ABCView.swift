@@ -45,12 +45,12 @@ struct ABCView: View {
     @State private var selected = ABCView.letters[0]
     @State private var bounceCount = 0
 
-    private let columns = [GridItem(.adaptive(minimum: 64), spacing: 12)]
+    private let columns = [GridItem(.adaptive(minimum: 64 * uiScale), spacing: 12 * uiScale)]
 
     var body: some View {
-        VStack(spacing: 16) {
-            VStack(spacing: 4) {
-                HStack(alignment: .firstTextBaseline, spacing: 12) {
+        VStack(spacing: 16 * uiScale) {
+            VStack(spacing: 4 * uiScale) {
+                HStack(alignment: .firstTextBaseline, spacing: 12 * uiScale) {
                     Text(selected.letter)
                     Text(selected.letter.lowercased())
                 }
@@ -58,7 +58,7 @@ struct ABCView: View {
                 .foregroundStyle(.red)
 
                 Text(selected.emoji)
-                    .font(.system(size: 80))
+                    .font(.system(size: 80 * uiScale))
                     .phaseAnimator([CGFloat(1), 1.3], trigger: bounceCount) { content, scale in
                         content.scaleEffect(scale)
                     } animation: { _ in
@@ -71,20 +71,20 @@ struct ABCView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(.white, in: RoundedRectangle(cornerRadius: 32, style: .continuous))
+            .background(.white, in: RoundedRectangle(cornerRadius: 32 * uiScale, style: .continuous))
             .onTapGesture { choose(selected) }
 
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 12) {
+                LazyVGrid(columns: columns, spacing: 12 * uiScale) {
                     ForEach(Array(Self.letters.enumerated()), id: \.element.id) { index, item in
                         Button { choose(item) } label: {
                             Text(item.letter)
                                 .font(.kid(36))
                                 .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity, minHeight: 64)
+                                .frame(maxWidth: .infinity, minHeight: 64 * uiScale)
                                 .background(
                                     Self.tileColors[index % Self.tileColors.count].gradient,
-                                    in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+                                    in: RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
                                 )
                         }
                         .buttonStyle(SquishyButtonStyle())
