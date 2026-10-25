@@ -55,6 +55,16 @@ final class ScreenshotTests: XCTestCase {
                 words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
                     .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.3)))
             }),
+            ("Dress Up", {
+                for item in ["Gown", "Shoes", "Boots", "Hats", "Crown", "Extras", "Wand"] { self.tap(self.app.buttons[item]) }
+            }),
+            ("Piano", {
+                self.tap(self.button("Twinkle Twinkle"))
+                for key in ["C", "C", "G", "G"] { self.tap(self.app.buttons[key]) }
+            }),
+            ("Math", {
+                self.tap(self.app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Answer'")).firstMatch)
+            }),
             ("Español", { self.tap(self.button("Gracias")) }),
             ("ABC", {}),
             ("1 2 3", {}),
