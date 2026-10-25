@@ -55,7 +55,8 @@ steps are done. Everything works in Safari on an iPhone.
 2. On [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list), add an
    **Identifier** → App IDs → App, with the explicit bundle ID `com.tejadar1.averysplayground`.
 3. In [App Store Connect](https://appstoreconnect.apple.com/apps), tap **+ New App**: iOS, pick that bundle ID,
-   any SKU. The name must be unused on the App Store, so "Avery's Playground" may need a twist.
+   any SKU. The name must be unused on the App Store, so use something like "Avery's Play: Kids Games".
+   The name under the icon is "Avery's Play" either way (set in `project.yml`).
 4. In App Store Connect → Users and Access → Integrations → **App Store Connect API**, generate a team key
    with **Admin** access. Note the Key ID and Issuer ID, and download the `.p8` file (Apple lets you download
    it only once).
