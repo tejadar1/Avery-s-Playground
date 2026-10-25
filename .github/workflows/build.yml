@@ -1,0 +1,74 @@
+name: Build
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen && xcodegen
+      - name: Build and run tests
+        run: |
+          udid() { xcrun simctl list devices available | grep -m1 -E "^ +$1" | grep -oE '[0-9A-F-]{36}'; }
+          mkdir -p screenshots
+          TEST_RUNNER_SCREENSHOTS_DIR="$PWD/screenshots" xcodebuild test -project AverysPlayground.xcodeproj \
+            -scheme AverysPlayground -destination "id=$(udid iPhone)" -destination "id=$(udid iPad)" \
+            -resultBundlePath TestResults.xcresult CODE_SIGNING_ALLOWED=NO
+      - name: Show why tests failed
+        if: failure()
+        run: |
+          xcrun xcresulttool get test-results tests --path TestResults.xcresult | grep -B1 '"nodeType" : "Failure Message"'
+      - name: Publish screenshots to the screenshots branch
+        if: always()
+        working-directory: screenshots
+        run: |
+          git init -q -b screenshots && git add .
+          git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Screenshots of ${{ github.sha }}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" screenshots
+
+  testflight:
+    needs: test
+    runs-on: macos-latest
+    env:
+      KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
+      ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+      TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+    steps:
+      - if: env.KEY_ID == ''
+        run: echo "App Store Connect secrets aren't set, so nothing is uploaded. See README > TestFlight."
+      - if: env.KEY_ID != ''
+        uses: actions/checkout@v4
+      - if: env.KEY_ID != ''
+        run: brew install xcodegen && xcodegen
+      # Archive unsigned; the export step signs with Apple's cloud-managed certificate, so no certificates live in this repo.
+      - if: env.KEY_ID != ''
+        name: Archive
+        run: |
+          xcodebuild archive -project AverysPlayground.xcodeproj -scheme AverysPlayground \
+            -destination generic/platform=iOS -archivePath build/App.xcarchive \
+            CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM="$TEAM_ID" CURRENT_PROJECT_VERSION=${{ github.run_number }}
+      - if: env.KEY_ID != ''
+        name: Sign and upload to TestFlight
+        run: |
+          mkdir -p ~/private_keys
+          echo "$KEY" > ~/private_keys/AuthKey_$KEY_ID.p8
+          cat > build/ExportOptions.plist <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>teamID</key><string>$TEAM_ID</string>
+          </dict></plist>
+          PLIST
+          xcodebuild -exportArchive -archivePath build/App.xcarchive -exportPath build/export \
+            -exportOptionsPlist build/ExportOptions.plist -allowProvisioningUpdates \
+            -authenticationKeyPath ~/private_keys/AuthKey_$KEY_ID.p8 \
+            -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER_ID"
