@@ -53,9 +53,10 @@ Then in Xcode:
 
 ## TestFlight (no Mac needed)
 
-GitHub builds the app on every push (`.github/workflows/build.yml`). The **test** job compiles it and runs the
-unit tests on an iPhone simulator. The **testflight** job uploads a build to TestFlight once these one-time
-steps are done. Everything works in Safari on an iPhone.
+GitHub builds the app on every push (`.github/workflows/build.yml`) and runs the unit tests on an iPhone
+simulator. Mac build minutes are costly on a private repo, so the screenshots of every game and the TestFlight
+upload only run for pushes to main, or when started by hand (Actions → Build → **Run workflow**). The upload
+needs these one-time steps, all doable in Safari on an iPhone.
 
 1. Join the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
 2. On [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list), add an
@@ -76,7 +77,7 @@ steps are done. Everything works in Safari on an iPhone.
    build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
    install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
 
-After that, every push uploads a new build, and TestFlight offers the update.
+After that, every change merged to main uploads a new build, and TestFlight offers the update.
 
 ## Project layout
 
@@ -87,7 +88,7 @@ AverysPlayground/
   Support/      Speech, haptics, fonts and shared styles
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
-AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch on each build
+AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (main and manual builds)
 Art/            SVG sources for Coco, the hand, the game icons (Art/icons), and the app icon
 project.yml     XcodeGen project definition
 ```
