@@ -77,7 +77,7 @@ final class ScreenshotTests: XCTestCase {
 
         for (index, game) in games.enumerated() {
             let tile = button(game.title)
-            if !tile.isHittable { app.swipeUp() }
+            for _ in 0..<4 where !tile.isHittable { app.swipeUp() }
             tile.tap()
             sleep(1)
             game.play()
