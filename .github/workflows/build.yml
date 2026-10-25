@@ -3,16 +3,22 @@ name: Build
 on:
   push:
   workflow_dispatch:
+    inputs:
+      screenshots:
+        description: Take screenshots of every game on iPhone and iPad (adds about 10 minutes)
+        type: boolean
+        default: false
 
 # A newer push to the same branch stops the build it replaces.
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
-# Mac build minutes are costly, so every push only builds and runs the fast unit tests on one iPhone.
-# Screenshots of every game (iPhone and iPad) and the TestFlight upload run on main, or when started by hand.
+# Mac build minutes are costly, so every build only runs the fast unit tests on one iPhone.
+# Screenshots of every game (iPhone and iPad) run only when ticked on a manual run.
+# The TestFlight upload runs on main, or when started by hand.
 env:
-  FULL: ${{ github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch' }}
+  SHOTS: ${{ inputs.screenshots == true }}
 
 jobs:
   test:
@@ -26,7 +32,7 @@ jobs:
         run: |
           udid() { xcrun simctl list devices available | grep -m1 -E "^ +$1" | grep -oE '[0-9A-F-]{36}'; }
           mkdir -p screenshots
-          if [ "$FULL" = true ]; then
+          if [ "$SHOTS" = true ]; then
             where=(-destination "id=$(udid iPhone)" -destination "id=$(udid iPad)")
           else
             where=(-destination "id=$(udid iPhone)" -only-testing:AverysPlaygroundTests)
@@ -38,7 +44,7 @@ jobs:
         run: |
           xcrun xcresulttool get test-results tests --path TestResults.xcresult | grep -B1 '"nodeType" : "Failure Message"'
       - name: Publish screenshots to the screenshots branch
-        if: always() && env.FULL == 'true'
+        if: always() && env.SHOTS == 'true'
         working-directory: screenshots
         run: |
           git init -q -b screenshots && git add .

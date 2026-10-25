@@ -54,8 +54,9 @@ Then in Xcode:
 ## TestFlight (no Mac needed)
 
 GitHub builds the app on every push (`.github/workflows/build.yml`) and runs the unit tests on an iPhone
-simulator. Mac build minutes are costly on a private repo, so the screenshots of every game and the TestFlight
-upload only run for pushes to main, or when started by hand (Actions → Build → **Run workflow**). The upload
+simulator. Mac build minutes are costly on a private repo, so the TestFlight upload only runs for pushes to
+main, or when started by hand (Actions → Build → **Run workflow**). Screenshots of every game on iPhone and iPad
+take about 10 more minutes, so they only run when you tick **Take screenshots** on a manual run. The upload
 needs these one-time steps, all doable in Safari on an iPhone.
 
 1. Join the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
@@ -86,7 +87,7 @@ AverysPlayground/
   Support/      Speech, haptics, fonts and shared styles
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
-AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (main and manual builds)
+AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (manual builds with screenshots ticked)
 Art/            SVG sources for Coco, the hand, the game icons (Art/icons), and the app icon
 project.yml     XcodeGen project definition
 ```
