@@ -23,51 +23,51 @@ final class ScreenshotTests: XCTestCase {
 
         let games: [(title: String, play: () -> Void)] = [
             ("Nail Salon", {
-                self.app.buttons["Nail 3"].tap()
+                self.tap(self.app.buttons["Nail 3"])
                 sleep(1)
-                let nail = self.app.descendants(matching: .any)["Big nail"]
+                let nail = self.find("Big nail")
                 for (from, to) in [((0.2, 0.05), (0.25, 0.95)), ((0.5, 0.05), (0.5, 0.95)), ((0.8, 0.05), (0.7, 0.9))] {
                     nail.coordinate(withNormalizedOffset: CGVector(dx: from.0, dy: from.1))
                         .press(forDuration: 0.05, thenDragTo: nail.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
             }),
             ("Hair Salon", {
-                let hair = self.app.descendants(matching: .any)["Hair"]
+                let hair = self.find("Hair")
                 hair.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.3))
                     .press(forDuration: 0.05, thenDragTo: hair.coordinate(withNormalizedOffset: CGVector(dx: 0.7, dy: 0.35)))
-                self.app.buttons["Scissors"].tap()
+                self.tap(self.app.buttons["Scissors"])
                 hair.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.7))
                     .press(forDuration: 0.05, thenDragTo: hair.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.62)))
             }),
             ("Mochi", {
-                self.app.buttons["Feed"].tap()
+                self.tap(self.app.buttons["Feed"])
                 sleep(2)
-                let mochi = self.app.descendants(matching: .any)["Puppy"]
+                let mochi = self.find("Puppy")
                 mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.35))
                     .press(forDuration: 0.05, thenDragTo: mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)))
             }),
             ("Read", {
-                self.button("Three Little Pigs").tap()
+                self.tap(self.button("Three Little Pigs"))
                 sleep(1)
-                let words = self.app.descendants(matching: .any)["Words"]
+                let words = self.find("Words")
                 words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
                     .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.3)))
             }),
-            ("Español", { self.button("Gracias").tap() }),
+            ("Español", { self.tap(self.button("Gracias")) }),
             ("ABC", {}),
             ("1 2 3", {}),
             ("Coloring", {
-                let picture = self.app.descendants(matching: .any)["Picture"]
+                let picture = self.find("Picture")
                 for (crayon, x, y) in [("Red", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {
-                    self.app.buttons[crayon].tap()
+                    self.tap(self.app.buttons[crayon])
                     picture.coordinate(withNormalizedOffset: CGVector(dx: x, dy: y)).tap()
                 }
             }),
-            ("Animals", { self.button("Cow").tap() }),
+            ("Animals", { self.tap(self.button("Cow")) }),
             ("Draw", {
-                let canvas = self.app.descendants(matching: .any)["Canvas"]
+                let canvas = self.find("Canvas")
                 for (crayon, from, to) in [("Coral", (0.2, 0.3), (0.8, 0.35)), ("Navy", (0.3, 0.6), (0.7, 0.8)), ("Teal", (0.15, 0.85), (0.85, 0.15))] {
-                    self.app.buttons[crayon].tap()
+                    self.tap(self.app.buttons[crayon])
                     canvas.coordinate(withNormalizedOffset: CGVector(dx: from.0, dy: from.1))
                         .press(forDuration: 0.05, thenDragTo: canvas.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
@@ -77,31 +77,59 @@ final class ScreenshotTests: XCTestCase {
 
         for (index, game) in games.enumerated() {
             let tile = button(game.title)
-            for _ in 0..<4 where !tile.isHittable { app.swipeUp() }
-            tile.tap()
+            tap(tile)
             sleep(1)
             game.play()
             sleep(1)
             try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
             if game.title == "Hair Salon" {
-                app.buttons["Styles"].tap()
-                app.buttons["Pigtails"].tap()
-                app.buttons["Bows"].tap()
-                app.buttons["🎀"].tap()
+                tap(app.buttons["Styles"])
+                tap(app.buttons["Pigtails"])
+                tap(app.buttons["Bows"])
+                tap(app.buttons["🎀"])
                 sleep(1)
                 try snap("02b-Hair Salon styled", device, dir)
             }
             if game.title == "Nail Salon" {
-                app.buttons["Stickers"].tap()
-                app.descendants(matching: .any)["Big nail"].tap()
-                app.buttons["🖐️ All nails"].tap()
+                tap(app.buttons["Stickers"])
+                tap(find("Big nail"))
+                tap(app.buttons["🖐️ All nails"])
                 sleep(1)
-                app.buttons["Done!"].tap()
+                tap(app.buttons["Done!"])
                 sleep(1)
                 try snap("01b-Nail Salon done", device, dir)
             }
             goHome()
         }
+    }
+
+    /// Waits for an element, scrolls it into view if it's off screen, then taps it.
+    /// Off the bottom scrolls the page; off the side scrolls the row of tools or crayons it sits in.
+    private func tap(_ element: XCUIElement, file: StaticString = #filePath, line: UInt = #line) {
+        guard element.waitForExistence(timeout: 5) else {
+            return XCTFail("Couldn't find \(element.description)", file: file, line: line)
+        }
+        let screen = app.windows.firstMatch.frame
+        for _ in 0..<6 where !element.isHittable {
+            let frame = element.frame
+            let rows = app.scrollViews.containing(NSPredicate(format: "label == %@", element.label))
+            let row = rows.element(boundBy: max(0, rows.count - 1))
+            if frame.midY > screen.maxY { app.swipeUp() }
+            else if frame.midY < screen.minY { app.swipeDown() }
+            else if frame.midX > screen.maxX { row.swipeLeft() }
+            else if frame.midX < screen.minX { row.swipeRight() }
+            else { break }
+        }
+        element.tap()
+    }
+
+    /// An element found by its accessibility identifier, once it has appeared.
+    private func find(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
+        let element = app.descendants(matching: .any)[identifier]
+        if !element.waitForExistence(timeout: 5) {
+            XCTFail("Couldn't find \(identifier)", file: file, line: line)
+        }
+        return element
     }
 
     private func button(_ text: String) -> XCUIElement {
