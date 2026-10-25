@@ -444,8 +444,8 @@ struct PolishBottle: View {
     }
 }
 
-/// Twinkling hearts and stars around the finished nails.
-private struct Sparkles: View {
+/// Twinkling hearts and stars around a finished look.
+struct Sparkles: View {
     private static let spots: [(x: CGFloat, y: CGFloat, emoji: String)] = [
         (0.1, 0.2, "✨"), (0.85, 0.12, "💖"), (0.5, 0.05, "⭐️"), (0.92, 0.35, "✨"),
         (0.08, 0.55, "💖"), (0.95, 0.65, "⭐️"), (0.3, 0.12, "✨"), (0.72, 0.05, "✨"),

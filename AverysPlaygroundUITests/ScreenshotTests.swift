@@ -31,6 +31,14 @@ final class ScreenshotTests: XCTestCase {
                         .press(forDuration: 0.05, thenDragTo: nail.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
             }),
+            ("Hair Salon", {
+                let hair = self.app.descendants(matching: .any)["Hair"]
+                hair.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.3))
+                    .press(forDuration: 0.05, thenDragTo: hair.coordinate(withNormalizedOffset: CGVector(dx: 0.7, dy: 0.35)))
+                self.app.buttons["Scissors"].tap()
+                hair.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.7))
+                    .press(forDuration: 0.05, thenDragTo: hair.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.62)))
+            }),
             ("Read", {
                 let letters = self.app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Letter'"))
                 for i in 0..<letters.count { letters.element(boundBy: i).tap() }
@@ -56,6 +64,14 @@ final class ScreenshotTests: XCTestCase {
             game.play()
             sleep(1)
             try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
+            if game.title == "Hair Salon" {
+                app.buttons["Styles"].tap()
+                app.buttons["Pigtails"].tap()
+                app.buttons["Bows"].tap()
+                app.buttons["🎀"].tap()
+                sleep(1)
+                try snap("02b-Hair Salon styled", device, dir)
+            }
             if game.title == "Nail Salon" {
                 app.buttons["Stickers"].tap()
                 app.descendants(matching: .any)["Big nail"].tap()
