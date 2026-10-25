@@ -10,6 +10,9 @@ targets:
     platform: iOS
     sources:
       - AverysPlayground
+    scheme:
+      testTargets:
+        - AverysPlaygroundTests
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.averysplayground
@@ -27,3 +30,14 @@ targets:
         INFOPLIST_KEY_UIRequiresFullScreen: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+  AverysPlaygroundTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - AverysPlaygroundTests
+    dependencies:
+      - target: AverysPlayground
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"

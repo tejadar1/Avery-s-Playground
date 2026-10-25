@@ -1,12 +1,13 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case abc, counting, colors, animals, drawing, bubbles
+    case nails, abc, counting, colors, animals, drawing, bubbles
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
+        case .nails: "Nail Salon"
         case .abc: "ABC"
         case .counting: "1 2 3"
         case .colors: "Colors"
@@ -18,6 +19,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
     var emoji: String {
         switch self {
+        case .nails: "💅"
         case .abc: "🔤"
         case .counting: "🔢"
         case .colors: "🎨"
@@ -29,6 +31,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
     var color: Color {
         switch self {
+        case .nails: .pink
         case .abc: .red
         case .counting: .orange
         case .colors: .purple
@@ -41,6 +44,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     @ViewBuilder
     var destination: some View {
         switch self {
+        case .nails: NailSalonView()
         case .abc: ABCView()
         case .counting: CountingView()
         case .colors: ColorsView()

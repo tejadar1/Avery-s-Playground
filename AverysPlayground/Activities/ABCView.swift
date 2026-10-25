@@ -59,7 +59,7 @@ struct ABCView: View {
 
                 Text(selected.emoji)
                     .font(.system(size: 80))
-                    .phaseAnimator([1.0, 1.3], trigger: bounceCount) { content, scale in
+                    .phaseAnimator([CGFloat(1), 1.3], trigger: bounceCount) { content, scale in
                         content.scaleEffect(scale)
                     } animation: { _ in
                         .spring(response: 0.25, dampingFraction: 0.5)

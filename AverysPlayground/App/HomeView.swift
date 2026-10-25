@@ -7,12 +7,18 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    Text("Avery's Playground")
-                        .font(.kid(40))
-                        .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.2), radius: 2, y: 2)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 12)
+                    HStack(spacing: 8) {
+                        Image("Coco")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 130)
+                            .accessibilityLabel("Coco the crocodile")
+                        Text("Avery's Playground")
+                            .font(.kid(36))
+                            .foregroundStyle(Color.outline)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding(.top, 8)
 
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(Activity.allCases) { activity in
@@ -52,14 +58,10 @@ private struct ActivityTile: View {
             Text(activity.title)
                 .font(.kid(24))
                 .foregroundStyle(.white)
+                .shadow(color: Color.outline, radius: 0, x: 2, y: 2)
         }
         .frame(maxWidth: .infinity, minHeight: 160)
-        .background(activity.color.gradient, in: RoundedRectangle(cornerRadius: 32, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 32, style: .continuous)
-                .strokeBorder(.white.opacity(0.6), lineWidth: 4)
-        )
-        .shadow(color: activity.color.opacity(0.5), radius: 8, y: 6)
+        .cartoonCard(activity.color)
     }
 }
 

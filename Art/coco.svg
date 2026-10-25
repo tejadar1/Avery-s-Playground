@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 440">
+  <defs>
+    <g id="shape">
+      <!-- tail -->
+      <path d="M130 360 C60 395 10 350 30 300 C40 330 80 340 120 318 Z"/>
+      <!-- back ridges -->
+      <circle cx="98" cy="215" r="16"/><circle cx="92" cy="255" r="16"/><circle cx="98" cy="295" r="16"/>
+      <circle cx="112" cy="335" r="15"/>
+      <!-- body -->
+      <ellipse cx="190" cy="320" rx="92" ry="95"/>
+      <!-- legs -->
+      <rect x="132" y="372" width="50" height="58" rx="22"/>
+      <rect x="208" y="372" width="50" height="58" rx="22"/>
+      <!-- back eye bump -->
+      <circle cx="122" cy="112" r="40"/>
+      <!-- head -->
+      <circle cx="165" cy="178" r="88"/>
+      <rect x="170" y="128" width="222" height="100" rx="48"/>
+      <rect x="176" y="196" width="200" height="66" rx="32"/>
+      <!-- nostril bump -->
+      <circle cx="362" cy="132" r="18"/>
+      <!-- front eye bump -->
+      <circle cx="195" cy="100" r="52"/>
+    </g>
+  </defs>
+  <!-- outline pass, then fill pass hides the inner seams -->
+  <use href="#shape" fill="#4A2C2A" stroke="#4A2C2A" stroke-width="20" stroke-linejoin="round"/>
+  <use href="#shape" fill="#7BC74D"/>
+  <!-- ridges and tail darker green -->
+  <g fill="#5FAE3A">
+    <circle cx="98" cy="215" r="9"/><circle cx="92" cy="255" r="9"/><circle cx="98" cy="295" r="9"/><circle cx="112" cy="335" r="8"/>
+    <circle cx="250" cy="150" r="7"/><circle cx="280" cy="142" r="5"/><circle cx="300" cy="158" r="6"/>
+  </g>
+  <!-- belly -->
+  <ellipse cx="212" cy="335" rx="58" ry="66" fill="#F6EBA8" stroke="#4A2C2A" stroke-width="8"/>
+  <path d="M176 310 h72 M168 336 h88 M176 362 h72" stroke="#D9C778" stroke-width="5" stroke-linecap="round"/>
+  <!-- waving arm -->
+  <ellipse cx="292" cy="276" rx="21" ry="44" transform="rotate(-50 292 276)" fill="#7BC74D" stroke="#4A2C2A" stroke-width="9"/>
+  <!-- toes -->
+  <path d="M146 430 v-10 M160 430 v-10 M222 430 v-10 M236 430 v-10" stroke="#4A2C2A" stroke-width="5" stroke-linecap="round"/>
+  <!-- mouth -->
+  <path d="M210 214 Q300 246 384 204" fill="none" stroke="#4A2C2A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M244 224 l8 16 l8 -13 Z M284 230 l7 16 l9 -15 Z M326 228 l6 15 l9 -16 Z" fill="#fff" stroke="#4A2C2A" stroke-width="4" stroke-linejoin="round"/>
+  <!-- nostril -->
+  <ellipse cx="366" cy="134" rx="6" ry="8" fill="#4A2C2A"/>
+  <!-- back eye -->
+  <circle cx="120" cy="112" r="24" fill="#fff" stroke="#4A2C2A" stroke-width="7"/>
+  <circle cx="128" cy="116" r="13" fill="#2B1B1A"/><circle cx="132" cy="110" r="4.5" fill="#fff"/>
+  <!-- front eye -->
+  <circle cx="198" cy="102" r="36" fill="#fff" stroke="#4A2C2A" stroke-width="8"/>
+  <circle cx="210" cy="108" r="21" fill="#2B1B1A"/>
+  <circle cx="218" cy="98" r="8" fill="#fff"/><circle cx="204" cy="118" r="4" fill="#fff"/>
+  <!-- cheek -->
+  <ellipse cx="225" cy="182" rx="22" ry="13" fill="#FF8FB1" opacity="0.75"/>
+  <!-- flower -->
+  <g transform="translate(160 48) rotate(-15)" stroke="#4A2C2A" stroke-width="6">
+    <circle cx="0" cy="-19" r="14" fill="#FF8FB1"/><circle cx="18" cy="-6" r="14" fill="#FF8FB1"/>
+    <circle cx="11" cy="15" r="14" fill="#FF8FB1"/><circle cx="-11" cy="15" r="14" fill="#FF8FB1"/>
+    <circle cx="-18" cy="-6" r="14" fill="#FF8FB1"/>
+    <circle cx="0" cy="0" r="10" fill="#FFD84D"/>
+  </g>
+</svg>
