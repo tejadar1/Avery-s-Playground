@@ -26,6 +26,8 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 - **No ads, no in-app purchases, no accounts, no internet.** Nothing is collected or sent anywhere.
 - Words are read aloud with the iPhone's built-in voice, so no recordings are needed. Speech still plays
   when the silent switch is on.
+- For a more natural voice, download a Premium or Enhanced one: Settings → Accessibility → Spoken Content →
+  Voices → English (and Spanish for the Spanish games). The app uses the best voice it finds.
 - Big buttons, haptic "taps", and no text you need to read to get around.
 - Follows Apple's design guidelines for kids' apps: buttons at least 44 points, standard back navigation, and
   Reduce Motion (Settings → Accessibility → Motion) stills the wagging, twinkling and spinning.
