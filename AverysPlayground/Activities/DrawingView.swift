@@ -87,6 +87,7 @@ struct DrawingView: View {
             }
         }
         .padding(12 * uiScale)
+        .fixedSize(horizontal: true, vertical: false)  // only as wide as two crayons, not half the screen
         .background(.white, in: RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
         .frame(maxHeight: .infinity, alignment: .top)
     }
