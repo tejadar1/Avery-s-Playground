@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     runs-on: macos-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - run: brew install xcodegen && xcodegen
@@ -16,11 +18,13 @@ jobs:
           mkdir -p screenshots
           TEST_RUNNER_SCREENSHOTS_DIR="$PWD/screenshots" xcodebuild test -project AverysPlayground.xcodeproj \
             -scheme AverysPlayground -destination "platform=iOS Simulator,name=$DEVICE" CODE_SIGNING_ALLOWED=NO
-      - uses: actions/upload-artifact@v4
+      - name: Publish screenshots to the screenshots branch
         if: always()
-        with:
-          name: screenshots
-          path: screenshots
+        working-directory: screenshots
+        run: |
+          git init -q -b screenshots && git add .
+          git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Screenshots of ${{ github.sha }}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" screenshots
 
   testflight:
     needs: test

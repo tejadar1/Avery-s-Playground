@@ -79,7 +79,7 @@ AverysPlayground/
   Support/      Speech, haptics, fonts and shared styles
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
-AverysPlaygroundUITests/  Opens every game and saves screenshots (GitHub keeps them with each build)
+AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch on each build
 Art/            SVG sources for Coco, the hand, and the app icon
 project.yml     XcodeGen project definition
 ```
