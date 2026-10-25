@@ -79,8 +79,10 @@ jobs:
         name: Sign and upload to TestFlight
         run: |
           mkdir -p ~/private_keys
-          # Rebuild the key's lines, since pasting it on a phone can join them or add spaces.
-          body=$(printf '%s' "$KEY" | sed 's/-----[A-Z ]*-----//g' | tr -d ' \t\r\n')
+          # Rebuild the key's lines, since pasting it on a phone can join them, add spaces or turn dashes into em dashes.
+          body=$(printf '%s' "$KEY" | sed 's/BEGIN PRIVATE KEY//; s/END PRIVATE KEY//' | LC_ALL=C tr -cd 'A-Za-z0-9+/=')
+          # An Apple .p8 key is 200 base64 characters; the length is safe to print, the key isn't.
+          echo "Key is ${#body} characters (an Apple key is 200)."
           printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$body" | fold -w 64)" > ~/private_keys/AuthKey_$KEY_ID.p8
           cat > build/ExportOptions.plist <<PLIST
           <?xml version="1.0" encoding="UTF-8"?>
