@@ -52,9 +52,14 @@ private struct ActivityTile: View {
     let activity: Activity
 
     var body: some View {
-        VStack(spacing: 8 * uiScale) {
-            Text(activity.emoji)
-                .font(.system(size: 64 * uiScale))
+        VStack(spacing: 4 * uiScale) {
+            Image(activity.icon)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 120 * uiScale)
+                .offset(y: -20 * uiScale)  // pops out over the top edge of the tile
+                .padding(.bottom, -20 * uiScale)
+                .accessibilityHidden(true)
             Text(activity.title)
                 .font(.kid(24))
                 .foregroundStyle(.white)

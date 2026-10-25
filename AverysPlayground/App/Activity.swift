@@ -20,20 +20,8 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
-    var emoji: String {
-        switch self {
-        case .nails: "💅"
-        case .reading: "📖"
-        case .stories: "📚"
-        case .spanish: "🗣️"
-        case .abc: "🔤"
-        case .counting: "🔢"
-        case .colors: "🎨"
-        case .animals: "🐮"
-        case .drawing: "🖍️"
-        case .bubbles: "🫧"
-        }
-    }
+    /// Drawn in Art/icons/<rawValue>.svg.
+    var icon: String { "Icon-\(rawValue)" }
 
     var color: Color {
         switch self {

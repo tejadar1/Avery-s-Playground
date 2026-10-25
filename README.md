@@ -80,7 +80,7 @@ AverysPlayground/
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
 AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch on each build
-Art/            SVG sources for Coco, the hand, and the app icon
+Art/            SVG sources for Coco, the hand, the game icons (Art/icons), and the app icon
 project.yml     XcodeGen project definition
 ```
 
@@ -119,6 +119,7 @@ and in a terminal: `npx skills add petergyang/no-ai-slop --skill no-ai-slop --gl
 ### Adding a new game
 
 1. Create a view in `AverysPlayground/Activities/`.
-2. Add a case to `Activity` in `App/Activity.swift` with a title, emoji, color, and destination.
+2. Add a case to `Activity` in `App/Activity.swift` with a title, color, and destination.
+3. Draw its icon as `Art/icons/<case name>.svg` and run `node Art/render.js`.
 
 It shows up on the home screen automatically.
