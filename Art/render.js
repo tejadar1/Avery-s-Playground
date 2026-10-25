@@ -5,9 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 const assets = path.join(__dirname, '../AverysPlayground/Assets.xcassets');
-// name in the asset catalog → [svg file, pixel width, parts to hide]; game icons are named Icon-<Activity rawValue>.
+// name in the asset catalog → [svg file, pixel width, parts to hide, scale]; game icons are named Icon-<Activity rawValue>.
 const images = {
   Coco: ['coco.svg', 1200],
+  // The launch screen shows images at their natural size: 600px at 3x is 200 points.
+  LaunchCoco: ['coco.svg', 600, 'none', '3x'],
   Hand: ['hand.svg', 1200, '#nails'],
   Shiba: ['shiba.svg', 900, '#tail, #sleep'],
   ShibaSleep: ['shiba.svg', 900, '#tail, #awake'],
@@ -21,7 +23,7 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
 
 (async () => {
   const browser = await chromium.launch();
-  for (const [name, [file, pixelWidth, hide = 'none']] of Object.entries(images)) {
+  for (const [name, [file, pixelWidth, hide = 'none', scale]] of Object.entries(images)) {
     const svg = fs.readFileSync(path.join(__dirname, file), 'utf8');
     const [, , vw, vh] = svg.match(/viewBox="([^"]+)"/)[1].split(/\s+/).map(Number);
     const height = Math.round(pixelWidth * vh / vw);
@@ -31,7 +33,7 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     fs.mkdirSync(dir, { recursive: true });
     await page.screenshot({ path: path.join(dir, `${name}.png`), omitBackground: true });
     fs.writeFileSync(path.join(dir, 'Contents.json'), JSON.stringify({
-      images: [{ filename: `${name}.png`, idiom: 'universal' }],
+      images: [{ filename: `${name}.png`, idiom: 'universal', ...(scale && { scale }) }],
       info: { author: 'xcode', version: 1 },
     }, null, 2) + '\n');
     await page.close();

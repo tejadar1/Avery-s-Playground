@@ -19,6 +19,8 @@ final class ScreenshotTests: XCTestCase {
 
     private func playEveryGame(saving dir: URL, as device: String) throws {
         app.launch()
+        try snap("00a-Getting ready", device, dir)
+        XCTAssertTrue(app.descendants(matching: .any)["Getting ready"].waitForNonExistence(timeout: 5))
         try snap("00-home", device, dir)
 
         let games: [(title: String, play: () -> Void)] = [

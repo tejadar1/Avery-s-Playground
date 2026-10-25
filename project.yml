@@ -10,6 +10,12 @@ targets:
     platform: iOS
     sources:
       - AverysPlayground
+    info:
+      path: AverysPlayground/Info.plist
+      properties:
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+          UIImageName: LaunchCoco
     scheme:
       testTargets:
         - AverysPlaygroundTests
@@ -29,7 +35,6 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UIUserInterfaceStyle: Light
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UIRequiresFullScreen: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
