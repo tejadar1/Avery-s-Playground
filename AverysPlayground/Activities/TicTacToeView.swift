@@ -75,6 +75,7 @@ struct TicTacToeView: View {
                 let isWinning = game.winningLine?.contains(index) == true
                 Button { place(index) } label: {
                     ZStack {
+                        Color.clear  // gives an empty square a size, so it can be tapped by VoiceOver and tests
                         if let piece = game.squares[index] {
                             pieceImage(piece, size: 70 * uiScale)
                                 .transition(.scale(scale: 0.2).combined(with: .opacity))
