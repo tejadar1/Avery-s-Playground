@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<clipPath id="k189"><path d="M100 22 C120 64 156 96 156 128 C156 160 130 180 100 180 C70 180 44 160 44 128 C44 96 80 64 100 22Z"/></clipPath><path d="M100 22 C120 64 156 96 156 128 C156 160 130 180 100 180 C70 180 44 160 44 128 C44 96 80 64 100 22Z" fill="#5B9BD5"/><g clip-path="url(#k189)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#3F7FBF"/><ellipse cx="76" cy="118" rx="10" ry="22" fill="#fff" opacity=".45"/></g><path d="M100 22 C120 64 156 96 156 128 C156 160 130 180 100 180 C70 180 44 160 44 128 C44 96 80 64 100 22Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<circle cx="82" cy="132" r="6" fill="#4A2C2A"/><circle cx="80.2" cy="129.9" r="2.0999999999999996" fill="#fff"/><circle cx="118" cy="132" r="6" fill="#4A2C2A"/><circle cx="116.2" cy="129.9" r="2.0999999999999996" fill="#fff"/>
+<ellipse cx="72" cy="148" rx="7" ry="4.55" fill="#F49AC1" opacity=".75"/><ellipse cx="128" cy="148" rx="7" ry="4.55" fill="#F49AC1" opacity=".75"/>
+<path d="M92 148 Q100 156 108 148" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

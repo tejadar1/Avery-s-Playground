@@ -145,11 +145,11 @@ struct NailSalonView: View {
     private enum Tray: CaseIterable {
         case polish, design, sticker
 
-        var emoji: String {
+        var picture: String {
             switch self {
-            case .polish: "💅"
-            case .design: "✨"
-            case .sticker: "🌸"
+            case .polish: "polish"
+            case .design: "sparkles"
+            case .sticker: "flower"
             }
         }
 
@@ -182,7 +182,7 @@ struct NailSalonView: View {
         (Color(red: 0.85, green: 0.86, blue: 0.9), Color(red: 0.85, green: 0.86, blue: 0.9)),
         (Color(red: 0.95, green: 0.78, blue: 0.35), Color(red: 0.95, green: 0.78, blue: 0.35)),
     ]
-    private static let stickers = ["🌸", "⭐️", "💖", "🦋", "🍓", "💎", "🌈", "🐊"]
+    private static let stickers = ["flower", "star", "heart", "butterfly", "strawberry", "gem", "rainbow", "crocodile"]
     private static let cheers = ["Holy guacamole, so pretty!", "Wowza bowza!", "So sparkly my tail is wiggling!", "Snap snap! I love it!", "Ooh la la!", "Crocodile-tastic!"]
 
     /// A look to copy: two colors, with designs or a sticker on some nails.
@@ -226,7 +226,7 @@ struct NailSalonView: View {
             }
             if isShowingOff {
                 Button(action: reset) {
-                    Text("🖐️ New nails")
+                    Text("New nails")
                         .font(.kid(30))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 32 * uiScale)
@@ -320,7 +320,7 @@ struct NailSalonView: View {
             }
             .frame(width: 44 * uiScale, height: 44 * uiScale)
             .clipShape(RoundedRectangle(cornerRadius: 10 * uiScale, style: .continuous))
-            .overlay(Text("🖐️").font(.system(size: 26 * uiScale)))
+            .overlay(Picture("hand", size: 26 * uiScale))
             .padding(8 * uiScale)
             .cartoonCard(Color(red: 0.62, green: 0.6, blue: 0.95), cornerRadius: 18 * uiScale)
         }
@@ -347,8 +347,7 @@ struct NailSalonView: View {
                     .matchedGeometryEffect(id: index, in: zoom)
                     .overlay(alignment: .topLeading) {
                         if let brushTip {
-                            Text("🖌️")
-                                .font(.system(size: 64 * uiScale))
+                            Picture("paintbrush", size: 64 * uiScale)
                                 .position(x: brushTip.x + 26, y: brushTip.y - 26)
                                 .allowsHitTesting(false)
                         }
@@ -374,8 +373,7 @@ struct NailSalonView: View {
     private func sideTools(_ index: Int) -> some View {
         VStack(spacing: 16 * uiScale) {
             Button(action: zoomOut) {
-                Text("🖐️")
-                    .font(.system(size: 30 * uiScale))
+                Picture("hand", size: 30 * uiScale)
                     .frame(width: 60 * uiScale, height: 60 * uiScale)
                     .cartoonCard(Color(red: 0.93, green: 0.55, blue: 0.85), cornerRadius: 30 * uiScale)
             }
@@ -437,8 +435,7 @@ struct NailSalonView: View {
             HStack(spacing: 14 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button { pick(item) } label: {
-                        Text(item.emoji)
-                            .font(.system(size: 30 * uiScale))
+                        Picture(item.picture, size: 30 * uiScale)
                             .frame(width: 60 * uiScale, height: 54 * uiScale)
                             .cartoonCard(item == tray ? .pink : .white, cornerRadius: 20 * uiScale)
                     }
@@ -479,8 +476,7 @@ struct NailSalonView: View {
                     case .sticker:
                         ForEach(Self.stickers, id: \.self) { sticker in
                             toolButton(.sticker(sticker)) {
-                                Text(sticker)
-                                    .font(.system(size: 36 * uiScale))
+                                Picture(sticker, size: 36 * uiScale)
                                     .frame(width: 60 * uiScale, height: 60 * uiScale)
                                     .cartoonCard(.white, cornerRadius: 30 * uiScale)
                                     .frame(height: 72 * uiScale)
@@ -644,7 +640,7 @@ private struct NailView: View {
                 .frame(width: size.width * 0.05, height: size.height * 0.5)
                 .offset(x: size.width * 0.3, y: size.height * 0.02)
             if let sticker = nail.sticker {
-                Text(sticker).font(.system(size: size.width * 0.62))
+                Picture(sticker, size: size.width * 0.62)
             }
         }
         .frame(width: size.width, height: size.height)
@@ -790,17 +786,16 @@ private struct HeartPattern: View {
 struct Sparkles: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private static let spots: [(x: CGFloat, y: CGFloat, emoji: String)] = [
-        (0.1, 0.2, "✨"), (0.85, 0.12, "💖"), (0.5, 0.05, "⭐️"), (0.92, 0.35, "✨"),
-        (0.08, 0.55, "💖"), (0.95, 0.65, "⭐️"), (0.3, 0.12, "✨"), (0.72, 0.05, "✨"),
+    private static let spots: [(x: CGFloat, y: CGFloat, picture: String)] = [
+        (0.1, 0.2, "sparkles"), (0.85, 0.12, "heart"), (0.5, 0.05, "star"), (0.92, 0.35, "sparkles"),
+        (0.08, 0.55, "heart"), (0.95, 0.65, "star"), (0.3, 0.12, "sparkles"), (0.72, 0.05, "sparkles"),
     ]
 
     var body: some View {
         GeometryReader { geo in
             ForEach(Self.spots.indices, id: \.self) { i in
                 let spot = Self.spots[i]
-                Text(spot.emoji)
-                    .font(.system(size: 40 * uiScale))
+                Picture(spot.picture, size: 40 * uiScale)
                     .phaseAnimator([CGFloat(0.6), 1.3]) { content, scale in
                         content.scaleEffect(reduceMotion ? 1 : scale).opacity(reduceMotion || scale > 1 ? 1 : 0.5)
                     } animation: { _ in

@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<clipPath id="k779"><path d="M70 30 C80 42 120 42 130 30 L178 58 L160 96 L142 86 V176 H58 V86 L40 96 L22 58Z"/></clipPath><path d="M70 30 C80 42 120 42 130 30 L178 58 L160 96 L142 86 V176 H58 V86 L40 96 L22 58Z" fill="#F7A8C4"/><g clip-path="url(#k779)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#E883A8"/><path d="M100 142 C80 128 76 118 80 110 C84 102 94 102 100 112 C106 102 116 102 120 110 C124 118 120 128 100 142Z" fill="#FFFFFF" opacity="1"/><ellipse cx="80" cy="70" rx="8" ry="20" fill="#fff" opacity=".45"/></g><path d="M70 30 C80 42 120 42 130 30 L178 58 L160 96 L142 86 V176 H58 V86 L40 96 L22 58Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<path d="M80 34 Q100 52 120 34" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

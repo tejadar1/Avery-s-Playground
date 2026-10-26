@@ -55,7 +55,7 @@ struct TicTacToeView: View {
 
             if game.winner != nil || game.isTie {
                 Button(action: newGame) {
-                    Text("🔄 Play again")
+                    Text("Play again")
                         .font(.kid(28))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 28 * uiScale)

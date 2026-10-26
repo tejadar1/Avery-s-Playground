@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<path d="M64 86 C64 40 136 40 136 86" fill="none" stroke="#4A2C2A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M64 86 C64 40 136 40 136 86" fill="none" stroke="#EE6FA3" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<clipPath id="k458"><path d="M30 86 H170 L158 172 C156 180 150 184 142 184 H58 C50 184 44 180 42 172Z"/></clipPath><path d="M30 86 H170 L158 172 C156 180 150 184 142 184 H58 C50 184 44 180 42 172Z" fill="#EE6FA3"/><g clip-path="url(#k458)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#D24E86"/><ellipse cx="56" cy="110" rx="8" ry="18" fill="#fff" opacity=".45"/></g><path d="M30 86 H170 L158 172 C156 180 150 184 142 184 H58 C50 184 44 180 42 172Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<clipPath id="k459"><path d="M30 86 H170 L164 116 C140 130 60 130 36 116Z"/></clipPath><path d="M30 86 H170 L164 116 C140 130 60 130 36 116Z" fill="#D24E86"/><path d="M30 86 H170 L164 116 C140 130 60 130 36 116Z" fill="none" stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round"/>
+<clipPath id="k460"><path d="M91 118 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0Z"/></clipPath><path d="M91 118 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0Z" fill="#F6C945"/><g clip-path="url(#k460)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#E0A92E"/></g><path d="M91 118 a9 9 0 1 0 18 0 a9 9 0 1 0 -18 0Z" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+</svg>

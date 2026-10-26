@@ -119,7 +119,7 @@ final class ScreenshotTests: XCTestCase {
                 tap(app.buttons["Styles"])
                 tap(app.buttons["Pigtails"])
                 tap(app.buttons["Bows"])
-                tap(app.buttons["🎀"])
+                tap(app.buttons["bow"])
                 sleep(1)
                 try snap("02b-Hair Salon styled", device, dir)
             }

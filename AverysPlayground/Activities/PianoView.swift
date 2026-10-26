@@ -3,7 +3,7 @@ import SwiftUI
 
 struct PianoSong: Hashable {
     let name: String
-    let emoji: String
+    let picture: String
     /// Keys 0...7 are C D E F G A B C.
     let notes: [Int]
     /// One word or syllable per note.
@@ -12,7 +12,7 @@ struct PianoSong: Hashable {
     static let all = [twinkle, mary, hotCrossBuns]
 
     static let twinkle = PianoSong(
-        name: "Twinkle Twinkle", emoji: "⭐️",
+        name: "Twinkle Twinkle", picture: "star",
         notes: [0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0, 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1, 0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0],
         words: ["Twin", "kle", "twin", "kle", "lit", "tle", "star,", "how", "I", "won", "der", "what", "you", "are.",
                 "Up", "a", "bove", "the", "world", "so", "high,", "like", "a", "dia", "mond", "in", "the", "sky.",
@@ -20,14 +20,14 @@ struct PianoSong: Hashable {
     )
 
     static let mary = PianoSong(
-        name: "Mary Had a Little Lamb", emoji: "🐑",
+        name: "Mary Had a Little Lamb", picture: "sheep",
         notes: [2, 1, 0, 1, 2, 2, 2, 1, 1, 1, 2, 4, 4, 2, 1, 0, 1, 2, 2, 2, 2, 1, 1, 2, 1, 0],
         words: ["Ma", "ry", "had", "a", "lit", "tle", "lamb,", "lit", "tle", "lamb,", "lit", "tle", "lamb.",
                 "Ma", "ry", "had", "a", "lit", "tle", "lamb,", "its", "fleece", "was", "white", "as", "snow."]
     )
 
     static let hotCrossBuns = PianoSong(
-        name: "Hot Cross Buns", emoji: "🥯",
+        name: "Hot Cross Buns", picture: "buns",
         notes: [2, 1, 0, 2, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0],
         words: ["Hot", "cross", "buns!", "Hot", "cross", "buns!", "One", "a", "pen", "ny,", "two", "a", "pen", "ny,", "hot", "cross", "buns!"]
     )
@@ -115,9 +115,9 @@ struct PianoView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12 * uiScale) {
-                    songButton("🎵", "Free play", isOn: lesson == nil) { choose(nil) }
+                    songButton("note", "Free play", isOn: lesson == nil) { choose(nil) }
                     ForEach(PianoSong.all, id: \.name) { song in
-                        songButton(song.emoji, song.name, isOn: lesson?.song == song) { choose(song) }
+                        songButton(song.picture, song.name, isOn: lesson?.song == song) { choose(song) }
                     }
                 }
                 .padding(.horizontal)
@@ -182,8 +182,7 @@ struct PianoView: View {
             .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
             .overlay(alignment: .top) {
                 if isNext {
-                    Text("⭐️")
-                        .font(.system(size: 40 * uiScale))
+                    Picture("star", size: 40 * uiScale)
                         .phaseAnimator([CGFloat(0), 14]) { content, drop in
                             content.offset(y: drop)
                         } animation: { _ in .easeInOut(duration: 0.4) }
@@ -198,13 +197,17 @@ struct PianoView: View {
             .accessibilityAddTraits(.isButton)
     }
 
-    private func songButton(_ emoji: String, _ name: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+    private func songButton(_ picture: String, _ name: String, isOn: Bool, action: @escaping () -> Void) -> some View {
         Button {
             Haptics.tap()
             action()
         } label: {
-            Text("\(emoji) \(name)")
-                .font(.kid(20))
+            Label {
+                Text(name)
+            } icon: {
+                Picture(picture, size: 30 * uiScale)
+            }
+            .font(.kid(20))
                 .foregroundStyle(isOn ? .white : Color.outline)
                 .padding(.horizontal, 16 * uiScale)
                 .frame(height: 50 * uiScale)

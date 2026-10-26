@@ -24,7 +24,7 @@ for text in list(english.values()) + [theme]:
     for s in literals(text):
         if "\\(" in s or not re.search(r"[A-Za-z]", s):
             continue
-        if re.fullmatch(r"[a-z0-9]+(\.[a-z0-9]+)+|[a-z]{2}-[A-Z]{2}|Icon-.*", s):
+        if re.fullmatch(r"[a-z0-9]+(\.[a-z0-9]+)+|[a-z]{2}-[A-Z]{2}|(Icon|Picture)-.*", s):
             continue  # SF Symbol names, language codes, asset names
         lines.add(s)
 
@@ -41,7 +41,7 @@ lines.update(str(n) for n in numbers)
 lines.update(f"{n}! Great counting!" for n in range(1, 11))
 lines.update(f"Let's count to {n}!" for n in range(1, 11))
 
-for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", emoji: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):
+for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", picture: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):
     lines.add(f"{letter}. " + (phrase or f"{letter} is for {word}!"))
 
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
@@ -63,10 +63,10 @@ cheers = literals(re.search(r"static let cheers = \[([^\]]+)\]", dress).group(1)
 for item in re.findall(r'case \w+ = "([^"]+)"', dress):
     lines.update(f"{item}! {cheer}" for cheer in cheers)
 
-for song in re.findall(r'name: "([^"]+)", emoji:', src["PianoView.swift"]):
+for song in re.findall(r'name: "([^"]+)", picture:', src["PianoView.swift"]):
     lines.update({f"{song}!", f"You played {song}! Holy guacamole, what a song!"})
 
-for one, many in re.findall(r'Food\(emoji: "[^"]+", one: "([^"]+)", many: "([^"]+)"\)', src["MathView.swift"]):
+for one, many in re.findall(r'Food\(picture: "[^"]+", one: "([^"]+)", many: "([^"]+)"\)', src["MathView.swift"]):
     for a in range(1, 6):
         for b in range(1, 6):
             lines.add(f"Coco has {a} {one if a == 1 else many}. Mochi brings {b} more. How many now?")

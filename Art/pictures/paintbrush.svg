@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<g transform="rotate(40 100 100)">
+<clipPath id="k427"><path d="M100 70 h0 a12 12 0 0 1 12 12 v96 a12 12 0 0 1 -12 12 h0 a12 12 0 0 1 -12 -12 v-96 a12 12 0 0 1 12 -12Z"/></clipPath><path d="M100 70 h0 a12 12 0 0 1 12 12 v96 a12 12 0 0 1 -12 12 h0 a12 12 0 0 1 -12 -12 v-96 a12 12 0 0 1 12 -12Z" fill="#E9646E"/><g clip-path="url(#k427)"><ellipse cx="110" cy="130" rx="10" ry="80" fill="#C94A55"/></g><path d="M100 70 h0 a12 12 0 0 1 12 12 v96 a12 12 0 0 1 -12 12 h0 a12 12 0 0 1 -12 -12 v-96 a12 12 0 0 1 12 -12Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<clipPath id="k428"><path d="M88 52 h24 a4 4 0 0 1 4 4 v20 a4 4 0 0 1 -4 4 h-24 a4 4 0 0 1 -4 -4 v-20 a4 4 0 0 1 4 -4Z"/></clipPath><path d="M88 52 h24 a4 4 0 0 1 4 4 v20 a4 4 0 0 1 -4 4 h-24 a4 4 0 0 1 -4 -4 v-20 a4 4 0 0 1 4 -4Z" fill="#B9B4C7"/><g clip-path="url(#k428)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#968FA8"/></g><path d="M88 52 h24 a4 4 0 0 1 4 4 v20 a4 4 0 0 1 -4 4 h-24 a4 4 0 0 1 -4 -4 v-20 a4 4 0 0 1 4 -4Z" fill="none" stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round"/>
+<clipPath id="k429"><path d="M84 54 C84 30 92 14 100 6 C108 14 116 30 116 54Z"/></clipPath><path d="M84 54 C84 30 92 14 100 6 C108 14 116 30 116 54Z" fill="#F7A8C4"/><g clip-path="url(#k429)"><ellipse cx="100" cy="10" rx="150" ry="20" fill="#EE6FA3"/></g><path d="M84 54 C84 30 92 14 100 6 C108 14 116 30 116 54Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+</g>
+</svg>

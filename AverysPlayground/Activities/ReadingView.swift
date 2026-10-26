@@ -2,20 +2,20 @@ import SwiftUI
 
 struct ReadingWord: Equatable {
     let text: String
-    let emoji: String
+    let picture: String
 }
 
 enum Phonics {
     /// Three-letter words with short vowels, the first words kids learn to sound out.
     static let words = [
-        ReadingWord(text: "cat", emoji: "🐱"), ReadingWord(text: "dog", emoji: "🐶"),
-        ReadingWord(text: "pig", emoji: "🐷"), ReadingWord(text: "sun", emoji: "☀️"),
-        ReadingWord(text: "bus", emoji: "🚌"), ReadingWord(text: "hat", emoji: "🎩"),
-        ReadingWord(text: "bed", emoji: "🛏️"), ReadingWord(text: "fox", emoji: "🦊"),
-        ReadingWord(text: "cup", emoji: "🥤"), ReadingWord(text: "bug", emoji: "🐛"),
-        ReadingWord(text: "hen", emoji: "🐔"), ReadingWord(text: "box", emoji: "📦"),
-        ReadingWord(text: "van", emoji: "🚐"), ReadingWord(text: "web", emoji: "🕸️"),
-        ReadingWord(text: "pen", emoji: "🖊️"), ReadingWord(text: "bat", emoji: "🦇"),
+        ReadingWord(text: "cat", picture: "cat"), ReadingWord(text: "dog", picture: "dog"),
+        ReadingWord(text: "pig", picture: "pig"), ReadingWord(text: "sun", picture: "sun"),
+        ReadingWord(text: "bus", picture: "bus"), ReadingWord(text: "hat", picture: "tophat"),
+        ReadingWord(text: "bed", picture: "bed"), ReadingWord(text: "fox", picture: "fox"),
+        ReadingWord(text: "cup", picture: "cup"), ReadingWord(text: "bug", picture: "caterpillar"),
+        ReadingWord(text: "hen", picture: "hen"), ReadingWord(text: "box", picture: "box"),
+        ReadingWord(text: "van", picture: "van"), ReadingWord(text: "web", picture: "web"),
+        ReadingWord(text: "pen", picture: "pen"), ReadingWord(text: "bat", picture: "bat"),
     ]
 
     /// Each letter's sound (not its name): IPA for the voice, and a spelling to fall back on.
@@ -50,7 +50,10 @@ struct ReadingView: View {
         VStack(spacing: 20 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount)
 
-            Text("⭐️ \(stars)")
+            HStack(spacing: 6 * uiScale) {
+                Picture("star", size: 32 * uiScale)
+                Text("\(stars)")
+            }
                 .font(.kid(28))
                 .foregroundStyle(Color.outline)
                 .contentTransition(.numericText())
@@ -81,8 +84,7 @@ struct ReadingView: View {
             HStack(spacing: 16 * uiScale) {
                 ForEach(choices, id: \.text) { choice in
                     Button { pick(choice) } label: {
-                        Text(choice.emoji)
-                            .font(.system(size: 64 * uiScale))
+                        Picture(choice.picture, size: 76 * uiScale)
                             .frame(width: 100 * uiScale, height: 100 * uiScale)
                             .cartoonCard(isSolved && choice == word ? .green : .white)
                     }

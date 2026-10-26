@@ -428,6 +428,9 @@ Nail idea
 Navy
 Necklace
 Nest
+New customer
+New nails
+New outfit
 Next picture
 Night night, Mochi. Shh!
 No
@@ -474,6 +477,7 @@ Pigtails! So cute!
 Pink
 Pink! Like a flower.
 Play
+Play again
 Ponytail
 Ponytail! So cute!
 Press the key with the star.
@@ -721,10 +725,14 @@ ball and sun!
 ball and tree!
 ball!
 ball! You got it!
+balloon
 banana
 bananas
 bat
 bat! You read it! Snap snap!
+bathtub
+beanie
+bear
 bears
 bed
 bed! You read it! Snap snap!
@@ -813,18 +821,24 @@ boat and sun!
 boat and tree!
 boat!
 boat! You got it!
+bone
+boots
 bove
+bow
+bowl
 bowls
 box
 box! You read it! Snap snap!
 bread
 brick
 bricks
+bubbles
 bug
 bug! You read it! Snap snap!
 buh
 build
 built
+buns
 buns!
 bus
 bus and apple!
@@ -940,9 +954,13 @@ cat and tree!
 cat!
 cat! You got it!
 cat! You read it! Snap snap!
+caterpillar
+chair
 chairs
 checkmark
+chick
 chicks
+comb
 cookie
 cookies
 could
@@ -973,7 +991,9 @@ cow and sun!
 cow and tree!
 cow!
 cow! You got it!
+crocodile
 cross
+crown
 cup
 cup! You read it! Snap snap!
 cupcake
@@ -1068,6 +1088,7 @@ egg and tree!
 egg!
 egg! You got it!
 eh
+elephant
 f
 far
 fast
@@ -1101,6 +1122,8 @@ fish and sun!
 fish and tree!
 fish!
 fish! You got it!
+flag
+flats
 fleece
 flower
 flower and apple!
@@ -1129,6 +1152,8 @@ flower and sun!
 flower and tree!
 flower!
 flower! You got it!
+flowercrown
+footprints
 for
 found
 fox
@@ -1161,12 +1186,17 @@ frog and tree!
 frog!
 frog! You got it!
 g
+gem
+girl
 going
+gown
 grapes
 grew
 guh
 h
 had
+hairdryer
+hand
 hat
 hat and apple!
 hat and ball!
@@ -1224,12 +1254,14 @@ heart and sun!
 heart and tree!
 heart!
 heart! You got it!
+heels
 help
 hen
 hen! You read it! Snap snap!
 herself
 high,
 home
+horse
 hot
 house
 house and apple!
@@ -1264,21 +1296,27 @@ huffed
 huh
 i
 ice cream
+icecream
 ih
 in
 into
 is
 it
 its
+juice
 just
 k
 kept
+kite
 kle
 ks
 kuh
+ladybug
 lamb,
 lamb.
+lightning
 like
+lion
 lit
 little
 me
@@ -1313,16 +1351,27 @@ moon!
 moon! You got it!
 n
 nap
+necklace
+nest
 nnn
+none
 not
+note
 ny,
 o
+octopus
 of
 one
 out
+overalls
 p
+paintbrush
+pajamas
+palette
+party
 pen
 pen! You read it! Snap snap!
+penguin
 pig
 pig and apple!
 pig and ball!
@@ -1352,12 +1401,18 @@ pig!
 pig! You got it!
 pig! You read it! Snap snap!
 pigs
+pizza
 plant
 planted
+polish
 porridge
 puffed
 puh
+purse
+queen
+rabbit
 race
+rainbow
 ran
 red
 right
@@ -1366,16 +1421,25 @@ ry
 s
 safe
 said
+sandals
+scissors
 second
+shampoo
 she
+sheep
+shower
 sky.
+sleep
 slice of pizza
 slices of pizza
 slow
+sneakers
 snow.
 so
 some
 sparkle
+sparkles
+sprout
 sss
 star
 star and apple!
@@ -1439,14 +1503,18 @@ sun and tree!
 sun!
 sun! You got it!
 sun! You read it! Snap snap!
+sunglasses
+sunhat
 t
 tall
+tennis
 the
 third
 three
 tle
 to
 took
+tophat
 trash
 tree
 tree and apple!
@@ -1476,29 +1544,38 @@ tree and tree!
 tree!
 tree! You got it!
 tried
+trophy
+tshirt
 tuh
+turtle
+tutu
 twin
 two
 u
 uh
+umbrella
 under
 up
 v
 van
 van! You read it! Snap snap!
+violin
 vvv
 w
 walk
+wand
 was
 way
 web
 web! You read it! Snap snap!
 went
 were
+whale
 what
 wheat
 white
 will
+wind
 wins
 woke
 wolf
@@ -1508,8 +1585,5 @@ world
 wuh
 x
 you
-🎲 Play again
-👗 New outfit
-💇 New customer
-🔄 Play again
-🖐️ New nails
+yoyo
+zebra

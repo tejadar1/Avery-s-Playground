@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<path d="M30 70 q-12 20 0 40 M18 56 q-18 34 0 68 M170 40 q14 18 4 38" fill="none" stroke="#7FBFE6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g transform="rotate(-14 100 110)">
+<clipPath id="k435"><path d="M58 116 V60 C58 48 76 48 76 60 V100 V44 C76 32 94 32 94 44 V96 V38 C94 26 112 26 112 38 V96 V50 C112 38 130 38 130 50 V120 L144 102 C152 92 168 100 160 112 L130 160 C120 176 104 182 90 182 C68 182 58 164 58 146Z"/></clipPath><path d="M58 116 V60 C58 48 76 48 76 60 V100 V44 C76 32 94 32 94 44 V96 V38 C94 26 112 26 112 38 V96 V50 C112 38 130 38 130 50 V120 L144 102 C152 92 168 100 160 112 L130 160 C120 176 104 182 90 182 C68 182 58 164 58 146Z" fill="#F6C945"/><g clip-path="url(#k435)"><ellipse cx="100" cy="200" rx="80" ry="36" fill="#E0A92E"/></g><path d="M58 116 V60 C58 48 76 48 76 60 V100 V44 C76 32 94 32 94 44 V96 V38 C94 26 112 26 112 38 V96 V50 C112 38 130 38 130 50 V120 L144 102 C152 92 168 100 160 112 L130 160 C120 176 104 182 90 182 C68 182 58 164 58 146Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<path d="M76 100 V84 M94 96 V80 M112 96 V82" fill="none" stroke="#E0A92E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

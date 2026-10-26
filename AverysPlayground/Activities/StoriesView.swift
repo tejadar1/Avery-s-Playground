@@ -2,7 +2,7 @@ import SwiftUI
 
 struct Story: Hashable {
     struct Page: Hashable {
-        let picture: String
+        let pictures: [String]
         let text: String
     }
 
@@ -13,65 +13,65 @@ struct Story: Hashable {
     var language = "en-US"
 
     static let all = [
-        Story(title: "The Three Little Pigs", cover: "🐷", color: .pink, pages: [
-            Page(picture: "🐷🐷🐷", text: "Three little pigs went out to build three little houses."),
-            Page(picture: "🌾🏠", text: "The first pig built a house of straw."),
-            Page(picture: "🪵🏠", text: "The second pig built a house of sticks."),
-            Page(picture: "🧱🏠", text: "The third pig built a house of bricks."),
-            Page(picture: "🐺💨", text: "The big bad wolf huffed and puffed and blew the straw and stick houses down!"),
-            Page(picture: "🧱🐷🐷🐷", text: "But he could not blow down the brick house. The three pigs were safe!"),
+        Story(title: "The Three Little Pigs", cover: "pig", color: .pink, pages: [
+            Page(pictures: ["pig", "pig", "pig"], text: "Three little pigs went out to build three little houses."),
+            Page(pictures: ["wheat", "house"], text: "The first pig built a house of straw."),
+            Page(pictures: ["sticks", "house"], text: "The second pig built a house of sticks."),
+            Page(pictures: ["bricks", "house"], text: "The third pig built a house of bricks."),
+            Page(pictures: ["wolf", "wind"], text: "The big bad wolf huffed and puffed and blew the straw and stick houses down!"),
+            Page(pictures: ["bricks", "pig", "pig", "pig"], text: "But he could not blow down the brick house. The three pigs were safe!"),
         ]),
-        Story(title: "Goldilocks and the Three Bears", cover: "🐻", color: .orange, pages: [
-            Page(picture: "👧🌳", text: "Goldilocks went for a walk in the woods."),
-            Page(picture: "🏠", text: "She found a little house. Nobody was home."),
-            Page(picture: "🥣🥣🥣", text: "She tried three bowls of porridge. This one is just right!"),
-            Page(picture: "🪑🪑🪑", text: "She tried three chairs. This one is just right!"),
-            Page(picture: "🛏️😴", text: "She tried three beds and fell fast asleep."),
-            Page(picture: "🐻🐻🐻", text: "The three bears came home! Goldilocks woke up and ran all the way home."),
+        Story(title: "Goldilocks and the Three Bears", cover: "bear", color: .orange, pages: [
+            Page(pictures: ["girl", "tree"], text: "Goldilocks went for a walk in the woods."),
+            Page(pictures: ["house"], text: "She found a little house. Nobody was home."),
+            Page(pictures: ["bowl", "bowl", "bowl"], text: "She tried three bowls of porridge. This one is just right!"),
+            Page(pictures: ["chair", "chair", "chair"], text: "She tried three chairs. This one is just right!"),
+            Page(pictures: ["bed", "sleep"], text: "She tried three beds and fell fast asleep."),
+            Page(pictures: ["bear", "bear", "bear"], text: "The three bears came home! Goldilocks woke up and ran all the way home."),
         ]),
-        Story(title: "The Tortoise and the Hare", cover: "🐢", color: .green, pages: [
-            Page(picture: "🐇🐢", text: "Hare was fast. Tortoise was slow."),
-            Page(picture: "🏁", text: "Let's have a race, said Hare."),
-            Page(picture: "🐇💤🌳", text: "Hare ran far ahead and took a nap under a tree."),
-            Page(picture: "🐢👣", text: "Tortoise kept going, slow and steady."),
-            Page(picture: "🐢🏆", text: "Tortoise won the race! Slow and steady wins."),
+        Story(title: "The Tortoise and the Hare", cover: "turtle", color: .green, pages: [
+            Page(pictures: ["rabbit", "turtle"], text: "Hare was fast. Tortoise was slow."),
+            Page(pictures: ["flag"], text: "Let's have a race, said Hare."),
+            Page(pictures: ["rabbit", "sleep", "tree"], text: "Hare ran far ahead and took a nap under a tree."),
+            Page(pictures: ["turtle", "footprints"], text: "Tortoise kept going, slow and steady."),
+            Page(pictures: ["turtle", "trophy"], text: "Tortoise won the race! Slow and steady wins."),
         ]),
-        Story(title: "The Little Red Hen", cover: "🐔", color: .red, pages: [
-            Page(picture: "🐔🌾", text: "The little red hen found some wheat."),
-            Page(picture: "🐶🐱🦆", text: "Who will help me plant it? Not I, said the dog, the cat, and the duck."),
-            Page(picture: "🌱☀️", text: "So she planted it all by herself. The wheat grew tall."),
-            Page(picture: "🍞", text: "She baked the wheat into bread."),
-            Page(picture: "🐶🐱🦆😋", text: "Who will help me eat it? I will, said the dog, the cat, and the duck."),
-            Page(picture: "🐔🐣🍞", text: "No, said the hen. My chicks and I will eat it!"),
+        Story(title: "The Little Red Hen", cover: "hen", color: .red, pages: [
+            Page(pictures: ["hen", "wheat"], text: "The little red hen found some wheat."),
+            Page(pictures: ["dog", "cat", "duck"], text: "Who will help me plant it? Not I, said the dog, the cat, and the duck."),
+            Page(pictures: ["sprout", "sun"], text: "So she planted it all by herself. The wheat grew tall."),
+            Page(pictures: ["bread"], text: "She baked the wheat into bread."),
+            Page(pictures: ["dog", "cat", "duck", "bread"], text: "Who will help me eat it? I will, said the dog, the cat, and the duck."),
+            Page(pictures: ["hen", "chick", "bread"], text: "No, said the hen. My chicks and I will eat it!"),
         ]),
     ]
 
     /// Retold in simple Spanish. Juan Bobo and La Ciguapa come from Dominican folklore;
     /// La Cucarachita Martina is told all over the Spanish-speaking Caribbean.
     static let spanish = [
-        Story(title: "La Cucarachita Martina", cover: "🎀", color: Color(red: 0.95, green: 0.47, blue: 0.6), pages: [
-            Page(picture: "🧹🪙", text: "La Cucarachita Martina barría su casa y encontró una moneda."),
-            Page(picture: "🎀", text: "Con la moneda compró una cinta roja y se puso muy bonita."),
-            Page(picture: "🐶", text: "Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!"),
-            Page(picture: "🐱", text: "Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!"),
-            Page(picture: "🐭", text: "Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!"),
-            Page(picture: "🐭💕🎀", text: "Martina y el Ratoncito Pérez se casaron y fueron muy felices."),
+        Story(title: "La Cucarachita Martina", cover: "bow", color: Color(red: 0.95, green: 0.47, blue: 0.6), pages: [
+            Page(pictures: ["broom", "coin"], text: "La Cucarachita Martina barría su casa y encontró una moneda."),
+            Page(pictures: ["bow"], text: "Con la moneda compró una cinta roja y se puso muy bonita."),
+            Page(pictures: ["dog"], text: "Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!"),
+            Page(pictures: ["cat"], text: "Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!"),
+            Page(pictures: ["mouse"], text: "Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!"),
+            Page(pictures: ["mouse", "heart", "bow"], text: "Martina y el Ratoncito Pérez se casaron y fueron muy felices."),
         ], language: "es-MX"),
-        Story(title: "Juan Bobo y la puerca", cover: "🐷", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
-            Page(picture: "👦🐷", text: "Juan Bobo vivía con su mamá y una puerca."),
-            Page(picture: "⛪️👩", text: "Un domingo, mamá se fue a misa. Juan, cuida la puerca."),
-            Page(picture: "🐷😢", text: "La puerca quería ir a misa también."),
-            Page(picture: "👗📿🐷", text: "Juan Bobo le puso el vestido de mamá y un collar muy lindo."),
-            Page(picture: "🐷💨🟤", text: "La puerca salió corriendo y se metió en el lodo."),
-            Page(picture: "👩😂", text: "Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!"),
+        Story(title: "Juan Bobo y la puerca", cover: "pig", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
+            Page(pictures: ["boy", "pig"], text: "Juan Bobo vivía con su mamá y una puerca."),
+            Page(pictures: ["church", "mom"], text: "Un domingo, mamá se fue a misa. Juan, cuida la puerca."),
+            Page(pictures: ["pig-sad"], text: "La puerca quería ir a misa también."),
+            Page(pictures: ["gown", "necklace", "pig"], text: "Juan Bobo le puso el vestido de mamá y un collar muy lindo."),
+            Page(pictures: ["pig", "wind", "mud"], text: "La puerca salió corriendo y se metió en el lodo."),
+            Page(pictures: ["mom-laugh"], text: "Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!"),
         ], language: "es-MX"),
-        Story(title: "La Ciguapa del bosque", cover: "🌙", color: Color(red: 0.36, green: 0.62, blue: 0.5), pages: [
-            Page(picture: "⛰️🌳🌙", text: "En las montañas vive la Ciguapa, con su pelo largo y negro."),
-            Page(picture: "👣", text: "Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás."),
-            Page(picture: "👧👣", text: "Una niña vio unas huellas en el bosque y las siguió."),
-            Page(picture: "🏡", text: "¡Las huellas la llevaron de vuelta a su casa!"),
-            Page(picture: "🐦🌳🏞️", text: "La Ciguapa cuida el bosque, los pájaros y los ríos."),
-            Page(picture: "🌙⭐️😴", text: "Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!"),
+        Story(title: "La Ciguapa del bosque", cover: "moon", color: Color(red: 0.36, green: 0.62, blue: 0.5), pages: [
+            Page(pictures: ["mountain", "tree", "moon"], text: "En las montañas vive la Ciguapa, con su pelo largo y negro."),
+            Page(pictures: ["footprints"], text: "Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás."),
+            Page(pictures: ["girl", "footprints"], text: "Una niña vio unas huellas en el bosque y las siguió."),
+            Page(pictures: ["cottage"], text: "¡Las huellas la llevaron de vuelta a su casa!"),
+            Page(pictures: ["bird", "tree", "river"], text: "La Ciguapa cuida el bosque, los pájaros y los ríos."),
+            Page(pictures: ["moon", "star", "sleep"], text: "Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!"),
         ], language: "es-MX"),
     ]
 }
@@ -81,21 +81,24 @@ struct StoriesView: View {
         ScrollView {
             VStack(spacing: 20 * uiScale) {
                 ForEach(Story.all, id: \.title) { story in
-                    shelfItem(story.cover, story.title, story.color, title: story.cover) {
+                    shelfItem(story.cover, story.title, story.color, title: "") {
                         StoryReader(story: story)
                     }
                 }
-                shelfItem("🔤", "Sound it out: cat, dog, pig", .teal, title: "Sound it out") {
+                shelfItem("cat", "Sound it out: cat, dog, pig", .teal, title: "Sound it out") {
                     ReadingView()
                 }
 
-                Text("Cuentos en español 🇩🇴")
-                    .font(.kid(28))
-                    .foregroundStyle(Color.outline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(spacing: 10 * uiScale) {
+                    Text("Cuentos en español")
+                    Picture("flag-dr", size: 40 * uiScale)
+                }
+                .font(.kid(28))
+                .foregroundStyle(Color.outline)
+                .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 12 * uiScale)
                 ForEach(Story.spanish, id: \.title) { story in
-                    shelfItem(story.cover, story.title, story.color, title: story.cover, language: story.language) {
+                    shelfItem(story.cover, story.title, story.color, title: "", language: story.language) {
                         StoryReader(story: story)
                     }
                 }
@@ -114,7 +117,7 @@ struct StoriesView: View {
                 .navigationTitle(title)
         } label: {
             HStack(spacing: 16 * uiScale) {
-                Text(cover).font(.system(size: 60 * uiScale))
+                Picture(cover, size: 70 * uiScale)
                 Text(name)
                     .font(.kid(26))
                     .foregroundStyle(.white)
@@ -146,9 +149,12 @@ private struct StoryReader: View {
     var body: some View {
         VStack(spacing: 24 * uiScale) {
             Button { Speaker.shared.say(page.text, language: story.language) } label: {
-                Text(page.picture)
-                    .font(.system(size: 90 * uiScale))
-                    .frame(maxWidth: .infinity, minHeight: 200 * uiScale)
+                HStack(spacing: 8 * uiScale) {
+                    ForEach(Array(page.pictures.enumerated()), id: \.offset) { _, name in
+                        Picture(name, size: min(150, 320 / CGFloat(page.pictures.count)) * uiScale)
+                    }
+                }
+                .frame(maxWidth: .infinity, minHeight: 200 * uiScale)
                     .cartoonCard(story.color.opacity(0.3))
             }
             .buttonStyle(SquishyButtonStyle())
@@ -180,7 +186,7 @@ private struct StoryReader: View {
             .id(pageIndex)
 
             if pageIndex == 0 {
-                Text("👆 Slide your finger under the words")
+                Text("Slide your finger under the words")
                     .font(.kid(18))
                     .foregroundStyle(.secondary)
             }
@@ -188,19 +194,19 @@ private struct StoryReader: View {
             Spacer(minLength: 0)
 
             HStack {
-                pageButton("◀️", hidden: pageIndex == 0) { turn(by: -1) }
+                pageButton("chevron.left", hidden: pageIndex == 0) { turn(by: -1) }
                 Spacer()
                 Text("\(pageIndex + 1) / \(story.pages.count)")
                     .font(.kid(22))
                     .foregroundStyle(Color.outline)
                 Spacer()
                 if isLastPage {
-                    pageButton("🏠", hidden: false) {
+                    pageButton("house.fill", hidden: false) {
                         Speaker.shared.say(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!", language: story.language)
                         dismiss()
                     }
                 } else {
-                    pageButton("▶️", hidden: false) { turn(by: 1) }
+                    pageButton("chevron.right", hidden: false) { turn(by: 1) }
                 }
             }
         }
@@ -209,10 +215,11 @@ private struct StoryReader: View {
         .onAppear { Speaker.shared.say(story.title, language: story.language) }
     }
 
-    private func pageButton(_ emoji: String, hidden: Bool, action: @escaping () -> Void) -> some View {
+    private func pageButton(_ symbol: String, hidden: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Text(emoji)
-                .font(.system(size: 36 * uiScale))
+            Image(systemName: symbol)
+                .font(.system(size: 30 * uiScale, weight: .heavy))
+                .foregroundStyle(Color.outline)
                 .frame(width: 76 * uiScale, height: 64 * uiScale)
                 .cartoonCard(.white, cornerRadius: 22 * uiScale)
         }

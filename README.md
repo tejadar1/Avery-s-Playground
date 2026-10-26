@@ -93,14 +93,14 @@ AverysPlayground/
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
 AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (manual builds with screenshots ticked)
-Art/            SVG sources for Coco, Mochi, the game icons (Art/icons), and the app icon
+Art/            SVG sources for Coco, Mochi, the game icons (Art/icons), the pictures in the games (Art/pictures), and the app icon
 project.yml     XcodeGen project definition
 ```
 
 ### Art
 
 The art is soft cartoon color with a thin dark-brown outline (`Color.outline` in code), a darker second tone for shading, and small dot eyes.
-Coco and Mochi are SVGs in `Art/`. After editing one, re-render the PNGs into the asset catalog:
+Coco and Mochi are SVGs in `Art/`. The pictures in the games (Bingo tiles, ABC, stories and so on) are in `Art/pictures`, and the code shows one with `Picture("cat", size:)`; the app uses no emoji. After editing an SVG, re-render the PNGs into the asset catalog:
 
 ```sh
 node Art/render.js   # needs Playwright with Chromium

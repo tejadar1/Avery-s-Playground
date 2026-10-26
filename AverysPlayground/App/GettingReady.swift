@@ -5,7 +5,7 @@ import SwiftUI
 struct GettingReady: View {
     let done: () -> Void
 
-    private static let steps = ["🪥", "🧼", "🎀"]
+    private static let steps = ["toothbrush", "soap", "bow"]
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var step = 0
@@ -26,8 +26,7 @@ struct GettingReady: View {
                 .overlay(alignment: .topTrailing) {
                     HStack(spacing: 4) {
                         ForEach(Self.steps.prefix(step), id: \.self) { item in
-                            Text(item)
-                                .font(.system(size: 40))
+                            Picture(item, size: 40)
                                 .transition(reduceMotion ? .opacity : .scale.combined(with: .opacity))
                         }
                     }

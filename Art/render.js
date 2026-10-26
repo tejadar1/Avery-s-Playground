@@ -18,6 +18,11 @@ const images = {
 for (const file of fs.readdirSync(path.join(__dirname, 'icons'))) {
   images[`Icon-${path.basename(file, '.svg')}`] = [`icons/${file}`, 600];
 }
+// The pictures in the games (Bingo tiles, ABC, stories...) are named Picture-<file name>.
+for (const file of fs.readdirSync(path.join(__dirname, 'pictures'))) {
+  images[`Picture-${path.basename(file, '.svg')}`] = [`pictures/${file}`, 400];
+}
+images['Picture-crocodile'] = ['coco.svg', 400];
 const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');text{font-family:Nunito;font-weight:900}";
 
 (async () => {

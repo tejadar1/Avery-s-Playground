@@ -86,12 +86,12 @@ struct HairSalonView: View {
     private enum Tray: CaseIterable {
         case wash, style, color, bow
 
-        var emoji: String {
+        var picture: String {
             switch self {
-            case .wash: "🧴"
-            case .style: "💇"
-            case .color: "🎨"
-            case .bow: "🎀"
+            case .wash: "shampoo"
+            case .style: "comb"
+            case .color: "palette"
+            case .bow: "bow"
             }
         }
 
@@ -119,7 +119,7 @@ struct HairSalonView: View {
         Color(red: 0.86, green: 0.63, blue: 0.46),
         Color(red: 0.6, green: 0.4, blue: 0.27),
     ]
-    private static let bows = ["🎀", "👑", "🌸", "⭐️", "🦋", "💎"]
+    private static let bows = ["bow", "crown", "flower", "star", "butterfly", "gem"]
 
     @State private var hair = Hairdo()
     @State private var skin = HairSalonView.skins[1]
@@ -137,7 +137,7 @@ struct HairSalonView: View {
             head
             if isShowingOff {
                 Button(action: newCustomer) {
-                    Text("💇 New customer")
+                    Text("New customer")
                         .font(.kid(30))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 32 * uiScale)
@@ -190,8 +190,7 @@ struct HairSalonView: View {
             HStack(spacing: 14 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button { pick(item) } label: {
-                        Text(item.emoji)
-                            .font(.system(size: 30 * uiScale))
+                        Picture(item.picture, size: 38 * uiScale)
                             .frame(width: 60 * uiScale, height: 54 * uiScale)
                             .cartoonCard(item == tray ? .pink : .white, cornerRadius: 20 * uiScale)
                     }
@@ -259,8 +258,7 @@ struct HairSalonView: View {
                                 hair.accessory = bow
                                 say(Self.cheers.randomElement()!)
                             } label: {
-                                Text(bow)
-                                    .font(.system(size: 40 * uiScale))
+                                Picture(bow, size: 46 * uiScale)
                                     .frame(width: 64 * uiScale, height: 64 * uiScale)
                                     .cartoonCard(.white, cornerRadius: 32 * uiScale)
                             }
@@ -361,21 +359,16 @@ private struct ToolPicture: View {
     let size: CGFloat
 
     var body: some View {
-        switch tool {
-        case .dryer:
-            Image("Icon-hair").resizable().scaledToFit().frame(width: size, height: size)
-        default:
-            Text(emoji).font(.system(size: size * 0.8))
-        }
+        Picture(picture, size: size)
     }
 
-    private var emoji: String {
+    private var picture: String {
         switch tool {
-        case .shampoo: "🧴"
-        case .rinse: "🚿"
-        case .dryer: ""
-        case .comb: "🪮"
-        case .scissors: "✂️"
+        case .shampoo: "shampoo"
+        case .rinse: "shower"
+        case .dryer: "hairdryer"
+        case .comb: "comb"
+        case .scissors: "scissors"
         }
     }
 }
@@ -516,7 +509,7 @@ private enum HairArt {
         }
 
         if let accessory = hair.accessory {
-            context.draw(Text(accessory).font(.system(size: 0.14 * s)), at: pt(0.68, 0.22))
+            context.draw(Image("Picture-\(accessory)"), in: CGRect(x: 0.6 * s, y: 0.14 * s, width: 0.16 * s, height: 0.16 * s))
         }
     }
 }

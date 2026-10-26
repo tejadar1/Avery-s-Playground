@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<path d="M14 84 H186" fill="none" stroke="#4A2C2A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<clipPath id="k465"><path d="M20 84 H90 C92 120 80 140 56 140 C30 140 20 120 20 84Z"/></clipPath><path d="M20 84 H90 C92 120 80 140 56 140 C30 140 20 120 20 84Z" fill="#4B587C"/><g clip-path="url(#k465)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#36405E"/><ellipse cx="42" cy="102" rx="10" ry="6" fill="#fff" opacity=".45"/></g><path d="M20 84 H90 C92 120 80 140 56 140 C30 140 20 120 20 84Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<clipPath id="k466"><path d="M110 84 H180 C180 120 170 140 144 140 C120 140 108 120 110 84Z"/></clipPath><path d="M110 84 H180 C180 120 170 140 144 140 C120 140 108 120 110 84Z" fill="#4B587C"/><g clip-path="url(#k466)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#36405E"/><ellipse cx="132" cy="102" rx="10" ry="6" fill="#fff" opacity=".45"/></g><path d="M110 84 H180 C180 120 170 140 144 140 C120 140 108 120 110 84Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<path d="M90 92 Q100 82 110 92" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

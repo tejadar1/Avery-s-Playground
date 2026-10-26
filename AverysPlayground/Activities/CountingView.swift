@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CountingView: View {
-    private static let things = ["🍎", "🐞", "⭐️", "🎈", "🐟", "🍓", "🦋", "🚗", "🌸", "🍪"]
+    private static let things = ["apple", "ladybug", "star", "balloon", "fish", "strawberry", "butterfly", "car", "flower", "cookie"]
 
     @State private var number = 3
     /// Positions the child has tapped, in the order they tapped them.
@@ -12,7 +12,7 @@ struct CountingView: View {
 
     var body: some View {
         VStack(spacing: 16 * uiScale) {
-            Text(isDone ? "🎉 \(number)! 🎉" : "Tap to count!")
+            Text(isDone ? "\(number)!" : "Tap to count!")
                 .font(.kid(36))
                 .foregroundStyle(isDone ? .green : .orange)
                 .animation(.spring, value: isDone)
@@ -22,8 +22,7 @@ struct CountingView: View {
                     let order = counted.firstIndex(of: index)
                     Button { count(index) } label: {
                         ZStack(alignment: .topTrailing) {
-                            Text(thing)
-                                .font(.system(size: 60 * uiScale))
+                            Picture(thing, size: 64 * uiScale)
                                 .frame(width: 90 * uiScale, height: 90 * uiScale)
                                 .background(
                                     (order == nil ? Color.white : Color.orange.opacity(0.3)),

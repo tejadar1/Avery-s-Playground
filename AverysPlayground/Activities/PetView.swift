@@ -43,7 +43,7 @@ struct PetNeeds: Codable, Equatable {
 struct PetView: View {
     private struct Floater: Identifiable {
         let id = UUID()
-        let emoji: String
+        let picture: String
         let point: CGPoint
     }
 
@@ -67,19 +67,19 @@ struct PetView: View {
             CocoSays(text: cheer, hops: cheerCount)
 
             HStack(spacing: 14 * uiScale) {
-                meter("🍖", needs.food, .orange)
-                meter("❤️", needs.love, .pink)
-                meter("⚡️", needs.energy, .yellow)
-                meter("🛁", needs.clean, .cyan)
+                meter("bone", needs.food, .orange)
+                meter("heart", needs.love, .pink)
+                meter("lightning", needs.energy, .yellow)
+                meter("bathtub", needs.clean, .cyan)
             }
 
             room
 
             HStack(spacing: 14 * uiScale) {
-                action("🍖", "Feed", feed)
-                action("🎾", "Play", play)
-                action("🛁", "Bath", bath, isOn: isBathing)
-                action("🌙", "Sleep", sleep, isOn: isSleeping)
+                action("bone", "Feed", feed)
+                action("tennis", "Play", play)
+                action("bathtub", "Bath", bath, isOn: isBathing)
+                action("moon", "Sleep", sleep, isOn: isSleeping)
             }
             .padding(.bottom, 16 * uiScale)
         }
@@ -117,24 +117,21 @@ struct PetView: View {
                     .accessibilityIdentifier("Puppy")
 
                 if showBowl {
-                    Text("🥣")
-                        .font(.system(size: 70 * uiScale))
+                    Picture("bowl", size: 70 * uiScale)
                         .position(x: geo.size.width * 0.5, y: geo.size.height * 0.9)
                         .transition(.scale)
                 }
                 if showBall {
-                    Text("🎾")
-                        .font(.system(size: 56 * uiScale))
+                    Picture("tennis", size: 56 * uiScale)
                         .position(x: geo.size.width * (ballAcross ? 0.88 : 0.12), y: geo.size.height * 0.8)
                 }
                 ForEach(floaters) { floater in
-                    FloatUp(emoji: floater.emoji).position(floater.point)
+                    FloatUp(picture: floater.picture).position(floater.point)
                 }
                 if isSleeping {
                     Color(red: 0.1, green: 0.1, blue: 0.3).opacity(0.45)
                         .allowsHitTesting(false)
-                    Text("💤")
-                        .font(.system(size: 70 * uiScale))
+                    Picture("sleep", size: 70 * uiScale)
                         .phaseAnimator([CGFloat(1), 1.3]) { content, scale in
                             content.scaleEffect(reduceMotion ? 1 : scale)
                         } animation: { _ in .easeInOut(duration: 0.8) }
@@ -170,9 +167,9 @@ struct PetView: View {
         }
     }
 
-    private func meter(_ emoji: String, _ value: Double, _ color: Color) -> some View {
+    private func meter(_ picture: String, _ value: Double, _ color: Color) -> some View {
         HStack(spacing: 4 * uiScale) {
-            Text(emoji).font(.system(size: 24 * uiScale))
+            Picture(picture, size: 24 * uiScale)
             Capsule()
                 .fill(.white)
                 .overlay(alignment: .leading) {
@@ -186,10 +183,10 @@ struct PetView: View {
         }
     }
 
-    private func action(_ emoji: String, _ name: String, _ perform: @escaping () -> Void, isOn: Bool = false) -> some View {
+    private func action(_ picture: String, _ name: String, _ perform: @escaping () -> Void, isOn: Bool = false) -> some View {
         Button(action: perform) {
             VStack(spacing: 0) {
-                Text(emoji).font(.system(size: 40 * uiScale))
+                Picture(picture, size: 40 * uiScale)
                 Text(name)
                     .font(.kid(16))
                     .foregroundStyle(Color.outline)
@@ -222,7 +219,7 @@ struct PetView: View {
         if isBathing {
             Sounds.shared.play(.bubbles)
             needs.scrub()
-            float("🫧", at: point, every: 0.12)
+            float("bubbles", at: point, every: 0.12)
             if needs.clean >= 1 {
                 Sounds.shared.stop()
                 isBathing = false
@@ -231,15 +228,15 @@ struct PetView: View {
             }
         } else {
             needs.pet()
-            float("❤️", at: point, every: 0.2)
+            float("heart", at: point, every: 0.2)
             if firstTouch { say(["Woof woof!", "Mochi loves you!", "Hee hee, she likes belly rubs!"].randomElement()!) }
         }
     }
 
-    private func float(_ emoji: String, at point: CGPoint, every seconds: TimeInterval) {
+    private func float(_ picture: String, at point: CGPoint, every seconds: TimeInterval) {
         guard Date.now.timeIntervalSince(lastFloat) > seconds else { return }
         lastFloat = .now
-        let floater = Floater(emoji: emoji, point: point)
+        let floater = Floater(picture: picture, point: point)
         floaters.append(floater)
         Task {
             try? await Task.sleep(for: .seconds(1.1))
@@ -310,14 +307,13 @@ struct PetView: View {
     }
 }
 
-/// An emoji that drifts up and fades away.
+/// A picture that drifts up and fades away.
 private struct FloatUp: View {
-    let emoji: String
+    let picture: String
     @State private var isUp = false
 
     var body: some View {
-        Text(emoji)
-            .font(.system(size: 40 * uiScale))
+        Picture(picture, size: 40 * uiScale)
             .offset(y: isUp ? -90 * uiScale : 0)
             .opacity(isUp ? 0 : 1)
             .allowsHitTesting(false)

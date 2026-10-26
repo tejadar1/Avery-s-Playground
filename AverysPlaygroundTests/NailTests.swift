@@ -17,9 +17,9 @@ final class NailTests: XCTestCase {
         var nail = Nail()
         nail.brush(.red, at: CGPoint(x: 0.5, y: 0.5), startsStroke: true)
         nail.apply(.design(.dots))
-        nail.apply(.sticker("⭐️"))
+        nail.apply(.sticker("star"))
         XCTAssertEqual(nail.design, .dots)
-        XCTAssertEqual(nail.sticker, "⭐️")
+        XCTAssertEqual(nail.sticker, "star")
         XCTAssertEqual(nail.strokes.count, 1, "designs and stickers keep the paint")
 
         nail.apply(.remover)

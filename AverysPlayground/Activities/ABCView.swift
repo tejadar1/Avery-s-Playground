@@ -4,7 +4,7 @@ struct ABCView: View {
     private struct Letter: Identifiable {
         let letter: String
         let word: String
-        let emoji: String
+        let picture: String
         var phrase: String? = nil
 
         var id: String { letter }
@@ -12,32 +12,32 @@ struct ABCView: View {
     }
 
     private static let letters: [Letter] = [
-        Letter(letter: "A", word: "Apple", emoji: "🍎"),
-        Letter(letter: "B", word: "Bear", emoji: "🐻"),
-        Letter(letter: "C", word: "Cat", emoji: "🐱"),
-        Letter(letter: "D", word: "Dog", emoji: "🐶"),
-        Letter(letter: "E", word: "Elephant", emoji: "🐘"),
-        Letter(letter: "F", word: "Fish", emoji: "🐟"),
-        Letter(letter: "G", word: "Grapes", emoji: "🍇"),
-        Letter(letter: "H", word: "Horse", emoji: "🐴"),
-        Letter(letter: "I", word: "Ice cream", emoji: "🍦"),
-        Letter(letter: "J", word: "Juice", emoji: "🧃"),
-        Letter(letter: "K", word: "Kite", emoji: "🪁"),
-        Letter(letter: "L", word: "Lion", emoji: "🦁"),
-        Letter(letter: "M", word: "Moon", emoji: "🌙"),
-        Letter(letter: "N", word: "Nest", emoji: "🪺"),
-        Letter(letter: "O", word: "Octopus", emoji: "🐙"),
-        Letter(letter: "P", word: "Penguin", emoji: "🐧"),
-        Letter(letter: "Q", word: "Queen", emoji: "👸"),
-        Letter(letter: "R", word: "Rainbow", emoji: "🌈"),
-        Letter(letter: "S", word: "Sun", emoji: "☀️"),
-        Letter(letter: "T", word: "Turtle", emoji: "🐢"),
-        Letter(letter: "U", word: "Umbrella", emoji: "☂️"),
-        Letter(letter: "V", word: "Violin", emoji: "🎻"),
-        Letter(letter: "W", word: "Whale", emoji: "🐳"),
-        Letter(letter: "X", word: "Fox", emoji: "🦊", phrase: "Fox ends with X!"),
-        Letter(letter: "Y", word: "Yo-yo", emoji: "🪀"),
-        Letter(letter: "Z", word: "Zebra", emoji: "🦓"),
+        Letter(letter: "A", word: "Apple", picture: "apple"),
+        Letter(letter: "B", word: "Bear", picture: "bear"),
+        Letter(letter: "C", word: "Cat", picture: "cat"),
+        Letter(letter: "D", word: "Dog", picture: "dog"),
+        Letter(letter: "E", word: "Elephant", picture: "elephant"),
+        Letter(letter: "F", word: "Fish", picture: "fish"),
+        Letter(letter: "G", word: "Grapes", picture: "grapes"),
+        Letter(letter: "H", word: "Horse", picture: "horse"),
+        Letter(letter: "I", word: "Ice cream", picture: "icecream"),
+        Letter(letter: "J", word: "Juice", picture: "juice"),
+        Letter(letter: "K", word: "Kite", picture: "kite"),
+        Letter(letter: "L", word: "Lion", picture: "lion"),
+        Letter(letter: "M", word: "Moon", picture: "moon"),
+        Letter(letter: "N", word: "Nest", picture: "nest"),
+        Letter(letter: "O", word: "Octopus", picture: "octopus"),
+        Letter(letter: "P", word: "Penguin", picture: "penguin"),
+        Letter(letter: "Q", word: "Queen", picture: "queen"),
+        Letter(letter: "R", word: "Rainbow", picture: "rainbow"),
+        Letter(letter: "S", word: "Sun", picture: "sun"),
+        Letter(letter: "T", word: "Turtle", picture: "turtle"),
+        Letter(letter: "U", word: "Umbrella", picture: "umbrella"),
+        Letter(letter: "V", word: "Violin", picture: "violin"),
+        Letter(letter: "W", word: "Whale", picture: "whale"),
+        Letter(letter: "X", word: "Fox", picture: "fox", phrase: "Fox ends with X!"),
+        Letter(letter: "Y", word: "Yo-yo", picture: "yoyo"),
+        Letter(letter: "Z", word: "Zebra", picture: "zebra"),
     ]
 
     private static let tileColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .pink]
@@ -57,8 +57,7 @@ struct ABCView: View {
                 .font(.kid(88))
                 .foregroundStyle(.red)
 
-                Text(selected.emoji)
-                    .font(.system(size: 80 * uiScale))
+                Picture(selected.picture, size: 100 * uiScale)
                     .phaseAnimator([CGFloat(1), 1.3], trigger: bounceCount) { content, scale in
                         content.scaleEffect(scale)
                     } animation: { _ in

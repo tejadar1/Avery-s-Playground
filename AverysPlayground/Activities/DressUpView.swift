@@ -17,13 +17,13 @@ struct DressUpView: View {
     private enum Tray: CaseIterable {
         case clothes, color, shoes, hat, extra
 
-        var emoji: String {
+        var picture: String {
             switch self {
-            case .clothes: "👗"
-            case .color: "🎨"
-            case .shoes: "👟"
-            case .hat: "👒"
-            case .extra: "✨"
+            case .clothes: "gown"
+            case .color: "palette"
+            case .shoes: "sneakers"
+            case .hat: "sunhat"
+            case .extra: "sparkles"
             }
         }
 
@@ -79,7 +79,7 @@ struct DressUpView: View {
 
             if isShowingOff {
                 Button(action: newDoll) {
-                    Text("👗 New outfit")
+                    Text("New outfit")
                         .font(.kid(30))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 32 * uiScale)
@@ -107,8 +107,7 @@ struct DressUpView: View {
                         tray = item
                         Speaker.shared.say(item.name)
                     } label: {
-                        Text(item.emoji)
-                            .font(.system(size: 28 * uiScale))
+                        Picture(item.picture, size: 36 * uiScale)
                             .frame(width: 56 * uiScale, height: 52 * uiScale)
                             .cartoonCard(item == tray ? Color(red: 0.9, green: 0.2, blue: 0.56) : .white, cornerRadius: 18 * uiScale)
                     }
@@ -136,7 +135,7 @@ struct DressUpView: View {
                     switch tray {
                     case .clothes:
                         ForEach(Outfit.Clothes.allCases, id: \.self) { item in
-                            choice(item.rawValue, emoji: ["👚", "👗", "💃", "🩰", "👖", "🌙"][Outfit.Clothes.allCases.firstIndex(of: item)!],
+                            choice(item.rawValue, picture: ["tshirt", "gown", "party", "tutu", "overalls", "pajamas"][Outfit.Clothes.allCases.firstIndex(of: item)!],
                                    isOn: outfit.clothes == item) { outfit.clothes = item }
                         }
                     case .color:
@@ -157,17 +156,17 @@ struct DressUpView: View {
                         }
                     case .shoes:
                         ForEach(Outfit.Shoes.allCases, id: \.self) { item in
-                            choice(item.rawValue, emoji: ["👠", "👟", "🥾", "🩰", "🩴"][Outfit.Shoes.allCases.firstIndex(of: item)!],
+                            choice(item.rawValue, picture: ["heels", "sneakers", "boots", "flats", "sandals"][Outfit.Shoes.allCases.firstIndex(of: item)!],
                                    isOn: outfit.shoes == item) { outfit.shoes = item }
                         }
                     case .hat:
                         ForEach(Outfit.Hat.allCases, id: \.self) { item in
-                            choice(item.rawValue, emoji: ["🚫", "👒", "👑", "🎀", "🧶", "🌸"][Outfit.Hat.allCases.firstIndex(of: item)!],
+                            choice(item.rawValue, picture: ["none", "sunhat", "crown", "bow", "beanie", "flowercrown"][Outfit.Hat.allCases.firstIndex(of: item)!],
                                    isOn: outfit.hat == item) { outfit.hat = item }
                         }
                     case .extra:
                         ForEach(Outfit.Extra.allCases, id: \.self) { item in
-                            choice(item.rawValue, emoji: ["🚫", "👜", "🪄", "🕶️", "📿"][Outfit.Extra.allCases.firstIndex(of: item)!],
+                            choice(item.rawValue, picture: ["none", "purse", "wand", "sunglasses", "necklace"][Outfit.Extra.allCases.firstIndex(of: item)!],
                                    isOn: outfit.extra == item) { outfit.extra = item }
                         }
                     }
@@ -180,14 +179,14 @@ struct DressUpView: View {
         .background(Color.white.opacity(0.7).ignoresSafeArea(edges: .bottom))
     }
 
-    private func choice(_ name: String, emoji: String, isOn: Bool, action: @escaping () -> Void) -> some View {
+    private func choice(_ name: String, picture: String, isOn: Bool, action: @escaping () -> Void) -> some View {
         Button {
             Haptics.tap()
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { action() }
             say(name == "No hat" || name == "Nothing" ? "Okay!" : "\(name)! \(Self.cheers.randomElement()!)")
         } label: {
             VStack(spacing: 2 * uiScale) {
-                Text(emoji).font(.system(size: 36 * uiScale))
+                Picture(picture, size: 44 * uiScale)
                 Text(name)
                     .font(.kid(13))
                     .foregroundStyle(Color.outline)
@@ -453,9 +452,9 @@ private enum DollArt {
         switch outfit.extra {
         case .none: break
         case .purse:
-            context.draw(Text("👛").font(.system(size: 0.08 * s)), at: pt(rightHand.x + 0.02, rightHand.y + 0.04))
+            context.draw(Image("Picture-purse"), in: CGRect(x: (rightHand.x - 0.03) * s, y: (rightHand.y - 0.01) * s, width: 0.1 * s, height: 0.1 * s))
         case .wand:
-            context.draw(Text("🪄").font(.system(size: 0.08 * s)), at: pt(leftHand.x - 0.02, leftHand.y - 0.03))
+            context.draw(Image("Picture-wand"), in: CGRect(x: (leftHand.x - 0.07) * s, y: (leftHand.y - 0.08) * s, width: 0.1 * s, height: 0.1 * s))
         case .sunglasses:
             for x in [0.468, 0.532] as [CGFloat] { fill(oval(x, 0.172, 0.045, 0.032), Color(red: 0.85, green: 0.25, blue: 0.55)) }
             fill(rect(0.488, 0.168, 0.024, 0.007), Color(red: 0.85, green: 0.25, blue: 0.55))

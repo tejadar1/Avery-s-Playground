@@ -46,6 +46,25 @@ struct PlayfulBackground: View {
     }
 }
 
+/// One of the drawings in Art/pictures, like "cat" or "apple". The word next to it says what it is, so VoiceOver skips it.
+struct Picture: View {
+    let name: String
+    let size: CGFloat
+
+    init(_ name: String, size: CGFloat) {
+        self.name = name
+        self.size = size
+    }
+
+    var body: some View {
+        Image("Picture-\(name)")
+            .resizable()
+            .scaledToFit()
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
+    }
+}
+
 /// A speech bubble with a little tail on the left, pointing at whoever is talking.
 struct SpeechBubble: Shape {
     var scale: CGFloat = 1  // pass uiScale; shapes can't read it themselves

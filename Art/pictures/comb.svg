@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<clipPath id="k414"><path d="M42 84 h116 a16 16 0 0 1 16 16 v8 a16 16 0 0 1 -16 16 h-116 a16 16 0 0 1 -16 -16 v-8 a16 16 0 0 1 16 -16Z"/></clipPath><path d="M42 84 h116 a16 16 0 0 1 16 16 v8 a16 16 0 0 1 -16 16 h-116 a16 16 0 0 1 -16 -16 v-8 a16 16 0 0 1 16 -16Z" fill="#F7A8C4"/><g clip-path="url(#k414)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#E883A8"/><ellipse cx="60" cy="94" rx="20" ry="5" fill="#fff" opacity=".45"/></g><path d="M42 84 h116 a16 16 0 0 1 16 16 v8 a16 16 0 0 1 -16 16 h-116 a16 16 0 0 1 -16 -16 v-8 a16 16 0 0 1 16 -16Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<path d="M40 120 V170M54 120 V170M68 120 V170M82 120 V170M96 120 V170M110 120 V170M124 120 V170M138 120 V170M152 120 V170" fill="none" stroke="#4A2C2A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M40 120 V170M54 120 V170M68 120 V170M82 120 V170M96 120 V170M110 120 V170M124 120 V170M138 120 V170M152 120 V170" fill="none" stroke="#F7A8C4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

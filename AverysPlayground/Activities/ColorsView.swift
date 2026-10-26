@@ -152,7 +152,7 @@ struct ColorsView: View {
             CocoSays(text: cheer, hops: cheerCount)
 
             HStack {
-                pageButton("◀️", by: -1)
+                pageButton("chevron.left", by: -1)
                 GeometryReader { geo in
                     let side = min(geo.size.width, geo.size.height)
                     ZStack {
@@ -174,7 +174,7 @@ struct ColorsView: View {
                 }
                 .padding(8 * uiScale)
                 .background(.white, in: RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
-                pageButton("▶️", by: 1)
+                pageButton("chevron.right", by: 1)
             }
             .padding(.horizontal)
 
@@ -201,14 +201,15 @@ struct ColorsView: View {
         .background(Scenery(.studio).ignoresSafeArea())
     }
 
-    private func pageButton(_ emoji: String, by step: Int) -> some View {
+    private func pageButton(_ symbol: String, by step: Int) -> some View {
         Button {
             Haptics.tap()
             pageIndex = (pageIndex + step + ColoringPage.all.count) % ColoringPage.all.count
             say("A \(page.name)!", hint: "What color should it be?")
         } label: {
-            Text(emoji)
-                .font(.system(size: 32 * uiScale))
+            Image(systemName: symbol)
+                .font(.system(size: 28 * uiScale, weight: .heavy))
+                .foregroundStyle(Color.outline)
                 .frame(width: 60 * uiScale, height: 60 * uiScale)
                 .cartoonCard(.white, cornerRadius: 20 * uiScale)
         }

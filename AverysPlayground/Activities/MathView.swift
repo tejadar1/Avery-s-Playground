@@ -3,18 +3,18 @@ import SwiftUI
 /// "Coco has 2 slices of pizza. Mochi brings 1 more." Sums up to 10, with three answers to pick from.
 struct AdditionProblem: Equatable {
     struct Food: Equatable {
-        let emoji: String
+        let picture: String
         let one: String
         let many: String
     }
 
     static let foods = [
-        Food(emoji: "🍕", one: "slice of pizza", many: "slices of pizza"),
-        Food(emoji: "🍎", one: "apple", many: "apples"),
-        Food(emoji: "🍪", one: "cookie", many: "cookies"),
-        Food(emoji: "🍓", one: "strawberry", many: "strawberries"),
-        Food(emoji: "🧁", one: "cupcake", many: "cupcakes"),
-        Food(emoji: "🍌", one: "banana", many: "bananas"),
+        Food(picture: "pizza", one: "slice of pizza", many: "slices of pizza"),
+        Food(picture: "apple", one: "apple", many: "apples"),
+        Food(picture: "cookie", one: "cookie", many: "cookies"),
+        Food(picture: "strawberry", one: "strawberry", many: "strawberries"),
+        Food(picture: "cupcake", one: "cupcake", many: "cupcakes"),
+        Food(picture: "banana", one: "banana", many: "bananas"),
     ]
 
     let first: Int
@@ -50,7 +50,10 @@ struct MathView: View {
         VStack(spacing: 16 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount)
 
-            Text("⭐️ \(stars)")
+            HStack(spacing: 6 * uiScale) {
+                Picture("star", size: 30 * uiScale)
+                Text("\(stars)")
+            }
                 .font(.kid(26))
                 .foregroundStyle(Color.outline)
                 .contentTransition(.numericText())
@@ -97,8 +100,7 @@ struct MathView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 62 * uiScale), spacing: 4 * uiScale)], spacing: 4 * uiScale) {
                 ForEach(start..<(start + count), id: \.self) { piece in
                     Button { tapPiece(piece) } label: {
-                        Text(problem.food.emoji)
-                            .font(.system(size: 52 * uiScale))
+                        Picture(problem.food.picture, size: 52 * uiScale)
                             .frame(width: 62 * uiScale, height: 62 * uiScale)
                             .overlay(alignment: .topTrailing) {
                                 if let order = counted.firstIndex(of: piece) {

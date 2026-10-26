@@ -2,20 +2,20 @@ import SwiftUI
 
 struct BingoTile: Hashable {
     let word: String
-    let emoji: String
+    let picture: String
 }
 
 /// Picture bingo against Coco: slide out two tiles, cover the ones on your card, and fill it first.
 struct BingoGame: Equatable {
     static let tiles = [
-        BingoTile(word: "cat", emoji: "🐱"), BingoTile(word: "dog", emoji: "🐶"), BingoTile(word: "sun", emoji: "☀️"),
-        BingoTile(word: "moon", emoji: "🌙"), BingoTile(word: "star", emoji: "⭐️"), BingoTile(word: "tree", emoji: "🌳"),
-        BingoTile(word: "fish", emoji: "🐟"), BingoTile(word: "bird", emoji: "🐦"), BingoTile(word: "apple", emoji: "🍎"),
-        BingoTile(word: "cake", emoji: "🎂"), BingoTile(word: "ball", emoji: "⚽️"), BingoTile(word: "car", emoji: "🚗"),
-        BingoTile(word: "hat", emoji: "🎩"), BingoTile(word: "bee", emoji: "🐝"), BingoTile(word: "frog", emoji: "🐸"),
-        BingoTile(word: "duck", emoji: "🦆"), BingoTile(word: "cow", emoji: "🐮"), BingoTile(word: "pig", emoji: "🐷"),
-        BingoTile(word: "boat", emoji: "⛵️"), BingoTile(word: "house", emoji: "🏠"), BingoTile(word: "flower", emoji: "🌸"),
-        BingoTile(word: "heart", emoji: "❤️"), BingoTile(word: "bus", emoji: "🚌"), BingoTile(word: "egg", emoji: "🥚"),
+        BingoTile(word: "cat", picture: "cat"), BingoTile(word: "dog", picture: "dog"), BingoTile(word: "sun", picture: "sun"),
+        BingoTile(word: "moon", picture: "moon"), BingoTile(word: "star", picture: "star"), BingoTile(word: "tree", picture: "tree"),
+        BingoTile(word: "fish", picture: "fish"), BingoTile(word: "bird", picture: "bird"), BingoTile(word: "apple", picture: "apple"),
+        BingoTile(word: "cake", picture: "cake"), BingoTile(word: "ball", picture: "ball"), BingoTile(word: "car", picture: "car"),
+        BingoTile(word: "hat", picture: "tophat"), BingoTile(word: "bee", picture: "bee"), BingoTile(word: "frog", picture: "frog"),
+        BingoTile(word: "duck", picture: "duck"), BingoTile(word: "cow", picture: "cow"), BingoTile(word: "pig", picture: "pig"),
+        BingoTile(word: "boat", picture: "boat"), BingoTile(word: "house", picture: "house"), BingoTile(word: "flower", picture: "flower"),
+        BingoTile(word: "heart", picture: "heart"), BingoTile(word: "bus", picture: "bus"), BingoTile(word: "egg", picture: "egg"),
     ]
 
     let card: [BingoTile]
@@ -94,7 +94,7 @@ struct BingoView: View {
 
             if isOver {
                 Button(action: newGame) {
-                    Text("🎲 Play again")
+                    Text("Play again")
                         .font(.kid(28))
                         .foregroundStyle(.white)
                         .padding(.horizontal, 28 * uiScale)
@@ -178,8 +178,7 @@ struct BingoView: View {
                 .foregroundStyle(Color.outline)
             LazyVGrid(columns: Array(repeating: GridItem(.fixed(30 * uiScale), spacing: 4 * uiScale), count: 3), spacing: 4 * uiScale) {
                 ForEach(game.cocoCard, id: \.self) { tile in
-                    Text(tile.emoji)
-                        .font(.system(size: 20 * uiScale))
+                    Picture(tile.picture, size: 24 * uiScale)
                         .frame(width: 30 * uiScale, height: 30 * uiScale)
                         .background(game.cocoCovered.contains(tile) ? Color(red: 0.45, green: 0.75, blue: 0.45) : Color(red: 1.0, green: 0.97, blue: 0.9),
                                     in: RoundedRectangle(cornerRadius: 6 * uiScale, style: .continuous))
@@ -195,7 +194,7 @@ struct BingoView: View {
 
     private func tileFace(_ tile: BingoTile, size: CGFloat) -> some View {
         VStack(spacing: 0) {
-            Text(tile.emoji).font(.system(size: size * 0.48))
+            Picture(tile.picture, size: size * 0.56)
             Text(tile.word)
                 .font(.kid(18))
                 .foregroundStyle(Color.outline)

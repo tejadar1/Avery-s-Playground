@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<clipPath id="k445"><path d="M30 100 a70 70 0 1 0 140 0 a70 70 0 1 0 -140 0Z"/></clipPath><path d="M30 100 a70 70 0 1 0 140 0 a70 70 0 1 0 -140 0Z" fill="#FFFFFF"/><g clip-path="url(#k445)"><ellipse cx="100" cy="210" rx="150" ry="80" fill="#E6E1EE"/></g><path d="M30 100 a70 70 0 1 0 140 0 a70 70 0 1 0 -140 0Z" fill="none" stroke="#4A2C2A" stroke-width="0" stroke-linejoin="round"/>
+<path d="M34 100 a66 66 0 1 0 132 0 a66 66 0 1 0 -132 0Z" fill="none" stroke="#968FA8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M54 54 L146 146" fill="none" stroke="#968FA8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
