@@ -199,7 +199,6 @@ struct ColorsView: View {
             }
         }
         .background(Color(red: 1.0, green: 0.95, blue: 0.85).ignoresSafeArea())
-        .onAppear { Speaker.shared.say("Let's color!") }
     }
 
     private func pageButton(_ emoji: String, by step: Int) -> some View {

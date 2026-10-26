@@ -26,9 +26,6 @@ struct HomeView: View {
                                 ActivityTile(activity: activity)
                             }
                             .buttonStyle(SquishyButtonStyle())
-                            .simultaneousGesture(TapGesture().onEnded {
-                                Speaker.shared.say(activity.title)
-                            })
                         }
                     }
                 }

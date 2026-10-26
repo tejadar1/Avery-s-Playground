@@ -231,7 +231,6 @@ struct NailSalonView: View {
             }
         }
         .background(HeartPattern().ignoresSafeArea())
-        .onAppear { Speaker.shared.say("Welcome to Coco's nail salon! I only have claws, so let's paint your nails!") }
     }
 
     private var hand: some View {

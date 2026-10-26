@@ -151,10 +151,7 @@ struct HairSalonView: View {
             }
         }
         .background(Color(red: 0.98, green: 0.92, blue: 1.0).ignoresSafeArea())
-        .onAppear {
-            newCustomer()
-            Speaker.shared.say("Welcome to Coco's hair salon! I don't have any hair, so let's do hers!")
-        }
+        .onAppear { newCustomer() }
     }
 
     private var head: some View {
