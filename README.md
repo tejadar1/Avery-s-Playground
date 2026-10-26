@@ -106,11 +106,12 @@ The Nail Salon hand is drawn in code (`Hand` in `NailSalonView.swift`) so its sk
 
 ### Coco's voice
 
-Coco's English lines are recorded with [ElevenLabs](https://elevenlabs.io) so she sounds like a cartoon character
-instead of the iPad's voice. `Voice/lines.txt` lists every line (made by `python3 Voice/lines.py > Voice/lines.txt`),
-and the **Coco's voice** workflow (Actions → Coco's voice → Run workflow, with the Voice ID the first time) records
-any new ones into `AverysPlayground/Voice/` and commits them. It needs an `ELEVENLABS_API_KEY` repository secret.
-Lines without a recording, and Spanish, use the iPad's voice.
+Coco's English lines are recorded with [Kokoro](https://github.com/hexgrad/kokoro), a free open-source voice, with the
+pitch raised for a cartoon sound, so she doesn't sound like the iPad's built-in voice. `Voice/lines.txt` lists every
+line (made by `python3 Voice/lines.py > Voice/lines.txt`) and `Voice/voice.txt` names the voice and pitch. Run
+Actions → Build → Run workflow with **voice: record** to record new lines into `AverysPlayground/Voice/` (free, on
+Linux), or **voice: samples** to hear several voices on the `voice-samples` branch. Lines without a recording, and
+Spanish, use the iPad's voice.
 
 ### Building with Claude Code
 

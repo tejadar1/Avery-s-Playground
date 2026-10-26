@@ -9,6 +9,11 @@ on:
         description: Take screenshots of every game on iPhone and iPad (adds about 10 minutes)
         type: boolean
         default: false
+      voice:
+        description: Instead of building, record Coco's voice (record) or voice samples to choose from (samples)
+        type: choice
+        options: [none, record, samples]
+        default: none
 
 # A newer run on the same branch stops the one it replaces.
 concurrency:
@@ -20,7 +25,35 @@ env:
   SHOTS: ${{ inputs.screenshots == true }}
 
 jobs:
+  # Coco's voice is made with Kokoro, a free open-source voice, on Linux (Voice/make.py). It commits the recordings
+  # to this branch; samples go to the voice-samples branch.
+  voice:
+    if: inputs.voice != 'none'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get install -y -q espeak-ng ffmpeg
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q kokoro soundfile
+      - if: inputs.voice == 'samples'
+        run: |
+          python3 Voice/make.py --samples
+          cd Voice/samples && git init -q -b voice-samples && git add .
+          git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Voice samples"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" voice-samples
+      - if: inputs.voice == 'record'
+        run: |
+          python3 Voice/make.py
+          git add Voice AverysPlayground/Voice
+          git diff --cached --quiet && exit 0
+          git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Record Coco's voice"
+          git push
+
   test:
+    if: inputs.voice == 'none'
     runs-on: macos-latest
     permissions:
       contents: write
