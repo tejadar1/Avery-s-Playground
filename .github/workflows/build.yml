@@ -58,6 +58,7 @@ jobs:
           git add Voice AverysPlayground/Voice
           git diff --cached --quiet && exit 0
           git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Record Coco's voice"
+          git pull -q --rebase origin "${{ github.ref_name }}"  # the branch may have moved on while recording
           git push
 
   test:
