@@ -12,7 +12,7 @@ struct HomeView: View {
                             .frame(height: 130 * uiScale)
                             .accessibilityLabel("Coco the crocodile")
                         VStack(alignment: .leading, spacing: 2 * uiScale) {
-                            Text("Avery's Playground")
+                            Text("Avery's World")
                                 .font(.kid(38))
                                 .foregroundStyle(Color.outline)
                             Text("Hi Avery! What should we do today?")
