@@ -150,7 +150,7 @@ struct HairSalonView: View {
                 toolTray
             }
         }
-        .background(Color(red: 0.98, green: 0.92, blue: 1.0).ignoresSafeArea())
+        .background(Scenery(.salon).ignoresSafeArea())
         .onAppear { newCustomer() }
     }
 

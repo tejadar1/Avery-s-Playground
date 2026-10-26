@@ -102,7 +102,7 @@ struct StoriesView: View {
             }
             .padding(20 * uiScale)
         }
-        .background(Color(red: 0.93, green: 0.92, blue: 1.0).ignoresSafeArea())
+        .background(Scenery(.library).ignoresSafeArea())
     }
 
     private func shelfItem<Destination: View>(
@@ -205,7 +205,7 @@ private struct StoryReader: View {
             }
         }
         .padding(20 * uiScale)
-        .background(Color(red: 1.0, green: 0.98, blue: 0.92).ignoresSafeArea())
+        .background(Scenery(.library).ignoresSafeArea())
         .onAppear { Speaker.shared.say(story.title, language: story.language) }
     }
 

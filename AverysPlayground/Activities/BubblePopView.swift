@@ -78,10 +78,7 @@ struct BubblePopView: View {
                 .padding(.top, 8 * uiScale)
                 .contentTransition(.numericText())
         }
-        .background(
-            LinearGradient(colors: [.cyan.opacity(0.3), .blue.opacity(0.5)], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-        )
+        .background(Scenery(.ocean).ignoresSafeArea())
         .onReceive(spawner) { now in
             bubbles.removeAll { $0.progress(at: now) > 1 }
             if bubbles.count < 12 {
@@ -111,21 +108,31 @@ struct BubblePopView: View {
     }
 }
 
+/// A see-through soap bubble: a faint tint, a rainbow shimmer around the rim and a shiny highlight.
 private struct BubbleView: View {
     let color: Color
 
     var body: some View {
-        Circle()
-            .fill(
-                RadialGradient(
-                    colors: [.white.opacity(0.9), color.opacity(0.5), color.opacity(0.8)],
-                    center: UnitPoint(x: 0.3, y: 0.3),
-                    startRadius: 2,
-                    endRadius: 60
+        GeometryReader { geo in
+            let d = geo.size.width
+            Circle()
+                .fill(RadialGradient(colors: [color.opacity(0.05), color.opacity(0.2), color.opacity(0.5)], center: .center, startRadius: 0, endRadius: d / 2))
+                .overlay(
+                    Circle().strokeBorder(
+                        AngularGradient(colors: [.pink, .yellow, .cyan, .purple, .pink].map { $0.opacity(0.75) }, center: .center),
+                        lineWidth: max(2, d * 0.04)
+                    )
                 )
-            )
-            .overlay(Circle().strokeBorder(.white.opacity(0.8), lineWidth: 2 * uiScale))
-            .contentShape(Circle())
+                .overlay(
+                    Ellipse()
+                        .fill(.white.opacity(0.85))
+                        .frame(width: d * 0.28, height: d * 0.14)
+                        .rotationEffect(.degrees(-35))
+                        .offset(x: -d * 0.18, y: -d * 0.22)
+                )
+                .overlay(Circle().fill(.white.opacity(0.8)).frame(width: d * 0.07).offset(x: -d * 0.32, y: -d * 0.05))
+        }
+        .contentShape(Circle())
     }
 }
 

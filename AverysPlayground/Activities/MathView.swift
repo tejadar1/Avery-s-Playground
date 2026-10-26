@@ -87,7 +87,7 @@ struct MathView: View {
             }
             .padding(.bottom, 32 * uiScale)
         }
-        .background(Color(red: 1.0, green: 0.96, blue: 0.86).ignoresSafeArea())
+        .background(Scenery(.picnic).ignoresSafeArea())
         .onAppear { say(problem.question) }
     }
 

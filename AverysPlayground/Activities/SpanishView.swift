@@ -174,7 +174,7 @@ struct SpanishView: View {
                 .padding()
             }
         }
-        .background(Color(red: 0.88, green: 0.98, blue: 0.94).ignoresSafeArea())
+        .background(Scenery(.fiesta).ignoresSafeArea())
     }
 
     private func pick(_ item: SpanishLesson) {

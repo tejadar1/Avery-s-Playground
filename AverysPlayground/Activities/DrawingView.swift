@@ -43,7 +43,7 @@ struct DrawingView: View {
             }
         }
         .padding(16 * uiScale)
-        .background(Color(red: 0.98, green: 0.88, blue: 0.45).ignoresSafeArea())
+        .background(Scenery(.studio).ignoresSafeArea())
     }
 
     private var page: some View {

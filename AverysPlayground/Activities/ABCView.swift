@@ -93,7 +93,7 @@ struct ABCView: View {
             }
         }
         .padding()
-        .background(Color.yellow.opacity(0.25).ignoresSafeArea())
+        .background(Scenery(.classroom).ignoresSafeArea())
     }
 
     private func choose(_ item: Letter) {

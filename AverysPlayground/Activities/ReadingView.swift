@@ -98,7 +98,7 @@ struct ReadingView: View {
             .padding(.bottom, 40 * uiScale)
         }
         .padding(.horizontal)
-        .background(Color(red: 0.88, green: 0.96, blue: 1.0).ignoresSafeArea())
+        .background(Scenery(.library).ignoresSafeArea())
         .onAppear { next(intro: "Let's read! Tap each letter to hear its sound.") }
     }
 

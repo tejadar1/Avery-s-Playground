@@ -83,7 +83,7 @@ struct PetView: View {
             }
             .padding(.bottom, 16 * uiScale)
         }
-        .background(Color(red: 1.0, green: 0.94, blue: 0.86).ignoresSafeArea())
+        .background(Scenery(.livingRoom).ignoresSafeArea())
         .onAppear {
             needs = (try? JSONDecoder().decode(PetNeeds.self, from: saved)) ?? PetNeeds()
             needs.catchUp(to: .now)

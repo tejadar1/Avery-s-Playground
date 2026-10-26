@@ -140,7 +140,7 @@ struct PianoView: View {
             Spacer(minLength: 0)
             keyboard
         }
-        .background(Color(red: 0.93, green: 0.95, blue: 1.0).ignoresSafeArea())
+        .background(Scenery(.stage).ignoresSafeArea())
     }
 
     private var keyboard: some View {

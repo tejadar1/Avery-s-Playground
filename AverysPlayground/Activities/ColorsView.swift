@@ -198,7 +198,7 @@ struct ColorsView: View {
                 .padding(.vertical, 16 * uiScale)
             }
         }
-        .background(Color(red: 1.0, green: 0.95, blue: 0.85).ignoresSafeArea())
+        .background(Scenery(.studio).ignoresSafeArea())
     }
 
     private func pageButton(_ emoji: String, by step: Int) -> some View {

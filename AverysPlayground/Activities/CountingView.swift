@@ -64,7 +64,7 @@ struct CountingView: View {
             }
         }
         .padding(.top)
-        .background(Color.orange.opacity(0.15).ignoresSafeArea())
+        .background(Scenery(.outdoors).ignoresSafeArea())
     }
 
     private func count(_ index: Int) {

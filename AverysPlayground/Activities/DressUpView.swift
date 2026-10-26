@@ -92,10 +92,7 @@ struct DressUpView: View {
                 trayView
             }
         }
-        .background(
-            LinearGradient(colors: [Color(red: 1.0, green: 0.86, blue: 0.93), Color(red: 0.98, green: 0.7, blue: 0.85)], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
-        )
+        .background(Scenery(.salon).ignoresSafeArea())
         .onAppear {
             newDoll()
         }
