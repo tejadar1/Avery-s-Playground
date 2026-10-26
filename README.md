@@ -54,10 +54,10 @@ Then in Xcode:
 
 ## TestFlight (no Mac needed)
 
-GitHub builds the app on every push (`.github/workflows/build.yml`) and runs the unit tests on an iPhone
-simulator. Mac build minutes are costly on a private repo, so the TestFlight upload only runs for pushes to
-main, or when started by hand (Actions → Build → **Run workflow**). Screenshots of every game on iPhone and iPad
-take about 10 more minutes, so they only run when you tick **Take screenshots** on a manual run. The upload
+GitHub builds the app on a Mac (`.github/workflows/build.yml`), which is costly on a private repo, so it only
+builds when started by hand: Actions → Build → **Run workflow**. Each run tests the app on an iPhone simulator and
+uploads it to TestFlight. Screenshots of every game on iPhone and iPad take about 10 more minutes, so they only
+run when you tick **Take screenshots**. The upload
 needs these one-time steps, all doable in Safari on an iPhone.
 
 1. Join the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
@@ -77,7 +77,7 @@ needs these one-time steps, all doable in Safari on an iPhone.
    build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
    install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
 
-After that, every change merged to main uploads a new build, and TestFlight offers the update.
+After that, each run uploads a new build, and TestFlight offers the update.
 
 ## Project layout
 

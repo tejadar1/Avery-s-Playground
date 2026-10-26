@@ -1,7 +1,8 @@
 name: Build
 
+# Mac build minutes are costly, so builds only run when started by hand (Actions → Build → Run workflow),
+# once per batch of changes. Pushes and merges don't build.
 on:
-  push:
   workflow_dispatch:
     inputs:
       screenshots:
@@ -9,14 +10,12 @@ on:
         type: boolean
         default: false
 
-# A newer push to the same branch stops the build it replaces.
+# A newer run on the same branch stops the one it replaces.
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
-# Mac build minutes are costly, so every build only runs the fast unit tests on one iPhone.
-# Screenshots of every game (iPhone and iPad) run only when ticked on a manual run.
-# The TestFlight upload runs on main, or when started by hand.
+# Every run tests on one iPhone, then uploads to TestFlight. Screenshots of every game (iPhone and iPad) run only when ticked.
 env:
   SHOTS: ${{ inputs.screenshots == true }}
 
@@ -53,7 +52,6 @@ jobs:
 
   testflight:
     needs: test
-    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     # Only the .p8 key is a secret; the IDs just say which account and key to use.
     env:
