@@ -53,7 +53,8 @@ struct SongLesson: Equatable {
 @MainActor
 final class PianoSound {
     static let shared = PianoSound()
-    static let frequencies: [Double] = [261.63, 293.66, 329.63, 349.23, 392.0, 440.0, 493.88, 523.25]
+    /// The white keys C D E F G A B C, then the black keys C♯ D♯ F♯ G♯ A♯ (keys 8...12).
+    static let frequencies: [Double] = [261.63, 293.66, 329.63, 349.23, 392.0, 440.0, 493.88, 523.25, 277.18, 311.13, 369.99, 415.3, 466.16]
 
     private let engine = AVAudioEngine()
     private var players: [AVAudioPlayerNode] = []
@@ -97,6 +98,9 @@ final class PianoSound {
 
 struct PianoView: View {
     private static let keyNames = ["C", "D", "E", "F", "G", "A", "B", "High C"]
+    /// Each black key sits just after one of these white keys, like on a real piano: C♯ D♯, then F♯ G♯ A♯.
+    static let blackKeysAfter = [0, 1, 3, 4, 5]
+    private static let blackKeyNames = ["C sharp", "D sharp", "F sharp", "G sharp", "A sharp"]
     private static let keyColors: [Color] = [
         Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3),
         Color(red: 0.97, green: 0.83, blue: 0.38), Color(red: 0.45, green: 0.72, blue: 0.42),
@@ -146,9 +150,17 @@ struct PianoView: View {
     private var keyboard: some View {
         GeometryReader { geo in
             let keyWidth = geo.size.width / CGFloat(Self.keyNames.count)
-            HStack(spacing: 0) {
-                ForEach(Self.keyNames.indices, id: \.self) { key in
-                    keyView(key, width: keyWidth)
+            let blackHeight = geo.size.height * 0.58
+            ZStack(alignment: .topLeading) {
+                HStack(spacing: 0) {
+                    ForEach(Self.keyNames.indices, id: \.self) { key in
+                        keyView(key, width: keyWidth, below: blackHeight)
+                    }
+                }
+                ForEach(Self.blackKeysAfter.indices, id: \.self) { index in
+                    blackKey(8 + index, name: Self.blackKeyNames[index])
+                        .frame(width: keyWidth * 0.58, height: blackHeight)
+                        .position(x: CGFloat(Self.blackKeysAfter[index] + 1) * keyWidth, y: blackHeight / 2)
                 }
             }
             .contentShape(Rectangle())
@@ -156,44 +168,94 @@ struct PianoView: View {
                 // One gesture for the whole keyboard, so sliding a finger across plays each key in turn.
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        let key = min(Self.keyNames.count - 1, max(0, Int(value.location.x / keyWidth)))
+                        let key = Self.key(at: value.location, keyWidth: keyWidth, blackHeight: blackHeight)
                         if key != pressed { press(key) }
                     }
                     .onEnded { _ in pressed = nil }
             )
         }
         .frame(height: 260 * uiScale)
+        .overlay(alignment: .top) {
+            // The red felt the keys tuck under.
+            Rectangle().fill(Color(red: 0.62, green: 0.12, blue: 0.2)).frame(height: 5 * uiScale)
+        }
+        .padding(.horizontal, 12 * uiScale)
+        .padding(.bottom, 12 * uiScale)
+        .padding(.top, 34 * uiScale)
+        .background(alignment: .top) {
+            RoundedRectangle(cornerRadius: 26 * uiScale, style: .continuous)
+                .fill(LinearGradient(colors: [Color(red: 0.86, green: 0.3, blue: 0.38), Color(red: 0.66, green: 0.17, blue: 0.26)], startPoint: .top, endPoint: .bottom))
+                .overlay(alignment: .top) {
+                    Text("Coco")
+                        .font(.kid(16))
+                        .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.45))
+                        .padding(.top, 7 * uiScale)
+                }
+                .overlay(RoundedRectangle(cornerRadius: 26 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                .shadow(color: Color.outline.opacity(0.25), radius: 8 * uiScale, y: 5 * uiScale)
+        }
         .padding(.horizontal)
         .padding(.bottom, 16 * uiScale)
     }
 
-    private func keyView(_ key: Int, width: CGFloat) -> some View {
+    /// The key under a finger: a black key if it's in the top part over one, otherwise the white key below.
+    static func key(at point: CGPoint, keyWidth: CGFloat, blackHeight: CGFloat) -> Int {
+        if point.y < blackHeight,
+           let index = blackKeysAfter.firstIndex(where: { abs(point.x - CGFloat($0 + 1) * keyWidth) < keyWidth * 0.29 }) {
+            return 8 + index
+        }
+        return min(keyNames.count - 1, max(0, Int(point.x / keyWidth)))
+    }
+
+    private func keyView(_ key: Int, width: CGFloat, below blackHeight: CGFloat) -> some View {
         let isNext = lesson?.nextKey == key
-        return RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
-            .fill(pressed == key ? Self.keyColors[key].opacity(0.35) : .white)
+        let shape = UnevenRoundedRectangle(bottomLeadingRadius: 12 * uiScale, bottomTrailingRadius: 12 * uiScale)
+        return shape
+            .fill(pressed == key
+                  ? AnyShapeStyle(Self.keyColors[key].opacity(0.35))
+                  : AnyShapeStyle(LinearGradient(colors: [.white, Color(red: 0.93, green: 0.92, blue: 0.95)], startPoint: .top, endPoint: .bottom)))
             .overlay(alignment: .bottom) {
+                // The note's color and letter, which the songs follow.
                 Text(Self.keyNames[key] == "High C" ? "C" : Self.keyNames[key])
-                    .font(.kid(26))
+                    .font(.kid(22))
                     .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12 * uiScale)
-                    .background(Self.keyColors[key], in: UnevenRoundedRectangle(bottomLeadingRadius: 18 * uiScale, bottomTrailingRadius: 18 * uiScale))
+                    .frame(width: width * 0.6, height: width * 0.6)
+                    .background(Self.keyColors[key], in: Circle())
+                    .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
+                    .padding(.bottom, 12 * uiScale)
             }
-            .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+            .overlay(shape.stroke(Color.outline, lineWidth: 2.5 * uiScale))
             .overlay(alignment: .top) {
                 if isNext {
+                    // Below the black keys, so it never hides under one.
                     Picture("star", size: 40 * uiScale)
                         .phaseAnimator([CGFloat(0), 14]) { content, drop in
                             content.offset(y: drop)
                         } animation: { _ in .easeInOut(duration: 0.4) }
-                        .padding(.top, 12 * uiScale)
+                        .padding(.top, blackHeight + 6 * uiScale)
                 }
             }
-            .scaleEffect(pressed == key ? 0.96 : 1, anchor: .top)
-            .padding(.horizontal, 3 * uiScale)
+            .scaleEffect(pressed == key ? 0.98 : 1, anchor: .top)
             .frame(width: width)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(Self.keyNames[key])
+            .accessibilityAddTraits(.isButton)
+    }
+
+    private func blackKey(_ key: Int, name: String) -> some View {
+        let shape = UnevenRoundedRectangle(bottomLeadingRadius: 8 * uiScale, bottomTrailingRadius: 8 * uiScale)
+        return shape
+            .fill(LinearGradient(colors: pressed == key ? [Color(white: 0.45), Color(white: 0.3)] : [Color(white: 0.28), Color(red: 0.12, green: 0.1, blue: 0.12)],
+                                 startPoint: .top, endPoint: .bottom))
+            .overlay(alignment: .top) {
+                // A little shine, like a glossy key.
+                Capsule().fill(.white.opacity(0.25)).frame(width: 5 * uiScale).padding(.vertical, 10 * uiScale).frame(maxHeight: .infinity, alignment: .top)
+                    .offset(x: -6 * uiScale)
+            }
+            .overlay(shape.stroke(Color.outline, lineWidth: 2.5 * uiScale))
+            .offset(y: pressed == key ? 2 * uiScale : 0)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(name)
             .accessibilityAddTraits(.isButton)
     }
 
