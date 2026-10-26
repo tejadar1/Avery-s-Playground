@@ -102,6 +102,8 @@ struct TicTacToeView: View {
             Text(name)
                 .font(.kid(22))
                 .foregroundStyle(Color.outline)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
             Text("\(wins)")
                 .font(.kid(22))
                 .foregroundStyle(.white)
