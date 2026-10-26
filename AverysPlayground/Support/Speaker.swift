@@ -1,12 +1,15 @@
 import AVFoundation
+import CryptoKit
 
-/// Reads words aloud with the best voice on the device. Works offline.
+/// Reads words aloud: Coco's recorded voice when the line has a recording (Voice/), otherwise the best voice
+/// on the device. Works offline.
 @MainActor
 final class Speaker {
     static let shared = Speaker()
 
     private let synthesizer = AVSpeechSynthesizer()
     private var voices: [String: AVSpeechSynthesisVoice] = [:]
+    private var player: AVAudioPlayer?
 
     private init() {
         // Play even when the ring/silent switch is on, and duck any music.
@@ -14,6 +17,12 @@ final class Speaker {
     }
 
     func say(_ text: String, language: String = "en-US") {
+        if language == "en-US", let url = Self.recording(for: text) {
+            synthesizer.stopSpeaking(at: .immediate)
+            player = try? AVAudioPlayer(contentsOf: url)
+            player?.play()
+            return
+        }
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = voice(language)
         speak(utterance)
@@ -44,6 +53,7 @@ final class Speaker {
     }
 
     private func speak(_ utterances: AVSpeechUtterance...) {
+        player?.stop()
         synthesizer.stopSpeaking(at: .immediate)
         for utterance in utterances {
             // The voice's own speed and pitch: slowing or raising it is what makes it sound robotic.
@@ -53,6 +63,16 @@ final class Speaker {
             }
             synthesizer.speak(utterance)
         }
+    }
+
+    /// Coco's recording of `text`, if Voice/make.py has made one.
+    nonisolated static func recording(for text: String) -> URL? {
+        Bundle.main.url(forResource: key(for: text), withExtension: "mp3")
+    }
+
+    /// A recording's file name: the first 16 hex digits of the line's SHA-256, as Voice/make.py names it.
+    nonisolated static func key(for text: String) -> String {
+        String(SHA256.hash(data: Data(text.utf8)).map { String(format: "%02x", $0) }.joined().prefix(16))
     }
 
     private func voice(_ language: String) -> AVSpeechSynthesisVoice? {

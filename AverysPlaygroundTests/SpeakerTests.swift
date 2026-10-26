@@ -12,4 +12,10 @@ final class SpeakerTests: XCTestCase {
             XCTAssertTrue(others.allSatisfy { $0.voiceTraits.contains(.isNoveltyVoice) || $0.quality.rawValue <= voice.quality.rawValue }, language)
         }
     }
+
+    func testRecordingKeysMatchTheRecorderScript() {
+        // Voice/make.py names the recording of "So bubbly!" 996896babe3c08bc.mp3.
+        XCTAssertEqual(Speaker.key(for: "So bubbly!"), "996896babe3c08bc")
+        XCTAssertNil(Speaker.recording(for: "a line that was never recorded"))
+    }
 }

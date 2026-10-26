@@ -104,6 +104,14 @@ node Art/render.js   # needs Playwright with Chromium
 
 The Nail Salon hand is drawn in code (`Hand` in `NailSalonView.swift`) so its skin tone can change.
 
+### Coco's voice
+
+Coco's English lines are recorded with [ElevenLabs](https://elevenlabs.io) so she sounds like a cartoon character
+instead of the iPad's voice. `Voice/lines.txt` lists every line (made by `python3 Voice/lines.py > Voice/lines.txt`),
+and the **Coco's voice** workflow (Actions → Coco's voice → Run workflow, with the Voice ID the first time) records
+any new ones into `AverysPlayground/Voice/` and commits them. It needs an `ELEVENLABS_API_KEY` repository secret.
+Lines without a recording, and Spanish, use the iPad's voice.
+
 ### Building with Claude Code
 
 Two tools from GitHub are part of how this app gets built. Claude Code loads both when it opens this repo:
