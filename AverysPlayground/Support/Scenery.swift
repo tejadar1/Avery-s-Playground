@@ -4,7 +4,7 @@ import SwiftUI
 /// Kept low-contrast at the top and middle so cards and text stay easy to read.
 struct Scenery: View {
     enum Place {
-        case outdoors, livingRoom, library, stage, picnic, fiesta, classroom, studio, salon, ocean
+        case outdoors, livingRoom, library, stage, picnic, fiesta, classroom, studio, salon
     }
 
     let place: Place
@@ -104,30 +104,6 @@ struct Scenery: View {
             cloud(w * 0.8, h * 0.2, 6)
             cloud(w * 0.5, h * 0.42, 4)
             hills(h * 0.8, Color(red: 0.62, green: 0.82, blue: 0.5), Color(red: 0.5, green: 0.74, blue: 0.42))
-        case .ocean:
-            gradient(Color(red: 0.55, green: 0.85, blue: 0.95), Color(red: 0.25, green: 0.55, blue: 0.85))
-            // Light rays from the surface and a sandy floor with seaweed
-            for i in 0..<4 {
-                let x = w * (0.1 + 0.25 * CGFloat(i))
-                var ray = Path()
-                ray.move(to: CGPoint(x: x, y: 0))
-                ray.addLine(to: CGPoint(x: x + 8 * unit, y: 0))
-                ray.addLine(to: CGPoint(x: x + 20 * unit, y: h * 0.7))
-                ray.addLine(to: CGPoint(x: x + 4 * unit, y: h * 0.7))
-                context.fill(ray, with: .color(.white.opacity(0.08)))
-            }
-            var sand = Path()
-            sand.move(to: CGPoint(x: 0, y: h))
-            sand.addLine(to: CGPoint(x: 0, y: h * 0.9))
-            sand.addQuadCurve(to: CGPoint(x: w, y: h * 0.88), control: CGPoint(x: w * 0.5, y: h * 0.84))
-            sand.addLine(to: CGPoint(x: w, y: h))
-            fill(sand, Color(red: 0.97, green: 0.87, blue: 0.62))
-            for x in [0.08, 0.2, 0.86, 0.94] as [CGFloat] {
-                var weed = Path()
-                weed.move(to: CGPoint(x: w * x, y: h * 0.9))
-                weed.addCurve(to: CGPoint(x: w * x + 2 * unit, y: h * 0.72), control1: CGPoint(x: w * x - 5 * unit, y: h * 0.84), control2: CGPoint(x: w * x + 6 * unit, y: h * 0.78))
-                context.stroke(weed, with: .color(Color(red: 0.35, green: 0.68, blue: 0.45)), style: StrokeStyle(lineWidth: 2.2 * unit, lineCap: .round))
-            }
         case .livingRoom:
             gradient(Color(red: 1.0, green: 0.93, blue: 0.84), Color(red: 0.99, green: 0.88, blue: 0.78))
             // Window with sky, a picture frame, then the floor
@@ -243,7 +219,7 @@ struct Scenery: View {
 
 #Preview {
     TabView {
-        ForEach([Scenery.Place.outdoors, .ocean, .livingRoom, .library, .stage, .picnic, .fiesta, .classroom, .studio, .salon], id: \.self) {
+        ForEach([Scenery.Place.outdoors, .livingRoom, .library, .stage, .picnic, .fiesta, .classroom, .studio, .salon], id: \.self) {
             Scenery($0).ignoresSafeArea()
         }
     }

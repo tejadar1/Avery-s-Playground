@@ -83,7 +83,11 @@ final class ScreenshotTests: XCTestCase {
                         .press(forDuration: 0.05, thenDragTo: canvas.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
             }),
-            ("Bubbles", { sleep(3) }),
+            ("Bingo", {
+                self.tap(self.app.buttons["Slide!"])
+                sleep(1)
+                self.tap(self.app.buttons["Slide!"])
+            }),
         ]
 
         for (index, game) in games.enumerated() {

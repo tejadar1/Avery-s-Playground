@@ -18,7 +18,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name) and tap part of the picture to color it in. |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |
-| 🫧 | **Bubbles** | Pop floating bubbles; it cheers every 10 pops. |
+| 🎲 | **Bingo** | Picture bingo against Coco, like Zingo: slide out two tiles (Coco reads their words), tap one that's on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
 
 ## Notes for parents
 

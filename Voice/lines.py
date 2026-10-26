@@ -40,7 +40,6 @@ numbers = range(1, 21)
 lines.update(str(n) for n in numbers)
 lines.update(f"{n}! Great counting!" for n in range(1, 11))
 lines.update(f"Let's count to {n}!" for n in range(1, 11))
-lines.update(f"{n} bubbles! Wow!" for n in range(10, 310, 10))
 
 for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", emoji: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):
     lines.add(f"{letter}. " + (phrase or f"{letter} is for {word}!"))
@@ -75,5 +74,10 @@ for a in range(1, 6):
     for b in range(1, 6):
         lines.add(f"{a} plus {b} is {a + b}! Yummy! Snap snap!")
 lines.update(f"Hee hee, not {n}!" for n in range(1, 11))
+
+bingo = re.findall(r'BingoTile\(word: "([^"]+)"', src["BingoView.swift"])
+for a in bingo:
+    lines.update({f"{a}!", f"{a}! You got it!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!"})
+    lines.update(f"{a} and {b}!" for b in bingo)
 
 print("\n".join(sorted(lines)))

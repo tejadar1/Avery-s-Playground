@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, counting, colors, drawing, bubbles
+    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, counting, colors, drawing, bingo
 
     var id: String { rawValue }
 
@@ -19,7 +19,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .counting: "1 2 3"
         case .colors: "Coloring"
         case .drawing: "Draw"
-        case .bubbles: "Bubbles"
+        case .bingo: "Bingo"
         }
     }
 
@@ -40,7 +40,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .counting: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .colors: Color(red: 0.66, green: 0.5, blue: 0.85)
         case .drawing: Color(red: 0.33, green: 0.56, blue: 0.86)
-        case .bubbles: Color(red: 0.4, green: 0.75, blue: 0.9)
+        case .bingo: Color(red: 0.4, green: 0.75, blue: 0.9)
         }
     }
 
@@ -59,7 +59,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .counting: CountingView()
         case .colors: ColorsView()
         case .drawing: DrawingView()
-        case .bubbles: BubblePopView()
+        case .bingo: BingoView()
         }
     }
 }

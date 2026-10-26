@@ -6,27 +6,16 @@
 1 plus 5 is 6! Yummy! Snap snap!
 1! Great counting!
 10
-10 bubbles! Wow!
 10! Great counting!
-100 bubbles! Wow!
 11
-110 bubbles! Wow!
 12
-120 bubbles! Wow!
 13
-130 bubbles! Wow!
 14
-140 bubbles! Wow!
 15
-150 bubbles! Wow!
 16
-160 bubbles! Wow!
 17
-170 bubbles! Wow!
 18
-180 bubbles! Wow!
 19
-190 bubbles! Wow!
 2
 2 plus 1 is 3! Yummy! Snap snap!
 2 plus 2 is 4! Yummy! Snap snap!
@@ -35,17 +24,6 @@
 2 plus 5 is 7! Yummy! Snap snap!
 2! Great counting!
 20
-20 bubbles! Wow!
-200 bubbles! Wow!
-210 bubbles! Wow!
-220 bubbles! Wow!
-230 bubbles! Wow!
-240 bubbles! Wow!
-250 bubbles! Wow!
-260 bubbles! Wow!
-270 bubbles! Wow!
-280 bubbles! Wow!
-290 bubbles! Wow!
 3
 3 plus 1 is 4! Yummy! Snap snap!
 3 plus 2 is 5! Yummy! Snap snap!
@@ -53,8 +31,6 @@
 3 plus 4 is 7! Yummy! Snap snap!
 3 plus 5 is 8! Yummy! Snap snap!
 3! Great counting!
-30 bubbles! Wow!
-300 bubbles! Wow!
 4
 4 plus 1 is 5! Yummy! Snap snap!
 4 plus 2 is 6! Yummy! Snap snap!
@@ -62,7 +38,6 @@
 4 plus 4 is 8! Yummy! Snap snap!
 4 plus 5 is 9! Yummy! Snap snap!
 4! Great counting!
-40 bubbles! Wow!
 5
 5 plus 1 is 6! Yummy! Snap snap!
 5 plus 2 is 7! Yummy! Snap snap!
@@ -70,19 +45,14 @@
 5 plus 4 is 9! Yummy! Snap snap!
 5 plus 5 is 10! Yummy! Snap snap!
 5! Great counting!
-50 bubbles! Wow!
 6
 6! Great counting!
-60 bubbles! Wow!
 7
 7! Great counting!
-70 bubbles! Wow!
 8
 8! Great counting!
-80 bubbles! Wow!
 9
 9! Great counting!
-90 bubbles! Wow!
 A
 A butterfly!
 A fish!
@@ -104,6 +74,8 @@ Bath time!
 Beanie
 Bear
 Big nail
+Bingo card
+Bingo! You filled your card! Holy guacamole!
 Black
 Black! Like a hat.
 Blow dryer
@@ -360,6 +332,30 @@ Hee hee, that's a pig!
 Hee hee, that's a sun!
 Hee hee, that's a van!
 Hee hee, that's a web!
+Hee hee, the apple isn't on your card.
+Hee hee, the ball isn't on your card.
+Hee hee, the bee isn't on your card.
+Hee hee, the bird isn't on your card.
+Hee hee, the boat isn't on your card.
+Hee hee, the bus isn't on your card.
+Hee hee, the cake isn't on your card.
+Hee hee, the car isn't on your card.
+Hee hee, the cat isn't on your card.
+Hee hee, the cow isn't on your card.
+Hee hee, the dog isn't on your card.
+Hee hee, the duck isn't on your card.
+Hee hee, the egg isn't on your card.
+Hee hee, the fish isn't on your card.
+Hee hee, the flower isn't on your card.
+Hee hee, the frog isn't on your card.
+Hee hee, the hat isn't on your card.
+Hee hee, the heart isn't on your card.
+Hee hee, the house isn't on your card.
+Hee hee, the moon isn't on your card.
+Hee hee, the pig isn't on your card.
+Hee hee, the star isn't on your card.
+Hee hee, the sun isn't on your card.
+Hee hee, the tree isn't on your card.
 High C
 High heels
 High heels! Fashion show time!
@@ -517,9 +513,36 @@ Shoes
 Skin color
 Sky
 Sleep
+Slide out two pictures! Tap one that's on your card.
+Slide!
 Slow
+Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
+Snap! I need the apple!
+Snap! I need the ball!
+Snap! I need the bee!
+Snap! I need the bird!
+Snap! I need the boat!
+Snap! I need the bus!
+Snap! I need the cake!
+Snap! I need the car!
+Snap! I need the cat!
+Snap! I need the cow!
+Snap! I need the dog!
+Snap! I need the duck!
+Snap! I need the egg!
+Snap! I need the fish!
+Snap! I need the flower!
+Snap! I need the frog!
+Snap! I need the hat!
+Snap! I need the heart!
+Snap! I need the house!
+Snap! I need the moon!
+Snap! I need the pig!
+Snap! I need the star!
+Snap! I need the sun!
+Snap! I need the tree!
 Sneakers
 Snip snip! Don't cut my tail!
 So
@@ -632,6 +655,32 @@ all
 an orange
 and
 apple
+apple and apple!
+apple and ball!
+apple and bee!
+apple and bird!
+apple and boat!
+apple and bus!
+apple and cake!
+apple and car!
+apple and cat!
+apple and cow!
+apple and dog!
+apple and duck!
+apple and egg!
+apple and fish!
+apple and flower!
+apple and frog!
+apple and hat!
+apple and heart!
+apple and house!
+apple and moon!
+apple and pig!
+apple and star!
+apple and sun!
+apple and tree!
+apple!
+apple! You got it!
 apples
 are.
 as
@@ -639,6 +688,33 @@ asleep
 b
 bad
 baked
+ball
+ball and apple!
+ball and ball!
+ball and bee!
+ball and bird!
+ball and boat!
+ball and bus!
+ball and cake!
+ball and car!
+ball and cat!
+ball and cow!
+ball and dog!
+ball and duck!
+ball and egg!
+ball and fish!
+ball and flower!
+ball and frog!
+ball and hat!
+ball and heart!
+ball and house!
+ball and moon!
+ball and pig!
+ball and star!
+ball and sun!
+ball and tree!
+ball!
+ball! You got it!
 banana
 bananas
 bat
@@ -647,9 +723,90 @@ bears
 bed
 bed! You read it! Snap snap!
 beds
+bee
+bee and apple!
+bee and ball!
+bee and bee!
+bee and bird!
+bee and boat!
+bee and bus!
+bee and cake!
+bee and car!
+bee and cat!
+bee and cow!
+bee and dog!
+bee and duck!
+bee and egg!
+bee and fish!
+bee and flower!
+bee and frog!
+bee and hat!
+bee and heart!
+bee and house!
+bee and moon!
+bee and pig!
+bee and star!
+bee and sun!
+bee and tree!
+bee!
+bee! You got it!
 big
+bird
+bird and apple!
+bird and ball!
+bird and bee!
+bird and bird!
+bird and boat!
+bird and bus!
+bird and cake!
+bird and car!
+bird and cat!
+bird and cow!
+bird and dog!
+bird and duck!
+bird and egg!
+bird and fish!
+bird and flower!
+bird and frog!
+bird and hat!
+bird and heart!
+bird and house!
+bird and moon!
+bird and pig!
+bird and star!
+bird and sun!
+bird and tree!
+bird!
+bird! You got it!
 blew
 blow
+boat
+boat and apple!
+boat and ball!
+boat and bee!
+boat and bird!
+boat and boat!
+boat and bus!
+boat and cake!
+boat and car!
+boat and cat!
+boat and cow!
+boat and dog!
+boat and duck!
+boat and egg!
+boat and fish!
+boat and flower!
+boat and frog!
+boat and hat!
+boat and heart!
+boat and house!
+boat and moon!
+boat and pig!
+boat and star!
+boat and sun!
+boat and tree!
+boat!
+boat! You got it!
 bove
 bowls
 box
@@ -664,18 +821,152 @@ build
 built
 buns!
 bus
+bus and apple!
+bus and ball!
+bus and bee!
+bus and bird!
+bus and boat!
+bus and bus!
+bus and cake!
+bus and car!
+bus and cat!
+bus and cow!
+bus and dog!
+bus and duck!
+bus and egg!
+bus and fish!
+bus and flower!
+bus and frog!
+bus and hat!
+bus and heart!
+bus and house!
+bus and moon!
+bus and pig!
+bus and star!
+bus and sun!
+bus and tree!
+bus!
+bus! You got it!
 bus! You read it! Snap snap!
 butterfly
 by
 c
+cake
+cake and apple!
+cake and ball!
+cake and bee!
+cake and bird!
+cake and boat!
+cake and bus!
+cake and cake!
+cake and car!
+cake and cat!
+cake and cow!
+cake and dog!
+cake and duck!
+cake and egg!
+cake and fish!
+cake and flower!
+cake and frog!
+cake and hat!
+cake and heart!
+cake and house!
+cake and moon!
+cake and pig!
+cake and star!
+cake and sun!
+cake and tree!
+cake!
+cake! You got it!
 came
+car
+car and apple!
+car and ball!
+car and bee!
+car and bird!
+car and boat!
+car and bus!
+car and cake!
+car and car!
+car and cat!
+car and cow!
+car and dog!
+car and duck!
+car and egg!
+car and fish!
+car and flower!
+car and frog!
+car and hat!
+car and heart!
+car and house!
+car and moon!
+car and pig!
+car and star!
+car and sun!
+car and tree!
+car!
+car! You got it!
 cat
+cat and apple!
+cat and ball!
+cat and bee!
+cat and bird!
+cat and boat!
+cat and bus!
+cat and cake!
+cat and car!
+cat and cat!
+cat and cow!
+cat and dog!
+cat and duck!
+cat and egg!
+cat and fish!
+cat and flower!
+cat and frog!
+cat and hat!
+cat and heart!
+cat and house!
+cat and moon!
+cat and pig!
+cat and star!
+cat and sun!
+cat and tree!
+cat!
+cat! You got it!
 cat! You read it! Snap snap!
 chairs
+checkmark
 chicks
 cookie
 cookies
 could
+cow
+cow and apple!
+cow and ball!
+cow and bee!
+cow and bird!
+cow and boat!
+cow and bus!
+cow and cake!
+cow and car!
+cow and cat!
+cow and cow!
+cow and dog!
+cow and duck!
+cow and egg!
+cow and fish!
+cow and flower!
+cow and frog!
+cow and hat!
+cow and heart!
+cow and house!
+cow and moon!
+cow and pig!
+cow and star!
+cow and sun!
+cow and tree!
+cow!
+cow! You got it!
 cross
 cup
 cup! You read it! Snap snap!
@@ -685,12 +976,91 @@ d
 der
 dia
 dog
+dog and apple!
+dog and ball!
+dog and bee!
+dog and bird!
+dog and boat!
+dog and bus!
+dog and cake!
+dog and car!
+dog and cat!
+dog and cow!
+dog and dog!
+dog and duck!
+dog and egg!
+dog and fish!
+dog and flower!
+dog and frog!
+dog and hat!
+dog and heart!
+dog and house!
+dog and moon!
+dog and pig!
+dog and star!
+dog and sun!
+dog and tree!
+dog!
+dog! You got it!
 dog! You read it! Snap snap!
 down
 duck
+duck and apple!
+duck and ball!
+duck and bee!
+duck and bird!
+duck and boat!
+duck and bus!
+duck and cake!
+duck and car!
+duck and cat!
+duck and cow!
+duck and dog!
+duck and duck!
+duck and egg!
+duck and fish!
+duck and flower!
+duck and frog!
+duck and hat!
+duck and heart!
+duck and house!
+duck and moon!
+duck and pig!
+duck and star!
+duck and sun!
+duck and tree!
+duck!
+duck! You got it!
 duh
 e
 eat
+egg
+egg and apple!
+egg and ball!
+egg and bee!
+egg and bird!
+egg and boat!
+egg and bus!
+egg and cake!
+egg and car!
+egg and cat!
+egg and cow!
+egg and dog!
+egg and duck!
+egg and egg!
+egg and fish!
+egg and flower!
+egg and frog!
+egg and hat!
+egg and heart!
+egg and house!
+egg and moon!
+egg and pig!
+egg and star!
+egg and sun!
+egg and tree!
+egg!
+egg! You got it!
 eh
 f
 far
@@ -699,12 +1069,91 @@ fell
 fff
 first
 fish
+fish and apple!
+fish and ball!
+fish and bee!
+fish and bird!
+fish and boat!
+fish and bus!
+fish and cake!
+fish and car!
+fish and cat!
+fish and cow!
+fish and dog!
+fish and duck!
+fish and egg!
+fish and fish!
+fish and flower!
+fish and frog!
+fish and hat!
+fish and heart!
+fish and house!
+fish and moon!
+fish and pig!
+fish and star!
+fish and sun!
+fish and tree!
+fish!
+fish! You got it!
 fleece
 flower
+flower and apple!
+flower and ball!
+flower and bee!
+flower and bird!
+flower and boat!
+flower and bus!
+flower and cake!
+flower and car!
+flower and cat!
+flower and cow!
+flower and dog!
+flower and duck!
+flower and egg!
+flower and fish!
+flower and flower!
+flower and frog!
+flower and hat!
+flower and heart!
+flower and house!
+flower and moon!
+flower and pig!
+flower and star!
+flower and sun!
+flower and tree!
+flower!
+flower! You got it!
 for
 found
 fox
 fox! You read it! Snap snap!
+frog
+frog and apple!
+frog and ball!
+frog and bee!
+frog and bird!
+frog and boat!
+frog and bus!
+frog and cake!
+frog and car!
+frog and cat!
+frog and cow!
+frog and dog!
+frog and duck!
+frog and egg!
+frog and fish!
+frog and flower!
+frog and frog!
+frog and hat!
+frog and heart!
+frog and house!
+frog and moon!
+frog and pig!
+frog and star!
+frog and sun!
+frog and tree!
+frog!
+frog! You got it!
 g
 going
 grapes
@@ -713,9 +1162,62 @@ guh
 h
 had
 hat
+hat and apple!
+hat and ball!
+hat and bee!
+hat and bird!
+hat and boat!
+hat and bus!
+hat and cake!
+hat and car!
+hat and cat!
+hat and cow!
+hat and dog!
+hat and duck!
+hat and egg!
+hat and fish!
+hat and flower!
+hat and frog!
+hat and hat!
+hat and heart!
+hat and house!
+hat and moon!
+hat and pig!
+hat and star!
+hat and sun!
+hat and tree!
+hat!
+hat! You got it!
 hat! You read it! Snap snap!
 have
 he
+heart
+heart and apple!
+heart and ball!
+heart and bee!
+heart and bird!
+heart and boat!
+heart and bus!
+heart and cake!
+heart and car!
+heart and cat!
+heart and cow!
+heart and dog!
+heart and duck!
+heart and egg!
+heart and fish!
+heart and flower!
+heart and frog!
+heart and hat!
+heart and heart!
+heart and house!
+heart and moon!
+heart and pig!
+heart and star!
+heart and sun!
+heart and tree!
+heart!
+heart! You got it!
 help
 hen
 hen! You read it! Snap snap!
@@ -724,6 +1226,32 @@ high,
 home
 hot
 house
+house and apple!
+house and ball!
+house and bee!
+house and bird!
+house and boat!
+house and bus!
+house and cake!
+house and car!
+house and cat!
+house and cow!
+house and dog!
+house and duck!
+house and egg!
+house and fish!
+house and flower!
+house and frog!
+house and hat!
+house and heart!
+house and house!
+house and moon!
+house and pig!
+house and star!
+house and sun!
+house and tree!
+house!
+house! You got it!
 houses
 how
 huffed
@@ -750,6 +1278,33 @@ little
 me
 mochi
 mond
+moon
+moon and apple!
+moon and ball!
+moon and bee!
+moon and bird!
+moon and boat!
+moon and bus!
+moon and cake!
+moon and car!
+moon and cat!
+moon and cow!
+moon and dog!
+moon and duck!
+moon and egg!
+moon and fish!
+moon and flower!
+moon and frog!
+moon and hat!
+moon and heart!
+moon and house!
+moon and moon!
+moon and pig!
+moon and star!
+moon and sun!
+moon and tree!
+moon!
+moon! You got it!
 n
 nap
 nnn
@@ -763,6 +1318,32 @@ p
 pen
 pen! You read it! Snap snap!
 pig
+pig and apple!
+pig and ball!
+pig and bee!
+pig and bird!
+pig and boat!
+pig and bus!
+pig and cake!
+pig and car!
+pig and cat!
+pig and cow!
+pig and dog!
+pig and duck!
+pig and egg!
+pig and fish!
+pig and flower!
+pig and frog!
+pig and hat!
+pig and heart!
+pig and house!
+pig and moon!
+pig and pig!
+pig and star!
+pig and sun!
+pig and tree!
+pig!
+pig! You got it!
 pig! You read it! Snap snap!
 pigs
 plant
@@ -790,6 +1371,33 @@ so
 some
 sparkle
 sss
+star
+star and apple!
+star and ball!
+star and bee!
+star and bird!
+star and boat!
+star and bus!
+star and cake!
+star and car!
+star and cat!
+star and cow!
+star and dog!
+star and duck!
+star and egg!
+star and fish!
+star and flower!
+star and frog!
+star and hat!
+star and heart!
+star and house!
+star and moon!
+star and pig!
+star and star!
+star and sun!
+star and tree!
+star!
+star! You got it!
 star,
 steady
 stick
@@ -798,6 +1406,32 @@ straw
 strawberries
 strawberry
 sun
+sun and apple!
+sun and ball!
+sun and bee!
+sun and bird!
+sun and boat!
+sun and bus!
+sun and cake!
+sun and car!
+sun and cat!
+sun and cow!
+sun and dog!
+sun and duck!
+sun and egg!
+sun and fish!
+sun and flower!
+sun and frog!
+sun and hat!
+sun and heart!
+sun and house!
+sun and moon!
+sun and pig!
+sun and star!
+sun and sun!
+sun and tree!
+sun!
+sun! You got it!
 sun! You read it! Snap snap!
 t
 tall
@@ -809,6 +1443,32 @@ to
 took
 trash
 tree
+tree and apple!
+tree and ball!
+tree and bee!
+tree and bird!
+tree and boat!
+tree and bus!
+tree and cake!
+tree and car!
+tree and cat!
+tree and cow!
+tree and dog!
+tree and duck!
+tree and egg!
+tree and fish!
+tree and flower!
+tree and frog!
+tree and hat!
+tree and heart!
+tree and house!
+tree and moon!
+tree and pig!
+tree and star!
+tree and sun!
+tree and tree!
+tree!
+tree! You got it!
 tried
 tuh
 twin
@@ -842,6 +1502,7 @@ world
 wuh
 x
 you
+🎲 Play again
 👗 New outfit
 💇 New customer
 🖐️ New nails
