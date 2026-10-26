@@ -406,7 +406,13 @@ private enum DollArt {
         for x in [0.452, 0.548] as [CGFloat] {
             context.fill(oval(x, 0.198, 0.026, 0.014), with: .color(Color(red: 0.95, green: 0.55, blue: 0.62).opacity(0.5)))
         }
-        fill(oval(0.5, 0.214, 0.034, 0.016), Color(red: 0.92, green: 0.3, blue: 0.5))
+        // A smiling pink mouth
+        var smile = Path()
+        smile.move(to: pt(0.481, 0.209))
+        smile.addQuadCurve(to: pt(0.519, 0.209), control: pt(0.5, 0.204))
+        smile.addQuadCurve(to: pt(0.481, 0.209), control: pt(0.5, 0.232))
+        smile.closeSubpath()
+        fill(smile, Color(red: 0.92, green: 0.3, blue: 0.5))
 
         // Side-swept bangs
         var bangs = Path()
