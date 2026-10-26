@@ -74,38 +74,49 @@ struct BingoView: View {
     private var isOver: Bool { game.won || game.cocoWon }
 
     var body: some View {
-        VStack(spacing: 12 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount)
+        GeometryReader { geo in
+            // Held sideways, the machine goes beside your card instead of above it, so the card still fits.
+            let wide = geo.size.width > geo.size.height
+            let around = wide ? AnyLayout(HStackLayout(spacing: 30 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
+            let machine = wide ? AnyLayout(VStackLayout(spacing: 18 * uiScale)) : AnyLayout(HStackLayout(spacing: 18 * uiScale))
+            VStack(spacing: 12 * uiScale) {
+                CocoSays(text: cheer, hops: cheerCount)
 
-            HStack(alignment: .center, spacing: 18 * uiScale) {
-                cocoCard
-                dispenser
-            }
-            .padding(.horizontal)
+                around {
+                    machine {
+                        cocoCard
+                        dispenser
+                    }
+                    .padding(.horizontal)
 
-            Spacer(minLength: 0)
-
-            ZStack {
-                card
-                if game.won { Sparkles() }
-            }
-            .frame(maxWidth: 520 * uiScale)
-            .padding(.horizontal)
-
-            if isOver {
-                Button(action: newGame) {
-                    Text("Play again")
-                        .font(.kid(28))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 28 * uiScale)
-                        .frame(height: 60 * uiScale)
-                        .cartoonCard(Color(red: 0.95, green: 0.47, blue: 0.6), cornerRadius: 30 * uiScale)
+                    ZStack {
+                        card
+                        if game.won { Sparkles() }
+                    }
+                    .frame(maxWidth: 520 * uiScale, maxHeight: .infinity, alignment: wide ? .center : .bottom)
+                    .padding(.horizontal)
                 }
-                .buttonStyle(SquishyButtonStyle())
+
+                playAgain
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding(.bottom, 16 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
+    }
+
+    @ViewBuilder private var playAgain: some View {
+        if isOver {
+            Button(action: newGame) {
+                Text("Play again")
+                    .font(.kid(28))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 28 * uiScale)
+                    .frame(height: 60 * uiScale)
+                    .cartoonCard(Color(red: 0.95, green: 0.47, blue: 0.6), cornerRadius: 30 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+        }
     }
 
     /// The machine: two tiles in its window and a big Slide button.

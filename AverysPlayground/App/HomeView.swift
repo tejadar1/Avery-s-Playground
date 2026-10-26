@@ -23,7 +23,8 @@ struct HomeView: View {
                     }
                     .padding(.top, 8 * uiScale)
 
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 280 * uiScale), spacing: 20 * uiScale)], spacing: 20 * uiScale) {
+                    // Narrow enough that all three sit in one row on an iPad held sideways.
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)], spacing: 20 * uiScale) {
                         ForEach(HomeSection.allCases) { section in
                             NavigationLink(value: section) {
                                 SectionTile(section: section)

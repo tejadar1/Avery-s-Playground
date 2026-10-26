@@ -42,16 +42,14 @@ struct TicTacToeView: View {
             }
             .padding(.horizontal)
 
-            Spacer(minLength: 0)
-
+            // Square, and only as big as the space left, so it fits an iPad held sideways too.
             ZStack {
                 board
                 if game.winner != nil { Sparkles() }
             }
-            .frame(maxWidth: 520 * uiScale)
+            .aspectRatio(1, contentMode: .fit)
+            .frame(maxWidth: 520 * uiScale, maxHeight: .infinity)
             .padding(.horizontal)
-
-            Spacer(minLength: 0)
 
             if game.winner != nil || game.isTie {
                 Button(action: newGame) {
