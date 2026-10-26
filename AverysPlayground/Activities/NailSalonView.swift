@@ -5,7 +5,7 @@ enum NailDesign: CaseIterable, Hashable {
 }
 
 enum NailTool: Hashable {
-    case polish(Color), glitter(Color), remover, design(NailDesign), sticker(String)
+    case polish(Color), glitter(Color, Color), remover, design(NailDesign), sticker(String)
 }
 
 struct Nail: Equatable {
@@ -13,6 +13,7 @@ struct Nail: Equatable {
         var points: [CGPoint]  // 0...1 across and down the nail
         let color: Color
         var glitter = false
+        var tint: Color?  // a second color the polish fades into across the nail
     }
 
     var strokes: [Stroke] = []
@@ -20,22 +21,22 @@ struct Nail: Equatable {
     var sticker: String?
 
     /// Adds a brush point; `startsStroke` begins a new stroke where the finger touched down.
-    mutating func brush(_ color: Color, glitter: Bool = false, at point: CGPoint, startsStroke: Bool) {
+    mutating func brush(_ color: Color, glitter: Bool = false, tint: Color? = nil, at point: CGPoint, startsStroke: Bool) {
         if startsStroke || strokes.isEmpty {
-            strokes.append(Stroke(points: [point], color: color, glitter: glitter))
+            strokes.append(Stroke(points: [point], color: color, glitter: glitter, tint: tint))
         } else {
             strokes[strokes.count - 1].points.append(point)
         }
     }
 
     /// A nail painted all over in one color.
-    static func painted(_ color: Color, glitter: Bool = false) -> Nail {
-        Nail(strokes: [0.2, 0.5, 0.8].map { Stroke(points: [CGPoint(x: $0, y: 0), CGPoint(x: $0, y: 1)], color: color, glitter: glitter) })
+    static func painted(_ color: Color, glitter: Bool = false, tint: Color? = nil) -> Nail {
+        Nail(strokes: [0.2, 0.5, 0.8].map { Stroke(points: [CGPoint(x: $0, y: 0), CGPoint(x: $0, y: 1)], color: color, glitter: glitter, tint: tint) })
     }
 
     mutating func apply(_ tool: NailTool) {
         switch tool {
-        case .polish, .glitter: break  // polish goes on with brush(_:glitter:at:startsStroke:)
+        case .polish, .glitter: break  // polish goes on with brush(_:glitter:tint:at:startsStroke:)
         case .remover: self = Nail()
         case .design(let design): self.design = design
         case .sticker(let sticker): self.sticker = sticker
@@ -171,11 +172,14 @@ struct NailSalonView: View {
         .white,
         Color(red: 0.32, green: 0.16, blue: 0.42),
     ]
-    private static let glitters: [Color] = [
-        Color(red: 0.85, green: 0.86, blue: 0.9),
-        Color(red: 0.95, green: 0.78, blue: 0.35),
-        Color(red: 1.0, green: 0.55, blue: 0.75),
-        Color(red: 0.55, green: 0.7, blue: 1.0),
+    /// Glitter polishes; most fade from one color into another across the nail.
+    private static let glitters: [(Color, Color)] = [
+        (Color(red: 1.0, green: 0.55, blue: 0.75), Color(red: 0.4, green: 0.75, blue: 0.95)),
+        (Color(red: 0.98, green: 0.78, blue: 0.3), Color(red: 1.0, green: 0.45, blue: 0.7)),
+        (Color(red: 1.0, green: 0.5, blue: 0.72), Color(red: 0.6, green: 0.4, blue: 0.9)),
+        (Color(red: 1.0, green: 0.62, blue: 0.78), Color(red: 1.0, green: 0.62, blue: 0.78)),
+        (Color(red: 0.85, green: 0.86, blue: 0.9), Color(red: 0.85, green: 0.86, blue: 0.9)),
+        (Color(red: 0.95, green: 0.78, blue: 0.35), Color(red: 0.95, green: 0.78, blue: 0.35)),
     ]
     private static let stickers = ["🌸", "⭐️", "💖", "🦋", "🍓", "💎", "🌈", "🐊"]
     private static let cheers = ["Holy guacamole, so pretty!", "Wowza bowza!", "So sparkly my tail is wiggling!", "Snap snap! I love it!", "Ooh la la!", "Crocodile-tastic!"]
@@ -184,7 +188,11 @@ struct NailSalonView: View {
     private static func randomIdea() -> [Nail] {
         let colors = Array(polishes.shuffled().prefix(2))
         return (0..<5).map { i in
-            var nail = Nail.painted(colors[i % 2], glitter: i == 1 || i == 3 ? Bool.random() : false)
+            var nail = Nail.painted(colors[i % 2])
+            if i == 1 || i == 3, Bool.random() {
+                let glitter = glitters.randomElement()!
+                nail = Nail.painted(glitter.0, glitter: true, tint: glitter.1)
+            }
             if i == 2 {
                 nail.sticker = stickers.randomElement()
             } else if Bool.random() {
@@ -455,8 +463,9 @@ struct NailSalonView: View {
                         ForEach(Self.polishes, id: \.self) { color in
                             toolButton(.polish(color)) { PolishBottle(color: color) }
                         }
-                        ForEach(Self.glitters, id: \.self) { color in
-                            toolButton(.glitter(color)) { PolishBottle(color: color, glitter: true) }
+                        ForEach(Self.glitters.indices, id: \.self) { i in
+                            let glitter = Self.glitters[i]
+                            toolButton(.glitter(glitter.0, glitter.1)) { PolishBottle(color: glitter.0, tint: glitter.1, glitter: true) }
                                 .accessibilityLabel("Glitter")
                         }
                     case .design:
@@ -517,15 +526,15 @@ struct NailSalonView: View {
     }
 
     private func brush(_ index: Int, at location: CGPoint, in size: CGSize) {
-        let paint: (color: Color, glitter: Bool)
+        let paint: (color: Color, glitter: Bool, tint: Color?)
         switch tool {
-        case .polish(let color): paint = (color, false)
-        case .glitter(let color): paint = (color, true)
+        case .polish(let color): paint = (color, false, nil)
+        case .glitter(let color, let tint): paint = (color, true, tint)
         default: return
         }
         if !isBrushing { Haptics.tap() }
         brushTip = location
-        nails[index].brush(paint.color, glitter: paint.glitter, at: CGPoint(x: location.x / size.width, y: location.y / size.height), startsStroke: !isBrushing)
+        nails[index].brush(paint.color, glitter: paint.glitter, tint: paint.tint, at: CGPoint(x: location.x / size.width, y: location.y / size.height), startsStroke: !isBrushing)
         isBrushing = true
     }
 
@@ -590,35 +599,35 @@ private struct NailView: View {
 
     var body: some View {
         ZStack {
-            Capsule().fill(Color(red: 1.0, green: 0.79, blue: 0.84))
+            NailShape().fill(Color(red: 1.0, green: 0.79, blue: 0.84))
             Canvas { context, canvas in
                 for stroke in nail.strokes {
                     var path = Path()
                     path.addLines(stroke.points.map { CGPoint(x: $0.x * canvas.width, y: $0.y * canvas.height) })
                     if stroke.points.count == 1, let dot = path.currentPoint { path.addLine(to: dot) }
-                    let style = StrokeStyle(lineWidth: canvas.width * 0.35, lineCap: .round, lineJoin: .round)
-                    context.stroke(path, with: .color(stroke.color), style: style)
+                    let style = StrokeStyle(lineWidth: canvas.width * 0.5, lineCap: .round, lineJoin: .round)
+                    if let tint = stroke.tint {
+                        // Fades across the nail, from one side to the other, wherever it's brushed.
+                        let fade = Gradient(colors: [stroke.color, tint])
+                        context.stroke(path, with: .linearGradient(fade, startPoint: CGPoint(x: canvas.width * 0.2, y: canvas.height * 0.4), endPoint: CGPoint(x: canvas.width * 0.8, y: canvas.height * 0.6)), style: style)
+                    } else {
+                        context.stroke(path, with: .color(stroke.color), style: style)
+                    }
                     if stroke.glitter {
-                        var sparkle = context
-                        sparkle.clip(to: path.strokedPath(style))
-                        for i in 0..<160 {
-                            let r = canvas.width * (0.012 + 0.012 * speckle(i + 900))
-                            let dot = CGRect(x: speckle(i) * canvas.width - r, y: speckle(i + 500) * canvas.height - r, width: 2 * r, height: 2 * r)
-                            sparkle.fill(Path(ellipseIn: dot), with: .color(.white.opacity(0.35 + 0.55 * speckle(i + 1300))))
-                        }
+                        drawGlitter(in: &context, clippedTo: path.strokedPath(style), size: canvas)
                     }
                 }
             }
-            .clipShape(Capsule())
+            .clipShape(NailShape())
             if nail.strokes.isEmpty && nail.design == nil {
                 // A bare nail, with a white tip like a real one.
-                DesignView(design: .tips).foregroundStyle(.white).clipShape(Capsule())
+                DesignView(design: .tips).foregroundStyle(.white).clipShape(NailShape())
             }
             if let design = nail.design {
                 let top = nail.strokes.last?.color
                 DesignView(design: design)
                     .foregroundStyle(top == nil || top == Color.white ? Color.pink : Color.white)
-                    .clipShape(Capsule())
+                    .clipShape(NailShape())
             }
             // Two glossy streaks.
             Capsule()
@@ -634,7 +643,28 @@ private struct NailView: View {
             }
         }
         .frame(width: size.width, height: size.height)
-        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: max(1.5, size.width * 0.06)))
+        .overlay(NailShape().stroke(Color.outline, lineWidth: max(1.5, size.width * 0.05)))
+    }
+}
+
+/// A real nail's shape: a rounded tip at the top and a squarer base at the cuticle.
+private struct NailShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        let tip = rect.width / 2, base = rect.width * 0.22
+        return UnevenRoundedRectangle(topLeadingRadius: tip, bottomLeadingRadius: base, bottomTrailingRadius: base, topTrailingRadius: tip)
+            .path(in: rect)
+    }
+}
+
+/// Fine glitter: lots of tiny light and dark specks, the same on every redraw.
+private func drawGlitter(in context: inout GraphicsContext, clippedTo area: Path, size: CGSize) {
+    var sparkle = context
+    sparkle.clip(to: area)
+    for i in 0..<700 {
+        let r = size.width * (0.003 + 0.006 * speckle(i + 900))
+        let dot = CGRect(x: speckle(i) * size.width - r, y: speckle(i + 500) * size.height - r, width: 2 * r, height: 2 * r)
+        let light = i % 3 != 0
+        sparkle.fill(Path(ellipseIn: dot), with: .color(light ? .white.opacity(0.4 + 0.5 * speckle(i + 1300)) : .black.opacity(0.18)))
     }
 }
 
@@ -687,6 +717,7 @@ private struct DesignView: View {
 
 struct PolishBottle: View {
     let color: Color
+    var tint: Color?
     var glitter = false
 
     var body: some View {
@@ -695,12 +726,19 @@ struct PolishBottle: View {
                 .fill(Color.outline)
                 .frame(width: 20 * uiScale, height: 28 * uiScale)
             RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous)
-                .fill(color)
+                .fill(LinearGradient(colors: [color, tint ?? color], startPoint: .top, endPoint: .bottom))
                 .frame(width: 46 * uiScale, height: 46 * uiScale)
+                .overlay {
+                    if glitter {
+                        Canvas { context, size in
+                            drawGlitter(in: &context, clippedTo: Path(CGRect(origin: .zero, size: size)), size: size)
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous))
+                    }
+                }
                 .overlay(alignment: .topLeading) {
                     Capsule().fill(.white.opacity(0.6)).frame(width: 7 * uiScale, height: 18 * uiScale).padding(9 * uiScale)
                 }
-                .overlay { if glitter { Text("✨").font(.system(size: 20 * uiScale)) } }
                 .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
         }
     }
@@ -722,7 +760,7 @@ private struct TargetRing: View {
     }
 }
 
-/// Pink with rows of faint hearts.
+/// Pastel mint fading into pink, with rows of soft white hearts.
 private struct HeartPattern: View {
     var body: some View {
         let step = 70 * uiScale, heartSize = CGSize(width: 30 * uiScale, height: 27 * uiScale)
@@ -737,8 +775,8 @@ private struct HeartPattern: View {
                 }
             }
         }
-        .foregroundStyle(Color(red: 0.98, green: 0.78, blue: 0.86))
-        .background(Color(red: 1.0, green: 0.88, blue: 0.93))
+        .foregroundStyle(.white)
+        .background(LinearGradient(colors: [Color(red: 0.84, green: 0.95, blue: 0.92), Color(red: 1.0, green: 0.86, blue: 0.93)], startPoint: .top, endPoint: .bottom))
         .accessibilityHidden(true)
     }
 }

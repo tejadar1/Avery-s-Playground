@@ -33,6 +33,13 @@ final class NailTests: XCTestCase {
         XCTAssertEqual(nail.strokes.map(\.glitter), [true, false])
     }
 
+    func testTwoToneGlitterKeepsBothColors() {
+        var nail = Nail()
+        nail.brush(.pink, glitter: true, tint: .blue, at: CGPoint(x: 0.5, y: 0.5), startsStroke: true)
+        XCTAssertEqual(nail.strokes.first?.tint, .blue)
+        XCTAssertEqual(Nail.painted(.pink, glitter: true, tint: .blue).strokes.map(\.tint), [.blue, .blue, .blue])
+    }
+
     func testPaintedNailIsOneColorAllOver() {
         let nail = Nail.painted(.red)
         XCTAssertEqual(Set(nail.strokes.map(\.color)), [.red])

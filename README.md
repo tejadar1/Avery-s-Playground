@@ -6,7 +6,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 | | Game | What happens |
 |---|---|---|
-| 💅 | **Nail Salon** | A big open hand with natural nails. Tap a nail to zoom in, then paint it with a brush by dragging a finger. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. A "Copy this!" card shows a look to try (tap it for another), and a button changes the skin tone. |
+| 💅 | **Nail Salon** | A big open hand with natural nails. Tap a nail to zoom in, then paint it with a brush by dragging a finger. Polish comes in plain colors and fine glitter, some fading from one color into another. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. A "Copy this!" card shows a look to try (tap it for another), and a button changes the skin tone. |
 | 💇 | **Hair Salon** | Shampoo, rinse, blow dry, comb and cut a girl's hair by dragging each tool over it. Then pick a style (ponytail, pigtails, space buns, afro puff, curly), a hair color and a bow. |
 | 👗 | **Dress Up** | Dress a fashion doll with long hair and long legs: a sparkly gown, party dress, tutu, t-shirt, overalls or pajamas in any color (hot pink first), plus high heels or other shoes, a hat, and a purse, wand, sunglasses or necklace. Tap Done for a fashion show. |
 | 🐶 | **Mochi** | Take care of Mochi, a Shiba Inu puppy. Feed her, rub her to pet her (hearts float up), play fetch, scrub her in the bath, and put her down for a nap. Her food, love, energy and clean meters slowly drop while the app is closed, like a Tamagotchi, but never to zero. |
