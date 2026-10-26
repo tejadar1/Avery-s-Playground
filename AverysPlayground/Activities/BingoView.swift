@@ -68,7 +68,7 @@ struct BingoView: View {
     @State private var round = 0
     @State private var wrongPick: BingoTile?
     @State private var shakes = 0
-    @State private var cheer = "Slide out two pictures! Tap one that's on your card."
+    @State private var cheer = "Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card."
     @State private var cheerCount = 0
 
     private var isOver: Bool { game.won || game.cocoWon }
@@ -253,7 +253,7 @@ struct BingoView: View {
         Haptics.tap()
         withAnimation(.spring) { game = .new() }
         round += 1
-        say("", hint: "Slide out two pictures! Tap one that's on your card.")
+        say("", hint: "Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card.")
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.

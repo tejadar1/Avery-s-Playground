@@ -23,6 +23,14 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
+    var section: HomeSection {
+        switch self {
+        case .reading, .abc, .counting, .math, .spanish, .piano: .learn
+        case .nails, .hair, .dressup, .pet, .colors, .drawing: .play
+        case .bingo: .teamUp
+        }
+    }
+
     /// Drawn in Art/icons/<rawValue>.svg.
     var icon: String { "Icon-\(rawValue)" }
 
@@ -62,4 +70,37 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .bingo: BingoView()
         }
     }
+}
+
+/// The three choices on the home screen; each opens a page of its games.
+enum HomeSection: String, CaseIterable, Identifiable, Hashable {
+    case learn, play, teamUp
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .learn: "Learn"
+        case .play: "Play"
+        case .teamUp: "Team Up"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .learn: "Letters, words, numbers and music"
+        case .play: "Pretend, dress up and make art"
+        case .teamUp: "Play with your grown-up"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .learn: Color(red: 0.31, green: 0.67, blue: 0.75)
+        case .play: Color(red: 0.95, green: 0.47, blue: 0.6)
+        case .teamUp: Color(red: 0.95, green: 0.62, blue: 0.3)
+        }
+    }
+
+    var activities: [Activity] { Activity.allCases.filter { $0.section == self } }
 }

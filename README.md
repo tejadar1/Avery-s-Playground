@@ -4,6 +4,9 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 ## Games
 
+The home screen has three big choices: **Learn** (Read, Math, Español, ABC, 1 2 3, Piano), **Play** (Nail Salon,
+Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with a grown-up (Bingo).
+
 | | Game | What happens |
 |---|---|---|
 | 💅 | **Nail Salon** | A big open hand with natural nails. Tap a nail to zoom in, then paint it with a brush by dragging a finger; brushing a new color over another blends them. Polish comes in plain colors and fine glitter, some fading from one color into another. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. A "Copy this!" card shows a look to try (tap it for another), and a button changes the skin tone. |
@@ -18,7 +21,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name) and tap part of the picture to color it in. |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |
-| 🎲 | **Bingo** | Picture bingo against Coco, like Zingo: slide out two tiles (Coco reads their words), tap one that's on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
+| 🎲 | **Bingo** | Picture bingo for a kid and a grown-up together, against Coco, like Zingo: slide out two tiles (Coco reads their words), tap one that's on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
 
 ## Notes for parents
 

@@ -8,4 +8,11 @@ final class ActivityTests: XCTestCase {
             XCTAssertNotNil(UIImage(named: activity.icon), "missing Art/icons/\(activity.rawValue).svg render")
         }
     }
+
+    func testEverySectionHasGames() {
+        for section in HomeSection.allCases {
+            XCTAssertFalse(section.activities.isEmpty, section.title)
+        }
+        XCTAssertEqual(HomeSection.allCases.flatMap(\.activities).count, Activity.allCases.count)
+    }
 }

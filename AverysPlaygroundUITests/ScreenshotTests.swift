@@ -90,7 +90,12 @@ final class ScreenshotTests: XCTestCase {
             }),
         ]
 
+        // Which home-screen choice each game is under (Activity.section in the app).
+        let learn = ["Read", "Math", "Español", "ABC", "1 2 3", "Piano"], teamUp = ["Bingo"]
         for (index, game) in games.enumerated() {
+            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
+            tap(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch)
+            sleep(1)
             let tile = button(game.title)
             tap(tile)
             sleep(1)
@@ -161,7 +166,7 @@ final class ScreenshotTests: XCTestCase {
     }
 
     private func goHome() {
-        for _ in 0..<3 where !app.staticTexts["Avery's Playground"].exists {
+        for _ in 0..<4 where !app.staticTexts["Avery's Playground"].exists {
             app.navigationBars.buttons.element(boundBy: 0).tap()
         }
     }
