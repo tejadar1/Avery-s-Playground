@@ -34,19 +34,23 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      # Kokoro's dependencies don't build on the runner's newest Python yet.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: |
           sudo apt-get install -y -q espeak-ng ffmpeg
           pip install -q torch --index-url https://download.pytorch.org/whl/cpu
           pip install -q kokoro soundfile
       - if: inputs.voice == 'samples'
         run: |
-          python3 Voice/make.py --samples
+          python Voice/make.py --samples
           cd Voice/samples && git init -q -b voice-samples && git add .
           git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Voice samples"
           git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" voice-samples
       - if: inputs.voice == 'record'
         run: |
-          python3 Voice/make.py
+          python Voice/make.py
           git add Voice AverysPlayground/Voice
           git diff --cached --quiet && exit 0
           git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Record Coco's voice"
