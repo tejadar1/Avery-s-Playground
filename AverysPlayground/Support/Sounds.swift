@@ -2,7 +2,7 @@ import AVFoundation
 
 /// Sound effects made on the fly, like the piano notes, so the app needs no sound files.
 enum Sound: CaseIterable {
-    case dryer, water, bubbles, brush, snip, pop, sparkle
+    case dryer, water, bubbles, brush, crayon, snip, pop, sparkle
 
     static let rate = 44_100.0
 
@@ -51,6 +51,17 @@ enum Sound: CaseIterable {
                 lower += 0.05 * (n - lower)
                 let swell: Double = 0.4 + 0.6 * abs(sin(2 * .pi * 4 * t))
                 return (low - lower) * swell
+            }
+        case .crayon:
+            // Wax on paper: bright, scratchy noise chopped into tiny grains, so it crackles instead of whooshing.
+            var low = 0.0, lower = 0.0, grain = 1.0
+            return Self.make(seconds: 0.6, peak: 0.3) { t in
+                let n = Self.noise()
+                low += 0.6 * (n - low)
+                lower += 0.15 * (n - lower)
+                if Int(t * Self.rate) % 120 == 0 { grain = .random(in: 0.15...1) }  // a new grain every ~3 ms
+                let stroke: Double = 0.65 + 0.35 * sin(2 * .pi * 5 * t)
+                return (low - lower) * grain * stroke
             }
         case .snip:
             var s = [Float](repeating: 0, count: Int(Self.rate * 0.5))
