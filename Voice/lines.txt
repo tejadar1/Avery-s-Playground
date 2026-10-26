@@ -304,6 +304,7 @@ Hare
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
 Hats
+Hearts
 Hee hee! That tickles!
 Hee hee, not 1!
 Hee hee, not 10!
@@ -376,6 +377,7 @@ I have lots and lots of teeth, and I brush every one!
 I wish I had hair like that!
 I. I is for Ice cream!
 Ice cream
+It's a tie! Everybody wins a hug!
 J
 J. J is for Juice!
 Juice
@@ -551,6 +553,8 @@ So smooth!
 So sparkly my tail is wiggling!
 So stylish!
 Squeaky clean! Shake shake shake!
+Stars
+Stars go first, then hearts. Get three in a row!
 Stickers
 Styles
 Sun
@@ -588,7 +592,9 @@ The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
 This
 Three
+Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
+Three stars in a row! Stars win! Holy guacamole!
 Tortoise
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
@@ -1505,4 +1511,5 @@ you
 🎲 Play again
 👗 New outfit
 💇 New customer
+🔄 Play again
 🖐️ New nails

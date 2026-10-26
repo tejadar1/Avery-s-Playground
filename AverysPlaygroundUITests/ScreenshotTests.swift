@@ -88,10 +88,14 @@ final class ScreenshotTests: XCTestCase {
                 sleep(1)
                 self.tap(self.app.buttons["Slide!"])
             }),
+            ("Tic-Tac-Toe", {
+                // Stars take the top row while hearts go in the middle.
+                for square in [1, 4, 2, 5, 3] { self.tap(self.button("Square \(square)")) }
+            }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Math", "Español", "ABC", "1 2 3", "Piano"], teamUp = ["Bingo"]
+        let learn = ["Read", "Math", "Español", "ABC", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
             tap(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch)

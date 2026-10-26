@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, counting, colors, drawing, bingo
+    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, counting, colors, drawing, bingo, tictactoe
 
     var id: String { rawValue }
 
@@ -20,6 +20,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .colors: "Coloring"
         case .drawing: "Draw"
         case .bingo: "Bingo"
+        case .tictactoe: "Tic-Tac-Toe"
         }
     }
 
@@ -27,7 +28,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .reading, .abc, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .pet, .colors, .drawing: .play
-        case .bingo: .teamUp
+        case .bingo, .tictactoe: .teamUp
         }
     }
 
@@ -49,6 +50,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .colors: Color(red: 0.66, green: 0.5, blue: 0.85)
         case .drawing: Color(red: 0.33, green: 0.56, blue: 0.86)
         case .bingo: Color(red: 0.4, green: 0.75, blue: 0.9)
+        case .tictactoe: Color(red: 0.62, green: 0.55, blue: 0.9)
         }
     }
 
@@ -68,6 +70,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .colors: ColorsView()
         case .drawing: DrawingView()
         case .bingo: BingoView()
+        case .tictactoe: TicTacToeView()
         }
     }
 }

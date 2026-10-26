@@ -5,7 +5,7 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 ## Games
 
 The home screen has three big choices: **Learn** (Read, Math, Español, ABC, 1 2 3, Piano), **Play** (Nail Salon,
-Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with a grown-up (Bingo).
+Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with a grown-up (Bingo, Tic-Tac-Toe).
 
 | | Game | What happens |
 |---|---|---|
@@ -22,6 +22,7 @@ Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name) and tap part of the picture to color it in. |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |
 | 🎲 | **Bingo** | Picture bingo for a kid and a grown-up together, against Coco, like Zingo: slide out two tiles (Coco reads their words), tap one that's on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
+| ⭐️ | **Tic-Tac-Toe** | For a kid and a grown-up on one iPad: stars against hearts, three in a row wins. The winning row lights up and each side's wins are counted. |
 
 ## Notes for parents
 

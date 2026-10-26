@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A tic-tac-toe board of stars and hearts -->
+  <rect x="26" y="30" width="152" height="152" rx="26" fill="#8A7BD8" stroke="#4A2C2A" stroke-width="4.5"/>
+  <rect x="20" y="22" width="152" height="152" rx="26" fill="#A99AF0" stroke="#4A2C2A" stroke-width="4.5"/>
+  <path d="M70 34 v128 M122 34 v128 M32 73 h128 M32 124 h128" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+  <g fill="#F6C945" stroke="#4A2C2A" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M45 34 l5 10 11 1.5 -8 7.5 2 11 -10 -5.5 -10 5.5 2 -11 -8 -7.5 11 -1.5z"/>
+    <path d="M96 85 l5 10 11 1.5 -8 7.5 2 11 -10 -5.5 -10 5.5 2 -11 -8 -7.5 11 -1.5z"/>
+    <path d="M146 136 l5 10 11 1.5 -8 7.5 2 11 -10 -5.5 -10 5.5 2 -11 -8 -7.5 11 -1.5z"/>
+  </g>
+  <g fill="#E9646E" stroke="#4A2C2A" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M146 64 l-14 -13 a8 8 0 0 1 14 -8 a8 8 0 0 1 14 8z"/>
+    <path d="M45 166 l-14 -13 a8 8 0 0 1 14 -8 a8 8 0 0 1 14 8z"/>
+  </g>
+  <path d="M38 40 L154 156" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+</svg>
