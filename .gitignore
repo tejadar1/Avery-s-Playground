@@ -5,3 +5,8 @@ xcuserdata/
 DerivedData/
 .DS_Store
 build/
+
+# Kokoro voice model, downloaded by the voice job
+Voice/kokoro-v1.0.onnx
+Voice/voices-v1.0.bin
+Voice/samples/

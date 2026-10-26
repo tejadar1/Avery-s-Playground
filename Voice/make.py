@@ -1,4 +1,4 @@
-"""Records Coco's lines with Kokoro, a free open-source voice, into AverysPlayground/Voice/<key>.mp3.
+"""Records Coco's lines with Kokoro (the kokoro-onnx build), a free open-source voice, into AverysPlayground/Voice/<key>.mp3.
 
 Runs on GitHub's Linux machines (.github/workflows/build.yml, "voice" input). Voice/voice.txt holds the Kokoro
 voice and how much to raise its pitch, like "af_heart 1.25". Records only lines without a file yet, removes files
@@ -12,18 +12,18 @@ import sys
 import tempfile
 from pathlib import Path
 
-import numpy as np
 import soundfile
-from kokoro import KPipeline
+from kokoro_onnx import Kokoro
 
 here = Path(__file__).resolve().parent
-pipeline = KPipeline(lang_code="a")  # American English
+# Model files downloaded by the workflow from the kokoro-onnx releases.
+kokoro = Kokoro(str(here / "kokoro-v1.0.onnx"), str(here / "voices-v1.0.bin"))
 
 
 def record(line, voice, pitch, path):
-    audio = np.concatenate([np.asarray(chunk) for _, _, chunk in pipeline(line, voice=voice)])
+    audio, rate = kokoro.create(line, voice=voice, speed=1.0, lang="en-us")
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
-        soundfile.write(wav.name, audio, 24000)
+        soundfile.write(wav.name, audio, rate)
         # Raise the pitch for a cartoon voice, keeping the speed (a touch quicker, for bounce).
         tempo = 1.08 / pitch
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav.name,
