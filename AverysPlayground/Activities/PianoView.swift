@@ -141,7 +141,6 @@ struct PianoView: View {
             keyboard
         }
         .background(Color(red: 0.93, green: 0.95, blue: 1.0).ignoresSafeArea())
-        .onAppear { Speaker.shared.say(cheer) }
     }
 
     private var keyboard: some View {
@@ -217,7 +216,11 @@ struct PianoView: View {
 
     private func choose(_ song: PianoSong?) {
         lesson = song.map { SongLesson(song: $0) }
-        say(song.map { "\($0.name)! Press the key with the star." } ?? "Free play! Tap any key.")
+        if let song {
+            say("\(song.name)!", hint: "Press the key with the star.")
+        } else {
+            say("Free play!", hint: "Tap any key.")
+        }
     }
 
     private func press(_ key: Int) {
@@ -237,10 +240,12 @@ struct PianoView: View {
         }
     }
 
-    private func say(_ text: String) {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 

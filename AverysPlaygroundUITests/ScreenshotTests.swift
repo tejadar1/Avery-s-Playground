@@ -114,7 +114,7 @@ final class ScreenshotTests: XCTestCase {
             if game.title == "Nail Salon" {
                 tap(app.buttons["Stickers"])
                 tap(find("Big nail"))
-                tap(app.buttons["🖐️ All nails"])
+                tap(app.buttons["All nails"])
                 sleep(1)
                 tap(app.buttons["Done!"])
                 sleep(1)

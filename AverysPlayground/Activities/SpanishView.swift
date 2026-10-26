@@ -175,7 +175,6 @@ struct SpanishView: View {
             }
         }
         .background(Color(red: 0.88, green: 0.98, blue: 0.94).ignoresSafeArea())
-        .onAppear { Speaker.shared.say("Hola! Tap a card to hear it in Spanish.") }
     }
 
     private func pick(_ item: SpanishLesson) {

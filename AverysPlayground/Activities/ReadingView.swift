@@ -114,10 +114,6 @@ struct ReadingView: View {
         if tapped.count == word.text.count, !isSolved {
             withAnimation { cheer = "Which picture is it?" }
             cheerCount += 1
-            Task {
-                try? await Task.sleep(for: .seconds(1))
-                Speaker.shared.say(cheer)
-            }
         }
     }
 
@@ -142,7 +138,7 @@ struct ReadingView: View {
             wrongPick = choice
             shakeCount += 1
             withAnimation { cheer = "Hee hee, that's a \(choice.text)! Try again!" }
-            Speaker.shared.say("Hee hee, that's a \(choice.text)! Try again!")
+            Speaker.shared.say("Hee hee, that's a \(choice.text)!")
         }
     }
 
@@ -158,7 +154,6 @@ struct ReadingView: View {
             cheer = intro
         }
         cheerCount += 1
-        Speaker.shared.say(intro)
     }
 }
 

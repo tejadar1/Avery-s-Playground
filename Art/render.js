@@ -10,7 +10,6 @@ const images = {
   Coco: ['coco.svg', 1200],
   // The launch screen shows images at their natural size: 600px at 3x is 200 points.
   LaunchCoco: ['coco.svg', 600, 'none', '3x'],
-  Hand: ['hand.svg', 1200, '#nails'],
   Shiba: ['shiba.svg', 900, '#tail, #sleep'],
   ShibaSleep: ['shiba.svg', 900, '#tail, #awake'],
   ShibaTail: ['shiba.svg', 900, '#body'],

@@ -153,7 +153,7 @@ struct HairSalonView: View {
         .background(Color(red: 0.98, green: 0.92, blue: 1.0).ignoresSafeArea())
         .onAppear {
             newCustomer()
-            Speaker.shared.say("Welcome to Coco's hair salon! I don't have any hair, so let's do hers! " + cheer)
+            Speaker.shared.say("Welcome to Coco's hair salon! I don't have any hair, so let's do hers!")
         }
     }
 
@@ -313,11 +313,11 @@ struct HairSalonView: View {
         guard isWorking else { return }
         isWorking = false
         switch tool {
-        case .shampoo: say("So bubbly! Now rinse it with water.")
-        case .rinse: say(hair.foam.isEmpty ? "All rinsed! Now blow dry it." : "Rinse off all the bubbles!")
-        case .dryer: say(hair.wetness == 0 ? "All dry! Now comb it." : "Keep blowing!")
-        case .comb: say(hair.tangles == 0 ? "So smooth! Want a haircut?" : "Comb out the tangles!")
-        case .scissors: say("Snip snip! Don't cut my tail! Now pick a style.")
+        case .shampoo: say("So bubbly!", hint: "Now rinse it with water.")
+        case .rinse: if hair.foam.isEmpty { say("All rinsed!", hint: "Now blow dry it.") } else { say("", hint: "Rinse off all the bubbles!") }
+        case .dryer: if hair.wetness == 0 { say("All dry!", hint: "Now comb it.") } else { say("", hint: "Keep blowing!") }
+        case .comb: if hair.tangles == 0 { say("So smooth!", hint: "Want a haircut?") } else { say("", hint: "Comb out the tangles!") }
+        case .scissors: say("Snip snip! Don't cut my tail!", hint: "Now pick a style.")
         }
     }
 
@@ -345,15 +345,17 @@ struct HairSalonView: View {
             tool = .shampoo
             isShowingOff = false
         }
-        say("Let's wash your hair! Rub on the shampoo.")
+        say("", hint: "Let's wash your hair! Rub on the shampoo.")
     }
 
     /// Speaks only when the message changes, so a hint isn't repeated after every stroke.
-    private func say(_ text: String) {
-        guard text != cheer else { return }
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        guard line != cheer else { return }
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 

@@ -87,7 +87,7 @@ struct PetView: View {
         .onAppear {
             needs = (try? JSONDecoder().decode(PetNeeds.self, from: saved)) ?? PetNeeds()
             needs.catchUp(to: .now)
-            say(hint)
+            say("", hint: hint)
         }
         .onChange(of: needs) { saved = (try? JSONEncoder().encode(needs)) ?? saved }
     }
@@ -280,7 +280,11 @@ struct PetView: View {
         guard !isSleeping else { return }
         Haptics.tap()
         isBathing.toggle()
-        say(isBathing ? "Bath time! Scrub Mochi with your finger." : "All done with the bath!")
+        if isBathing {
+            say("Bath time!", hint: "Scrub Mochi with your finger.")
+        } else {
+            say("All done with the bath!")
+        }
     }
 
     private func sleep() {
@@ -297,10 +301,12 @@ struct PetView: View {
         }
     }
 
-    private func say(_ text: String) {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
+    private func say(_ text: String, hint: String = "") {
+        let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        Speaker.shared.say(text)
+        if !text.isEmpty { Speaker.shared.say(text) }
     }
 }
 
