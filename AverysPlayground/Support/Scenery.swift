@@ -4,7 +4,7 @@ import SwiftUI
 /// Kept low-contrast at the top and middle so cards and text stay easy to read.
 struct Scenery: View {
     enum Place {
-        case outdoors, livingRoom, library, stage, picnic, fiesta, classroom, studio, salon
+        case outdoors, library, stage, picnic, fiesta, classroom, studio, salon
     }
 
     let place: Place
@@ -104,18 +104,6 @@ struct Scenery: View {
             cloud(w * 0.8, h * 0.2, 6)
             cloud(w * 0.5, h * 0.42, 4)
             hills(h * 0.8, Color(red: 0.62, green: 0.82, blue: 0.5), Color(red: 0.5, green: 0.74, blue: 0.42))
-        case .livingRoom:
-            gradient(Color(red: 1.0, green: 0.93, blue: 0.84), Color(red: 0.99, green: 0.88, blue: 0.78))
-            // Window with sky, a picture frame, then the floor
-            let win = CGRect(x: w * 0.68, y: h * 0.12, width: w * 0.24, height: h * 0.2)
-            fill(Path(roundedRect: win, cornerRadius: 2 * unit), Color(red: 0.7, green: 0.88, blue: 0.98))
-            context.stroke(Path { p in
-                p.move(to: CGPoint(x: win.midX, y: win.minY)); p.addLine(to: CGPoint(x: win.midX, y: win.maxY))
-                p.move(to: CGPoint(x: win.minX, y: win.midY)); p.addLine(to: CGPoint(x: win.maxX, y: win.midY))
-            }, with: .color(line.opacity(0.55)), lineWidth: 0.8 * unit)
-            fill(Path(roundedRect: CGRect(x: w * 0.08, y: h * 0.14, width: w * 0.14, height: h * 0.1), cornerRadius: unit), Color(red: 0.98, green: 0.8, blue: 0.6))
-            fill(Path(ellipseIn: CGRect(x: w * 0.12, y: h * 0.165, width: w * 0.06, height: h * 0.05)), Color(red: 0.95, green: 0.6, blue: 0.62))
-            floorboards(h * 0.72, Color(red: 0.86, green: 0.68, blue: 0.5), Color(red: 0.74, green: 0.56, blue: 0.4))
         case .library:
             gradient(Color(red: 0.9, green: 0.94, blue: 1.0), Color(red: 0.95, green: 0.93, blue: 1.0))
             // A shelf of books along the top
@@ -219,7 +207,7 @@ struct Scenery: View {
 
 #Preview {
     TabView {
-        ForEach([Scenery.Place.outdoors, .livingRoom, .library, .stage, .picnic, .fiesta, .classroom, .studio, .salon], id: \.self) {
+        ForEach([Scenery.Place.outdoors, .library, .stage, .picnic, .fiesta, .classroom, .studio, .salon], id: \.self) {
             Scenery($0).ignoresSafeArea()
         }
     }

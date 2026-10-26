@@ -69,6 +69,7 @@ All rinsed!
 Apple
 B
 B. B is for Bear!
+Ball
 Ballet flats
 Bath
 Bath time!
@@ -273,6 +274,8 @@ Doll
 Done!
 Down
 Down! So cute!
+Drag the hose to spray Mochi.
+Drag to spray Mochi
 E
 E. E is for Elephant!
 Elephant
@@ -286,6 +289,7 @@ Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Fish
 Flower crown
+Food bowl
 Fox
 Fox ends with X!
 Free play
@@ -373,6 +377,7 @@ Holy guacamole, I love it!
 Holy guacamole, so pretty!
 Holy guacamole, so stylish!
 Horse
+Hose
 Hot
 Hot Cross Buns
 Hot Cross Buns!
@@ -420,10 +425,19 @@ Mochi had a good nap! Good morning!
 Mochi is full! Burp! Hee hee!
 Mochi is hungry! Tap the food.
 Mochi is sleepy. Tap the moon for a nap.
-Mochi is so happy to see you! Rub her to pet her. She says woof, I say snap snap!
+Mochi is so happy to see you! Throw her the ball, or rub her to pet her.
 Mochi loves you!
 Mochi rolled in the mud! Time for a bath.
 Mochi wants hugs! Rub her with your finger.
+MochiBody
+MochiHead
+MochiHeadSleep
+MochiLegBack
+MochiLegFarBack
+MochiLegFarFront
+MochiLegFront
+MochiRoom
+MochiTail
 Moon
 Mustard
 My
@@ -509,7 +523,6 @@ S
 S. S is for Sun!
 Sandals
 Scissors
-Scrub Mochi with your finger.
 Shampoo
 She
 She baked the wheat into bread.
@@ -518,9 +531,6 @@ She tried three beds and fell fast asleep.
 She tried three bowls of porridge. This one is just right!
 She tried three chairs. This one is just right!
 Shh! Mochi is sleeping.
-Shiba
-ShibaSleep
-ShibaTail
 Shoes
 Skin color
 Sky
@@ -736,7 +746,6 @@ banana
 bananas
 bat
 bat! You read it! Snap snap!
-bathtub
 beanie
 bear
 bears
@@ -827,7 +836,6 @@ boat and sun!
 boat and tree!
 boat!
 boat! You got it!
-bone
 boots
 bove
 bow
@@ -1035,6 +1043,9 @@ dog and tree!
 dog!
 dog! You got it!
 dog! You read it! Snap snap!
+dogbed
+dogbowl
+dogbowl-empty
 down
 duck
 duck and apple!
@@ -1355,6 +1366,7 @@ moon and sun!
 moon and tree!
 moon!
 moon! You got it!
+mud
 n
 nap
 necklace

@@ -10,11 +10,15 @@ const images = {
   Coco: ['coco.svg', 1200],
   // The launch screen shows images at their natural size: 600px at 3x is 200 points.
   LaunchCoco: ['coco.svg', 600, 'none', '3x'],
-  Shiba: ['shiba.svg', 900, '#tail, #sleep'],
-  ShibaSleep: ['shiba.svg', 900, '#tail, #awake'],
-  ShibaTail: ['shiba.svg', 900, '#body'],
   'Icon-pet': ['shiba.svg', 600, '#sleep'],
+  MochiRoom: ['mochi-room.svg', 2400],
 };
+// Mochi from the side: one image per part, all the same size, stacked in PetView so the parts can move.
+const mochiParts = ['legFarBack', 'legFarFront', 'tail', 'body', 'legBack', 'legFront', 'head', 'headSleep'];
+for (const part of mochiParts) {
+  const name = 'Mochi' + part[0].toUpperCase() + part.slice(1);
+  images[name] = ['mochi.svg', 600, mochiParts.filter((p) => p !== part).map((p) => '#' + p).join(', ')];
+}
 for (const file of fs.readdirSync(path.join(__dirname, 'icons'))) {
   images[`Icon-${path.basename(file, '.svg')}`] = [`icons/${file}`, 600];
 }
