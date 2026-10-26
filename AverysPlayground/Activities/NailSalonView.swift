@@ -210,6 +210,7 @@ struct NailSalonView: View {
     @State private var tool = NailTool.polish(NailSalonView.polishes[0])
     @State private var cheer = "Tap a nail to paint it!"
     @State private var cheerCount = 0
+    @State private var wins = 0
     @State private var isShowingOff = false
     @State private var zoomed: Int?
     @State private var isBrushing = false
@@ -218,7 +219,7 @@ struct NailSalonView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             if let zoomed {
                 bigNail(zoomed)
             } else {
@@ -240,6 +241,7 @@ struct NailSalonView: View {
             }
         }
         .background(HeartPattern().ignoresSafeArea())
+        .celebration(wins)
     }
 
     private var hand: some View {
@@ -561,8 +563,7 @@ struct NailSalonView: View {
     }
 
     private func showOff() {
-        Haptics.success()
-        Sounds.shared.play(.sparkle)
+        wins += 1
         withAnimation(.spring) {
             zoomed = nil
             isShowingOff = true

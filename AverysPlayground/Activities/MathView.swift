@@ -45,10 +45,11 @@ struct MathView: View {
     @State private var stars = 0
     @State private var cheer = ""
     @State private var cheerCount = 0
+    @State private var wins = 0
 
     var body: some View {
         VStack(spacing: 16 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
             HStack(spacing: 6 * uiScale) {
                 Picture("star", size: 30 * uiScale)
@@ -91,6 +92,7 @@ struct MathView: View {
             .padding(.bottom, 32 * uiScale)
         }
         .background(Scenery(.picnic).ignoresSafeArea())
+        .celebration(wins)
         .onAppear { say(problem.question) }
     }
 
@@ -100,7 +102,7 @@ struct MathView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 62 * uiScale), spacing: 4 * uiScale)], spacing: 4 * uiScale) {
                 ForEach(start..<(start + count), id: \.self) { piece in
                     Button { tapPiece(piece) } label: {
-                        Picture(problem.food.picture, size: 52 * uiScale)
+                        Picture(problem.food.picture, size: 60 * uiScale)
                             .frame(width: 62 * uiScale, height: 62 * uiScale)
                             .overlay(alignment: .topTrailing) {
                                 if let order = counted.firstIndex(of: piece) {
@@ -137,8 +139,7 @@ struct MathView: View {
     private func pick(_ choice: Int) {
         guard !isSolved else { return }
         if choice == problem.answer {
-            Haptics.success()
-            Sounds.shared.play(.sparkle)
+            wins += 1
             withAnimation(.spring) {
                 isSolved = true
                 stars += 1

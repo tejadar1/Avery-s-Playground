@@ -59,10 +59,11 @@ struct DressUpView: View {
     @State private var isShowingOff = false
     @State private var cheer = "Let's get her dressed! Pick some clothes."
     @State private var cheerCount = 0
+    @State private var wins = 0
 
     var body: some View {
         VStack(spacing: 0) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
             ZStack {
                 Canvas { context, size in
@@ -93,6 +94,7 @@ struct DressUpView: View {
             }
         }
         .background(Scenery(.salon).ignoresSafeArea())
+        .celebration(wins)
         .onAppear {
             newDoll()
         }
@@ -115,8 +117,7 @@ struct DressUpView: View {
                     .accessibilityLabel(item.name)
                 }
                 Button {
-                    Haptics.success()
-                    Sounds.shared.play(.sparkle)
+                    wins += 1
                     withAnimation(.spring) { isShowingOff = true }
                     say("Ta-da! Fashion show! She looks amazing!")
                 } label: {

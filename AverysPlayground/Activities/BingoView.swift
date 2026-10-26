@@ -70,6 +70,7 @@ struct BingoView: View {
     @State private var shakes = 0
     @State private var cheer = "Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card."
     @State private var cheerCount = 0
+    @State private var wins = 0
 
     private var isOver: Bool { game.won || game.cocoWon }
 
@@ -80,7 +81,7 @@ struct BingoView: View {
             let around = wide ? AnyLayout(HStackLayout(spacing: 30 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
             let machine = wide ? AnyLayout(VStackLayout(spacing: 18 * uiScale)) : AnyLayout(HStackLayout(spacing: 18 * uiScale))
             VStack(spacing: 12 * uiScale) {
-                CocoSays(text: cheer, hops: cheerCount)
+                CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
                 around {
                     machine {
@@ -103,6 +104,7 @@ struct BingoView: View {
         }
         .padding(.bottom, 16 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
+        .celebration(wins)
     }
 
     @ViewBuilder private var playAgain: some View {
@@ -189,7 +191,7 @@ struct BingoView: View {
                 .foregroundStyle(Color.outline)
             LazyVGrid(columns: Array(repeating: GridItem(.fixed(30 * uiScale), spacing: 4 * uiScale), count: 3), spacing: 4 * uiScale) {
                 ForEach(game.cocoCard, id: \.self) { tile in
-                    Picture(tile.picture, size: 24 * uiScale)
+                    Picture(tile.picture, size: 28 * uiScale)
                         .frame(width: 30 * uiScale, height: 30 * uiScale)
                         .background(game.cocoCovered.contains(tile) ? Color(red: 0.45, green: 0.75, blue: 0.45) : Color(red: 1.0, green: 0.97, blue: 0.9),
                                     in: RoundedRectangle(cornerRadius: 6 * uiScale, style: .continuous))
@@ -205,7 +207,7 @@ struct BingoView: View {
 
     private func tileFace(_ tile: BingoTile, size: CGFloat) -> some View {
         VStack(spacing: 0) {
-            Picture(tile.picture, size: size * 0.56)
+            Picture(tile.picture, size: size * 0.66)
             Text(tile.word)
                 .font(.kid(18))
                 .foregroundStyle(Color.outline)
@@ -245,8 +247,7 @@ struct BingoView: View {
             Haptics.tap()
             Sounds.shared.play(.pop)
             if game.won {
-                Haptics.success()
-                Sounds.shared.play(.sparkle)
+                wins += 1
                 say("Bingo! You filled your card! Holy guacamole!")
             } else {
                 say("\(tile.word)! You got it!")

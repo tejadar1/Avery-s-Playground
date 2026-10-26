@@ -59,6 +59,7 @@ A fish!
 A flower!
 A house!
 A ice cream!
+A sharp
 A. A is for Apple!
 All clean!
 All done with the bath!
@@ -92,6 +93,7 @@ Buns! So cute!
 But
 But he could not blow down the brick house. The three pigs were safe!
 C
+C sharp
 C. C is for Cat!
 Canvas
 Cat
@@ -262,6 +264,7 @@ Crown
 Curly
 Curly! So cute!
 D
+D sharp
 D. D is for Dog!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
@@ -275,6 +278,7 @@ E. E is for Elephant!
 Elephant
 Extras
 F
+F sharp
 F. F is for Fish!
 Fashion show time!
 Feed
@@ -287,6 +291,7 @@ Fox ends with X!
 Free play
 Free play!
 G
+G sharp
 G. G is for Grapes!
 Glitter
 Goldilocks
@@ -393,6 +398,7 @@ Let's count to 1!
 Let's count to 10!
 Let's count to 2!
 Let's count to 3!
+Let's count to 3! Tap each one.
 Let's count to 4!
 Let's count to 5!
 Let's count to 6!
@@ -579,9 +585,9 @@ Tap a nail to paint it!
 Tap any key.
 Tap each letter to hear its sound!
 Tap each letter!
+Tap each one.
 Tap the keys to play! Or pick a song.
 Tap the nail!
-Tap to count!
 Teal
 Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card.
 The

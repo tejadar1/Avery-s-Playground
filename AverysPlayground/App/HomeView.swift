@@ -6,10 +6,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 24 * uiScale) {
                     HStack(spacing: 8 * uiScale) {
-                        Image("Coco")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 130 * uiScale)
+                        CocoFigure(height: 130 * uiScale)
                             .accessibilityLabel("Coco the crocodile")
                         VStack(alignment: .leading, spacing: 2 * uiScale) {
                             Text("Avery's World")

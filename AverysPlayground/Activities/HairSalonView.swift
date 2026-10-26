@@ -129,11 +129,12 @@ struct HairSalonView: View {
     @State private var isWorking = false
     @State private var cheer = "Let's wash your hair! Rub on the shampoo."
     @State private var cheerCount = 0
+    @State private var wins = 0
     @State private var isShowingOff = false
 
     var body: some View {
         VStack(spacing: 0) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             head
             if isShowingOff {
                 Button(action: newCustomer) {
@@ -151,6 +152,7 @@ struct HairSalonView: View {
             }
         }
         .background(Scenery(.salon).ignoresSafeArea())
+        .celebration(wins)
         .onAppear { newCustomer() }
     }
 
@@ -323,8 +325,7 @@ struct HairSalonView: View {
     }
 
     private func showOff() {
-        Haptics.success()
-        Sounds.shared.play(.sparkle)
+        wins += 1
         withAnimation(.spring) { isShowingOff = true }
         say("Ta-da! She looks beautiful! Holy guacamole!")
     }

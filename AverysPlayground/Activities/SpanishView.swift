@@ -188,7 +188,7 @@ struct SpanishView: View {
 
     /// A drawing, or for colors a paint dot and for numbers the number itself.
     @ViewBuilder private func picture(_ word: SpanishWord) -> some View {
-        let size = 52 * uiScale
+        let size = 68 * uiScale
         if let color = Self.colors[word.picture] {
             Circle()
                 .fill(color)

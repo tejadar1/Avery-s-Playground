@@ -31,10 +31,11 @@ struct TicTacToeView: View {
     @State private var heartWins = 0
     @State private var cheer = "Stars go first, then hearts. Get three in a row!"
     @State private var cheerCount = 0
+    @State private var wins = 0
 
     var body: some View {
         VStack(spacing: 16 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
             HStack(spacing: 16 * uiScale) {
                 player(.star, name: "Stars", wins: starWins)
@@ -65,6 +66,7 @@ struct TicTacToeView: View {
         }
         .padding(.bottom, 16 * uiScale)
         .background(Scenery(.fiesta).ignoresSafeArea())
+        .celebration(wins)
     }
 
     private var board: some View {
@@ -130,8 +132,7 @@ struct TicTacToeView: View {
         Haptics.tap()
         Sounds.shared.play(.pop)
         if let winner = game.winner {
-            Haptics.success()
-            Sounds.shared.play(.sparkle)
+            wins += 1
             withAnimation(.spring) {
                 if winner == .star { starWins += 1 } else { heartWins += 1 }
             }

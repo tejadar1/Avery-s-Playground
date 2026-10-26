@@ -45,10 +45,11 @@ struct ReadingView: View {
     @State private var stars = 0
     @State private var cheer = "Tap each letter to hear its sound!"
     @State private var cheerCount = 0
+    @State private var wins = 0
 
     var body: some View {
         VStack(spacing: 20 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
             HStack(spacing: 6 * uiScale) {
                 Picture("star", size: 32 * uiScale)
@@ -84,7 +85,7 @@ struct ReadingView: View {
             HStack(spacing: 16 * uiScale) {
                 ForEach(choices, id: \.text) { choice in
                     Button { pick(choice) } label: {
-                        Picture(choice.picture, size: 76 * uiScale)
+                        Picture(choice.picture, size: 86 * uiScale)
                             .frame(width: 100 * uiScale, height: 100 * uiScale)
                             .cartoonCard(isSolved && choice == word ? .green : .white)
                     }
@@ -101,6 +102,7 @@ struct ReadingView: View {
         }
         .padding(.horizontal)
         .background(Scenery(.library).ignoresSafeArea())
+        .celebration(wins)
         .onAppear { next(intro: "Let's read! Tap each letter to hear its sound.") }
     }
 
@@ -122,8 +124,7 @@ struct ReadingView: View {
     private func pick(_ choice: ReadingWord) {
         guard !isSolved else { return }
         if choice == word {
-            Haptics.success()
-            Sounds.shared.play(.sparkle)
+            wins += 1
             withAnimation(.spring) {
                 isSolved = true
                 stars += 1

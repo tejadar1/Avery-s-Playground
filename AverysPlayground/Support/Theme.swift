@@ -86,10 +86,54 @@ struct SpeechBubble: Shape {
     }
 }
 
-/// Coco with a speech bubble. She hops each time `hops` changes, and she's silly: tap her for a spin and a joke.
+/// Coco's picture. She blinks every few seconds, so she looks alive.
+struct CocoFigure: View {
+    let height: CGFloat
+    @State private var isBlinking = false
+
+    /// Coco's eyes in coco.svg (420 × 440): center, size, and the green of the head around each.
+    private static let eyes: [(x: CGFloat, y: CGFloat, rx: CGFloat, ry: CGFloat, skin: Color)] = [
+        (122, 114, 17, 20, Color(red: 0.38, green: 0.66, blue: 0.34)),
+        (200, 104, 25, 29, Color(red: 0.49, green: 0.76, blue: 0.42)),
+    ]
+
+    var body: some View {
+        Image("Coco")
+            .resizable()
+            .scaledToFit()
+            .frame(height: height)
+            .overlay {
+                if isBlinking {
+                    Canvas { context, size in
+                        let s = size.width / 420
+                        for eye in Self.eyes {
+                            context.fill(Path(ellipseIn: CGRect(x: (eye.x - eye.rx - 3) * s, y: (eye.y - eye.ry - 3) * s,
+                                                                width: (eye.rx + 3) * 2 * s, height: (eye.ry + 3) * 2 * s)), with: .color(eye.skin))
+                            var lid = Path()
+                            lid.move(to: CGPoint(x: (eye.x - eye.rx) * s, y: eye.y * s))
+                            lid.addQuadCurve(to: CGPoint(x: (eye.x + eye.rx) * s, y: eye.y * s), control: CGPoint(x: eye.x * s, y: (eye.y + eye.ry * 0.7) * s))
+                            context.stroke(lid, with: .color(.outline), style: StrokeStyle(lineWidth: 5 * s, lineCap: .round))
+                        }
+                    }
+                }
+            }
+            .task {
+                while !Task.isCancelled {
+                    try? await Task.sleep(for: .seconds(.random(in: 2.5...5)))
+                    isBlinking = true
+                    try? await Task.sleep(for: .seconds(0.14))
+                    isBlinking = false
+                }
+            }
+    }
+}
+
+/// Coco with a speech bubble. She hops each time `hops` changes, jumps for joy when `cheers` changes,
+/// and she's silly: tap her for a spin and a joke.
 struct CocoSays: View {
     let text: String
     let hops: Int
+    var cheers = 0
 
     private static let sillyLines = [
         "Snap snap! I'm Coco, the silliest crocodile!",
@@ -108,14 +152,16 @@ struct CocoSays: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 4 * uiScale) {
-            Image("Coco")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 100 * uiScale)
+            CocoFigure(height: 100 * uiScale)
                 .phaseAnimator([CGFloat(0), -14], trigger: hops) { content, lift in
                     content.offset(y: lift)
                 } animation: { _ in
                     .spring(response: 0.2, dampingFraction: 0.5)
+                }
+                .phaseAnimator([CGFloat(0), -46, 0, -24, 0], trigger: cheers) { content, lift in
+                    content.offset(y: reduceMotion ? 0 : lift).rotationEffect(.degrees(reduceMotion ? 0 : Double(lift) * 0.3))
+                } animation: { _ in
+                    .spring(response: 0.22, dampingFraction: 0.55)
                 }
                 .rotationEffect(.degrees(reduceMotion ? 0 : Double(spins) * 360))
                 .animation(.spring(response: 0.6, dampingFraction: 0.6), value: spins)
@@ -149,5 +195,78 @@ struct CocoSays: View {
         let line = Self.sillyLines.filter { $0 != joke }.randomElement()!
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { joke = line }
         Speaker.shared.say(line)
+    }
+}
+
+/// The same win everywhere: confetti, stars and hearts fall, with the sparkle sound and a happy buzz.
+private struct Celebration: ViewModifier {
+    let trigger: Int
+    @State private var showing: Int?
+
+    func body(content: Content) -> some View {
+        content
+            .overlay {
+                if let showing {
+                    Confetti().id(showing).ignoresSafeArea().allowsHitTesting(false)
+                }
+            }
+            .onChange(of: trigger) { _, new in
+                Haptics.success()
+                Sounds.shared.play(.sparkle)
+                showing = new
+                Task {
+                    try? await Task.sleep(for: .seconds(3))
+                    if showing == new { showing = nil }
+                }
+            }
+    }
+}
+
+extension View {
+    /// Celebrates each time `wins` goes up.
+    func celebration(_ wins: Int) -> some View {
+        modifier(Celebration(trigger: wins))
+    }
+}
+
+private struct Confetti: View {
+    private struct Piece {
+        let x = CGFloat.random(in: 0.02...0.98)
+        let delay = Double.random(in: 0...0.6)
+        let fall = Double.random(in: 1.4...2.3)
+        let spin = Double.random(in: -600...600)
+        let kind = Int.random(in: 0...5)
+        let color = [Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.97, green: 0.79, blue: 0.27), Color(red: 0.38, green: 0.72, blue: 0.4),
+                     Color(red: 0.36, green: 0.61, blue: 0.84), Color(red: 0.66, green: 0.55, blue: 0.88), Color(red: 0.97, green: 0.66, blue: 0.77)].randomElement()!
+    }
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var pieces = (0..<44).map { _ in Piece() }
+    @State private var fallen = false
+
+    var body: some View {
+        if reduceMotion {
+            Sparkles()
+        } else {
+            GeometryReader { geo in
+                ForEach(pieces.indices, id: \.self) { index in
+                    let piece = pieces[index]
+                    shape(piece)
+                        .rotationEffect(.degrees(fallen ? piece.spin : 0))
+                        .position(x: piece.x * geo.size.width, y: fallen ? geo.size.height + 40 : -40)
+                        .animation(.easeIn(duration: piece.fall).delay(piece.delay), value: fallen)
+                }
+            }
+            .onAppear { fallen = true }
+        }
+    }
+
+    @ViewBuilder private func shape(_ piece: Piece) -> some View {
+        switch piece.kind {
+        case 0: Picture("star", size: 26 * uiScale)
+        case 1: Picture("heart", size: 22 * uiScale)
+        case 2: Circle().fill(piece.color).frame(width: 11 * uiScale, height: 11 * uiScale)
+        default: RoundedRectangle(cornerRadius: 2 * uiScale).fill(piece.color).frame(width: 10 * uiScale, height: 17 * uiScale)
+        }
     }
 }

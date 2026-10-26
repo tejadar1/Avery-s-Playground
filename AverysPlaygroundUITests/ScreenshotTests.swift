@@ -67,7 +67,9 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Español", { self.tap(self.button("Gracias")) }),
             ("ABC", {}),
-            ("1 2 3", {}),
+            ("1 2 3", {
+                for _ in 0..<2 { self.tap(self.app.buttons["star"].firstMatch) }
+            }),
             ("Coloring", {
                 let picture = self.find("Picture")
                 for (crayon, x, y) in [("Red", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {
