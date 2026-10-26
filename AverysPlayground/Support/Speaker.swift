@@ -1,6 +1,6 @@
 import AVFoundation
 
-/// Reads words aloud with a slow, friendly voice. Works offline.
+/// Reads words aloud with the best voice on the device. Works offline.
 @MainActor
 final class Speaker {
     static let shared = Speaker()
@@ -46,8 +46,8 @@ final class Speaker {
     private func speak(_ utterances: AVSpeechUtterance...) {
         synthesizer.stopSpeaking(at: .immediate)
         for utterance in utterances {
-            utterance.rate = 0.45
-            utterance.pitchMultiplier = 1.05
+            // The voice's own speed and pitch: slowing or raising it is what makes it sound robotic.
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate
             if utterance.voice == nil {
                 utterance.voice = voice("en-US")
             }
