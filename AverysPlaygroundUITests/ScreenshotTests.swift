@@ -56,7 +56,7 @@ final class ScreenshotTests: XCTestCase {
                     .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.3)))
             }),
             ("Dress Up", {
-                for item in ["Gown", "Shoes", "Boots", "Hats", "Crown", "Extras", "Wand"] { self.tap(self.app.buttons[item]) }
+                for item in ["Gown", "Hats", "Crown", "Extras", "Wand"] { self.tap(self.app.buttons[item]) }
             }),
             ("Piano", {
                 self.tap(self.button("Twinkle Twinkle"))
