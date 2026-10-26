@@ -75,7 +75,6 @@ final class ScreenshotTests: XCTestCase {
                     picture.coordinate(withNormalizedOffset: CGVector(dx: x, dy: y)).tap()
                 }
             }),
-            ("Animals", { self.tap(self.button("Cow")) }),
             ("Draw", {
                 let canvas = self.find("Canvas")
                 for (crayon, from, to) in [("Coral", (0.2, 0.3), (0.8, 0.35)), ("Navy", (0.3, 0.6), (0.7, 0.8)), ("Teal", (0.15, 0.85), (0.85, 0.15))] {

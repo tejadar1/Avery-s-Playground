@@ -17,7 +17,6 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A. A is for Apple!" |
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name) and tap part of the picture to color it in. |
-| 🐮 | **Animals** | Tap an animal to hear what it says: "The cow says moo!" |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |
 | 🫧 | **Bubbles** | Pop floating bubbles; it cheers every 10 pops. |
 
