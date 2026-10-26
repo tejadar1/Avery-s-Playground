@@ -6,7 +6,7 @@ struct DrawingView: View {
         let color: Color
     }
 
-    /// Soft crayon colors, two to a row in the side panel.
+    /// Soft crayon colors, two to a row in the side panel (six to a row along the bottom on iPhone).
     private static let crayons: [(name: String, color: Color)] = [
         ("Navy", Color(red: 0.24, green: 0.27, blue: 0.34)), ("Yellow", Color(red: 0.96, green: 0.87, blue: 0.42)),
         ("White", .white), ("Mustard", Color(red: 0.93, green: 0.69, blue: 0.26)),
@@ -19,79 +19,111 @@ struct DrawingView: View {
     @State private var strokes: [Stroke] = []
     @State private var current: Stroke?
     @State private var color = DrawingView.crayons[7].color
+    @Environment(\.horizontalSizeClass) private var widthClass
+    @Environment(\.verticalSizeClass) private var heightClass
 
     var body: some View {
-        HStack(spacing: 14 * uiScale) {
-            panel
-
-            Canvas { context, _ in
-                for stroke in strokes + [current].compactMap({ $0 }) {
-                    draw(stroke, in: &context)
+        Group {
+            // An upright iPhone is too narrow for a side panel, so the crayons go along the bottom.
+            if widthClass == .compact && heightClass == .regular {
+                VStack(spacing: 12) {
+                    page
+                    HStack(spacing: 10) {
+                        crayons(columns: 6, size: 44, spacing: 0)  // full-size taps that still fit the narrowest iPhone
+                        VStack(spacing: 8) { undoButton; clearButton }
+                    }
+                    .padding(10)
+                    .background(.white, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                }
+            } else {
+                HStack(spacing: 14 * uiScale) {
+                    panel
+                    page
                 }
             }
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
-            .shadow(color: .black.opacity(0.12), radius: 10 * uiScale, y: 4 * uiScale)
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        if current == nil {
-                            Sounds.shared.play(.brush)
-                            current = Stroke(points: [value.location], color: color)
-                        } else {
-                            current?.points.append(value.location)
-                        }
-                    }
-                    .onEnded { _ in
-                        Sounds.shared.stop()
-                        if let current { strokes.append(current) }
-                        current = nil
-                    }
-            )
-            .accessibilityIdentifier("Canvas")
         }
         .padding(16 * uiScale)
         .background(Color(red: 0.98, green: 0.88, blue: 0.45).ignoresSafeArea())
     }
 
+    private var page: some View {
+        Canvas { context, _ in
+            for stroke in strokes + [current].compactMap({ $0 }) {
+                draw(stroke, in: &context)
+            }
+        }
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
+        .shadow(color: .black.opacity(0.12), radius: 10 * uiScale, y: 4 * uiScale)
+        .contentShape(Rectangle())
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    if current == nil {
+                        Sounds.shared.play(.brush)
+                        current = Stroke(points: [value.location], color: color)
+                    } else {
+                        current?.points.append(value.location)
+                    }
+                }
+                .onEnded { _ in
+                    Sounds.shared.stop()
+                    if let current { strokes.append(current) }
+                    current = nil
+                }
+        )
+        .accessibilityIdentifier("Canvas")
+    }
+
     private var panel: some View {
         VStack(spacing: 14 * uiScale) {
-            LazyVGrid(columns: Array(repeating: GridItem(.fixed(44 * uiScale), spacing: 12 * uiScale), count: 2), spacing: 12 * uiScale) {
-                ForEach(Self.crayons, id: \.name) { crayon in
-                    Button {
-                        Haptics.tap()
-                        color = crayon.color
-                        Speaker.shared.say(crayon.name)
-                    } label: {
-                        Circle()
-                            .fill(crayon.color)
-                            .overlay(Circle().strokeBorder(.black.opacity(0.08), lineWidth: 1))
-                            .padding(5 * uiScale)
-                            .overlay(Circle().strokeBorder(crayon.color == color ? Color.outline.opacity(0.7) : .clear, lineWidth: 3 * uiScale))
-                            .frame(width: 44 * uiScale, height: 44 * uiScale)
-                    }
-                    .buttonStyle(SquishyButtonStyle())
-                    .accessibilityLabel(crayon.name)
-                }
-            }
+            crayons(columns: 2, size: 44 * uiScale, spacing: 12 * uiScale)
 
             Divider()
 
             HStack(spacing: 12 * uiScale) {
-                panelButton("arrow.uturn.backward", "Undo") {
-                    if !strokes.isEmpty { strokes.removeLast() }
-                }
-                panelButton("trash", "Clear") {
-                    Speaker.shared.say("All clean!")
-                    withAnimation { strokes = [] }
-                }
+                undoButton
+                clearButton
             }
         }
         .padding(12 * uiScale)
         .fixedSize(horizontal: true, vertical: false)  // only as wide as two crayons, not half the screen
         .background(.white, in: RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
         .frame(maxHeight: .infinity, alignment: .top)
+    }
+
+    private func crayons(columns: Int, size: CGFloat, spacing: CGFloat) -> some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.fixed(size), spacing: spacing), count: columns), spacing: spacing) {
+            ForEach(Self.crayons, id: \.name) { crayon in
+                Button {
+                    Haptics.tap()
+                    color = crayon.color
+                    Speaker.shared.say(crayon.name)
+                } label: {
+                    Circle()
+                        .fill(crayon.color)
+                        .overlay(Circle().strokeBorder(.black.opacity(0.08), lineWidth: 1))
+                        .padding(5 * uiScale)
+                        .overlay(Circle().strokeBorder(crayon.color == color ? Color.outline.opacity(0.7) : .clear, lineWidth: 3 * uiScale))
+                        .frame(width: size, height: size)
+                }
+                .buttonStyle(SquishyButtonStyle())
+                .accessibilityLabel(crayon.name)
+            }
+        }
+    }
+
+    private var undoButton: some View {
+        panelButton("arrow.uturn.backward", "Undo") {
+            if !strokes.isEmpty { strokes.removeLast() }
+        }
+    }
+
+    private var clearButton: some View {
+        panelButton("trash", "Clear") {
+            Speaker.shared.say("All clean!")
+            withAnimation { strokes = [] }
+        }
     }
 
     private func panelButton(_ symbol: String, _ name: String, action: @escaping () -> Void) -> some View {
