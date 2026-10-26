@@ -11,10 +11,15 @@ struct HomeView: View {
                             .scaledToFit()
                             .frame(height: 130 * uiScale)
                             .accessibilityLabel("Coco the crocodile")
-                        Text("Avery's Playground")
-                            .font(.kid(36))
-                            .foregroundStyle(Color.outline)
-                            .multilineTextAlignment(.leading)
+                        VStack(alignment: .leading, spacing: 2 * uiScale) {
+                            Text("Avery's Playground")
+                                .font(.kid(38))
+                                .foregroundStyle(Color.outline)
+                            Text("Hi Avery! What should we do today?")
+                                .font(.kid(20))
+                                .foregroundStyle(Color.outline.opacity(0.7))
+                        }
+                        .multilineTextAlignment(.leading)
                     }
                     .padding(.top, 8 * uiScale)
 

@@ -25,26 +25,45 @@ struct SquishyButtonStyle: ButtonStyle {
 }
 
 extension View {
-    /// Soft color, a thin outline, and a gentle drop shadow, like a cartoon sticker.
+    /// Soft color with a light shine at the top, a thin outline, a crisp sticker edge and a soft glow beneath.
     func cartoonCard(_ color: Color, cornerRadius: CGFloat = 28 * uiScale) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         return background(
             shape.fill(color)
+                .overlay(shape.fill(LinearGradient(colors: [.white.opacity(0.3), .white.opacity(0)], startPoint: .top, endPoint: .center)))
                 .background(shape.fill(.white))  // keeps see-through colors light over the shadow
-                .overlay(shape.strokeBorder(Color.outline, lineWidth: 3 * uiScale))
-                .background(shape.fill(Color.outline.opacity(0.25)).offset(y: 5 * uiScale))
+                .overlay(shape.strokeBorder(Color.outline.opacity(0.9), lineWidth: 2.5 * uiScale))
+                .background(shape.fill(Color.outline.opacity(0.18)).offset(y: 4 * uiScale))
+                .shadow(color: .black.opacity(0.1), radius: 10 * uiScale, y: 6 * uiScale)
         )
     }
 }
 
+/// The home and menu screens' backdrop: sky, clouds and hills.
 struct PlayfulBackground: View {
     var body: some View {
-        LinearGradient(
-            colors: [Color(red: 0.55, green: 0.82, blue: 1.0), Color(red: 0.78, green: 0.94, blue: 0.62)],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
+        Scenery(.outdoors).ignoresSafeArea()
+    }
+}
+
+/// A speech bubble with a little tail on the left, pointing at whoever is talking.
+struct SpeechBubble: Shape {
+    var scale: CGFloat = 1  // pass uiScale; shapes can't read it themselves
+
+    func path(in rect: CGRect) -> Path {
+        let tail = 12 * scale, r = min(20 * scale, rect.height / 2)
+        let left = rect.minX + tail
+        var p = Path()
+        p.move(to: CGPoint(x: left + r, y: rect.minY))
+        p.addArc(tangent1End: CGPoint(x: rect.maxX, y: rect.minY), tangent2End: CGPoint(x: rect.maxX, y: rect.maxY), radius: r)
+        p.addArc(tangent1End: CGPoint(x: rect.maxX, y: rect.maxY), tangent2End: CGPoint(x: left, y: rect.maxY), radius: r)
+        p.addArc(tangent1End: CGPoint(x: left, y: rect.maxY), tangent2End: CGPoint(x: left, y: rect.minY), radius: r)
+        p.addLine(to: CGPoint(x: left, y: rect.midY + 6 * scale))
+        p.addLine(to: CGPoint(x: rect.minX, y: rect.midY + 12 * scale))
+        p.addLine(to: CGPoint(x: left, y: rect.midY - 6 * scale))
+        p.addArc(tangent1End: CGPoint(x: left, y: rect.minY), tangent2End: CGPoint(x: rect.maxX, y: rect.minY), radius: r)
+        p.closeSubpath()
+        return p
     }
 }
 
@@ -88,9 +107,14 @@ struct CocoSays: View {
             Text(joke ?? text)
                 .font(.kid(22))
                 .foregroundStyle(Color.outline)
-                .padding(.horizontal, 16 * uiScale)
-                .padding(.vertical, 10 * uiScale)
-                .cartoonCard(.white, cornerRadius: 22 * uiScale)
+                .padding(.leading, 28 * uiScale)
+                .padding(.trailing, 16 * uiScale)
+                .padding(.vertical, 12 * uiScale)
+                .background(
+                    SpeechBubble(scale: uiScale).fill(.white)
+                        .overlay(SpeechBubble(scale: uiScale).stroke(Color.outline.opacity(0.9), style: StrokeStyle(lineWidth: 2.5 * uiScale, lineJoin: .round)))
+                        .shadow(color: .black.opacity(0.1), radius: 8 * uiScale, y: 4 * uiScale)
+                )
                 .id(joke ?? text)
                 .transition(.scale.combined(with: .opacity))
             Spacer(minLength: 0)
