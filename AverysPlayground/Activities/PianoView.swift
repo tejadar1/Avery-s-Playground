@@ -141,7 +141,9 @@ struct PianoView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)  // like the story words: wrap to the screen instead of running off it
-                .padding(.horizontal)
+                .padding(12 * uiScale)
+                .cartoonCard(.white, cornerRadius: 24 * uiScale)
+                .padding(.horizontal, 28 * uiScale)  // clear of the stage curtains
             }
 
             Spacer(minLength: 0)

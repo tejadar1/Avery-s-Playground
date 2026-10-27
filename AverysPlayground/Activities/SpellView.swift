@@ -81,7 +81,7 @@ struct SpellView: View {
                         Text(String(letter))
                             .font(.kid(48))
                             .foregroundStyle(.white)
-                            .frame(width: 64 * uiScale, height: 76 * uiScale)
+                            .frame(width: 58 * uiScale, height: 76 * uiScale)  // five fit on the smallest iPhone
                             .cartoonCard(Self.tileColors[index % Self.tileColors.count], cornerRadius: 18 * uiScale)
                     }
                     .buttonStyle(SquishyButtonStyle())
