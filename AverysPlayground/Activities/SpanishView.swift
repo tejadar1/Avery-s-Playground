@@ -38,7 +38,7 @@ enum SpanishLesson: CaseIterable {
         case .animals: "dog"
         case .colors: "palette"
         case .numbers: "numbers"
-        case .food: "apple"
+        case .food: "mangu"
         }
     }
 
@@ -70,7 +70,7 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "¡Ay, mi madre!", english: "Oh my goodness!", picture: "face-shock"),
             SpanishWord(spanish: "Cógelo suave", english: "Take it easy", picture: "face-calm"),
             SpanishWord(spanish: "Ahorita", english: "In a little bit", picture: "hourglass"),
-            SpanishWord(spanish: "¿Quieres mangú?", english: "Do you want mangú?", picture: "plantain"),
+            SpanishWord(spanish: "¿Quieres mangú?", english: "Do you want mangú?", picture: "mangu"),
             SpanishWord(spanish: "Ponte las chancletas", english: "Put on your flip-flops", picture: "sandals"),
         ]
         case .animals: [
@@ -107,8 +107,19 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "diez", english: "ten", picture: "10"),
         ]
         case .food: [
+            // Dominican food first. In the DR "plátano" is the plantain and a banana is "guineo".
+            SpanishWord(spanish: "el mangú", english: "mashed plantains", picture: "mangu"),
+            SpanishWord(spanish: "los tostones", english: "fried plantains", picture: "tostones"),
+            SpanishWord(spanish: "el arroz con habichuelas", english: "rice and beans", picture: "rice-beans"),
+            SpanishWord(spanish: "el sancocho", english: "stew", picture: "sancocho"),
+            SpanishWord(spanish: "el queso frito", english: "fried cheese", picture: "queso-frito"),
+            SpanishWord(spanish: "el salami", english: "salami", picture: "salami"),
+            SpanishWord(spanish: "el plátano", english: "plantain", picture: "plantain"),
+            SpanishWord(spanish: "el aguacate", english: "avocado", picture: "avocado"),
+            SpanishWord(spanish: "el mango", english: "mango", picture: "mango"),
+            SpanishWord(spanish: "el guineo", english: "banana", picture: "banana"),
+            SpanishWord(spanish: "el bizcocho", english: "cake", picture: "cake"),
             SpanishWord(spanish: "la manzana", english: "apple", picture: "apple"),
-            SpanishWord(spanish: "el plátano", english: "banana", picture: "banana"),
             SpanishWord(spanish: "el agua", english: "water", picture: "water"),
             SpanishWord(spanish: "la leche", english: "milk", picture: "milk"),
             SpanishWord(spanish: "el pan", english: "bread", picture: "bread"),

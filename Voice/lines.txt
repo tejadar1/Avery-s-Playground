@@ -800,6 +800,7 @@ are.
 as
 asleep
 avery
+avocado
 b
 bad
 baked
@@ -1315,16 +1316,25 @@ es:dos
 es:dulce
 es:el
 es:el agua
+es:el aguacate
+es:el arroz con habichuelas
+es:el bizcocho
 es:el caballo
 es:el cocodrilo
 es:el gato
+es:el guineo
 es:el helado
+es:el mango
+es:el mangú
 es:el pan
 es:el perro
 es:el pez
 es:el plátano
 es:el pájaro
 es:el queso
+es:el queso frito
+es:el salami
+es:el sancocho
 es:en
 es:encontró
 es:felices
@@ -1348,6 +1358,7 @@ es:llegó
 es:llevaron
 es:lodo
 es:los
+es:los tostones
 es:mamá
 es:me
 es:metió
@@ -1486,6 +1497,8 @@ four
 fox
 fox! You read it! Snap snap!
 fox! You spelled it!
+fried cheese
+fried plantains
 frog
 frog and apple!
 frog and ball!
@@ -1651,6 +1664,8 @@ like
 lion
 lit
 little
+mango
+mashed plantains
 me
 milk
 mochi
@@ -1745,6 +1760,7 @@ pigs
 pink
 pizza
 plant
+plantain
 planted
 polish
 porridge
@@ -1758,12 +1774,14 @@ race
 rainbow
 ran
 red
+rice and beans
 right
 room
 ry
 s
 safe
 said
+salami
 sandals
 scissors
 second
@@ -1815,6 +1833,7 @@ star!
 star! You got it!
 star,
 steady
+stew
 stick
 stickers
 sticks
