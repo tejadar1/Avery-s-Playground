@@ -77,8 +77,9 @@ struct TraceLetter {
 
 /// How far along a letter the finger has traced: one stroke at a time, in order.
 struct Tracing {
-    static let reach: CGFloat = 0.08
-    static let enough = 0.85
+    /// Forgiving, for little fingers: near the line counts, and most of the stroke is enough.
+    static let reach: CGFloat = 0.11
+    static let enough = 0.8
 
     let letter: TraceLetter
     private(set) var stroke = 0

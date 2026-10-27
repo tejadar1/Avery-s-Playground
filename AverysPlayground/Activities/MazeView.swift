@@ -57,18 +57,36 @@ struct MazeWalk {
 
     /// Moves toward `target` one open step at a time, backing up along the trail when going back.
     mutating func move(toward target: Maze.Cell) {
+        guard target != current else { return }
+        // Just around a corner: follow the passage there, so a little finger that cuts the corner still works.
+        // (Across a hedge is always further than two steps, so hedges still stop her.)
+        for first in maze.neighbors(of: current) where maze.isOpen(current, first) {
+            if first == target {
+                step(to: first)
+                return
+            }
+            if maze.isOpen(first, target) {
+                step(to: first)
+                if !isDone { step(to: target) }
+                return
+            }
+        }
         while current != target {
             let dx = target.x - current.x, dy = target.y - current.y
             let steps = abs(dx) >= abs(dy)
                 ? [Maze.Cell(x: current.x + dx.signum(), y: current.y), Maze.Cell(x: current.x, y: current.y + dy.signum())]
                 : [Maze.Cell(x: current.x, y: current.y + dy.signum()), Maze.Cell(x: current.x + dx.signum(), y: current.y)]
-            guard let step = steps.first(where: { $0 != current && maze.isOpen(current, $0) }) else { return }
-            if trail.count > 1, trail[trail.count - 2] == step {
-                trail.removeLast()
-            } else {
-                trail.append(step)
-            }
+            guard let next = steps.first(where: { $0 != current && maze.isOpen(current, $0) }) else { return }
+            step(to: next)
             if isDone { return }
+        }
+    }
+
+    private mutating func step(to cell: Maze.Cell) {
+        if trail.count > 1, trail[trail.count - 2] == cell {
+            trail.removeLast()
+        } else {
+            trail.append(cell)
         }
     }
 }

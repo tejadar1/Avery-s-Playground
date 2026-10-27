@@ -60,24 +60,58 @@ struct Hairdo: Equatable {
 
     var averageLength: CGFloat { lengths.reduce(0, +) / CGFloat(lengths.count) }
 
-    mutating func use(_ tool: HairTool, at point: CGPoint) {
+    /// Spots all over her hair that shampoo lathers up: the top of her head and down both sides, never her face.
+    static let latherSpots: [CGPoint] = stride(from: 0.2, through: 0.8, by: 0.07).flatMap { x in
+        stride(from: 0.12, through: 0.8, by: 0.07).map { y in CGPoint(x: x, y: y) }
+    }
+    .filter { spot in
+        let onTop = pow((spot.x - 0.5) / 0.27, 2) + pow((spot.y - 0.3) / 0.19, 2) <= 1
+        let onSides = (spot.x < 0.31 || spot.x > 0.69) && spot.y >= 0.3
+        let onFace = pow((spot.x - 0.5) / 0.2, 2) + pow((spot.y - 0.45) / 0.22, 2) < 1
+        return (onTop || onSides) && !onFace
+    }
+
+    /// Most of her hair is bubbly, so it's time to rinse.
+    var isLathered: Bool { foam.count >= Self.latherSpots.count * 4 / 5 }
+
+    /// `previous` is where the finger was a moment ago, so a quick swipe works all along its path.
+    mutating func use(_ tool: HairTool, at point: CGPoint, from previous: CGPoint? = nil) {
         switch tool {
         case .shampoo:
-            if foam.count < 80, foam.allSatisfy({ hypot($0.x - point.x, $0.y - point.y) > 0.03 }) {
-                foam.append(point)
+            // A big soapy hand: every hair spot near the finger lathers up.
+            for spot in Self.latherSpots where hypot(spot.x - point.x, spot.y - point.y) < 0.1 && !foam.contains(spot) {
+                foam.append(spot)
             }
             tangles = min(1, tangles + 0.01)
         case .rinse:
-            foam.removeAll { hypot($0.x - point.x, $0.y - point.y) < 0.1 }
+            foam.removeAll { hypot($0.x - point.x, $0.y - point.y) < 0.13 }
             wetness = 1
         case .dryer:
             wetness = max(0, wetness - 0.02)
         case .comb:
             tangles = max(0, tangles - 0.03)
         case .scissors:
-            guard point.y > Self.top + 0.05 else { return }
-            for index in lengths.indices where abs(Self.strandX(index) - point.x) < 0.04 {
-                lengths[index] = min(lengths[index], max(0.15, (point.y - Self.top) / Self.maxLength))
+            // Cut all along the path since the last touch, so a quick swipe doesn't skip strands.
+            let from = previous ?? point
+            let steps = max(1, Int(hypot(point.x - from.x, point.y - from.y) / 0.01))
+            for step in 0...steps {
+                let t = CGFloat(step) / CGFloat(steps)
+                cut(at: CGPoint(x: from.x + (point.x - from.x) * t, y: from.y + (point.y - from.y) * t))
+            }
+        }
+    }
+
+    /// Cuts the strands under the point to that height, and evens out the two strands on each side
+    /// so the cut makes a smooth line instead of steps.
+    private mutating func cut(at point: CGPoint) {
+        guard point.y > Self.top + 0.05 else { return }
+        let length = max(0.15, (point.y - Self.top) / Self.maxLength)
+        for index in lengths.indices where abs(Self.strandX(index) - point.x) < 0.05 {
+            lengths[index] = min(lengths[index], length)
+            for (offset, slack) in [(1, 0.1), (2, 0.2)] as [(Int, CGFloat)] {
+                for neighbor in [index - offset, index + offset] where lengths.indices.contains(neighbor) {
+                    lengths[neighbor] = min(lengths[neighbor], lengths[index] + slack)
+                }
             }
         }
     }
@@ -324,9 +358,10 @@ struct HairSalonView: View {
             if let sound = tool.sound { Sounds.shared.play(sound) }
         }
         isWorking = true
+        let previous = toolTip.map { CGPoint(x: $0.x / side, y: $0.y / side) }
         toolTip = location
-        hair.use(tool, at: CGPoint(x: location.x / side, y: location.y / side))
-        if !hair.foam.isEmpty { washed = true }
+        hair.use(tool, at: CGPoint(x: location.x / side, y: location.y / side), from: previous)
+        if hair.isLathered { washed = true }
     }
 
     private func finishWork() {
@@ -335,7 +370,7 @@ struct HairSalonView: View {
         guard isWorking else { return }
         isWorking = false
         switch tool {
-        case .shampoo: say("So bubbly!", hint: "Now rinse it with water.")
+        case .shampoo: if hair.isLathered { say("So bubbly!", hint: "Now rinse it with water.") } else { say("", hint: "Rub shampoo all over her hair!") }
         case .rinse: if hair.foam.isEmpty { say("All rinsed!", hint: "Now blow dry it.") } else { say("", hint: "Rinse off all the bubbles!") }
         case .dryer: if hair.wetness == 0 { say("All dry!", hint: "Now comb it.") } else { say("", hint: "Keep blowing!") }
         case .comb: if hair.tangles == 0 { say("So smooth!", hint: "Want a haircut?") } else { say("", hint: "Comb out the tangles!") }
@@ -582,8 +617,8 @@ private enum HairArt {
             }
         }
         for bubble in hair.foam {
-            context.fill(circle(bubble.x, bubble.y, 0.038), with: .color(.white))
-            context.stroke(circle(bubble.x, bubble.y, 0.038), with: .color(Color(red: 0.7, green: 0.85, blue: 1.0)), lineWidth: line * 0.6)
+            context.fill(circle(bubble.x, bubble.y, 0.048), with: .color(.white))
+            context.stroke(circle(bubble.x, bubble.y, 0.048), with: .color(Color(red: 0.7, green: 0.85, blue: 1.0)), lineWidth: line * 0.6)
         }
 
         if let accessory = hair.accessory {

@@ -337,15 +337,21 @@ struct ColorsView: View {
         }
         .contentShape(Rectangle())
         .gesture(
-            // A tap fills the part under the finger; a swipe colors with the crayon, staying inside that part.
+            // A tap fills the part under the finger; a swipe colors with the crayon, inside each part it passes over.
             DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let point = CGPoint(x: value.location.x / size.width, y: value.location.y / size.height)
-                    if current == nil {
+                    if let stroke = current {
+                        if let region = page.region(at: point), region != stroke.region {
+                            // Crossing into another part: keep what's colored and carry on coloring the new part.
+                            strokes[pageIndex].append(stroke)
+                            current = ColorStroke(region: region, color: selected.color, points: [stroke.points.last ?? point, point])
+                        } else {
+                            current?.points.append(point)
+                        }
+                    } else {
                         guard let region = page.region(at: point) else { return }
                         current = ColorStroke(region: region, color: selected.color, points: [point])
-                    } else {
-                        current?.points.append(point)
                     }
                 }
                 .onEnded { value in

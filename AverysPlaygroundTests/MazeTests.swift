@@ -35,6 +35,15 @@ final class MazeTests: XCTestCase {
         XCTAssertEqual(walk.trail, [maze.start], "going back rubs out the trail")
     }
 
+    func testAFingerJustAroundTheCornerStillLeadsHer() {
+        let maze = Maze(size: 6)
+        let first = maze.passages[maze.start]!.first!
+        guard let second = maze.passages[first]!.first(where: { $0 != maze.start }) else { return }
+        var walk = MazeWalk(maze: maze)
+        walk.move(toward: second)
+        XCTAssertEqual(walk.trail, [maze.start, first, second])
+    }
+
     func testFollowingThePathReachesTheBone() {
         let maze = Maze(size: 6)
         // Find the way through, then walk it one cell at a time.

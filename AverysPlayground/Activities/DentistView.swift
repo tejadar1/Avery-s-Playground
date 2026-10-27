@@ -110,13 +110,13 @@ struct Mouth: Equatable {
     /// Pulls out the food in a gap near the floss. True if it got some.
     mutating func floss(at point: CGPoint) -> Bool {
         let before = food.count
-        food.removeAll { Self.distance($0, point) < 0.07 }
+        food.removeAll { Self.distance($0, point) < 0.1 }  // generous, for little fingers
         return food.count < before
     }
 
     /// Fills the cavity in the tooth that was tapped. True if there was one.
     mutating func fix(at point: CGPoint) -> Bool {
-        guard let index = teeth.firstIndex(where: { $0.cavity && !$0.fixed && Self.distance($0.center, point) < 0.09 }) else { return false }
+        guard let index = teeth.firstIndex(where: { $0.cavity && !$0.fixed && Self.distance($0.center, point) < 0.12 }) else { return false }
         teeth[index].fixed = true
         return true
     }
@@ -484,7 +484,7 @@ private enum DentistArt {
         }
         // Bits of food stuck between teeth
         for bit in mouth.food {
-            fill(circle(bit, 0.022), Color(red: 0.45, green: 0.72, blue: 0.35))
+            fill(circle(bit, 0.032), Color(red: 0.45, green: 0.72, blue: 0.35))
         }
         // Toothpaste foam
         for bubble in mouth.foam {

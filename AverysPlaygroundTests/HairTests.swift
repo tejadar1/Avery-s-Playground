@@ -12,11 +12,30 @@ final class HairTests: XCTestCase {
         XCTAssertEqual(hair.lengths[0], 0.5, accuracy: 0.001, "cutting lower never makes hair longer")
     }
 
+    func testShampooCanLatherAllTheHairButNotTheFace() {
+        var hair = Hairdo()
+        XCTAssertGreaterThan(Hairdo.latherSpots.count, 20)
+        XCTAssertFalse(Hairdo.latherSpots.contains { hypot($0.x - 0.5, $0.y - 0.47) < 0.12 }, "no bubbles on her face")
+        for spot in Hairdo.latherSpots { hair.use(.shampoo, at: spot) }
+        XCTAssertEqual(hair.foam.count, Hairdo.latherSpots.count)
+        XCTAssertTrue(hair.isLathered)
+    }
+
+    func testAQuickSwipeCutsEveryStrandAlongIt() {
+        var hair = Hairdo()
+        let y = Hairdo.top + Hairdo.maxLength * 0.6
+        hair.use(.scissors, at: CGPoint(x: 0.85, y: y), from: CGPoint(x: 0.15, y: y))
+        for length in hair.lengths { XCTAssertEqual(length, 0.6, accuracy: 0.001) }
+    }
+
     func testWashDryAndComb() {
         var hair = Hairdo()
         hair.use(.shampoo, at: CGPoint(x: 0.5, y: 0.3))
+        let bubbles = hair.foam.count
+        XCTAssertGreaterThan(bubbles, 1, "a whole patch lathers at once")
         hair.use(.shampoo, at: CGPoint(x: 0.5, y: 0.3))
-        XCTAssertEqual(hair.foam.count, 1, "no bubble stacked on the same spot")
+        XCTAssertEqual(hair.foam.count, bubbles, "no bubble stacked on the same spot")
+        XCTAssertFalse(hair.isLathered, "one spot isn't the whole head")
 
         hair.use(.rinse, at: CGPoint(x: 0.52, y: 0.3))
         XCTAssertTrue(hair.foam.isEmpty)
