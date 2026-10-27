@@ -7,12 +7,12 @@ struct SpanishWord: Hashable {
 }
 
 enum SpanishLesson: CaseIterable {
-    case phrases, dominican, animals, colors, numbers, food
+    case phrases, family, food, animals, colors, numbers
 
     var title: String {
         switch self {
         case .phrases: "¡Hola!"
-        case .dominican: "Dominicano"
+        case .family: "Familia"
         case .animals: "Animales"
         case .colors: "Colores"
         case .numbers: "Números"
@@ -23,7 +23,7 @@ enum SpanishLesson: CaseIterable {
     var english: String {
         switch self {
         case .phrases: "Hello!"
-        case .dominican: "Dominican"
+        case .family: "Family"
         case .animals: "Animals"
         case .colors: "Colors"
         case .numbers: "Numbers"
@@ -34,7 +34,7 @@ enum SpanishLesson: CaseIterable {
     var picture: String {
         switch self {
         case .phrases: "wave"
-        case .dominican: "flag-dr"
+        case .family: "grandma"
         case .animals: "dog"
         case .colors: "palette"
         case .numbers: "numbers"
@@ -54,24 +54,25 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "¿Cómo estás?", english: "How are you?", picture: "face-smile"),
             SpanishWord(spanish: "Muy bien", english: "Very good", picture: "thumbsup"),
             SpanishWord(spanish: "Me llamo Avery", english: "My name is Avery", picture: "avery"),
-            SpanishWord(spanish: "Te quiero", english: "I love you", picture: "heart"),
-            SpanishWord(spanish: "Tengo hambre", english: "I'm hungry", picture: "face-yum"),
             SpanishWord(spanish: "¡Vamos a jugar!", english: "Let's play!", picture: "ball"),
-        ]
-        case .dominican: [
-            SpanishWord(spanish: "Bendición, mami", english: "Bless me, Mom", picture: "pray"),
-            SpanishWord(spanish: "Bendición, papi", english: "Bless me, Dad", picture: "pray"),
-            SpanishWord(spanish: "Bendición, abuela", english: "Bless me, Grandma", picture: "grandma"),
-            SpanishWord(spanish: "Dios te bendiga", english: "God bless you", picture: "face-angel"),
-            SpanishWord(spanish: "¿Qué lo que?", english: "What's up?", picture: "face-cool"),
             SpanishWord(spanish: "¡Qué chévere!", english: "How cool!", picture: "face-starstruck"),
-            SpanishWord(spanish: "Ven acá, mi amor", english: "Come here, my love", picture: "face-hug"),
-            SpanishWord(spanish: "Dame un abrazo", english: "Give me a hug", picture: "hug"),
-            SpanishWord(spanish: "¡Ay, mi madre!", english: "Oh my goodness!", picture: "face-shock"),
-            SpanishWord(spanish: "Cógelo suave", english: "Take it easy", picture: "face-calm"),
             SpanishWord(spanish: "Ahorita", english: "In a little bit", picture: "hourglass"),
-            SpanishWord(spanish: "¿Quieres mangú?", english: "Do you want mangú?", picture: "mangu"),
             SpanishWord(spanish: "Ponte las chancletas", english: "Put on your flip-flops", picture: "sandals"),
+        ]
+        // Talking with family the Dominican way: kids ask their elders for a blessing when they say hi and bye.
+        case .family: [
+            SpanishWord(spanish: "Mami", english: "Mom", picture: "mom"),
+            SpanishWord(spanish: "Papi", english: "Dad", picture: "dad"),
+            SpanishWord(spanish: "Abuela", english: "Grandma", picture: "grandma"),
+            SpanishWord(spanish: "Abuelo", english: "Grandpa", picture: "grandpa"),
+            SpanishWord(spanish: "Mi hermano", english: "My brother", picture: "boy"),
+            SpanishWord(spanish: "Mi hermana", english: "My sister", picture: "girl"),
+            SpanishWord(spanish: "Bendición, abuela", english: "Bless me, Grandma", picture: "grandma"),
+            SpanishWord(spanish: "Bendición, abuelo", english: "Bless me, Grandpa", picture: "grandpa"),
+            SpanishWord(spanish: "Dios te bendiga", english: "God bless you", picture: "face-angel"),
+            SpanishWord(spanish: "Te quiero mucho", english: "I love you so much", picture: "heart"),
+            SpanishWord(spanish: "Dame un abrazo", english: "Give me a hug", picture: "hug"),
+            SpanishWord(spanish: "Ven acá, mi amor", english: "Come here, my love", picture: "face-hug"),
         ]
         case .animals: [
             SpanishWord(spanish: "el perro", english: "dog", picture: "dog"),
@@ -126,6 +127,9 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "el queso", english: "cheese", picture: "cheese"),
             SpanishWord(spanish: "la galleta", english: "cookie", picture: "cookie"),
             SpanishWord(spanish: "el helado", english: "ice cream", picture: "icecream"),
+            SpanishWord(spanish: "Tengo hambre", english: "I'm hungry", picture: "face-yum"),
+            SpanishWord(spanish: "¿Quieres mangú?", english: "Do you want mangú?", picture: "mangu"),
+            SpanishWord(spanish: "¡Qué rico!", english: "Yummy!", picture: "face-yum"),
         ]
         }
     }

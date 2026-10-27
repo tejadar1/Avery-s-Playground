@@ -79,9 +79,8 @@ Bingo card
 Bingo! You filled your card! Holy guacamole!
 Black
 Black! Like a hat.
-Bless me, Dad
 Bless me, Grandma
-Bless me, Mom
+Bless me, Grandpa
 Blow dryer
 Blue
 Blue! Like a whale.
@@ -274,12 +273,12 @@ D is for Dog!
 D sharp
 D!
 D! Great tracing!
+Dad
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
 Do you want mangú?
 Dog
 Doll
-Dominican
 Done!
 Down
 Down! So cute!
@@ -296,6 +295,7 @@ F is for Fish!
 F sharp
 F!
 F! Great tracing!
+Family
 Fashion show time!
 Feed
 Fetch! Good pup, Mochi!
@@ -323,6 +323,8 @@ Good morning
 Good night
 Goodbye
 Gown
+Grandma
+Grandpa
 Grapes
 Green
 Green! Like a frog.
@@ -415,7 +417,7 @@ I
 I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
 I is for Ice cream!
-I love you
+I love you so much
 I wish I had hair like that!
 I!
 I! Great tracing!
@@ -485,11 +487,14 @@ MochiLegFarFront
 MochiLegFront
 MochiRoom
 MochiTail
+Mom
 Moon
 Mustard
 My
+My brother
 My name
 My name is Avery
+My sister
 N
 N is for Nest!
 N!
@@ -533,7 +538,6 @@ O is for Octopus!
 O!
 O! Great tracing!
 Octopus
-Oh my goodness!
 Okay!
 One
 Ooh la la!
@@ -662,7 +666,6 @@ T-shirt! Wowza bowza!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
-Take it easy
 Tap a nail to paint it!
 Tap any key.
 Tap each letter to hear its sound!
@@ -720,7 +723,6 @@ Want a haircut?
 Wash
 Whale
 What color should it be?
-What's up?
 Which picture is it?
 White
 White! Like a cloud.
@@ -748,6 +750,7 @@ Yo-yo
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
+Yummy!
 Z
 Z is for Zebra!
 Z!
@@ -1211,13 +1214,14 @@ egg! You got it!
 eh
 eight
 elephant
+es:Abuela
+es:Abuelo
 es:Adiós
 es:Ahorita
 es:Animales
 es:Ay
 es:Bendición, abuela
-es:Bendición, mami
-es:Bendición, papi
+es:Bendición, abuelo
 es:Bobo
 es:Buenas
 es:Buenas noches
@@ -1230,12 +1234,11 @@ es:Con
 es:Con la moneda compró una cinta roja y se puso muy bonita.
 es:Cuando
 es:Cucarachita
-es:Cógelo suave
 es:Dame un abrazo
 es:Dios te bendiga
-es:Dominicano
 es:En
 es:En las montañas vive la Ciguapa, con su pelo largo y negro.
+es:Familia
 es:Gracias
 es:Guau
 es:Hola
@@ -1251,15 +1254,19 @@ es:La Cucarachita Martina barría su casa y encontró una moneda.
 es:La puerca quería ir a misa también.
 es:La puerca salió corriendo y se metió en el lodo.
 es:Las
+es:Mami
 es:Mamá
 es:Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!
 es:Martina
 es:Martina y el Ratoncito Pérez se casaron y fueron muy felices.
 es:Me llamo Avery
+es:Mi hermana
+es:Mi hermano
 es:Miau
 es:Muy bien
 es:No
 es:Números
+es:Papi
 es:Pasó
 es:Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!
 es:Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!
@@ -1273,7 +1280,7 @@ es:Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!
 es:Sound it out
 es:Sí
 es:Te
-es:Te quiero
+es:Te quiero mucho
 es:Tengo hambre
 es:Tiene
 es:Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás.
@@ -1415,15 +1422,14 @@ es:vivía
 es:voz
 es:vuelta
 es:y
-es:¡Ay, mi madre!
 es:¡Colorín colorado, este cuento se ha acabado!
 es:¡Hola!
 es:¡Las huellas la llevaron de vuelta a su casa!
 es:¡Qué chévere!
+es:¡Qué rico!
 es:¡Vamos a jugar!
 es:¿Cómo estás?
 es:¿Quieres mangú?
-es:¿Qué lo que?
 f
 far
 farm
