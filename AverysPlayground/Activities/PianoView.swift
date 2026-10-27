@@ -139,6 +139,7 @@ struct PianoView: View {
                             .background(index == lesson.position ? Self.keyColors[lesson.song.notes[index]] : .clear, in: Capsule())
                     }
                 }
+                .frame(maxWidth: .infinity)  // like the story words: wrap to the screen instead of running off it
                 .padding(.horizontal)
             }
 
