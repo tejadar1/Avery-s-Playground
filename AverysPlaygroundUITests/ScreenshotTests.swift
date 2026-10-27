@@ -60,6 +60,11 @@ final class ScreenshotTests: XCTestCase {
                 words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
                     .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.45, dy: 0.3)))
             }),
+            ("Dentist", {
+                let mouth = self.find("Mouth")
+                mouth.coordinate(withNormalizedOffset: CGVector(dx: 0.2, dy: 0.36))
+                    .press(forDuration: 0.05, thenDragTo: mouth.coordinate(withNormalizedOffset: CGVector(dx: 0.8, dy: 0.36)))
+            }),
             ("Dress Up", {
                 for item in ["Gown", "Hats", "Crown", "Extras", "Wand"] { self.tap(self.app.buttons[item]) }
             }),
@@ -114,10 +119,14 @@ final class ScreenshotTests: XCTestCase {
                 self.tap(self.button("Card 1"))
                 self.tap(self.button("Card 2"))
             }),
+            ("Routines", {
+                self.tap(self.button("Morning"))
+                for step in ["Wake up", "Wash face", "Get dressed"] { self.tap(self.button(step)) }
+            }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe", "Memory"]
+        let learn = ["Read", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe", "Memory", "Routines"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
             tap(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch)

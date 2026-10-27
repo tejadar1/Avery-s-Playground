@@ -142,6 +142,10 @@ struct MazeView: View {
             Picture("bone", size: cell * 0.6)
                 .position(center(maze.goal))
             Picture("dog", size: cell * 0.72)
+                // Hops at the start, so it's clear she's the one to drag.
+                .phaseAnimator([CGFloat(0), -cell * 0.12]) { content, hop in
+                    content.offset(y: walk.trail.count == 1 ? hop : 0)
+                } animation: { _ in .easeInOut(duration: 0.35) }
                 .position(center(walk.current))
                 .animation(.spring(response: 0.18, dampingFraction: 0.7), value: walk.current)
         }

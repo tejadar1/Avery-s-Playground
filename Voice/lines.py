@@ -97,7 +97,7 @@ lines.update(f"Hee hee, not {n}!" for n in range(1, 11))
 
 bingo = re.findall(r'BingoTile\(word: "([^"]+)"', src["BingoView.swift"])
 for a in bingo:
-    lines.update({f"{a}!", f"{a}! You got it!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!"})
+    lines.update({f"{a}!", f"{a}! You got it!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!", f"Hee hee, that's not the {a}!"})
     lines.update(f"{a} and {b}!" for b in bingo)
 
 print("\n".join(sorted(lines)))

@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, maze, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory
+    case nails, hair, dressup, dentist, pet, maze, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines
 
     var id: String { rawValue }
 
@@ -10,6 +10,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .nails: "Nail Salon"
         case .hair: "Hair Salon"
         case .dressup: "Dress Up"
+        case .dentist: "Dentist"
         case .pet: "Mochi"
         case .maze: "Maze"
         case .piano: "Piano"
@@ -25,14 +26,15 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .bingo: "Bingo"
         case .tictactoe: "Tic-Tac-Toe"
         case .memory: "Memory"
+        case .routines: "Routines"
         }
     }
 
     var section: HomeSection {
         switch self {
         case .reading, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .pet, .maze, .colors, .drawing: .play
-        case .bingo, .tictactoe, .memory: .teamUp
+        case .nails, .hair, .dressup, .dentist, .pet, .maze, .colors, .drawing: .play
+        case .bingo, .tictactoe, .memory, .routines: .teamUp
         }
     }
 
@@ -40,10 +42,10 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     var tune: Tune? {
         switch self {
         case .piano: nil
-        case .nails, .hair, .dressup: .salon
+        case .nails, .hair, .dressup, .dentist: .salon
         case .pet, .maze: .pet
         case .colors, .drawing: .art
-        case .bingo, .tictactoe, .memory: .teamUp
+        case .bingo, .tictactoe, .memory, .routines: .teamUp
         case .reading, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
         }
     }
@@ -56,6 +58,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .nails: Color(red: 0.95, green: 0.47, blue: 0.6)
         case .hair: Color(red: 0.78, green: 0.5, blue: 0.86)
         case .dressup: Color(red: 0.92, green: 0.55, blue: 0.75)
+        case .dentist: Color(red: 0.4, green: 0.72, blue: 0.9)
         case .pet: Color(red: 0.72, green: 0.52, blue: 0.42)
         case .maze: Color(red: 0.38, green: 0.72, blue: 0.4)
         case .piano: Color(red: 0.42, green: 0.5, blue: 0.85)
@@ -71,6 +74,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .bingo: Color(red: 0.4, green: 0.75, blue: 0.9)
         case .tictactoe: Color(red: 0.62, green: 0.55, blue: 0.9)
         case .memory: Color(red: 0.36, green: 0.75, blue: 0.68)
+        case .routines: Color(red: 0.42, green: 0.5, blue: 0.85)
         }
     }
 
@@ -80,6 +84,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .nails: NailSalonView()
         case .hair: HairSalonView()
         case .dressup: DressUpView()
+        case .dentist: DentistView()
         case .pet: PetView()
         case .maze: MazeView()
         case .piano: PianoView()
@@ -95,6 +100,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .bingo: BingoView()
         case .tictactoe: TicTacToeView()
         case .memory: MemoryView()
+        case .routines: RoutinesView()
         }
     }
 }

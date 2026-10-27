@@ -4,14 +4,15 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 ## Games
 
-The home screen has three big choices: **Learn** (Read, Math, Español, ABC, 1 2 3, Piano), **Play** (Nail Salon,
-Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with a grown-up (Bingo, Tic-Tac-Toe, Memory).
+The home screen has three big choices: **Learn** (Read, Math, Español, ABC, Trace, Spell, 1 2 3, Piano), **Play** (Nail Salon,
+Hair Salon, Dress Up, Dentist, Mochi, Maze, Coloring, Draw) and **Team Up**, games to play with a grown-up (Bingo, Tic-Tac-Toe, Memory, Routines).
 
 | | Game | What happens |
 |---|---|---|
 | 💅 | **Nail Salon** | A big open hand with long nails that reach past the fingertips. Tap a nail to zoom in, then paint it with a brush by dragging a finger; brushing a new color over another blends them. Polish comes in plain colors and fine glitter, some fading from one color into another. Add dots, stripes, hearts or stars, stick on a flower or a gem, then tap Done to show off. A "Copy this!" card shows a look to try (tap it for another), and a button changes the skin tone. |
 | 💇 | **Hair Salon** | Shampoo, rinse, blow dry, comb and cut the hair of a girl drawn like a fashion doll (big eyes, lashes, glossy lips), by dragging each tool over it. Then pick a style (ponytail, pigtails, space buns, afro puff, curly), a hair color and a bow. |
 | 👗 | **Dress Up** | Dress a fashion doll with long glossy hair, long legs and a hand-on-hip pose: a sparkly gown, party dress, tutu, t-shirt, overalls or pajamas in any color (hot pink first), plus high heels or other shoes, a hat, and a purse, wand, sunglasses or necklace. Tap Done for a fashion show. |
+| 🦷 | **Dentist** | A wide-open mouth at the dentist. Brush the dirty teeth until they shine, floss out the bits of food, tap the teeth with holes to fix them, then rinse with mouthwash. The tool to use next bounces. |
 | 🐶 | **Mochi** | Mochi, a Shiba Inu puppy, trots around her living room. Throw her ball and she runs to fetch it; put down her bowl and she walks over and eats; spray her clean with the hose (the mud fades, then she shakes off); tap Sleep and she curls up in her bed; rub her for hearts. Her food, love, energy and clean meters slowly drop while the app is closed, like a Tamagotchi, but never to zero. |
 | 🎹 | **Piano** | A rainbow keyboard. Pick Twinkle Twinkle, Mary Had a Little Lamb or Hot Cross Buns and a bouncing star shows the next key while the words light up, or play freely. Slide a finger across the keys to glide up and down. |
 | 📖 | **Read** | A shelf of storybooks: The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each word is read aloud as the finger reaches it, so she can follow along word by word; the last word stays lit. Tap the picture to hear the whole page. A Spanish shelf, Cuentos en español, has La Cucarachita Martina, Juan Bobo y la puerca, La Ciguapa del bosque, El Ratón Pérez, Medio Pollito and El Gallo de Bodas, read word by word in Coco's Spanish voice. The shelf also has Sound it out: tap each letter of a word like "cat" to hear its sound, then pick the matching picture. |
@@ -22,9 +23,10 @@ Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name), then tap a part to fill it or color it in with a finger. |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |
-| 🎲 | **Bingo** | Picture bingo for a kid and a grown-up together, against Coco, like Zingo: slide out two tiles (Coco reads their words), tap one that's on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
+| 🎲 | **Bingo** | Picture bingo for a kid and a grown-up together, against Coco, like Zingo: slide out two tiles (Coco reads their words), drag one onto the same picture on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
 | ⭐️ | **Tic-Tac-Toe** | For a kid and a grown-up on one iPad: stars against hearts, three in a row wins. The winning row lights up and each side's wins are counted. |
 | 🃏 | **Memory** | For a kid and a grown-up taking turns: turn over two cards to find matching animals. A match is yours and you go again; otherwise the cards flip back and it's the other side's turn. |
+| 🌙 | **Routines** | Morning and bedtime checklists to use with a grown-up: big picture buttons for each step (wash face, get dressed, breakfast... or bath, pajamas, story, lights out). The child taps each one as it's done, and the next one bounces. A grown-up timer (5 to 20 minutes) shows time running out, and Coco says when time's up. |
 
 Every win in any game earns a sticker for the **Sticker book** on the home screen (50 to find). Each place has its own soft background tune, made in the app like the sound effects (`Support/Music.swift`); the music button at the top right of every game turns it off.
 

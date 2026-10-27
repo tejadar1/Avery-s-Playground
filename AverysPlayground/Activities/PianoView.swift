@@ -177,7 +177,7 @@ struct PianoView: View {
                         let key = Self.key(at: value.location, keyWidth: keyWidth, blackHeight: blackHeight)
                         if key != pressed { press(key) }
                     }
-                    .onEnded { _ in pressed = nil }
+                    .onEnded { _ in withAnimation(.easeOut(duration: 0.18)) { pressed = nil } }  // a quick tap still shows the key going down
             )
         }
         .frame(height: 260 * uiScale)
@@ -215,11 +215,19 @@ struct PianoView: View {
 
     private func keyView(_ key: Int, width: CGFloat, below blackHeight: CGFloat) -> some View {
         let isNext = lesson?.nextKey == key
+        let isDown = pressed == key
         let shape = UnevenRoundedRectangle(bottomLeadingRadius: 12 * uiScale, bottomTrailingRadius: 12 * uiScale)
         return shape
-            .fill(pressed == key
-                  ? AnyShapeStyle(Self.keyColors[key].opacity(0.35))
-                  : AnyShapeStyle(LinearGradient(colors: [.white, Color(red: 0.93, green: 0.92, blue: 0.95)], startPoint: .top, endPoint: .bottom)))
+            // Pressed, the key tips down under the felt: shadowed at the top, tinted with its note's color.
+            .fill(LinearGradient(colors: isDown ? [Color(white: 0.62), Self.keyColors[key].opacity(0.45), Self.keyColors[key].opacity(0.3)]
+                                                : [.white, Color(red: 0.93, green: 0.92, blue: 0.95)],
+                                 startPoint: .top, endPoint: .bottom))
+            .overlay(alignment: .bottom) {
+                // The key's front edge shows when it's up, and disappears as it goes down.
+                UnevenRoundedRectangle(bottomLeadingRadius: 12 * uiScale, bottomTrailingRadius: 12 * uiScale)
+                    .fill(Color(red: 0.78, green: 0.76, blue: 0.82))
+                    .frame(height: isDown ? 0 : 9 * uiScale)
+            }
             .overlay(alignment: .bottom) {
                 // The note's color and letter, which the songs follow.
                 Text(Self.keyNames[key] == "High C" ? "C" : Self.keyNames[key])
@@ -241,7 +249,7 @@ struct PianoView: View {
                         .padding(.top, blackHeight + 6 * uiScale)
                 }
             }
-            .scaleEffect(pressed == key ? 0.98 : 1, anchor: .top)
+            .offset(y: isDown ? 6 * uiScale : 0)
             .frame(width: width)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(Self.keyNames[key])
@@ -251,15 +259,15 @@ struct PianoView: View {
     private func blackKey(_ key: Int, name: String) -> some View {
         let shape = UnevenRoundedRectangle(bottomLeadingRadius: 8 * uiScale, bottomTrailingRadius: 8 * uiScale)
         return shape
-            .fill(LinearGradient(colors: pressed == key ? [Color(white: 0.45), Color(white: 0.3)] : [Color(white: 0.28), Color(red: 0.12, green: 0.1, blue: 0.12)],
+            .fill(LinearGradient(colors: pressed == key ? [Color(white: 0.05), Color(white: 0.2)] : [Color(white: 0.28), Color(red: 0.12, green: 0.1, blue: 0.12)],
                                  startPoint: .top, endPoint: .bottom))
             .overlay(alignment: .top) {
-                // A little shine, like a glossy key.
-                Capsule().fill(.white.opacity(0.25)).frame(width: 5 * uiScale).padding(.vertical, 10 * uiScale).frame(maxHeight: .infinity, alignment: .top)
+                // A little shine, like a glossy key; it goes when the key is down.
+                Capsule().fill(.white.opacity(pressed == key ? 0 : 0.25)).frame(width: 5 * uiScale).padding(.vertical, 10 * uiScale).frame(maxHeight: .infinity, alignment: .top)
                     .offset(x: -6 * uiScale)
             }
             .overlay(shape.stroke(Color.outline, lineWidth: 2.5 * uiScale))
-            .offset(y: pressed == key ? 2 * uiScale : 0)
+            .scaleEffect(y: pressed == key ? 0.95 : 1, anchor: .top)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(name)
             .accessibilityAddTraits(.isButton)

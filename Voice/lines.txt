@@ -1,3 +1,4 @@
+%02d
 1
 1 plus 1 is 2! Yummy! Snap snap!
 1 plus 2 is 3! Yummy! Snap snap!
@@ -59,7 +60,9 @@ ABC
 AVERY
 All clean!
 All done with the bath!
+All done! Sweet dreams, Avery!
 All dry!
+All fixed! Holy guacamole!
 All nails
 All rinsed!
 Animals
@@ -69,6 +72,8 @@ B
 B is for Bear!
 B!
 B! Great tracing!
+Backpack
+Backpack ready!
 Ball
 Ballet flats
 Ballet flats! Fashion show time!
@@ -85,6 +90,8 @@ Beanie! Ooh la la!
 Beanie! So stylish!
 Beanie! Wowza bowza!
 Bear
+Bedtime
+Big hug!
 Big nail
 Bingo card
 Bingo! You filled your card! Holy guacamole!
@@ -109,8 +116,13 @@ Bow! Ooh la la!
 Bow! So stylish!
 Bow! Wowza bowza!
 Bows
+Breakfast
 Brown
 Brown! Like a bear.
+Brush
+Brush hair
+Brush teeth
+Bubble bath, all clean!
 Buns
 Buns! So cute!
 But
@@ -285,6 +297,7 @@ Come here, my love
 Copy this nail
 Copy this!
 Coral
+Cozy pajamas!
 Crocodile-tastic!
 Crown
 Crown! Fashion show time!
@@ -310,6 +323,7 @@ Down
 Down! So cute!
 Drag the hose to spray Mochi.
 Drag to spray Mochi
+Drink of water
 E
 E is for Elephant!
 E!
@@ -327,6 +341,8 @@ Feed
 Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Fish
+Fix
+Floss
 Flower crown
 Flower crown! Fashion show time!
 Flower crown! Holy guacamole, I love it!
@@ -344,6 +360,7 @@ G is for Grapes!
 G sharp
 G!
 G! Great tracing!
+Get dressed
 Give me a hug
 Glitter
 God bless you
@@ -351,7 +368,10 @@ Goldilocks
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good morning
+Good morning! Let's get ready for school.
+Good morning, sunshine!
 Good night
+Good night!
 Goodbye
 Gown
 Gown! Fashion show time!
@@ -364,12 +384,15 @@ Grandpa
 Grapes
 Green
 Green! Like a frog.
+Grown-up timer
+Gulp gulp!
 H
 H is for Horse!
 H!
 H! Great tracing!
 Hair
 Hair color
+Halfway there! Keep going!
 Hare
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
@@ -406,6 +429,30 @@ Hee hee, that's a pig!
 Hee hee, that's a sun!
 Hee hee, that's a van!
 Hee hee, that's a web!
+Hee hee, that's not the apple!
+Hee hee, that's not the ball!
+Hee hee, that's not the bee!
+Hee hee, that's not the bird!
+Hee hee, that's not the boat!
+Hee hee, that's not the bus!
+Hee hee, that's not the cake!
+Hee hee, that's not the car!
+Hee hee, that's not the cat!
+Hee hee, that's not the cow!
+Hee hee, that's not the dog!
+Hee hee, that's not the duck!
+Hee hee, that's not the egg!
+Hee hee, that's not the fish!
+Hee hee, that's not the flower!
+Hee hee, that's not the frog!
+Hee hee, that's not the hat!
+Hee hee, that's not the heart!
+Hee hee, that's not the house!
+Hee hee, that's not the moon!
+Hee hee, that's not the pig!
+Hee hee, that's not the star!
+Hee hee, that's not the sun!
+Hee hee, that's not the tree!
 Hee hee, the apple isn't on your card.
 Hee hee, the ball isn't on your card.
 Hee hee, the bee isn't on your card.
@@ -451,6 +498,7 @@ Hot Cross Buns
 Hot Cross Buns!
 How are you?
 How cool!
+Hugs and kisses
 I
 I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
@@ -496,7 +544,9 @@ Let's have a race, said Hare.
 Let's play!
 Let's read! Tap each letter to hear its sound.
 Let's wash your hair! Rub on the shampoo.
+Lights out
 Lion
+Looking good!
 M
 M is for Moon!
 M!
@@ -504,7 +554,7 @@ M! Great tracing!
 Ma
 Mary Had a Little Lamb
 Mary Had a Little Lamb!
-Maze
+Maze board
 Maze. Drag Mochi to the bone.
 Mochi
 Mochi found her bone! Woof woof!
@@ -527,6 +577,8 @@ MochiRoom
 MochiTail
 Mom
 Moon
+Morning
+Mouth
 Mustard
 My
 My brother
@@ -552,6 +604,7 @@ New maze
 New nails
 New outfit
 New sticker!
+Next patient
 Next picture
 Night night, Mochi. Shh!
 No
@@ -561,10 +614,12 @@ No hat! Holy guacamole, I love it!
 No hat! Ooh la la!
 No hat! So stylish!
 No hat! Wowza bowza!
+No more food stuck! Yay!
 No, said the hen. My chicks and I will eat it!
 Nobody
 Nom nom nom! Yummy!
 Not
+Not yet! Tap the one that's bouncing.
 Nothing
 Nothing! Fashion show time!
 Nothing! Holy guacamole, I love it!
@@ -575,6 +630,7 @@ Now blow dry it.
 Now comb it.
 Now pick a style.
 Now rinse it with water.
+Now tap Rinse to swish!
 Numbers
 O
 O is for Octopus!
@@ -584,6 +640,7 @@ Octopus
 Okay!
 One
 Ooh la la!
+Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Orange! Like an orange.
 Overalls
@@ -623,6 +680,7 @@ Please
 Ponytail
 Ponytail! So cute!
 Press the key with the star.
+Pretty hair!
 Previous picture
 Puff
 Puff! So cute!
@@ -646,6 +704,8 @@ R is for Rainbow!
 R!
 R! Great tracing!
 Rainbow
+Ready for school! Have a great day!
+Ready, set, go! Let's beat the timer!
 Red
 Red! Like a strawberry.
 Remover
@@ -662,6 +722,7 @@ Sandals! Ooh la la!
 Sandals! So stylish!
 Sandals! Wowza bowza!
 Scissors
+Scrub the teeth until they shine.
 Shampoo
 She
 She baked the wheat into bread.
@@ -671,9 +732,12 @@ She tried three bowls of porridge. This one is just right!
 She tried three chairs. This one is just right!
 Shh! Mochi is sleeping.
 Shoes
+Shoes on
+Shoes on, ready to go!
 Skin color
 Sky
 Sleep
+Slide the floss over the bits of food between the teeth.
 Slide!
 Slow
 Snap snap! I filled my card! Good game! Want to play again?
@@ -716,7 +780,10 @@ So she planted it all by herself. The wheat grew tall.
 So smooth!
 So sparkly my tail is wiggling!
 So stylish!
+Sparkly teeth!
+Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
+Splish splash, clean face!
 Squeaky clean! Shake shake shake!
 Stars
 Stars go first! Turn over two cards to find a match.
@@ -724,7 +791,11 @@ Stars go first, then hearts. Get three in a row!
 Stars win! Holy guacamole!
 Stars' turn!
 Start at the green dot.
+Start over
 Stickers
+Stop the timer
+Story
+Story time!
 Styles
 Sun
 Sun hat
@@ -739,6 +810,7 @@ Sunglasses! Holy guacamole, I love it!
 Sunglasses! Ooh la la!
 Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
+Swish swish! Minty fresh! What a great smile!
 T
 T is for Turtle!
 T!
@@ -757,10 +829,12 @@ Tap any key.
 Tap each letter to hear its sound!
 Tap each letter!
 Tap each one.
+Tap each picture when you do it!
 Tap the keys to play! Or pick a song.
 Tap the nail!
+Tap the teeth with a hole to fix them.
 Teal
-Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card.
+Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.
 Thank you
 The
 The Little Red Hen
@@ -777,6 +851,10 @@ Three
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
+Time to get ready for bed.
+Time's up
+Time's up!
+Timer
 Tortoise
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
@@ -796,6 +874,7 @@ U
 U is for Umbrella!
 U!
 U! Great tracing!
+Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
 Up
@@ -809,6 +888,7 @@ W
 W is for Whale!
 W!
 W! Great tracing!
+Wake up
 Wand
 Wand! Fashion show time!
 Wand! Holy guacamole, I love it!
@@ -817,6 +897,7 @@ Wand! So stylish!
 Wand! Wowza bowza!
 Want a haircut?
 Wash
+Wash face
 Whale
 What color should it be?
 Which picture is it?
@@ -843,9 +924,11 @@ Y! Great tracing!
 Yellow
 Yellow! Like a banana.
 Yo-yo
+You beat the timer! Holy guacamole!
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
+Yum yum, breakfast!
 Yummy!
 Z
 Z is for Zebra!
@@ -901,6 +984,7 @@ asleep
 avery
 avocado
 b
+backpack
 bad
 baked
 ball
@@ -936,6 +1020,7 @@ bananas
 bat
 bat! You read it! Snap snap!
 bat! You spelled it!
+bathtub
 beach
 beanie
 bear
@@ -972,6 +1057,7 @@ bee and tree!
 bee!
 bee! You got it!
 big
+bingo
 bird
 bird and apple!
 bird and ball!
@@ -1031,6 +1117,7 @@ boat and tree!
 boat!
 boat! You got it!
 bone
+book
 boots
 bove
 bow
@@ -1250,6 +1337,7 @@ dogbed
 dogbowl
 dogbowl-empty
 down
+drill
 duck
 duck and apple!
 duck and ball!
@@ -1673,6 +1761,7 @@ five
 flag
 flats
 fleece
+floss
 flower
 flower and apple!
 flower and ball!
@@ -1849,6 +1938,7 @@ house! You got it!
 houses
 how
 huffed
+hug
 huh
 i
 ice cream
@@ -1909,6 +1999,7 @@ moon and tree!
 moon!
 moon! You got it!
 mouse
+mouthwash
 mud
 n
 nap
@@ -2010,6 +2101,7 @@ slow
 sneakers
 snow.
 so
+soap
 some
 sparkle
 sparkles
@@ -2082,6 +2174,7 @@ sun! You read it! Snap snap!
 sun! You spelled it!
 sunglasses
 sunhat
+sunrise
 t
 tall
 ten
@@ -2089,9 +2182,11 @@ tennis
 the
 third
 three
+timer
 tle
 to
 took
+toothbrush
 tophat
 trash
 tree

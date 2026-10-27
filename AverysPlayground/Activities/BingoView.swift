@@ -67,8 +67,13 @@ struct BingoView: View {
     @State private var game = BingoGame.new()
     @State private var round = 0
     @State private var wrongPick: BingoTile?
+    /// The tile being dragged, where the finger is, and where each picture on your card sits.
+    @State private var dragging: BingoTile?
+    @State private var dragOffset = CGSize.zero
+    @State private var dragLocation = CGPoint.zero
+    @State private var spots: [BingoTile: CGRect] = [:]
     @State private var shakes = 0
-    @State private var cheer = "Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card."
+    @State private var cheer = "Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card."
     @State private var cheerCount = 0
     @State private var wins = 0
 
@@ -89,6 +94,7 @@ struct BingoView: View {
                         dispenser
                     }
                     .padding(.horizontal)
+                    .zIndex(1)  // a dragged tile passes over your card, not under it
 
                     ZStack {
                         card
@@ -101,6 +107,7 @@ struct BingoView: View {
                 playAgain
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .coordinateSpace(.named("bingo"))
         }
         .padding(.bottom, 16 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
@@ -128,11 +135,24 @@ struct BingoView: View {
                 ForEach(0..<2, id: \.self) { slot in
                     if slot < game.shown.count {
                         let tile = game.shown[slot]
-                        Button { pick(tile) } label: {
-                            tileFace(tile, size: 84 * uiScale)
-                                .cartoonCard(Color(red: 1.0, green: 0.97, blue: 0.86), cornerRadius: 16 * uiScale)
-                        }
-                        .buttonStyle(SquishyButtonStyle())
+                        tileFace(tile, size: 84 * uiScale)
+                            .cartoonCard(Color(red: 1.0, green: 0.97, blue: 0.86), cornerRadius: 16 * uiScale)
+                            .scaleEffect(dragging == tile ? 1.15 : 1)
+                            .offset(dragging == tile ? dragOffset : .zero)
+                            .zIndex(dragging == tile ? 1 : 0)
+                            .gesture(
+                                DragGesture(minimumDistance: 0, coordinateSpace: .named("bingo"))
+                                    .onChanged { value in
+                                        guard !isOver else { return }
+                                        if dragging == nil { Haptics.tap() }
+                                        dragging = tile
+                                        dragOffset = value.translation
+                                        dragLocation = value.location
+                                    }
+                                    .onEnded { value in drop(tile, at: value.location) }
+                            )
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityAction { pick(tile) }
                         .phaseAnimator([CGFloat(0), -12, 12, 0], trigger: shakes) { content, x in
                             content.offset(x: tile == wrongPick ? x : 0)
                         } animation: { _ in .linear(duration: 0.08) }
@@ -158,6 +178,10 @@ struct BingoView: View {
             }
             .buttonStyle(SquishyButtonStyle())
             .disabled(isOver)
+            // Bounces when there's nothing for her to drag, so she knows to slide again.
+            .phaseAnimator([CGFloat(0), -8]) { content, lift in
+                content.offset(y: !isOver && !game.shown.contains(where: game.needs) ? lift : 0)
+            } animation: { _ in .easeInOut(duration: 0.4) }
         }
     }
 
@@ -165,8 +189,11 @@ struct BingoView: View {
     private var card: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10 * uiScale), count: 3), spacing: 10 * uiScale) {
             ForEach(game.card, id: \.self) { tile in
+                let hovered = dragging != nil && spots[tile]?.contains(dragLocation) == true
                 tileFace(tile, size: 100 * uiScale)
                     .frame(maxWidth: .infinity)
+                    .background(hovered ? Color(red: 1.0, green: 0.92, blue: 0.55) : .clear, in: RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous))
+                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .named("bingo")) } action: { spots[tile] = $0 }
                     .overlay {
                         if game.covered.contains(tile) {
                             RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous)
@@ -241,6 +268,24 @@ struct BingoView: View {
         }
     }
 
+    /// Covers the picture if the tile lands on its match; anywhere else it springs back to the machine.
+    private func drop(_ tile: BingoTile, at location: CGPoint) {
+        let target = spots.first { game.card.contains($0.key) && $0.value.contains(location) }?.key
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+            dragging = nil
+            dragOffset = .zero
+        }
+        guard let target, !isOver else { return }  // let go somewhere else: just put it back
+        if target == tile || !game.needs(tile) {
+            pick(tile)
+        } else {
+            Haptics.tap()
+            wrongPick = tile
+            shakes += 1
+            say("Hee hee, that's not the \(tile.word)!")
+        }
+    }
+
     private func pick(_ tile: BingoTile) {
         guard !isOver else { return }
         if withAnimation(.spring(response: 0.35, dampingFraction: 0.6), { game.claim(tile) }) {
@@ -264,7 +309,7 @@ struct BingoView: View {
         Haptics.tap()
         withAnimation(.spring) { game = .new() }
         round += 1
-        say("", hint: "Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card.")
+        say("", hint: "Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.")
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.

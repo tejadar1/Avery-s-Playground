@@ -32,6 +32,8 @@ struct SpellView: View {
 
     @State private var spelling = Spelling(Phonics.words.randomElement()!)
     @State private var wrongTile: Int?
+    /// After a wrong letter, the right one lights up.
+    @State private var hintTile: Int?
     @State private var shakes = 0
     @State private var cheer = "Spell the word! Tap the letters in order. Tap the picture to hear it."
     @State private var cheerCount = 0
@@ -83,6 +85,9 @@ struct SpellView: View {
                             .foregroundStyle(.white)
                             .frame(width: 58 * uiScale, height: 76 * uiScale)  // five fit on the smallest iPhone
                             .cartoonCard(Self.tileColors[index % Self.tileColors.count], cornerRadius: 18 * uiScale)
+                            .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
+                                .strokeBorder(Color(red: 1.0, green: 0.85, blue: 0.3), lineWidth: index == hintTile ? 6 * uiScale : 0))
+                            .scaleEffect(index == hintTile ? 1.12 : 1)
                     }
                     .buttonStyle(SquishyButtonStyle())
                     .opacity(used ? 0.2 : 1)
@@ -106,11 +111,15 @@ struct SpellView: View {
         if withAnimation(.spring(response: 0.3, dampingFraction: 0.6), { spelling.place(index) }) {
             Haptics.tap()
             Sounds.shared.play(.pop)
+            hintTile = nil
             if spelling.isDone { finish() }
         } else {
             Haptics.tap()
             wrongTile = index
             shakes += 1
+            withAnimation(.spring) {
+                hintTile = spelling.tiles.indices.first { !spelling.placed.contains($0) && spelling.tiles[$0] == spelling.next }
+            }
         }
     }
 
@@ -123,7 +132,10 @@ struct SpellView: View {
             try? await Task.sleep(for: .seconds(2.6))
             var newWord = Phonics.words.randomElement()!
             while newWord.text == word { newWord = Phonics.words.randomElement()! }
-            withAnimation(.spring) { spelling = Spelling(newWord) }
+            withAnimation(.spring) {
+                spelling = Spelling(newWord)
+                hintTile = nil
+            }
             say(newWord.text)
         }
     }

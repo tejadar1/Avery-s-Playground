@@ -131,6 +131,16 @@ struct HairSalonView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
     @State private var isShowingOff = false
+    @State private var washed = false
+
+    /// The wash step to do next, which bounces in the tray: shampoo, rinse, dry, then comb.
+    private var nextTool: HairTool? {
+        if !washed { return .shampoo }
+        if !hair.foam.isEmpty { return .rinse }
+        if hair.wetness > 0 { return .dryer }
+        if hair.tangles > 0.1 { return .comb }
+        return nil
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -222,7 +232,10 @@ struct HairSalonView: View {
                             } label: {
                                 ToolPicture(tool: item, size: 56 * uiScale)
                                     .frame(width: 72 * uiScale, height: 72 * uiScale)
-                                    .cartoonCard(.white, cornerRadius: 22 * uiScale)
+                                    .cartoonCard(item == nextTool && item != tool ? Color(red: 1.0, green: 0.92, blue: 0.55) : .white, cornerRadius: 22 * uiScale)
+                                    .phaseAnimator([CGFloat(0), -8]) { content, lift in
+                                        content.offset(y: item == nextTool && item != tool ? lift : 0)
+                                    } animation: { _ in .easeInOut(duration: 0.4) }
                             }
                         }
                     case .style:
@@ -302,6 +315,7 @@ struct HairSalonView: View {
         isWorking = true
         toolTip = location
         hair.use(tool, at: CGPoint(x: location.x / side, y: location.y / side))
+        if !hair.foam.isEmpty { washed = true }
     }
 
     private func finishWork() {
@@ -340,6 +354,7 @@ struct HairSalonView: View {
             tray = .wash
             tool = .shampoo
             isShowingOff = false
+            washed = false
         }
         say("", hint: "Let's wash your hair! Rub on the shampoo.")
     }
