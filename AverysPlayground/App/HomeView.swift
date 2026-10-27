@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var stickers: [String] = []
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -28,12 +30,23 @@ struct HomeView: View {
                             }
                             .buttonStyle(SquishyButtonStyle())
                         }
+                        NavigationLink {
+                            StickerBookView()
+                                .navigationTitle("Stickers")
+                                .navigationBarTitleDisplayMode(.inline)
+                        } label: {
+                            StickerTile(stickers: stickers)
+                        }
+                        .buttonStyle(SquishyButtonStyle())
                     }
                 }
                 .padding(20 * uiScale)
             }
             .background(PlayfulBackground())
-            .onAppear { Music.shared.play(.home) }
+            .onAppear {
+                Music.shared.play(.home)
+                stickers = StickerBook.earned()
+            }
             .navigationDestination(for: HomeSection.self) { section in
                 SectionView(section: section)
                     .navigationTitle(section.title)
@@ -70,6 +83,41 @@ private struct SectionView: View {
             .padding(.top, 20 * uiScale)
         }
         .background(PlayfulBackground())
+    }
+}
+
+/// The sticker book on the home screen, with her newest stickers fanned out and how many she has.
+private struct StickerTile: View {
+    let stickers: [String]
+
+    var body: some View {
+        let shown = stickers.isEmpty ? ["star", "heart", "crown"] : Array(stickers.suffix(3))
+        VStack(spacing: 6 * uiScale) {
+            HStack(spacing: -16 * uiScale) {
+                ForEach(Array(shown.enumerated()), id: \.offset) { index, name in
+                    Picture(name, size: 62 * uiScale)
+                        .padding(10 * uiScale)
+                        .background(Circle().fill(.white))
+                        .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                        .rotationEffect(.degrees(Double(index - 1) * 12))
+                        .opacity(stickers.isEmpty ? 0.5 : 1)
+                }
+            }
+            .padding(.top, 14 * uiScale)
+            .accessibilityHidden(true)
+            Text("Stickers")
+                .font(.kid(40))
+                .foregroundStyle(.white)
+                .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
+            Text("\(stickers.count) of \(StickerBook.all.count) found")
+                .font(.kid(18))
+                .foregroundStyle(.white.opacity(0.95))
+        }
+        .padding(.horizontal, 12 * uiScale)
+        .padding(.bottom, 16 * uiScale)
+        .frame(maxWidth: .infinity, minHeight: 230 * uiScale)
+        .cartoonCard(Color(red: 0.62, green: 0.5, blue: 0.88))
+        .accessibilityElement(children: .combine)
     }
 }
 

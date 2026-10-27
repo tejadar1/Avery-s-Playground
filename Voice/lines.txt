@@ -60,6 +60,7 @@ A farm!
 A garden!
 A night sky!
 A sharp
+A sticker to find
 A. A is for Apple!
 All clean!
 All done with the bath!
@@ -388,6 +389,7 @@ High heels! Holy guacamole, I love it!
 High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
+Holy guacamole! You found every sticker!
 Holy guacamole, I love it!
 Holy guacamole, so pretty!
 Holy guacamole, so stylish!
@@ -473,6 +475,7 @@ Nest
 New customer
 New nails
 New outfit
+New sticker!
 Next picture
 Night night, Mochi. Shh!
 No
@@ -1611,6 +1614,7 @@ moon and sun!
 moon and tree!
 moon!
 moon! You got it!
+mouse
 mud
 n
 nap
@@ -1627,6 +1631,7 @@ o
 octopus
 of
 one
+oopsie
 orange
 out
 overalls
@@ -1741,6 +1746,7 @@ star! You got it!
 star,
 steady
 stick
+stickers
 sticks
 straw
 strawberries
@@ -1846,6 +1852,7 @@ whale
 what
 wheat
 white
+whoopsie!
 will
 wind
 wins

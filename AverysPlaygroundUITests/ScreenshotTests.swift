@@ -139,6 +139,12 @@ final class ScreenshotTests: XCTestCase {
             }
             goHome()
         }
+
+        // By now the games have earned some stickers.
+        tap(button("Stickers"))
+        sleep(1)
+        try snap("16-Stickers", device, dir)
+        goHome()
     }
 
     /// Waits for an element, scrolls it into view if it's off screen, then taps it.

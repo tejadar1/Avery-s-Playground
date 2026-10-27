@@ -207,10 +207,12 @@ struct CocoSays: View {
     }
 }
 
-/// The same win everywhere: confetti, stars and hearts fall, with the sparkle sound and a happy buzz.
+/// The same win everywhere: confetti, stars and hearts fall, with the sparkle sound and a happy buzz,
+/// and a new sticker for her sticker book pops up.
 private struct Celebration: ViewModifier {
     let trigger: Int
     @State private var showing: Int?
+    @State private var sticker: String?
 
     func body(content: Content) -> some View {
         content
@@ -219,15 +221,54 @@ private struct Celebration: ViewModifier {
                     Confetti().id(showing).ignoresSafeArea().allowsHitTesting(false)
                 }
             }
+            .overlay {
+                if let sticker {
+                    NewSticker(name: sticker)
+                        .transition(.scale(scale: 0.3).combined(with: .opacity))
+                        .allowsHitTesting(false)
+                }
+            }
             .onChange(of: trigger) { _, new in
                 Haptics.success()
                 Sounds.shared.play(.sparkle)
                 showing = new
+                let earned = StickerBook.award()
                 Task {
-                    try? await Task.sleep(for: .seconds(3))
+                    try? await Task.sleep(for: .seconds(0.8))
+                    if let earned {
+                        Sounds.shared.play(.pop)
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) { sticker = earned }
+                    }
+                    try? await Task.sleep(for: .seconds(2.2))
+                    withAnimation(.easeIn(duration: 0.25)) { sticker = nil }
                     if showing == new { showing = nil }
                 }
             }
+    }
+}
+
+/// "New sticker!": the sticker she just earned, big, with a ribbon.
+private struct NewSticker: View {
+    let name: String
+
+    var body: some View {
+        VStack(spacing: -14 * uiScale) {
+            Picture(name, size: 130 * uiScale)
+                .padding(22 * uiScale)
+                .background(Circle().fill(.white))
+                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 4 * uiScale))
+                .shadow(color: .black.opacity(0.2), radius: 0, x: 4 * uiScale, y: 6 * uiScale)
+                .rotationEffect(.degrees(-6))
+            Text("New sticker!")
+                .font(.kid(28))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 22 * uiScale)
+                .padding(.vertical, 8 * uiScale)
+                .background(Color(red: 0.95, green: 0.47, blue: 0.6), in: Capsule())
+                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("New sticker: \(name)")
     }
 }
 
