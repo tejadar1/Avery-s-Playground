@@ -374,6 +374,8 @@ Gulp gulp!
 H
 H is for Horse!
 H!
+Ha ha ha! That's funny! Do it again!
+Ha ha ha! That's funny! You did it!
 Hair
 Hair color
 Halfway there! Keep going!
@@ -385,6 +387,7 @@ Hear the word
 Hearts
 Hearts win! Snap snap!
 Hearts' turn!
+Hee hee hee! You're so funny! You made me giggle!
 Hee hee! That tickles!
 Hee hee, not 1!
 Hee hee, not 10!
@@ -437,6 +440,7 @@ Hee hee, that's not the pig!
 Hee hee, that's not the star!
 Hee hee, that's not the sun!
 Hee hee, that's not the tree!
+Hee hee, that's so funny! Again, again!
 Hee hee, the apple isn't on your card.
 Hee hee, the ball isn't on your card.
 Hee hee, the bee isn't on your card.
@@ -818,6 +822,7 @@ Tap the nail!
 Tap the teeth with a hole to fix them.
 Teal
 Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.
+That's funny! That tickles my tummy! Hee hee!
 The
 The Little Red Hen
 The Three Little Pigs
