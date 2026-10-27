@@ -57,7 +57,7 @@ struct Mouth: Equatable {
     /// Scrubs the teeth under the brush, leaving toothpaste foam. True if a tooth got cleaner.
     mutating func brush(at point: CGPoint) -> Bool {
         var scrubbed = false
-        for index in teeth.indices where teeth[index].dirt > 0 && distance(teeth[index].center, point) < 0.09 {
+        for index in teeth.indices where teeth[index].dirt > 0 && Self.distance(teeth[index].center, point) < 0.09 {
             teeth[index].dirt = max(0, teeth[index].dirt - 0.12)
             scrubbed = true
         }
@@ -68,13 +68,13 @@ struct Mouth: Equatable {
     /// Pulls out the food in a gap near the floss. True if it got some.
     mutating func floss(at point: CGPoint) -> Bool {
         let before = food.count
-        food.removeAll { distance($0, point) < 0.07 }
+        food.removeAll { Self.distance($0, point) < 0.07 }
         return food.count < before
     }
 
     /// Fills the cavity in the tooth that was tapped. True if there was one.
     mutating func fix(at point: CGPoint) -> Bool {
-        guard let index = teeth.firstIndex(where: { $0.cavity && !$0.fixed && distance($0.center, point) < 0.09 }) else { return false }
+        guard let index = teeth.firstIndex(where: { $0.cavity && !$0.fixed && Self.distance($0.center, point) < 0.09 }) else { return false }
         teeth[index].fixed = true
         return true
     }
@@ -83,7 +83,7 @@ struct Mouth: Equatable {
         foam = []
     }
 
-    private func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat { hypot(a.x - b.x, a.y - b.y) }
+    private static func distance(_ a: CGPoint, _ b: CGPoint) -> CGFloat { hypot(a.x - b.x, a.y - b.y) }
 }
 
 struct DentistView: View {
