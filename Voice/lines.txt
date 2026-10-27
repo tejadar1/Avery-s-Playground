@@ -4,9 +4,7 @@
 1 plus 3 is 4! Yummy! Snap snap!
 1 plus 4 is 5! Yummy! Snap snap!
 1 plus 5 is 6! Yummy! Snap snap!
-1! Great counting!
 10
-10! Great counting!
 11
 12
 13
@@ -22,7 +20,6 @@
 2 plus 3 is 5! Yummy! Snap snap!
 2 plus 4 is 6! Yummy! Snap snap!
 2 plus 5 is 7! Yummy! Snap snap!
-2! Great counting!
 20
 3
 3 plus 1 is 4! Yummy! Snap snap!
@@ -30,29 +27,22 @@
 3 plus 3 is 6! Yummy! Snap snap!
 3 plus 4 is 7! Yummy! Snap snap!
 3 plus 5 is 8! Yummy! Snap snap!
-3! Great counting!
 4
 4 plus 1 is 5! Yummy! Snap snap!
 4 plus 2 is 6! Yummy! Snap snap!
 4 plus 3 is 7! Yummy! Snap snap!
 4 plus 4 is 8! Yummy! Snap snap!
 4 plus 5 is 9! Yummy! Snap snap!
-4! Great counting!
 5
 5 plus 1 is 6! Yummy! Snap snap!
 5 plus 2 is 7! Yummy! Snap snap!
 5 plus 3 is 8! Yummy! Snap snap!
 5 plus 4 is 9! Yummy! Snap snap!
 5 plus 5 is 10! Yummy! Snap snap!
-5! Great counting!
 6
-6! Great counting!
 7
-7! Great counting!
 8
-8! Great counting!
 9
-9! Great counting!
 A
 A beach!
 A coral reef!

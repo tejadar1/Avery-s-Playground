@@ -58,7 +58,6 @@ for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
 
 numbers = range(1, 21)
 lines.update(str(n) for n in numbers)
-lines.update(f"{n}! Great counting!" for n in range(1, 11))
 lines.update(f"Let's count to {n}!" for n in range(1, 11))
 
 for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", picture: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):

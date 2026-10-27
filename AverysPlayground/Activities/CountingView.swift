@@ -76,7 +76,7 @@ struct CountingView: View {
         }
         if isDone {
             wins += 1
-            say("\(number)! Great counting!")
+            say("\(number)")  // the last number; the confetti does the cheering
         } else {
             Haptics.tap()
             say("\(counted.count)")
