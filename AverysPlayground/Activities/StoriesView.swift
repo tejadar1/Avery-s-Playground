@@ -284,7 +284,7 @@ private struct StoryReader: View {
         }
         .padding(16 * uiScale)
         .background(Scenery(.library).ignoresSafeArea())
-        .onAppear { Speaker.shared.say(story.title, language: story.language) }
+        .onAppear { read(story.title) }
     }
 
     private func book(wide: Bool) -> some View {
@@ -294,7 +294,7 @@ private struct StoryReader: View {
                                  identity: PageTurn(angle: 0, anchor: turningForward ? .leading : .trailing)),
             removal: .opacity)
         return spread {
-            Button { Speaker.shared.say(page.text, language: story.language) } label: {
+            Button { read(page.text) } label: {
                 StoryScene(page: page)
             }
             .buttonStyle(SquishyButtonStyle())
@@ -372,7 +372,7 @@ private struct StoryReader: View {
             Spacer()
             if isLastPage {
                 pageButton("house.fill", hidden: false) {
-                    Speaker.shared.say(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!", language: story.language)
+                    read(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!")
                     dismiss()
                 }
             } else {
@@ -409,7 +409,16 @@ private struct StoryReader: View {
         isSwiping = true
         current = index
         Haptics.tap()
-        Speaker.shared.say(words[index].trimmingCharacters(in: .punctuationCharacters), language: story.language)
+        read(words[index].trimmingCharacters(in: .punctuationCharacters))
+    }
+
+    /// Dora reads the books: her Spanish voice for the Spanish ones, and her voice speaking English for the rest.
+    private func read(_ text: String) {
+        if story.language == "en-US" {
+            Speaker.shared.say(Speaker.dora + text)
+        } else {
+            Speaker.shared.say(text, language: story.language)
+        }
     }
 
     private func turn(by delta: Int) {

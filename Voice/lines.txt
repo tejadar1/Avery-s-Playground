@@ -123,7 +123,6 @@ Brush teeth
 Bubble bath, all clean!
 Buns
 Buns! So cute!
-But
 But he could not blow down the brick house. The three pigs were safe!
 C
 C is for Cat!
@@ -353,7 +352,6 @@ G sharp
 G!
 Get dressed
 Glitter
-Goldilocks
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good morning! Let's get ready for school.
@@ -379,7 +377,6 @@ Ha ha ha! That's funny! You did it!
 Hair
 Hair color
 Halfway there! Keep going!
-Hare
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
 Hats
@@ -525,7 +522,6 @@ L
 L is for Lion!
 L!
 Leo
-Let's
 Let's count to 1!
 Let's count to 10!
 Let's count to 2!
@@ -577,7 +573,6 @@ Moon
 Morning
 Mouth
 Mustard
-My
 My name
 My tail is so long, sometimes I forget it's mine! Hello, tail!
 N
@@ -598,7 +593,6 @@ New nails
 New sticker!
 Next picture
 Night night, Mochi. Shh!
-No
 No hat
 No hat! Fashion show time!
 No hat! Holy guacamole, I love it!
@@ -607,9 +601,7 @@ No hat! So stylish!
 No hat! Wowza bowza!
 No more food stuck! Yay!
 No, said the hen. My chicks and I will eat it!
-Nobody
 Nom nom nom! Yummy!
-Not
 Not yet! Tap the one that's bouncing.
 Nothing
 Nothing! Fashion show time!
@@ -712,7 +704,6 @@ Say cheese! Snap snap!
 Scissors
 Scrub the teeth until they shine.
 Shampoo
-She
 She baked the wheat into bread.
 She found a little house. Nobody was home.
 She tried three beds and fell fast asleep.
@@ -727,7 +718,6 @@ Sky
 Sleep
 Slide the floss over the bits of food between the teeth.
 Slide!
-Slow
 Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
@@ -763,7 +753,6 @@ Sneakers! Ooh la la!
 Sneakers! So stylish!
 Sneakers! Wowza bowza!
 Snip snip! Don't cut my tail!
-So
 So bubbly!
 So she planted it all by herself. The wheat grew tall.
 So smooth!
@@ -825,7 +814,6 @@ Tap the teeth with a hole to fix them.
 Teal
 Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.
 That's funny! That tickles my tummy! Hee hee!
-The
 The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
@@ -835,8 +823,6 @@ The little red hen found some wheat.
 The second pig built a house of sticks.
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
-This
-Three
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
@@ -844,7 +830,6 @@ Time to get ready for bed.
 Time's up
 Time's up!
 Timer
-Tortoise
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Trace board
@@ -891,7 +876,6 @@ What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Which picture is it?
 White
 White! Like a cloud.
-Who
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who's silly? You're silly! Snap snap!
@@ -937,11 +921,8 @@ a strawberry
 a whale
 aeiou
 ah
-ahead
 ahh
-all
 an orange
-and
 apple
 apple and apple!
 apple and ball!
@@ -972,12 +953,9 @@ apple! You got it!
 apples
 are.
 as
-asleep
 avery
 b
 backpack
-bad
-baked
 ball
 ball and apple!
 ball and ball!
@@ -1015,11 +993,9 @@ bathtub
 beach
 beanie
 bear
-bears
 bed
 bed! You read it! Snap snap!
 bed! You spelled it!
-beds
 bee
 bee and apple!
 bee and ball!
@@ -1047,7 +1023,6 @@ bee and sun!
 bee and tree!
 bee!
 bee! You got it!
-big
 bingo
 bird
 bird and apple!
@@ -1076,8 +1051,6 @@ bird and sun!
 bird and tree!
 bird!
 bird! You got it!
-blew
-blow
 boat
 boat and apple!
 boat and ball!
@@ -1111,20 +1084,16 @@ boots
 bove
 bow
 bowl
-bowls
 box
 box! You read it! Snap snap!
 box! You spelled it!
 bread
-brick
 bricks
 bubbles
 bug
 bug! You read it! Snap snap!
 bug! You spelled it!
 buh
-build
-built
 buns
 buns!
 bus
@@ -1157,7 +1126,6 @@ bus! You got it!
 bus! You read it! Snap snap!
 bus! You spelled it!
 butterfly
-by
 c
 cake
 cake and apple!
@@ -1186,7 +1154,6 @@ cake and sun!
 cake and tree!
 cake!
 cake! You got it!
-came
 car
 car and apple!
 car and ball!
@@ -1245,15 +1212,12 @@ cat! You read it! Snap snap!
 cat! You spelled it!
 caterpillar
 chair
-chairs
 checkmark
 chick
-chicks
 comb
 cookie
 cookies
 coral reef
-could
 cow
 cow and apple!
 cow and ball!
@@ -1328,6 +1292,8 @@ dora:Ahh, minty fresh! Thank you, Coco!
 dora:Animals
 dora:Bless me, Grandma
 dora:Bless me, Grandpa
+dora:But
+dora:But he could not blow down the brick house. The three pigs were safe!
 dora:Colors
 dora:Come here, my love
 dora:Dad
@@ -1336,12 +1302,18 @@ dora:Family
 dora:Food
 dora:Give me a hug
 dora:God bless you
+dora:Goldilocks
+dora:Goldilocks and the Three Bears
+dora:Goldilocks went for a walk in the woods.
 dora:Good morning
 dora:Good night
 dora:Goodbye
 dora:Gracias, Coco! I love it!
 dora:Grandma
 dora:Grandpa
+dora:Hare
+dora:Hare ran far ahead and took a nap under a tree.
+dora:Hare was fast. Tortoise was slow.
 dora:Hello
 dora:Hello!
 dora:Hi Coco! I'm so excited!
@@ -1350,70 +1322,200 @@ dora:Hola Coco! Holy guacamole, it's my turn!
 dora:Holy guacamole, look at me!
 dora:How are you?
 dora:How cool!
+dora:I
 dora:I love it! Thank you, Coco!
 dora:I love you so much
 dora:I'm hungry
 dora:In a little bit
+dora:Let's
+dora:Let's have a race, said Hare.
 dora:Let's play!
 dora:Look at my smile! Gracias!
 dora:Mom
+dora:My
 dora:My brother
 dora:My name is Avery
 dora:My sister
 dora:My teeth are so sparkly! Thank you!
+dora:No
+dora:No, said the hen. My chicks and I will eat it!
+dora:Nobody
+dora:Not
 dora:Numbers
 dora:Please
 dora:Put on your flip-flops
+dora:She
+dora:She baked the wheat into bread.
+dora:She found a little house. Nobody was home.
+dora:She tried three beds and fell fast asleep.
+dora:She tried three bowls of porridge. This one is just right!
+dora:She tried three chairs. This one is just right!
+dora:Slow
+dora:So
+dora:So she planted it all by herself. The wheat grew tall.
 dora:Thank you
+dora:The
+dora:The Little Red Hen
+dora:The Three Little Pigs
+dora:The Tortoise and the Hare
+dora:The big bad wolf huffed and puffed and blew the straw and stick houses down!
+dora:The end!
+dora:The first pig built a house of straw.
+dora:The little red hen found some wheat.
+dora:The second pig built a house of sticks.
+dora:The third pig built a house of bricks.
+dora:The three bears came home! Goldilocks woke up and ran all the way home.
+dora:This
+dora:Three
+dora:Three little pigs went out to build three little houses.
+dora:Tortoise
+dora:Tortoise kept going, slow and steady.
+dora:Tortoise won the race! Slow and steady wins.
 dora:Very good
+dora:Who
+dora:Who will help me eat it? I will, said the dog, the cat, and the duck.
+dora:Who will help me plant it? Not I, said the dog, the cat, and the duck.
 dora:Wow! I look amazing!
 dora:Yummy!
+dora:a
+dora:ahead
+dora:all
+dora:and
 dora:apple
+dora:asleep
 dora:avocado
+dora:bad
+dora:baked
 dora:banana
+dora:bears
+dora:beds
+dora:big
 dora:bird
 dora:black
+dora:blew
+dora:blow
 dora:blue
+dora:bowls
 dora:bread
+dora:brick
+dora:bricks
+dora:build
+dora:built
+dora:by
 dora:cake
+dora:came
 dora:cat
+dora:chairs
 dora:cheese
+dora:chicks
 dora:cookie
+dora:could
 dora:cow
 dora:crocodile
 dora:dog
+dora:down
+dora:duck
+dora:eat
 dora:eight
+dora:far
+dora:fast
+dora:fell
+dora:first
 dora:fish
 dora:five
+dora:for
+dora:found
 dora:four
 dora:fried cheese
 dora:fried plantains
 dora:frog
+dora:going
 dora:green
+dora:grew
+dora:have
+dora:he
+dora:help
+dora:hen
+dora:herself
+dora:home
 dora:horse
+dora:house
+dora:houses
+dora:huffed
 dora:ice cream
+dora:in
+dora:into
+dora:is
+dora:it
+dora:just
+dora:kept
+dora:little
 dora:mango
 dora:mashed plantains
+dora:me
 dora:milk
+dora:nap
 dora:nine
+dora:not
+dora:of
 dora:one
 dora:orange
+dora:out
+dora:pig
+dora:pigs
 dora:pink
+dora:plant
 dora:plantain
+dora:planted
+dora:porridge
+dora:puffed
 dora:purple
+dora:race
+dora:ran
 dora:red
 dora:rice and beans
+dora:right
+dora:safe
+dora:said
 dora:salami
+dora:second
 dora:seven
+dora:she
 dora:six
+dora:slow
+dora:some
+dora:steady
 dora:stew
+dora:stick
+dora:sticks
+dora:straw
+dora:tall
 dora:ten
+dora:the
+dora:third
 dora:three
+dora:to
+dora:took
+dora:tree
+dora:tried
 dora:two
+dora:under
+dora:up
+dora:walk
+dora:was
 dora:water
+dora:way
+dora:went
+dora:were
+dora:wheat
 dora:white
+dora:will
+dora:wins
+dora:woke
+dora:wolf
+dora:won
+dora:woods
 dora:yellow
-down
 drill
 duck
 duck and apple!
@@ -1444,7 +1546,6 @@ duck!
 duck! You got it!
 duh
 e
-eat
 egg
 egg and apple!
 egg and ball!
@@ -1800,12 +1901,8 @@ es:¿Quieres mangú?
 es:árbol
 es:él
 f
-far
 farm
-fast
-fell
 fff
-first
 fish
 fish and apple!
 fish and ball!
@@ -1866,8 +1963,6 @@ flower!
 flower! You got it!
 flowercrown
 footprints
-for
-found
 fox
 fox! You read it! Snap snap!
 fox! You spelled it!
@@ -1902,10 +1997,8 @@ g
 garden
 gem
 girl
-going
 gown
 grapes
-grew
 guh
 h
 had
@@ -1940,8 +2033,6 @@ hat!
 hat! You got it!
 hat! You read it! Snap snap!
 hat! You spelled it!
-have
-he
 heart
 heart and apple!
 heart and ball!
@@ -1970,13 +2061,10 @@ heart and tree!
 heart!
 heart! You got it!
 heels
-help
 hen
 hen! You read it! Snap snap!
 hen! You spelled it!
-herself
 high,
-home
 horse
 hot
 house
@@ -2006,23 +2094,16 @@ house and sun!
 house and tree!
 house!
 house! You got it!
-houses
 how
-huffed
 hug
 huh
 i
 icecream
 ih
 in
-into
-is
-it
 its
 juice
-just
 k
-kept
 kite
 kle
 ks
@@ -2034,8 +2115,6 @@ lightning
 like
 lion
 lit
-little
-me
 mochi
 mond
 moon
@@ -2069,21 +2148,16 @@ mouse
 mouthwash
 mud
 n
-nap
 necklace
 nest
 night sky
 nnn
 none
-not
 note
 ny,
 o
 octopus
-of
-one
 oopsie
-out
 overalls
 p
 paintbrush
@@ -2123,43 +2197,28 @@ pig!
 pig! You got it!
 pig! You read it! Snap snap!
 pig! You spelled it!
-pigs
 pizza
-plant
-planted
 polish
-porridge
-puffed
 puh
 purse
 queen
 rabbit
-race
 rainbow
-ran
-red
-right
 room
 ry
 s
-safe
-said
 sandals
 scissors
-second
 shampoo
-she
 sheep
 shower
 sky.
 sleep
 slice of pizza
 slices of pizza
-slow
 sneakers
 snow.
 so
-some
 sound:b
 sound:d
 sound:f
@@ -2210,11 +2269,8 @@ star and tree!
 star!
 star! You got it!
 star,
-steady
-stick
 stickers
 sticks
-straw
 strawberries
 strawberry
 sun
@@ -2250,16 +2306,11 @@ sunglasses
 sunhat
 sunrise
 t
-tall
 tennis
 the
-third
-three
 timer
 tle
-to
 toilet
-took
 toothbrush
 tophat
 trash
@@ -2290,7 +2341,6 @@ tree and sun!
 tree and tree!
 tree!
 tree! You got it!
-tried
 trophy
 tshirt
 tuh
@@ -2301,8 +2351,6 @@ two
 u
 uh
 umbrella
-under
-up
 v
 van
 van! You read it! Snap snap!
@@ -2311,27 +2359,19 @@ violin
 vitamins
 vvv
 w
-walk
 wand
 was
-way
 web
 web! You read it! Snap snap!
 web! You spelled it!
-went
-were
 whale
 what
 wheat
 white
 whoopsie!
-will
 wind
-wins
-woke
 wolf
 won
-woods
 world
 wuh
 x
