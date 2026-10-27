@@ -19,7 +19,7 @@ Hair Salon, Dress Up, Dentist, Mochi, Maze, Coloring, Draw) and **Team Up**, gam
 | 🍕 | **Math** | Adding with food: "Coco has 2 slices of pizza. Mochi brings 1 more. How many now?" Tap the slices to count them, then pick the answer. Sums up to 10. |
 | 🗣️ | **Español** | Spanish words and phrases in six sets: greetings, family (talking with abuela and abuelo: "Bendición, abuela"), food (Dominican first: mangú, tostones, sancocho; in the DR a plantain is plátano and a banana is guineo), animals, colors and numbers. Tap a card to hear the Spanish, the English, then the Spanish again so your child can say it back. |
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A is for Apple!" |
-| ✏️ | **Trace** | Trace capital letters with a finger, stroke by stroke from a green start dot along dotted paths on writing paper; ABC goes through the alphabet and My name traces A-V-E-R-Y. |
+| ✏️ | **Trace** | Trace capital letters with a finger along dotted paths on writing paper: any part in any order, and close to the line counts (green dots hint where each part starts); ABC goes through the alphabet and My name traces A-V-E-R-Y. |
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name), then tap a part to fill it or color it in with a finger. |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |

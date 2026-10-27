@@ -13,16 +13,15 @@ final class TracingTests: XCTestCase {
         }
     }
 
-    func testStrokesGoInOrderAndScribblesDontCount() {
+    func testStrokesGoInAnyOrderAndScribblesDontCount() {
         var tracing = Tracing(letter: TraceLetter.named("T"))
-        // The T's stem is the second stroke, so tracing it first does nothing.
-        for point in TraceLetter.resample([CGPoint(x: 0.5, y: 0.15), CGPoint(x: 0.5, y: 0.85)], every: 0.02) {
-            XCTAssertFalse(tracing.touch(point))
-        }
-        XCTAssertEqual(tracing.stroke, 0)
-        // A dot in the corner is nowhere near the top bar.
+        // The stem first is fine: it finishes the stem but not the top bar.
+        for point in TraceLetter.resample([CGPoint(x: 0.5, y: 0.15), CGPoint(x: 0.5, y: 0.85)], every: 0.02) { _ = tracing.touch(point) }
+        XCTAssertEqual(tracing.traced, [1])
+        XCTAssertFalse(tracing.isDone)
+        // A dot in the corner is nowhere near the letter.
         var fresh = Tracing(letter: TraceLetter.named("T"))
         XCTAssertFalse(fresh.touch(CGPoint(x: 0.95, y: 0.95)))
-        XCTAssertTrue(fresh.hit.isEmpty)
+        XCTAssertTrue(fresh.hits.allSatisfy(\.isEmpty))
     }
 }

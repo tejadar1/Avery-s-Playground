@@ -767,7 +767,6 @@ Stars go first! Turn over two cards to find a match.
 Stars go first, then hearts. Get three in a row!
 Stars win! Holy guacamole!
 Stars' turn!
-Start at the green dot.
 Start over
 Stickers
 Stop the timer
@@ -833,7 +832,8 @@ Timer
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Trace board
-Trace the A with your finger. Start at the green dot!
+Trace the A with your finger!
+Trace the gray lines with your finger.
 Turtle
 Tutu
 Tutu! Fashion show time!

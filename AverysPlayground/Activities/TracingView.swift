@@ -75,29 +75,39 @@ struct TraceLetter {
     ]
 }
 
-/// How far along a letter the finger has traced: one stroke at a time, in order.
+/// Which parts of a letter the finger has traced. Any part, in any order: being close to the line is enough.
 struct Tracing {
-    /// Forgiving, for little fingers: near the line counts, and most of the stroke is enough.
-    static let reach: CGFloat = 0.11
-    static let enough = 0.8
+    /// Forgiving, for little fingers: near the line counts, and most of a stroke is enough.
+    static let reach: CGFloat = 0.14
+    static let enough = 0.7
 
     let letter: TraceLetter
-    private(set) var stroke = 0
-    private(set) var hit: Set<Int> = []
+    /// The strokes traced so far.
+    private(set) var traced: Set<Int> = []
+    /// Each stroke's checkpoints the finger has passed near.
+    private(set) var hits: [Set<Int>]
 
-    var isDone: Bool { stroke == letter.strokes.count }
+    init(letter: TraceLetter) {
+        self.letter = letter
+        hits = Array(repeating: [], count: letter.strokes.count)
+    }
 
-    /// Marks the current stroke's checkpoints near `point`. Returns true when that finishes the stroke.
+    var isDone: Bool { traced.count == letter.strokes.count }
+
+    /// Marks the checkpoints near `point` on every stroke not traced yet. Returns true when that finishes a stroke.
     mutating func touch(_ point: CGPoint) -> Bool {
-        guard !isDone else { return false }
-        let checkpoints = letter.checkpoints[stroke]
-        for (index, spot) in checkpoints.enumerated() where hypot(spot.x - point.x, spot.y - point.y) < Self.reach {
-            hit.insert(index)
+        var finished = false
+        for stroke in letter.strokes.indices where !traced.contains(stroke) {
+            let checkpoints = letter.checkpoints[stroke]
+            for (index, spot) in checkpoints.enumerated() where hypot(spot.x - point.x, spot.y - point.y) < Self.reach {
+                hits[stroke].insert(index)
+            }
+            if Double(hits[stroke].count) >= Double(checkpoints.count) * Self.enough {
+                traced.insert(stroke)
+                finished = true
+            }
         }
-        guard Double(hit.count) >= Double(checkpoints.count) * Self.enough else { return false }
-        stroke += 1
-        hit = []
-        return true
+        return finished
     }
 }
 
@@ -115,7 +125,7 @@ struct TracingView: View {
     @State private var tracing = Tracing(letter: TraceLetter.alphabet[0])
     @State private var ink: [[CGPoint]] = []
     @State private var isDrawing = false
-    @State private var cheer = "Trace the A with your finger. Start at the green dot!"
+    @State private var cheer = "Trace the A with your finger!"
     @State private var cheerCount = 0
     @State private var wins = 0
 
@@ -163,18 +173,19 @@ struct TracingView: View {
             func pen(_ width: CGFloat) -> StrokeStyle { StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round) }
             for (number, stroke) in tracing.letter.strokes.enumerated() {
                 let shape = path(stroke)
-                if number < tracing.stroke {
+                if tracing.traced.contains(number) {
                     context.stroke(shape, with: .color(color), style: pen(side * 0.1))
                 } else {
-                    context.stroke(shape, with: .color(Color(white: number == tracing.stroke ? 0.86 : 0.92)), style: pen(side * 0.12))
+                    context.stroke(shape, with: .color(Color(white: 0.86)), style: pen(side * 0.12))
                     context.stroke(shape, with: .color(Color(white: 0.6)), style: StrokeStyle(lineWidth: side * 0.012, lineCap: .round, dash: [side * 0.02, side * 0.03]))
                 }
             }
             for line in ink {
                 context.stroke(path(line), with: .color(color.opacity(0.85)), style: pen(side * 0.055))
             }
-            // Where to start the next stroke
-            if !tracing.isDone, let start = tracing.letter.strokes[tracing.stroke].first?.applying(scale) {
+            // A hint of where each part not traced yet usually starts
+            for (number, stroke) in tracing.letter.strokes.enumerated() where !tracing.traced.contains(number) {
+                guard let start = stroke.first?.applying(scale) else { continue }
                 let dot = CGRect(x: start.x - side * 0.04, y: start.y - side * 0.04, width: side * 0.08, height: side * 0.08)
                 context.fill(Path(ellipseIn: dot), with: .color(Color(red: 0.38, green: 0.72, blue: 0.4)))
                 context.stroke(Path(ellipseIn: dot), with: .color(.outline), lineWidth: side * 0.008)
@@ -249,7 +260,7 @@ struct TracingView: View {
         tracing = Tracing(letter: letters[number])
         ink = []
         isDrawing = false
-        say("\(tracing.letter.letter)!", hint: "Start at the green dot.")
+        say("\(tracing.letter.letter)!", hint: "Trace the gray lines with your finger.")
     }
 
     private func finishLetter() {
