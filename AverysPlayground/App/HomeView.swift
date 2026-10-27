@@ -11,7 +11,7 @@ struct HomeView: View {
                     ViewThatFits(in: .horizontal) {
                         HStack(spacing: 8 * uiScale) {
                             friends
-                            title
+                            title.fixedSize()  // only beside them when the title fits on one line
                         }
                         VStack(spacing: 8 * uiScale) {
                             friends
@@ -128,7 +128,7 @@ private extension HomeView {
                 .font(.kid(20))
                 .foregroundStyle(Color.outline.opacity(0.7))
         }
-        .fixedSize()
+        .multilineTextAlignment(.center)
     }
 }
 
