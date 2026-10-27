@@ -74,7 +74,7 @@ struct DressUpView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .photo(photo, caption: friend.name, flashes: flashes, size: 220 * uiScale)
             .padding(.horizontal)
-            .overlay(alignment: .topTrailing) {
+            .overlay(alignment: .bottomTrailing) {  // beside the hem, clear of her head
                 UpNext(count: Friend.all.count, current: model) { index in
                     let waiting = Friend.all[index]
                     // Just her face: the whole doll, zoomed in on the head
