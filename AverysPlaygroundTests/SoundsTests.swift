@@ -13,7 +13,7 @@ final class SoundsTests: XCTestCase {
     }
 
     func testOnlyOneShotSoundsDontLoop() {
-        XCTAssertEqual(Sound.allCases.filter { !$0.loops }, [.pop, .sparkle])
+        XCTAssertEqual(Sound.allCases.filter { !$0.loops }, [.pop, .sparkle, .shutter])
     }
 
     func testEveryTuneIsASoftLoop() {

@@ -2,12 +2,12 @@ import AVFoundation
 
 /// Sound effects made on the fly, like the piano notes, so the app needs no sound files.
 enum Sound: CaseIterable {
-    case dryer, water, bubbles, brush, snip, pop, sparkle
+    case dryer, water, bubbles, snip, pop, sparkle, shutter
 
     static let rate = 44_100.0
 
     /// Sounds that keep going while a finger is down, until `Sounds.stop()`.
-    var loops: Bool { self != .pop && self != .sparkle }
+    var loops: Bool { self != .pop && self != .sparkle && self != .shutter }
 
     /// Mono samples in -1...1. Looping sounds join up without a click.
     var samples: [Float] {
@@ -42,16 +42,6 @@ enum Sound: CaseIterable {
                 }
             }
             return Self.scaled(s, peak: 0.35)
-        case .brush:
-            // Scratchy noise that swells with each back-and-forth stroke.
-            var low = 0.0, lower = 0.0
-            return Self.make(seconds: 0.5, peak: 0.25) { t in
-                let n = Self.noise()
-                low += 0.3 * (n - low)
-                lower += 0.05 * (n - lower)
-                let swell: Double = 0.4 + 0.6 * abs(sin(2 * .pi * 4 * t))
-                return (low - lower) * swell
-            }
         case .snip:
             var s = [Float](repeating: 0, count: Int(Self.rate * 0.5))
             for start in [0.0, 0.22] {
@@ -76,6 +66,13 @@ enum Sound: CaseIterable {
                 }
             }
             return Self.scaled(s, peak: 0.4)
+        case .shutter:
+            // A camera: two quick clicks, the shutter opening and closing.
+            var s = [Float](repeating: 0, count: Int(Self.rate * 0.15))
+            for (start, loud) in [(0.0, 1.0), (0.07, 0.7)] {
+                Self.add(&s, at: start, seconds: 0.03) { u in loud * Self.noise() * exp(-u * 220) }
+            }
+            return Self.scaled(s, peak: 0.6)
         }
     }
 

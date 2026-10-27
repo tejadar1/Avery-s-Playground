@@ -32,6 +32,29 @@ enum DentistTool: String, CaseIterable {
     }
 }
 
+/// The animals who come to the dentist, taking turns.
+enum Patient: CaseIterable {
+    case lion, bear, bunny, kitty
+
+    var name: String {
+        switch self {
+        case .lion: "Leo"
+        case .bear: "Bobo"
+        case .bunny: "Bella"
+        case .kitty: "Kiki"
+        }
+    }
+
+    var fur: Color {
+        switch self {
+        case .lion: Color(red: 0.98, green: 0.8, blue: 0.45)
+        case .bear: Color(red: 0.78, green: 0.56, blue: 0.38)
+        case .bunny: Color(red: 0.98, green: 0.96, blue: 0.98)
+        case .kitty: Color(red: 0.8, green: 0.8, blue: 0.86)
+        }
+    }
+}
+
 /// A wide-open mouth at the dentist: dirty teeth to brush, food stuck between them to floss,
 /// cavities to fix, and foam to rinse away. Points are 0...1 across the mouth picture.
 struct Mouth: Equatable {
@@ -107,6 +130,12 @@ struct Mouth: Equatable {
 
 struct DentistView: View {
     @State private var mouth = Mouth()
+    /// Whose turn it is, in Patient.allCases.
+    @State private var turn = 0
+    @State private var photo: Image?
+    @State private var flashes = 0
+    private var patient: Patient { Patient.allCases[turn] }
+    private var nextPatient: Patient { Patient.allCases[(turn + 1) % Patient.allCases.count] }
     @State private var tool = DentistTool.brush
     @State private var toolTip: CGPoint?
     @State private var rinsing = false
@@ -122,21 +151,20 @@ struct DentistView: View {
                 let side = min(geo.size.width, geo.size.height)
                 mouthView(side: side)
                     .frame(width: side, height: side)
+                    .photo(photo, caption: patient.name, flashes: flashes, size: side * 0.6)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(.horizontal)
+            .overlay(alignment: .topTrailing) {
+                UpNext(count: Patient.allCases.count, current: turn) { index in
+                    let waiting = Patient.allCases[index]
+                    Canvas { context, size in DentistArt.draw(nil, patient: waiting, in: &context, size: size) }
+                }
+                .padding(.trailing)
+            }
 
             if mouth.isClean {
-                Button(action: newPatient) {
-                    Text("Next patient")
-                        .font(.kid(28))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 28 * uiScale)
-                        .frame(height: 64 * uiScale)
-                        .cartoonCard(Color(red: 0.36, green: 0.75, blue: 0.68), cornerRadius: 32 * uiScale)
-                }
-                .buttonStyle(SquishyButtonStyle())
-                .padding(.bottom, 16 * uiScale)
+                PhotoOrNext(next: nextPatient.name, takePhoto: takePhoto, goNext: newPatient)
             } else {
                 toolTray
             }
@@ -173,7 +201,7 @@ struct DentistView: View {
 
     private func mouthView(side: CGFloat) -> some View {
         Canvas { context, size in
-            DentistArt.draw(mouth, in: &context, size: size)
+            DentistArt.draw(mouth, patient: patient, in: &context, size: size)
         }
         .overlay(alignment: .topLeading) {
             if rinsing {
@@ -249,7 +277,10 @@ struct DentistView: View {
         case .rinse: changed = false
         }
         guard changed else { return }
-        if tool == .brush { Sounds.shared.play(.brush) } else { Sounds.shared.play(.pop); Haptics.tap() }
+        if tool != .brush {  // brushing is quiet; the foam and the wiggle show it
+            Sounds.shared.play(.pop)
+            Haptics.tap()
+        }
         // A cheer when a job is finished, pointing to the next one.
         if before.isDirty && !mouth.isDirty {
             say("Sparkly teeth! Snap snap!", hint: nextHint)
@@ -284,13 +315,25 @@ struct DentistView: View {
         }
     }
 
+    private func takePhoto() {
+        Sounds.shared.play(.shutter)
+        Haptics.tap()
+        let who = patient
+        let picture = snapshot(of: Canvas { context, size in DentistArt.draw(nil, patient: who, in: &context, size: size) }, size: 300)
+        flashes += 1
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
+        say("Say cheese! Snap snap!")
+    }
+
     private func newPatient() {
         Haptics.tap()
         withAnimation(.spring) {
+            turn = (turn + 1) % Patient.allCases.count
             mouth = Mouth()
             tool = .brush
+            photo = nil
         }
-        say("Open wide! Pick the toothbrush and brush the teeth.")
+        say("Hi \(patient.name)!", hint: "Open wide! Pick the toothbrush and brush the teeth.")
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.
@@ -301,12 +344,12 @@ struct DentistView: View {
     }
 }
 
-/// Draws the open mouth in the app's style: pink lips with an outline, gums, a tongue and ten teeth.
+/// Draws a patient's face in the app's style, with the mouth open wide, or a big clean smile when `mouth` is nil.
 private enum DentistArt {
     /// Where the open mouth sits in the lion's face, as a share of the picture. The mouth's own points are 0...1 inside it.
     static let mouthBox = CGRect(x: 0.15, y: 0.42, width: 0.7, height: 0.52)
 
-    static func draw(_ mouth: Mouth, in context: inout GraphicsContext, size: CGSize) {
+    static func draw(_ mouth: Mouth?, patient: Patient, in context: inout GraphicsContext, size: CGSize) {
         let s = size.width
         let line = 0.01 * s
         let outline = Color.outline
@@ -322,20 +365,59 @@ private enum DentistArt {
             context.stroke(path, with: .color(outline), lineWidth: line)
         }
 
-        // A fluffy mane: a ring of round tufts, outlined as one shape
-        let tufts = (0..<14).map { i -> CGPoint in
-            let angle = Double(i) / 14 * 2 * .pi
-            return CGPoint(x: 0.5 + 0.36 * cos(angle), y: 0.5 + 0.36 * sin(angle))
+        let fur = patient.fur
+        let pink = Color(red: 0.97, green: 0.66, blue: 0.72)
+        switch patient {
+        case .lion:
+            // A fluffy mane: a ring of round tufts, outlined as one shape
+            let tufts = (0..<14).map { i -> CGPoint in
+                let angle = Double(i) / 14 * 2 * .pi
+                return CGPoint(x: 0.5 + 0.36 * cos(angle), y: 0.5 + 0.36 * sin(angle))
+            }
+            for tuft in tufts { context.fill(spot(tuft.x, tuft.y, 0.115 + 0.01), with: .color(outline)) }
+            for tuft in tufts { context.fill(spot(tuft.x, tuft.y, 0.115), with: .color(Color(red: 0.93, green: 0.55, blue: 0.25))) }
+            context.fill(spot(0.5, 0.5, 0.4), with: .color(Color(red: 0.93, green: 0.55, blue: 0.25)))
+            fallthrough
+        case .bear:
+            // Round ears with pink insides
+            let r: CGFloat = patient == .bear ? 0.1 : 0.085
+            for x in [0.24, 0.76] as [CGFloat] {
+                fill(spot(x, 0.2, r), fur)
+                context.fill(spot(x, 0.2, r * 0.53), with: .color(pink))
+            }
+        case .bunny:
+            // Long floppy-tipped ears
+            for x in [0.36, 0.64] as [CGFloat] {
+                fill(Path(ellipseIn: CGRect(x: (x - 0.075) * s, y: 0.0, width: 0.15 * s, height: 0.36 * s)), fur)
+                context.fill(Path(ellipseIn: CGRect(x: (x - 0.04) * s, y: 0.04 * s, width: 0.08 * s, height: 0.26 * s)), with: .color(pink))
+            }
+        case .kitty:
+            // Pointy ears
+            for side in [-1.0, 1.0] as [CGFloat] {
+                var ear = Path()
+                ear.move(to: CGPoint(x: (0.5 + side * 0.36) * s, y: 0.36 * s))
+                ear.addLine(to: CGPoint(x: (0.5 + side * 0.32) * s, y: 0.05 * s))
+                ear.addLine(to: CGPoint(x: (0.5 + side * 0.1) * s, y: 0.2 * s))
+                ear.closeSubpath()
+                fill(ear, fur)
+                var inner = Path()
+                inner.move(to: CGPoint(x: (0.5 + side * 0.31) * s, y: 0.28 * s))
+                inner.addLine(to: CGPoint(x: (0.5 + side * 0.3) * s, y: 0.12 * s))
+                inner.addLine(to: CGPoint(x: (0.5 + side * 0.18) * s, y: 0.21 * s))
+                inner.closeSubpath()
+                context.fill(inner, with: .color(pink))
+            }
         }
-        for tuft in tufts { context.fill(spot(tuft.x, tuft.y, 0.115 + 0.01), with: .color(outline)) }
-        for tuft in tufts { context.fill(spot(tuft.x, tuft.y, 0.115), with: .color(Color(red: 0.93, green: 0.55, blue: 0.25))) }
-        context.fill(spot(0.5, 0.5, 0.4), with: .color(Color(red: 0.93, green: 0.55, blue: 0.25)))
-        // Round ears with pink insides, then the face
-        for x in [0.24, 0.76] as [CGFloat] {
-            fill(spot(x, 0.2, 0.085), Color(red: 0.98, green: 0.8, blue: 0.45))
-            context.fill(spot(x, 0.2, 0.045), with: .color(Color(red: 0.97, green: 0.66, blue: 0.72)))
+        fill(Path(ellipseIn: CGRect(x: 0.12 * s, y: 0.14 * s, width: 0.76 * s, height: 0.8 * s)), fur)
+        if patient == .kitty || patient == .bunny {
+            // Whiskers
+            var whiskers = Path()
+            for (dy, tilt) in [(-0.02, -0.03), (0.01, 0.0), (0.04, 0.03)] as [(CGFloat, CGFloat)] {
+                whiskers.move(to: CGPoint(x: 0.38 * s, y: (0.4 + dy) * s)); whiskers.addLine(to: CGPoint(x: 0.2 * s, y: (0.4 + dy + tilt) * s))
+                whiskers.move(to: CGPoint(x: 0.62 * s, y: (0.4 + dy) * s)); whiskers.addLine(to: CGPoint(x: 0.8 * s, y: (0.4 + dy + tilt) * s))
+            }
+            context.stroke(whiskers, with: .color(outline.opacity(0.6)), style: StrokeStyle(lineWidth: line * 0.7, lineCap: .round))
         }
-        fill(Path(ellipseIn: CGRect(x: 0.12 * s, y: 0.14 * s, width: 0.76 * s, height: 0.8 * s)), Color(red: 0.98, green: 0.8, blue: 0.45))
         // Happy closed eyes (going "ahh"), rosy cheeks and a little nose
         for x in [0.37, 0.63] as [CGFloat] {
             var eye = Path()
@@ -349,7 +431,23 @@ private enum DentistArt {
         nose.move(to: CGPoint(x: 0.45 * s, y: 0.36 * s))
         nose.addQuadCurve(to: CGPoint(x: 0.55 * s, y: 0.36 * s), control: CGPoint(x: 0.5 * s, y: 0.34 * s))
         nose.addQuadCurve(to: CGPoint(x: 0.45 * s, y: 0.36 * s), control: CGPoint(x: 0.5 * s, y: 0.44 * s))
-        fill(nose, Color(red: 0.55, green: 0.33, blue: 0.25))
+        fill(nose, patient == .bunny || patient == .kitty ? Color(red: 0.95, green: 0.5, blue: 0.6) : Color(red: 0.55, green: 0.33, blue: 0.25))
+
+        guard let mouth else {
+            // A big, clean smile for the photo
+            var smile = Path()
+            smile.move(to: CGPoint(x: 0.3 * s, y: 0.56 * s))
+            smile.addQuadCurve(to: CGPoint(x: 0.7 * s, y: 0.56 * s), control: CGPoint(x: 0.5 * s, y: 0.6 * s))
+            smile.addQuadCurve(to: CGPoint(x: 0.3 * s, y: 0.56 * s), control: CGPoint(x: 0.5 * s, y: 0.92 * s))
+            smile.closeSubpath()
+            fill(smile, Color(red: 0.62, green: 0.18, blue: 0.27))
+            var teeth = context
+            teeth.clip(to: smile)
+            teeth.fill(Path(CGRect(x: 0.28 * s, y: 0.55 * s, width: 0.44 * s, height: 0.07 * s)), with: .color(.white))
+            teeth.fill(Path(ellipseIn: CGRect(x: 0.4 * s, y: 0.66 * s, width: 0.2 * s, height: 0.12 * s)), with: .color(Color(red: 0.96, green: 0.45, blue: 0.55)))
+            context.stroke(smile, with: .color(outline), lineWidth: line)
+            return
+        }
 
         // A creamy muzzle around the wide-open mouth
         let lips = Path(ellipseIn: rect(0.04, 0.08, 0.92, 0.84))

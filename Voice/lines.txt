@@ -91,6 +91,7 @@ Beanie! So stylish!
 Beanie! Wowza bowza!
 Bear
 Bedtime
+Bella
 Big hug!
 Big nail
 Bingo card
@@ -102,6 +103,7 @@ Bless me, Grandpa
 Blow dryer
 Blue
 Blue! Like a whale.
+Bobo
 Boop! You booped my nose!
 Boots
 Boots! Fashion show time!
@@ -480,6 +482,15 @@ Hee hee, the tree isn't on your card.
 Hello
 Hello!
 Help Mochi find her bone! Drag her along the path.
+Hi Avery!
+Hi Bella!
+Hi Bobo!
+Hi Kiki!
+Hi Leo!
+Hi Lily!
+Hi Mia!
+Hi Rosa!
+Hi Zoe!
 High C
 High heels
 High heels! Fashion show time!
@@ -521,12 +532,14 @@ K is for Kite!
 K!
 K! Great tracing!
 Keep blowing!
+Kiki
 Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
 L is for Lion!
 L!
 L! Great tracing!
+Leo
 Let's
 Let's count to 1!
 Let's count to 10!
@@ -599,12 +612,9 @@ Necklace! Ooh la la!
 Necklace! So stylish!
 Necklace! Wowza bowza!
 Nest
-New customer
 New maze
 New nails
-New outfit
 New sticker!
-Next patient
 Next picture
 Night night, Mochi. Shh!
 No
@@ -722,6 +732,7 @@ Sandals! Holy guacamole, I love it!
 Sandals! Ooh la la!
 Sandals! So stylish!
 Sandals! Wowza bowza!
+Say cheese! Snap snap!
 Scissors
 Scrub the teeth until they shine.
 Shampoo
@@ -949,6 +960,7 @@ a whale
 aeiou
 ah
 ahead
+ahh
 all
 an orange
 and

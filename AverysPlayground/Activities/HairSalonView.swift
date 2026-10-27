@@ -28,12 +28,13 @@ enum HairTool: CaseIterable, Hashable {
         }
     }
 
-    var sound: Sound {
+    /// Combing is quiet.
+    var sound: Sound? {
         switch self {
         case .shampoo: .bubbles
         case .rinse: .water
         case .dryer: .dryer
-        case .comb: .brush
+        case .comb: nil
         case .scissors: .snip
         }
     }
@@ -114,15 +115,15 @@ struct HairSalonView: View {
         Color(red: 0.62, green: 0.47, blue: 0.95),
         Color(red: 0.35, green: 0.62, blue: 1.0),
     ]
-    private static let skins: [Color] = [
-        Color(red: 0.99, green: 0.84, blue: 0.72),
-        Color(red: 0.86, green: 0.63, blue: 0.46),
-        Color(red: 0.6, green: 0.4, blue: 0.27),
-    ]
     private static let bows = ["bow", "crown", "flower", "star", "butterfly", "gem"]
 
     @State private var hair = Hairdo()
-    @State private var skin = HairSalonView.skins[1]
+    /// Whose turn it is, in Friend.all; they take turns in order.
+    @State private var customer = 0
+    @State private var photo: Image?
+    @State private var flashes = 0
+    private var friend: Friend { Friend.all[customer] }
+    private var skin: Color { friend.skin }
     @State private var tray = Tray.wash
     @State private var tool = HairTool.shampoo
     @State private var toolTip: CGPoint?
@@ -147,16 +148,10 @@ struct HairSalonView: View {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             head
             if isShowingOff {
-                Button(action: newCustomer) {
-                    Text("New customer")
-                        .font(.kid(30))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 32 * uiScale)
-                        .padding(.vertical, 16 * uiScale)
-                        .cartoonCard(.pink, cornerRadius: 40 * uiScale)
+                PhotoOrNext(next: Friend.all[(customer + 1) % Friend.all.count].name, takePhoto: takePhoto) {
+                    customer = (customer + 1) % Friend.all.count
+                    newCustomer()
                 }
-                .buttonStyle(SquishyButtonStyle())
-                .padding(.vertical, 24 * uiScale)
             } else {
                 toolTray
             }
@@ -171,11 +166,15 @@ struct HairSalonView: View {
             let side = min(geo.size.width, geo.size.height)
             ZStack {
                 Canvas { context, size in
-                    HairArt.draw(hair, skin: skin, in: &context, size: size)
+                    HairArt.draw(hair, skin: skin, eyes: friend.eyes, in: &context, size: size)
                 }
                 if let toolTip {
-                    ToolPicture(tool: tool, size: 70 * uiScale)
-                        .position(x: toolTip.x + 30 * uiScale, y: toolTip.y - 30 * uiScale)
+                    // Big, held just above and right of the finger so the hair under it stays in view, wiggling as it works.
+                    ToolPicture(tool: tool, size: side * 0.3)
+                        .phaseAnimator([CGFloat(-6), 6]) { content, wiggle in
+                            content.offset(x: wiggle).rotationEffect(.degrees(wiggle * 0.6))
+                        } animation: { _ in .linear(duration: 0.1) }
+                        .position(x: toolTip.x + side * 0.1, y: toolTip.y - side * 0.1)
                         .allowsHitTesting(false)
                 }
                 if isShowingOff {
@@ -193,8 +192,20 @@ struct HairSalonView: View {
             .accessibilityLabel("Hair")
             .accessibilityIdentifier("Hair")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .photo(photo, caption: friend.name, flashes: flashes, size: side * 0.6)
         }
         .padding(.horizontal)
+        .overlay(alignment: .topTrailing) {
+            UpNext(count: Friend.all.count, current: customer) { index in
+                let waiting = Friend.all[index]
+                Canvas { context, size in
+                    HairArt.draw(Hairdo(color: waiting.hair), skin: waiting.skin, eyes: waiting.eyes, in: &context, size: size)
+                }
+                .scaleEffect(1.6)
+                .offset(y: 4 * uiScale)
+            }
+            .padding(.trailing)
+        }
     }
 
     private var toolTray: some View {
@@ -249,7 +260,7 @@ struct HairSalonView: View {
                                     preview.style = style
                                     preview.foam = []
                                     preview.accessory = nil
-                                    HairArt.draw(preview, skin: skin, in: &context, size: size)
+                                    HairArt.draw(preview, skin: skin, eyes: friend.eyes, in: &context, size: size)
                                 }
                                 .frame(width: 72 * uiScale, height: 72 * uiScale)
                                 .cartoonCard(.white, cornerRadius: 22 * uiScale)
@@ -310,7 +321,7 @@ struct HairSalonView: View {
         guard !isShowingOff, tray == .wash else { return }
         if !isWorking {
             Haptics.tap()
-            Sounds.shared.play(tool.sound)
+            if let sound = tool.sound { Sounds.shared.play(sound) }
         }
         isWorking = true
         toolTip = location
@@ -344,19 +355,31 @@ struct HairSalonView: View {
         say("Ta-da! She looks beautiful! Holy guacamole!")
     }
 
+    private func takePhoto() {
+        Sounds.shared.play(.shutter)
+        Haptics.tap()
+        let look = hair, tone = skin, eyes = friend.eyes
+        let picture = snapshot(of: Canvas { context, size in
+            HairArt.draw(look, skin: tone, eyes: eyes, in: &context, size: size)
+        }, size: 300)
+        flashes += 1
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
+        say("Say cheese! Snap snap!")
+    }
+
     private func newCustomer() {
         withAnimation(.spring) {
             hair = Hairdo(
                 lengths: (0..<Hairdo.strandCount).map { _ in .random(in: 0.85...1) },
-                color: Self.hairColors[Int.random(in: 0..<4)]
+                color: friend.hair
             )
-            skin = Self.skins.randomElement()!
+            photo = nil
             tray = .wash
             tool = .shampoo
             isShowingOff = false
             washed = false
         }
-        say("", hint: "Let's wash your hair! Rub on the shampoo.")
+        say("Hi \(friend.name)!", hint: "Let's wash your hair! Rub on the shampoo.")
     }
 
     /// Speaks only when the message changes, so a hint isn't repeated after every stroke.
@@ -391,7 +414,7 @@ private struct ToolPicture: View {
 
 /// Draws the customer in Coco's style: flat colors, thick dark-brown outlines.
 private enum HairArt {
-    static func draw(_ hair: Hairdo, skin: Color, in context: inout GraphicsContext, size: CGSize) {
+    static func draw(_ hair: Hairdo, skin: Color, eyes: Color, in context: inout GraphicsContext, size: CGSize) {
         let s = size.width
         let line = 0.008 * s
         let outline = Color.outline
@@ -489,7 +512,7 @@ private enum HairArt {
             context.fill(eyeShape(0), with: .color(.white))
             var iris = context
             iris.clip(to: eyeShape(0))
-            iris.fill(circle(x, 0.455, 0.042), with: .color(Color(red: 0.55, green: 0.36, blue: 0.2)))
+            iris.fill(circle(x, 0.455, 0.042), with: .color(eyes))
             iris.fill(circle(x, 0.455, 0.021), with: .color(Color(red: 0.17, green: 0.11, blue: 0.1)))
             iris.fill(circle(x + 0.014, 0.442, 0.011), with: .color(.white))
             iris.fill(circle(x - 0.014, 0.47, 0.006), with: .color(.white))

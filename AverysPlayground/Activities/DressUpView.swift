@@ -43,18 +43,14 @@ struct DressUpView: View {
         Color(red: 0.55, green: 0.82, blue: 0.7), Color(red: 0.98, green: 0.85, blue: 0.45), Color(red: 0.94, green: 0.5, blue: 0.42),
         Color(red: 0.98, green: 0.97, blue: 0.95), Color(red: 0.25, green: 0.3, blue: 0.45),
     ]
-    private static let skins: [Color] = [
-        Color(red: 0.99, green: 0.84, blue: 0.72), Color(red: 0.86, green: 0.63, blue: 0.46), Color(red: 0.6, green: 0.4, blue: 0.27),
-    ]
-    private static let hairs: [Color] = [
-        Color(red: 0.98, green: 0.87, blue: 0.55), Color(red: 0.45, green: 0.28, blue: 0.15), Color(red: 0.2, green: 0.14, blue: 0.13),
-        Color(red: 0.96, green: 0.8, blue: 0.42), Color(red: 0.75, green: 0.32, blue: 0.18),
-    ]
     private static let cheers = ["So stylish!", "Ooh la la!", "Holy guacamole, I love it!", "Wowza bowza!", "Fashion show time!"]
 
     @State private var outfit = Outfit()
-    @State private var skin = DressUpView.skins[1]
-    @State private var hair = DressUpView.hairs[0]
+    /// Whose turn it is, in Friend.all; they take turns modeling.
+    @State private var model = 0
+    @State private var photo: Image?
+    @State private var flashes = 0
+    private var friend: Friend { Friend.all[model] }
     @State private var tray = Tray.clothes
     @State private var isShowingOff = false
     @State private var cheer = "Let's get her dressed! Pick some clothes."
@@ -67,7 +63,7 @@ struct DressUpView: View {
 
             ZStack {
                 Canvas { context, size in
-                    DollArt.draw(outfit, skin: skin, hair: hair, in: &context, size: size)
+                    DollArt.draw(outfit, skin: friend.skin, hair: friend.hair, eyes: friend.eyes, in: &context, size: size)
                 }
                 .aspectRatio(1 / DollArt.height, contentMode: .fit)
                 .accessibilityElement(children: .ignore)
@@ -76,19 +72,27 @@ struct DressUpView: View {
                 if isShowingOff { Sparkles() }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .photo(photo, caption: friend.name, flashes: flashes, size: 220 * uiScale)
             .padding(.horizontal)
+            .overlay(alignment: .topTrailing) {
+                UpNext(count: Friend.all.count, current: model) { index in
+                    let waiting = Friend.all[index]
+                    // Just her face: the whole doll, zoomed in on the head
+                    let width = 150 * uiScale
+                    Canvas { context, size in
+                        DollArt.draw(Outfit(), skin: waiting.skin, hair: waiting.hair, eyes: waiting.eyes, in: &context, size: size)
+                    }
+                    .frame(width: width, height: width * DollArt.height)
+                    .offset(y: width * (DollArt.height / 2 - 0.165))
+                }
+                .padding(.trailing)
+            }
 
             if isShowingOff {
-                Button(action: newDoll) {
-                    Text("New outfit")
-                        .font(.kid(30))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 32 * uiScale)
-                        .padding(.vertical, 16 * uiScale)
-                        .cartoonCard(Color(red: 0.95, green: 0.47, blue: 0.6), cornerRadius: 40 * uiScale)
+                PhotoOrNext(next: Friend.all[(model + 1) % Friend.all.count].name, takePhoto: takePhoto) {
+                    model = (model + 1) % Friend.all.count
+                    newDoll()
                 }
-                .buttonStyle(SquishyButtonStyle())
-                .padding(.vertical, 24 * uiScale)
             } else {
                 trayView
             }
@@ -201,15 +205,27 @@ struct DressUpView: View {
         .accessibilityLabel(name)
     }
 
+    private func takePhoto() {
+        Sounds.shared.play(.shutter)
+        Haptics.tap()
+        let look = outfit, who = friend
+        let picture = snapshot(of: Canvas { context, size in
+            DollArt.draw(look, skin: who.skin, hair: who.hair, eyes: who.eyes, in: &context, size: size)
+        }
+        .aspectRatio(1 / DollArt.height, contentMode: .fit), size: 300)
+        flashes += 1
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
+        say("Say cheese! Snap snap!")
+    }
+
     private func newDoll() {
         withAnimation(.spring) {
             outfit = Outfit()
-            skin = Self.skins.randomElement()!
-            hair = Self.hairs.randomElement()!
             tray = .clothes
             isShowingOff = false
+            photo = nil
         }
-        say("", hint: "Let's get her dressed! Pick some clothes.")
+        say("Hi \(friend.name)!", hint: "Let's get her dressed! Pick some clothes.")
     }
 
     /// Speaks only when the message changes, so taps don't repeat the same line.
@@ -228,7 +244,7 @@ struct DressUpView: View {
 private enum DollArt {
     static let height: CGFloat = 1.3
 
-    static func draw(_ outfit: Outfit, skin: Color, hair: Color, in context: inout GraphicsContext, size: CGSize) {
+    static func draw(_ outfit: Outfit, skin: Color, hair: Color, eyes: Color, in context: inout GraphicsContext, size: CGSize) {
         let s = size.width
         let line = 0.006 * s
         let outline = Color.outline
@@ -398,7 +414,7 @@ private enum DollArt {
             let side: CGFloat = x < 0.5 ? -1 : 1
             context.fill(oval(x, 0.168, 0.046, 0.034), with: .color(Color(red: 0.86, green: 0.6, blue: 0.95).opacity(0.7)))  // eyeshadow
             fill(oval(x, 0.172, 0.036, 0.027), .white)
-            context.fill(oval(x, 0.172, 0.019, 0.021), with: .color(Color(red: 0.3, green: 0.55, blue: 0.85)))
+            context.fill(oval(x, 0.172, 0.019, 0.021), with: .color(eyes))
             context.fill(oval(x, 0.172, 0.009, 0.011), with: .color(Color(red: 0.12, green: 0.1, blue: 0.12)))
             context.fill(oval(x + 0.004, 0.167, 0.006, 0.006), with: .color(.white))
             // Lashes and a thin brow
