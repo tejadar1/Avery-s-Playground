@@ -51,9 +51,10 @@ def record(line, voice, pitch, path, lang="en-us"):
 if "--samples" in sys.argv:
     out = here / "samples"
     out.mkdir(exist_ok=True)
-    line = "Holy guacamole! Snap snap! I ate a crayon once. It tasted purple! Let's paint your nails!"
-    for voice in ["af_heart", "af_bella", "af_nicole", "af_sky", "af_nova", "af_jessica"]:
-        for pitch in [1.0, 1.2, 1.35]:
+    # Storyteller voices for the books: warm women's voices at their own pitch, reading the same page.
+    line = "Once upon a time, three little pigs went out to build three little houses. The first pig built a house of straw."
+    for voice in ["af_bella", "af_heart", "af_nicole", "af_sarah", "af_aoede", "af_kore", "bf_emma", "bf_isabella", "ef_dora"]:
+        for pitch in [1.0, 1.08]:
             record(line, voice, pitch, out / f"{voice}-{pitch}.mp3")
     sys.exit()
 
