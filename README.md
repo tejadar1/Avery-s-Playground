@@ -18,11 +18,14 @@ Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with
 | 🍕 | **Math** | Adding with food: "Coco has 2 slices of pizza. Mochi brings 1 more. How many now?" Tap the slices to count them, then pick the answer. Sums up to 10. |
 | 🗣️ | **Español** | Spanish words and phrases in six sets: greetings, Dominican family sayings ("Bendición, mami"), animals, colors, numbers, and food. Tap a card to hear the Spanish, the English, then the Spanish again so your child can say it back. |
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A. A is for Apple!" |
+| ✏️ | **Trace** | Trace capital letters with a finger, stroke by stroke from a green start dot along dotted paths on writing paper; ABC goes through the alphabet and My name traces A-V-E-R-Y. |
 | 🔢 | **1 2 3** | Pick a number, then tap each item to count out loud. |
 | 🎨 | **Coloring** | A coloring book: a flower, a house, a fish, an ice cream cone and a butterfly. Pick a crayon (Coco says its name) and tap part of the picture to color it in. |
 | 🖍️ | **Draw** | Draw with your finger in lines that look like real crayon, with a waxy edge and paper showing through. Twelve soft crayon colors down the side (Coco names each one), plus undo and clear. |
 | 🎲 | **Bingo** | Picture bingo for a kid and a grown-up together, against Coco, like Zingo: slide out two tiles (Coco reads their words), tap one that's on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
 | ⭐️ | **Tic-Tac-Toe** | For a kid and a grown-up on one iPad: stars against hearts, three in a row wins. The winning row lights up and each side's wins are counted. |
+
+Every win in any game earns a sticker for the **Sticker book** on the home screen (50 to find). Each place has its own soft background tune, made in the app like the sound effects (`Support/Music.swift`).
 
 ## Notes for parents
 
@@ -93,7 +96,7 @@ AverysPlayground/
   Assets.xcassets
 AverysPlaygroundTests/    Unit tests (run with ⌘U)
 AverysPlaygroundUITests/  Opens every game and saves screenshots to the `screenshots` branch (manual builds with screenshots ticked)
-Art/            SVG sources for Coco, Mochi, the game icons (Art/icons), the pictures in the games (Art/pictures), and the app icon
+Art/            SVG sources for Coco, Mochi, the game icons (Art/icons), the pictures in the games (Art/pictures), the app icon and launch screen
 project.yml     XcodeGen project definition
 ```
 

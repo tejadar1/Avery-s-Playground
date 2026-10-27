@@ -8,8 +8,9 @@ const assets = path.join(__dirname, '../AverysPlayground/Assets.xcassets');
 // name in the asset catalog → [svg file, pixel width, parts to hide, scale]; game icons are named Icon-<Activity rawValue>.
 const images = {
   Coco: ['coco.svg', 1200],
-  // The launch screen shows images at their natural size: 600px at 3x is 200 points.
-  LaunchCoco: ['coco.svg', 600, 'none', '3x'],
+  // The launch screen shows images at their natural size, 3x: 600px is 200 points. LaunchCoco (Coco on her
+  // scene) is made below; GettingReady shows LaunchScene with Coco on top in the same spot, so she can move.
+  LaunchScene: ['launch-scene.svg', 600, 'none', '3x'],
   'Icon-pet': ['shiba.svg', 600, '#sleep'],
   MochiRoom: ['mochi-room.svg', 2400],
 };
@@ -47,10 +48,23 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     await page.close();
   }
 
-  // App icon: Coco on a sky-to-grass gradient, opaque, 1024×1024.
+  // Coco on top of a background SVG, at a box in its pixels.
   const coco = fs.readFileSync(path.join(__dirname, 'coco.svg'), 'utf8');
-  const page = await browser.newPage({ viewport: { width: 1024, height: 1024 } });
-  await page.setContent(`<style>html,body{margin:0}body{width:1024px;height:1024px;display:flex;align-items:center;justify-content:center;background:linear-gradient(#8DD1FF,#C7EF9E)}svg{width:820px;height:820px}</style>${coco}`);
-  await page.screenshot({ path: path.join(assets, 'AppIcon.appiconset/AppIcon.png') });
+  async function compose(background, width, height, [x, y, w, h], file) {
+    const scene = fs.readFileSync(path.join(__dirname, background), 'utf8');
+    const page = await browser.newPage({ viewport: { width, height } });
+    await page.setContent(`<style>${font}html,body{margin:0;background:transparent}div{position:absolute}svg{display:block;width:100%;height:100%}</style>`
+      + `<div style="inset:0">${scene}</div><div style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${coco}</div>`, { waitUntil: 'networkidle' });
+    await page.screenshot({ path: file, omitBackground: true });
+    await page.close();
+  }
+  // Coco's box in the launch scene, in its 600×780 pixels: 30, 50, 140×146.67 points in GettingReady.
+  await compose('launch-scene.svg', 600, 780, [90, 150, 420, 440], path.join(assets, 'LaunchCoco.imageset/LaunchCoco.png'));
+  fs.writeFileSync(path.join(assets, 'LaunchCoco.imageset/Contents.json'), JSON.stringify({
+    images: [{ filename: 'LaunchCoco.png', idiom: 'universal', scale: '3x' }],
+    info: { author: 'xcode', version: 1 },
+  }, null, 2) + '\n');
+  // App icon: Coco on a hill in front of a sunburst, opaque, 1024×1024.
+  await compose('icon-background.svg', 1024, 1024, [150, 110, 760, 796], path.join(assets, 'AppIcon.appiconset/AppIcon.png'));
   await browser.close();
 })();
