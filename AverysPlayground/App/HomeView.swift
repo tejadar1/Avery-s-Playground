@@ -7,26 +7,16 @@ struct HomeView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24 * uiScale) {
-                    HStack(spacing: 8 * uiScale) {
-                        CocoFigure(height: 130 * uiScale)
-                            .accessibilityLabel("Coco the crocodile")
-                        Image("Avery")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 140 * uiScale)
-                            .phaseAnimator([0.0, -4, 0, 4]) { content, angle in
-                                content.rotationEffect(.degrees(angle), anchor: .bottom)  // a happy little sway
-                            } animation: { _ in .easeInOut(duration: 0.9) }
-                            .accessibilityLabel("Avery")
-                        VStack(alignment: .leading, spacing: 2 * uiScale) {
-                            Text("Avery's World")
-                                .font(.kid(38))
-                                .foregroundStyle(Color.outline)
-                            Text("Hi Avery! What should we do today?")
-                                .font(.kid(20))
-                                .foregroundStyle(Color.outline.opacity(0.7))
+                    // Coco and Avery beside the title, or above it when that doesn't fit (an iPhone)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 8 * uiScale) {
+                            friends
+                            title
                         }
-                        .multilineTextAlignment(.leading)
+                        VStack(spacing: 8 * uiScale) {
+                            friends
+                            title
+                        }
                     }
                     .padding(.top, 8 * uiScale)
 
@@ -91,6 +81,35 @@ private struct SectionView: View {
             .padding(.top, 20 * uiScale)
         }
         .background(PlayfulBackground())
+    }
+}
+
+private extension HomeView {
+    var friends: some View {
+        HStack(spacing: 8 * uiScale) {
+            CocoFigure(height: 130 * uiScale)
+                .accessibilityLabel("Coco the crocodile")
+            Image("Avery")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 140 * uiScale)
+                .phaseAnimator([0.0, -4, 0, 4]) { content, angle in
+                    content.rotationEffect(.degrees(angle), anchor: .bottom)  // a happy little sway
+                } animation: { _ in .easeInOut(duration: 0.9) }
+                .accessibilityLabel("Avery")
+        }
+    }
+
+    var title: some View {
+        VStack(spacing: 2 * uiScale) {
+            Text("Avery's World")
+                .font(.kid(38))
+                .foregroundStyle(Color.outline)
+            Text("Hi Avery! What should we do today?")
+                .font(.kid(20))
+                .foregroundStyle(Color.outline.opacity(0.7))
+        }
+        .fixedSize()
     }
 }
 
