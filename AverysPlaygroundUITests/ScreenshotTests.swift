@@ -48,6 +48,11 @@ final class ScreenshotTests: XCTestCase {
                 mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.35))
                     .press(forDuration: 0.05, thenDragTo: mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)))
             }),
+            ("Maze", {
+                let maze = self.find("Maze")
+                maze.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.1))
+                    .press(forDuration: 0.05, thenDragTo: maze.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.6)))
+            }),
             ("Read", {
                 self.tap(self.button("Three Little Pigs"))
                 sleep(1)
@@ -151,7 +156,7 @@ final class ScreenshotTests: XCTestCase {
         // By now the games have earned some stickers.
         tap(button("Stickers"))
         sleep(1)
-        try snap("17-Stickers", device, dir)
+        try snap("18-Stickers", device, dir)
         goHome()
     }
 

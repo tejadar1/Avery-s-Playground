@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, tracing, counting, colors, drawing, bingo, tictactoe
+    case nails, hair, dressup, pet, maze, piano, reading, math, spanish, abc, tracing, counting, colors, drawing, bingo, tictactoe
 
     var id: String { rawValue }
 
@@ -11,6 +11,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .hair: "Hair Salon"
         case .dressup: "Dress Up"
         case .pet: "Mochi"
+        case .maze: "Maze"
         case .piano: "Piano"
         case .reading: "Read"
         case .math: "Math"
@@ -28,7 +29,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     var section: HomeSection {
         switch self {
         case .reading, .abc, .tracing, .counting, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .pet, .colors, .drawing: .play
+        case .nails, .hair, .dressup, .pet, .maze, .colors, .drawing: .play
         case .bingo, .tictactoe: .teamUp
         }
     }
@@ -38,7 +39,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .piano: nil
         case .nails, .hair, .dressup: .salon
-        case .pet: .pet
+        case .pet, .maze: .pet
         case .colors, .drawing: .art
         case .bingo, .tictactoe: .teamUp
         case .reading, .math, .spanish, .abc, .tracing, .counting: .learn
@@ -54,6 +55,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .hair: Color(red: 0.78, green: 0.5, blue: 0.86)
         case .dressup: Color(red: 0.92, green: 0.55, blue: 0.75)
         case .pet: Color(red: 0.72, green: 0.52, blue: 0.42)
+        case .maze: Color(red: 0.38, green: 0.72, blue: 0.4)
         case .piano: Color(red: 0.42, green: 0.5, blue: 0.85)
         case .reading: Color(red: 0.31, green: 0.67, blue: 0.75)
         case .math: Color(red: 0.9, green: 0.72, blue: 0.3)
@@ -75,6 +77,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .hair: HairSalonView()
         case .dressup: DressUpView()
         case .pet: PetView()
+        case .maze: MazeView()
         case .piano: PianoView()
         case .reading: StoriesView()
         case .math: MathView()

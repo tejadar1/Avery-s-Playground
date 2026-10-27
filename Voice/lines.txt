@@ -391,6 +391,7 @@ Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
 Hello
 Hello!
+Help Mochi find her bone! Drag her along the path.
 High C
 High heels
 High heels! Fashion show time!
@@ -462,7 +463,10 @@ M! Great tracing!
 Ma
 Mary Had a Little Lamb
 Mary Had a Little Lamb!
+Maze
+Maze. Drag Mochi to the bone.
 Mochi
+Mochi found her bone! Woof woof!
 Mochi had a good nap! Good morning!
 Mochi is full! Burp! Hee hee!
 Mochi is hungry! Tap the food.
@@ -495,6 +499,7 @@ Navy
 Necklace
 Nest
 New customer
+New maze
 New nails
 New outfit
 New sticker!
@@ -921,6 +926,7 @@ boat and sun!
 boat and tree!
 boat!
 boat! You got it!
+bone
 boots
 bove
 bow
