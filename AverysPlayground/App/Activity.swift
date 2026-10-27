@@ -32,6 +32,18 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
+    /// The background tune; the piano makes its own music, so it has none.
+    var tune: Tune? {
+        switch self {
+        case .piano: nil
+        case .nails, .hair, .dressup: .salon
+        case .pet: .pet
+        case .colors, .drawing: .art
+        case .bingo, .tictactoe: .teamUp
+        case .reading, .math, .spanish, .abc, .counting: .learn
+        }
+    }
+
     /// Drawn in Art/icons/<rawValue>.svg.
     var icon: String { "Icon-\(rawValue)" }
 

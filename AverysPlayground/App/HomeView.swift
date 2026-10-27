@@ -33,15 +33,18 @@ struct HomeView: View {
                 .padding(20 * uiScale)
             }
             .background(PlayfulBackground())
+            .onAppear { Music.shared.play(.home) }
             .navigationDestination(for: HomeSection.self) { section in
                 SectionView(section: section)
                     .navigationTitle(section.title)
                     .navigationBarTitleDisplayMode(.inline)
+                    .onAppear { Music.shared.play(.home) }
             }
             .navigationDestination(for: Activity.self) { activity in
                 activity.destination
                     .navigationTitle(activity.title)
                     .navigationBarTitleDisplayMode(.inline)
+                    .onAppear { Music.shared.play(activity.tune) }
             }
         }
         .tint(Color.outline)
