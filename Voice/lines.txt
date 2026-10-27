@@ -389,6 +389,7 @@ Hearts win! Snap snap!
 Hearts' turn!
 Hee hee hee! You're so funny! You made me giggle!
 Hee hee! That tickles!
+Hee hee! You're silly! You're a silly, silly goose!
 Hee hee, not 1!
 Hee hee, not 10!
 Hee hee, not 2!
@@ -465,6 +466,7 @@ Hee hee, the pig isn't on your card.
 Hee hee, the star isn't on your card.
 Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
+Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
 Hi Avery!
 Hi Bella!
@@ -892,6 +894,7 @@ White! Like a cloud.
 Who
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
+Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Woo hoo, kangaroo!
@@ -912,9 +915,11 @@ Yellow! Like a banana.
 Yippee skippy!
 Yo-yo
 You beat the timer! Holy guacamole!
+You did it, you silly goose!
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
+You're so silly! Ha ha ha! Let's be silly together!
 Yum yum, breakfast!
 Z
 Z is for Zebra!

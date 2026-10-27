@@ -50,13 +50,14 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     await page.close();
   }
 
-  // Coco on top of a background SVG, at a box in its pixels.
+  // Coco (and anyone else in `others`: [svg, box]) on top of a background SVG, at a box in its pixels.
   const coco = fs.readFileSync(path.join(__dirname, 'coco.svg'), 'utf8');
-  async function compose(background, width, height, [x, y, w, h], file) {
+  const box = (svg, [x, y, w, h]) => `<div style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${svg}</div>`;
+  async function compose(background, width, height, cocoBox, file, others = []) {
     const scene = fs.readFileSync(path.join(__dirname, background), 'utf8');
     const page = await browser.newPage({ viewport: { width, height } });
     await page.setContent(`<style>${font}html,body{margin:0;background:transparent}div{position:absolute}svg{display:block;width:100%;height:100%}</style>`
-      + `<div style="inset:0">${scene}</div><div style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${coco}</div>`, { waitUntil: 'networkidle' });
+      + `<div style="inset:0">${scene}</div>${box(coco, cocoBox)}${others.map(([svg, b]) => box(svg, b)).join('')}`, { waitUntil: 'networkidle' });
     await page.screenshot({ path: file, omitBackground: true });
     await page.close();
   }
@@ -66,7 +67,9 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     images: [{ filename: 'LaunchCoco.png', idiom: 'universal', scale: '3x' }],
     info: { author: 'xcode', version: 1 },
   }, null, 2) + '\n');
-  // App icon: Coco on a hill in front of a sunburst, opaque, 1024×1024.
-  await compose('icon-background.svg', 1024, 1024, [150, 110, 760, 796], path.join(assets, 'AppIcon.appiconset/AppIcon.png'));
+  // App icon: Coco and Avery waving on a hill in front of a sunburst, opaque, 1024×1024.
+  const avery = fs.readFileSync(path.join(__dirname, 'avery.svg'), 'utf8');
+  await compose('icon-background.svg', 1024, 1024, [40, 200, 560, 586], path.join(assets, 'AppIcon.appiconset/AppIcon.png'),
+    [[avery, [470, 250, 520, 572]]]);
   await browser.close();
 })();

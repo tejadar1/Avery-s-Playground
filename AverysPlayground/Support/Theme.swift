@@ -137,6 +137,7 @@ enum Hooray {
         "Hot diggity dog!", "Jumping jellybeans!", "Cool beans!", "Croc-tacular!", "Yippee skippy!",
         "Okey dokey, artichokey!", "Woo hoo, kangaroo!", "Super duper pooper scooper!",
         "Ha ha ha! That's funny! You did it!", "Hee hee, that's so funny! Again, again!",
+        "You did it, you silly goose!", "Hee hee, you're so silly! You did it!",
     ]
 
     static var random: String { all.randomElement()! }
@@ -168,6 +169,9 @@ struct CocoSays: View {
         "Ha ha ha! That's funny! Do it again!",
         "Hee hee hee! You're so funny! You made me giggle!",
         "That's funny! That tickles my tummy! Hee hee!",
+        "Hee hee! You're silly! You're a silly, silly goose!",
+        "You're so silly! Ha ha ha! Let's be silly together!",
+        "Who's silly? You're silly! Snap snap!",
     ]
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
