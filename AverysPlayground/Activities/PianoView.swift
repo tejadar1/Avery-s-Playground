@@ -114,6 +114,7 @@ struct PianoView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
     @State private var oops = 0
+    @State private var lyricsHeight: CGFloat = 0
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
@@ -131,17 +132,29 @@ struct PianoView: View {
             }
 
             if let lesson {
-                FlowLayout(spacing: 8 * uiScale, lineSpacing: 6 * uiScale) {
-                    ForEach(Array(lesson.song.words.enumerated()), id: \.offset) { index, word in
-                        Text(word)
-                            .font(.kid(22))
-                            .foregroundStyle(index == lesson.position ? .white : Color.outline.opacity(index < lesson.position ? 1 : 0.45))
-                            .padding(.horizontal, 6 * uiScale)
-                            .background(index == lesson.position ? Self.keyColors[lesson.song.notes[index]] : .clear, in: Capsule())
+                // A long song scrolls inside its card, following the word to play, so the keyboard always fits.
+                ScrollViewReader { scroll in
+                    ScrollView {
+                        FlowLayout(spacing: 8 * uiScale, lineSpacing: 6 * uiScale) {
+                            ForEach(Array(lesson.song.words.enumerated()), id: \.offset) { index, word in
+                                Text(word)
+                                    .font(.kid(22))
+                                    .foregroundStyle(index == lesson.position ? .white : Color.outline.opacity(index < lesson.position ? 1 : 0.45))
+                                    .padding(.horizontal, 6 * uiScale)
+                                    .background(index == lesson.position ? Self.keyColors[lesson.song.notes[index]] : .clear, in: Capsule())
+                                    .id(index)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)  // like the story words: wrap to the screen instead of running off it
+                        .padding(12 * uiScale)
+                        .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { lyricsHeight = $0 }
+                    }
+                    .frame(maxHeight: lyricsHeight)  // as tall as the words, or less when the screen is short
+                    .scrollBounceBehavior(.basedOnSize)
+                    .onChange(of: lesson.position) { _, position in
+                        withAnimation { scroll.scrollTo(position, anchor: .center) }
                     }
                 }
-                .frame(maxWidth: .infinity)  // like the story words: wrap to the screen instead of running off it
-                .padding(12 * uiScale)
                 .cartoonCard(.white, cornerRadius: 24 * uiScale)
                 .padding(.horizontal, 28 * uiScale)  // clear of the stage curtains
             }
