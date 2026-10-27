@@ -336,6 +336,7 @@ Hare
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
 Hats
+Hear the word
 Hearts
 Hee hee! That tickles!
 Hee hee, not 1!
@@ -638,6 +639,7 @@ So she planted it all by herself. The wheat grew tall.
 So smooth!
 So sparkly my tail is wiggling!
 So stylish!
+Spell the word! Tap the letters in order. Tap the picture to hear it.
 Squeaky clean! Shake shake shake!
 Stars
 Stars go first, then hearts. Get three in a row!
@@ -833,12 +835,14 @@ banana
 bananas
 bat
 bat! You read it! Snap snap!
+bat! You spelled it!
 beach
 beanie
 bear
 bears
 bed
 bed! You read it! Snap snap!
+bed! You spelled it!
 beds
 bee
 bee and apple!
@@ -934,12 +938,14 @@ bowl
 bowls
 box
 box! You read it! Snap snap!
+box! You spelled it!
 bread
 brick
 bricks
 bubbles
 bug
 bug! You read it! Snap snap!
+bug! You spelled it!
 buh
 build
 built
@@ -973,6 +979,7 @@ bus and tree!
 bus!
 bus! You got it!
 bus! You read it! Snap snap!
+bus! You spelled it!
 butterfly
 by
 c
@@ -1059,6 +1066,7 @@ cat and tree!
 cat!
 cat! You got it!
 cat! You read it! Snap snap!
+cat! You spelled it!
 caterpillar
 chair
 chairs
@@ -1103,6 +1111,7 @@ cross
 crown
 cup
 cup! You read it! Snap snap!
+cup! You spelled it!
 cupcake
 cupcakes
 d
@@ -1136,6 +1145,7 @@ dog and tree!
 dog!
 dog! You got it!
 dog! You read it! Snap snap!
+dog! You spelled it!
 dogbed
 dogbowl
 dogbowl-empty
@@ -1475,6 +1485,7 @@ found
 four
 fox
 fox! You read it! Snap snap!
+fox! You spelled it!
 frog
 frog and apple!
 frog and ball!
@@ -1544,6 +1555,7 @@ hat and tree!
 hat!
 hat! You got it!
 hat! You read it! Snap snap!
+hat! You spelled it!
 have
 he
 heart
@@ -1577,6 +1589,7 @@ heels
 help
 hen
 hen! You read it! Snap snap!
+hen! You spelled it!
 herself
 high,
 home
@@ -1697,6 +1710,7 @@ palette
 party
 pen
 pen! You read it! Snap snap!
+pen! You spelled it!
 penguin
 pig
 pig and apple!
@@ -1726,6 +1740,7 @@ pig and tree!
 pig!
 pig! You got it!
 pig! You read it! Snap snap!
+pig! You spelled it!
 pigs
 pink
 pizza
@@ -1834,6 +1849,7 @@ sun and tree!
 sun!
 sun! You got it!
 sun! You read it! Snap snap!
+sun! You spelled it!
 sunglasses
 sunhat
 t
@@ -1891,6 +1907,7 @@ up
 v
 van
 van! You read it! Snap snap!
+van! You spelled it!
 violin
 vvv
 w
@@ -1901,6 +1918,7 @@ water
 way
 web
 web! You read it! Snap snap!
+web! You spelled it!
 went
 were
 whale

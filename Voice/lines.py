@@ -64,7 +64,7 @@ for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)"
     lines.add(phrase or f"{letter} is for {word}!")
 
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
-    lines.update({f"{word}! You read it! Snap snap!", f"Hee hee, that's a {word}!"})
+    lines.update({f"{word}! You read it! Snap snap!", f"Hee hee, that's a {word}!", f"{word}! You spelled it!", word})
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):

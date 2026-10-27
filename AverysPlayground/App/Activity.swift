@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, maze, piano, reading, math, spanish, abc, tracing, counting, colors, drawing, bingo, tictactoe
+    case nails, hair, dressup, pet, maze, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe
 
     var id: String { rawValue }
 
@@ -18,6 +18,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .spanish: "Español"
         case .abc: "ABC"
         case .tracing: "Trace"
+        case .spelling: "Spell"
         case .counting: "1 2 3"
         case .colors: "Coloring"
         case .drawing: "Draw"
@@ -28,7 +29,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
     var section: HomeSection {
         switch self {
-        case .reading, .abc, .tracing, .counting, .math, .spanish, .piano: .learn
+        case .reading, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .pet, .maze, .colors, .drawing: .play
         case .bingo, .tictactoe: .teamUp
         }
@@ -42,7 +43,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .pet, .maze: .pet
         case .colors, .drawing: .art
         case .bingo, .tictactoe: .teamUp
-        case .reading, .math, .spanish, .abc, .tracing, .counting: .learn
+        case .reading, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
         }
     }
 
@@ -62,6 +63,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .spanish: Color(red: 0.36, green: 0.75, blue: 0.68)
         case .abc: Color(red: 0.9, green: 0.42, blue: 0.38)
         case .tracing: Color(red: 0.36, green: 0.61, blue: 0.84)
+        case .spelling: Color(red: 0.95, green: 0.55, blue: 0.4)
         case .counting: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .colors: Color(red: 0.66, green: 0.5, blue: 0.85)
         case .drawing: Color(red: 0.33, green: 0.56, blue: 0.86)
@@ -84,6 +86,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .spanish: SpanishView()
         case .abc: ABCView()
         case .tracing: TracingView()
+        case .spelling: SpellView()
         case .counting: CountingView()
         case .colors: ColorsView()
         case .drawing: DrawingView()
