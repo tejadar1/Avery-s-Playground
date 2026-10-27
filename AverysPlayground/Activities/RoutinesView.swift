@@ -26,6 +26,7 @@ enum RoutineKind: String, CaseIterable {
         case .bedtime: [
             RoutineStep(name: "Bath", picture: "bathtub", cheer: "Bubble bath, all clean!"),
             RoutineStep(name: "Pajamas", picture: "pajamas", cheer: "Cozy pajamas!"),
+            RoutineStep(name: "Use the restroom", picture: "toilet", cheer: "Potty time, all done! Wash your hands!"),
             RoutineStep(name: "Brush teeth", picture: "toothbrush", cheer: "Sparkly teeth!"),
             RoutineStep(name: "Drink of water", picture: "cup", cheer: "Gulp gulp!"),
             RoutineStep(name: "Story", picture: "book", cheer: "Story time!"),

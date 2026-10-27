@@ -679,6 +679,7 @@ Play again
 Please
 Ponytail
 Ponytail! So cute!
+Potty time, all done! Wash your hands!
 Press the key with the star.
 Pretty hair!
 Previous picture
@@ -878,6 +879,7 @@ Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
 Up
+Use the restroom
 V
 V is for Violin!
 V!
@@ -2185,6 +2187,7 @@ three
 timer
 tle
 to
+toilet
 took
 toothbrush
 tophat
