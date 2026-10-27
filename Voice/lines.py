@@ -62,7 +62,7 @@ lines.update(f"{n}! Great counting!" for n in range(1, 11))
 lines.update(f"Let's count to {n}!" for n in range(1, 11))
 
 for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", picture: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):
-    lines.add(f"{letter}. " + (phrase or f"{letter} is for {word}!"))
+    lines.add(phrase or f"{letter} is for {word}!")
 
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
     lines.update({f"{word}! You read it! Snap snap!", f"Hee hee, that's a {word}!"})

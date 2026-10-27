@@ -58,12 +58,12 @@ A beach!
 A coral reef!
 A farm!
 A garden!
+A is for Apple!
 A night sky!
 A sharp
 A sticker to find
 A!
 A! Great tracing!
-A. A is for Apple!
 ABC
 AVERY
 All clean!
@@ -75,9 +75,9 @@ Animals
 Apple
 Avery! You wrote your name!
 B
+B is for Bear!
 B!
 B! Great tracing!
-B. B is for Bear!
 Ball
 Ballet flats
 Bath
@@ -106,10 +106,10 @@ Buns! So cute!
 But
 But he could not blow down the brick house. The three pigs were safe!
 C
+C is for Cat!
 C sharp
 C!
 C! Great tracing!
-C. C is for Cat!
 Canvas
 Cat
 Clear
@@ -280,10 +280,10 @@ Crown
 Curly
 Curly! So cute!
 D
+D is for Dog!
 D sharp
 D!
 D! Great tracing!
-D. D is for Dog!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
 Do you want mangú?
@@ -296,16 +296,16 @@ Down! So cute!
 Drag the hose to spray Mochi.
 Drag to spray Mochi
 E
+E is for Elephant!
 E!
 E! Great tracing!
-E. E is for Elephant!
 Elephant
 Extras
 F
+F is for Fish!
 F sharp
 F!
 F! Great tracing!
-F. F is for Fish!
 Fashion show time!
 Feed
 Fetch! Good pup, Mochi!
@@ -319,10 +319,10 @@ Fox ends with X!
 Free play
 Free play!
 G
+G is for Grapes!
 G sharp
 G!
 G! Great tracing!
-G. G is for Grapes!
 Give me a hug
 Glitter
 God bless you
@@ -337,9 +337,9 @@ Grapes
 Green
 Green! Like a frog.
 H
+H is for Horse!
 H!
 H! Great tracing!
-H. H is for Horse!
 Hair
 Hair color
 Hare
@@ -422,31 +422,31 @@ How cool!
 I
 I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
+I is for Ice cream!
 I love you
 I wish I had hair like that!
 I!
 I! Great tracing!
 I'm hungry
-I. I is for Ice cream!
 Ice cream
 In a little bit
 It's a tie! Everybody wins a hug!
 J
+J is for Juice!
 J!
 J! Great tracing!
-J. J is for Juice!
 Juice
 K
+K is for Kite!
 K!
 K! Great tracing!
-K. K is for Kite!
 Keep blowing!
 Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
+L is for Lion!
 L!
 L! Great tracing!
-L. L is for Lion!
 Let's
 Let's count to 1!
 Let's count to 10!
@@ -466,9 +466,9 @@ Let's read! Tap each letter to hear its sound.
 Let's wash your hair! Rub on the shampoo.
 Lion
 M
+M is for Moon!
 M!
 M! Great tracing!
-M. M is for Moon!
 Ma
 Mary Had a Little Lamb
 Mary Had a Little Lamb!
@@ -496,9 +496,9 @@ My
 My name
 My name is Avery
 N
+N is for Nest!
 N!
 N! Great tracing!
-N. N is for Nest!
 Nail
 Nail idea
 Navy
@@ -533,9 +533,9 @@ Now pick a style.
 Now rinse it with water.
 Numbers
 O
+O is for Octopus!
 O!
 O! Great tracing!
-O. O is for Octopus!
 Octopus
 Oh my goodness!
 Okay!
@@ -545,9 +545,9 @@ Orange
 Orange! Like an orange.
 Overalls
 P
+P is for Penguin!
 P!
 P! Great tracing!
-P. P is for Penguin!
 Paint it with the brush!
 Pajamas
 Party dress
@@ -574,14 +574,14 @@ Purple! Like grapes.
 Purse
 Put on your flip-flops
 Q
+Q is for Queen!
 Q!
 Q! Great tracing!
-Q. Q is for Queen!
 Queen
 R
+R is for Rainbow!
 R!
 R! Great tracing!
-R. R is for Rainbow!
 Rainbow
 Red
 Red! Like a strawberry.
@@ -589,9 +589,9 @@ Remover
 Rinse
 Rinse off all the bubbles!
 S
+S is for Sun!
 S!
 S! Great tracing!
-S. S is for Sun!
 Sandals
 Scissors
 Shampoo
@@ -653,6 +653,7 @@ Sun
 Sun hat
 Sunglasses
 T
+T is for Turtle!
 T!
 T! Great tracing!
 T-shirt
@@ -661,7 +662,6 @@ T-shirt! Holy guacamole, I love it!
 T-shirt! Ooh la la!
 T-shirt! So stylish!
 T-shirt! Wowza bowza!
-T. T is for Turtle!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
@@ -702,22 +702,22 @@ Twin
 Twinkle Twinkle
 Twinkle Twinkle!
 U
+U is for Umbrella!
 U!
 U! Great tracing!
-U. U is for Umbrella!
 Umbrella
 Undo
 Up
 V
+V is for Violin!
 V!
 V! Great tracing!
-V. V is for Violin!
 Very good
 Violin
 W
+W is for Whale!
 W!
 W! Great tracing!
-W. W is for Whale!
 Wand
 Want a haircut?
 Wash
@@ -741,11 +741,10 @@ Wowza! You colored the whole night sky!
 X
 X!
 X! Great tracing!
-X. Fox ends with X!
 Y
+Y is for Yo-yo!
 Y!
 Y! Great tracing!
-Y. Y is for Yo-yo!
 Yellow
 Yellow! Like a banana.
 Yo-yo
@@ -753,9 +752,9 @@ You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
 Z
+Z is for Zebra!
 Z!
 Z! Great tracing!
-Z. Z is for Zebra!
 Zebra
 a
 a banana

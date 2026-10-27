@@ -8,7 +8,7 @@ struct ABCView: View {
         var phrase: String? = nil
 
         var id: String { letter }
-        var spoken: String { "\(letter). " + (phrase ?? "\(letter) is for \(word)!") }
+        var spoken: String { phrase ?? "\(letter) is for \(word)!" }
     }
 
     private static let letters: [Letter] = [
