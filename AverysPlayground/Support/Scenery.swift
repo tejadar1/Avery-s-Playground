@@ -4,7 +4,7 @@ import SwiftUI
 /// Kept low-contrast at the top and middle so cards and text stay easy to read.
 struct Scenery: View {
     enum Place {
-        case outdoors, library, stage, picnic, fiesta, classroom, studio, salon
+        case outdoors, night, library, stage, picnic, fiesta, classroom, studio, salon
     }
 
     let place: Place
@@ -104,6 +104,13 @@ struct Scenery: View {
             cloud(w * 0.8, h * 0.2, 6)
             cloud(w * 0.5, h * 0.42, 4)
             hills(h * 0.8, Color(red: 0.62, green: 0.82, blue: 0.5), Color(red: 0.5, green: 0.74, blue: 0.42))
+        case .night:
+            gradient(Color(red: 0.22, green: 0.26, blue: 0.5), Color(red: 0.4, green: 0.38, blue: 0.64))
+            for i in 0..<26 {
+                let star = CGRect(x: speck(i) * w, y: speck(i + 40) * h * 0.62, width: 0.9 * unit, height: 0.9 * unit)
+                context.fill(Path(ellipseIn: star), with: .color(.white.opacity(0.85)))
+            }
+            hills(h * 0.8, Color(red: 0.3, green: 0.46, blue: 0.44), Color(red: 0.23, green: 0.38, blue: 0.37))
         case .library:
             gradient(Color(red: 0.9, green: 0.94, blue: 1.0), Color(red: 0.95, green: 0.93, blue: 1.0))
             // A shelf of books along the top
@@ -207,7 +214,7 @@ struct Scenery: View {
 
 #Preview {
     TabView {
-        ForEach([Scenery.Place.outdoors, .library, .stage, .picnic, .fiesta, .classroom, .studio, .salon], id: \.self) {
+        ForEach([Scenery.Place.outdoors, .night, .library, .stage, .picnic, .fiesta, .classroom, .studio, .salon], id: \.self) {
             Scenery($0).ignoresSafeArea()
         }
     }

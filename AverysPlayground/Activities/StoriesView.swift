@@ -2,8 +2,12 @@ import SwiftUI
 
 struct Story: Hashable {
     struct Page: Hashable {
+        /// Where the page's picture takes place.
+        enum Setting { case meadow, home, night }
+
         let pictures: [String]
         let text: String
+        var setting = Setting.meadow
     }
 
     let title: String
@@ -24,10 +28,10 @@ struct Story: Hashable {
         Story(title: "Goldilocks and the Three Bears", cover: "bear", color: .orange, pages: [
             Page(pictures: ["girl", "tree"], text: "Goldilocks went for a walk in the woods."),
             Page(pictures: ["house"], text: "She found a little house. Nobody was home."),
-            Page(pictures: ["bowl", "bowl", "bowl"], text: "She tried three bowls of porridge. This one is just right!"),
-            Page(pictures: ["chair", "chair", "chair"], text: "She tried three chairs. This one is just right!"),
-            Page(pictures: ["bed", "sleep"], text: "She tried three beds and fell fast asleep."),
-            Page(pictures: ["bear", "bear", "bear"], text: "The three bears came home! Goldilocks woke up and ran all the way home."),
+            Page(pictures: ["bowl", "bowl", "bowl"], text: "She tried three bowls of porridge. This one is just right!", setting: .home),
+            Page(pictures: ["chair", "chair", "chair"], text: "She tried three chairs. This one is just right!", setting: .home),
+            Page(pictures: ["bed", "sleep"], text: "She tried three beds and fell fast asleep.", setting: .home),
+            Page(pictures: ["bear", "bear", "bear"], text: "The three bears came home! Goldilocks woke up and ran all the way home.", setting: .home),
         ]),
         Story(title: "The Tortoise and the Hare", cover: "turtle", color: .green, pages: [
             Page(pictures: ["rabbit", "turtle"], text: "Hare was fast. Tortoise was slow."),
@@ -40,9 +44,9 @@ struct Story: Hashable {
             Page(pictures: ["hen", "wheat"], text: "The little red hen found some wheat."),
             Page(pictures: ["dog", "cat", "duck"], text: "Who will help me plant it? Not I, said the dog, the cat, and the duck."),
             Page(pictures: ["sprout", "sun"], text: "So she planted it all by herself. The wheat grew tall."),
-            Page(pictures: ["bread"], text: "She baked the wheat into bread."),
-            Page(pictures: ["dog", "cat", "duck", "bread"], text: "Who will help me eat it? I will, said the dog, the cat, and the duck."),
-            Page(pictures: ["hen", "chick", "bread"], text: "No, said the hen. My chicks and I will eat it!"),
+            Page(pictures: ["bread"], text: "She baked the wheat into bread.", setting: .home),
+            Page(pictures: ["dog", "cat", "duck", "bread"], text: "Who will help me eat it? I will, said the dog, the cat, and the duck.", setting: .home),
+            Page(pictures: ["hen", "chick", "bread"], text: "No, said the hen. My chicks and I will eat it!", setting: .home),
         ]),
     ]
 
@@ -50,43 +54,44 @@ struct Story: Hashable {
     /// La Cucarachita Martina is told all over the Spanish-speaking Caribbean.
     static let spanish = [
         Story(title: "La Cucarachita Martina", cover: "bow", color: Color(red: 0.95, green: 0.47, blue: 0.6), pages: [
-            Page(pictures: ["broom", "coin"], text: "La Cucarachita Martina barría su casa y encontró una moneda."),
-            Page(pictures: ["bow"], text: "Con la moneda compró una cinta roja y se puso muy bonita."),
+            Page(pictures: ["broom", "coin"], text: "La Cucarachita Martina barría su casa y encontró una moneda.", setting: .home),
+            Page(pictures: ["bow"], text: "Con la moneda compró una cinta roja y se puso muy bonita.", setting: .home),
             Page(pictures: ["dog"], text: "Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!"),
             Page(pictures: ["cat"], text: "Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!"),
             Page(pictures: ["mouse"], text: "Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!"),
-            Page(pictures: ["mouse", "heart", "bow"], text: "Martina y el Ratoncito Pérez se casaron y fueron muy felices."),
+            Page(pictures: ["mouse", "heart", "bow"], text: "Martina y el Ratoncito Pérez se casaron y fueron muy felices.", setting: .home),
         ], language: "es-MX"),
         Story(title: "Juan Bobo y la puerca", cover: "pig", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
             Page(pictures: ["boy", "pig"], text: "Juan Bobo vivía con su mamá y una puerca."),
             Page(pictures: ["church", "mom"], text: "Un domingo, mamá se fue a misa. Juan, cuida la puerca."),
             Page(pictures: ["pig-sad"], text: "La puerca quería ir a misa también."),
-            Page(pictures: ["gown", "necklace", "pig"], text: "Juan Bobo le puso el vestido de mamá y un collar muy lindo."),
+            Page(pictures: ["gown", "necklace", "pig"], text: "Juan Bobo le puso el vestido de mamá y un collar muy lindo.", setting: .home),
             Page(pictures: ["pig", "wind", "mud"], text: "La puerca salió corriendo y se metió en el lodo."),
-            Page(pictures: ["mom-laugh"], text: "Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!"),
+            Page(pictures: ["mom-laugh"], text: "Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!", setting: .home),
         ], language: "es-MX"),
         Story(title: "La Ciguapa del bosque", cover: "moon", color: Color(red: 0.36, green: 0.62, blue: 0.5), pages: [
-            Page(pictures: ["mountain", "tree", "moon"], text: "En las montañas vive la Ciguapa, con su pelo largo y negro."),
+            Page(pictures: ["mountain", "tree", "moon"], text: "En las montañas vive la Ciguapa, con su pelo largo y negro.", setting: .night),
             Page(pictures: ["footprints"], text: "Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás."),
             Page(pictures: ["girl", "footprints"], text: "Una niña vio unas huellas en el bosque y las siguió."),
             Page(pictures: ["cottage"], text: "¡Las huellas la llevaron de vuelta a su casa!"),
             Page(pictures: ["bird", "tree", "river"], text: "La Ciguapa cuida el bosque, los pájaros y los ríos."),
-            Page(pictures: ["moon", "star", "sleep"], text: "Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!"),
+            Page(pictures: ["moon", "star", "sleep"], text: "Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!", setting: .night),
         ], language: "es-MX"),
     ]
 }
 
+/// A bookshelf: pick a book and it opens.
 struct StoriesView: View {
+    private let columns = [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 0)]
+
     var body: some View {
         ScrollView {
-            VStack(spacing: 20 * uiScale) {
-                ForEach(Story.all, id: \.title) { story in
-                    shelfItem(story.cover, story.title, story.color, title: "") {
-                        StoryReader(story: story)
+            VStack(alignment: .leading, spacing: 18 * uiScale) {
+                shelf {
+                    ForEach(Story.all, id: \.title) { story in
+                        book(story.cover, story.title, story.color) { StoryReader(story: story) }
                     }
-                }
-                shelfItem("cat", "Sound it out: cat, dog, pig", .teal, title: "Sound it out") {
-                    ReadingView()
+                    book("cat", "Sound it out: cat, dog, pig", .teal, title: "Sound it out") { ReadingView() }
                 }
 
                 HStack(spacing: 10 * uiScale) {
@@ -95,11 +100,11 @@ struct StoriesView: View {
                 }
                 .font(.kid(28))
                 .foregroundStyle(Color.outline)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 12 * uiScale)
-                ForEach(Story.spanish, id: \.title) { story in
-                    shelfItem(story.cover, story.title, story.color, title: "", language: story.language) {
-                        StoryReader(story: story)
+                .padding(.top, 12 * uiScale)
+
+                shelf {
+                    ForEach(Story.spanish, id: \.title) { story in
+                        book(story.cover, story.title, story.color, language: story.language) { StoryReader(story: story) }
                     }
                 }
             }
@@ -108,28 +113,124 @@ struct StoriesView: View {
         .background(Scenery(.library).ignoresSafeArea())
     }
 
-    private func shelfItem<Destination: View>(
-        _ cover: String, _ name: String, _ color: Color, title: String, language: String = "en-US",
+    /// Books standing in rows, each row on a wooden shelf.
+    private func shelf<Books: View>(@ViewBuilder books: () -> Books) -> some View {
+        LazyVGrid(columns: columns, spacing: 22 * uiScale) { books() }
+    }
+
+    private func book<Destination: View>(
+        _ cover: String, _ name: String, _ color: Color, title: String = "", language: String = "en-US",
         @ViewBuilder destination: () -> Destination
     ) -> some View {
-        NavigationLink {
-            destination()
-                .navigationTitle(title)
-        } label: {
-            HStack(spacing: 16 * uiScale) {
-                Picture(cover, size: 70 * uiScale)
-                Text(name)
-                    .font(.kid(26))
-                    .foregroundStyle(.white)
-                    .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
-                    .multilineTextAlignment(.leading)
-                Spacer(minLength: 0)
+        VStack(spacing: 0) {
+            NavigationLink {
+                destination()
+                    .navigationTitle(title)
+            } label: {
+                BookCover(title: name, picture: cover, color: color)
+                    .padding(.horizontal, 14 * uiScale)
             }
-            .padding(20 * uiScale)
-            .cartoonCard(color)
+            .buttonStyle(SquishyButtonStyle())
+            .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(name, language: language) })
+            .accessibilityLabel(name)
+
+            // This cell's piece of the shelf; side by side they make one plank.
+            Rectangle()
+                .fill(LinearGradient(colors: [Color(red: 0.8, green: 0.6, blue: 0.42), Color(red: 0.66, green: 0.47, blue: 0.32)], startPoint: .top, endPoint: .bottom))
+                .frame(height: 16 * uiScale)
+                .overlay(alignment: .top) { Rectangle().fill(Color.outline.opacity(0.6)).frame(height: 2.5 * uiScale) }
+                .overlay(alignment: .bottom) { Rectangle().fill(Color.outline.opacity(0.6)).frame(height: 2.5 * uiScale) }
         }
-        .buttonStyle(SquishyButtonStyle())
-        .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(name, language: language) })
+    }
+}
+
+/// A book standing on the shelf: a colored cover with a spine, its picture and its title.
+private struct BookCover: View {
+    let title: String
+    let picture: String
+    let color: Color
+
+    var body: some View {
+        let shape = UnevenRoundedRectangle(topLeadingRadius: 4 * uiScale, bottomLeadingRadius: 4 * uiScale,
+                                           bottomTrailingRadius: 14 * uiScale, topTrailingRadius: 14 * uiScale)
+        VStack(spacing: 8 * uiScale) {
+            Picture(picture, size: 72 * uiScale)
+                .padding(8 * uiScale)
+                .background(.white.opacity(0.85), in: Circle())
+            Text(title)
+                .font(.kid(17))
+                .foregroundStyle(.white)
+                .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 1.5, y: 1.5)
+                .multilineTextAlignment(.center)
+                .lineLimit(3)
+                .minimumScaleFactor(0.7)
+        }
+        .padding(.leading, 20 * uiScale)
+        .padding(.trailing, 10 * uiScale)
+        .padding(.vertical, 14 * uiScale)
+        .frame(maxWidth: .infinity, minHeight: 200 * uiScale)
+        .background(color)
+        .overlay(alignment: .leading) {
+            // The spine, with a gold line down it.
+            Rectangle().fill(.black.opacity(0.18)).frame(width: 13 * uiScale)
+                .overlay(alignment: .trailing) { Rectangle().fill(Color(red: 1.0, green: 0.85, blue: 0.45)).frame(width: 2.5 * uiScale) }
+        }
+        .clipShape(shape)
+        .overlay(shape.stroke(Color.outline, lineWidth: 2.5 * uiScale))
+        .shadow(color: Color.outline.opacity(0.25), radius: 0, x: 4 * uiScale, y: 3 * uiScale)
+    }
+}
+
+/// A page's picture: its drawings standing in a little scene, with the sun, moon and stars up in the sky.
+private struct StoryScene: View {
+    let page: Story.Page
+    private static let sky: Set<String> = ["sun", "moon", "star", "sleep"]
+
+    var body: some View {
+        GeometryReader { geo in
+            let ground = page.pictures.filter { !Self.sky.contains($0) }
+            let up = page.pictures.filter { Self.sky.contains($0) }
+            let size = min(geo.size.height * 0.55, geo.size.width * 0.92 / CGFloat(max(1, ground.count)))
+            ZStack {
+                backdrop
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .clipped()
+                HStack(alignment: .bottom, spacing: size * 0.04) {
+                    ForEach(Array(ground.enumerated()), id: \.offset) { index, name in
+                        Picture(name, size: index == 0 ? size : size * 0.86)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, geo.size.height * 0.07)
+                HStack(spacing: 6 * uiScale) {
+                    ForEach(Array(up.enumerated()), id: \.offset) { _, name in
+                        Picture(name, size: geo.size.height * 0.22)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                .padding(geo.size.height * 0.05)
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 12 * uiScale, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 12 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 2.5 * uiScale))
+    }
+
+    @ViewBuilder private var backdrop: some View {
+        switch page.setting {
+        case .meadow: Scenery(.outdoors)
+        case .night: Scenery(.night)
+        case .home: Image("MochiRoom").resizable().scaledToFill()
+        }
+    }
+}
+
+/// Turns a page over from the spine, like a real book.
+private struct PageTurn: ViewModifier {
+    let angle: Double
+    let anchor: UnitPoint
+
+    func body(content: Content) -> some View {
+        content.rotation3DEffect(.degrees(angle), axis: (x: 0, y: 1, z: 0), anchor: anchor, perspective: 0.4)
     }
 }
 
@@ -138,6 +239,7 @@ private struct StoryReader: View {
 
     @Environment(\.dismiss) private var dismiss
     @State private var pageIndex = 0
+    @State private var turningForward = true
     @State private var frames: [Int: CGRect] = [:]
     @State private var current: Int?
     @State private var isSwiping = false
@@ -145,21 +247,65 @@ private struct StoryReader: View {
     private var page: Story.Page { story.pages[pageIndex] }
     private var words: [String] { page.text.split(separator: " ").map(String.init) }
     private var isLastPage: Bool { pageIndex == story.pages.count - 1 }
+    private static let paperColor = Color(red: 1.0, green: 0.98, blue: 0.93)
 
     var body: some View {
-        VStack(spacing: 24 * uiScale) {
+        GeometryReader { geo in
+            // Held sideways the book lies open with two pages; upright, the picture sits above the words.
+            let wide = geo.size.width > geo.size.height * 1.05
+            VStack(spacing: 16 * uiScale) {
+                book(wide: wide)
+                controls
+            }
+        }
+        .padding(16 * uiScale)
+        .background(Scenery(.library).ignoresSafeArea())
+        .onAppear { Speaker.shared.say(story.title, language: story.language) }
+    }
+
+    private func book(wide: Bool) -> some View {
+        let spread = wide ? AnyLayout(HStackLayout(spacing: 0)) : AnyLayout(VStackLayout(spacing: 0))
+        let turn = AnyTransition.asymmetric(
+            insertion: .modifier(active: PageTurn(angle: turningForward ? -90 : 90, anchor: turningForward ? .leading : .trailing),
+                                 identity: PageTurn(angle: 0, anchor: turningForward ? .leading : .trailing)),
+            removal: .opacity)
+        return spread {
             Button { Speaker.shared.say(page.text, language: story.language) } label: {
-                HStack(spacing: 8 * uiScale) {
-                    ForEach(Array(page.pictures.enumerated()), id: \.offset) { _, name in
-                        Picture(name, size: min(150, 320 / CGFloat(page.pictures.count)) * uiScale)
-                    }
-                }
-                .frame(maxWidth: .infinity, minHeight: 200 * uiScale)
-                    .cartoonCard(story.color.opacity(0.3))
+                StoryScene(page: page)
             }
             .buttonStyle(SquishyButtonStyle())
             .accessibilityLabel("Read this page")
+            .padding(18 * uiScale)
+            .background(paper(spineAt: wide ? .trailing : .bottom))
 
+            wordsPage
+                .padding(26 * uiScale)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .background(paper(spineAt: wide ? .leading : .top))
+        }
+        .id(pageIndex)
+        .transition(turn)
+        .clipShape(RoundedRectangle(cornerRadius: 8 * uiScale))
+        .padding(12 * uiScale)
+        .background(story.color, in: RoundedRectangle(cornerRadius: 20 * uiScale, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 20 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+        .shadow(color: Color.outline.opacity(0.25), radius: 10 * uiScale, y: 6 * uiScale)
+    }
+
+    /// Cream paper that darkens toward the spine.
+    private func paper(spineAt edge: Edge) -> some View {
+        let (from, to): (UnitPoint, UnitPoint) = switch edge {
+        case .leading: (.leading, UnitPoint(x: 0.12, y: 0.5))
+        case .trailing: (.trailing, UnitPoint(x: 0.88, y: 0.5))
+        case .top: (.top, UnitPoint(x: 0.5, y: 0.12))
+        case .bottom: (.bottom, UnitPoint(x: 0.5, y: 0.88))
+        }
+        return Self.paperColor
+            .overlay(LinearGradient(colors: [.black.opacity(0.13), .clear], startPoint: from, endPoint: to))
+    }
+
+    private var wordsPage: some View {
+        VStack(alignment: .leading, spacing: 20 * uiScale) {
             FlowLayout(spacing: FlowLayout.wordSpacing, lineSpacing: FlowLayout.lineSpacing) {
                 ForEach(Array(words.enumerated()), id: \.offset) { index, word in
                     Text(word)
@@ -183,36 +329,32 @@ private struct StoryReader: View {
                     .onChanged { read(at: $0.location) }
                     .onEnded { _ in isSwiping = false }  // the last word stays lit so she can look at it
             )
-            .id(pageIndex)
 
             if pageIndex == 0 {
                 Text("Slide your finger under the words")
                     .font(.kid(18))
                     .foregroundStyle(.secondary)
             }
+        }
+    }
 
-            Spacer(minLength: 0)
-
-            HStack {
-                pageButton("chevron.left", hidden: pageIndex == 0) { turn(by: -1) }
-                Spacer()
-                Text("\(pageIndex + 1) / \(story.pages.count)")
-                    .font(.kid(22))
-                    .foregroundStyle(Color.outline)
-                Spacer()
-                if isLastPage {
-                    pageButton("house.fill", hidden: false) {
-                        Speaker.shared.say(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!", language: story.language)
-                        dismiss()
-                    }
-                } else {
-                    pageButton("chevron.right", hidden: false) { turn(by: 1) }
+    private var controls: some View {
+        HStack {
+            pageButton("chevron.left", hidden: pageIndex == 0) { turn(by: -1) }
+            Spacer()
+            Text("\(pageIndex + 1) / \(story.pages.count)")
+                .font(.kid(22))
+                .foregroundStyle(Color.outline)
+            Spacer()
+            if isLastPage {
+                pageButton("house.fill", hidden: false) {
+                    Speaker.shared.say(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!", language: story.language)
+                    dismiss()
                 }
+            } else {
+                pageButton("chevron.right", hidden: false) { turn(by: 1) }
             }
         }
-        .padding(20 * uiScale)
-        .background(Scenery(.library).ignoresSafeArea())
-        .onAppear { Speaker.shared.say(story.title, language: story.language) }
     }
 
     private func pageButton(_ symbol: String, hidden: Bool, action: @escaping () -> Void) -> some View {
@@ -248,7 +390,9 @@ private struct StoryReader: View {
 
     private func turn(by delta: Int) {
         Haptics.tap()
-        withAnimation(.spring) {
+        Sounds.shared.play(.pop)
+        turningForward = delta > 0
+        withAnimation(.easeInOut(duration: 0.45)) {
             pageIndex += delta
             current = nil
         }
