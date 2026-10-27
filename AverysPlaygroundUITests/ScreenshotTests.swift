@@ -62,8 +62,9 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Dentist", {
                 let mouth = self.find("Mouth")
-                mouth.coordinate(withNormalizedOffset: CGVector(dx: 0.2, dy: 0.36))
-                    .press(forDuration: 0.05, thenDragTo: mouth.coordinate(withNormalizedOffset: CGVector(dx: 0.8, dy: 0.36)))
+                // Across the top teeth, which sit in the lion's mouth in the lower half of the picture
+                mouth.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.6))
+                    .press(forDuration: 0.05, thenDragTo: mouth.coordinate(withNormalizedOffset: CGVector(dx: 0.7, dy: 0.6)))
             }),
             ("Dress Up", {
                 for item in ["Gown", "Hats", "Crown", "Extras", "Wand"] { self.tap(self.app.buttons[item]) }
