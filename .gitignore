@@ -10,3 +10,4 @@ build/
 Voice/kokoro-v1.0.onnx
 Voice/voices-v1.0.bin
 Voice/samples/
+__pycache__/
