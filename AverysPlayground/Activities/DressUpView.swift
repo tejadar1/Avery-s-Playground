@@ -265,25 +265,38 @@ private enum DollArt {
         }
 
         let waist: CGFloat = 0.47, hips: CGFloat = 0.56, ankle: CGFloat = 1.17
-        let leftHand = CGPoint(x: 0.36, y: 0.6), rightHand = CGPoint(x: 0.64, y: 0.6)
+        // A fashion doll's pose: one hand on her hip, unless she's carrying her purse.
+        let handOnHip = outfit.extra != .purse
+        let elbow = CGPoint(x: 0.665, y: 0.41)
+        let leftHand = CGPoint(x: 0.36, y: 0.6), rightHand = handOnHip ? CGPoint(x: 0.565, y: 0.49) : CGPoint(x: 0.64, y: 0.6)
 
         // Long hair behind, down past her waist, with a wavy end.
         var back = Path()
         back.move(to: pt(0.4, 0.2))
         back.addCurve(to: pt(0.6, 0.2), control1: pt(0.38, 0.03), control2: pt(0.62, 0.03))
-        back.addCurve(to: pt(0.64, 0.53), control1: pt(0.65, 0.3), control2: pt(0.67, 0.43))
+        back.addCurve(to: pt(0.65, 0.53), control1: pt(0.68, 0.28), control2: pt(0.69, 0.43))
         back.addQuadCurve(to: pt(0.57, 0.55), control: pt(0.62, 0.58))
         back.addQuadCurve(to: pt(0.5, 0.54), control: pt(0.53, 0.51))
         back.addQuadCurve(to: pt(0.43, 0.55), control: pt(0.47, 0.51))
         back.addQuadCurve(to: pt(0.36, 0.53), control: pt(0.38, 0.58))
-        back.addCurve(to: pt(0.4, 0.2), control1: pt(0.33, 0.43), control2: pt(0.35, 0.3))
+        back.addCurve(to: pt(0.4, 0.2), control1: pt(0.31, 0.43), control2: pt(0.32, 0.28))
         back.closeSubpath()
         fill(back, hair)
+        // Glossy shine down the long hair
+        var shine = Path()
+        shine.move(to: pt(0.37, 0.27)); shine.addQuadCurve(to: pt(0.37, 0.46), control: pt(0.35, 0.37))
+        shine.move(to: pt(0.63, 0.27)); shine.addQuadCurve(to: pt(0.63, 0.46), control: pt(0.65, 0.37))
+        context.stroke(shine, with: .color(.white.opacity(0.45)), style: StrokeStyle(lineWidth: line * 2, lineCap: .round))
 
         // Arms and long legs
         let longSleeves = outfit.clothes == .pajamas
         limb(from: CGPoint(x: 0.425, y: 0.31), to: leftHand, width: 0.032, longSleeves ? color : skin)
-        limb(from: CGPoint(x: 0.575, y: 0.31), to: rightHand, width: 0.032, longSleeves ? color : skin)
+        if handOnHip {
+            limb(from: CGPoint(x: 0.575, y: 0.31), to: elbow, width: 0.032, longSleeves ? color : skin)
+            limb(from: elbow, to: rightHand, width: 0.03, longSleeves ? color : skin)
+        } else {
+            limb(from: CGPoint(x: 0.575, y: 0.31), to: rightHand, width: 0.032, longSleeves ? color : skin)
+        }
         if longSleeves {
             fill(oval(leftHand.x, leftHand.y + 0.01, 0.035, 0.035), skin)
             fill(oval(rightHand.x, rightHand.y + 0.01, 0.035, 0.035), skin)
@@ -383,7 +396,8 @@ private enum DollArt {
         fill(oval(0.5, 0.165, 0.16, 0.185), skin)
         for x in [0.468, 0.532] as [CGFloat] {
             let side: CGFloat = x < 0.5 ? -1 : 1
-            fill(oval(x, 0.172, 0.032, 0.024), .white)
+            context.fill(oval(x, 0.168, 0.046, 0.034), with: .color(Color(red: 0.86, green: 0.6, blue: 0.95).opacity(0.7)))  // eyeshadow
+            fill(oval(x, 0.172, 0.036, 0.027), .white)
             context.fill(oval(x, 0.172, 0.019, 0.021), with: .color(Color(red: 0.3, green: 0.55, blue: 0.85)))
             context.fill(oval(x, 0.172, 0.009, 0.011), with: .color(Color(red: 0.12, green: 0.1, blue: 0.12)))
             context.fill(oval(x + 0.004, 0.167, 0.006, 0.006), with: .color(.white))
@@ -403,13 +417,15 @@ private enum DollArt {
         for x in [0.452, 0.548] as [CGFloat] {
             context.fill(oval(x, 0.198, 0.026, 0.014), with: .color(Color(red: 0.95, green: 0.55, blue: 0.62).opacity(0.5)))
         }
-        // A smiling pink mouth
+        // A big smile with glossy pink lips
         var smile = Path()
-        smile.move(to: pt(0.481, 0.209))
-        smile.addQuadCurve(to: pt(0.519, 0.209), control: pt(0.5, 0.204))
-        smile.addQuadCurve(to: pt(0.481, 0.209), control: pt(0.5, 0.232))
+        smile.move(to: pt(0.478, 0.208))
+        smile.addQuadCurve(to: pt(0.5, 0.205), control: pt(0.49, 0.2))
+        smile.addQuadCurve(to: pt(0.522, 0.208), control: pt(0.51, 0.2))
+        smile.addQuadCurve(to: pt(0.478, 0.208), control: pt(0.5, 0.236))
         smile.closeSubpath()
-        fill(smile, Color(red: 0.92, green: 0.3, blue: 0.5))
+        fill(smile, Color(red: 0.95, green: 0.3, blue: 0.55))
+        context.fill(oval(0.5, 0.216, 0.016, 0.005), with: .color(.white.opacity(0.75)))
 
         // Side-swept bangs
         var bangs = Path()

@@ -77,6 +77,30 @@ struct Story: Hashable {
             Page(pictures: ["bird", "tree", "river"], text: "La Ciguapa cuida el bosque, los pájaros y los ríos."),
             Page(pictures: ["moon", "star", "sleep"], text: "Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!", setting: .night),
         ], language: "es-MX"),
+        Story(title: "El Ratón Pérez", cover: "tooth", color: Color(red: 0.55, green: 0.6, blue: 0.9), pages: [
+            Page(pictures: ["avery", "tooth"], text: "A Avery se le cayó un diente. ¡Qué emoción!", setting: .home),
+            Page(pictures: ["tooth", "bed"], text: "Lo puso debajo de la almohada y se fue a dormir.", setting: .home),
+            Page(pictures: ["mouse", "moon", "star"], text: "De noche llegó el Ratón Pérez, chiquito y elegante.", setting: .night),
+            Page(pictures: ["mouse", "tooth"], text: "Tomó el diente con mucho cuidado. ¡Shh, sin hacer ruido!", setting: .home),
+            Page(pictures: ["mouse", "coin"], text: "Y dejó una moneda brillante debajo de la almohada.", setting: .home),
+            Page(pictures: ["avery", "coin", "sparkles"], text: "Por la mañana, Avery encontró la moneda. ¡Gracias, Ratón Pérez!", setting: .home),
+        ], language: "es-MX"),
+        Story(title: "Medio Pollito", cover: "chick", color: Color(red: 0.96, green: 0.76, blue: 0.3), pages: [
+            Page(pictures: ["hen", "chick"], text: "Había una vez un pollito con un ala y una pata. Se llamaba Medio Pollito."),
+            Page(pictures: ["chick", "crown"], text: "Un día dijo: ¡Me voy a ver al rey! Y salió saltando, pata, pata."),
+            Page(pictures: ["chick", "river"], text: "El río le dijo: ¡Ayúdame, quítame estas ramas! Y Medio Pollito lo ayudó."),
+            Page(pictures: ["chick", "fire"], text: "El fuego le dijo: ¡Ayúdame, dame un palito! Y Medio Pollito lo ayudó."),
+            Page(pictures: ["chick", "wind", "tree"], text: "El viento le dijo: ¡Ayúdame a salir del árbol! Y Medio Pollito lo ayudó."),
+            Page(pictures: ["chick", "crown", "heart"], text: "Cuando el pollito necesitó ayuda, el río, el fuego y el viento lo ayudaron a él. ¡Qué lindo es ayudar!"),
+        ], language: "es-MX"),
+        Story(title: "El Gallo de Bodas", cover: "rooster", color: Color(red: 0.85, green: 0.42, blue: 0.3), pages: [
+            Page(pictures: ["rooster", "cake"], text: "El gallo iba muy elegante a la boda de su tío."),
+            Page(pictures: ["rooster", "mud"], text: "En el camino vio un maíz en el lodo. Pico, pico, ¡y se ensució el pico!"),
+            Page(pictures: ["rooster", "sprout"], text: "Hierba, ¿me limpias el pico? Y la hierba dijo: ¡Ahora no!"),
+            Page(pictures: ["rooster", "sheep"], text: "Oveja, ¿me ayudas? Y la oveja dijo: ¡Ahora no!"),
+            Page(pictures: ["rooster", "sun"], text: "Sol, ¿me ayudas tú? ¡Claro que sí! dijo el sol, y secó el lodo."),
+            Page(pictures: ["rooster", "party", "heart"], text: "Con el pico limpio, el gallo llegó a la boda y cantó: ¡Quiquiriquí!"),
+        ], language: "es-MX"),
     ]
 }
 

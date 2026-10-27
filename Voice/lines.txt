@@ -70,9 +70,19 @@ B!
 B! Great tracing!
 Ball
 Ballet flats
+Ballet flats! Fashion show time!
+Ballet flats! Holy guacamole, I love it!
+Ballet flats! Ooh la la!
+Ballet flats! So stylish!
+Ballet flats! Wowza bowza!
 Bath
 Bath time!
 Beanie
+Beanie! Fashion show time!
+Beanie! Holy guacamole, I love it!
+Beanie! Ooh la la!
+Beanie! So stylish!
+Beanie! Wowza bowza!
 Bear
 Big nail
 Bingo card
@@ -86,7 +96,17 @@ Blue
 Blue! Like a whale.
 Boop! You booped my nose!
 Boots
+Boots! Fashion show time!
+Boots! Holy guacamole, I love it!
+Boots! Ooh la la!
+Boots! So stylish!
+Boots! Wowza bowza!
 Bow
+Bow! Fashion show time!
+Bow! Holy guacamole, I love it!
+Bow! Ooh la la!
+Bow! So stylish!
+Bow! Wowza bowza!
 Bows
 Brown
 Brown! Like a bear.
@@ -266,6 +286,11 @@ Copy this!
 Coral
 Crocodile-tastic!
 Crown
+Crown! Fashion show time!
+Crown! Holy guacamole, I love it!
+Crown! Ooh la la!
+Crown! So stylish!
+Crown! Wowza bowza!
 Curly
 Curly! So cute!
 D
@@ -302,6 +327,11 @@ Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Fish
 Flower crown
+Flower crown! Fashion show time!
+Flower crown! Holy guacamole, I love it!
+Flower crown! Ooh la la!
+Flower crown! So stylish!
+Flower crown! Wowza bowza!
 Food
 Food bowl
 Fox
@@ -323,6 +353,11 @@ Good morning
 Good night
 Goodbye
 Gown
+Gown! Fashion show time!
+Gown! Holy guacamole, I love it!
+Gown! Ooh la la!
+Gown! So stylish!
+Gown! Wowza bowza!
 Grandma
 Grandpa
 Grapes
@@ -503,6 +538,11 @@ Nail
 Nail idea
 Navy
 Necklace
+Necklace! Fashion show time!
+Necklace! Holy guacamole, I love it!
+Necklace! Ooh la la!
+Necklace! So stylish!
+Necklace! Wowza bowza!
 Nest
 New customer
 New maze
@@ -544,13 +584,28 @@ Ooh la la!
 Orange
 Orange! Like an orange.
 Overalls
+Overalls! Fashion show time!
+Overalls! Holy guacamole, I love it!
+Overalls! Ooh la la!
+Overalls! So stylish!
+Overalls! Wowza bowza!
 P
 P is for Penguin!
 P!
 P! Great tracing!
 Paint it with the brush!
 Pajamas
+Pajamas! Fashion show time!
+Pajamas! Holy guacamole, I love it!
+Pajamas! Ooh la la!
+Pajamas! So stylish!
+Pajamas! Wowza bowza!
 Party dress
+Party dress! Fashion show time!
+Party dress! Holy guacamole, I love it!
+Party dress! Ooh la la!
+Party dress! So stylish!
+Party dress! Wowza bowza!
 Penguin
 Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick another nail!
@@ -572,6 +627,11 @@ Puppy
 Purple
 Purple! Like grapes.
 Purse
+Purse! Fashion show time!
+Purse! Holy guacamole, I love it!
+Purse! Ooh la la!
+Purse! So stylish!
+Purse! Wowza bowza!
 Put on your flip-flops
 Q
 Q is for Queen!
@@ -593,6 +653,11 @@ S is for Sun!
 S!
 S! Great tracing!
 Sandals
+Sandals! Fashion show time!
+Sandals! Holy guacamole, I love it!
+Sandals! Ooh la la!
+Sandals! So stylish!
+Sandals! Wowza bowza!
 Scissors
 Shampoo
 She
@@ -636,6 +701,11 @@ Snap! I need the star!
 Snap! I need the sun!
 Snap! I need the tree!
 Sneakers
+Sneakers! Fashion show time!
+Sneakers! Holy guacamole, I love it!
+Sneakers! Ooh la la!
+Sneakers! So stylish!
+Sneakers! Wowza bowza!
 Snip snip! Don't cut my tail!
 So
 So bubbly!
@@ -652,7 +722,17 @@ Stickers
 Styles
 Sun
 Sun hat
+Sun hat! Fashion show time!
+Sun hat! Holy guacamole, I love it!
+Sun hat! Ooh la la!
+Sun hat! So stylish!
+Sun hat! Wowza bowza!
 Sunglasses
+Sunglasses! Fashion show time!
+Sunglasses! Holy guacamole, I love it!
+Sunglasses! Ooh la la!
+Sunglasses! So stylish!
+Sunglasses! Wowza bowza!
 T
 T is for Turtle!
 T!
@@ -698,6 +778,11 @@ Trace board
 Trace the A with your finger. Start at the green dot!
 Turtle
 Tutu
+Tutu! Fashion show time!
+Tutu! Holy guacamole, I love it!
+Tutu! Ooh la la!
+Tutu! So stylish!
+Tutu! Wowza bowza!
 Twin
 Twinkle Twinkle
 Twinkle Twinkle!
@@ -719,6 +804,11 @@ W is for Whale!
 W!
 W! Great tracing!
 Wand
+Wand! Fashion show time!
+Wand! Holy guacamole, I love it!
+Wand! Ooh la la!
+Wand! So stylish!
+Wand! Wowza bowza!
 Want a haircut?
 Wash
 Whale
@@ -1214,12 +1304,17 @@ egg! You got it!
 eh
 eight
 elephant
+es:A
+es:A Avery se le cayó un diente. ¡Qué emoción!
 es:Abuela
 es:Abuelo
 es:Adiós
+es:Ahora
 es:Ahorita
 es:Animales
+es:Avery
 es:Ay
+es:Ayúdame
 es:Bendición, abuela
 es:Bendición, abuelo
 es:Bobo
@@ -1228,19 +1323,36 @@ es:Buenas noches
 es:Buenos días
 es:Chuí
 es:Ciguapa
+es:Claro
 es:Colores
 es:Comida
 es:Con
+es:Con el pico limpio, el gallo llegó a la boda y cantó: ¡Quiquiriquí!
 es:Con la moneda compró una cinta roja y se puso muy bonita.
 es:Cuando
+es:Cuando el pollito necesitó ayuda, el río, el fuego y el viento lo ayudaron a él. ¡Qué lindo es ayudar!
 es:Cucarachita
 es:Dame un abrazo
+es:De
+es:De noche llegó el Ratón Pérez, chiquito y elegante.
 es:Dios te bendiga
+es:El
+es:El Gallo de Bodas
+es:El Ratón Pérez
+es:El fuego le dijo: ¡Ayúdame, dame un palito! Y Medio Pollito lo ayudó.
+es:El gallo iba muy elegante a la boda de su tío.
+es:El río le dijo: ¡Ayúdame, quítame estas ramas! Y Medio Pollito lo ayudó.
+es:El viento le dijo: ¡Ayúdame a salir del árbol! Y Medio Pollito lo ayudó.
 es:En
+es:En el camino vio un maíz en el lodo. Pico, pico, ¡y se ensució el pico!
 es:En las montañas vive la Ciguapa, con su pelo largo y negro.
 es:Familia
 es:Gracias
 es:Guau
+es:Había
+es:Había una vez un pollito con un ala y una pata. Se llamaba Medio Pollito.
+es:Hierba
+es:Hierba, ¿me limpias el pico? Y la hierba dijo: ¡Ahora no!
 es:Hola
 es:Juan
 es:Juan Bobo le puso el vestido de mamá y un collar muy lindo.
@@ -1254,29 +1366,47 @@ es:La Cucarachita Martina barría su casa y encontró una moneda.
 es:La puerca quería ir a misa también.
 es:La puerca salió corriendo y se metió en el lodo.
 es:Las
+es:Lo
+es:Lo puso debajo de la almohada y se fue a dormir.
 es:Mami
 es:Mamá
 es:Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!
 es:Martina
 es:Martina y el Ratoncito Pérez se casaron y fueron muy felices.
+es:Me
 es:Me llamo Avery
+es:Medio
+es:Medio Pollito
 es:Mi hermana
 es:Mi hermano
 es:Miau
 es:Muy bien
 es:No
 es:Números
+es:Oveja
+es:Oveja, ¿me ayudas? Y la oveja dijo: ¡Ahora no!
 es:Papi
 es:Pasó
 es:Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!
 es:Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!
 es:Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!
+es:Pico
+es:Pollito
 es:Ponte las chancletas
+es:Por
 es:Por favor
+es:Por la mañana, Avery encontró la moneda. ¡Gracias, Ratón Pérez!
 es:Pérez
+es:Quiquiriquí
+es:Qué
 es:Ratoncito
+es:Ratón
+es:Se
+es:Shh
 es:Si
 es:Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!
+es:Sol
+es:Sol, ¿me ayudas tú? ¡Claro que sí! dijo el sol, y secó el lodo.
 es:Sound it out
 es:Sí
 es:Te
@@ -1284,26 +1414,44 @@ es:Te quiero mucho
 es:Tengo hambre
 es:Tiene
 es:Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás.
+es:Tomó
+es:Tomó el diente con mucho cuidado. ¡Shh, sin hacer ruido!
 es:Un
 es:Un domingo, mamá se fue a misa. Juan, cuida la puerca.
+es:Un día dijo: ¡Me voy a ver al rey! Y salió saltando, pata, pata.
 es:Una
 es:Una niña vio unas huellas en el bosque y las siguió.
 es:Ven acá, mi amor
+es:Y
+es:Y dejó una moneda brillante debajo de la almohada.
 es:a
 es:adelante
 es:al
+es:ala
+es:almohada
 es:amarillo
 es:asustas
 es:atrás
+es:ayuda
+es:ayudar
+es:ayudaron
+es:ayudas
+es:ayudó
 es:azul
 es:barría
 es:blanco
+es:boda
 es:bonita
 es:bosque
+es:brillante
 es:camina
+es:camino
+es:cantó
 es:casa
 es:casaron
 es:casas
+es:cayó
+es:chiquito
 es:chuí
 es:cinco
 es:cinta
@@ -1314,13 +1462,21 @@ es:conmigo
 es:corriendo
 es:cuatro
 es:cuida
+es:cuidado
 es:cuidamos
+es:dame
 es:de
+es:debajo
+es:dejó
+es:del
+es:diente
 es:diez
 es:dijo
 es:domingo
+es:dormir
 es:dos
 es:dulce
+es:día
 es:el
 es:el agua
 es:el aguacate
@@ -1342,14 +1498,24 @@ es:el queso
 es:el queso frito
 es:el salami
 es:el sancocho
+es:elegante
+es:emoción
 es:en
 es:encontró
+es:ensució
+es:es
+es:estas
 es:felices
 es:fue
+es:fuego
 es:fueron
+es:gallo
 es:gato
 es:guau
+es:hacer
+es:hierba
 es:huellas
+es:iba
 es:ir
 es:la
 es:la galleta
@@ -1360,13 +1526,19 @@ es:la vaca
 es:largo
 es:las
 es:le
+es:limpias
+es:limpio
 es:lindo
+es:llamaba
 es:llegó
 es:llevaron
+es:lo
 es:lodo
 es:los
 es:los tostones
 es:mamá
+es:maíz
+es:mañana
 es:me
 es:metió
 es:miau
@@ -1377,48 +1549,73 @@ es:morado
 es:mucho
 es:muy
 es:naranja
+es:necesitó
 es:negro
 es:niña
+es:no
+es:noche
 es:noches
 es:nueve
 es:ocho
+es:oveja
+es:palito
 es:para
+es:pata
 es:pelo
 es:perro
+es:pico
 es:pies
+es:pollito
 es:puerca
 es:puso
 es:pájaros
 es:que
 es:quería
 es:qué
+es:quítame
+es:ramas
 es:revés
+es:rey
 es:rió
 es:roja
 es:rojo
 es:rosa
+es:ruido
+es:río
 es:ríos
+es:salir
 es:salió
+es:saltando
 es:se
+es:secó
 es:seis
 es:siete
 es:siguió
+es:sin
+es:sol
 es:sonríe
 es:su
 es:sus
+es:sí
 es:también
 es:tan
 es:tres
+es:tío
+es:tú
 es:un
 es:una
 es:unas
 es:uno
 es:van
+es:ver
 es:verde
 es:vestido
+es:vez
+es:viento
 es:vio
 es:vive
 es:vivía
+es:voy
 es:voz
 es:vuelta
 es:y
@@ -1430,6 +1627,8 @@ es:¡Qué rico!
 es:¡Vamos a jugar!
 es:¿Cómo estás?
 es:¿Quieres mangú?
+es:árbol
+es:él
 f
 far
 farm

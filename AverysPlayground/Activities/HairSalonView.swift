@@ -446,35 +446,74 @@ private enum HairArt {
             fillHair(circle(0.5, 0.17, 0.1 + 0.08 * hair.averageLength))
         }
 
-        // Neck, salon cape, ears, face
-        fill(Path(CGRect(x: 0.44 * s, y: 0.6 * s, width: 0.12 * s, height: 0.32 * s)), skin)
+        // Neck, salon cape, ears, face: a fashion doll's big head on a slim neck
+        fill(Path(CGRect(x: 0.46 * s, y: 0.6 * s, width: 0.08 * s, height: 0.32 * s)), skin)
         fill(Path(roundedRect: CGRect(x: 0.16 * s, y: 0.88 * s, width: 0.68 * s, height: 0.3 * s), cornerRadius: 0.12 * s), Color(red: 1.0, green: 0.56, blue: 0.69))
-        fill(circle(0.3, 0.47, 0.045), skin)
-        fill(circle(0.7, 0.47, 0.045), skin)
-        fill(Path(ellipseIn: CGRect(x: 0.3 * s, y: 0.23 * s, width: 0.4 * s, height: 0.44 * s)), skin)
-        for x in [0.42, 0.58] as [CGFloat] {
-            context.fill(circle(x, 0.47, 0.03), with: .color(Color(red: 0.17, green: 0.11, blue: 0.1)))
-            context.fill(circle(x + 0.01, 0.46, 0.01), with: .color(.white))
-        }
-        // Eyelashes fan up and out from the outer corner of each eye.
-        for (x, side) in [(0.42, -1), (0.58, 1)] as [(CGFloat, CGFloat)] {
-            var lashes = Path()
-            for degrees in [20.0, 50.0, 80.0] {
-                let dx = side * CGFloat(sin(degrees * .pi / 180)), dy = -CGFloat(cos(degrees * .pi / 180))
-                lashes.move(to: pt(x + dx * 0.03, 0.47 + dy * 0.03))
-                lashes.addLine(to: pt(x + dx * 0.055, 0.47 + dy * 0.055))
+        fill(circle(0.29, 0.47, 0.04), skin)
+        fill(circle(0.71, 0.47, 0.04), skin)
+        var face = Path()
+        face.move(to: pt(0.5, 0.23))
+        face.addCurve(to: pt(0.71, 0.46), control1: pt(0.64, 0.23), control2: pt(0.72, 0.32))
+        face.addCurve(to: pt(0.5, 0.67), control1: pt(0.7, 0.58), control2: pt(0.6, 0.67))
+        face.addCurve(to: pt(0.29, 0.46), control1: pt(0.4, 0.67), control2: pt(0.3, 0.58))
+        face.addCurve(to: pt(0.5, 0.23), control1: pt(0.28, 0.32), control2: pt(0.36, 0.23))
+        face.closeSubpath()
+        fill(face, skin)
+
+        // Big almond eyes with shadow, a colored iris, sparkles and lashes
+        for (x, side) in [(0.4, -1), (0.6, 1)] as [(CGFloat, CGFloat)] {
+            func eyeShape(_ grow: CGFloat) -> Path {
+                var eye = Path()
+                eye.move(to: pt(x - 0.075 - grow, 0.465))
+                eye.addQuadCurve(to: pt(x + 0.075 + grow, 0.465), control: pt(x, 0.38 - grow * 1.5))
+                eye.addQuadCurve(to: pt(x - 0.075 - grow, 0.465), control: pt(x, 0.525 + grow))
+                eye.closeSubpath()
+                return eye
             }
-            context.stroke(lashes, with: .color(outline), style: StrokeStyle(lineWidth: line * 0.8, lineCap: .round))
+            context.fill(eyeShape(0.012), with: .color(Color(red: 0.78, green: 0.62, blue: 0.93).opacity(0.75)))  // eyeshadow
+            context.fill(eyeShape(0), with: .color(.white))
+            var iris = context
+            iris.clip(to: eyeShape(0))
+            iris.fill(circle(x, 0.455, 0.042), with: .color(Color(red: 0.55, green: 0.36, blue: 0.2)))
+            iris.fill(circle(x, 0.455, 0.021), with: .color(Color(red: 0.17, green: 0.11, blue: 0.1)))
+            iris.fill(circle(x + 0.014, 0.442, 0.011), with: .color(.white))
+            iris.fill(circle(x - 0.014, 0.47, 0.006), with: .color(.white))
+            context.stroke(eyeShape(0), with: .color(outline), lineWidth: line)
+            var topLid = Path()
+            topLid.move(to: pt(x - 0.078, 0.466))
+            topLid.addQuadCurve(to: pt(x + 0.078, 0.466), control: pt(x, 0.377))
+            context.stroke(topLid, with: .color(outline), style: StrokeStyle(lineWidth: line * 2.2, lineCap: .round))
+            var lashes = Path()
+            for (dx, dy) in [(0.035, 0.41), (0.06, 0.43), (0.08, 0.462)] as [(CGFloat, CGFloat)] {
+                lashes.move(to: pt(x + side * dx, dy + 0.004))
+                lashes.addLine(to: pt(x + side * (dx + 0.022), dy - 0.018))
+            }
+            context.stroke(lashes, with: .color(outline), style: StrokeStyle(lineWidth: line * 1.1, lineCap: .round))
         }
-        fill(circle(0.3, 0.53, 0.014), Color(red: 1.0, green: 0.84, blue: 0.3))
-        fill(circle(0.7, 0.53, 0.014), Color(red: 1.0, green: 0.84, blue: 0.3))
+        // Earrings, blush and a little nose
+        fill(circle(0.29, 0.53, 0.014), Color(red: 1.0, green: 0.84, blue: 0.3))
+        fill(circle(0.71, 0.53, 0.014), Color(red: 1.0, green: 0.84, blue: 0.3))
         for x in [0.36, 0.64] as [CGFloat] {
-            context.fill(Path(ellipseIn: CGRect(x: (x - 0.035) * s, y: 0.53 * s, width: 0.07 * s, height: 0.04 * s)), with: .color(Color(red: 1.0, green: 0.56, blue: 0.69).opacity(0.7)))
+            context.fill(Path(ellipseIn: CGRect(x: (x - 0.035) * s, y: 0.52 * s, width: 0.07 * s, height: 0.035 * s)), with: .color(Color(red: 1.0, green: 0.56, blue: 0.69).opacity(0.6)))
         }
-        var smile = Path()
-        smile.addArc(center: pt(0.5, 0.53), radius: 0.07 * s, startAngle: .degrees(25), endAngle: .degrees(155), clockwise: false)
-        smile.closeSubpath()
-        fill(smile, Color(red: 0.95, green: 0.38, blue: 0.5))
+        var nose = Path()
+        nose.move(to: pt(0.49, 0.53))
+        nose.addQuadCurve(to: pt(0.51, 0.53), control: pt(0.5, 0.537))
+        context.stroke(nose, with: .color(outline.opacity(0.7)), style: StrokeStyle(lineWidth: line, lineCap: .round))
+
+        // Full glossy lips, smiling
+        var lips = Path()
+        lips.move(to: pt(0.44, 0.585))
+        lips.addQuadCurve(to: pt(0.5, 0.572), control: pt(0.47, 0.562))
+        lips.addQuadCurve(to: pt(0.56, 0.585), control: pt(0.53, 0.562))
+        lips.addQuadCurve(to: pt(0.44, 0.585), control: pt(0.5, 0.64))
+        lips.closeSubpath()
+        fill(lips, Color(red: 0.93, green: 0.36, blue: 0.52))
+        var mouth = Path()
+        mouth.move(to: pt(0.445, 0.586))
+        mouth.addQuadCurve(to: pt(0.555, 0.586), control: pt(0.5, 0.6))
+        context.stroke(mouth, with: .color(outline), style: StrokeStyle(lineWidth: line * 0.8, lineCap: .round))
+        context.fill(Path(ellipseIn: CGRect(x: 0.482 * s, y: 0.596 * s, width: 0.036 * s, height: 0.011 * s)), with: .color(.white.opacity(0.7)))
 
         // Top of the hair with bangs
         var cap = Path()

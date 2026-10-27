@@ -79,7 +79,8 @@ lines.update(f"{name}! So cute!" for name in re.findall(r'case \.\w+: "([^"]+)"'
 
 dress = src["DressUpView.swift"]
 cheers = literals(re.search(r"static let cheers = \[([^\]]+)\]", dress).group(1))
-for item in re.findall(r'case \w+ = "([^"]+)"', dress):
+items = [i for enum in re.findall(r"enum \w+: String, CaseIterable \{([^}]+)\}", dress) for i in re.findall(r'\w+ = "([^"]+)"', enum)]
+for item in items:
     lines.update(f"{item}! {cheer}" for cheer in cheers)
 
 for song in re.findall(r'name: "([^"]+)", picture:', src["PianoView.swift"]):
