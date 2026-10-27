@@ -50,15 +50,34 @@ struct HomeView: View {
                     .navigationTitle(section.title)
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear { Music.shared.play(.home) }
+                    .toolbar { ToolbarItem(placement: .topBarTrailing) { MusicButton() } }
             }
             .navigationDestination(for: Activity.self) { activity in
                 activity.destination
                     .navigationTitle(activity.title)
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear { Music.shared.play(activity.tune) }
+                    .toolbar { ToolbarItem(placement: .topBarTrailing) { MusicButton() } }
             }
         }
         .tint(Color.outline)
+    }
+}
+
+/// Turns the background music off and on, on every game.
+private struct MusicButton: View {
+    @State private var muted = Music.shared.isMuted
+
+    var body: some View {
+        Button {
+            muted.toggle()
+            Music.shared.isMuted = muted
+            Haptics.tap()
+        } label: {
+            Image(systemName: muted ? "speaker.slash.fill" : "music.note")
+        }
+        .accessibilityLabel(muted ? "Turn music on" : "Turn music off")
+        .accessibilityIdentifier("Music")
     }
 }
 
@@ -105,7 +124,7 @@ private extension HomeView {
             Text("Avery's World")
                 .font(.kid(38))
                 .foregroundStyle(Color.outline)
-            Text("Hi Avery! What should we do today?")
+            Text("Hi Avery and friends! What should we do today?")
                 .font(.kid(20))
                 .foregroundStyle(Color.outline.opacity(0.7))
         }

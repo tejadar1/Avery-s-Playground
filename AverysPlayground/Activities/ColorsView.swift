@@ -346,11 +346,9 @@ struct ColorsView: View {
                         current = ColorStroke(region: region, color: selected.color, points: [point])
                     } else {
                         current?.points.append(point)
-                        if current?.points.count == 3 { Sounds.shared.play(.crayon) }
                     }
                 }
                 .onEnded { value in
-                    Sounds.shared.stop()
                     guard let stroke = current else { return }
                     current = nil
                     if hypot(value.translation.width, value.translation.height) < 12 {

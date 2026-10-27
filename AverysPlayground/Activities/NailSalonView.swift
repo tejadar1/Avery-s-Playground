@@ -53,11 +53,13 @@ enum Hand {
         let width: CGFloat
         let angle: Double  // degrees clockwise from straight up
 
-        var nailSize: CGSize { CGSize(width: width * 0.74, height: width * 0.74 * 1.25) }
+        /// Long nails, with lots of room to paint.
+        var nailSize: CGSize { CGSize(width: width * 0.74, height: width * 0.74 * 1.9) }
+        /// How far the nail reaches past the fingertip.
+        var overhang: CGFloat { nailSize.height * 0.35 }
 
-        /// The nail sits at the fingertip, a little in from the end.
         var nailCenter: CGPoint {
-            let d = length - 6 - nailSize.height / 2
+            let d = length - 6 + overhang - nailSize.height / 2
             let a = angle * .pi / 180
             return CGPoint(x: base.x + d * sin(a), y: base.y - d * cos(a))
         }
@@ -256,7 +258,7 @@ struct NailSalonView: View {
                     Button { zoom(into: index) } label: {
                         NailView(nail: nails[index], size: size)
                             .matchedGeometryEffect(id: index, in: zoom)
-                            .background { if !isShowingOff { TargetRing(size: size.height * 1.7) } }
+                            .background { if !isShowingOff { TargetRing(size: size.height * 1.2) } }
                             .padding(12 * uiScale)
                             .contentShape(Rectangle())
                     }
@@ -335,7 +337,7 @@ struct NailSalonView: View {
     private func bigNail(_ index: Int) -> some View {
         GeometryReader { geo in
             let shape = Hand.fingers[index].nailSize
-            let width = min(geo.size.width * 0.42, geo.size.height * 0.62 * shape.width / shape.height)
+            let width = min(geo.size.width * 0.42, geo.size.height * 0.72 * shape.width / shape.height)
             let size = CGSize(width: width, height: width * shape.height / shape.width)
             let top = geo.size.height * 0.06
             ZStack(alignment: .top) {
@@ -344,7 +346,7 @@ struct NailSalonView: View {
                     .fill(Skin.all[skin].light)
                     .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 5 * uiScale))
                     .frame(width: size.width * 1.45, height: geo.size.height * 1.3)
-                    .padding(.top, top)
+                    .padding(.top, top + size.height * 0.35 - size.width * 0.22)  // the nail reaches past the fingertip
                 NailView(nail: nails[index], size: size)
                     .matchedGeometryEffect(id: index, in: zoom)
                     .overlay(alignment: .topLeading) {
@@ -354,7 +356,7 @@ struct NailSalonView: View {
                                 .allowsHitTesting(false)
                         }
                     }
-                    .padding(.top, top + size.width * 0.22)
+                    .padding(.top, top)
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Nail")
                     .accessibilityIdentifier("Big nail")
@@ -402,15 +404,16 @@ struct NailSalonView: View {
 
     /// This nail from the "Copy this!" look, with Coco cheering it on.
     private func goalCard(_ index: Int, width: CGFloat) -> some View {
-        let nail = CGSize(width: width * 0.62, height: width * 0.62 * 1.25)
+        let shape = Hand.fingers[index].nailSize
+        let nail = CGSize(width: width * 0.48, height: width * 0.48 * shape.height / shape.width)
         return ZStack(alignment: .top) {
             Capsule()
                 .fill(Skin.all[skin].light)
                 .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
                 .frame(width: nail.width * 1.4, height: width * 1.6)
-                .padding(.top, width * 0.12)
+                .padding(.top, width * 0.08 + nail.height * 0.35)
             NailView(nail: idea[index], size: nail)
-                .padding(.top, width * 0.12 + nail.width * 0.2)
+                .padding(.top, width * 0.08)
         }
         .frame(width: width, height: width * 1.15, alignment: .top)
         .background(Color(red: 0.84, green: 0.93, blue: 1.0))

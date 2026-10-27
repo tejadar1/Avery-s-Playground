@@ -109,11 +109,20 @@ final class Music {
     private var buffers: [Tune: AVAudioPCMBuffer] = [:]
     private var playing: Tune?
 
+    /// Turned off with the music button on any game, and remembered.
+    var isMuted = UserDefaults.standard.bool(forKey: "musicMuted") {
+        didSet {
+            UserDefaults.standard.set(isMuted, forKey: "musicMuted")
+            player.volume = isMuted ? 0 : Self.volume
+        }
+    }
+    private static let volume: Float = 0.22  // soft, under Coco's voice and the sound effects
+
     private init() {
         _ = Speaker.shared  // sets up the audio session, so music plays even with the silent switch on
         engine.attach(player)
         engine.connect(player, to: engine.mainMixerNode, format: format)
-        player.volume = 0.22  // soft, under Coco's voice and the sound effects
+        player.volume = isMuted ? 0 : Self.volume
     }
 
     /// Starts `tune` looping, or stops the music for nil (like the piano, which makes its own).

@@ -50,7 +50,7 @@ final class NailTests: XCTestCase {
         let canvas = CGRect(origin: .zero, size: Hand.canvas)
         let middle = Hand.fingers[2]
         XCTAssertEqual(middle.nailCenter.x, middle.base.x, accuracy: 0.01)
-        XCTAssertEqual(middle.base.y - middle.nailCenter.y + middle.nailSize.height / 2, middle.length - 6, accuracy: 0.01)
+        XCTAssertEqual(middle.base.y - middle.nailCenter.y + middle.nailSize.height / 2, middle.length - 6 + middle.overhang, accuracy: 0.01)
         for finger in Hand.fingers {
             let size = finger.nailSize
             let nail = CGRect(x: finger.nailCenter.x - size.height / 2, y: finger.nailCenter.y - size.height / 2, width: size.height, height: size.height)
