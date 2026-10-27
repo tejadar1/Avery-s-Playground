@@ -15,6 +15,7 @@ enum RoutineKind: String, CaseIterable {
         switch self {
         case .morning: [
             RoutineStep(name: "Wake up", picture: "sunrise", cheer: "Good morning, sunshine!"),
+            RoutineStep(name: "Use the restroom", picture: "toilet", cheer: "Potty time, all done! Wash your hands!"),
             RoutineStep(name: "Wash face", picture: "soap", cheer: "Splish splash, clean face!"),
             RoutineStep(name: "Get dressed", picture: "tshirt", cheer: "Looking good!"),
             RoutineStep(name: "Breakfast", picture: "bowl", cheer: "Yum yum, breakfast!"),

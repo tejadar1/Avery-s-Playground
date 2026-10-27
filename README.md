@@ -26,7 +26,7 @@ Hair Salon, Dress Up, Dentist, Mochi, Maze, Coloring, Draw) and **Team Up**, gam
 | 🎲 | **Bingo** | Picture bingo for a kid and a grown-up together, against Coco, like Zingo: slide out two tiles (Coco reads their words), drag one onto the same picture on your card to cover it, and fill your card before Coco does. Coco is a little slow, on purpose. |
 | ⭐️ | **Tic-Tac-Toe** | For a kid and a grown-up on one iPad: stars against hearts, three in a row wins. The winning row lights up and each side's wins are counted. |
 | 🃏 | **Memory** | For a kid and a grown-up taking turns: turn over two cards to find matching animals. A match is yours and you go again; otherwise the cards flip back and it's the other side's turn. |
-| 🌙 | **Routines** | Morning and bedtime checklists to use with a grown-up: big picture buttons for each step (wash face, get dressed, breakfast... or bath, pajamas, restroom, story, lights out). The child taps each one as it's done, and the next one bounces. A grown-up timer (5 to 20 minutes) shows time running out, and Coco says when time's up. |
+| 🌙 | **Routines** | Morning and bedtime checklists to use with a grown-up: big picture buttons for each step (restroom, wash face, get dressed, breakfast... or bath, pajamas, restroom, story, lights out). The child taps each one as it's done, and the next one bounces. A grown-up timer (5 to 20 minutes) shows time running out, and Coco says when time's up. |
 
 Every win in any game earns a sticker for the **Sticker book** on the home screen (50 to find). Each place has its own soft background tune, made in the app like the sound effects (`Support/Music.swift`); the music button at the top right of every game turns it off.
 
