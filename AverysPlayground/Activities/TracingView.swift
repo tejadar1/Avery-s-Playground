@@ -127,7 +127,7 @@ struct TracingView: View {
 
             HStack(spacing: 12 * uiScale) {
                 modeButton("ABC", .abc)
-                modeButton("My name", .name)
+                modeButton("My name", .name, picture: "avery")
             }
 
             GeometryReader { geo in
@@ -224,13 +224,16 @@ struct TracingView: View {
         }
     }
 
-    private func modeButton(_ title: String, _ value: Mode) -> some View {
+    private func modeButton(_ title: String, _ value: Mode, picture: String? = nil) -> some View {
         Button {
             Haptics.tap()
             mode = value
             start(0)
         } label: {
-            Text(title)
+            HStack(spacing: 6 * uiScale) {
+                if let picture { Picture(picture, size: 36 * uiScale) }
+                Text(title)
+            }
                 .font(.kid(20))
                 .foregroundStyle(mode == value ? .white : Color.outline)
                 .padding(.horizontal, 18 * uiScale)

@@ -53,7 +53,7 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "Buenas noches", english: "Good night", picture: "moon"),
             SpanishWord(spanish: "¿Cómo estás?", english: "How are you?", picture: "face-smile"),
             SpanishWord(spanish: "Muy bien", english: "Very good", picture: "thumbsup"),
-            SpanishWord(spanish: "Me llamo Avery", english: "My name is Avery", picture: "face-happy"),
+            SpanishWord(spanish: "Me llamo Avery", english: "My name is Avery", picture: "avery"),
             SpanishWord(spanish: "Te quiero", english: "I love you", picture: "heart"),
             SpanishWord(spanish: "Tengo hambre", english: "I'm hungry", picture: "face-yum"),
             SpanishWord(spanish: "¡Vamos a jugar!", english: "Let's play!", picture: "ball"),

@@ -8,6 +8,7 @@ const assets = path.join(__dirname, '../AverysPlayground/Assets.xcassets');
 // name in the asset catalog → [svg file, pixel width, parts to hide, scale]; game icons are named Icon-<Activity rawValue>.
 const images = {
   Coco: ['coco.svg', 1200],
+  Avery: ['avery.svg', 900],
   // The launch screen shows images at their natural size, 3x: 600px is 200 points. LaunchCoco (Coco on her
   // scene) is made below; GettingReady shows LaunchScene with Coco on top in the same spot, so she can move.
   LaunchScene: ['launch-scene.svg', 600, 'none', '3x'],
@@ -28,6 +29,7 @@ for (const file of fs.readdirSync(path.join(__dirname, 'pictures'))) {
   images[`Picture-${path.basename(file, '.svg')}`] = [`pictures/${file}`, 400];
 }
 images['Picture-crocodile'] = ['coco.svg', 400];
+images['Picture-avery'] = ['avery.svg', 400];
 const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');text{font-family:Nunito;font-weight:900}";
 
 (async () => {

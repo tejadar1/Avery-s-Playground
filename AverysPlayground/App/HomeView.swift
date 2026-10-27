@@ -10,6 +10,14 @@ struct HomeView: View {
                     HStack(spacing: 8 * uiScale) {
                         CocoFigure(height: 130 * uiScale)
                             .accessibilityLabel("Coco the crocodile")
+                        Image("Avery")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 140 * uiScale)
+                            .phaseAnimator([0.0, -4, 0, 4]) { content, angle in
+                                content.rotationEffect(.degrees(angle), anchor: .bottom)  // a happy little sway
+                            } animation: { _ in .easeInOut(duration: 0.9) }
+                            .accessibilityLabel("Avery")
                         VStack(alignment: .leading, spacing: 2 * uiScale) {
                             Text("Avery's World")
                                 .font(.kid(38))
