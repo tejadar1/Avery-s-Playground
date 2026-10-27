@@ -1080,6 +1080,151 @@ boat!
 boat! You got it!
 bone
 book
+book:But
+book:But he could not blow down the brick house. The three pigs were safe!
+book:Goldilocks
+book:Goldilocks and the Three Bears
+book:Goldilocks went for a walk in the woods.
+book:Hare
+book:Hare ran far ahead and took a nap under a tree.
+book:Hare was fast. Tortoise was slow.
+book:I
+book:Let's
+book:Let's have a race, said Hare.
+book:My
+book:No
+book:No, said the hen. My chicks and I will eat it!
+book:Nobody
+book:Not
+book:She
+book:She baked the wheat into bread.
+book:She found a little house. Nobody was home.
+book:She tried three beds and fell fast asleep.
+book:She tried three bowls of porridge. This one is just right!
+book:She tried three chairs. This one is just right!
+book:Slow
+book:So
+book:So she planted it all by herself. The wheat grew tall.
+book:The
+book:The Little Red Hen
+book:The Three Little Pigs
+book:The Tortoise and the Hare
+book:The big bad wolf huffed and puffed and blew the straw and stick houses down!
+book:The end!
+book:The first pig built a house of straw.
+book:The little red hen found some wheat.
+book:The second pig built a house of sticks.
+book:The third pig built a house of bricks.
+book:The three bears came home! Goldilocks woke up and ran all the way home.
+book:This
+book:Three
+book:Three little pigs went out to build three little houses.
+book:Tortoise
+book:Tortoise kept going, slow and steady.
+book:Tortoise won the race! Slow and steady wins.
+book:Who
+book:Who will help me eat it? I will, said the dog, the cat, and the duck.
+book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
+book:a
+book:ahead
+book:all
+book:and
+book:asleep
+book:bad
+book:baked
+book:bears
+book:beds
+book:big
+book:blew
+book:blow
+book:bowls
+book:bread
+book:brick
+book:bricks
+book:build
+book:built
+book:by
+book:came
+book:cat
+book:chairs
+book:chicks
+book:could
+book:dog
+book:down
+book:duck
+book:eat
+book:far
+book:fast
+book:fell
+book:first
+book:for
+book:found
+book:going
+book:grew
+book:have
+book:he
+book:help
+book:hen
+book:herself
+book:home
+book:house
+book:houses
+book:huffed
+book:in
+book:into
+book:is
+book:it
+book:just
+book:kept
+book:little
+book:me
+book:nap
+book:not
+book:of
+book:one
+book:out
+book:pig
+book:pigs
+book:plant
+book:planted
+book:porridge
+book:puffed
+book:race
+book:ran
+book:red
+book:right
+book:safe
+book:said
+book:second
+book:she
+book:slow
+book:some
+book:steady
+book:stick
+book:sticks
+book:straw
+book:tall
+book:the
+book:third
+book:three
+book:to
+book:took
+book:tree
+book:tried
+book:under
+book:up
+book:walk
+book:was
+book:way
+book:went
+book:were
+book:wheat
+book:will
+book:wins
+book:woke
+book:wolf
+book:won
+book:woods
 boots
 bove
 bow
@@ -1292,8 +1437,6 @@ dora:Ahh, minty fresh! Thank you, Coco!
 dora:Animals
 dora:Bless me, Grandma
 dora:Bless me, Grandpa
-dora:But
-dora:But he could not blow down the brick house. The three pigs were safe!
 dora:Colors
 dora:Come here, my love
 dora:Dad
@@ -1302,18 +1445,12 @@ dora:Family
 dora:Food
 dora:Give me a hug
 dora:God bless you
-dora:Goldilocks
-dora:Goldilocks and the Three Bears
-dora:Goldilocks went for a walk in the woods.
 dora:Good morning
 dora:Good night
 dora:Goodbye
 dora:Gracias, Coco! I love it!
 dora:Grandma
 dora:Grandpa
-dora:Hare
-dora:Hare ran far ahead and took a nap under a tree.
-dora:Hare was fast. Tortoise was slow.
 dora:Hello
 dora:Hello!
 dora:Hi Coco! I'm so excited!
@@ -1322,199 +1459,68 @@ dora:Hola Coco! Holy guacamole, it's my turn!
 dora:Holy guacamole, look at me!
 dora:How are you?
 dora:How cool!
-dora:I
 dora:I love it! Thank you, Coco!
 dora:I love you so much
 dora:I'm hungry
 dora:In a little bit
-dora:Let's
-dora:Let's have a race, said Hare.
 dora:Let's play!
 dora:Look at my smile! Gracias!
 dora:Mom
-dora:My
 dora:My brother
 dora:My name is Avery
 dora:My sister
 dora:My teeth are so sparkly! Thank you!
-dora:No
-dora:No, said the hen. My chicks and I will eat it!
-dora:Nobody
-dora:Not
 dora:Numbers
 dora:Please
 dora:Put on your flip-flops
-dora:She
-dora:She baked the wheat into bread.
-dora:She found a little house. Nobody was home.
-dora:She tried three beds and fell fast asleep.
-dora:She tried three bowls of porridge. This one is just right!
-dora:She tried three chairs. This one is just right!
-dora:Slow
-dora:So
-dora:So she planted it all by herself. The wheat grew tall.
 dora:Thank you
-dora:The
-dora:The Little Red Hen
-dora:The Three Little Pigs
-dora:The Tortoise and the Hare
-dora:The big bad wolf huffed and puffed and blew the straw and stick houses down!
-dora:The end!
-dora:The first pig built a house of straw.
-dora:The little red hen found some wheat.
-dora:The second pig built a house of sticks.
-dora:The third pig built a house of bricks.
-dora:The three bears came home! Goldilocks woke up and ran all the way home.
-dora:This
-dora:Three
-dora:Three little pigs went out to build three little houses.
-dora:Tortoise
-dora:Tortoise kept going, slow and steady.
-dora:Tortoise won the race! Slow and steady wins.
 dora:Very good
-dora:Who
-dora:Who will help me eat it? I will, said the dog, the cat, and the duck.
-dora:Who will help me plant it? Not I, said the dog, the cat, and the duck.
 dora:Wow! I look amazing!
 dora:Yummy!
-dora:a
-dora:ahead
-dora:all
-dora:and
 dora:apple
-dora:asleep
 dora:avocado
-dora:bad
-dora:baked
 dora:banana
-dora:bears
-dora:beds
-dora:big
 dora:bird
 dora:black
-dora:blew
-dora:blow
 dora:blue
-dora:bowls
 dora:bread
-dora:brick
-dora:bricks
-dora:build
-dora:built
-dora:by
 dora:cake
-dora:came
 dora:cat
-dora:chairs
 dora:cheese
-dora:chicks
 dora:cookie
-dora:could
 dora:cow
 dora:crocodile
 dora:dog
-dora:down
-dora:duck
-dora:eat
 dora:eight
-dora:far
-dora:fast
-dora:fell
-dora:first
 dora:fish
 dora:five
-dora:for
-dora:found
 dora:four
 dora:fried cheese
 dora:fried plantains
 dora:frog
-dora:going
 dora:green
-dora:grew
-dora:have
-dora:he
-dora:help
-dora:hen
-dora:herself
-dora:home
 dora:horse
-dora:house
-dora:houses
-dora:huffed
 dora:ice cream
-dora:in
-dora:into
-dora:is
-dora:it
-dora:just
-dora:kept
-dora:little
 dora:mango
 dora:mashed plantains
-dora:me
 dora:milk
-dora:nap
 dora:nine
-dora:not
-dora:of
 dora:one
 dora:orange
-dora:out
-dora:pig
-dora:pigs
 dora:pink
-dora:plant
 dora:plantain
-dora:planted
-dora:porridge
-dora:puffed
 dora:purple
-dora:race
-dora:ran
 dora:red
 dora:rice and beans
-dora:right
-dora:safe
-dora:said
 dora:salami
-dora:second
 dora:seven
-dora:she
 dora:six
-dora:slow
-dora:some
-dora:steady
 dora:stew
-dora:stick
-dora:sticks
-dora:straw
-dora:tall
 dora:ten
-dora:the
-dora:third
 dora:three
-dora:to
-dora:took
-dora:tree
-dora:tried
 dora:two
-dora:under
-dora:up
-dora:walk
-dora:was
 dora:water
-dora:way
-dora:went
-dora:were
-dora:wheat
 dora:white
-dora:will
-dora:wins
-dora:woke
-dora:wolf
-dora:won
-dora:woods
 dora:yellow
 drill
 duck

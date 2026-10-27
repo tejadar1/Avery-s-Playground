@@ -412,10 +412,10 @@ private struct StoryReader: View {
         read(words[index].trimmingCharacters(in: .punctuationCharacters))
     }
 
-    /// Dora reads the books: her Spanish voice for the Spanish ones, and her voice speaking English for the rest.
+    /// The storyteller reads the English books; Dora reads the Spanish ones.
     private func read(_ text: String) {
         if story.language == "en-US" {
-            Speaker.shared.say(Speaker.dora + text)
+            Speaker.shared.say(Speaker.book + text)
         } else {
             Speaker.shared.say(text, language: story.language)
         }

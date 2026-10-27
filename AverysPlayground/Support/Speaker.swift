@@ -19,13 +19,20 @@ final class Speaker {
 
     /// Lines starting with this are a friend talking, recorded in Dora's voice (the Spanish one) speaking English.
     static let dora = "dora:"
+    /// Lines starting with this are read from a storybook, in the storyteller's voice (Voice/voice.txt, third line).
+    static let book = "book:"
+
+    /// What a line says, without the prefix that picks its voice.
+    nonisolated static func words(_ text: String) -> String {
+        text.replacingOccurrences(of: dora, with: "").replacingOccurrences(of: book, with: "")
+    }
 
     func say(_ text: String, language: String = "en-US") {
         if let url = Self.recording(for: text, language: language) {
             play([url])
             return
         }
-        let utterance = AVSpeechUtterance(string: text.replacingOccurrences(of: Self.dora, with: ""))
+        let utterance = AVSpeechUtterance(string: Self.words(text))
         utterance.voice = voice(language)
         speak(utterance)
     }
@@ -36,8 +43,7 @@ final class Speaker {
             play([one, two], pauses: [0.15])
             return
         }
-        speak(AVSpeechUtterance(string: first.replacingOccurrences(of: Self.dora, with: "")),
-              AVSpeechUtterance(string: second.replacingOccurrences(of: Self.dora, with: "")))
+        speak(AVSpeechUtterance(string: Self.words(first)), AVSpeechUtterance(string: Self.words(second)))
     }
 
     /// Speaks a sound written in IPA, like "æ" for the a in "cat": Coco's recording ("sound:" + the IPA) when there is one,

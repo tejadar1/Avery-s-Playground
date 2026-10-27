@@ -39,9 +39,9 @@ def story_lines(stories, prefix=""):
     return {prefix + line for line in found}
 
 
-# English books are read in Dora's voice ("dora:"); Coco only says a book's name when its cover is tapped.
-lines |= story_lines(english["StoriesView.swift"], "dora:")
-lines.add("dora:The end!")
+# English books are read by the storyteller ("book:"); Coco only says a book's name when its cover is tapped.
+lines |= story_lines(english["StoriesView.swift"], "book:")
+lines.add("book:The end!")
 
 # Spanish, in Coco's Spanish voice: the stories, the end, and the Spanish cards with their English meanings.
 lines |= story_lines(src["StoriesView.swift"].split("static let spanish")[1], "es:")

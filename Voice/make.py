@@ -1,8 +1,9 @@
 """Records Coco's lines with Kokoro (the kokoro-onnx build), a free open-source voice, into AverysPlayground/Voice/<key>.mp3.
 
 Runs on GitHub's Linux machines (.github/workflows/build.yml, "voice" input). Voice/voice.txt holds the Kokoro
-voice and how much to raise its pitch, one line per language: English, then Spanish, like "af_heart 1.25".
-Lines starting with "es:" are Spanish. Records only lines without a file yet, removes files for lines that are
+voice and how much to raise its pitch, one per line: Coco in English, then Spanish (Dora), then the storyteller
+for the English books, like "af_heart 1.25". Lines starting with "es:" are Spanish, "dora:" are Dora speaking
+English (the friends, and the meanings in Español), and "book:" are the storyteller. Records only lines without a file yet, removes files for lines that are
 gone, and re-records a language's lines when its voice changes.
 `--samples` instead records a few lines in several voices and pitches to Voice/samples/ for choosing one.
 The key is the first 16 hex digits of the line's SHA-256 ("es:" included), matching Speaker.recording(for:language:).
@@ -74,10 +75,12 @@ for old in out.glob("*.mp3"):
 
 voices = (here / "voice.txt").read_text().splitlines()
 for (voice, pitch), lang, suffix, mine in [
-    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:"))),
+    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:"))),
     (voices[1].split(), "es", "-es", lambda l: l.startswith("es:")),
     # The friends, and the English meanings of Spanish words: Dora's voice speaking English
     (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:")),
+    # The storyteller for the English books
+    (voices[2].split(), "en-us", "-book", lambda l: l.startswith("book:")),
 ]:
     keys = {k: l for k, l in wanted.items() if mine(l)}
     made_with = out / f"voice-id{suffix}.txt"
@@ -88,7 +91,7 @@ for (voice, pitch), lang, suffix, mine in [
     todo = [(k, l) for k, l in keys.items() if not (out / f"{k}.mp3").exists()]
     print(f"{len(keys)} {lang} lines, {len(todo)} to record with {voice} at pitch {pitch}")
     for n, (k, line) in enumerate(todo, 1):
-        record(line.removeprefix("es:").removeprefix("dora:"), voice, float(pitch), out / f"{k}.mp3", lang)
+        record(line.split(":", 1)[1] if line.startswith(("es:", "dora:", "book:")) else line, voice, float(pitch), out / f"{k}.mp3", lang)
         if n % 100 == 0:
             print(f"{n} recorded")
 print("Done")
