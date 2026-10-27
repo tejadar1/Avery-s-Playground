@@ -55,8 +55,7 @@ struct PetView: View {
         let to: CGPoint
     }
 
-    /// Where Mochi's bed is, and how far her mouth reaches in front of her, as a fraction of her width.
-    private static let bedX: CGFloat = 0.84
+    /// How far Mochi's mouth reaches in front of her, as a fraction of her width.
     private static let mouthReach: CGFloat = 0.42
     private static let wall = Color(red: 0.81, green: 0.91, blue: 0.89)
     private static let floor = Color(red: 0.93, green: 0.75, blue: 0.56)
@@ -92,7 +91,11 @@ struct PetView: View {
     @State private var cheer = ""
     @State private var cheerCount = 0
 
-    private var mochiHeight: CGFloat { min(roomSize.height * 0.34, roomSize.width * 0.3) }
+    private var mochiHeight: CGFloat { min(roomSize.height * 0.32, roomSize.width * 0.4) }
+    /// How far from the edges Mochi's middle can go and still be all on screen, as a fraction of the room's width.
+    private var edge: CGFloat { mochiHeight * 2 / 3 / roomSize.width + 0.01 }
+    /// Her bed sits against the right wall, wholly on screen.
+    private var bedX: CGFloat { 1 - (mochiHeight * 4 / 3 * 1.15 / 2 + 10) / roomSize.width }
     /// How far Mochi's mouth is from her middle, as a fraction of the room's width.
     private var reach: CGFloat { Self.mouthReach * mochiHeight * 4 / 3 / roomSize.width }
 
@@ -135,11 +138,11 @@ struct PetView: View {
             // The room picture fills the space from the bottom; its floor starts 380 of its 1000 points up.
             let fill = max(w / 1600, h / 1000)
             let floorTop = h - 380 * fill
-            let baseline = floorTop + (h - trayHeight - floorTop) * 0.62
+            let baseline = floorTop + (h - trayHeight - floorTop) * 0.72
             let mochiH = mochiHeight, mochiW = mochiHeight * 4 / 3
             let mochiCenter = CGPoint(x: mochiX * w, y: baseline - mochiH * 0.423)
             let mouth = CGPoint(x: mochiCenter.x + (facingRight ? 1 : -1) * Self.mouthReach * mochiW, y: mochiCenter.y - mochiH * 0.03)
-            let bedW = mochiW * 1.3, bowlW = mochiH * 0.45, ballW = mochiH * 0.2
+            let bedW = mochiW * 1.15, bowlW = mochiH * 0.45, ballW = mochiH * 0.2
 
             ZStack(alignment: .topLeading) {
                 Image("MochiRoom")
@@ -150,7 +153,7 @@ struct PetView: View {
                     .accessibilityHidden(true)
 
                 Picture("dogbed", size: bedW)
-                    .position(x: Self.bedX * w, y: baseline - bedW * 0.27)
+                    .position(x: bedX * w, y: baseline - bedW * 0.27)
 
                 if let bowlX {
                     Picture(bowlFull ? "dogbowl" : "dogbowl-empty", size: bowlW)
@@ -215,7 +218,7 @@ struct PetView: View {
                         .phaseAnimator([CGFloat(1), 1.3]) { content, scale in
                             content.scaleEffect(reduceMotion ? 1 : scale)
                         } animation: { _ in .easeInOut(duration: 0.8) }
-                        .position(x: Self.bedX * w + mochiW * 0.3, y: baseline - mochiH * 0.9)
+                        .position(x: bedX * w + mochiW * 0.3, y: baseline - mochiH * 0.9)
                 }
             }
             .frame(width: w, height: h)
@@ -336,7 +339,7 @@ struct PetView: View {
     }
 
     private func walk(to target: CGFloat, run: Bool = false) async {
-        let x = min(0.9, max(0.1, target))
+        let x = min(1 - edge, max(edge, target))
         let distance = abs(x - mochiX)
         guard distance > 0.01, !Task.isCancelled else { return }
         facingRight = x > mochiX
@@ -488,7 +491,7 @@ struct PetView: View {
         isHosing = false
         say("Night night, Mochi. Shh!")
         act {
-            await walk(to: Self.bedX)
+            await walk(to: bedX)
             guard !Task.isCancelled else { return }
             withAnimation(.easeInOut(duration: 0.6)) {
                 pose = .sleep
