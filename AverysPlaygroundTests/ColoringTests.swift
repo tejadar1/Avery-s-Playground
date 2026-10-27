@@ -3,11 +3,10 @@ import XCTest
 
 final class ColoringTests: XCTestCase {
     func testTapColorsTheTopmostShape() {
-        let flower = ColoringPage.flower
-        let middle = flower.regions.count - 1
-        XCTAssertEqual(flower.region(at: CGPoint(x: 0.5, y: 0.3)), middle, "the flower's middle sits on top of the petals")
-        XCTAssertNotNil(flower.region(at: CGPoint(x: 0.56, y: 0.2)), "a petal")
-        XCTAssertNil(flower.region(at: CGPoint(x: 0.05, y: 0.05)), "empty paper")
+        let garden = ColoringPage.garden
+        XCTAssertEqual(garden.region(at: CGPoint(x: 0.86, y: 0.16)), 1, "the sun sits on top of the sky")
+        XCTAssertEqual(garden.region(at: CGPoint(x: 0.4, y: 0.03)), 0, "plain sky")
+        XCTAssertNil(garden.region(at: CGPoint(x: 1.5, y: 0.5)), "off the page")
     }
 
     func testEveryPageHasShapesToColor() {

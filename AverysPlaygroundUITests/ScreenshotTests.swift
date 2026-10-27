@@ -76,6 +76,9 @@ final class ScreenshotTests: XCTestCase {
                     self.tap(self.app.buttons[crayon])
                     picture.coordinate(withNormalizedOffset: CGVector(dx: x, dy: y)).tap()
                 }
+                self.tap(self.app.buttons["Purple"])
+                picture.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.88))
+                    .press(forDuration: 0.05, thenDragTo: picture.coordinate(withNormalizedOffset: CGVector(dx: 0.6, dy: 0.95)))
             }),
             ("Draw", {
                 let canvas = self.find("Canvas")

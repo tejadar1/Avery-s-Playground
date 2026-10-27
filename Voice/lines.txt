@@ -54,11 +54,11 @@
 9
 9! Great counting!
 A
-A butterfly!
-A fish!
-A flower!
-A house!
-A ice cream!
+A beach!
+A coral reef!
+A farm!
+A garden!
+A night sky!
 A sharp
 A. A is for Apple!
 All clean!
@@ -489,7 +489,7 @@ Paint it with the brush!
 Pajamas
 Party dress
 Penguin
-Pick a crayon, then tap the picture!
+Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick another nail!
 Picture
 Pigtails
@@ -647,11 +647,11 @@ Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Wiggle wiggle wiggle! That's my happy dance!
 Woof woof!
 Wowza bowza!
-Wowza! You colored the whole butterfly!
-Wowza! You colored the whole fish!
-Wowza! You colored the whole flower!
-Wowza! You colored the whole house!
-Wowza! You colored the whole ice cream!
+Wowza! You colored the whole beach!
+Wowza! You colored the whole coral reef!
+Wowza! You colored the whole farm!
+Wowza! You colored the whole garden!
+Wowza! You colored the whole night sky!
 X
 X. Fox ends with X!
 Y
@@ -746,6 +746,7 @@ banana
 bananas
 bat
 bat! You read it! Snap snap!
+beach
 beanie
 bear
 bears
@@ -977,6 +978,7 @@ chicks
 comb
 cookie
 cookies
+coral reef
 could
 cow
 cow and apple!
@@ -1108,6 +1110,7 @@ eh
 elephant
 f
 far
+farm
 fast
 fell
 fff
@@ -1203,6 +1206,7 @@ frog and tree!
 frog!
 frog! You got it!
 g
+garden
 gem
 girl
 going
@@ -1312,7 +1316,6 @@ how
 huffed
 huh
 i
-ice cream
 icecream
 ih
 in
@@ -1371,6 +1374,7 @@ n
 nap
 necklace
 nest
+night sky
 nnn
 none
 not
