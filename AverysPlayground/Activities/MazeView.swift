@@ -190,7 +190,10 @@ struct MazeView: View {
 
     private func finish() {
         wins += 1
-        say("Mochi found her bone! Woof woof!")
+        let hooray = Hooray.random
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Mochi found her bone! \(hooray)" }
+        cheerCount += 1
+        Speaker.shared.say("Mochi found her bone! Woof woof!", then: hooray)
         Task {
             try? await Task.sleep(for: .seconds(2.5))
             newMaze()

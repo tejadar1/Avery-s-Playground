@@ -128,6 +128,19 @@ struct CocoFigure: View {
     }
 }
 
+/// The silly things Coco shouts when something goes right, picked at random so it's never the same line twice.
+/// Avery's favorite is "Holy guacamole!", so it comes up a lot.
+enum Hooray {
+    static let all = [
+        "Holy guacamole!", "Holy guacamole, you did it!", "Holy moly, guacamole!", "Holy guacamole, look at you!",
+        "Snap snap, hooray!", "Crocodile-tastic!", "Wowza bowza!", "Easy peasy, lemon squeezy!",
+        "Hot diggity dog!", "Jumping jellybeans!", "Cool beans!", "Croc-tacular!", "Yippee skippy!",
+        "Okey dokey, artichokey!", "Woo hoo, kangaroo!", "Super duper pooper scooper!",
+    ]
+
+    static var random: String { all.randomElement()! }
+}
+
 /// Coco with a speech bubble. She hops each time `hops` changes, jumps for joy when `cheers` changes,
 /// wobbles with a silly "oopsie" when `oops` changes, and tap her for a spin and a joke.
 struct CocoSays: View {
@@ -145,6 +158,12 @@ struct CocoSays: View {
         "Hee hee! That tickles!",
         "Boop! You booped my nose!",
         "I have lots and lots of teeth, and I brush every one!",
+        "Holy guacamole! I sat on a banana! Squish!",
+        "What do you call a crocodile in a vest? An investi-gator! Hee hee!",
+        "Guacamole is my favorite food. It's green, just like me!",
+        "I tried to tickle a fish, but it was too slippery! Wiggle wiggle!",
+        "Why did the crocodile cross the road? To get to the snack-odile! Hee hee!",
+        "My tail is so long, sometimes I forget it's mine! Hello, tail!",
     ]
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion

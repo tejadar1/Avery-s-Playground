@@ -21,8 +21,24 @@ here = Path(__file__).resolve().parent
 kokoro = Kokoro(str(here / "kokoro-v1.0.onnx"), str(here / "voices-v1.0.bin"))
 
 
+def letter_sound(ipa, voice):
+    """A letter's sound ("sound:æ" lines) from its IPA. Stops get a soft vowel so they can be heard; held sounds are held."""
+    phonemes = ipa + ("ə" if ipa in {"b", "d", "ɡ", "k", "p", "t", "h", "w"} else "ː" if ipa in {"f", "s", "v", "n"} else "")
+    audio, rate = kokoro.create(phonemes, voice=voice, speed=0.85, lang="en-us", is_phonemes=True)
+    if len(audio) < rate * 0.1 or abs(audio).max() < 0.02:
+        raise ValueError(f"no sound for {ipa}")
+    return audio, rate
+
+
 def record(line, voice, pitch, path, lang="en-us"):
-    audio, rate = kokoro.create(line, voice=voice, speed=1.0, lang=lang)
+    if line.startswith("sound:"):
+        try:
+            audio, rate = letter_sound(line.removeprefix("sound:"), voice)
+        except Exception as error:  # the app falls back to the device voice for this sound
+            print(f"Skipped {line}: {error}")
+            return
+    else:
+        audio, rate = kokoro.create(line, voice=voice, speed=1.0, lang=lang)
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         soundfile.write(wav.name, audio, rate)
         # Raise the pitch for a cartoon voice, keeping the speed (a touch quicker, for bounce).

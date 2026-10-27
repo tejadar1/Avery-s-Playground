@@ -305,7 +305,7 @@ struct HairSalonView: View {
                         ForEach(Self.hairColors, id: \.self) { color in
                             choice("Hair color", isSelected: color == hair.color) {
                                 withAnimation { hair.color = color }
-                                say(Self.cheers.randomElement()!)
+                                say((Self.cheers + Hooray.all).randomElement()!)
                             } label: {
                                 Circle()
                                     .fill(color)
@@ -317,7 +317,7 @@ struct HairSalonView: View {
                         ForEach(Self.bows, id: \.self) { bow in
                             choice(bow, isSelected: bow == hair.accessory) {
                                 hair.accessory = bow
-                                say(Self.cheers.randomElement()!)
+                                say((Self.cheers + Hooray.all).randomElement()!)
                             } label: {
                                 Picture(bow, size: 46 * uiScale)
                                     .frame(width: 64 * uiScale, height: 64 * uiScale)

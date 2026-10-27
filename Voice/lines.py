@@ -52,9 +52,11 @@ meanings = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var englis
 for case, title in titles.items():
     lines.update({"es:" + title, meanings[case]})
 
-# Letter tracing: the letter's name as it comes up, and a cheer when it's traced
-for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-    lines.update({f"{letter}!", f"{letter}! Great tracing!"})
+# Letter tracing: the letter's name, said before a silly cheer when it's traced
+lines.update(f"{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+# Each letter's sound for Spell and Sound it out, recorded from its IPA ("sound:æ"); see make.py
+lines.update("sound:" + ipa for ipa in re.findall(r'"\w": \("([^"]+)", "[^"]+"\)', src["ReadingView.swift"]))
 
 numbers = range(1, 21)
 lines.update(str(n) for n in numbers)

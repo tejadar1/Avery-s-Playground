@@ -151,7 +151,7 @@ struct MemoryView: View {
                 case nil: say("It's a tie! Everybody wins a hug!")
                 }
             } else {
-                say("A match! Go again!")
+                say(Hooray.random, hint: "A match! Go again!")
             }
         } else if game.isMiss {
             Task {

@@ -27,8 +27,22 @@ final class Speaker {
         speak(utterance)
     }
 
-    /// Speaks a sound written in IPA, like "æ" for the a in "cat". `text` is what's read if the voice can't do IPA.
+    /// Says two lines one after the other, like a letter and then a cheer.
+    func say(_ first: String, then second: String) {
+        if let one = Self.recording(for: first), let two = Self.recording(for: second) {
+            play([one, two], pauses: [0.15])
+            return
+        }
+        speak(AVSpeechUtterance(string: first), AVSpeechUtterance(string: second))
+    }
+
+    /// Speaks a sound written in IPA, like "æ" for the a in "cat": Coco's recording ("sound:" + the IPA) when there is one,
+    /// otherwise the device voice. `text` is what's read if the voice can't do IPA.
     func say(_ text: String, ipa: String) {
+        if let url = Self.recording(for: "sound:" + ipa) {
+            play([url])
+            return
+        }
         let sound = NSMutableAttributedString(string: text)
         sound.addAttribute(
             NSAttributedString.Key(rawValue: AVSpeechSynthesisIPANotationAttribute),

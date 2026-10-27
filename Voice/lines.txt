@@ -55,7 +55,6 @@ A night sky!
 A sharp
 A sticker to find
 A!
-A! Great tracing!
 ABC
 AVERY
 All clean!
@@ -71,7 +70,6 @@ Avery! You wrote your name!
 B
 B is for Bear!
 B!
-B! Great tracing!
 Backpack
 Backpack ready!
 Ball
@@ -133,7 +131,6 @@ C
 C is for Cat!
 C sharp
 C!
-C! Great tracing!
 Canvas
 Cat
 Clear
@@ -296,10 +293,12 @@ Colors
 Comb
 Comb out the tangles!
 Come here, my love
+Cool beans!
 Copy this nail
 Copy this!
 Coral
 Cozy pajamas!
+Croc-tacular!
 Crocodile-tastic!
 Crown
 Crown! Fashion show time!
@@ -313,7 +312,6 @@ D
 D is for Dog!
 D sharp
 D!
-D! Great tracing!
 Dad
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
@@ -329,14 +327,13 @@ Drink of water
 E
 E is for Elephant!
 E!
-E! Great tracing!
+Easy peasy, lemon squeezy!
 Elephant
 Extras
 F
 F is for Fish!
 F sharp
 F!
-F! Great tracing!
 Family
 Fashion show time!
 Feed
@@ -361,7 +358,6 @@ G
 G is for Grapes!
 G sharp
 G!
-G! Great tracing!
 Get dressed
 Give me a hug
 Glitter
@@ -387,11 +383,11 @@ Grapes
 Green
 Green! Like a frog.
 Grown-up timer
+Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
 H is for Horse!
 H!
-H! Great tracing!
 Hair
 Hair color
 Halfway there! Keep going!
@@ -498,15 +494,21 @@ High heels! Holy guacamole, I love it!
 High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
+Holy guacamole!
+Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
 Holy guacamole, I love it!
+Holy guacamole, look at you!
 Holy guacamole, so pretty!
 Holy guacamole, so stylish!
+Holy guacamole, you did it!
+Holy moly, guacamole!
 Horse
 Hose
 Hot
 Hot Cross Buns
 Hot Cross Buns!
+Hot diggity dog!
 How are you?
 How cool!
 Hugs and kisses
@@ -515,9 +517,9 @@ I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
 I is for Ice cream!
 I love you so much
+I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
 I wish I had hair like that!
 I!
-I! Great tracing!
 I'm hungry
 Ice cream
 In a little bit
@@ -525,12 +527,11 @@ It's a tie! Everybody wins a hug!
 J
 J is for Juice!
 J!
-J! Great tracing!
 Juice
+Jumping jellybeans!
 K
 K is for Kite!
 K!
-K! Great tracing!
 Keep blowing!
 Kiki
 Kite
@@ -538,7 +539,6 @@ Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
 L is for Lion!
 L!
-L! Great tracing!
 Leo
 Let's
 Let's count to 1!
@@ -563,7 +563,6 @@ Looking good!
 M
 M is for Moon!
 M!
-M! Great tracing!
 Ma
 Mary Had a Little Lamb
 Mary Had a Little Lamb!
@@ -598,10 +597,10 @@ My brother
 My name
 My name is Avery
 My sister
+My tail is so long, sometimes I forget it's mine! Hello, tail!
 N
 N is for Nest!
 N!
-N! Great tracing!
 Nail
 Nail idea
 Navy
@@ -645,9 +644,9 @@ Numbers
 O
 O is for Octopus!
 O!
-O! Great tracing!
 Octopus
 Okay!
+Okey dokey, artichokey!
 One
 Ooh la la!
 Open wide! Pick the toothbrush and brush the teeth.
@@ -662,7 +661,6 @@ Overalls! Wowza bowza!
 P
 P is for Penguin!
 P!
-P! Great tracing!
 Paint it with the brush!
 Pajamas
 Pajamas! Fashion show time!
@@ -708,12 +706,10 @@ Put on your flip-flops
 Q
 Q is for Queen!
 Q!
-Q! Great tracing!
 Queen
 R
 R is for Rainbow!
 R!
-R! Great tracing!
 Rainbow
 Ready for school! Have a great day!
 Ready, set, go! Let's beat the timer!
@@ -722,10 +718,10 @@ Red! Like a strawberry.
 Remover
 Rinse
 Rinse off all the bubbles!
+Rub shampoo all over her hair!
 S
 S is for Sun!
 S!
-S! Great tracing!
 Sandals
 Sandals! Fashion show time!
 Sandals! Holy guacamole, I love it!
@@ -755,6 +751,7 @@ Slow
 Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
+Snap snap, hooray!
 Snap! I need the apple!
 Snap! I need the ball!
 Snap! I need the bee!
@@ -821,11 +818,11 @@ Sunglasses! Holy guacamole, I love it!
 Sunglasses! Ooh la la!
 Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
+Super duper pooper scooper!
 Swish swish! Minty fresh! What a great smile!
 T
 T is for Turtle!
 T!
-T! Great tracing!
 T-shirt
 T-shirt! Fashion show time!
 T-shirt! Holy guacamole, I love it!
@@ -885,7 +882,6 @@ Twinkle Twinkle!
 U
 U is for Umbrella!
 U!
-U! Great tracing!
 Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
@@ -894,14 +890,12 @@ Use the restroom
 V
 V is for Violin!
 V!
-V! Great tracing!
 Very good
 Violin
 Vitamins, yum! Strong and healthy!
 W
 W is for Whale!
 W!
-W! Great tracing!
 Wake up
 Wand
 Wand! Fashion show time!
@@ -913,13 +907,16 @@ Want a haircut?
 Wash
 Whale
 What color should it be?
+What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Which picture is it?
 White
 White! Like a cloud.
 Who
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
+Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
+Woo hoo, kangaroo!
 Woof woof!
 Wowza bowza!
 Wowza! You colored the whole beach!
@@ -929,13 +926,12 @@ Wowza! You colored the whole garden!
 Wowza! You colored the whole night sky!
 X
 X!
-X! Great tracing!
 Y
 Y is for Yo-yo!
 Y!
-Y! Great tracing!
 Yellow
 Yellow! Like a banana.
+Yippee skippy!
 Yo-yo
 You beat the timer! Holy guacamole!
 You played Hot Cross Buns! Holy guacamole, what a song!
@@ -946,7 +942,6 @@ Yummy!
 Z
 Z is for Zebra!
 Z!
-Z! Great tracing!
 Zebra
 a
 a banana
@@ -2116,6 +2111,24 @@ sneakers
 snow.
 so
 some
+sound:b
+sound:d
+sound:f
+sound:h
+sound:k
+sound:ks
+sound:n
+sound:p
+sound:s
+sound:t
+sound:v
+sound:w
+sound:æ
+sound:ɑ
+sound:ɛ
+sound:ɡ
+sound:ɪ
+sound:ʌ
 sparkle
 sparkles
 sprout

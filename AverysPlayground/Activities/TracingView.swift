@@ -265,7 +265,10 @@ struct TracingView: View {
             }
         } else {
             wins += 1
-            say("\(letter)! Great tracing!")
+            let hooray = Hooray.random
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "\(letter)! \(hooray)" }
+            cheerCount += 1
+            Speaker.shared.say("\(letter)!", then: hooray)
         }
         Task {
             try? await Task.sleep(for: .seconds(isLast && mode == .name ? 3 : 1.6))
