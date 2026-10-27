@@ -64,8 +64,8 @@ All dry!
 All fixed! Holy guacamole!
 All nails
 All rinsed!
-Animals
 Apple
+Avery
 Avery! You wrote your name!
 B
 B is for Bear!
@@ -96,8 +96,6 @@ Bingo card
 Bingo! You filled your card! Holy guacamole!
 Black
 Black! Like a hat.
-Bless me, Grandma
-Bless me, Grandpa
 Blow dryer
 Blue
 Blue! Like a whale.
@@ -292,7 +290,6 @@ Coco has 5 strawberries. Mochi brings 5 more. How many now?
 Colors
 Comb
 Comb out the tangles!
-Come here, my love
 Cool beans!
 Copy this nail
 Copy this!
@@ -312,10 +309,8 @@ D
 D is for Dog!
 D sharp
 D!
-Dad
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
-Do you want mangú?
 Dog
 Doll
 Done!
@@ -334,7 +329,6 @@ F
 F is for Fish!
 F sharp
 F!
-Family
 Fashion show time!
 Feed
 Fetch! Good pup, Mochi!
@@ -348,7 +342,6 @@ Flower crown! Holy guacamole, I love it!
 Flower crown! Ooh la la!
 Flower crown! So stylish!
 Flower crown! Wowza bowza!
-Food
 Food bowl
 Fox
 Fox ends with X!
@@ -359,26 +352,19 @@ G is for Grapes!
 G sharp
 G!
 Get dressed
-Give me a hug
 Glitter
-God bless you
 Goldilocks
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
-Good morning
 Good morning! Let's get ready for school.
 Good morning, sunshine!
-Good night
 Good night!
-Goodbye
 Gown
 Gown! Fashion show time!
 Gown! Holy guacamole, I love it!
 Gown! Ooh la la!
 Gown! So stylish!
 Gown! Wowza bowza!
-Grandma
-Grandpa
 Grapes
 Green
 Green! Like a frog.
@@ -475,8 +461,6 @@ Hee hee, the pig isn't on your card.
 Hee hee, the star isn't on your card.
 Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
-Hello
-Hello!
 Help Mochi find her bone! Drag her along the path.
 Hi Avery!
 Hi Bella!
@@ -509,20 +493,15 @@ Hot
 Hot Cross Buns
 Hot Cross Buns!
 Hot diggity dog!
-How are you?
-How cool!
 Hugs and kisses
 I
 I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
 I is for Ice cream!
-I love you so much
 I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
 I wish I had hair like that!
 I!
-I'm hungry
 Ice cream
-In a little bit
 It's a tie! Everybody wins a hug!
 J
 J is for Juice!
@@ -554,10 +533,10 @@ Let's count to 8!
 Let's count to 9!
 Let's get her dressed! Pick some clothes.
 Let's have a race, said Hare.
-Let's play!
 Let's read! Tap each letter to hear its sound.
 Let's wash your hair! Rub on the shampoo.
 Lights out
+Lily
 Lion
 Looking good!
 M
@@ -568,6 +547,7 @@ Mary Had a Little Lamb
 Mary Had a Little Lamb!
 Maze board
 Maze. Drag Mochi to the bone.
+Mia
 Mochi
 Mochi found her bone! Woof woof!
 Mochi had a good nap! Good morning!
@@ -587,16 +567,12 @@ MochiLegFarFront
 MochiLegFront
 MochiRoom
 MochiTail
-Mom
 Moon
 Morning
 Mouth
 Mustard
 My
-My brother
 My name
-My name is Avery
-My sister
 My tail is so long, sometimes I forget it's mine! Hello, tail!
 N
 N is for Nest!
@@ -640,7 +616,6 @@ Now comb it.
 Now pick a style.
 Now rinse it with water.
 Now tap Rinse to swish!
-Numbers
 O
 O is for Octopus!
 O!
@@ -684,7 +659,6 @@ Pink
 Pink! Like a flower.
 Play
 Play again
-Please
 Ponytail
 Ponytail! So cute!
 Potty time, all done! Wash your hands!
@@ -702,7 +676,6 @@ Purse! Holy guacamole, I love it!
 Purse! Ooh la la!
 Purse! So stylish!
 Purse! Wowza bowza!
-Put on your flip-flops
 Q
 Q is for Queen!
 Q!
@@ -718,6 +691,7 @@ Red! Like a strawberry.
 Remover
 Rinse
 Rinse off all the bubbles!
+Rosa
 Rub shampoo all over her hair!
 S
 S is for Sun!
@@ -844,7 +818,6 @@ Tap the nail!
 Tap the teeth with a hole to fix them.
 Teal
 Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.
-Thank you
 The
 The Little Red Hen
 The Three Little Pigs
@@ -886,11 +859,11 @@ Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
 Up
+Up next
 Use the restroom
 V
 V is for Violin!
 V!
-Very good
 Violin
 Vitamins, yum! Strong and healthy!
 W
@@ -938,11 +911,11 @@ You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
 Yum yum, breakfast!
-Yummy!
 Z
 Z is for Zebra!
 Z!
 Zebra
+Zoe
 a
 a banana
 a bear
@@ -991,7 +964,6 @@ are.
 as
 asleep
 avery
-avocado
 b
 backpack
 bad
@@ -1094,10 +1066,8 @@ bird and sun!
 bird and tree!
 bird!
 bird! You got it!
-black
 blew
 blow
-blue
 boat
 boat and apple!
 boat and ball!
@@ -1267,7 +1237,6 @@ caterpillar
 chair
 chairs
 checkmark
-cheese
 chick
 chicks
 comb
@@ -1345,6 +1314,95 @@ dog! You spelled it!
 dogbed
 dogbowl
 dogbowl-empty
+dora:Ahh, minty fresh! Thank you, Coco!
+dora:Animals
+dora:Bless me, Grandma
+dora:Bless me, Grandpa
+dora:Colors
+dora:Come here, my love
+dora:Dad
+dora:Do you want mangú?
+dora:Family
+dora:Food
+dora:Give me a hug
+dora:God bless you
+dora:Good morning
+dora:Good night
+dora:Goodbye
+dora:Gracias, Coco! I love it!
+dora:Grandma
+dora:Grandpa
+dora:Hello
+dora:Hello!
+dora:Hi Coco! I'm so excited!
+dora:Hi Coco! Make me look fabulous!
+dora:Hola Coco! Holy guacamole, it's my turn!
+dora:Holy guacamole, look at me!
+dora:How are you?
+dora:How cool!
+dora:I love it! Thank you, Coco!
+dora:I love you so much
+dora:I'm hungry
+dora:In a little bit
+dora:Let's play!
+dora:Look at my smile! Gracias!
+dora:Mom
+dora:My brother
+dora:My name is Avery
+dora:My sister
+dora:My teeth are so sparkly! Thank you!
+dora:Numbers
+dora:Please
+dora:Put on your flip-flops
+dora:Thank you
+dora:Very good
+dora:Wow! I look amazing!
+dora:Yummy!
+dora:apple
+dora:avocado
+dora:banana
+dora:bird
+dora:black
+dora:blue
+dora:bread
+dora:cake
+dora:cat
+dora:cheese
+dora:cookie
+dora:cow
+dora:crocodile
+dora:dog
+dora:eight
+dora:fish
+dora:five
+dora:four
+dora:fried cheese
+dora:fried plantains
+dora:frog
+dora:green
+dora:horse
+dora:ice cream
+dora:mango
+dora:mashed plantains
+dora:milk
+dora:nine
+dora:one
+dora:orange
+dora:pink
+dora:plantain
+dora:purple
+dora:red
+dora:rice and beans
+dora:salami
+dora:seven
+dora:six
+dora:stew
+dora:ten
+dora:three
+dora:two
+dora:water
+dora:white
+dora:yellow
 down
 drill
 duck
@@ -1405,7 +1463,6 @@ egg and tree!
 egg!
 egg! You got it!
 eh
-eight
 elephant
 es:A
 es:A Avery se le cayó un diente. ¡Qué emoción!
@@ -1766,7 +1823,6 @@ fish and sun!
 fish and tree!
 fish!
 fish! You got it!
-five
 flag
 flats
 fleece
@@ -1802,12 +1858,9 @@ flowercrown
 footprints
 for
 found
-four
 fox
 fox! You read it! Snap snap!
 fox! You spelled it!
-fried cheese
-fried plantains
 frog
 frog and apple!
 frog and ball!
@@ -1842,7 +1895,6 @@ girl
 going
 gown
 grapes
-green
 grew
 guh
 h
@@ -1950,7 +2002,6 @@ huffed
 hug
 huh
 i
-ice cream
 icecream
 ih
 in
@@ -1974,10 +2025,7 @@ like
 lion
 lit
 little
-mango
-mashed plantains
 me
-milk
 mochi
 mond
 moon
@@ -2015,7 +2063,6 @@ nap
 necklace
 nest
 night sky
-nine
 nnn
 none
 not
@@ -2026,7 +2073,6 @@ octopus
 of
 one
 oopsie
-orange
 out
 overalls
 p
@@ -2068,16 +2114,13 @@ pig! You got it!
 pig! You read it! Snap snap!
 pig! You spelled it!
 pigs
-pink
 pizza
 plant
-plantain
 planted
 polish
 porridge
 puffed
 puh
-purple
 purse
 queen
 rabbit
@@ -2085,23 +2128,19 @@ race
 rainbow
 ran
 red
-rice and beans
 right
 room
 ry
 s
 safe
 said
-salami
 sandals
 scissors
 second
-seven
 shampoo
 she
 sheep
 shower
-six
 sky.
 sleep
 slice of pizza
@@ -2162,7 +2201,6 @@ star!
 star! You got it!
 star,
 steady
-stew
 stick
 stickers
 sticks
@@ -2203,7 +2241,6 @@ sunhat
 sunrise
 t
 tall
-ten
 tennis
 the
 third
@@ -2267,7 +2304,6 @@ w
 walk
 wand
 was
-water
 way
 web
 web! You read it! Snap snap!
@@ -2289,7 +2325,6 @@ woods
 world
 wuh
 x
-yellow
 you
 yoyo
 zebra

@@ -215,7 +215,9 @@ struct DressUpView: View {
         .aspectRatio(1 / DollArt.height, contentMode: .fit), size: 300)
         flashes += 1
         withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
-        say("Say cheese! Snap snap!")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Say cheese! Snap snap!" }
+        cheerCount += 1
+        Speaker.shared.say("Say cheese! Snap snap!", then: FriendSays.thanks.randomElement()!)
     }
 
     private func newDoll() {
@@ -225,7 +227,9 @@ struct DressUpView: View {
             isShowingOff = false
             photo = nil
         }
-        say("Hi \(friend.name)!", hint: "Let's get her dressed! Pick some clothes.")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Hi \(friend.name)! Let's get her dressed! Pick some clothes." }
+        cheerCount += 1
+        Speaker.shared.say("Hi \(friend.name)!", then: FriendSays.hello.randomElement()!)
     }
 
     /// Speaks only when the message changes, so taps don't repeat the same line.

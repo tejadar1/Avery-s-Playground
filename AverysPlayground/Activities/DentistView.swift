@@ -322,7 +322,9 @@ struct DentistView: View {
         let picture = snapshot(of: Canvas { context, size in DentistArt.draw(nil, patient: who, in: &context, size: size) }, size: 300)
         flashes += 1
         withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
-        say("Say cheese! Snap snap!")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Say cheese! Snap snap!" }
+        cheerCount += 1
+        Speaker.shared.say("Say cheese! Snap snap!", then: FriendSays.patientThanks.randomElement()!)
     }
 
     private func newPatient() {

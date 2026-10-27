@@ -9,7 +9,7 @@ from pathlib import Path
 
 app = Path(__file__).resolve().parent.parent / "AverysPlayground"
 src = {p.name: p.read_text() for p in (app / "Activities").glob("*.swift")}
-theme = (app / "Support" / "Theme.swift").read_text()
+theme = (app / "Support" / "Theme.swift").read_text() + (app / "Support" / "Customers.swift").read_text()
 lines = set()
 
 
@@ -45,12 +45,13 @@ lines |= story_lines(english["StoriesView.swift"])
 lines |= story_lines(src["StoriesView.swift"].split("static let spanish")[1], "es:")
 lines.add("es:¡Colorín colorado, este cuento se ha acabado!")
 spanish = src["SpanishView.swift"]
+# English meanings are said in Dora's voice ("dora:"), like the Spanish
 for es, en in re.findall(r'SpanishWord\(spanish: "([^"]+)", english: "([^"]+)"', spanish):
-    lines.update({"es:" + es, en})
+    lines.update({"es:" + es, "dora:" + en})
 titles = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var title")[1].split("var english")[0]))
 meanings = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var english")[1].split("var picture")[0]))
 for case, title in titles.items():
-    lines.update({"es:" + title, meanings[case]})
+    lines.update({"es:" + title, "dora:" + meanings[case]})
 
 # Letter tracing: the letter's name, said before a silly cheer when it's traced
 lines.update(f"{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")

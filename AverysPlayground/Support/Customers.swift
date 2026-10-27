@@ -16,6 +16,19 @@ struct Friend: Hashable {
     ]
 }
 
+/// What the customers say back to Coco, in Dora's voice.
+enum FriendSays {
+    static let hello = [
+        "dora:Hi Coco! I'm so excited!", "dora:Hi Coco! Make me look fabulous!", "dora:Hola Coco! Holy guacamole, it's my turn!",
+    ]
+    static let thanks = [
+        "dora:I love it! Thank you, Coco!", "dora:Wow! I look amazing!", "dora:Holy guacamole, look at me!", "dora:Gracias, Coco! I love it!",
+    ]
+    static let patientThanks = [
+        "dora:My teeth are so sparkly! Thank you!", "dora:Ahh, minty fresh! Thank you, Coco!", "dora:Look at my smile! Gracias!",
+    ]
+}
+
 /// The line of customers waiting for their turn, small round faces after the one being helped now.
 struct UpNext<Face: View>: View {
     let count: Int

@@ -400,7 +400,9 @@ struct HairSalonView: View {
         }, size: 300)
         flashes += 1
         withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
-        say("Say cheese! Snap snap!")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Say cheese! Snap snap!" }
+        cheerCount += 1
+        Speaker.shared.say("Say cheese! Snap snap!", then: FriendSays.thanks.randomElement()!)
     }
 
     private func newCustomer() {
@@ -415,7 +417,9 @@ struct HairSalonView: View {
             isShowingOff = false
             washed = false
         }
-        say("Hi \(friend.name)!", hint: "Let's wash your hair! Rub on the shampoo.")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Hi \(friend.name)! Let's wash your hair! Rub on the shampoo." }
+        cheerCount += 1
+        Speaker.shared.say("Hi \(friend.name)!", then: FriendSays.hello.randomElement()!)
     }
 
     /// Speaks only when the message changes, so a hint isn't repeated after every stroke.

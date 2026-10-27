@@ -73,8 +73,10 @@ for old in out.glob("*.mp3"):
 
 voices = (here / "voice.txt").read_text().splitlines()
 for (voice, pitch), lang, suffix, mine in [
-    (voices[0].split(), "en-us", "", lambda l: not l.startswith("es:")),
+    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:"))),
     (voices[1].split(), "es", "-es", lambda l: l.startswith("es:")),
+    # The friends, and the English meanings of Spanish words: Dora's voice speaking English
+    (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:")),
 ]:
     keys = {k: l for k, l in wanted.items() if mine(l)}
     made_with = out / f"voice-id{suffix}.txt"
@@ -85,7 +87,7 @@ for (voice, pitch), lang, suffix, mine in [
     todo = [(k, l) for k, l in keys.items() if not (out / f"{k}.mp3").exists()]
     print(f"{len(keys)} {lang} lines, {len(todo)} to record with {voice} at pitch {pitch}")
     for n, (k, line) in enumerate(todo, 1):
-        record(line.removeprefix("es:"), voice, float(pitch), out / f"{k}.mp3", lang)
+        record(line.removeprefix("es:").removeprefix("dora:"), voice, float(pitch), out / f"{k}.mp3", lang)
         if n % 100 == 0:
             print(f"{n} recorded")
 print("Done")

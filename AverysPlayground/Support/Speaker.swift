@@ -17,12 +17,15 @@ final class Speaker {
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
     }
 
+    /// Lines starting with this are a friend talking, recorded in Dora's voice (the Spanish one) speaking English.
+    static let dora = "dora:"
+
     func say(_ text: String, language: String = "en-US") {
         if let url = Self.recording(for: text, language: language) {
             play([url])
             return
         }
-        let utterance = AVSpeechUtterance(string: text)
+        let utterance = AVSpeechUtterance(string: text.replacingOccurrences(of: Self.dora, with: ""))
         utterance.voice = voice(language)
         speak(utterance)
     }
@@ -33,7 +36,8 @@ final class Speaker {
             play([one, two], pauses: [0.15])
             return
         }
-        speak(AVSpeechUtterance(string: first), AVSpeechUtterance(string: second))
+        speak(AVSpeechUtterance(string: first.replacingOccurrences(of: Self.dora, with: "")),
+              AVSpeechUtterance(string: second.replacingOccurrences(of: Self.dora, with: "")))
     }
 
     /// Speaks a sound written in IPA, like "æ" for the a in "cat": Coco's recording ("sound:" + the IPA) when there is one,
@@ -54,7 +58,8 @@ final class Speaker {
 
     /// Says the Spanish, the English meaning, then the Spanish again with a pause so the child can repeat it.
     func say(spanish: String, english: String) {
-        if let word = Self.recording(for: spanish, language: "es-MX"), let meaning = Self.recording(for: english) {
+        // The English meaning in Dora's voice too, so the whole card is one voice.
+        if let word = Self.recording(for: spanish, language: "es-MX"), let meaning = Self.recording(for: Self.dora + english) ?? Self.recording(for: english) {
             play([word, meaning, word], pauses: [0.3, 0.6])
             return
         }
