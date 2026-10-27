@@ -129,11 +129,12 @@ struct CocoFigure: View {
 }
 
 /// Coco with a speech bubble. She hops each time `hops` changes, jumps for joy when `cheers` changes,
-/// and she's silly: tap her for a spin and a joke.
+/// wobbles with a silly "oopsie" when `oops` changes, and tap her for a spin and a joke.
 struct CocoSays: View {
     let text: String
     let hops: Int
     var cheers = 0
+    var oops = 0
 
     private static let sillyLines = [
         "Snap snap! I'm Coco, the silliest crocodile!",
@@ -157,6 +158,14 @@ struct CocoSays: View {
                     content.offset(y: lift)
                 } animation: { _ in
                     .spring(response: 0.2, dampingFraction: 0.5)
+                }
+                .phaseAnimator([0.0, -14, 12, -8, 5, 0], trigger: oops) { content, tilt in
+                    // A wobble and a squish, like she's going "whoopsie!", never a frown
+                    content
+                        .rotationEffect(.degrees(reduceMotion ? 0 : tilt), anchor: .bottom)
+                        .scaleEffect(x: 1, y: reduceMotion || tilt == 0 ? 1 : 0.94, anchor: .bottom)
+                } animation: { _ in
+                    .spring(response: 0.16, dampingFraction: 0.5)
                 }
                 .phaseAnimator([CGFloat(0), -46, 0, -24, 0], trigger: cheers) { content, lift in
                     content.offset(y: reduceMotion ? 0 : lift).rotationEffect(.degrees(reduceMotion ? 0 : Double(lift) * 0.3))

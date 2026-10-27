@@ -81,7 +81,7 @@ struct BingoView: View {
             let around = wide ? AnyLayout(HStackLayout(spacing: 30 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
             let machine = wide ? AnyLayout(VStackLayout(spacing: 18 * uiScale)) : AnyLayout(HStackLayout(spacing: 18 * uiScale))
             VStack(spacing: 12 * uiScale) {
-                CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: shakes)
 
                 around {
                     machine {

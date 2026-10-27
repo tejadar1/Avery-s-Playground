@@ -113,10 +113,11 @@ struct PianoView: View {
     @State private var cheer = "Tap the keys to play! Or pick a song."
     @State private var cheerCount = 0
     @State private var wins = 0
+    @State private var oops = 0
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: oops)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12 * uiScale) {
@@ -295,7 +296,11 @@ struct PianoView: View {
         pressed = key
         PianoSound.shared.play(key)
         Haptics.tap()
-        guard var current = lesson, current.play(key) else { return }
+        guard var current = lesson else { return }
+        guard current.play(key) else {
+            oops += 1  // a wrong key in a song: Coco wobbles, no telling off
+            return
+        }
         lesson = current
         if current.isFinished {
             wins += 1

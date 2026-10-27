@@ -49,7 +49,7 @@ struct ReadingView: View {
 
     var body: some View {
         VStack(spacing: 20 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: shakeCount)
 
             HStack(spacing: 6 * uiScale) {
                 Picture("star", size: 32 * uiScale)

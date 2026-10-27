@@ -49,7 +49,7 @@ struct MathView: View {
 
     var body: some View {
         VStack(spacing: 16 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: shakes)
 
             HStack(spacing: 6 * uiScale) {
                 Picture("star", size: 30 * uiScale)
