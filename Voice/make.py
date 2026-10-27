@@ -1,10 +1,11 @@
 """Records Coco's lines with Kokoro (the kokoro-onnx build), a free open-source voice, into AverysPlayground/Voice/<key>.mp3.
 
 Runs on GitHub's Linux machines (.github/workflows/build.yml, "voice" input). Voice/voice.txt holds the Kokoro
-voice and how much to raise its pitch, like "af_heart 1.25". Records only lines without a file yet, removes files
-for lines that are gone, and re-records everything when voice.txt changes.
+voice and how much to raise its pitch, one line per language: English, then Spanish, like "af_heart 1.25".
+Lines starting with "es:" are Spanish. Records only lines without a file yet, removes files for lines that are
+gone, and re-records a language's lines when its voice changes.
 `--samples` instead records a few lines in several voices and pitches to Voice/samples/ for choosing one.
-The key is the first 16 hex digits of the line's SHA-256, matching Speaker.key(for:) in the app.
+The key is the first 16 hex digits of the line's SHA-256 ("es:" included), matching Speaker.recording(for:language:).
 """
 import hashlib
 import subprocess
@@ -20,8 +21,8 @@ here = Path(__file__).resolve().parent
 kokoro = Kokoro(str(here / "kokoro-v1.0.onnx"), str(here / "voices-v1.0.bin"))
 
 
-def record(line, voice, pitch, path):
-    audio, rate = kokoro.create(line, voice=voice, speed=1.0, lang="en-us")
+def record(line, voice, pitch, path, lang="en-us"):
+    audio, rate = kokoro.create(line, voice=voice, speed=1.0, lang=lang)
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         soundfile.write(wav.name, audio, rate)
         # Raise the pitch for a cartoon voice, keeping the speed (a touch quicker, for bounce).
@@ -42,26 +43,33 @@ if "--samples" in sys.argv:
 
 out = here.parent / "AverysPlayground" / "Voice"
 out.mkdir(exist_ok=True)
-voice, pitch = (here / "voice.txt").read_text().split()
-made_with = out / "voice-id.txt"
-if made_with.exists() and made_with.read_text().split() != [voice, pitch]:
-    for old in out.glob("*.mp3"):
-        old.unlink()
-made_with.write_text(f"{voice} {pitch}\n")
 
 
 def key(line):
     return hashlib.sha256(line.encode()).hexdigest()[:16]
 
 
-wanted = {key(l): l for l in (here / "lines.txt").read_text().splitlines() if l.strip()}
+all_lines = [l for l in (here / "lines.txt").read_text().splitlines() if l.strip()]
+wanted = {key(l): l for l in all_lines}
 for old in out.glob("*.mp3"):
     if old.stem not in wanted:
         old.unlink()
-todo = [(k, l) for k, l in wanted.items() if not (out / f"{k}.mp3").exists()]
-print(f"{len(wanted)} lines, {len(todo)} to record with {voice} at pitch {pitch}")
-for n, (k, line) in enumerate(todo, 1):
-    record(line, voice, float(pitch), out / f"{k}.mp3")
-    if n % 100 == 0:
-        print(f"{n} recorded")
+
+voices = (here / "voice.txt").read_text().splitlines()
+for (voice, pitch), lang, suffix, mine in [
+    (voices[0].split(), "en-us", "", lambda l: not l.startswith("es:")),
+    (voices[1].split(), "es", "-es", lambda l: l.startswith("es:")),
+]:
+    keys = {k: l for k, l in wanted.items() if mine(l)}
+    made_with = out / f"voice-id{suffix}.txt"
+    if made_with.exists() and made_with.read_text().split() != [voice, pitch]:
+        for k in keys:
+            (out / f"{k}.mp3").unlink(missing_ok=True)
+    made_with.write_text(f"{voice} {pitch}\n")
+    todo = [(k, l) for k, l in keys.items() if not (out / f"{k}.mp3").exists()]
+    print(f"{len(keys)} {lang} lines, {len(todo)} to record with {voice} at pitch {pitch}")
+    for n, (k, line) in enumerate(todo, 1):
+        record(line.removeprefix("es:"), voice, float(pitch), out / f"{k}.mp3", lang)
+        if n % 100 == 0:
+            print(f"{n} recorded")
 print("Done")

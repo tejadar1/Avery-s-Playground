@@ -17,5 +17,6 @@ final class SpeakerTests: XCTestCase {
         // Voice/make.py names the recording of "So bubbly!" 996896babe3c08bc.mp3.
         XCTAssertEqual(Speaker.key(for: "So bubbly!"), "996896babe3c08bc")
         XCTAssertNil(Speaker.recording(for: "a line that was never recorded"))
+        XCTAssertNil(Speaker.recording(for: "Bonjour", language: "fr-FR"), "only English and Spanish are recorded")
     }
 }

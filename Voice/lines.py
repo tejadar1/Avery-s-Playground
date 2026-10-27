@@ -1,4 +1,4 @@
-"""Lists every English line Coco can say, one per line, for Voice/make.py to record.
+"""Lists every line Coco can say, one per line, for Voice/make.py to record. Spanish lines start with "es:".
 
 Run from the repo root after changing what Coco says: python3 Voice/lines.py > Voice/lines.txt
 Plain strings are taken from the Swift source; lines built from data (numbers, names) are spelled out below.
@@ -17,7 +17,7 @@ def literals(text):
     return re.findall(r'"((?:[^"\\]|\\.)*)"', text)
 
 
-# Plain strings Coco might say. Spanish is spoken by the iPad's Spanish voice, so skip it.
+# Plain strings Coco might say in English. The Spanish ones are listed below.
 english = {name: text for name, text in src.items() if name != "SpanishView.swift"}
 english["StoriesView.swift"] = english["StoriesView.swift"].split("static let spanish")[0]
 for text in list(english.values()) + [theme]:
@@ -28,13 +28,29 @@ for text in list(english.values()) + [theme]:
             continue  # SF Symbol names, language codes, asset names
         lines.add(s)
 
-# Story words, as the finger reaches each one
-stories = english["StoriesView.swift"]
-for page in re.findall(r'text: "([^"]+)"', stories):
-    for word in page.split(" "):
-        word = word.strip(".,!?;:'\"")
-        if word:
-            lines.add(word)
+
+
+def story_lines(stories, prefix=""):
+    """Story titles, pages, and each word as the finger reaches it (with punctuation trimmed, as the app does)."""
+    found = set(re.findall(r'title: "([^"]+)"', stories))
+    for page in re.findall(r'text: "([^"]+)"', stories):
+        found.add(page)
+        found.update(w for w in (w.strip(".,!?;:'\"¿¡") for w in page.split(" ")) if w)
+    return {prefix + line for line in found}
+
+
+lines |= story_lines(english["StoriesView.swift"])
+
+# Spanish, in Coco's Spanish voice: the stories, the end, and the Spanish cards with their English meanings.
+lines |= story_lines(src["StoriesView.swift"].split("static let spanish")[1], "es:")
+lines.add("es:¡Colorín colorado, este cuento se ha acabado!")
+spanish = src["SpanishView.swift"]
+for es, en in re.findall(r'SpanishWord\(spanish: "([^"]+)", english: "([^"]+)"', spanish):
+    lines.update({"es:" + es, en})
+titles = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var title")[1].split("var english")[0]))
+meanings = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var english")[1].split("var picture")[0]))
+for case, title in titles.items():
+    lines.update({"es:" + title, meanings[case]})
 
 numbers = range(1, 21)
 lines.update(str(n) for n in numbers)

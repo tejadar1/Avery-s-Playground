@@ -66,6 +66,7 @@ All done with the bath!
 All dry!
 All nails
 All rinsed!
+Animals
 Apple
 B
 B. B is for Bear!
@@ -80,6 +81,9 @@ Bingo card
 Bingo! You filled your card! Holy guacamole!
 Black
 Black! Like a hat.
+Bless me, Dad
+Bless me, Grandma
+Bless me, Mom
 Blow dryer
 Blue
 Blue! Like a whale.
@@ -257,6 +261,7 @@ Coco has 5 strawberries. Mochi brings 5 more. How many now?
 Colors
 Comb
 Comb out the tangles!
+Come here, my love
 Copy this nail
 Copy this!
 Coral
@@ -269,8 +274,10 @@ D sharp
 D. D is for Dog!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
+Do you want mangú?
 Dog
 Doll
+Dominican
 Done!
 Down
 Down! So cute!
@@ -289,6 +296,7 @@ Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Fish
 Flower crown
+Food
 Food bowl
 Fox
 Fox ends with X!
@@ -297,10 +305,15 @@ Free play!
 G
 G sharp
 G. G is for Grapes!
+Give me a hug
 Glitter
+God bless you
 Goldilocks
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
+Good morning
+Good night
+Goodbye
 Gown
 Grapes
 Green
@@ -366,6 +379,8 @@ Hee hee, the pig isn't on your card.
 Hee hee, the star isn't on your card.
 Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
+Hello
+Hello!
 High C
 High heels
 High heels! Fashion show time!
@@ -381,12 +396,17 @@ Hose
 Hot
 Hot Cross Buns
 Hot Cross Buns!
+How are you?
+How cool!
 I
 I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
+I love you
 I wish I had hair like that!
+I'm hungry
 I. I is for Ice cream!
 Ice cream
+In a little bit
 It's a tie! Everybody wins a hug!
 J
 J. J is for Juice!
@@ -412,6 +432,7 @@ Let's count to 8!
 Let's count to 9!
 Let's get her dressed! Pick some clothes.
 Let's have a race, said Hare.
+Let's play!
 Let's read! Tap each letter to hear its sound.
 Let's wash your hair! Rub on the shampoo.
 Lion
@@ -441,6 +462,7 @@ MochiTail
 Moon
 Mustard
 My
+My name is Avery
 N
 N. N is for Nest!
 Nail
@@ -474,9 +496,11 @@ Now blow dry it.
 Now comb it.
 Now pick a style.
 Now rinse it with water.
+Numbers
 O
 O. O is for Octopus!
 Octopus
+Oh my goodness!
 Okay!
 One
 Ooh la la!
@@ -498,6 +522,7 @@ Pink
 Pink! Like a flower.
 Play
 Play again
+Please
 Ponytail
 Ponytail! So cute!
 Press the key with the star.
@@ -508,6 +533,7 @@ Puppy
 Purple
 Purple! Like grapes.
 Purse
+Put on your flip-flops
 Q
 Q. Q is for Queen!
 Queen
@@ -591,6 +617,7 @@ T. T is for Turtle!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
+Take it easy
 Tap a nail to paint it!
 Tap any key.
 Tap each letter to hear its sound!
@@ -600,6 +627,7 @@ Tap the keys to play! Or pick a song.
 Tap the nail!
 Teal
 Team up with your grown-up against Coco! Slide out two pictures and tap the ones on your card.
+Thank you
 The
 The Little Red Hen
 The Three Little Pigs
@@ -630,6 +658,7 @@ Undo
 Up
 V
 V. V is for Violin!
+Very good
 Violin
 W
 W. W is for Whale!
@@ -638,6 +667,7 @@ Want a haircut?
 Wash
 Whale
 What color should it be?
+What's up?
 Which picture is it?
 White
 White! Like a cloud.
@@ -808,8 +838,10 @@ bird and sun!
 bird and tree!
 bird!
 bird! You got it!
+black
 blew
 blow
+blue
 boat
 boat and apple!
 boat and ball!
@@ -973,6 +1005,7 @@ caterpillar
 chair
 chairs
 checkmark
+cheese
 chick
 chicks
 comb
@@ -1107,7 +1140,211 @@ egg and tree!
 egg!
 egg! You got it!
 eh
+eight
 elephant
+es:Adiós
+es:Ahorita
+es:Animales
+es:Ay
+es:Bendición, abuela
+es:Bendición, mami
+es:Bendición, papi
+es:Bobo
+es:Buenas
+es:Buenas noches
+es:Buenos días
+es:Chuí
+es:Ciguapa
+es:Colores
+es:Comida
+es:Con
+es:Con la moneda compró una cinta roja y se puso muy bonita.
+es:Cuando
+es:Cucarachita
+es:Cógelo suave
+es:Dame un abrazo
+es:Dios te bendiga
+es:Dominicano
+es:En
+es:En las montañas vive la Ciguapa, con su pelo largo y negro.
+es:Gracias
+es:Guau
+es:Hola
+es:Juan
+es:Juan Bobo le puso el vestido de mamá y un collar muy lindo.
+es:Juan Bobo vivía con su mamá y una puerca.
+es:Juan Bobo y la puerca
+es:La
+es:La Ciguapa cuida el bosque, los pájaros y los ríos.
+es:La Ciguapa del bosque
+es:La Cucarachita Martina
+es:La Cucarachita Martina barría su casa y encontró una moneda.
+es:La puerca quería ir a misa también.
+es:La puerca salió corriendo y se metió en el lodo.
+es:Las
+es:Mamá
+es:Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!
+es:Martina
+es:Martina y el Ratoncito Pérez se casaron y fueron muy felices.
+es:Me llamo Avery
+es:Miau
+es:Muy bien
+es:No
+es:Números
+es:Pasó
+es:Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!
+es:Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!
+es:Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!
+es:Ponte las chancletas
+es:Por favor
+es:Pérez
+es:Ratoncito
+es:Si
+es:Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!
+es:Sound it out
+es:Sí
+es:Te
+es:Te quiero
+es:Tengo hambre
+es:Tiene
+es:Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás.
+es:Un
+es:Un domingo, mamá se fue a misa. Juan, cuida la puerca.
+es:Una
+es:Una niña vio unas huellas en el bosque y las siguió.
+es:Ven acá, mi amor
+es:a
+es:adelante
+es:al
+es:amarillo
+es:asustas
+es:atrás
+es:azul
+es:barría
+es:blanco
+es:bonita
+es:bosque
+es:camina
+es:casa
+es:casaron
+es:casas
+es:chuí
+es:cinco
+es:cinta
+es:collar
+es:compró
+es:con
+es:conmigo
+es:corriendo
+es:cuatro
+es:cuida
+es:cuidamos
+es:de
+es:diez
+es:dijo
+es:domingo
+es:dos
+es:dulce
+es:el
+es:el agua
+es:el caballo
+es:el cocodrilo
+es:el gato
+es:el helado
+es:el pan
+es:el perro
+es:el pez
+es:el plátano
+es:el pájaro
+es:el queso
+es:en
+es:encontró
+es:felices
+es:fue
+es:fueron
+es:gato
+es:guau
+es:huellas
+es:ir
+es:la
+es:la galleta
+es:la leche
+es:la manzana
+es:la rana
+es:la vaca
+es:largo
+es:las
+es:le
+es:lindo
+es:llegó
+es:llevaron
+es:lodo
+es:los
+es:mamá
+es:me
+es:metió
+es:miau
+es:misa
+es:moneda
+es:montañas
+es:morado
+es:mucho
+es:muy
+es:naranja
+es:negro
+es:niña
+es:noches
+es:nueve
+es:ocho
+es:para
+es:pelo
+es:perro
+es:pies
+es:puerca
+es:puso
+es:pájaros
+es:que
+es:quería
+es:qué
+es:revés
+es:rió
+es:roja
+es:rojo
+es:rosa
+es:ríos
+es:salió
+es:se
+es:seis
+es:siete
+es:siguió
+es:sonríe
+es:su
+es:sus
+es:también
+es:tan
+es:tres
+es:un
+es:una
+es:unas
+es:uno
+es:van
+es:verde
+es:vestido
+es:vio
+es:vive
+es:vivía
+es:voz
+es:vuelta
+es:y
+es:¡Ay, mi madre!
+es:¡Colorín colorado, este cuento se ha acabado!
+es:¡Hola!
+es:¡Las huellas la llevaron de vuelta a su casa!
+es:¡Qué chévere!
+es:¡Vamos a jugar!
+es:¿Cómo estás?
+es:¿Quieres mangú?
+es:¿Qué lo que?
 f
 far
 farm
@@ -1142,6 +1379,7 @@ fish and sun!
 fish and tree!
 fish!
 fish! You got it!
+five
 flag
 flats
 fleece
@@ -1176,6 +1414,7 @@ flowercrown
 footprints
 for
 found
+four
 fox
 fox! You read it! Snap snap!
 frog
@@ -1212,6 +1451,7 @@ girl
 going
 gown
 grapes
+green
 grew
 guh
 h
@@ -1316,6 +1556,7 @@ how
 huffed
 huh
 i
+ice cream
 icecream
 ih
 in
@@ -1340,6 +1581,7 @@ lion
 lit
 little
 me
+milk
 mochi
 mond
 moon
@@ -1375,6 +1617,7 @@ nap
 necklace
 nest
 night sky
+nine
 nnn
 none
 not
@@ -1384,6 +1627,7 @@ o
 octopus
 of
 one
+orange
 out
 overalls
 p
@@ -1423,6 +1667,7 @@ pig!
 pig! You got it!
 pig! You read it! Snap snap!
 pigs
+pink
 pizza
 plant
 planted
@@ -1430,6 +1675,7 @@ polish
 porridge
 puffed
 puh
+purple
 purse
 queen
 rabbit
@@ -1446,10 +1692,12 @@ said
 sandals
 scissors
 second
+seven
 shampoo
 she
 sheep
 shower
+six
 sky.
 sleep
 slice of pizza
@@ -1529,6 +1777,7 @@ sunglasses
 sunhat
 t
 tall
+ten
 tennis
 the
 third
@@ -1587,6 +1836,7 @@ w
 walk
 wand
 was
+water
 way
 web
 web! You read it! Snap snap!
@@ -1606,6 +1856,7 @@ woods
 world
 wuh
 x
+yellow
 you
 yoyo
 zebra

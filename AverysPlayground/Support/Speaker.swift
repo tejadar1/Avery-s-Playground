@@ -1,8 +1,8 @@
 import AVFoundation
 import CryptoKit
 
-/// Reads words aloud: Coco's recorded voice when the line has a recording (Voice/), otherwise the best voice
-/// on the device. Works offline.
+/// Reads words aloud: Coco's recorded voice when the line has a recording (Voice/), in English or Spanish,
+/// otherwise the best voice on the device. Works offline.
 @MainActor
 final class Speaker {
     static let shared = Speaker()
@@ -10,6 +10,7 @@ final class Speaker {
     private let synthesizer = AVSpeechSynthesizer()
     private var voices: [String: AVSpeechSynthesisVoice] = [:]
     private var player: AVAudioPlayer?
+    private var recordings: Task<Void, Never>?
 
     private init() {
         // Play even when the ring/silent switch is on, and duck any music.
@@ -17,10 +18,8 @@ final class Speaker {
     }
 
     func say(_ text: String, language: String = "en-US") {
-        if language == "en-US", let url = Self.recording(for: text) {
-            synthesizer.stopSpeaking(at: .immediate)
-            player = try? AVAudioPlayer(contentsOf: url)
-            player?.play()
+        if let url = Self.recording(for: text, language: language) {
+            play([url])
             return
         }
         let utterance = AVSpeechUtterance(string: text)
@@ -41,6 +40,10 @@ final class Speaker {
 
     /// Says the Spanish, the English meaning, then the Spanish again with a pause so the child can repeat it.
     func say(spanish: String, english: String) {
+        if let word = Self.recording(for: spanish, language: "es-MX"), let meaning = Self.recording(for: english) {
+            play([word, meaning, word], pauses: [0.3, 0.6])
+            return
+        }
         let first = AVSpeechUtterance(string: spanish)
         let meaning = AVSpeechUtterance(string: english)
         let again = AVSpeechUtterance(string: spanish)
@@ -52,7 +55,23 @@ final class Speaker {
         speak(first, meaning, again)
     }
 
+    /// Plays recordings one after another, with a pause after each one that has one.
+    private func play(_ urls: [URL], pauses: [Double] = []) {
+        synthesizer.stopSpeaking(at: .immediate)
+        recordings?.cancel()
+        recordings = Task {
+            for (index, url) in urls.enumerated() {
+                guard !Task.isCancelled else { return }
+                player = try? AVAudioPlayer(contentsOf: url)
+                player?.play()
+                let pause = index < pauses.count ? pauses[index] : 0
+                try? await Task.sleep(for: .seconds((player?.duration ?? 0) + pause))
+            }
+        }
+    }
+
     private func speak(_ utterances: AVSpeechUtterance...) {
+        recordings?.cancel()
         player?.stop()
         synthesizer.stopSpeaking(at: .immediate)
         for utterance in utterances {
@@ -65,9 +84,10 @@ final class Speaker {
         }
     }
 
-    /// Coco's recording of `text`, if Voice/make.py has made one.
-    nonisolated static func recording(for text: String) -> URL? {
-        Bundle.main.url(forResource: key(for: text), withExtension: "mp3")
+    /// Coco's recording of `text`, if Voice/make.py has made one. Spanish lines are recorded as "es:" + the line.
+    nonisolated static func recording(for text: String, language: String = "en-US") -> URL? {
+        let line: String? = language == "en-US" ? text : language.hasPrefix("es") ? "es:" + text : nil
+        return line.flatMap { Bundle.main.url(forResource: key(for: $0), withExtension: "mp3") }
     }
 
     /// A recording's file name: the first 16 hex digits of the line's SHA-256, as Voice/make.py names it.

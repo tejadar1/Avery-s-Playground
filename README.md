@@ -14,7 +14,7 @@ Hair Salon, Dress Up, Mochi, Coloring, Draw) and **Team Up**, games to play with
 | 👗 | **Dress Up** | Dress a fashion doll with long hair and long legs: a sparkly gown, party dress, tutu, t-shirt, overalls or pajamas in any color (hot pink first), plus high heels or other shoes, a hat, and a purse, wand, sunglasses or necklace. Tap Done for a fashion show. |
 | 🐶 | **Mochi** | Mochi, a Shiba Inu puppy, trots around her living room. Throw her ball and she runs to fetch it; put down her bowl and she walks over and eats; spray her clean with the hose (the mud fades, then she shakes off); tap Sleep and she curls up in her bed; rub her for hearts. Her food, love, energy and clean meters slowly drop while the app is closed, like a Tamagotchi, but never to zero. |
 | 🎹 | **Piano** | A rainbow keyboard. Pick Twinkle Twinkle, Mary Had a Little Lamb or Hot Cross Buns and a bouncing star shows the next key while the words light up, or play freely. Slide a finger across the keys to glide up and down. |
-| 📖 | **Read** | A shelf of storybooks: The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each word is read aloud as the finger reaches it, so she can follow along word by word; the last word stays lit. Tap the picture to hear the whole page. A Spanish shelf, Cuentos en español, has La Cucarachita Martina, Juan Bobo y la puerca and La Ciguapa del bosque, read word by word in a Spanish voice. The shelf also has Sound it out: tap each letter of a word like "cat" to hear its sound, then pick the matching picture. |
+| 📖 | **Read** | A shelf of storybooks: The Three Little Pigs, Goldilocks, The Tortoise and the Hare, and The Little Red Hen. Slide a finger under the words and each word is read aloud as the finger reaches it, so she can follow along word by word; the last word stays lit. Tap the picture to hear the whole page. A Spanish shelf, Cuentos en español, has La Cucarachita Martina, Juan Bobo y la puerca and La Ciguapa del bosque, read word by word in Coco's Spanish voice. The shelf also has Sound it out: tap each letter of a word like "cat" to hear its sound, then pick the matching picture. |
 | 🍕 | **Math** | Adding with food: "Coco has 2 slices of pizza. Mochi brings 1 more. How many now?" Tap the slices to count them, then pick the answer. Sums up to 10. |
 | 🗣️ | **Español** | Spanish words and phrases in six sets: greetings, Dominican family sayings ("Bendición, mami"), animals, colors, numbers, and food. Tap a card to hear the Spanish, the English, then the Spanish again so your child can say it back. |
 | 🔤 | **ABC** | Tap a letter to see and hear it: "A. A is for Apple!" |
@@ -110,12 +110,14 @@ The Nail Salon hand is drawn in code (`Hand` in `NailSalonView.swift`) so its sk
 
 ### Coco's voice
 
-Coco's English lines are recorded with [Kokoro](https://github.com/hexgrad/kokoro), a free open-source voice, with the
-pitch raised for a cartoon sound, so she doesn't sound like the iPad's built-in voice. `Voice/lines.txt` lists every
-line (made by `python3 Voice/lines.py > Voice/lines.txt`) and `Voice/voice.txt` names the voice and pitch. Run
+Coco's lines are recorded with [Kokoro](https://github.com/hexgrad/kokoro), a free open-source voice, with the
+pitch raised for a cartoon sound, so she doesn't sound like the iPad's built-in voice. Spanish (the Spanish cards and
+stories) uses Kokoro's Spanish voice the same way. `Voice/lines.txt` lists every line, Spanish ones starting with
+`es:` (made by `python3 Voice/lines.py > Voice/lines.txt`), and `Voice/voice.txt` names the English then the Spanish
+voice and pitch. Run
 Actions → Build → Run workflow with **voice: record** to record new lines into `AverysPlayground/Voice/` (free, on
-Linux), or **voice: samples** to hear several voices on the `voice-samples` branch. Lines without a recording, and
-Spanish, use the iPad's voice.
+Linux), or **voice: samples** to hear several voices on the `voice-samples` branch. Lines without a recording use the iPad's
+voice.
 
 ### Building with Claude Code
 
