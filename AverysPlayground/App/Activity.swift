@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, maze, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe
+    case nails, hair, dressup, pet, maze, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory
 
     var id: String { rawValue }
 
@@ -24,6 +24,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .drawing: "Draw"
         case .bingo: "Bingo"
         case .tictactoe: "Tic-Tac-Toe"
+        case .memory: "Memory"
         }
     }
 
@@ -31,7 +32,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .reading, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .pet, .maze, .colors, .drawing: .play
-        case .bingo, .tictactoe: .teamUp
+        case .bingo, .tictactoe, .memory: .teamUp
         }
     }
 
@@ -42,7 +43,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .nails, .hair, .dressup: .salon
         case .pet, .maze: .pet
         case .colors, .drawing: .art
-        case .bingo, .tictactoe: .teamUp
+        case .bingo, .tictactoe, .memory: .teamUp
         case .reading, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
         }
     }
@@ -69,6 +70,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .drawing: Color(red: 0.33, green: 0.56, blue: 0.86)
         case .bingo: Color(red: 0.4, green: 0.75, blue: 0.9)
         case .tictactoe: Color(red: 0.62, green: 0.55, blue: 0.9)
+        case .memory: Color(red: 0.36, green: 0.75, blue: 0.68)
         }
     }
 
@@ -92,6 +94,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .drawing: DrawingView()
         case .bingo: BingoView()
         case .tictactoe: TicTacToeView()
+        case .memory: MemoryView()
         }
     }
 }

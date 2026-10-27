@@ -49,7 +49,7 @@ final class ScreenshotTests: XCTestCase {
                     .press(forDuration: 0.05, thenDragTo: mochi.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)))
             }),
             ("Maze", {
-                let maze = self.find("Maze")
+                let maze = self.find("Maze board")
                 maze.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.1))
                     .press(forDuration: 0.05, thenDragTo: maze.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.6)))
             }),
@@ -110,10 +110,14 @@ final class ScreenshotTests: XCTestCase {
                 // Stars take the top row while hearts go in the middle.
                 for square in [1, 4, 2, 5, 3] { self.tap(self.button("Square \(square)")) }
             }),
+            ("Memory", {
+                self.tap(self.button("Card 1"))
+                self.tap(self.button("Card 2"))
+            }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe"]
+        let learn = ["Read", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe", "Memory"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
             tap(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch)

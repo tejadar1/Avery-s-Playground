@@ -49,6 +49,7 @@ A coral reef!
 A farm!
 A garden!
 A is for Apple!
+A match! Go again!
 A night sky!
 A sharp
 A sticker to find
@@ -375,6 +376,8 @@ Hare was fast. Tortoise was slow.
 Hats
 Hear the word
 Hearts
+Hearts win! Snap snap!
+Hearts' turn!
 Hee hee! That tickles!
 Hee hee, not 1!
 Hee hee, not 10!
@@ -716,7 +719,10 @@ So stylish!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
 Squeaky clean! Shake shake shake!
 Stars
+Stars go first! Turn over two cards to find a match.
 Stars go first, then hearts. Get three in a row!
+Stars win! Holy guacamole!
+Stars' turn!
 Start at the green dot.
 Stickers
 Styles

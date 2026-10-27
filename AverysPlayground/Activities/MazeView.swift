@@ -163,7 +163,7 @@ struct MazeView: View {
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Maze. Drag Mochi to the bone.")
-        .accessibilityIdentifier("Maze")
+        .accessibilityIdentifier("Maze board")
     }
 
     private func finish() {
