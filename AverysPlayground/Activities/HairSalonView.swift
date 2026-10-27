@@ -67,7 +67,8 @@ struct Hairdo: Equatable {
     .filter { spot in
         let onTop = pow((spot.x - 0.5) / 0.27, 2) + pow((spot.y - 0.3) / 0.19, 2) <= 1
         let onSides = (spot.x < 0.31 || spot.x > 0.69) && spot.y >= 0.3
-        let onFace = pow((spot.x - 0.5) / 0.2, 2) + pow((spot.y - 0.45) / 0.22, 2) < 1
+        // Just the face below her bangs; bubbles on the bangs are fine
+        let onFace = pow((spot.x - 0.5) / 0.19, 2) + pow((spot.y - 0.5) / 0.17, 2) < 1
         return (onTop || onSides) && !onFace
     }
 
