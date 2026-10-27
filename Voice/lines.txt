@@ -784,7 +784,6 @@ So stylish!
 Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
-Splish splash, clean face!
 Squeaky clean! Shake shake shake!
 Stars
 Stars go first! Turn over two cards to find a match.
@@ -825,6 +824,7 @@ T-shirt! Wowza bowza!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
+Take vitamins
 Tap a nail to paint it!
 Tap any key.
 Tap each letter to hear its sound!
@@ -886,6 +886,7 @@ V!
 V! Great tracing!
 Very good
 Violin
+Vitamins, yum! Strong and healthy!
 W
 W is for Whale!
 W!
@@ -899,7 +900,6 @@ Wand! So stylish!
 Wand! Wowza bowza!
 Want a haircut?
 Wash
-Wash face
 Whale
 What color should it be?
 Which picture is it?
@@ -2103,7 +2103,6 @@ slow
 sneakers
 snow.
 so
-soap
 some
 sparkle
 sparkles
@@ -2237,6 +2236,7 @@ van
 van! You read it! Snap snap!
 van! You spelled it!
 violin
+vitamins
 vvv
 w
 walk

@@ -121,7 +121,7 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Routines", {
                 self.tap(self.button("Morning"))
-                for step in ["Wake up", "Wash face", "Get dressed"] { self.tap(self.button(step)) }
+                for step in ["Wake up", "Take vitamins", "Get dressed"] { self.tap(self.button(step)) }
             }),
         ]
 
