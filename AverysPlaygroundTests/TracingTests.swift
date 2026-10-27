@@ -21,7 +21,8 @@ final class TracingTests: XCTestCase {
         }
         XCTAssertEqual(tracing.stroke, 0)
         // A dot in the corner is nowhere near the top bar.
-        XCTAssertFalse(tracing.touch(CGPoint(x: 0.95, y: 0.95)))
-        XCTAssertTrue(tracing.hit.isEmpty)
+        var fresh = Tracing(letter: TraceLetter.named("T"))
+        XCTAssertFalse(fresh.touch(CGPoint(x: 0.95, y: 0.95)))
+        XCTAssertTrue(fresh.hit.isEmpty)
     }
 }

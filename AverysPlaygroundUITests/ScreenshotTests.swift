@@ -120,6 +120,7 @@ final class ScreenshotTests: XCTestCase {
             try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
             if game.title == "Read" {
                 app.navigationBars.buttons.element(boundBy: 0).tap()
+                app.swipeUp()  // the Spanish shelf is further down, and the shelf only makes books as they come into view
                 tap(button("Cucarachita"))
                 sleep(1)
                 let words = find("Words")
