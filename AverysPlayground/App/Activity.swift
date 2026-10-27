@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, counting, colors, drawing, bingo, tictactoe
+    case nails, hair, dressup, pet, piano, reading, math, spanish, abc, tracing, counting, colors, drawing, bingo, tictactoe
 
     var id: String { rawValue }
 
@@ -16,6 +16,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .math: "Math"
         case .spanish: "Español"
         case .abc: "ABC"
+        case .tracing: "Trace"
         case .counting: "1 2 3"
         case .colors: "Coloring"
         case .drawing: "Draw"
@@ -26,7 +27,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
     var section: HomeSection {
         switch self {
-        case .reading, .abc, .counting, .math, .spanish, .piano: .learn
+        case .reading, .abc, .tracing, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .pet, .colors, .drawing: .play
         case .bingo, .tictactoe: .teamUp
         }
@@ -40,7 +41,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .pet: .pet
         case .colors, .drawing: .art
         case .bingo, .tictactoe: .teamUp
-        case .reading, .math, .spanish, .abc, .counting: .learn
+        case .reading, .math, .spanish, .abc, .tracing, .counting: .learn
         }
     }
 
@@ -58,6 +59,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .math: Color(red: 0.9, green: 0.72, blue: 0.3)
         case .spanish: Color(red: 0.36, green: 0.75, blue: 0.68)
         case .abc: Color(red: 0.9, green: 0.42, blue: 0.38)
+        case .tracing: Color(red: 0.36, green: 0.61, blue: 0.84)
         case .counting: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .colors: Color(red: 0.66, green: 0.5, blue: 0.85)
         case .drawing: Color(red: 0.33, green: 0.56, blue: 0.86)
@@ -78,6 +80,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .math: MathView()
         case .spanish: SpanishView()
         case .abc: ABCView()
+        case .tracing: TracingView()
         case .counting: CountingView()
         case .colors: ColorsView()
         case .drawing: DrawingView()

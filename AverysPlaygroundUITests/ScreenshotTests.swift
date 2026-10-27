@@ -70,6 +70,13 @@ final class ScreenshotTests: XCTestCase {
             ("1 2 3", {
                 for _ in 0..<2 { self.tap(self.app.buttons["star"].firstMatch) }
             }),
+            ("Trace", {
+                let board = self.find("Trace board")
+                for (from, to) in [((0.5, 0.15), (0.2, 0.85)), ((0.5, 0.15), (0.8, 0.85)), ((0.32, 0.58), (0.68, 0.58))] {
+                    board.coordinate(withNormalizedOffset: CGVector(dx: from.0, dy: from.1))
+                        .press(forDuration: 0.05, thenDragTo: board.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
+                }
+            }),
             ("Coloring", {
                 let picture = self.find("Picture")
                 for (crayon, x, y) in [("Red", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {
@@ -100,7 +107,7 @@ final class ScreenshotTests: XCTestCase {
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Math", "Español", "ABC", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe"]
+        let learn = ["Read", "Math", "Español", "ABC", "Trace", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
             tap(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch)
@@ -143,7 +150,7 @@ final class ScreenshotTests: XCTestCase {
         // By now the games have earned some stickers.
         tap(button("Stickers"))
         sleep(1)
-        try snap("16-Stickers", device, dir)
+        try snap("17-Stickers", device, dir)
         goHome()
     }
 

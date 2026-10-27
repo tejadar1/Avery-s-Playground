@@ -52,6 +52,10 @@ meanings = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var englis
 for case, title in titles.items():
     lines.update({"es:" + title, meanings[case]})
 
+# Letter tracing: the letter's name as it comes up, and a cheer when it's traced
+for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+    lines.update({f"{letter}!", f"{letter}! Great tracing!"})
+
 numbers = range(1, 21)
 lines.update(str(n) for n in numbers)
 lines.update(f"{n}! Great counting!" for n in range(1, 11))
