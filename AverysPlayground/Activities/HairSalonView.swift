@@ -40,6 +40,27 @@ enum HairTool: CaseIterable, Hashable {
     }
 }
 
+/// The haircut a customer asks for: how long her hair should end up, as a share of its full length.
+enum Haircut: CaseIterable {
+    case trim, shoulders, short
+
+    var length: CGFloat {
+        switch self {
+        case .trim: 0.8
+        case .shoulders: 0.68
+        case .short: 0.52
+        }
+    }
+
+    var wish: String {
+        switch self {
+        case .trim: "She wants just a little trim!"
+        case .shoulders: "She wants it down to her shoulders!"
+        case .short: "She wants it short and cute!"
+        }
+    }
+}
+
 /// The customer's hair. Points are 0...1 across and down the drawing.
 struct Hairdo: Equatable {
     static let strandCount = 12
@@ -53,6 +74,7 @@ struct Hairdo: Equatable {
     var style = HairStyle.down
     var color = Color(red: 0.45, green: 0.28, blue: 0.15)
     var accessory: String?
+    var goal: Haircut?
 
     static func strandX(_ index: Int) -> CGFloat {
         0.22 + 0.56 * CGFloat(index) / CGFloat(strandCount - 1)
@@ -70,6 +92,13 @@ struct Hairdo: Equatable {
         // Just the face below her bangs; bubbles on the bangs are fine
         let onFace = pow((spot.x - 0.5) / 0.19, 2) + pow((spot.y - 0.5) / 0.17, 2) < 1
         return (onTop || onSides) && !onFace
+    }
+
+    /// Close enough to the haircut she asked for: most strands at or a bit under her line. Being too short is fine,
+    /// since the scissors can't go much past it.
+    var isCutToGoal: Bool {
+        guard let goal else { return false }
+        return lengths.filter { $0 <= goal.length + 0.12 }.count >= lengths.count * 3 / 4
     }
 
     /// Most of her hair is bubbly, so it's time to rinse.
@@ -106,7 +135,8 @@ struct Hairdo: Equatable {
     /// so the cut makes a smooth line instead of steps.
     private mutating func cut(at point: CGPoint) {
         guard point.y > Self.top + 0.05 else { return }
-        let length = max(0.15, (point.y - Self.top) / Self.maxLength)
+        // With a goal, the scissors stop a little past her line, so an eager snip can't ruin it.
+        let length = max(goal.map { $0.length - 0.1 } ?? 0.15, (point.y - Self.top) / Self.maxLength)
         for index in lengths.indices where abs(Self.strandX(index) - point.x) < 0.05 {
             lengths[index] = min(lengths[index], length)
             for (offset, slack) in [(1, 0.1), (2, 0.2)] as [(Int, CGFloat)] {
@@ -168,6 +198,7 @@ struct HairSalonView: View {
     @State private var wins = 0
     @State private var isShowingOff = false
     @State private var washed = false
+    @State private var cutDone = false
 
     /// The wash step to do next, which bounces in the tray: shampoo, rinse, dry, then comb.
     private var nextTool: HairTool? {
@@ -201,7 +232,7 @@ struct HairSalonView: View {
             let side = min(geo.size.width, geo.size.height)
             ZStack {
                 Canvas { context, size in
-                    HairArt.draw(hair, skin: skin, eyes: friend.eyes, in: &context, size: size)
+                    HairArt.draw(hair, skin: skin, eyes: friend.eyes, guide: tool == .scissors && !cutDone && !isShowingOff, in: &context, size: size)
                 }
                 if let toolTip {
                     // Big, held just above and right of the finger so the hair under it stays in view, wiggling as it works.
@@ -274,7 +305,11 @@ struct HairSalonView: View {
                         ForEach(HairTool.allCases, id: \.self) { item in
                             choice(item.name, isSelected: item == tool) {
                                 tool = item
-                                Speaker.shared.say(item.name)
+                                if item == .scissors, !cutDone, let goal = hair.goal {
+                                    say(goal.wish, hint: "Cut along the dotted line.")
+                                } else {
+                                    Speaker.shared.say(item.name)
+                                }
                             } label: {
                                 ToolPicture(tool: item, size: 56 * uiScale)
                                     .frame(width: 72 * uiScale, height: 72 * uiScale)
@@ -374,8 +409,17 @@ struct HairSalonView: View {
         case .shampoo: if hair.isLathered { say("So bubbly!", hint: "Now rinse it with water.") } else { say("", hint: "Rub shampoo all over her hair!") }
         case .rinse: if hair.foam.isEmpty { say("All rinsed!", hint: "Now blow dry it.") } else { say("", hint: "Rinse off all the bubbles!") }
         case .dryer: if hair.wetness == 0 { say("All dry!", hint: "Now comb it.") } else { say("", hint: "Keep blowing!") }
-        case .comb: if hair.tangles == 0 { say("So smooth!", hint: "Want a haircut?") } else { say("", hint: "Comb out the tangles!") }
-        case .scissors: say("Snip snip! Don't cut my tail!", hint: "Now pick a style.")
+        case .comb: if hair.tangles == 0 { say("So smooth!", hint: "Now the scissors!") } else { say("", hint: "Comb out the tangles!") }
+        case .scissors:
+            if hair.isCutToGoal {
+                if !cutDone {
+                    cutDone = true
+                    Sounds.shared.play(.sparkle)
+                    say(Hooray.pick(from: ["Perfect! Just how she wanted it!", "Snip snip, perfect!", "Holy guacamole, what a great haircut!"]), hint: "Now pick a style.")
+                }
+            } else {
+                say("Snip snip! Don't cut my tail!", hint: "Cut along the dotted line.")
+            }
         }
     }
 
@@ -409,13 +453,15 @@ struct HairSalonView: View {
         withAnimation(.spring) {
             hair = Hairdo(
                 lengths: (0..<Hairdo.strandCount).map { _ in .random(in: 0.85...1) },
-                color: friend.hair
+                color: friend.hair,
+                goal: Haircut.allCases.randomElement()
             )
             photo = nil
             tray = .wash
             tool = .shampoo
             isShowingOff = false
             washed = false
+            cutDone = false
         }
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Hi \(friend.name)! Let's wash your hair! Rub on the shampoo." }
         cheerCount += 1
@@ -452,11 +498,12 @@ private struct ToolPicture: View {
     }
 }
 
-/// Draws the customer in the Dress Up doll's soft style. Her face, ears, neck and cape are the Salon- images from
+/// Draws the customer in the Dress Up doll's soft style, with a glam, Barbie-style face. Her face, ears, neck and cape are the Salon- images from
 /// Art/doll.js, with her skin and eye colors multiplied in; her hair is drawn here so it can be washed and cut,
 /// with a darker edge, a soft shade and a sheen instead of thick outlines.
 private enum HairArt {
-    static func draw(_ hair: Hairdo, skin: Color, eyes: Color, in context: inout GraphicsContext, size: CGSize) {
+    /// `guide` shows the dotted line where her haircut should end.
+    static func draw(_ hair: Hairdo, skin: Color, eyes: Color, guide: Bool = false, in context: inout GraphicsContext, size: CGSize) {
         let s = size.width
         let line = 0.004 * s
         let wetShade = Color.black.opacity(0.25 * hair.wetness)
@@ -487,7 +534,7 @@ private enum HairArt {
                 layer.addFilter(.blur(radius: 0.012 * s))
                 layer.fill(shape, with: .color(.black.opacity(0.22)))
                 layer.fill(shape.offsetBy(dx: -0.022 * s, dy: -0.016 * s), with: .color(hair.color))
-                layer.stroke(shape.offsetBy(dx: 0.02 * s, dy: 0.02 * s), with: .color(.white.opacity(0.3)), lineWidth: 0.014 * s)
+                layer.stroke(shape.offsetBy(dx: 0.02 * s, dy: 0.02 * s), with: .color(.white.opacity(0.4)), lineWidth: 0.016 * s)
             }
             context.fill(shape, with: .color(wetShade))
         }
@@ -556,6 +603,13 @@ private enum HairArt {
         image("eyes-under")
         image("eyes", tint: eyes)
         image("eyes-over")
+        // Arched brows, a darker tone of her hair
+        var brows = Path()
+        for side in [-1, 1] as [CGFloat] {
+            brows.move(to: pt(0.5 + side * 0.145, 0.398))
+            brows.addQuadCurve(to: pt(0.5 + side * 0.055, 0.388), control: pt(0.5 + side * 0.105, 0.366))
+        }
+        context.stroke(brows, with: .color(edge), style: StrokeStyle(lineWidth: line * 2.2, lineCap: .round))
 
         // Top of the hair with bangs swept to the side
         var cap = Path()
@@ -591,6 +645,18 @@ private enum HairArt {
         for bubble in hair.foam {
             context.fill(circle(bubble.x, bubble.y, 0.048), with: .color(.white))
             context.stroke(circle(bubble.x, bubble.y, 0.048), with: .color(Color(red: 0.7, green: 0.85, blue: 1.0)), lineWidth: line)
+        }
+
+        // The haircut she wants: a dotted line across her hair on each side of her face
+        if guide, let goal = hair.goal {
+            let y = Hairdo.top + Hairdo.maxLength * goal.length
+            var dots = Path()
+            for (from, to) in [(0.16, 0.33), (0.67, 0.84)] as [(CGFloat, CGFloat)] {
+                dots.move(to: pt(from, y))
+                dots.addLine(to: pt(to, y))
+            }
+            context.stroke(dots, with: .color(Color(red: 0.9, green: 0.2, blue: 0.56)), style: StrokeStyle(lineWidth: line * 2.5, lineCap: .round, dash: [0.012 * s, 0.022 * s]))
+            context.stroke(dots, with: .color(.white), style: StrokeStyle(lineWidth: line, lineCap: .round, dash: [0.012 * s, 0.022 * s]))
         }
 
         if let accessory = hair.accessory {

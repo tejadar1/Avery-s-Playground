@@ -66,6 +66,7 @@ All fixed! Holy guacamole!
 All nails
 All rinsed!
 Another sticker! Yay!
+Anywhere
 Apple
 Avery
 Avery! You wrote your name!
@@ -286,6 +287,9 @@ Coco has 5 strawberries. Mochi brings 2 more. How many now?
 Coco has 5 strawberries. Mochi brings 3 more. How many now?
 Coco has 5 strawberries. Mochi brings 4 more. How many now?
 Coco has 5 strawberries. Mochi brings 5 more. How many now?
+Color anywhere you like!
+Coloring anywhere
+Coloring inside the lines
 Colors
 Comb
 Comb out the tangles!
@@ -305,6 +309,7 @@ Crown! Wowza bowza!
 Crunch crunch! Yummy!
 Curly
 Curly! So cute!
+Cut along the dotted line.
 D
 D sharp
 Designs
@@ -487,6 +492,7 @@ Holy guacamole, look at that color!
 Holy guacamole, look at you!
 Holy guacamole, so pretty!
 Holy guacamole, so stylish!
+Holy guacamole, what a great haircut!
 Holy guacamole, you did it!
 Holy moly, guacamole!
 Horse
@@ -503,7 +509,9 @@ I have lots and lots of teeth, and I brush every one!
 I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
 I want my claws painted too!
 I wish I had hair like that!
+I'll keep your crayon inside the lines!
 Ice cream
+In the lines
 It's a tie! Everybody wins a hug!
 J
 Juice
@@ -609,6 +617,7 @@ Now comb it.
 Now pick a style.
 Now rinse it with water.
 Now tap Rinse to swish!
+Now the scissors!
 O
 Octopus
 Okay!
@@ -642,6 +651,7 @@ Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
 Penguin
+Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick another nail!
 Picture
@@ -701,6 +711,9 @@ She found a little house. Nobody was home.
 She tried three beds and fell fast asleep.
 She tried three bowls of porridge. This one is just right!
 She tried three chairs. This one is just right!
+She wants it down to her shoulders!
+She wants it short and cute!
+She wants just a little trim!
 Shh! Mochi is sleeping.
 Shoes
 Shoes on
@@ -746,6 +759,7 @@ Sneakers! Ooh la la!
 Sneakers! So stylish!
 Sneakers! Wowza bowza!
 Snip snip! Don't cut my tail!
+Snip snip, perfect!
 So bubbly!
 So fancy!
 So much glitter! It's like stars!
@@ -868,7 +882,6 @@ Wand! Holy guacamole, I love it!
 Wand! Ooh la la!
 Wand! So stylish!
 Wand! Wowza bowza!
-Want a haircut?
 Wash
 Whale
 What a design!
@@ -1072,6 +1085,7 @@ boat and sun!
 boat and tree!
 boat!
 body
+body-over
 bone
 book
 book:A is for Apple!
@@ -1413,6 +1427,7 @@ caterpillar
 chair
 checkmark
 chick
+coloringInLines
 comb
 cookie
 cookies
@@ -1957,6 +1972,8 @@ es:¿Quieres mangú?
 es:árbol
 es:él
 eyes
+eyes-over
+eyes-under
 f
 farm
 fff
@@ -2319,6 +2336,7 @@ star and sun!
 star and tree!
 star!
 star,
+stickerWins
 stickers
 sticks
 strawberries

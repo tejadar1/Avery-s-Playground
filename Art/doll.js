@@ -95,26 +95,36 @@ parts.push(part('body', soft(bodyShapes, '#fff', SKIN_LINE, bodyShade)
 
 // ---- Eyes: whites under, the iris tinted by eye color, then lashes, lips and blush on top ----
 // Drawn around the doll's face; the hair salon draws the same face bigger (`at` is a transform).
-function face(at) {
+function face(at, glam = false) {
   const eyes = [[470, -1], [530, 1]];
   const eye = (x, d) => `M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160 C${x + 12 * d} 176 ${x - 8 * d} 178 ${x - 21 * d} 166Z`;
+  // A glam (Barbie-style) face has bigger eyes, each grown around its middle.
+  const big = (x) => glam ? ` transform="translate(${x} 164) scale(1.18) translate(${-x} -164)"` : '';
   const g = (body) => `<g transform="${at}">${body}</g>`;
-  return {
-    under: g(eyes.map(([x, d]) => path(eye(x, d), '#fff')).join('')),
-    iris: g(`<clipPath id="eyeClip">${eyes.map(([x, d]) => `<path d="${eye(x, d)}"/>`).join('')}</clipPath>`
-      + `<radialGradient id="iris"><stop offset="0.35" stop-color="#fff"/><stop offset="1" stop-color="#8a8a8a"/></radialGradient>`
-      + `<g clip-path="url(#eyeClip)">${eyes.map(([x]) => `<circle cx="${x}" cy="164" r="11" fill="url(#iris)" stroke="#6a6a6a" stroke-width="1.5"/>`).join('')}</g>`),
-    over: g(`<radialGradient id="blush"><stop offset="0" stop-color="#f2849c" stop-opacity="0.5"/><stop offset="1" stop-color="#f2849c" stop-opacity="0"/></radialGradient>`
-      + `<linearGradient id="lips" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7798d"/><stop offset="1" stop-color="#d45a74"/></linearGradient>`
-      + eyes.map(([x, d]) => `<circle cx="${x}" cy="164" r="5" fill="#2a1d1d"/><circle cx="${x + 3.5}" cy="160" r="3" fill="#fff"/><circle cx="${x - 3}" cy="168" r="1.4" fill="#fff" opacity="0.8"/>`
-        + stroke(`M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160`, '#3a2626', 3.5)
-        + stroke(`M${x + 21 * d} 160 L${x + 27 * d} 155 M${x + 17 * d} 156 L${x + 22 * d} 149 M${x + 12 * d} 154 L${x + 15 * d} 147`, '#3a2626', 2)
-        + stroke(`M${x - 18 * d} 170 C${x - 6 * d} 177 ${x + 8 * d} 175 ${x + 18 * d} 165`, '#c99a8c', 1.5)
-        + stroke(`M${x - 20 * d} 157 C${x - 8 * d} 144 ${x + 10 * d} 144 ${x + 20 * d} 153`, '#cfa8de', 5, ' opacity="0.45"')).join('')
-      + `<ellipse cx="452" cy="197" rx="18" ry="11" fill="url(#blush)"/><ellipse cx="548" cy="197" rx="18" ry="11" fill="url(#blush)"/>`
-      + path('M486 217 C492 212 497 212 500 214 C503 212 508 212 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
+  const lips = glam
+    ? path('M484 217 C491 209 497 210 500 213 C503 210 509 209 516 217 C507 221 493 221 484 217Z', 'url(#lips)', '#b13a63', 1.2)
+      + path('M484 217 C490 231 510 231 516 217 C507 221 493 221 484 217Z', 'url(#lips)', '#b13a63', 1.2)
+      + `<ellipse cx="504" cy="223.5" rx="6" ry="2.2" fill="#fff" opacity="0.8"/><ellipse cx="495" cy="213.5" rx="2.5" ry="1" fill="#fff" opacity="0.6"/>`
+    : path('M486 217 C492 212 497 212 500 214 C503 212 508 212 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
       + path('M486 217 C492 227 508 227 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
-      + `<ellipse cx="503" cy="222" rx="5" ry="1.8" fill="#fff" opacity="0.6"/>`),
+      + `<ellipse cx="503" cy="222" rx="5" ry="1.8" fill="#fff" opacity="0.6"/>`;
+  return {
+    under: g(eyes.map(([x, d]) => `<path d="${eye(x, d)}" fill="#fff"${big(x)}/>`).join('')),
+    iris: g(`<clipPath id="eyeClip">${eyes.map(([x, d]) => `<path d="${eye(x, d)}"${big(x)}/>`).join('')}</clipPath>`
+      + `<radialGradient id="iris"><stop offset="0.35" stop-color="#fff"/><stop offset="1" stop-color="#8a8a8a"/></radialGradient>`
+      + `<g clip-path="url(#eyeClip)">${eyes.map(([x]) => `<circle cx="${x}" cy="164" r="11" fill="url(#iris)" stroke="#6a6a6a" stroke-width="1.5"${big(x)}/>`).join('')}</g>`),
+    over: g(`<radialGradient id="blush"><stop offset="0" stop-color="#f2849c" stop-opacity="${glam ? 0.65 : 0.5}"/><stop offset="1" stop-color="#f2849c" stop-opacity="0"/></radialGradient>`
+      + `<linearGradient id="lips" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${glam ? '#f0609a' : '#e7798d'}"/><stop offset="1" stop-color="${glam ? '#d63b7c' : '#d45a74'}"/></linearGradient>`
+      + eyes.map(([x, d]) => `<g${big(x)}>`
+        + (glam ? stroke(`M${x - 22 * d} 156 C${x - 8 * d} 145 ${x + 12 * d} 145 ${x + 23 * d} 154`, '#d9a6e8', 5, ' opacity="0.45"') + `<circle cx="${x - 2 * d}" cy="147" r="1.5" fill="#fff" opacity="0.8"/><circle cx="${x + 8 * d}" cy="146" r="1.2" fill="#fff" opacity="0.8"/>` : '')
+        + `<circle cx="${x}" cy="164" r="5" fill="#2a1d1d"/><circle cx="${x + 3.5}" cy="160" r="3" fill="#fff"/><circle cx="${x - 3}" cy="168" r="1.4" fill="#fff" opacity="0.8"/>`
+        + stroke(`M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160${glam ? ` L${x + 27 * d} 155` : ''}`, '#3a2626', glam ? 4.2 : 3.5)
+        + (glam
+          ? stroke(`M${x + 23 * d} 158 L${x + 29 * d} 153 M${x + 19 * d} 155 L${x + 24 * d} 149 M${x + 14 * d} 153 L${x + 18 * d} 147`, '#3a2626', 1.8)
+          : stroke(`M${x + 21 * d} 160 L${x + 27 * d} 155 M${x + 17 * d} 156 L${x + 22 * d} 149 M${x + 12 * d} 154 L${x + 15 * d} 147`, '#3a2626', 2))
+        + stroke(`M${x - 18 * d} 170 C${x - 6 * d} 177 ${x + 8 * d} 175 ${x + 18 * d} 165`, '#c99a8c', 1.5)
+        + (glam ? '' : stroke(`M${x - 20 * d} 157 C${x - 8 * d} 144 ${x + 10 * d} 144 ${x + 20 * d} 153`, '#cfa8de', 5, ' opacity="0.45"')) + '</g>').join('')
+      + `<ellipse cx="452" cy="197" rx="18" ry="11" fill="url(#blush)"/><ellipse cx="548" cy="197" rx="18" ry="11" fill="url(#blush)"/>` + lips),
   };
 }
 const dollFace = face(HEAD);
@@ -271,7 +281,7 @@ parts.push(part('necklace', [...Array(11)].map((_, k) => { const a = Math.PI * (
 // ---- The hair salon customer, close up (Art/salon.svg, 1000 square): the face, ears, neck and cape. Her hair is drawn
 // in the app, so it can be washed and cut. Her face is the doll's, three times bigger.
 const salon = [];
-const salonFace = face('translate(500 455) scale(3) translate(-500 -164)');
+const salonFace = face('translate(500 455) scale(3) translate(-500 -164)', true);
 const ear = (x, d) => `M${x} 420 C${x + 34 * d} 410 ${x + 46 * d} 450 ${x + 40 * d} 480 C${x + 34 * d} 510 ${x + 12 * d} 524 ${x} 516Z`;
 const salonHead = 'M500 228 C640 228 716 320 708 450 C700 572 606 668 500 674 C394 668 300 572 292 450 C284 320 360 228 500 228Z';
 salon.push(part('body', soft(['M454 600 L454 940 L546 940 L546 600Z', ear(304, -1), ear(696, 1)], '#fff', SKIN_LINE,

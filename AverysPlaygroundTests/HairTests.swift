@@ -48,4 +48,20 @@ final class HairTests: XCTestCase {
         XCTAssertEqual(hair.wetness, 0)
         XCTAssertEqual(hair.tangles, 0)
     }
+
+    func testAHaircutGoalIsLenient() {
+        var hair = Hairdo(goal: .shoulders)
+        XCTAssertFalse(hair.isCutToGoal)
+        // A cut well above her line stops just past it
+        let high = Hairdo.top + Hairdo.maxLength * 0.2
+        hair.use(.scissors, at: CGPoint(x: 0.85, y: high), from: CGPoint(x: 0.15, y: high))
+        for length in hair.lengths { XCTAssertEqual(length, Haircut.shoulders.length - 0.1, accuracy: 0.001) }
+        XCTAssertTrue(hair.isCutToGoal)
+
+        // A wobbly cut near the line counts, even with a few long strands left
+        var wobbly = Hairdo(goal: .trim)
+        let near = Hairdo.top + Hairdo.maxLength * (Haircut.trim.length + 0.08)
+        wobbly.use(.scissors, at: CGPoint(x: 0.75, y: near), from: CGPoint(x: 0.15, y: near))
+        XCTAssertTrue(wobbly.isCutToGoal)
+    }
 }

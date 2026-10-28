@@ -214,7 +214,9 @@ struct ColoringPage {
 
 /// Crayon colored inside one region of a page, in page units.
 struct ColorStroke {
+    /// The part it stays inside, or `free` when it can go anywhere.
     let region: Int
+    static let free = -1
     let color: Color
     var points: [CGPoint]
 }
@@ -258,6 +260,8 @@ struct ColorsView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
     @State private var celebrated: Set<Int> = []
+    /// Crayon stays inside each part, or (off) colors anywhere, over the lines too.
+    @AppStorage("coloringInLines") private var inLines = true
 
     private var page: ColoringPage { ColoringPage.all[pageIndex] }
 
@@ -273,6 +277,7 @@ struct ColorsView: View {
                     .frame(width: size.width, height: size.height)
                     .clipShape(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
                     .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                    .overlay(alignment: .topTrailing) { linesButton.padding(8 * uiScale) }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(.horizontal)
@@ -331,7 +336,15 @@ struct ColorsView: View {
                         }
                     }
                 }
-                context.stroke(shape, with: .color(.outline), style: line)
+            }
+            // Coloring anywhere goes over everything but the outlines.
+            for mark in marks where mark.region == ColorStroke.free {
+                var path = Path()
+                path.addLines(mark.points.map { $0.applying(toView) })
+                context.stroke(path, with: .color(mark.color.opacity(0.9)), style: crayon)
+            }
+            for region in page.regions {
+                context.stroke(region.applying(toView), with: .color(.outline), style: line)
             }
             context.stroke(page.details.applying(toView), with: .color(.outline), style: line)
         }
@@ -341,7 +354,13 @@ struct ColorsView: View {
             DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     let point = CGPoint(x: value.location.x / size.width, y: value.location.y / size.height)
-                    if let stroke = current {
+                    if !inLines {
+                        if current == nil {
+                            current = ColorStroke(region: ColorStroke.free, color: selected.color, points: [point])
+                        } else {
+                            current?.points.append(point)
+                        }
+                    } else if let stroke = current {
                         if let region = page.region(at: point), region != stroke.region {
                             // Crossing into another part: keep what's colored and carry on coloring the new part.
                             strokes[pageIndex].append(stroke)
@@ -358,7 +377,7 @@ struct ColorsView: View {
                     guard let stroke = current else { return }
                     current = nil
                     if hypot(value.translation.width, value.translation.height) < 12 {
-                        fill(stroke.region)
+                        if let region = page.region(at: stroke.points[0]) { fill(region) }
                     } else {
                         strokes[pageIndex].append(stroke)
                         checkDone()
@@ -368,6 +387,25 @@ struct ColorsView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Picture of a \(page.name)")
         .accessibilityIdentifier("Picture")
+    }
+
+    /// For the grown-up: keep the crayon inside the lines, or let it color anywhere.
+    private var linesButton: some View {
+        Button {
+            Haptics.tap()
+            inLines.toggle()
+            say(inLines ? "I'll keep your crayon inside the lines!" : "Color anywhere you like!")
+        } label: {
+            Label(inLines ? "In the lines" : "Anywhere", systemImage: inLines ? "square.dashed.inset.filled" : "scribble.variable")
+                .font(.kid(15))
+                .foregroundStyle(Color.outline)
+                .padding(.horizontal, 12 * uiScale)
+                .frame(height: 40 * uiScale)
+                .background(.white.opacity(0.9), in: Capsule())
+                .overlay(Capsule().strokeBorder(Color.outline.opacity(0.5), lineWidth: 1.5))
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .accessibilityLabel(inLines ? "Coloring inside the lines" : "Coloring anywhere")
     }
 
     private func pageButton(_ symbol: String, by step: Int) -> some View {
@@ -402,7 +440,10 @@ struct ColorsView: View {
     /// Cheers once every part of the page has some color.
     private func checkDone() {
         let colored = page.regions.indices.allSatisfy { index in
-            fills[pageIndex][index] != .white || strokes[pageIndex].contains { $0.region == index && $0.color != .white }
+            fills[pageIndex][index] != .white || strokes[pageIndex].contains { stroke in
+                stroke.color != .white && (stroke.region == index
+                    || stroke.region == ColorStroke.free && stroke.points.contains { page.region(at: $0) == index })
+            }
         }
         guard colored, !celebrated.contains(pageIndex) else { return }
         celebrated.insert(pageIndex)
