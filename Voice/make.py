@@ -44,11 +44,11 @@ def record(line, voice, pitch, path, lang="en-us", speed=1.0, quicker=1.0):
         audio, rate = kokoro.create(line.replace("Mochi", "Moe-chee"), voice=voice, speed=speed, lang=lang)
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         soundfile.write(wav.name, audio, rate)
-        # Raise the pitch for a cartoon voice, keeping the speed (times `quicker`).
+        # Raise the pitch for a cartoon voice, keeping the speed (times `quicker`). The stretch back sounds a little
+        # electronic, so voices at their own pitch and speed (Dora, Bella) skip it.
         tempo = quicker / pitch
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav.name,
-                        "-af", f"asetrate={int(24000 * pitch)},aresample=24000,atempo={tempo:.3f}",
-                        "-b:a", "64k", str(path)], check=True)
+        shift = [] if pitch == 1 and quicker == 1 else ["-af", f"asetrate={int(24000 * pitch)},aresample=24000,atempo={tempo:.3f}"]
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav.name, *shift, "-b:a", "64k", str(path)], check=True)
 
 
 if "--samples" in sys.argv:
