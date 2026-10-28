@@ -55,24 +55,34 @@ enum SpanishLesson: CaseIterable {
             SpanishWord(spanish: "Muy bien", english: "Very good", picture: "thumbsup"),
             SpanishWord(spanish: "Me llamo Avery", english: "My name is Avery", picture: "avery"),
             SpanishWord(spanish: "¡Vamos a jugar!", english: "Let's play!", picture: "ball"),
+            SpanishWord(spanish: "¿Qué lo que?", english: "What's up?", picture: "face-cool"),
             SpanishWord(spanish: "¡Qué chévere!", english: "How cool!", picture: "face-starstruck"),
+            SpanishWord(spanish: "¡Ay, mi madre!", english: "Oh my goodness!", picture: "face-shock"),
+            SpanishWord(spanish: "Cógelo suave", english: "Take it easy", picture: "face-calm"),
             SpanishWord(spanish: "Ahorita", english: "In a little bit", picture: "hourglass"),
             SpanishWord(spanish: "Ponte las chancletas", english: "Put on your flip-flops", picture: "sandals"),
         ]
-        // Talking with family the Dominican way: kids ask their elders for a blessing when they say hi and bye.
+        // Talking with family the Dominican way: kids ask their parents and elders for a blessing when they say hi and bye,
+        // answer "Sí, mami", say "con permiso" and "buen provecho".
         case .family: [
             SpanishWord(spanish: "Mami", english: "Mom", picture: "mom"),
             SpanishWord(spanish: "Papi", english: "Dad", picture: "dad"),
+            SpanishWord(spanish: "Bendición, mami", english: "Bless me, Mom", picture: "pray"),
+            SpanishWord(spanish: "Bendición, papi", english: "Bless me, Dad", picture: "pray"),
+            SpanishWord(spanish: "Dios te bendiga", english: "God bless you", picture: "face-angel"),
+            SpanishWord(spanish: "Sí, mami", english: "Yes, Mom", picture: "mom"),
+            SpanishWord(spanish: "Sí, papi", english: "Yes, Dad", picture: "dad"),
             SpanishWord(spanish: "Abuela", english: "Grandma", picture: "grandma"),
             SpanishWord(spanish: "Abuelo", english: "Grandpa", picture: "grandpa"),
-            SpanishWord(spanish: "Mi hermano", english: "My brother", picture: "boy"),
-            SpanishWord(spanish: "Mi hermana", english: "My sister", picture: "girl"),
             SpanishWord(spanish: "Bendición, abuela", english: "Bless me, Grandma", picture: "grandma"),
             SpanishWord(spanish: "Bendición, abuelo", english: "Bless me, Grandpa", picture: "grandpa"),
-            SpanishWord(spanish: "Dios te bendiga", english: "God bless you", picture: "face-angel"),
+            SpanishWord(spanish: "Mi hermano", english: "My brother", picture: "boy"),
+            SpanishWord(spanish: "Mi hermana", english: "My sister", picture: "girl"),
             SpanishWord(spanish: "Te quiero mucho", english: "I love you so much", picture: "heart"),
             SpanishWord(spanish: "Dame un abrazo", english: "Give me a hug", picture: "hug"),
             SpanishWord(spanish: "Ven acá, mi amor", english: "Come here, my love", picture: "face-hug"),
+            SpanishWord(spanish: "Con permiso", english: "Excuse me", picture: "face-please"),
+            SpanishWord(spanish: "Buen provecho", english: "Enjoy your meal", picture: "face-yum"),
         ]
         case .animals: [
             SpanishWord(spanish: "el perro", english: "dog", picture: "dog"),

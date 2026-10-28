@@ -1506,12 +1506,16 @@ dogbowl
 dogbowl-empty
 dora:Ahh, minty fresh! Thank you, Coco!
 dora:Animals
+dora:Bless me, Dad
 dora:Bless me, Grandma
 dora:Bless me, Grandpa
+dora:Bless me, Mom
 dora:Colors
 dora:Come here, my love
 dora:Dad
 dora:Do you want mangú?
+dora:Enjoy your meal
+dora:Excuse me
 dora:Family
 dora:Food
 dora:Give me a hug
@@ -1542,11 +1546,16 @@ dora:My name is Avery
 dora:My sister
 dora:My teeth are so sparkly! Thank you!
 dora:Numbers
+dora:Oh my goodness!
 dora:Please
 dora:Put on your flip-flops
+dora:Take it easy
 dora:Thank you
 dora:Very good
+dora:What's up?
 dora:Wow! I look amazing!
+dora:Yes, Dad
+dora:Yes, Mom
 dora:Yummy!
 dora:apple
 dora:avocado
@@ -1663,7 +1672,10 @@ es:Ay
 es:Ayúdame
 es:Bendición, abuela
 es:Bendición, abuelo
+es:Bendición, mami
+es:Bendición, papi
 es:Bobo
+es:Buen provecho
 es:Buenas
 es:Buenas noches
 es:Buenos días
@@ -1675,9 +1687,11 @@ es:Comida
 es:Con
 es:Con el pico limpio, el gallo llegó a la boda y cantó: ¡Quiquiriquí!
 es:Con la moneda compró una cinta roja y se puso muy bonita.
+es:Con permiso
 es:Cuando
 es:Cuando el pollito necesitó ayuda, el río, el fuego y el viento lo ayudaron a él. ¡Qué lindo es ayudar!
 es:Cucarachita
+es:Cógelo suave
 es:Dame un abrazo
 es:De
 es:De noche llegó el Ratón Pérez, chiquito y elegante.
@@ -1755,6 +1769,8 @@ es:Sol
 es:Sol, ¿me ayudas tú? ¡Claro que sí! dijo el sol, y secó el lodo.
 es:Sound it out
 es:Sí
+es:Sí, mami
+es:Sí, papi
 es:Te
 es:Te quiero mucho
 es:Tengo hambre
@@ -1965,6 +1981,7 @@ es:voy
 es:voz
 es:vuelta
 es:y
+es:¡Ay, mi madre!
 es:¡Colorín colorado, este cuento se ha acabado!
 es:¡Hola!
 es:¡Las huellas la llevaron de vuelta a su casa!
@@ -1973,6 +1990,7 @@ es:¡Qué rico!
 es:¡Vamos a jugar!
 es:¿Cómo estás?
 es:¿Quieres mangú?
+es:¿Qué lo que?
 es:árbol
 es:él
 eyes
