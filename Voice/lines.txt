@@ -317,6 +317,7 @@ Did you know crocodiles can't stick out their tongues? Blehhh!
 Dog
 Doll
 Doll-
+Done
 Done!
 Dots and stripes, oh my!
 Down
@@ -369,7 +370,6 @@ Gown! Wowza bowza!
 Grapes
 Green
 Green! Like a frog.
-Grown-up timer
 Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
@@ -502,6 +502,7 @@ Hot Cross Buns
 Hot Cross Buns!
 Hot diggity dog!
 Hugs and kisses
+Hurry
 I
 I ate a crayon once. It tasted purple!
 I can see my face in it! Hee hee!
@@ -630,6 +631,7 @@ Ooh, shiny!
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Orange! Like an orange.
+Order
 Overalls
 Overalls! Fashion show time!
 Overalls! Holy guacamole, I love it!
@@ -685,10 +687,10 @@ Queen
 R
 Rainbow
 Ready for school! Have a great day!
-Ready, set, go! Let's beat the timer!
 Red
 Red! Like a strawberry.
 Remover
+Reset
 Rinse
 Rinse off all the bubbles!
 Rinse!
@@ -865,6 +867,7 @@ Twinkle Twinkle
 Twinkle Twinkle!
 Twinkle twinkle, little nail!
 U
+Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!
 Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
@@ -1005,6 +1008,7 @@ bear
 bed
 bed! You read it!
 bed! You spelled it!
+bedtimeOrder
 bee
 bee and apple!
 bee and ball!
@@ -2138,6 +2142,7 @@ hen! You spelled it!
 high,
 horse
 hot
+hourglass
 house
 house and apple!
 house and ball!
@@ -2167,6 +2172,7 @@ house!
 how
 hug
 huh
+hurry up
 i
 icecream
 ih
@@ -2213,6 +2219,7 @@ moon and star!
 moon and sun!
 moon and tree!
 moon!
+morningOrder
 mouse
 mouthwash
 mud
@@ -2377,7 +2384,6 @@ sunrise
 t
 tennis
 the
-timer
 tle
 toilet
 toothbrush

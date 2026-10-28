@@ -16,9 +16,9 @@ enum RoutineKind: String, CaseIterable {
         case .morning: [
             RoutineStep(name: "Wake up", picture: "sunrise", cheer: "Good morning, sunshine!"),
             RoutineStep(name: "Use the restroom", picture: "toilet", cheer: "Potty time, all done! Wash your hands!"),
-            RoutineStep(name: "Take vitamins", picture: "vitamins", cheer: "Vitamins, yum! Strong and healthy!"),
             RoutineStep(name: "Get dressed", picture: "tshirt", cheer: "Looking good!"),
             RoutineStep(name: "Breakfast", picture: "bowl", cheer: "Yum yum, breakfast!"),
+            RoutineStep(name: "Take vitamins", picture: "vitamins", cheer: "Vitamins, yum! Strong and healthy!"),
             RoutineStep(name: "Brush teeth", picture: "toothbrush", cheer: "Sparkly teeth!"),
             RoutineStep(name: "Brush hair", picture: "comb", cheer: "Pretty hair!"),
             RoutineStep(name: "Shoes on", picture: "sneakers", cheer: "Shoes on, ready to go!"),
@@ -27,14 +27,21 @@ enum RoutineKind: String, CaseIterable {
         case .bedtime: [
             RoutineStep(name: "Bath", picture: "bathtub", cheer: "Bubble bath, all clean!"),
             RoutineStep(name: "Pajamas", picture: "pajamas", cheer: "Cozy pajamas!"),
-            RoutineStep(name: "Use the restroom", picture: "toilet", cheer: "Potty time, all done! Wash your hands!"),
-            RoutineStep(name: "Brush teeth", picture: "toothbrush", cheer: "Sparkly teeth!"),
             RoutineStep(name: "Drink of water", picture: "cup", cheer: "Gulp gulp!"),
+            RoutineStep(name: "Brush teeth", picture: "toothbrush", cheer: "Sparkly teeth!"),
+            RoutineStep(name: "Use the restroom", picture: "toilet", cheer: "Potty time, all done! Wash your hands!"),
             RoutineStep(name: "Story", picture: "book", cheer: "Story time!"),
             RoutineStep(name: "Hugs and kisses", picture: "hug", cheer: "Big hug!"),
             RoutineStep(name: "Lights out", picture: "moon", cheer: "Good night!"),
         ]
         }
+    }
+
+    /// The steps in the order a grown-up saved, by name; steps missing from it keep their place at the end.
+    func steps(in order: [String]) -> [RoutineStep] {
+        steps.enumerated()
+            .sorted { (order.firstIndex(of: $0.element.name) ?? order.count + $0.offset) < (order.firstIndex(of: $1.element.name) ?? order.count + $1.offset) }
+            .map(\.element)
     }
 
     var finished: String {
@@ -45,12 +52,16 @@ enum RoutineKind: String, CaseIterable {
 /// A morning or bedtime checklist: the child taps each step as they do it.
 struct Routine: Equatable {
     let kind: RoutineKind
+    let steps: [RoutineStep]
     private(set) var done: Set<Int> = []
 
-    init(_ kind: RoutineKind) { self.kind = kind }
+    init(_ kind: RoutineKind, order: [String] = []) {
+        self.kind = kind
+        steps = kind.steps(in: order)
+    }
 
     /// The first step not done yet, which bounces so she knows what's next.
-    var next: Int? { kind.steps.indices.first { !done.contains($0) } }
+    var next: Int? { steps.indices.first { !done.contains($0) } }
     var isDone: Bool { next == nil }
 
     /// Ticks off a step. False if it was already done.
@@ -61,6 +72,7 @@ struct Routine: Equatable {
 
 struct RoutinesView: View {
     private static let green = Color(red: 0.45, green: 0.75, blue: 0.45)
+    private static let red = Color(red: 0.91, green: 0.3, blue: 0.33)
 
     @State private var routine = Routine(Calendar.current.component(.hour, from: .now) < 14 ? .morning : .bedtime)
     /// The grown-up's timer: when it runs out, and how long it was set for.
@@ -71,6 +83,10 @@ struct RoutinesView: View {
     @State private var cheerCount = 0
     @State private var oops = 0
     @State private var wins = 0
+    @State private var isReordering = false
+    /// The grown-up's own order for each routine: step names joined by "|", empty for the usual order.
+    @AppStorage("morningOrder") private var morningOrder = ""
+    @AppStorage("bedtimeOrder") private var bedtimeOrder = ""
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
@@ -96,7 +112,7 @@ struct RoutinesView: View {
 
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 140 * uiScale), spacing: 14 * uiScale)], spacing: 14 * uiScale) {
-                    ForEach(Array(routine.kind.steps.enumerated()), id: \.offset) { index, step in
+                    ForEach(Array(routine.steps.enumerated()), id: \.offset) { index, step in
                         stepButton(index, step)
                     }
                 }
@@ -108,6 +124,46 @@ struct RoutinesView: View {
         .background(Scenery(routine.kind == .morning ? .outdoors : .night).ignoresSafeArea())
         .celebration(wins)
         .task(id: timerEnd) { await runTimer() }
+        .onAppear { routine = Routine(routine.kind, order: order(for: routine.kind)) }
+        .sheet(isPresented: $isReordering, onDismiss: { routine = Routine(routine.kind, order: order(for: routine.kind)) }) { reorderSheet }
+    }
+
+    private func order(for kind: RoutineKind) -> [String] {
+        (kind == .morning ? morningOrder : bedtimeOrder).split(separator: "|").map(String.init)
+    }
+
+    /// For the grown-up: drag the steps into their family's order. Saved on this device.
+    private var reorderSheet: some View {
+        let kind = routine.kind
+        let saved = Binding(
+            get: { kind.steps(in: order(for: kind)) },
+            set: { steps in
+                let names = steps.map(\.name).joined(separator: "|")
+                if kind == .morning { morningOrder = names } else { bedtimeOrder = names }
+            }
+        )
+        return NavigationStack {
+            List {
+                ForEach(saved.wrappedValue, id: \.name) { step in
+                    HStack(spacing: 12) {
+                        Picture(step.picture, size: 40)
+                        Text(step.name).font(.kid(20)).foregroundStyle(Color.outline)
+                    }
+                }
+                .onMove { saved.wrappedValue.move(fromOffsets: $0, toOffset: $1) }
+            }
+            .environment(\.editMode, .constant(.active))
+            .navigationTitle("\(kind.rawValue) order")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Reset") { saved.wrappedValue = kind.steps }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { isReordering = false }
+                }
+            }
+        }
     }
 
     private func stepButton(_ index: Int, _ step: RoutineStep) -> some View {
@@ -150,21 +206,20 @@ struct RoutinesView: View {
         .accessibilityLabel(isDone ? "\(step.name), done" : step.name)
     }
 
-    /// Time left on the grown-up's timer: green, then yellow, then red when it's up.
+    /// The grown-up's timer means "hurry up": a red bar running down beside a turning hourglass.
     private func timerBar(until end: Date) -> some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
             let left = max(0, end.timeIntervalSince(context.date))
             let fraction = timerLength > 0 ? left / timerLength : 0
-            let color = fraction > 0.5 ? Self.green : fraction > 0.2 ? Color(red: 0.97, green: 0.78, blue: 0.3) : Color(red: 0.91, green: 0.4, blue: 0.43)
             HStack(spacing: 10 * uiScale) {
-                Image(systemName: timesUp ? "alarm.fill" : "timer")
-                    .font(.system(size: 26 * uiScale, weight: .bold))
-                    .foregroundStyle(color)
-                    .symbolEffect(.pulse, isActive: timesUp)
+                Picture("hourglass", size: 40 * uiScale)
+                    .phaseAnimator([0.0, 180]) { content, turn in
+                        content.rotationEffect(.degrees(timesUp ? 0 : turn))
+                    } animation: { _ in .easeInOut(duration: 0.6).delay(1.4) }
                 GeometryReader { geo in
                     Capsule().fill(.white)
                         .overlay(alignment: .leading) {
-                            Capsule().fill(color).frame(width: max(geo.size.height, geo.size.width * fraction))
+                            Capsule().fill(Self.red).frame(width: max(geo.size.height, geo.size.width * fraction))
                         }
                         .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2.5 * uiScale))
                 }
@@ -181,7 +236,7 @@ struct RoutinesView: View {
         .accessibilityLabel(timesUp ? "Time's up" : "Timer")
     }
 
-    /// Small, out-of-the-way controls for the grown-up: a timer and starting over.
+    /// Small, out-of-the-way controls for the grown-up: the hurry timer, the order of the steps, and starting over.
     private var grownUpBar: some View {
         HStack(spacing: 12 * uiScale) {
             Menu {
@@ -192,7 +247,19 @@ struct RoutinesView: View {
                     Button("Stop the timer", role: .destructive) { stopTimer() }
                 }
             } label: {
-                Label("Grown-up timer", systemImage: "timer")
+                // Red: the timer goes on when she needs to hurry up
+                HStack(spacing: 6 * uiScale) {
+                    Picture("hourglass", size: 26 * uiScale)
+                    Text("Hurry").font(.kid(16))
+                }
+                .foregroundStyle(.white)
+                .padding(.horizontal, 14 * uiScale)
+                .frame(height: 44 * uiScale)
+                .background(Self.red, in: Capsule())
+                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
+            }
+            Button { isReordering = true } label: {
+                Label("Order", systemImage: "arrow.up.arrow.down")
                     .font(.kid(16))
                     .foregroundStyle(Color.outline)
                     .padding(.horizontal, 14 * uiScale)
@@ -221,13 +288,13 @@ struct RoutinesView: View {
             stopTimer()
             say(beatTheTimer ? "You beat the timer! Holy guacamole!" : routine.kind.finished)
         } else {
-            say(routine.kind.steps[index].cheer)
+            say(routine.steps[index].cheer)
         }
     }
 
     private func switchTo(_ kind: RoutineKind) {
         Haptics.tap()
-        withAnimation(.spring) { routine = Routine(kind) }
+        withAnimation(.spring) { routine = Routine(kind, order: order(for: kind)) }
         stopTimer()
         say(kind == .morning ? "Good morning! Let's get ready for school." : "Time to get ready for bed.", hint: "Tap each picture when you do it!")
     }
@@ -236,7 +303,8 @@ struct RoutinesView: View {
         timerLength = TimeInterval(minutes * 60)
         timesUp = false
         withAnimation { timerEnd = .now + timerLength }
-        say("Ready, set, go! Let's beat the timer!")
+        oops += 1
+        say("Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!")
     }
 
     private func stopTimer() {

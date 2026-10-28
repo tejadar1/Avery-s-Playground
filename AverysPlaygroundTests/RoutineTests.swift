@@ -21,4 +21,13 @@ final class RoutineTests: XCTestCase {
             }
         }
     }
+
+    func testAGrownUpsOrderIsKeptAndNewStepsGoLast() {
+        let kind = RoutineKind.bedtime
+        let order = ["Story", "Bath"]
+        let steps = kind.steps(in: order).map(\.name)
+        XCTAssertEqual(Array(steps.prefix(2)), order)
+        XCTAssertEqual(Array(steps.dropFirst(2)), kind.steps.map(\.name).filter { !order.contains($0) }, "the rest keep their usual order")
+        XCTAssertEqual(Routine(kind, order: order).steps.first?.name, "Story")
+    }
 }
