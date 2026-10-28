@@ -1,1 +1,1 @@
-af_bella 1.0
+af_bella 1.0 1.0 natural
