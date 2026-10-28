@@ -232,7 +232,7 @@ struct HairSalonView: View {
             let side = min(geo.size.width, geo.size.height)
             ZStack {
                 Canvas { context, size in
-                    HairArt.draw(hair, skin: skin, eyes: friend.eyes, guide: tool == .scissors && !cutDone && !isShowingOff, in: &context, size: size)
+                    HairArt.draw(hair, skin: skin, eyes: friend.eyes, guide: tray == .wash && tool == .scissors && !cutDone && !isShowingOff, in: &context, size: size)
                 }
                 if let toolTip {
                     // Big, held just above and right of the finger so the hair under it stays in view, wiggling as it works.

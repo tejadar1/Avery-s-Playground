@@ -100,7 +100,7 @@ struct DressUpView: View {
 
     private var trayView: some View {
         VStack(spacing: 10 * uiScale) {
-            HStack(spacing: 12 * uiScale) {
+            HStack(spacing: 8 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button {
                         Haptics.tap()
@@ -108,7 +108,7 @@ struct DressUpView: View {
                         Speaker.shared.say(item.name)
                     } label: {
                         Picture(item.picture, size: 36 * uiScale)
-                            .frame(width: 56 * uiScale, height: 52 * uiScale)
+                            .frame(width: 52 * uiScale, height: 52 * uiScale)
                             .cartoonCard(item == tray ? Color(red: 0.9, green: 0.2, blue: 0.56) : .white, cornerRadius: 18 * uiScale)
                     }
                     .buttonStyle(SquishyButtonStyle())
@@ -122,6 +122,8 @@ struct DressUpView: View {
                     Text("Done!")
                         .font(.kid(22))
                         .foregroundStyle(.white)
+                        .lineLimit(1)
+                        .fixedSize()
                         .frame(height: 52 * uiScale)
                         .padding(.horizontal, 14 * uiScale)
                         .cartoonCard(Color(red: 0.45, green: 0.72, blue: 0.42), cornerRadius: 18 * uiScale)
