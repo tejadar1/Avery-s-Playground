@@ -1,1 +1,1 @@
-ef_dora 1.1 0.9 natural
+ef_dora 1.0 0.9 natural
