@@ -16,9 +16,23 @@ struct Nail: Equatable {
         var tint: Color?  // a second color the polish fades into across the nail
     }
 
+    /// A sticker stuck on the nail, where it was tapped: 0...1 across and down the nail.
+    struct Sticker: Equatable {
+        let picture: String
+        let spot: CGPoint
+    }
+
+    static let maxStickers = 5
+
     var strokes: [Stroke] = []
     var design: NailDesign?
-    var sticker: String?
+    var stickers: [Sticker] = []
+
+    /// Sticks a sticker where the nail was tapped, kept inside the nail; the oldest comes off past the limit.
+    mutating func stick(_ picture: String, at point: CGPoint) {
+        stickers.append(Sticker(picture: picture, spot: CGPoint(x: min(0.82, max(0.18, point.x)), y: min(0.85, max(0.15, point.y)))))
+        if stickers.count > Self.maxStickers { stickers.removeFirst() }
+    }
 
     /// Adds a brush point; `startsStroke` begins a new stroke where the finger touched down.
     mutating func brush(_ color: Color, glitter: Bool = false, tint: Color? = nil, at point: CGPoint, startsStroke: Bool) {
@@ -40,7 +54,7 @@ struct Nail: Equatable {
         case .polish, .glitter: break  // polish goes on with brush(_:glitter:tint:at:startsStroke:)
         case .remover: self = Nail()
         case .design(let design): self.design = design
-        case .sticker(let sticker): self.sticker = sticker
+        case .sticker(let sticker): stick(sticker, at: CGPoint(x: 0.5, y: 0.45))
         }
     }
 }
@@ -197,7 +211,7 @@ struct NailSalonView: View {
                 nail = Nail.painted(glitter.0, glitter: true, tint: glitter.1)
             }
             if i == 2 {
-                nail.sticker = stickers.randomElement()
+                nail.stick(stickers.randomElement()!, at: CGPoint(x: 0.5, y: 0.45))
             } else if Bool.random() {
                 nail.design = NailDesign.allCases.randomElement()
             }
@@ -356,15 +370,15 @@ struct NailSalonView: View {
                                 .allowsHitTesting(false)
                         }
                     }
-                    .padding(.top, top)
                     .accessibilityElement(children: .ignore)
                     .accessibilityLabel("Nail")
                     .accessibilityIdentifier("Big nail")
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { brush(index, at: $0.location, in: size) }
-                            .onEnded { _ in finishBrush(index) }
+                            .onEnded { finishBrush(index, at: $0.location, in: size) }
                     )
+                    .padding(.top, top)  // after the gesture, so touches are measured on the nail itself
             }
             .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
             .clipped()
@@ -540,7 +554,7 @@ struct NailSalonView: View {
         isBrushing = true
     }
 
-    private func finishBrush(_ index: Int) {
+    private func finishBrush(_ index: Int, at location: CGPoint, in size: CGSize) {
         brushTip = nil
         if isBrushing {
             isBrushing = false
@@ -550,7 +564,13 @@ struct NailSalonView: View {
         }
         Haptics.tap()
         Sounds.shared.play(.pop)
-        withAnimation(.spring) { nails[index].apply(tool) }
+        withAnimation(.spring) {
+            if case .sticker(let sticker) = tool {
+                nails[index].stick(sticker, at: CGPoint(x: location.x / size.width, y: location.y / size.height))  // right where she tapped
+            } else {
+                nails[index].apply(tool)
+            }
+        }
         say(tool == .remover ? "All clean!" : Self.cheers.randomElement()!)
     }
 
@@ -643,8 +663,10 @@ private struct NailView: View {
                 .fill(.white.opacity(0.55))
                 .frame(width: size.width * 0.05, height: size.height * 0.5)
                 .offset(x: size.width * 0.3, y: size.height * 0.02)
-            if let sticker = nail.sticker {
-                Picture(sticker, size: size.width * 0.62)
+            ForEach(Array(nail.stickers.enumerated()), id: \.offset) { _, sticker in
+                Picture(sticker.picture, size: size.width * 0.5)
+                    .position(x: sticker.spot.x * size.width, y: sticker.spot.y * size.height)
+                    .transition(.scale)
             }
         }
         .frame(width: size.width, height: size.height)

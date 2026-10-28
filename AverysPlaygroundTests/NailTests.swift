@@ -19,11 +19,21 @@ final class NailTests: XCTestCase {
         nail.apply(.design(.dots))
         nail.apply(.sticker("star"))
         XCTAssertEqual(nail.design, .dots)
-        XCTAssertEqual(nail.sticker, "star")
+        XCTAssertEqual(nail.stickers.map(\.picture), ["star"])
         XCTAssertEqual(nail.strokes.count, 1, "designs and stickers keep the paint")
 
         nail.apply(.remover)
         XCTAssertEqual(nail, Nail())
+    }
+
+    func testStickersGoWhereTappedAndStayOnTheNail() {
+        var nail = Nail()
+        nail.stick("heart", at: CGPoint(x: 0.3, y: 0.7))
+        XCTAssertEqual(nail.stickers.last?.spot, CGPoint(x: 0.3, y: 0.7))
+        nail.stick("star", at: CGPoint(x: 1.4, y: -0.2))
+        XCTAssertEqual(nail.stickers.last?.spot, CGPoint(x: 0.82, y: 0.15), "kept inside the nail")
+        for _ in 0..<10 { nail.stick("gem", at: CGPoint(x: 0.5, y: 0.5)) }
+        XCTAssertEqual(nail.stickers.count, Nail.maxStickers)
     }
 
     func testGlitterStaysWithItsStroke() {
