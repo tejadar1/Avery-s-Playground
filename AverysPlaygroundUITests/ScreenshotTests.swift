@@ -130,9 +130,16 @@ final class ScreenshotTests: XCTestCase {
         let learn = ["Read", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe", "Memory", "Routines"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
-            tap(app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch)
+            let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
+            tap(section)
             sleep(1)
             let tile = button(game.title)
+            // A tap during the trip home can be missed (it was once, on iPad landscape): go home and open the section again.
+            for _ in 0..<2 where !tile.waitForExistence(timeout: 3) {
+                goHome()
+                tap(section)
+                sleep(1)
+            }
             tap(tile)
             sleep(1)
             game.play()
