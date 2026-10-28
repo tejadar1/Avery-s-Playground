@@ -31,7 +31,8 @@ def letter_sound(ipa, voice):
     return audio, rate
 
 
-def record(line, voice, pitch, path, lang="en-us"):
+def record(line, voice, pitch, path, lang="en-us", speed=1.0, quicker=1.08):
+    """`speed` is how fast Kokoro speaks; `quicker` speeds up the finished recording (a touch quicker, for bounce)."""
     if line.startswith("sound:"):
         try:
             audio, rate = letter_sound(line.removeprefix("sound:"), voice)
@@ -39,11 +40,11 @@ def record(line, voice, pitch, path, lang="en-us"):
             print(f"Skipped {line}: {error}")
             return
     else:
-        audio, rate = kokoro.create(line, voice=voice, speed=1.0, lang=lang)
+        audio, rate = kokoro.create(line, voice=voice, speed=speed, lang=lang)
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         soundfile.write(wav.name, audio, rate)
-        # Raise the pitch for a cartoon voice, keeping the speed (a touch quicker, for bounce).
-        tempo = 1.08 / pitch
+        # Raise the pitch for a cartoon voice, keeping the speed (times `quicker`).
+        tempo = quicker / pitch
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav.name,
                         "-af", f"asetrate={int(24000 * pitch)},aresample=24000,atempo={tempo:.3f}",
                         "-b:a", "64k", str(path)], check=True)
@@ -74,13 +75,15 @@ for old in out.glob("*.mp3"):
         old.unlink()
 
 voices = (here / "voice.txt").read_text().splitlines()
-for (voice, pitch), lang, suffix, mine in [
-    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:", "sound:"))),
-    (voices[1].split(), "es", "-es", lambda l: l.startswith("es:")),
+# Each voice: (voice and pitch, language, file suffix, its lines, Kokoro speed, speed-up afterwards).
+# Dora speaks a little slower and isn't sped up, so Spanish words are clear for learning.
+for (voice, pitch), lang, suffix, mine, speed, quicker in [
+    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:", "sound:")), 1.0, 1.08),
+    (voices[1].split(), "es", "-es", lambda l: l.startswith("es:"), 0.9, 1.0),
     # The friends, and the English meanings of Spanish words: Dora's voice speaking English
-    (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:")),
+    (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:"), 0.9, 1.0),
     # Bella: the storyteller for the English books, and the teacher for letters, letter sounds and words
-    (voices[2].split(), "en-us", "-book", lambda l: l.startswith(("book:", "sound:"))),
+    (voices[2].split(), "en-us", "-book", lambda l: l.startswith(("book:", "sound:")), 1.0, 1.08),
 ]:
     keys = {k: l for k, l in wanted.items() if mine(l)}
     made_with = out / f"voice-id{suffix}.txt"
@@ -91,7 +94,8 @@ for (voice, pitch), lang, suffix, mine in [
     todo = [(k, l) for k, l in keys.items() if not (out / f"{k}.mp3").exists()]
     print(f"{len(keys)} {lang} lines, {len(todo)} to record with {voice} at pitch {pitch}")
     for n, (k, line) in enumerate(todo, 1):
-        record(line.split(":", 1)[1] if line.startswith(("es:", "dora:", "book:")) else line, voice, float(pitch), out / f"{k}.mp3", lang)
+        record(line.split(":", 1)[1] if line.startswith(("es:", "dora:", "book:")) else line, voice, float(pitch), out / f"{k}.mp3", lang,
+               speed, quicker)
         if n % 100 == 0:
             print(f"{n} recorded")
 print("Done")
