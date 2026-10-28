@@ -106,7 +106,7 @@ project.yml     XcodeGen project definition
 ### Art
 
 The art is soft cartoon color with a thin dark-brown outline (`Color.outline` in code), a darker second tone for shading, and small dot eyes.
-Coco and Mochi are SVGs in `Art/` (Mochi's room is `mochi-room.svg`, and `mochi.svg` holds her side view in parts that move). The pictures in the games (Bingo tiles, ABC, stories and so on) are in `Art/pictures`, and the code shows one with `Picture("cat", size:)`; the app uses no emoji. After editing an SVG, re-render the PNGs into the asset catalog:
+Coco and Mochi are SVGs in `Art/` (Mochi's room is `mochi-room.svg`, and `mochi.svg` holds her side view in parts that move). The pictures in the games (Bingo tiles, ABC, stories and so on) are in `Art/pictures`, and the code shows one with `Picture("cat", size:)`; the app uses no emoji. The Dress Up doll is `doll.svg`, one layer per part, written by `node Art/doll.js Art/doll.svg`: edit `doll.js`, not the SVG. Its white and gray parts get tinted in the app with the friend's skin, hair and eye colors and the outfit color. After editing an SVG, re-render the PNGs into the asset catalog:
 
 ```sh
 node Art/render.js   # needs Playwright with Chromium

@@ -24,6 +24,12 @@ for (const part of mochiParts) {
 for (const file of fs.readdirSync(path.join(__dirname, 'icons'))) {
   images[`Icon-${path.basename(file, '.svg')}`] = [`icons/${file}`, 600];
 }
+// The Dress Up doll, one image per layer, stacked in DressUpView.
+const doll = fs.readFileSync(path.join(__dirname, 'doll.svg'), 'utf8');
+const dollParts = [...doll.matchAll(/<g id="([\w-]+)" class="part">/g)].map((m) => m[1]);
+for (const part of dollParts) {
+  images[`Doll-${part}`] = ['doll.svg', 1000, dollParts.filter((p) => p !== part).map((p) => '#' + p).join(', ')];
+}
 // The pictures in the games (Bingo tiles, ABC, stories...) are named Picture-<file name>.
 for (const file of fs.readdirSync(path.join(__dirname, 'pictures'))) {
   images[`Picture-${path.basename(file, '.svg')}`] = [`pictures/${file}`, 400];

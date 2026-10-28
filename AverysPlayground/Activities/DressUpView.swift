@@ -62,13 +62,10 @@ struct DressUpView: View {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
             ZStack {
-                Canvas { context, size in
-                    DollArt.draw(outfit, skin: friend.skin, hair: friend.hair, eyes: friend.eyes, in: &context, size: size)
-                }
-                .aspectRatio(1 / DollArt.height, contentMode: .fit)
-                .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Doll")
-                .accessibilityIdentifier("Doll")
+                Doll(outfit: outfit, friend: friend)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Doll")
+                    .accessibilityIdentifier("Doll")
                 if isShowingOff { Sparkles() }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -76,14 +73,11 @@ struct DressUpView: View {
             .padding(.horizontal)
             .overlay(alignment: .bottomTrailing) {  // beside the hem, clear of her head
                 UpNext(count: Friend.all.count, current: model) { index in
-                    let waiting = Friend.all[index]
                     // Just her face: the whole doll, zoomed in on the head
                     let width = 150 * uiScale
-                    Canvas { context, size in
-                        DollArt.draw(Outfit(), skin: waiting.skin, hair: waiting.hair, eyes: waiting.eyes, in: &context, size: size)
-                    }
-                    .frame(width: width, height: width * DollArt.height)
-                    .offset(y: width * (DollArt.height / 2 - 0.165))
+                    Doll(friend: Friend.all[index])
+                        .frame(width: width, height: width * Doll.height)
+                        .offset(y: width * (Doll.height / 2 - 0.165))
                 }
                 .padding(.trailing)
             }
@@ -209,10 +203,7 @@ struct DressUpView: View {
         Sounds.shared.play(.shutter)
         Haptics.tap()
         let look = outfit, who = friend
-        let picture = snapshot(of: Canvas { context, size in
-            DollArt.draw(look, skin: who.skin, hair: who.hair, eyes: who.eyes, in: &context, size: size)
-        }
-        .aspectRatio(1 / DollArt.height, contentMode: .fit), size: 300)
+        let picture = snapshot(of: Doll(outfit: look, friend: who), size: 300)
         flashes += 1
         withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Say cheese! Snap snap!" }
@@ -243,264 +234,52 @@ struct DressUpView: View {
     }
 }
 
-/// Draws a fashion doll in the app's mixed style: thin outlines, soft colors, long legs and long hair.
-/// Points are in widths: x is 0...1, y is 0...`height`.
-private enum DollArt {
+/// The fashion doll, stacked from the Doll- images drawn by Art/doll.js. Its white and gray parts are
+/// multiplied by her skin, hair and eye colors and the outfit color; the rest keep their own colors.
+private struct Doll: View {
     static let height: CGFloat = 1.3
 
-    static func draw(_ outfit: Outfit, skin: Color, hair: Color, eyes: Color, in context: inout GraphicsContext, size: CGSize) {
-        let s = size.width
-        let line = 0.006 * s
-        let outline = Color.outline
-        let color = outfit.color
-        let shade = Color.black.opacity(0.12)
-        let hotPink = Color(red: 0.9, green: 0.2, blue: 0.56)
+    var outfit = Outfit()
+    let friend: Friend
 
-        func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint { CGPoint(x: x * s, y: y * s) }
-        func rect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat, _ r: CGFloat = 0) -> Path {
-            Path(roundedRect: CGRect(x: x * s, y: y * s, width: w * s, height: h * s), cornerRadius: r * s)
-        }
-        func oval(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> Path {
-            Path(ellipseIn: CGRect(x: (x - w / 2) * s, y: (y - h / 2) * s, width: w * s, height: h * s))
-        }
-        func shape(_ points: [(CGFloat, CGFloat)]) -> Path {
-            var path = Path()
-            path.addLines(points.map { pt($0.0, $0.1) })
-            path.closeSubpath()
-            return path
-        }
-        func fill(_ path: Path, _ fillColor: Color) {
-            context.fill(path, with: .color(fillColor))
-            context.stroke(path, with: .color(outline), style: StrokeStyle(lineWidth: line, lineJoin: .round))
-        }
-        func limb(from: CGPoint, to: CGPoint, width: CGFloat, _ fillColor: Color) {
-            var path = Path()
-            path.move(to: pt(from.x, from.y))
-            path.addLine(to: pt(to.x, to.y))
-            context.stroke(path, with: .color(outline), style: StrokeStyle(lineWidth: width * s + 2 * line, lineCap: .round))
-            context.stroke(path, with: .color(fillColor), style: StrokeStyle(lineWidth: width * s, lineCap: .round))
-        }
-        func sparkles(_ spots: [(CGFloat, CGFloat)]) {
-            for (x, y) in spots { context.fill(oval(x, y, 0.012, 0.012), with: .color(.white.opacity(0.85))) }
-        }
-
-        let waist: CGFloat = 0.47, hips: CGFloat = 0.56, ankle: CGFloat = 1.17
-        // A fashion doll's pose: one hand on her hip, unless she's carrying her purse.
-        let handOnHip = outfit.extra != .purse
-        let elbow = CGPoint(x: 0.665, y: 0.41)
-        let leftHand = CGPoint(x: 0.36, y: 0.6), rightHand = handOnHip ? CGPoint(x: 0.565, y: 0.49) : CGPoint(x: 0.64, y: 0.6)
-
-        // Long hair behind, down past her waist, with a wavy end.
-        var back = Path()
-        back.move(to: pt(0.4, 0.2))
-        back.addCurve(to: pt(0.6, 0.2), control1: pt(0.38, 0.03), control2: pt(0.62, 0.03))
-        back.addCurve(to: pt(0.65, 0.53), control1: pt(0.68, 0.28), control2: pt(0.69, 0.43))
-        back.addQuadCurve(to: pt(0.57, 0.55), control: pt(0.62, 0.58))
-        back.addQuadCurve(to: pt(0.5, 0.54), control: pt(0.53, 0.51))
-        back.addQuadCurve(to: pt(0.43, 0.55), control: pt(0.47, 0.51))
-        back.addQuadCurve(to: pt(0.36, 0.53), control: pt(0.38, 0.58))
-        back.addCurve(to: pt(0.4, 0.2), control1: pt(0.31, 0.43), control2: pt(0.32, 0.28))
-        back.closeSubpath()
-        fill(back, hair)
-        // Glossy shine down the long hair
-        var shine = Path()
-        shine.move(to: pt(0.37, 0.27)); shine.addQuadCurve(to: pt(0.37, 0.46), control: pt(0.35, 0.37))
-        shine.move(to: pt(0.63, 0.27)); shine.addQuadCurve(to: pt(0.63, 0.46), control: pt(0.65, 0.37))
-        context.stroke(shine, with: .color(.white.opacity(0.45)), style: StrokeStyle(lineWidth: line * 2, lineCap: .round))
-
-        // Arms and long legs
-        let longSleeves = outfit.clothes == .pajamas
-        limb(from: CGPoint(x: 0.425, y: 0.31), to: leftHand, width: 0.032, longSleeves ? color : skin)
-        if handOnHip {
-            limb(from: CGPoint(x: 0.575, y: 0.31), to: elbow, width: 0.032, longSleeves ? color : skin)
-            limb(from: elbow, to: rightHand, width: 0.03, longSleeves ? color : skin)
-        } else {
-            limb(from: CGPoint(x: 0.575, y: 0.31), to: rightHand, width: 0.032, longSleeves ? color : skin)
-        }
-        if longSleeves {
-            fill(oval(leftHand.x, leftHand.y + 0.01, 0.035, 0.035), skin)
-            fill(oval(rightHand.x, rightHand.y + 0.01, 0.035, 0.035), skin)
-        }
-        let longPants = outfit.clothes == .overalls || outfit.clothes == .pajamas
-        limb(from: CGPoint(x: 0.475, y: hips - 0.02), to: CGPoint(x: 0.47, y: ankle), width: 0.042, longPants ? color : skin)
-        limb(from: CGPoint(x: 0.525, y: hips - 0.02), to: CGPoint(x: 0.53, y: ankle), width: 0.042, longPants ? color : skin)
-        if outfit.clothes == .pajamas {
-            for (x, y) in [(0.47, 0.7), (0.475, 0.85), (0.53, 0.76), (0.53, 0.95), (0.47, 1.02)] as [(CGFloat, CGFloat)] {
-                context.fill(oval(x, y, 0.014, 0.014), with: .color(.white))
+    var body: some View {
+        let clothes = "\(outfit.clothes)", shoes = "\(outfit.shoes)"
+        ZStack {
+            layer("hairBack", friend.hair)
+            layer("body", friend.skin)
+            if outfit.clothes == .gown {  // the long skirt covers her shoes
+                layer(shoes)
+                layer(clothes, outfit.color)
+            } else {
+                layer(clothes, outfit.color)
+                layer(shoes)
             }
-        }
-
-        // Shoes
-        for x in [CGFloat(0.47), 0.53] {
-            switch outfit.shoes {
-            case .heels:
-                fill(rect(x - 0.006, ankle + 0.015, 0.009, 0.05, 0.004), hotPink)
-                fill(shape([(x - 0.025, ankle - 0.01), (x + 0.022, ankle - 0.01), (x + 0.032, ankle + 0.035), (x - 0.008, ankle + 0.03)]), hotPink)
-            case .sneakers:
-                fill(rect(x - 0.035, ankle - 0.012, 0.068, 0.04, 0.02), Color(red: 0.94, green: 0.5, blue: 0.42))
-                context.fill(rect(x - 0.035, ankle + 0.016, 0.068, 0.012, 0.006), with: .color(.white))
-            case .boots:
-                fill(rect(x - 0.027, ankle - 0.13, 0.054, 0.15, 0.012), Color(red: 0.55, green: 0.37, blue: 0.24))
-                fill(rect(x - 0.035, ankle - 0.01, 0.068, 0.04, 0.02), Color(red: 0.55, green: 0.37, blue: 0.24))
-            case .flats:
-                fill(oval(x, ankle + 0.012, 0.062, 0.032), Color(red: 0.98, green: 0.72, blue: 0.8))
-            case .sandals:
-                fill(oval(x, ankle + 0.012, 0.058, 0.03), skin)
-                context.stroke(rect(x - 0.028, ankle, 0.056, 0.012), with: .color(Color(red: 0.95, green: 0.62, blue: 0.3)), lineWidth: line * 1.6)
+            if outfit.extra == .necklace { layer("necklace") }
+            layer("eyes", friend.eyes)
+            layer("hairFront", friend.hair)
+            if outfit.extra == .sunglasses { layer("sunglasses") }
+            switch outfit.hat {
+            case .none: EmptyView()
+            case .sunHat:
+                layer("sunHat")
+                layer("sunHatBand", outfit.color)
+            case .beanie: layer("beanie", outfit.color)
+            default: layer("\(outfit.hat)")
             }
+            if outfit.extra == .purse || outfit.extra == .wand { layer("\(outfit.extra)") }
         }
+        .aspectRatio(1 / Self.height, contentMode: .fit)
+    }
 
-        // A slim top that narrows at the waist
-        var torso = Path()
-        torso.move(to: pt(0.415, 0.3))
-        torso.addLine(to: pt(0.585, 0.3))
-        torso.addQuadCurve(to: pt(0.545, waist), control: pt(0.58, 0.4))
-        torso.addQuadCurve(to: pt(0.57, hips), control: pt(0.55, 0.52))
-        torso.addLine(to: pt(0.43, hips))
-        torso.addQuadCurve(to: pt(0.455, waist), control: pt(0.45, 0.52))
-        torso.addQuadCurve(to: pt(0.415, 0.3), control: pt(0.42, 0.4))
-        torso.closeSubpath()
+    /// A part with its fixed-color pieces below and above it, when it has them.
+    @ViewBuilder private func layer(_ name: String, _ tint: Color = .white) -> some View {
+        image(name + "-under")
+        image(name).colorMultiply(tint)
+        image(name + "-over")
+    }
 
-        // Clothes
-        switch outfit.clothes {
-        case .tshirt:
-            fill(torso, color)
-            fill(oval(0.42, 0.32, 0.06, 0.05), color)
-            fill(oval(0.58, 0.32, 0.06, 0.05), color)
-            fill(shape([(0.43, hips - 0.03), (0.57, hips - 0.03), (0.6, 0.68), (0.4, 0.68)]), Color(red: 0.4, green: 0.55, blue: 0.8))
-        case .gown:
-            fill(torso, color)
-            var skirt = Path()
-            skirt.move(to: pt(0.455, waist))
-            skirt.addLine(to: pt(0.545, waist))
-            skirt.addQuadCurve(to: pt(0.74, 1.2), control: pt(0.6, 0.8))
-            skirt.addQuadCurve(to: pt(0.26, 1.2), control: pt(0.5, 1.25))
-            skirt.addQuadCurve(to: pt(0.455, waist), control: pt(0.4, 0.8))
-            skirt.closeSubpath()
-            fill(skirt, color)
-            context.fill(shape([(0.5, 0.5), (0.6, 1.2), (0.71, 1.19)]), with: .color(shade))
-            sparkles([(0.47, 0.6), (0.53, 0.7), (0.42, 0.85), (0.58, 0.9), (0.36, 1.08), (0.5, 1.0), (0.64, 1.1), (0.45, 1.16), (0.5, 0.36), (0.47, 0.42)])
-        case .party:
-            fill(torso, color)
-            var skirt = Path()
-            skirt.move(to: pt(0.455, waist))
-            skirt.addLine(to: pt(0.545, waist))
-            skirt.addLine(to: pt(0.66, 0.73))
-            skirt.addQuadCurve(to: pt(0.34, 0.73), control: pt(0.5, 0.77))
-            skirt.closeSubpath()
-            fill(skirt, color)
-            fill(rect(0.45, waist - 0.015, 0.1, 0.03, 0.01), .white)
-            sparkles([(0.45, 0.6), (0.55, 0.64), (0.5, 0.69), (0.4, 0.7), (0.6, 0.7)])
-        case .tutu:
-            fill(torso, color)
-            for k in 0..<6 {
-                fill(oval(0.375 + CGFloat(k) * 0.05, 0.6, 0.07, 0.06), color)
-            }
-        case .overalls:
-            fill(torso, .white)
-            fill(oval(0.42, 0.32, 0.06, 0.05), .white)
-            fill(oval(0.58, 0.32, 0.06, 0.05), .white)
-            fill(rect(0.43, 0.42, 0.14, 0.17, 0.02), color)
-            fill(rect(0.44, 0.31, 0.02, 0.12), color)
-            fill(rect(0.54, 0.31, 0.02, 0.12), color)
-            fill(oval(0.5, 0.47, 0.035, 0.025), Color.white.opacity(0.6))
-        case .pajamas:
-            fill(torso, color)
-            for (x, y) in [(0.46, 0.36), (0.54, 0.4), (0.48, 0.48), (0.54, 0.52)] as [(CGFloat, CGFloat)] {
-                context.fill(oval(x, y, 0.016, 0.016), with: .color(.white))
-            }
-        }
-
-        // Neck and head
-        fill(rect(0.485, 0.24, 0.03, 0.07), skin)
-        fill(oval(0.5, 0.165, 0.16, 0.185), skin)
-        for x in [0.468, 0.532] as [CGFloat] {
-            let side: CGFloat = x < 0.5 ? -1 : 1
-            context.fill(oval(x, 0.168, 0.046, 0.034), with: .color(Color(red: 0.86, green: 0.6, blue: 0.95).opacity(0.7)))  // eyeshadow
-            fill(oval(x, 0.172, 0.036, 0.027), .white)
-            context.fill(oval(x, 0.172, 0.019, 0.021), with: .color(eyes))
-            context.fill(oval(x, 0.172, 0.009, 0.011), with: .color(Color(red: 0.12, green: 0.1, blue: 0.12)))
-            context.fill(oval(x + 0.004, 0.167, 0.006, 0.006), with: .color(.white))
-            // Lashes and a thin brow
-            var lashes = Path()
-            for k in 0..<3 {
-                let base = pt(x + side * (0.006 + 0.005 * CGFloat(k)), 0.161 + 0.001 * CGFloat(k))
-                lashes.move(to: base)
-                lashes.addLine(to: CGPoint(x: base.x + side * 0.006 * s, y: base.y - 0.008 * s))
-            }
-            var brow = Path()
-            brow.move(to: pt(x - 0.016, 0.148))
-            brow.addQuadCurve(to: pt(x + 0.016, 0.148), control: pt(x, 0.14))
-            context.stroke(lashes, with: .color(outline), style: StrokeStyle(lineWidth: line, lineCap: .round))
-            context.stroke(brow, with: .color(hair == Color(red: 0.98, green: 0.87, blue: 0.55) ? Color(red: 0.75, green: 0.6, blue: 0.35) : outline), style: StrokeStyle(lineWidth: line, lineCap: .round))
-        }
-        for x in [0.452, 0.548] as [CGFloat] {
-            context.fill(oval(x, 0.198, 0.026, 0.014), with: .color(Color(red: 0.95, green: 0.55, blue: 0.62).opacity(0.5)))
-        }
-        // A big smile with glossy pink lips
-        var smile = Path()
-        smile.move(to: pt(0.478, 0.208))
-        smile.addQuadCurve(to: pt(0.5, 0.205), control: pt(0.49, 0.2))
-        smile.addQuadCurve(to: pt(0.522, 0.208), control: pt(0.51, 0.2))
-        smile.addQuadCurve(to: pt(0.478, 0.208), control: pt(0.5, 0.236))
-        smile.closeSubpath()
-        fill(smile, Color(red: 0.95, green: 0.3, blue: 0.55))
-        context.fill(oval(0.5, 0.216, 0.016, 0.005), with: .color(.white.opacity(0.75)))
-
-        // Side-swept bangs
-        var bangs = Path()
-        bangs.move(to: pt(0.415, 0.2))
-        bangs.addCurve(to: pt(0.585, 0.19), control1: pt(0.39, 0.05), control2: pt(0.61, 0.05))
-        bangs.addQuadCurve(to: pt(0.47, 0.125), control: pt(0.56, 0.11))
-        bangs.addQuadCurve(to: pt(0.415, 0.2), control: pt(0.43, 0.12))
-        bangs.closeSubpath()
-        fill(bangs, hair)
-
-        // Hat
-        switch outfit.hat {
-        case .none: break
-        case .sunHat:
-            fill(oval(0.5, 0.08, 0.3, 0.06), Color(red: 0.98, green: 0.9, blue: 0.6))
-            fill(oval(0.5, 0.055, 0.16, 0.08), Color(red: 0.98, green: 0.9, blue: 0.6))
-            fill(rect(0.425, 0.06, 0.15, 0.018, 0.009), color)
-        case .crown:
-            fill(shape([(0.445, 0.085), (0.445, 0.035), (0.473, 0.06), (0.5, 0.02), (0.527, 0.06), (0.555, 0.035), (0.555, 0.085)]), Color(red: 0.98, green: 0.82, blue: 0.35))
-            context.fill(oval(0.5, 0.068, 0.016, 0.016), with: .color(hotPink))
-        case .bow:
-            fill(shape([(0.585, 0.09), (0.545, 0.06), (0.545, 0.12)]), hotPink)
-            fill(shape([(0.585, 0.09), (0.625, 0.06), (0.625, 0.12)]), hotPink)
-            fill(oval(0.585, 0.09, 0.022, 0.022), hotPink)
-        case .beanie:
-            var dome = Path()
-            dome.addArc(center: pt(0.5, 0.115), radius: 0.095 * s, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
-            dome.closeSubpath()
-            fill(dome, color)
-            fill(rect(0.4, 0.095, 0.2, 0.032, 0.014), Color.white.opacity(0.9))
-            fill(oval(0.5, 0.012, 0.04, 0.04), .white)
-        case .flowers:
-            let petals: [Color] = [Color(red: 0.95, green: 0.6, blue: 0.72), Color(red: 0.98, green: 0.85, blue: 0.45), Color(red: 0.72, green: 0.6, blue: 0.9)]
-            for k in 0..<7 {
-                let angle = Double.pi * (1.05 + 0.9 * Double(k) / 6)
-                fill(oval(0.5 + 0.095 * CGFloat(cos(angle)), 0.12 + 0.075 * CGFloat(sin(angle)), 0.035, 0.035), petals[k % 3])
-            }
-        }
-
-        // Extra
-        switch outfit.extra {
-        case .none: break
-        case .purse:
-            context.draw(Image("Picture-purse"), in: CGRect(x: (rightHand.x - 0.03) * s, y: (rightHand.y - 0.01) * s, width: 0.1 * s, height: 0.1 * s))
-        case .wand:
-            context.draw(Image("Picture-wand"), in: CGRect(x: (leftHand.x - 0.07) * s, y: (leftHand.y - 0.08) * s, width: 0.1 * s, height: 0.1 * s))
-        case .sunglasses:
-            for x in [0.468, 0.532] as [CGFloat] { fill(oval(x, 0.172, 0.045, 0.032), Color(red: 0.85, green: 0.25, blue: 0.55)) }
-            fill(rect(0.488, 0.168, 0.024, 0.007), Color(red: 0.85, green: 0.25, blue: 0.55))
-        case .necklace:
-            for k in 0..<7 {
-                let angle = Double.pi * (0.15 + 0.7 * Double(k) / 6)
-                fill(oval(0.5 + 0.045 * CGFloat(cos(angle)), 0.285 + 0.028 * CGFloat(sin(angle)), 0.014, 0.014), .white)
-            }
-        }
+    @ViewBuilder private func image(_ name: String) -> some View {
+        if let image = UIImage(named: "Doll-" + name) { Image(uiImage: image).resizable() }
     }
 }
 
