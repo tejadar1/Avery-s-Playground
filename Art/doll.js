@@ -1,6 +1,7 @@
 // Writes Art/doll.svg, the Dress Up doll: one <g class="part"> per layer, each rendered to its own image by render.js.
 // Tinted parts are drawn in white and grays (the app multiplies them by skin, hair, eye or clothes color); "-under"
-// and "-over" parts keep their own colors and go below and above it. Run: node Art/doll.js Art/doll.svg
+// and "-over" parts keep their own colors and go below and above it. Also writes Art/salon.svg, the hair salon
+// customer's face, in the same style. Run: node Art/doll.js
 // A softer, storybook look than the rest of the app: thin outlines in a darker tone of each color, and blurred shading.
 const fs = require('fs');
 const f = (n) => +n.toFixed(1);
@@ -46,9 +47,9 @@ const grow = (points, by, from = 0, to = points.length) => points.slice(from, to
 const path = (d, fill, line, sw = W) => `<path d="${d}" fill="${fill}"${line ? ` stroke="${line}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round"` : ''}/>`;
 const stroke = (d, color, sw, extra = '') => `<path d="${d}" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"${extra}/>`;
 // Shapes under one outline (outline everything, then fill on top), with blurred shading kept inside them.
-function soft(paths, fill, line, shading = '') {
+function soft(paths, fill, line, shading = '', w = W) {
   const id = 'c' + ids++;
-  return `<g stroke="${line}" stroke-width="${2 * W}" stroke-linejoin="round" fill="${line}">${paths.map((d) => `<path d="${d}"/>`).join('')}</g>`
+  return `<g stroke="${line}" stroke-width="${2 * w}" stroke-linejoin="round" fill="${line}">${paths.map((d) => `<path d="${d}"/>`).join('')}</g>`
     + `<g fill="${fill}">${paths.map((d) => `<path d="${d}"/>`).join('')}</g>`
     + (shading && `<clipPath id="${id}">${paths.map((d) => `<path d="${d}"/>`).join('')}</clipPath><g clip-path="url(#${id})"><g filter="url(#blur)">${shading}</g></g>`);
 }
@@ -93,23 +94,33 @@ parts.push(part('body', soft(bodyShapes, '#fff', SKIN_LINE, bodyShade)
   + stroke('M496 186 C493 196 492 200 494 203', '#d9b0a3', 2.5) + stroke('M491 204 C496 209 504 209 509 204', '#b98a7c', 3) + '</g>'));
 
 // ---- Eyes: whites under, the iris tinted by eye color, then lashes, lips and blush on top ----
-const eyes = [[470, -1], [530, 1]];
-const eye = (x, d) => `M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160 C${x + 12 * d} 176 ${x - 8 * d} 178 ${x - 21 * d} 166Z`;
-parts.push(part('eyes-under', `<g transform="${HEAD}">${eyes.map(([x, d]) => path(eye(x, d), '#fff')).join('')}</g>`));
-parts.push(part('eyes', `<g transform="${HEAD}"><clipPath id="eyeClip">${eyes.map(([x, d]) => `<path d="${eye(x, d)}"/>`).join('')}</clipPath>`
-  + `<radialGradient id="iris"><stop offset="0.35" stop-color="#fff"/><stop offset="1" stop-color="#8a8a8a"/></radialGradient>`
-  + `<g clip-path="url(#eyeClip)">${eyes.map(([x]) => `<circle cx="${x}" cy="164" r="11" fill="url(#iris)" stroke="#6a6a6a" stroke-width="1.5"/>`).join('')}</g></g>`));
-parts.push(part('eyes-over', `<g transform="${HEAD}"><radialGradient id="blush"><stop offset="0" stop-color="#f2849c" stop-opacity="0.5"/><stop offset="1" stop-color="#f2849c" stop-opacity="0"/></radialGradient>`
-  + `<linearGradient id="lips" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7798d"/><stop offset="1" stop-color="#d45a74"/></linearGradient>`
-  + eyes.map(([x, d]) => `<circle cx="${x}" cy="164" r="5" fill="#2a1d1d"/><circle cx="${x + 3.5}" cy="160" r="3" fill="#fff"/><circle cx="${x - 3}" cy="168" r="1.4" fill="#fff" opacity="0.8"/>`
-    + stroke(`M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160`, '#3a2626', 3.5)
-    + stroke(`M${x + 21 * d} 160 L${x + 27 * d} 155 M${x + 17 * d} 156 L${x + 22 * d} 149 M${x + 12 * d} 154 L${x + 15 * d} 147`, '#3a2626', 2)
-    + stroke(`M${x - 18 * d} 170 C${x - 6 * d} 177 ${x + 8 * d} 175 ${x + 18 * d} 165`, '#c99a8c', 1.5)
-    + stroke(`M${x - 20 * d} 157 C${x - 8 * d} 144 ${x + 10 * d} 144 ${x + 20 * d} 153`, '#cfa8de', 5, ' opacity="0.45"')).join('')
-  + `<ellipse cx="452" cy="197" rx="18" ry="11" fill="url(#blush)"/><ellipse cx="548" cy="197" rx="18" ry="11" fill="url(#blush)"/>`
-  + path('M486 217 C492 212 497 212 500 214 C503 212 508 212 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
-  + path('M486 217 C492 227 508 227 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
-  + `<ellipse cx="503" cy="222" rx="5" ry="1.8" fill="#fff" opacity="0.6"/></g>`));
+// Drawn around the doll's face; the hair salon draws the same face bigger (`at` is a transform).
+function face(at) {
+  const eyes = [[470, -1], [530, 1]];
+  const eye = (x, d) => `M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160 C${x + 12 * d} 176 ${x - 8 * d} 178 ${x - 21 * d} 166Z`;
+  const g = (body) => `<g transform="${at}">${body}</g>`;
+  return {
+    under: g(eyes.map(([x, d]) => path(eye(x, d), '#fff')).join('')),
+    iris: g(`<clipPath id="eyeClip">${eyes.map(([x, d]) => `<path d="${eye(x, d)}"/>`).join('')}</clipPath>`
+      + `<radialGradient id="iris"><stop offset="0.35" stop-color="#fff"/><stop offset="1" stop-color="#8a8a8a"/></radialGradient>`
+      + `<g clip-path="url(#eyeClip)">${eyes.map(([x]) => `<circle cx="${x}" cy="164" r="11" fill="url(#iris)" stroke="#6a6a6a" stroke-width="1.5"/>`).join('')}</g>`),
+    over: g(`<radialGradient id="blush"><stop offset="0" stop-color="#f2849c" stop-opacity="0.5"/><stop offset="1" stop-color="#f2849c" stop-opacity="0"/></radialGradient>`
+      + `<linearGradient id="lips" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7798d"/><stop offset="1" stop-color="#d45a74"/></linearGradient>`
+      + eyes.map(([x, d]) => `<circle cx="${x}" cy="164" r="5" fill="#2a1d1d"/><circle cx="${x + 3.5}" cy="160" r="3" fill="#fff"/><circle cx="${x - 3}" cy="168" r="1.4" fill="#fff" opacity="0.8"/>`
+        + stroke(`M${x - 21 * d} 166 C${x - 12 * d} 151 ${x + 10 * d} 149 ${x + 21 * d} 160`, '#3a2626', 3.5)
+        + stroke(`M${x + 21 * d} 160 L${x + 27 * d} 155 M${x + 17 * d} 156 L${x + 22 * d} 149 M${x + 12 * d} 154 L${x + 15 * d} 147`, '#3a2626', 2)
+        + stroke(`M${x - 18 * d} 170 C${x - 6 * d} 177 ${x + 8 * d} 175 ${x + 18 * d} 165`, '#c99a8c', 1.5)
+        + stroke(`M${x - 20 * d} 157 C${x - 8 * d} 144 ${x + 10 * d} 144 ${x + 20 * d} 153`, '#cfa8de', 5, ' opacity="0.45"')).join('')
+      + `<ellipse cx="452" cy="197" rx="18" ry="11" fill="url(#blush)"/><ellipse cx="548" cy="197" rx="18" ry="11" fill="url(#blush)"/>`
+      + path('M486 217 C492 212 497 212 500 214 C503 212 508 212 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
+      + path('M486 217 C492 227 508 227 514 217 C506 220 494 220 486 217Z', 'url(#lips)', '#b84c66', 1.2)
+      + `<ellipse cx="503" cy="222" rx="5" ry="1.8" fill="#fff" opacity="0.6"/>`),
+  };
+}
+const dollFace = face(HEAD);
+parts.push(part('eyes-under', dollFace.under));
+parts.push(part('eyes', dollFace.iris));
+parts.push(part('eyes-over', dollFace.over));
 
 // ---- Hair in front: a side part, bangs swept across, soft locks over her shoulders, and the brows ----
 const bangs = 'M536 82 C500 78 446 96 430 142 C422 172 424 202 432 230 C440 190 452 150 488 132 C512 122 530 106 536 82Z';
@@ -257,11 +268,34 @@ parts.push(part('sunglasses', hat(path('M442 156 L496 156 C496 182 486 192 469 1
 parts.push(part('necklace', [...Array(11)].map((_, k) => { const a = Math.PI * (0.08 + 0.84 * k / 10); const x = f(500 + 40 * Math.cos(a)), y = f(280 + 28 * Math.sin(a)); return `<circle cx="${x}" cy="${y}" r="6" fill="#fdf8ef" stroke="#c9bfb0" stroke-width="1.5"/><circle cx="${f(x - 2)}" cy="${f(y - 2)}" r="1.8" fill="#fff"/>`; }).join('')
   + path('M500 310 L512 324 L500 342 L488 324Z', '#ec5596', '#a82a64', 2) + path('M500 314 L506 324 L500 330Z', '#f9b6d0')));
 
+// ---- The hair salon customer, close up (Art/salon.svg, 1000 square): the face, ears, neck and cape. Her hair is drawn
+// in the app, so it can be washed and cut. Her face is the doll's, three times bigger.
+const salon = [];
+const salonFace = face('translate(500 455) scale(3) translate(-500 -164)');
+const ear = (x, d) => `M${x} 420 C${x + 34 * d} 410 ${x + 46 * d} 450 ${x + 40 * d} 480 C${x + 34 * d} 510 ${x + 12 * d} 524 ${x} 516Z`;
+const salonHead = 'M500 228 C640 228 716 320 708 450 C700 572 606 668 500 674 C394 668 300 572 292 450 C284 320 360 228 500 228Z';
+salon.push(part('body', soft(['M454 600 L454 940 L546 940 L546 600Z', ear(304, -1), ear(696, 1)], '#fff', SKIN_LINE,
+  stroke('M454 660 C480 690 520 690 546 660', SKIN_SHADE, 40) + stroke('M280 450 C278 480 284 500 296 510 M720 450 C722 480 716 500 704 510', '#ead0c6', 12), 8)
+  + soft([salonHead], '#fff', SKIN_LINE, stroke('M706 440 C700 580 600 672 500 680', '#ead0c6', 34) + stroke('M330 290 C400 250 600 250 670 290', '#ead0c6', 40), 8)
+  + stroke('M496 512 C492 540 490 556 494 566', '#d9b0a3', 6) + stroke('M482 572 C494 584 506 584 518 572', '#b98a7c', 7)));
+salon.push(part('body-over', soft(['M500 860 C380 860 220 900 170 980 L160 1000 L840 1000 L830 980 C780 900 620 860 500 860Z'], '#ff9bb5', '#d4637f',
+  stroke('M300 930 C290 960 286 980 284 1000 M700 930 C710 960 714 980 716 1000', '#e97d99', 26) + stroke('M420 880 C410 930 404 970 402 1000', '#ffc1d1', 14), 8)
+  + stroke('M440 866 C470 884 530 884 560 866', '#d4637f', 6)));
+salon.push(part('eyes-under', salonFace.under));
+salon.push(part('eyes', salonFace.iris));
+salon.push(part('eyes-over', salonFace.over + [300, 700].map((x) => `<circle cx="${x}" cy="528" r="14" fill="#f6c945" stroke="#b8902a" stroke-width="3"/><circle cx="${x - 4}" cy="524" r="4" fill="#fff"/>`).join('')));
+fs.writeFileSync(require('path').join(__dirname, 'salon.svg'), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <!-- The hair salon customer, written by doll.js (edit that, not this). One layer per part, rendered one at a time by render.js. -->
+  <defs><filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter></defs>
+${salon.join('\n')}
+</svg>
+`);
+
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1300">
   <!-- The Dress Up doll, written by doll.js (edit that, not this). One layer per part, rendered one at a time by render.js. -->
   <defs><filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter></defs>
 ${parts.join('\n')}
 </svg>
 `;
-fs.writeFileSync(process.argv[2], svg);
+fs.writeFileSync(require('path').join(__dirname, 'doll.svg'), svg);
 console.log(parts.length, 'parts', svg.length, 'bytes');

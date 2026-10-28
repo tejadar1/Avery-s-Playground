@@ -24,11 +24,13 @@ for (const part of mochiParts) {
 for (const file of fs.readdirSync(path.join(__dirname, 'icons'))) {
   images[`Icon-${path.basename(file, '.svg')}`] = [`icons/${file}`, 600];
 }
-// The Dress Up doll, one image per layer, stacked in DressUpView.
-const doll = fs.readFileSync(path.join(__dirname, 'doll.svg'), 'utf8');
-const dollParts = [...doll.matchAll(/<g id="([\w-]+)" class="part">/g)].map((m) => m[1]);
-for (const part of dollParts) {
-  images[`Doll-${part}`] = ['doll.svg', 1000, dollParts.filter((p) => p !== part).map((p) => '#' + p).join(', ')];
+// The Dress Up doll, one image per layer, stacked in DressUpView, and the hair salon customer's face the same way (doll.js writes both).
+for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salon.svg', 800]]) {
+  const svg = fs.readFileSync(path.join(__dirname, file), 'utf8');
+  const parts = [...svg.matchAll(/<g id="([\w-]+)" class="part">/g)].map((m) => m[1]);
+  for (const part of parts) {
+    images[`${prefix}-${part}`] = [file, width, parts.filter((p) => p !== part).map((p) => '#' + p).join(', ')];
+  }
 }
 // The pictures in the games (Bingo tiles, ABC, stories...) are named Picture-<file name>.
 for (const file of fs.readdirSync(path.join(__dirname, 'pictures'))) {

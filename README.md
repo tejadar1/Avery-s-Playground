@@ -28,7 +28,7 @@ Hair Salon, Dress Up, Dentist, Mochi, Maze, Coloring, Draw) and **Team Up**, gam
 | 🃏 | **Memory** | For a kid and a grown-up taking turns: turn over two cards to find matching animals. A match is yours and you go again; otherwise the cards flip back and it's the other side's turn. |
 | 🌙 | **Routines** | Morning and bedtime checklists to use with a grown-up: big picture buttons for each step (restroom, vitamins, get dressed, breakfast... or bath, pajamas, restroom, story, lights out). The child taps each one as it's done, and the next one bounces. A grown-up timer (5 to 20 minutes) shows time running out, and Coco says when time's up. |
 
-Every win in any game earns a sticker for the **Sticker book** on the home screen (50 to find). Each place has its own soft background tune, made in the app like the sound effects (`Support/Music.swift`); the music button at the top right of every game turns it off.
+Wins in any game add up to stickers for the **Sticker book** on the home screen (50 to find): two wins for each of the first ten stickers, then one more per sticker for every ten in the book, about 200 wins in all. Each place has its own soft background tune, made in the app like the sound effects (`Support/Music.swift`); the music button at the top right of every game turns it off.
 
 ## Notes for parents
 
@@ -106,7 +106,7 @@ project.yml     XcodeGen project definition
 ### Art
 
 The art is soft cartoon color with a thin dark-brown outline (`Color.outline` in code), a darker second tone for shading, and small dot eyes.
-Coco and Mochi are SVGs in `Art/` (Mochi's room is `mochi-room.svg`, and `mochi.svg` holds her side view in parts that move). The pictures in the games (Bingo tiles, ABC, stories and so on) are in `Art/pictures`, and the code shows one with `Picture("cat", size:)`; the app uses no emoji. The Dress Up doll is `doll.svg`, one layer per part, written by `node Art/doll.js Art/doll.svg`: edit `doll.js`, not the SVG. Its white and gray parts get tinted in the app with the friend's skin, hair and eye colors and the outfit color. After editing an SVG, re-render the PNGs into the asset catalog:
+Coco and Mochi are SVGs in `Art/` (Mochi's room is `mochi-room.svg`, and `mochi.svg` holds her side view in parts that move). The pictures in the games (Bingo tiles, ABC, stories and so on) are in `Art/pictures`, and the code shows one with `Picture("cat", size:)`; the app uses no emoji. The Dress Up doll (`doll.svg`) and the hair salon customer's face (`salon.svg`) are drawn in a softer style, one layer per part, written by `node Art/doll.js`: edit `doll.js`, not the SVGs. Their white and gray parts get tinted in the app with the friend's skin, hair and eye colors and the outfit color; the salon customer's hair is drawn in code so it can be cut. After editing an SVG, re-render the PNGs into the asset catalog:
 
 ```sh
 node Art/render.js   # needs Playwright with Chromium
