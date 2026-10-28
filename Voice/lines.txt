@@ -1,10 +1,10 @@
 %02d
 1
-1 plus 1 is 2! Yummy! Snap snap!
-1 plus 2 is 3! Yummy! Snap snap!
-1 plus 3 is 4! Yummy! Snap snap!
-1 plus 4 is 5! Yummy! Snap snap!
-1 plus 5 is 6! Yummy! Snap snap!
+1 plus 1 is 2!
+1 plus 2 is 3!
+1 plus 3 is 4!
+1 plus 4 is 5!
+1 plus 5 is 6!
 10
 11
 12
@@ -16,30 +16,30 @@
 18
 19
 2
-2 plus 1 is 3! Yummy! Snap snap!
-2 plus 2 is 4! Yummy! Snap snap!
-2 plus 3 is 5! Yummy! Snap snap!
-2 plus 4 is 6! Yummy! Snap snap!
-2 plus 5 is 7! Yummy! Snap snap!
+2 plus 1 is 3!
+2 plus 2 is 4!
+2 plus 3 is 5!
+2 plus 4 is 6!
+2 plus 5 is 7!
 20
 3
-3 plus 1 is 4! Yummy! Snap snap!
-3 plus 2 is 5! Yummy! Snap snap!
-3 plus 3 is 6! Yummy! Snap snap!
-3 plus 4 is 7! Yummy! Snap snap!
-3 plus 5 is 8! Yummy! Snap snap!
+3 plus 1 is 4!
+3 plus 2 is 5!
+3 plus 3 is 6!
+3 plus 4 is 7!
+3 plus 5 is 8!
 4
-4 plus 1 is 5! Yummy! Snap snap!
-4 plus 2 is 6! Yummy! Snap snap!
-4 plus 3 is 7! Yummy! Snap snap!
-4 plus 4 is 8! Yummy! Snap snap!
-4 plus 5 is 9! Yummy! Snap snap!
+4 plus 1 is 5!
+4 plus 2 is 6!
+4 plus 3 is 7!
+4 plus 4 is 8!
+4 plus 5 is 9!
 5
-5 plus 1 is 6! Yummy! Snap snap!
-5 plus 2 is 7! Yummy! Snap snap!
-5 plus 3 is 8! Yummy! Snap snap!
-5 plus 4 is 9! Yummy! Snap snap!
-5 plus 5 is 10! Yummy! Snap snap!
+5 plus 1 is 6!
+5 plus 2 is 7!
+5 plus 3 is 8!
+5 plus 4 is 9!
+5 plus 5 is 10!
 6
 7
 8
@@ -62,6 +62,7 @@ All dry!
 All fixed! Holy guacamole!
 All nails
 All rinsed!
+Another sticker! Yay!
 Apple
 Avery
 Avery! You wrote your name!
@@ -305,6 +306,7 @@ Did you know crocodiles can't stick out their tongues? Blehhh!
 Dog
 Doll
 Done!
+Dots and stripes, oh my!
 Down
 Down! So cute!
 Drag the hose to spray Mochi.
@@ -338,6 +340,7 @@ G
 G sharp
 Get dressed
 Glitter
+Glitter makes everything better!
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good morning! Let's get ready for school.
@@ -371,6 +374,7 @@ Hearts' turn!
 Hee hee hee! You're so funny! You made me giggle!
 Hee hee! That tickles!
 Hee hee! You're silly! You're a silly, silly goose!
+Hee hee, I love that sticker!
 Hee hee, not 1!
 Hee hee, not 10!
 Hee hee, not 2!
@@ -469,6 +473,8 @@ Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
 Holy guacamole, I love it!
+Holy guacamole, it sparkles!
+Holy guacamole, look at that color!
 Holy guacamole, look at you!
 Holy guacamole, so pretty!
 Holy guacamole, so stylish!
@@ -483,8 +489,10 @@ Hot diggity dog!
 Hugs and kisses
 I
 I ate a crayon once. It tasted purple!
+I can see my face in it! Hee hee!
 I have lots and lots of teeth, and I brush every one!
 I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
+I want my claws painted too!
 I wish I had hair like that!
 Ice cream
 It's a tie! Everybody wins a hug!
@@ -516,6 +524,7 @@ Let's wash your hair! Rub on the shampoo.
 Lights out
 Lily
 Lion
+Look at that shine!
 Looking good!
 M
 Ma
@@ -533,6 +542,7 @@ Mochi is sleepy. Tap the moon for a nap.
 Mochi is so happy to see you! Throw her the ball, or rub her to pet her.
 Mochi loves you!
 Mochi rolled in the mud! Time for a bath.
+Mochi says thank you! Lick lick!
 Mochi wants hugs! Rub her with your finger.
 MochiBody
 MochiHead
@@ -592,6 +602,9 @@ Okay!
 Okey dokey, artichokey!
 One
 Ooh la la!
+Ooh la la, fancy!
+Ooh, fancy pattern!
+Ooh, shiny!
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Orange! Like an orange.
@@ -627,9 +640,11 @@ Play
 Play again
 Ponytail
 Ponytail! So cute!
+Poof! All gone!
 Potty time, all done! Wash your hands!
 Press the key with the star.
 Pretty hair!
+Pretty pretty pretty!
 Previous picture
 Puff
 Puff! So cute!
@@ -716,20 +731,26 @@ Sneakers! So stylish!
 Sneakers! Wowza bowza!
 Snip snip! Don't cut my tail!
 So bubbly!
+So fancy!
+So much glitter! It's like stars!
 So she planted it all by herself. The wheat grew tall.
 So smooth!
 So sparkly my tail is wiggling!
 So stylish!
+Sparkle sparkle!
 Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
 Squeaky clean! Shake shake shake!
+Squeaky clean! Start again!
 Stars
 Stars go first! Turn over two cards to find a match.
 Stars go first, then hearts. Get three in a row!
 Stars win! Holy guacamole!
 Stars' turn!
 Start over
+Stick it anywhere!
+Stick! A sticker!
 Stickers
 Stop the timer
 Story
@@ -750,6 +771,7 @@ Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
 Super duper pooper scooper!
 Swish swish! Minty fresh! What a great smile!
+Swish swish, paint paint!
 T
 T-shirt
 T-shirt! Fashion show time!
@@ -772,7 +794,10 @@ Tap the nail!
 Tap the teeth with a hole to fix them.
 Teal
 Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.
+That color is so pretty!
+That sticker is so silly!
 That's funny! That tickles my tummy! Hee hee!
+That's so cute!
 The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
@@ -804,6 +829,7 @@ Tutu! Wowza bowza!
 Twin
 Twinkle Twinkle
 Twinkle Twinkle!
+Twinkle twinkle, little nail!
 U
 Uh oh, time's up! Hurry, hurry!
 Umbrella
@@ -825,6 +851,7 @@ Wand! Wowza bowza!
 Want a haircut?
 Wash
 Whale
+What a design!
 What color should it be?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Which picture is it?
@@ -835,6 +862,7 @@ Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
+Wiggle wiggle, happy puppy!
 Woo hoo, kangaroo!
 Woof woof!
 Wowza bowza!
@@ -854,6 +882,7 @@ You did it, you silly goose!
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
+You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
 Yum yum, breakfast!
 Z
@@ -898,7 +927,6 @@ apple and star!
 apple and sun!
 apple and tree!
 apple!
-apple! You got it!
 apples
 are.
 as
@@ -931,19 +959,18 @@ ball and star!
 ball and sun!
 ball and tree!
 ball!
-ball! You got it!
 balloon
 banana
 bananas
 bat
-bat! You read it! Snap snap!
+bat! You read it!
 bat! You spelled it!
 bathtub
 beach
 beanie
 bear
 bed
-bed! You read it! Snap snap!
+bed! You read it!
 bed! You spelled it!
 bee
 bee and apple!
@@ -971,7 +998,6 @@ bee and star!
 bee and sun!
 bee and tree!
 bee!
-bee! You got it!
 bingo
 bird
 bird and apple!
@@ -999,7 +1025,6 @@ bird and star!
 bird and sun!
 bird and tree!
 bird!
-bird! You got it!
 boat
 boat and apple!
 boat and ball!
@@ -1026,7 +1051,6 @@ boat and star!
 boat and sun!
 boat and tree!
 boat!
-boat! You got it!
 bone
 book
 book:A is for Apple!
@@ -1243,13 +1267,13 @@ bove
 bow
 bowl
 box
-box! You read it! Snap snap!
+box! You read it!
 box! You spelled it!
 bread
 bricks
 bubbles
 bug
-bug! You read it! Snap snap!
+bug! You read it!
 bug! You spelled it!
 buh
 buns
@@ -1280,8 +1304,7 @@ bus and star!
 bus and sun!
 bus and tree!
 bus!
-bus! You got it!
-bus! You read it! Snap snap!
+bus! You read it!
 bus! You spelled it!
 butterfly
 c
@@ -1311,7 +1334,6 @@ cake and star!
 cake and sun!
 cake and tree!
 cake!
-cake! You got it!
 car
 car and apple!
 car and ball!
@@ -1338,7 +1360,6 @@ car and star!
 car and sun!
 car and tree!
 car!
-car! You got it!
 cat
 cat and apple!
 cat and ball!
@@ -1365,8 +1386,7 @@ cat and star!
 cat and sun!
 cat and tree!
 cat!
-cat! You got it!
-cat! You read it! Snap snap!
+cat! You read it!
 cat! You spelled it!
 caterpillar
 chair
@@ -1402,12 +1422,11 @@ cow and star!
 cow and sun!
 cow and tree!
 cow!
-cow! You got it!
 crocodile
 cross
 crown
 cup
-cup! You read it! Snap snap!
+cup! You read it!
 cup! You spelled it!
 cupcake
 cupcakes
@@ -1440,8 +1459,7 @@ dog and star!
 dog and sun!
 dog and tree!
 dog!
-dog! You got it!
-dog! You read it! Snap snap!
+dog! You read it!
 dog! You spelled it!
 dogbed
 dogbowl
@@ -1562,7 +1580,6 @@ duck and star!
 duck and sun!
 duck and tree!
 duck!
-duck! You got it!
 duh
 e
 egg
@@ -1591,7 +1608,6 @@ egg and star!
 egg and sun!
 egg and tree!
 egg!
-egg! You got it!
 eh
 elephant
 es:A
@@ -1948,7 +1964,6 @@ fish and star!
 fish and sun!
 fish and tree!
 fish!
-fish! You got it!
 flag
 flats
 fleece
@@ -1979,11 +1994,10 @@ flower and star!
 flower and sun!
 flower and tree!
 flower!
-flower! You got it!
 flowercrown
 footprints
 fox
-fox! You read it! Snap snap!
+fox! You read it!
 fox! You spelled it!
 frog
 frog and apple!
@@ -2011,7 +2025,6 @@ frog and star!
 frog and sun!
 frog and tree!
 frog!
-frog! You got it!
 g
 garden
 gem
@@ -2049,8 +2062,7 @@ hat and star!
 hat and sun!
 hat and tree!
 hat!
-hat! You got it!
-hat! You read it! Snap snap!
+hat! You read it!
 hat! You spelled it!
 heart
 heart and apple!
@@ -2078,10 +2090,9 @@ heart and star!
 heart and sun!
 heart and tree!
 heart!
-heart! You got it!
 heels
 hen
-hen! You read it! Snap snap!
+hen! You read it!
 hen! You spelled it!
 high,
 horse
@@ -2112,7 +2123,6 @@ house and star!
 house and sun!
 house and tree!
 house!
-house! You got it!
 how
 hug
 huh
@@ -2162,7 +2172,6 @@ moon and star!
 moon and sun!
 moon and tree!
 moon!
-moon! You got it!
 mouse
 mouthwash
 mud
@@ -2184,7 +2193,7 @@ pajamas
 palette
 party
 pen
-pen! You read it! Snap snap!
+pen! You read it!
 pen! You spelled it!
 penguin
 pig
@@ -2213,8 +2222,7 @@ pig and star!
 pig and sun!
 pig and tree!
 pig!
-pig! You got it!
-pig! You read it! Snap snap!
+pig! You read it!
 pig! You spelled it!
 pizza
 polish
@@ -2286,7 +2294,6 @@ star and star!
 star and sun!
 star and tree!
 star!
-star! You got it!
 star,
 stickers
 sticks
@@ -2318,8 +2325,7 @@ sun and star!
 sun and sun!
 sun and tree!
 sun!
-sun! You got it!
-sun! You read it! Snap snap!
+sun! You read it!
 sun! You spelled it!
 sunglasses
 sunhat
@@ -2359,7 +2365,6 @@ tree and star!
 tree and sun!
 tree and tree!
 tree!
-tree! You got it!
 trophy
 tshirt
 tuh
@@ -2372,7 +2377,7 @@ uh
 umbrella
 v
 van
-van! You read it! Snap snap!
+van! You read it!
 van! You spelled it!
 violin
 vitamins
@@ -2381,7 +2386,7 @@ w
 wand
 was
 web
-web! You read it! Snap snap!
+web! You read it!
 web! You spelled it!
 whale
 what

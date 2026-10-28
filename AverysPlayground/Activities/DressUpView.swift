@@ -148,7 +148,7 @@ struct DressUpView: View {
                             Button {
                                 Haptics.tap()
                                 withAnimation { outfit.color = color }
-                                say(Self.cheers.randomElement()!)
+                                say(Hooray.pick(from: Self.cheers + Hooray.all))
                             } label: {
                                 Circle()
                                     .fill(color)
@@ -188,7 +188,7 @@ struct DressUpView: View {
         Button {
             Haptics.tap()
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { action() }
-            say(name == "No hat" || name == "Nothing" ? "Okay!" : "\(name)! \(Self.cheers.randomElement()!)")
+            say(name == "No hat" || name == "Nothing" ? "Okay!" : "\(name)! \(Hooray.pick(from: Self.cheers))")
         } label: {
             VStack(spacing: 2 * uiScale) {
                 Picture(picture, size: 44 * uiScale)

@@ -69,7 +69,7 @@ for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)"
     lines.add("book:" + (phrase or f"{letter} is for {word}!"))  # in Bella's voice
 
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
-    lines.update({f"{word}! You read it! Snap snap!", f"Hee hee, that's a {word}!", f"{word}! You spelled it!", "book:" + word})
+    lines.update({f"{word}! You read it!", f"Hee hee, that's a {word}!", f"{word}! You spelled it!", "book:" + word})
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):
@@ -97,12 +97,12 @@ for one, many in re.findall(r'Food\(picture: "[^"]+", one: "([^"]+)", many: "([^
             lines.add(f"Coco has {a} {one if a == 1 else many}. Mochi brings {b} more. How many now?")
 for a in range(1, 6):
     for b in range(1, 6):
-        lines.add(f"{a} plus {b} is {a + b}! Yummy! Snap snap!")
+        lines.add(f"{a} plus {b} is {a + b}!")
 lines.update(f"Hee hee, not {n}!" for n in range(1, 11))
 
 bingo = re.findall(r'BingoTile\(word: "([^"]+)"', src["BingoView.swift"])
 for a in bingo:
-    lines.update({f"{a}!", f"{a}! You got it!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!", f"Hee hee, that's not the {a}!"})
+    lines.update({f"{a}!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!", f"Hee hee, that's not the {a}!"})
     lines.update(f"{a} and {b}!" for b in bingo)
 
 # Coco says hi to each customer by name: the friends at the salon and in dress up, and the dentist's animals

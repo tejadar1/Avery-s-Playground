@@ -140,7 +140,19 @@ enum Hooray {
         "You did it, you silly goose!", "Hee hee, you're so silly! You did it!",
     ]
 
-    static var random: String { all.randomElement()! }
+    /// A silly cheer she hasn't said lately.
+    static var random: String { pick() }
+
+    /// A line from `lines` that isn't one of Coco's last few, so she doesn't repeat herself.
+    static func pick(from lines: [String] = all) -> String {
+        let fresh = lines.filter { !recent.contains($0) }
+        let line = (fresh.isEmpty ? lines : fresh).randomElement()!
+        recent.append(line)
+        if recent.count > 6 { recent.removeFirst() }
+        return line
+    }
+
+    private static var recent: [String] = []
 }
 
 /// Coco with a speech bubble. She hops each time `hops` changes, jumps for joy when `cheers` changes,

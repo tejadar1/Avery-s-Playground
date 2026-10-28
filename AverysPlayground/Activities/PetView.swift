@@ -515,7 +515,7 @@ struct PetView: View {
         float("heart", at: point, every: 0.2)
         if firstTouch {
             Haptics.tap()
-            say(["Woof woof!", "Mochi loves you!", "Hee hee, she likes belly rubs!"].randomElement()!)
+            say(Hooray.pick(from: ["Woof woof!", "Mochi loves you!", "Hee hee, she likes belly rubs!", "Wiggle wiggle, happy puppy!", "Mochi says thank you! Lick lick!"]))
         }
     }
 

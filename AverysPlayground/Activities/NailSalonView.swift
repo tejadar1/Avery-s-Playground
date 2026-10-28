@@ -199,7 +199,21 @@ struct NailSalonView: View {
         (Color(red: 0.95, green: 0.78, blue: 0.35), Color(red: 0.95, green: 0.78, blue: 0.35)),
     ]
     private static let stickers = ["flower", "star", "heart", "butterfly", "strawberry", "gem", "rainbow", "crocodile"]
-    private static let cheers = ["Holy guacamole, so pretty!", "Wowza bowza!", "So sparkly my tail is wiggling!", "Snap snap! I love it!", "Ooh la la!", "Crocodile-tastic!"]
+    private static let cheers = [
+        "Holy guacamole, so pretty!", "Wowza bowza!", "So sparkly my tail is wiggling!", "Snap snap! I love it!", "Ooh la la!",
+        "Crocodile-tastic!", "Ooh, shiny!", "That color is so pretty!", "Swish swish, paint paint!", "Look at that shine!",
+        "I want my claws painted too!", "So fancy!", "You're a nail artist!", "Holy guacamole, look at that color!",
+        "Pretty pretty pretty!", "I can see my face in it! Hee hee!",
+    ]
+    private static let glitterCheers = [
+        "Sparkle sparkle!", "So much glitter! It's like stars!", "Twinkle twinkle, little nail!", "Glitter makes everything better!",
+        "Holy guacamole, it sparkles!",
+    ]
+    private static let designCheers = ["Ooh, fancy pattern!", "Dots and stripes, oh my!", "That's so cute!", "What a design!", "Ooh la la, fancy!"]
+    private static let stickerCheers = [
+        "Stick! A sticker!", "Hee hee, I love that sticker!", "Stick it anywhere!", "Another sticker! Yay!", "That sticker is so silly!",
+    ]
+    private static let removerCheers = ["All clean!", "Squeaky clean! Start again!", "Poof! All gone!"]
 
     /// A look to copy: two colors, with designs or a sticker on some nails.
     private static func randomIdea() -> [Nail] {
@@ -559,7 +573,9 @@ struct NailSalonView: View {
         if isBrushing {
             isBrushing = false
             // Cheer on the first stroke and every few after, not on every one.
-            if nails[index].strokes.count % 4 == 1 { say(Self.cheers.randomElement()!) }
+            if nails[index].strokes.count % 4 == 1 {
+                say(Hooray.pick(from: nails[index].strokes.last?.glitter == true ? Self.glitterCheers : Self.cheers + Hooray.all))
+            }
             return
         }
         Haptics.tap()
@@ -571,7 +587,12 @@ struct NailSalonView: View {
                 nails[index].apply(tool)
             }
         }
-        say(tool == .remover ? "All clean!" : Self.cheers.randomElement()!)
+        switch tool {
+        case .remover: say(Hooray.pick(from: Self.removerCheers))
+        case .design: say(Hooray.pick(from: Self.designCheers))
+        case .sticker: say(Hooray.pick(from: Self.stickerCheers))
+        default: say(Hooray.pick(from: Self.cheers))
+        }
     }
 
     private func pick(_ item: Tray) {

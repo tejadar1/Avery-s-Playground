@@ -19,4 +19,15 @@ final class SpeakerTests: XCTestCase {
         XCTAssertNil(Speaker.recording(for: "a line that was never recorded"))
         XCTAssertNil(Speaker.recording(for: "Bonjour", language: "fr-FR"), "only English and Spanish are recorded")
     }
+
+    func testCocoDoesNotRepeatHerRecentCheers() {
+        let lines = ["a", "b", "c", "d", "e", "f", "g", "h"]
+        var said: [String] = []
+        for _ in 0..<40 {
+            let line = Hooray.pick(from: lines)
+            XCTAssertFalse(said.suffix(6).contains(line), "\(line) again so soon")
+            said.append(line)
+        }
+        XCTAssertEqual(Hooray.pick(from: ["only"]), "only", "with nothing fresh she still says something")
+    }
 }

@@ -144,7 +144,10 @@ struct MathView: View {
                 isSolved = true
                 stars += 1
             }
-            say("\(problem.first) plus \(problem.second) is \(problem.answer)! Yummy! Snap snap!")
+            let sum = "\(problem.first) plus \(problem.second) is \(problem.answer)!", hooray = Hooray.random
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "\(sum) \(hooray)" }
+            cheerCount += 1
+            Speaker.shared.say(sum, then: hooray)
             Task {
                 try? await Task.sleep(for: .seconds(3))
                 next()
