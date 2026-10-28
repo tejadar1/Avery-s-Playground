@@ -282,7 +282,9 @@ struct TracingView: View {
             Speaker.shared.say(Speaker.book + "\(letter)!", then: hooray)  // Bella says the letter, Coco cheers
         }
         Task {
-            try? await Task.sleep(for: .seconds(isLast && mode == .name ? 3 : 1.6))
+            // Two seconds to enjoy the letter, and never cutting Coco off mid-cheer
+            try? await Task.sleep(for: .seconds(isLast && mode == .name ? 3 : 2))
+            await Speaker.shared.finishSpeaking()
             start(isLast ? 0 : index + 1)
         }
     }

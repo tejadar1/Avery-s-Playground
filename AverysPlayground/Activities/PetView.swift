@@ -27,6 +27,11 @@ struct PetNeeds: Codable, Equatable {
     mutating func scrub() { clean = min(1, clean + 0.03) }
     mutating func nap() { energy = 1 }
 
+    mutating func treat() {
+        food = min(1, food + 0.1)
+        love = min(1, love + 0.1)
+    }
+
     mutating func play() {
         love = min(1, love + 0.15)
         energy = max(Self.floor, energy - 0.1)
@@ -78,6 +83,7 @@ struct PetView: View {
     @State private var ballDrag: CGPoint?
     @State private var ballSpin = 0.0
     @State private var ballInMouth = false
+    @State private var treatInMouth = false
 
     @State private var isHosing = false
     @State private var nozzle: CGPoint?
@@ -186,6 +192,12 @@ struct PetView: View {
                     .accessibilityLabel("Mochi")
                     .accessibilityIdentifier("Puppy")
 
+                if treatInMouth {
+                    Picture("bone", size: ballW * 1.6)
+                        .position(mouth)
+                        .transition(.scale.combined(with: .offset(y: -60 * uiScale)))
+                }
+
                 Picture("tennis", size: ballW)
                     .rotationEffect(.degrees(ballSpin))
                     .position(ballInMouth ? mouth : ballDrag ?? CGPoint(x: ballX * w, y: baseline - ballW * 0.34))
@@ -265,9 +277,11 @@ struct PetView: View {
     private var trayHeight: CGFloat { 96 * uiScale }
 
     private var tray: some View {
-        HStack(spacing: 14 * uiScale) {
+        HStack(spacing: 8 * uiScale) {
             action("dogbowl", "Feed", feed)
+            action("bone", "Treat", treat)
             action("tennis", "Play", play)
+            action("hand", "Tummy", bellyRub, isOn: pose == .belly)
             action("shower", "Bath", bath, isOn: isHosing)
             action("moon", "Sleep", sleep, isOn: isSleeping)
         }
@@ -293,12 +307,14 @@ struct PetView: View {
     private func action(_ picture: String, _ name: String, _ perform: @escaping () -> Void, isOn: Bool = false) -> some View {
         Button(action: perform) {
             VStack(spacing: 0) {
-                Picture(picture, size: 44 * uiScale)
+                Picture(picture, size: 40 * uiScale)
                 Text(name)
-                    .font(.kid(16))
+                    .font(.kid(15))
                     .foregroundStyle(Color.outline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
-            .frame(width: 80 * uiScale, height: 80 * uiScale)
+            .frame(width: 58 * uiScale, height: 76 * uiScale)
             .cartoonCard(isOn ? .yellow : .white, cornerRadius: 22 * uiScale)
         }
         .buttonStyle(SquishyButtonStyle())
@@ -321,6 +337,7 @@ struct PetView: View {
     private func act(_ work: @escaping @MainActor () async -> Void) {
         behavior?.cancel()
         isBusy = true
+        if pose == .belly { withAnimation(.spring) { pose = .stand } }  // up on her feet for anything else
         behavior = Task { @MainActor in
             await work()
             guard !Task.isCancelled else { return }
@@ -421,6 +438,49 @@ struct PetView: View {
         goEat()
     }
 
+    /// Mochi hops for a treat, catches it and crunches it.
+    private func treat() {
+        guard !isSleeping else { return say("Shh! Mochi is sleeping.") }
+        Haptics.tap()
+        isHosing = false
+        guard !ballInMouth else { return }
+        say(Hooray.pick(from: ["Treat time! Good girl, Mochi!", "A treat! Mochi does a happy dance!", "Sit, Mochi! Good girl! Here's your treat!"]))
+        act {
+            pose = .stand
+            for _ in 0..<2 {
+                jumps += 1
+                await pause(0.5)
+                guard !Task.isCancelled else { return }
+            }
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { treatInMouth = true }
+            pose = .eat
+            for _ in 0..<3 {
+                Sounds.shared.play(.pop)
+                await pause(0.4)
+            }
+            withAnimation { treatInMouth = false }
+            pose = .stand
+            needs.treat()
+            say(Hooray.pick(from: ["Crunch crunch! Yummy!", "Mochi loved it! Woof!", "Nom nom! More please!"]))
+        }
+    }
+
+    /// Mochi rolls onto her back so you can rub her tummy, then rolls back up.
+    private func bellyRub() {
+        guard !isSleeping else { return say("Shh! Mochi is sleeping.") }
+        Haptics.tap()
+        isHosing = false
+        guard !ballInMouth else { return }
+        say("Mochi rolled over! Rub her tummy!")
+        act {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) { pose = .belly }
+            await pause(7)
+            guard !Task.isCancelled else { return }
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) { pose = .stand }
+            jumps += 1
+        }
+    }
+
     private func play() {
         guard !isSleeping else { return say("Shh! Mochi is sleeping.") }
         isHosing = false
@@ -512,10 +572,13 @@ struct PetView: View {
         let firstTouch = !isRubbing
         isRubbing = true
         needs.pet()
+        if pose == .belly { needs.pet() }  // tummy rubs count double
         float("heart", at: point, every: 0.2)
         if firstTouch {
             Haptics.tap()
-            say(Hooray.pick(from: ["Woof woof!", "Mochi loves you!", "Hee hee, she likes belly rubs!", "Wiggle wiggle, happy puppy!", "Mochi says thank you! Lick lick!"]))
+            say(Hooray.pick(from: pose == .belly
+                ? ["Tummy tickles! Hee hee!", "Kick kick! She loves it!", "Belly rubs are the best!", "Rub rub rub! Happy puppy!"]
+                : ["Woof woof!", "Mochi loves you!", "Hee hee, she likes belly rubs!", "Wiggle wiggle, happy puppy!", "Mochi says thank you! Lick lick!"]))
         }
     }
 
@@ -543,7 +606,7 @@ struct PetView: View {
 /// so her legs can walk, her tail wag and her head eat.
 struct MochiSprite: View {
     enum Gait { case still, walk, run }
-    enum Pose { case stand, eat, sleep, shake }
+    enum Pose { case stand, eat, sleep, shake, belly }
 
     let gait: Gait
     let pose: Pose
@@ -560,7 +623,8 @@ struct MochiSprite: View {
         TimelineView(.animation) { timeline in
             let t = reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate
             let pace = gait == .run ? 14.0 : 8.0
-            let swing = gait == .still ? 0 : sin(t * pace) * (gait == .run ? 30 : 20)
+            // On her back her paws paddle in the air.
+            let swing = pose == .belly ? sin(t * 10) * 25 : gait == .still ? 0 : sin(t * pace) * (gait == .run ? 30 : 20)
             let bob = gait == .still ? 0 : abs(sin(t * pace)) * -4
             let wag = pose == .sleep ? 0 : sin(t * (wagsFast ? 20 : 7)) * 16
             let head = pose == .eat ? 22 + sin(t * 9) * 8 : pose == .sleep ? 12.0 : 0
@@ -588,7 +652,9 @@ struct MochiSprite: View {
                 // Lying down, her tummy rests where her paws were.
                 .offset(y: CGFloat(pose == .sleep ? 44 : bob) * s)
                 .rotationEffect(.degrees(shake), anchor: .bottom)
-                .scaleEffect(x: facingRight ? 1 : -1)
+                // Belly up: flipped over, her back on the floor
+                .scaleEffect(x: facingRight ? 1 : -1, y: pose == .belly ? -1 : 1)
+                .offset(y: pose == .belly ? 64 * s : 0)
             }
         }
     }

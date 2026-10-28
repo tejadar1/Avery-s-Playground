@@ -81,6 +81,12 @@ final class Speaker {
         speak(first, meaning, again)
     }
 
+    /// Waits until Coco is done talking.
+    func finishSpeaking() async {
+        await recordings?.value
+        while synthesizer.isSpeaking { try? await Task.sleep(for: .seconds(0.1)) }
+    }
+
     /// Plays recordings one after another, with a pause after each one that has one.
     private func play(_ urls: [URL], pauses: [Double] = []) {
         synthesizer.stopSpeaking(at: .immediate)

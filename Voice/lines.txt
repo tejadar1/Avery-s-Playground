@@ -1,4 +1,6 @@
 %02d
+-over
+-under
 1
 1 plus 1 is 2!
 1 plus 2 is 3!
@@ -53,6 +55,7 @@ A match! Go again!
 A night sky!
 A sharp
 A sticker to find
+A treat! Mochi does a happy dance!
 ABC
 AVERY
 All clean!
@@ -87,6 +90,7 @@ Beanie! Wowza bowza!
 Bear
 Bedtime
 Bella
+Belly rubs are the best!
 Big hug!
 Big nail
 Bingo card
@@ -298,6 +302,7 @@ Crown! Holy guacamole, I love it!
 Crown! Ooh la la!
 Crown! So stylish!
 Crown! Wowza bowza!
+Crunch crunch! Yummy!
 Curly
 Curly! So cute!
 D
@@ -306,6 +311,7 @@ Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
 Dog
 Doll
+Doll-
 Done!
 Dots and stripes, oh my!
 Down
@@ -504,6 +510,7 @@ Juice
 Jumping jellybeans!
 K
 Keep blowing!
+Kick kick! She loves it!
 Kiki
 Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
@@ -543,8 +550,10 @@ Mochi is full! Burp! Hee hee!
 Mochi is hungry! Tap the food.
 Mochi is sleepy. Tap the moon for a nap.
 Mochi is so happy to see you! Throw her the ball, or rub her to pet her.
+Mochi loved it! Woof!
 Mochi loves you!
 Mochi rolled in the mud! Time for a bath.
+Mochi rolled over! Rub her tummy!
 Mochi says thank you! Lick lick!
 Mochi wants hugs! Rub her with your finger.
 MochiBody
@@ -587,6 +596,7 @@ No hat! Wowza bowza!
 No more food stuck! Yay!
 No, said the hen. My chicks and I will eat it!
 Nom nom nom! Yummy!
+Nom nom! More please!
 Not yet! Tap the one that's bouncing.
 Nothing
 Nothing! Fashion show time!
@@ -673,6 +683,7 @@ Rinse
 Rinse off all the bubbles!
 Rinse!
 Rosa
+Rub rub rub! Happy puppy!
 Rub shampoo all over her hair!
 S
 Sandals
@@ -694,6 +705,7 @@ Shh! Mochi is sleeping.
 Shoes
 Shoes on
 Shoes on, ready to go!
+Sit, Mochi! Good girl! Here's your treat!
 Skin color
 Sky
 Sleep
@@ -823,6 +835,10 @@ Tortoise won the race! Slow and steady wins.
 Trace board
 Trace the A with your finger!
 Trace the gray lines with your finger.
+Treat
+Treat time! Good girl, Mochi!
+Tummy
+Tummy tickles! Hee hee!
 Turtle
 Tutu
 Tutu! Fashion show time!
@@ -1055,6 +1071,7 @@ boat and star!
 boat and sun!
 boat and tree!
 boat!
+body
 bone
 book
 book:A is for Apple!
@@ -1939,6 +1956,7 @@ es:¿Cómo estás?
 es:¿Quieres mangú?
 es:árbol
 es:él
+eyes
 f
 farm
 fff
@@ -2038,6 +2056,8 @@ grapes
 guh
 h
 had
+hairBack
+hairFront
 hairdryer
 hand
 hat
@@ -2331,6 +2351,8 @@ sun and tree!
 sun!
 sun! You read it!
 sun! You spelled it!
+sunHat
+sunHatBand
 sunglasses
 sunhat
 sunrise

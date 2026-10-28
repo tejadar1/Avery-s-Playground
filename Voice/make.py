@@ -40,7 +40,8 @@ def record(line, voice, pitch, path, lang="en-us", speed=1.0, quicker=1.0):
             print(f"Skipped {line}: {error}")
             return
     else:
-        audio, rate = kokoro.create(line, voice=voice, speed=speed, lang=lang)
+        # Mochi like the ice cream, "moe-chee", not "mo-kai"
+        audio, rate = kokoro.create(line.replace("Mochi", "Moe-chee"), voice=voice, speed=speed, lang=lang)
     with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
         soundfile.write(wav.name, audio, rate)
         # Raise the pitch for a cartoon voice, keeping the speed (times `quicker`).
