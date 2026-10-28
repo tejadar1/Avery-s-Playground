@@ -45,7 +45,7 @@ struct SpellView: View {
 
             Spacer(minLength: 0)
 
-            Button { Speaker.shared.say(spelling.word.text) } label: {
+            Button { Speaker.shared.say(Speaker.book + spelling.word.text) } label: {
                 Picture(spelling.word.picture, size: 130 * uiScale)
                     .padding(18 * uiScale)
                     .cartoonCard(.white, cornerRadius: 36 * uiScale)
@@ -139,15 +139,16 @@ struct SpellView: View {
                 spelling = Spelling(newWord)
                 hintTile = nil
             }
-            say(newWord.text)
+            say(newWord.text, voice: Speaker.book)
         }
     }
 
     /// Shows the line in Coco's bubble and reads it aloud.
-    private func say(_ text: String) {
+    /// `voice` is a Speaker prefix, like Speaker.book for Bella; Coco's voice otherwise.
+    private func say(_ text: String, voice: String = "") {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
         cheerCount += 1
-        Speaker.shared.say(text)
+        Speaker.shared.say(voice + text)
     }
 }
 

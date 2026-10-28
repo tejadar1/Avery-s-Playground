@@ -260,7 +260,7 @@ struct TracingView: View {
         tracing = Tracing(letter: letters[number])
         ink = []
         isDrawing = false
-        say("\(tracing.letter.letter)!", hint: "Trace the gray lines with your finger.")
+        say("\(tracing.letter.letter)!", hint: "Trace the gray lines with your finger.", voice: Speaker.book)
     }
 
     private func finishLetter() {
@@ -272,14 +272,14 @@ struct TracingView: View {
                 say("Avery! You wrote your name!")
             } else {
                 Sounds.shared.play(.sparkle)
-                say("\(letter)!")
+                say("\(letter)!", voice: Speaker.book)
             }
         } else {
             wins += 1
             let hooray = Hooray.random
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "\(letter)! \(hooray)" }
             cheerCount += 1
-            Speaker.shared.say("\(letter)!", then: hooray)
+            Speaker.shared.say(Speaker.book + "\(letter)!", then: hooray)  // Bella says the letter, Coco cheers
         }
         Task {
             try? await Task.sleep(for: .seconds(isLast && mode == .name ? 3 : 1.6))
@@ -288,10 +288,11 @@ struct TracingView: View {
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.
-    private func say(_ text: String, hint: String = "") {
+    /// `voice` is a Speaker prefix, like Speaker.book for Bella; Coco's voice otherwise.
+    private func say(_ text: String, hint: String = "", voice: String = "") {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = [text, hint].filter { !$0.isEmpty }.joined(separator: " ") }
         cheerCount += 1
-        Speaker.shared.say(text)
+        Speaker.shared.say(voice + text)
     }
 }
 

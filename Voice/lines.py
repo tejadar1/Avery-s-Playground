@@ -56,7 +56,7 @@ for case, title in titles.items():
     lines.update({"es:" + title, "dora:" + meanings[case]})
 
 # Letter tracing: the letter's name, said before a silly cheer when it's traced
-lines.update(f"{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+lines.update(f"book:{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")  # in Bella's voice
 
 # Each letter's sound for Spell and Sound it out, recorded from its IPA ("sound:æ"); see make.py
 lines.update("sound:" + ipa for ipa in re.findall(r'"\w": \("([^"]+)", "[^"]+"\)', src["ReadingView.swift"]))
@@ -66,10 +66,10 @@ lines.update(str(n) for n in numbers)
 lines.update(f"Let's count to {n}!" for n in range(1, 11))
 
 for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", picture: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):
-    lines.add(phrase or f"{letter} is for {word}!")
+    lines.add("book:" + (phrase or f"{letter} is for {word}!"))  # in Bella's voice
 
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
-    lines.update({f"{word}! You read it! Snap snap!", f"Hee hee, that's a {word}!", f"{word}! You spelled it!", word})
+    lines.update({f"{word}! You read it! Snap snap!", f"Hee hee, that's a {word}!", f"{word}! You spelled it!", "book:" + word})
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):

@@ -75,12 +75,12 @@ for old in out.glob("*.mp3"):
 
 voices = (here / "voice.txt").read_text().splitlines()
 for (voice, pitch), lang, suffix, mine in [
-    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:"))),
+    (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:", "sound:"))),
     (voices[1].split(), "es", "-es", lambda l: l.startswith("es:")),
     # The friends, and the English meanings of Spanish words: Dora's voice speaking English
     (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:")),
-    # The storyteller for the English books
-    (voices[2].split(), "en-us", "-book", lambda l: l.startswith("book:")),
+    # Bella: the storyteller for the English books, and the teacher for letters, letter sounds and words
+    (voices[2].split(), "en-us", "-book", lambda l: l.startswith(("book:", "sound:"))),
 ]:
     keys = {k: l for k, l in wanted.items() if mine(l)}
     made_with = out / f"voice-id{suffix}.txt"

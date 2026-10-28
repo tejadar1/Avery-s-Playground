@@ -19,7 +19,8 @@ final class Speaker {
 
     /// Lines starting with this are a friend talking, recorded in Dora's voice (the Spanish one) speaking English.
     static let dora = "dora:"
-    /// Lines starting with this are read from a storybook, in the storyteller's voice (Voice/voice.txt, third line).
+    /// Lines starting with this are in Bella's voice (Voice/voice.txt, third line): the storyteller, and the teacher
+    /// who says letters, letter sounds and words to learn, clearly and at a natural pitch.
     static let book = "book:"
 
     /// What a line says, without the prefix that picks its voice.

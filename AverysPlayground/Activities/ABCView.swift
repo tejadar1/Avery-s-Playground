@@ -98,7 +98,7 @@ struct ABCView: View {
     private func choose(_ item: Letter) {
         selected = item
         Haptics.tap()
-        Speaker.shared.say(item.spoken)
+        Speaker.shared.say(Speaker.book + item.spoken)  // Bella says the letter and word, clearly
         bounceCount += 1
     }
 }

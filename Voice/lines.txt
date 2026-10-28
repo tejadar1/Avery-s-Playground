@@ -49,12 +49,10 @@ A beach!
 A coral reef!
 A farm!
 A garden!
-A is for Apple!
 A match! Go again!
 A night sky!
 A sharp
 A sticker to find
-A!
 ABC
 AVERY
 All clean!
@@ -68,8 +66,6 @@ Apple
 Avery
 Avery! You wrote your name!
 B
-B is for Bear!
-B!
 Backpack
 Backpack ready!
 Ball
@@ -125,9 +121,7 @@ Buns
 Buns! So cute!
 But he could not blow down the brick house. The three pigs were safe!
 C
-C is for Cat!
 C sharp
-C!
 Canvas
 Cat
 Clear
@@ -305,9 +299,7 @@ Crown! Wowza bowza!
 Curly
 Curly! So cute!
 D
-D is for Dog!
 D sharp
-D!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
 Dog
@@ -319,15 +311,11 @@ Drag the hose to spray Mochi.
 Drag to spray Mochi
 Drink of water
 E
-E is for Elephant!
-E!
 Easy peasy, lemon squeezy!
 Elephant
 Extras
 F
-F is for Fish!
 F sharp
-F!
 Fashion show time!
 Feed
 Fetch! Good pup, Mochi!
@@ -347,9 +335,7 @@ Fox ends with X!
 Free play
 Free play!
 G
-G is for Grapes!
 G sharp
-G!
 Get dressed
 Glitter
 Goldilocks and the Three Bears
@@ -370,8 +356,6 @@ Grown-up timer
 Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
-H is for Horse!
-H!
 Ha ha ha! That's funny! Do it again!
 Ha ha ha! That's funny! You did it!
 Hair
@@ -500,27 +484,19 @@ Hugs and kisses
 I
 I ate a crayon once. It tasted purple!
 I have lots and lots of teeth, and I brush every one!
-I is for Ice cream!
 I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
 I wish I had hair like that!
-I!
 Ice cream
 It's a tie! Everybody wins a hug!
 J
-J is for Juice!
-J!
 Juice
 Jumping jellybeans!
 K
-K is for Kite!
-K!
 Keep blowing!
 Kiki
 Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
-L is for Lion!
-L!
 Leo
 Let's count to 1!
 Let's count to 10!
@@ -542,8 +518,6 @@ Lily
 Lion
 Looking good!
 M
-M is for Moon!
-M!
 Ma
 Mary Had a Little Lamb
 Mary Had a Little Lamb!
@@ -576,8 +550,6 @@ Mustard
 My name
 My tail is so long, sometimes I forget it's mine! Hello, tail!
 N
-N is for Nest!
-N!
 Nail
 Nail idea
 Navy
@@ -615,8 +587,6 @@ Now pick a style.
 Now rinse it with water.
 Now tap Rinse to swish!
 O
-O is for Octopus!
-O!
 Octopus
 Okay!
 Okey dokey, artichokey!
@@ -632,8 +602,6 @@ Overalls! Ooh la la!
 Overalls! So stylish!
 Overalls! Wowza bowza!
 P
-P is for Penguin!
-P!
 Paint it with the brush!
 Pajamas
 Pajamas! Fashion show time!
@@ -675,12 +643,8 @@ Purse! Ooh la la!
 Purse! So stylish!
 Purse! Wowza bowza!
 Q
-Q is for Queen!
-Q!
 Queen
 R
-R is for Rainbow!
-R!
 Rainbow
 Ready for school! Have a great day!
 Ready, set, go! Let's beat the timer!
@@ -692,8 +656,6 @@ Rinse off all the bubbles!
 Rosa
 Rub shampoo all over her hair!
 S
-S is for Sun!
-S!
 Sandals
 Sandals! Fashion show time!
 Sandals! Holy guacamole, I love it!
@@ -789,8 +751,6 @@ Sunglasses! Wowza bowza!
 Super duper pooper scooper!
 Swish swish! Minty fresh! What a great smile!
 T
-T is for Turtle!
-T!
 T-shirt
 T-shirt! Fashion show time!
 T-shirt! Holy guacamole, I love it!
@@ -845,8 +805,6 @@ Twin
 Twinkle Twinkle
 Twinkle Twinkle!
 U
-U is for Umbrella!
-U!
 Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
@@ -854,13 +812,9 @@ Up
 Up next
 Use the restroom
 V
-V is for Violin!
-V!
 Violin
 Vitamins, yum! Strong and healthy!
 W
-W is for Whale!
-W!
 Wake up
 Wand
 Wand! Fashion show time!
@@ -890,10 +844,7 @@ Wowza! You colored the whole farm!
 Wowza! You colored the whole garden!
 Wowza! You colored the whole night sky!
 X
-X!
 Y
-Y is for Yo-yo!
-Y!
 Yellow
 Yellow! Like a banana.
 Yippee skippy!
@@ -906,8 +857,6 @@ You played Twinkle Twinkle! Holy guacamole, what a song!
 You're so silly! Ha ha ha! Let's be silly together!
 Yum yum, breakfast!
 Z
-Z is for Zebra!
-Z!
 Zebra
 Zoe
 a
@@ -1080,22 +1029,61 @@ boat!
 boat! You got it!
 bone
 book
+book:A is for Apple!
+book:A!
+book:B is for Bear!
+book:B!
 book:But
 book:But he could not blow down the brick house. The three pigs were safe!
+book:C is for Cat!
+book:C!
+book:D is for Dog!
+book:D!
+book:E is for Elephant!
+book:E!
+book:F is for Fish!
+book:F!
+book:Fox ends with X!
+book:G is for Grapes!
+book:G!
 book:Goldilocks
 book:Goldilocks and the Three Bears
 book:Goldilocks went for a walk in the woods.
+book:H is for Horse!
+book:H!
 book:Hare
 book:Hare ran far ahead and took a nap under a tree.
 book:Hare was fast. Tortoise was slow.
 book:I
+book:I is for Ice cream!
+book:I!
+book:J is for Juice!
+book:J!
+book:K is for Kite!
+book:K!
+book:L is for Lion!
+book:L!
 book:Let's
 book:Let's have a race, said Hare.
+book:M is for Moon!
+book:M!
 book:My
+book:N is for Nest!
+book:N!
 book:No
 book:No, said the hen. My chicks and I will eat it!
 book:Nobody
 book:Not
+book:O is for Octopus!
+book:O!
+book:P is for Penguin!
+book:P!
+book:Q is for Queen!
+book:Q!
+book:R is for Rainbow!
+book:R!
+book:S is for Sun!
+book:S!
 book:She
 book:She baked the wheat into bread.
 book:She found a little house. Nobody was home.
@@ -1105,6 +1093,8 @@ book:She tried three chairs. This one is just right!
 book:Slow
 book:So
 book:So she planted it all by herself. The wheat grew tall.
+book:T is for Turtle!
+book:T!
 book:The
 book:The Little Red Hen
 book:The Three Little Pigs
@@ -1122,9 +1112,20 @@ book:Three little pigs went out to build three little houses.
 book:Tortoise
 book:Tortoise kept going, slow and steady.
 book:Tortoise won the race! Slow and steady wins.
+book:U is for Umbrella!
+book:U!
+book:V is for Violin!
+book:V!
+book:W is for Whale!
+book:W!
 book:Who
 book:Who will help me eat it? I will, said the dog, the cat, and the duck.
 book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
+book:X!
+book:Y is for Yo-yo!
+book:Y!
+book:Z is for Zebra!
+book:Z!
 book:a
 book:ahead
 book:all
@@ -1132,23 +1133,29 @@ book:and
 book:asleep
 book:bad
 book:baked
+book:bat
 book:bears
+book:bed
 book:beds
 book:big
 book:blew
 book:blow
 book:bowls
+book:box
 book:bread
 book:brick
 book:bricks
+book:bug
 book:build
 book:built
+book:bus
 book:by
 book:came
 book:cat
 book:chairs
 book:chicks
 book:could
+book:cup
 book:dog
 book:down
 book:duck
@@ -1159,8 +1166,10 @@ book:fell
 book:first
 book:for
 book:found
+book:fox
 book:going
 book:grew
+book:hat
 book:have
 book:he
 book:help
@@ -1183,6 +1192,7 @@ book:not
 book:of
 book:one
 book:out
+book:pen
 book:pig
 book:pigs
 book:plant
@@ -1203,6 +1213,7 @@ book:steady
 book:stick
 book:sticks
 book:straw
+book:sun
 book:tall
 book:the
 book:third
@@ -1213,9 +1224,11 @@ book:tree
 book:tried
 book:under
 book:up
+book:van
 book:walk
 book:was
 book:way
+book:web
 book:went
 book:were
 book:wheat
