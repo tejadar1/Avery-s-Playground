@@ -83,7 +83,7 @@ struct DressUpView: View {
             }
 
             if isShowingOff {
-                PhotoOrNext(next: Friend.all[(model + 1) % Friend.all.count].name, takePhoto: takePhoto) {
+                PhotoOrNext(next: "\(Friend.all[(model + 1) % Friend.all.count].name)'s turn", takePhoto: takePhoto) {
                     model = (model + 1) % Friend.all.count
                     newDoll()
                 }

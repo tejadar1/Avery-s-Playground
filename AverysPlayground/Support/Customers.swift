@@ -60,6 +60,8 @@ struct UpNext<Face: View>: View {
 
 /// A picture of the finished look in a white instant-photo frame with the customer's name, tilted like it was just pinned up.
 struct Polaroid: View {
+    static let paper = Color(red: 1.0, green: 0.95, blue: 0.97)
+
     let image: Image
     let caption: String
     let size: CGFloat
@@ -70,7 +72,7 @@ struct Polaroid: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: size, height: size)
-                .background(Color(red: 1.0, green: 0.95, blue: 0.97))
+                .background(Self.paper)
                 .clipShape(RoundedRectangle(cornerRadius: 4 * uiScale))
             Text(caption)
                 .font(.kid(22))
@@ -85,14 +87,17 @@ struct Polaroid: View {
     }
 }
 
-/// Turns a view into a picture, for the photo at the end of a turn.
-@MainActor func snapshot(of view: some View, size: CGFloat) -> Image? {
-    let renderer = ImageRenderer(content: view.frame(width: size, height: size))
-    renderer.scale = 2
-    return renderer.uiImage.map { Image(uiImage: $0) }
+/// Turns a view into a picture, for the photo at the end of a turn, and saves a copy to the iPad's Photos
+/// (iOS asks the grown-up the first time). `height` defaults to a square.
+@MainActor func snapshot(of view: some View, size: CGFloat, height: CGFloat? = nil) -> Image? {
+    let renderer = ImageRenderer(content: view.frame(width: size, height: height ?? size).background(Polaroid.paper))
+    renderer.scale = 3
+    guard let picture = renderer.uiImage else { return nil }
+    UIImageWriteToSavedPhotosAlbum(picture, nil, nil, nil)
+    return Image(uiImage: picture)
 }
 
-/// The two buttons at the end of a turn: take a picture, or go on to the next customer.
+/// The two buttons at the end of a turn: take a picture (saved to Photos), or go on, like "Mia's turn".
 struct PhotoOrNext: View {
     let next: String
     let takePhoto: () -> Void
@@ -110,7 +115,7 @@ struct PhotoOrNext: View {
             }
             .buttonStyle(SquishyButtonStyle())
             Button(action: goNext) {
-                Text("\(next)'s turn")
+                Text(next)
                     .font(.kid(24))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 22 * uiScale)
@@ -145,5 +150,26 @@ extension View {
             }
             .ignoresSafeArea()
         }
+    }
+}
+
+/// A camera button for the art games: takes a picture of her work and saves it to Photos.
+struct PhotoButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Image(systemName: "camera.fill")
+                .font(.system(size: 20 * uiScale, weight: .bold))
+                .foregroundStyle(.white)
+                .frame(width: 44 * uiScale, height: 44 * uiScale)
+                .background(Color(red: 0.42, green: 0.5, blue: 0.85), in: Circle())
+                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .accessibilityLabel("Take a picture")
     }
 }

@@ -242,6 +242,8 @@ struct NailSalonView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
     @State private var isShowingOff = false
+    @State private var photo: Image?
+    @State private var flashes = 0
     @State private var zoomed: Int?
     @State private var isBrushing = false
     @State private var brushTip: CGPoint?
@@ -256,20 +258,13 @@ struct NailSalonView: View {
                 hand
             }
             if isShowingOff {
-                Button(action: reset) {
-                    Text("New nails")
-                        .font(.kid(30))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 32 * uiScale)
-                        .padding(.vertical, 16 * uiScale)
-                        .cartoonCard(.pink, cornerRadius: 40 * uiScale)
-                }
-                .buttonStyle(SquishyButtonStyle())
-                .padding(.vertical, 24 * uiScale)
+                PhotoOrNext(next: "New nails", takePhoto: takePhoto, goNext: reset)
+                    .padding(.vertical, 8 * uiScale)
             } else {
                 toolTray
             }
         }
+        .photo(photo, caption: "Avery", flashes: flashes, size: 220 * uiScale)
         .background(HeartPattern().ignoresSafeArea())
         .celebration(wins)
     }
@@ -615,11 +610,38 @@ struct NailSalonView: View {
         say("Ta-da! Your nails look amazing!")
     }
 
+    /// Her painted hand, for the photo: just the hand and nails, none of the buttons.
+    private var handPhoto: some View {
+        GeometryReader { geo in
+            let scale = min(geo.size.width / Hand.canvas.width, geo.size.height / Hand.canvas.height)
+            ZStack {
+                HandView(skin: Skin.all[skin])
+                ForEach(nails.indices, id: \.self) { index in
+                    let finger = Hand.fingers[index]
+                    NailView(nail: nails[index], size: CGSize(width: finger.nailSize.width * scale, height: finger.nailSize.height * scale))
+                        .rotationEffect(.degrees(finger.angle))
+                        .position(x: finger.nailCenter.x * scale, y: finger.nailCenter.y * scale)
+                }
+            }
+            .frame(width: Hand.canvas.width * scale, height: Hand.canvas.height * scale)
+        }
+    }
+
+    private func takePhoto() {
+        Sounds.shared.play(.shutter)
+        Haptics.tap()
+        let picture = snapshot(of: handPhoto, size: 400, height: 400 * Hand.canvas.height / Hand.canvas.width)
+        flashes += 1
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
+        say("Say cheese! Snap snap!")
+    }
+
     private func reset() {
         Haptics.tap()
         withAnimation(.spring) {
             nails = Array(repeating: Nail(), count: 5)
             isShowingOff = false
+            photo = nil
             idea = Self.randomIdea()
         }
         pick(.polish)

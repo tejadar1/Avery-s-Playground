@@ -13,6 +13,7 @@ targets:
     info:
       path: AverysPlayground/Info.plist
       properties:
+        NSPhotoLibraryAddUsageDescription: Avery's pictures from the games are saved to Photos.
         UILaunchScreen:
           UIColorName: LaunchBackground
           UIImageName: LaunchCoco

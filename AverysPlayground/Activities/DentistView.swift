@@ -164,7 +164,7 @@ struct DentistView: View {
             }
 
             if mouth.isClean {
-                PhotoOrNext(next: nextPatient.name, takePhoto: takePhoto, goNext: newPatient)
+                PhotoOrNext(next: "\(nextPatient.name)'s turn", takePhoto: takePhoto, goNext: newPatient)
             } else {
                 toolTray
             }

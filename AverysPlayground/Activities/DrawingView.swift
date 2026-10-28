@@ -19,6 +19,9 @@ struct DrawingView: View {
     @State private var strokes: [Stroke] = []
     @State private var current: Stroke?
     @State private var color = DrawingView.crayons[7].color
+    @State private var pageSize = CGSize(width: 1, height: 1)
+    @State private var photo: Image?
+    @State private var flashes = 0
     @Environment(\.horizontalSizeClass) private var widthClass
     @Environment(\.verticalSizeClass) private var heightClass
 
@@ -30,7 +33,7 @@ struct DrawingView: View {
                     page
                     HStack(spacing: 10) {
                         crayons(columns: 6, size: 44, spacing: 0)  // full-size taps that still fit the narrowest iPhone
-                        VStack(spacing: 8) { undoButton; clearButton }
+                        VStack(spacing: 8) { undoButton; clearButton; photoButton }
                     }
                     .padding(10)
                     .background(.white, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
@@ -43,6 +46,7 @@ struct DrawingView: View {
             }
         }
         .padding(16 * uiScale)
+        .photo(photo, caption: "Avery", flashes: flashes, size: 220 * uiScale)
         .background(Scenery(.studio).ignoresSafeArea())
     }
 
@@ -53,6 +57,7 @@ struct DrawingView: View {
             }
         }
         .background(.white)
+        .onGeometryChange(for: CGSize.self) { $0.size } action: { pageSize = $0 }
         .clipShape(RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
         .shadow(color: .black.opacity(0.12), radius: 10 * uiScale, y: 4 * uiScale)
         .contentShape(Rectangle())
@@ -83,6 +88,7 @@ struct DrawingView: View {
                 undoButton
                 clearButton
             }
+            photoButton
         }
         .padding(12 * uiScale)
         .fixedSize(horizontal: true, vertical: false)  // only as wide as two crayons, not half the screen
@@ -114,6 +120,25 @@ struct DrawingView: View {
     private var undoButton: some View {
         panelButton("arrow.uturn.backward", "Undo") {
             if !strokes.isEmpty { strokes.removeLast() }
+        }
+    }
+
+    /// Saves the drawing to Photos and shows it as a photo for a moment.
+    private var photoButton: some View {
+        panelButton("camera.fill", "Take a picture") {
+            Sounds.shared.play(.shutter)
+            let drawing = Canvas { context, _ in
+                for stroke in strokes { draw(stroke, in: &context) }
+            }
+            .background(.white)
+            let picture = snapshot(of: drawing, size: pageSize.width, height: pageSize.height)
+            flashes += 1
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
+            Speaker.shared.say("Snap! Your picture is saved!")
+            Task {
+                try? await Task.sleep(for: .seconds(3))
+                withAnimation { photo = nil }
+            }
         }
     }
 

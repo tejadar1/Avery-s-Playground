@@ -552,6 +552,7 @@ Mary Had a Little Lamb!
 Maze board
 Maze. Drag Mochi to the bone.
 Mia
+Mia's turn
 Mochi
 Mochi found her bone! Woof woof!
 Mochi had a good nap! Good morning!
@@ -754,6 +755,7 @@ Snap! I need the pig!
 Snap! I need the star!
 Snap! I need the sun!
 Snap! I need the tree!
+Snap! Your picture is saved!
 Sneakers
 Sneakers! Fashion show time!
 Sneakers! Holy guacamole, I love it!
@@ -814,6 +816,7 @@ T-shirt! Wowza bowza!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
+Take a picture
 Take vitamins
 Tap a nail to paint it!
 Tap any key.

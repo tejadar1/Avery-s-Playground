@@ -214,7 +214,7 @@ struct HairSalonView: View {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             head
             if isShowingOff {
-                PhotoOrNext(next: Friend.all[(customer + 1) % Friend.all.count].name, takePhoto: takePhoto) {
+                PhotoOrNext(next: "\(Friend.all[(customer + 1) % Friend.all.count].name)'s turn", takePhoto: takePhoto) {
                     customer = (customer + 1) % Friend.all.count
                     newCustomer()
                 }

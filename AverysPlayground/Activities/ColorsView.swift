@@ -262,6 +262,8 @@ struct ColorsView: View {
     @State private var celebrated: Set<Int> = []
     /// Crayon stays inside each part, or (off) colors anywhere, over the lines too.
     @AppStorage("coloringInLines") private var inLines = true
+    @State private var photo: Image?
+    @State private var flashes = 0
 
     private var page: ColoringPage { ColoringPage.all[pageIndex] }
 
@@ -278,6 +280,7 @@ struct ColorsView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
                     .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                     .overlay(alignment: .topTrailing) { linesButton.padding(8 * uiScale) }
+                    .overlay(alignment: .topLeading) { PhotoButton { takePhoto(size: size) }.padding(8 * uiScale) }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(.horizontal)
@@ -308,6 +311,7 @@ struct ColorsView: View {
             .padding(.horizontal)
             .padding(.bottom, 8 * uiScale)
         }
+        .photo(photo, caption: "Avery", flashes: flashes, size: 220 * uiScale)
         .background(Scenery(.studio).ignoresSafeArea())
         .celebration(wins)
     }
@@ -406,6 +410,18 @@ struct ColorsView: View {
         }
         .buttonStyle(SquishyButtonStyle())
         .accessibilityLabel(inLines ? "Coloring inside the lines" : "Coloring anywhere")
+    }
+
+    private func takePhoto(size: CGSize) {
+        Sounds.shared.play(.shutter)
+        let picture = snapshot(of: canvas(size: size), size: size.width, height: size.height)
+        flashes += 1
+        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) { photo = picture }
+        say("Snap! Your picture is saved!")
+        Task {
+            try? await Task.sleep(for: .seconds(3))
+            withAnimation { photo = nil }
+        }
     }
 
     private func pageButton(_ symbol: String, by step: Int) -> some View {
