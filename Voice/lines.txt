@@ -1546,13 +1546,10 @@ dora:My name is Avery
 dora:My sister
 dora:My teeth are so sparkly! Thank you!
 dora:Numbers
-dora:Oh my goodness!
 dora:Please
 dora:Put on your flip-flops
-dora:Take it easy
 dora:Thank you
 dora:Very good
-dora:What's up?
 dora:Wow! I look amazing!
 dora:Yes, Dad
 dora:Yes, Mom
@@ -1691,7 +1688,6 @@ es:Con permiso
 es:Cuando
 es:Cuando el pollito necesitó ayuda, el río, el fuego y el viento lo ayudaron a él. ¡Qué lindo es ayudar!
 es:Cucarachita
-es:Cógelo suave
 es:Dame un abrazo
 es:De
 es:De noche llegó el Ratón Pérez, chiquito y elegante.
@@ -1981,7 +1977,6 @@ es:voy
 es:voz
 es:vuelta
 es:y
-es:¡Ay, mi madre!
 es:¡Colorín colorado, este cuento se ha acabado!
 es:¡Hola!
 es:¡Las huellas la llevaron de vuelta a su casa!
@@ -1990,7 +1985,6 @@ es:¡Qué rico!
 es:¡Vamos a jugar!
 es:¿Cómo estás?
 es:¿Quieres mangú?
-es:¿Qué lo que?
 es:árbol
 es:él
 eyes
