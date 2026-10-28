@@ -251,7 +251,7 @@ struct DentistView: View {
         if item == .rinse {
             rinse()
         } else {
-            say(item.rawValue + "!", hint: hint(for: item))
+            say(item.rawValue + "!", hint: hint(for: item), voice: Speaker.book)
         }
     }
 
@@ -339,10 +339,10 @@ struct DentistView: View {
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.
-    private func say(_ text: String, hint: String = "") {
+    private func say(_ text: String, hint: String = "", voice: String = "") {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = [text, hint].filter { !$0.isEmpty }.joined(separator: " ") }
         cheerCount += 1
-        Speaker.shared.say(text)
+        Speaker.shared.say(voice + text)
     }
 }
 

@@ -298,7 +298,7 @@ struct BingoView: View {
                 let hooray = Hooray.random
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "\(tile.word)! \(hooray)" }
                 cheerCount += 1
-                Speaker.shared.say("\(tile.word)!", then: hooray)
+                Speaker.shared.say(Speaker.book + "\(tile.word)!", then: hooray)
             }
         } else {
             Haptics.tap()

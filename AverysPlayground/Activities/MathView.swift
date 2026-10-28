@@ -133,7 +133,7 @@ struct MathView: View {
         guard !counted.contains(piece) else { return }
         Haptics.tap()
         withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) { counted.append(piece) }
-        Speaker.shared.say("\(counted.count)")
+        Speaker.shared.say(Speaker.book + "\(counted.count)")
     }
 
     private func pick(_ choice: Int) {
@@ -147,7 +147,7 @@ struct MathView: View {
             let sum = "\(problem.first) plus \(problem.second) is \(problem.answer)!", hooray = Hooray.random
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "\(sum) \(hooray)" }
             cheerCount += 1
-            Speaker.shared.say(sum, then: hooray)
+            Speaker.shared.say(Speaker.book + sum, then: hooray)
             Task {
                 try? await Task.sleep(for: .seconds(3))
                 next()

@@ -1,4 +1,5 @@
-"""Lists every line Coco can say, one per line, for Voice/make.py to record. Spanish lines start with "es:".
+"""Lists every line Coco can say, one per line, for Voice/make.py to record. Spanish lines start with "es:";
+"book:" lines are Bella, who reads, names things and teaches (letters, numbers, words, colors); Coco does the silly cheering.
 
 Run from the repo root after changing what Coco says: python3 Voice/lines.py > Voice/lines.txt
 Plain strings are taken from the Swift source; lines built from data (numbers, names) are spelled out below.
@@ -62,21 +63,21 @@ lines.update(f"book:{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")  # in
 lines.update("sound:" + ipa for ipa in re.findall(r'"\w": \("([^"]+)", "[^"]+"\)', src["ReadingView.swift"]))
 
 numbers = range(1, 21)
-lines.update(str(n) for n in numbers)
+lines.update(f"book:{n}" for n in numbers)  # counting, in Bella's voice
 lines.update(f"Let's count to {n}!" for n in range(1, 11))
 
 for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)", picture: "[^"]+"(?:, phrase: "([^"]+)")?\)', src["ABCView.swift"]):
     lines.add("book:" + (phrase or f"{letter} is for {word}!"))  # in Bella's voice
 
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
-    lines.update({f"{word}! You read it!", f"Hee hee, that's a {word}!", f"{word}! You spelled it!", "book:" + word})
+    lines.update({f"book:{word}! You read it!", f"Hee hee, that's a {word}!", f"book:{word}! You spelled it!", "book:" + word})
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):
     name = page[0] or page[1]
     lines.update({f"A {name}!", f"Wowza! You colored the whole {name}!"})
 for name, example in re.findall(r'NamedColor\(name: "([^"]+)", color: [^,]+, exampleName: "([^"]+)"\)', colors):
-    lines.add(f"{name}! Like {example}.")
+    lines.add(f"book:{name}! Like {example}.")
 
 hair = src["HairSalonView.swift"]
 styles = hair.split("enum HairStyle")[1].split("\nenum ")[0]
@@ -89,7 +90,7 @@ for item in items:
     lines.update(f"{item}! {cheer}" for cheer in cheers)
 
 for song in re.findall(r'name: "([^"]+)", picture:', src["PianoView.swift"]):
-    lines.update({f"{song}!", f"You played {song}! Holy guacamole, what a song!"})
+    lines.update({f"book:{song}!", f"You played {song}! Holy guacamole, what a song!"})
 
 for one, many in re.findall(r'Food\(picture: "[^"]+", one: "([^"]+)", many: "([^"]+)"\)', src["MathView.swift"]):
     for a in range(1, 6):
@@ -97,12 +98,12 @@ for one, many in re.findall(r'Food\(picture: "[^"]+", one: "([^"]+)", many: "([^
             lines.add(f"Coco has {a} {one if a == 1 else many}. Mochi brings {b} more. How many now?")
 for a in range(1, 6):
     for b in range(1, 6):
-        lines.add(f"{a} plus {b} is {a + b}!")
+        lines.add(f"book:{a} plus {b} is {a + b}!")
 lines.update(f"Hee hee, not {n}!" for n in range(1, 11))
 
 bingo = re.findall(r'BingoTile\(word: "([^"]+)"', src["BingoView.swift"])
 for a in bingo:
-    lines.update({f"{a}!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!", f"Hee hee, that's not the {a}!"})
+    lines.update({f"book:{a}!", f"Hee hee, the {a} isn't on your card.", f"Snap! I need the {a}!", f"Hee hee, that's not the {a}!"})
     lines.update(f"{a} and {b}!" for b in bingo)
 
 # Coco says hi to each customer by name: the friends at the salon and in dress up, and the dentist's animals
@@ -110,6 +111,13 @@ friends = re.findall(r'Friend\(name: "(\w+)"', (app / "Support" / "Customers.swi
 patients = re.findall(r'case \.(?:lion|bear|bunny|kitty): "(\w+)"', src["DentistView.swift"])
 lines.update(f"Hi {name}!" for name in friends + patients)
 tools = re.search(r'enum DentistTool.*?\n(.*?)\n', src["DentistView.swift"]).group(1)
-lines.update(name + "!" for name in re.findall(r'= "(\w+)"', tools))
+lines.update(f"book:{name}!" for name in re.findall(r'= "(\w+)"', tools))
+
+# Bella names things: the trays and tools in the salons and Dress Up, the crayons in Draw, and the stickers
+for name in ["HairSalonView.swift", "NailSalonView.swift", "DressUpView.swift"]:
+    for block in re.findall(r"var name: String \{(.*?)\n    \}", src[name], re.S):
+        lines.update("book:" + n for n in re.findall(r'case \.\w+: "([^"]+)"', block))
+lines.update("book:" + n for n in re.findall(r'\("(\w+)", (?:Color|\.white)', src["DrawingView.swift"]))
+lines.update("book:" + n for n in literals(src["StickerBookView.swift"].split("static let all = [")[1].split("]")[0]))
 
 print("\n".join(sorted(lines)))

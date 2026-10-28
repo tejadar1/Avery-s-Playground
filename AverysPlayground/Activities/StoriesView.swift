@@ -193,7 +193,7 @@ struct StoriesView: View {
                     .padding(.horizontal, 14 * uiScale)
             }
             .buttonStyle(SquishyButtonStyle())
-            .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(name, language: language) })
+            .simultaneousGesture(TapGesture().onEnded { Speaker.shared.say(language == "en-US" ? Speaker.book + name : name, language: language) })
             .accessibilityLabel(name)
 
             // This cell's piece of the shelf; side by side they make one plank.

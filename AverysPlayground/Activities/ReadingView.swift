@@ -132,7 +132,7 @@ struct ReadingView: View {
                 cheer = "\(word.text.capitalized)! You read it! \(hooray)"
             }
             cheerCount += 1
-            Speaker.shared.say("\(word.text)! You read it!", then: hooray)
+            Speaker.shared.say(Speaker.book + "\(word.text)! You read it!", then: hooray)
             Task {
                 try? await Task.sleep(for: .seconds(2.5))
                 next(intro: "Tap each letter!")

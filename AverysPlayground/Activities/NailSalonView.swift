@@ -598,7 +598,7 @@ struct NailSalonView: View {
         case .design: tool = .design(.dots)
         case .sticker: tool = .sticker(Self.stickers[0])
         }
-        Speaker.shared.say(item.name)
+        Speaker.shared.say(Speaker.book + item.name)
     }
 
     private func showOff() {

@@ -308,7 +308,7 @@ struct HairSalonView: View {
                                 if item == .scissors, !cutDone, let goal = hair.goal {
                                     say(goal.wish, hint: "Cut along the dotted line.")
                                 } else {
-                                    Speaker.shared.say(item.name)
+                                    Speaker.shared.say(Speaker.book + item.name)
                                 }
                             } label: {
                                 ToolPicture(tool: item, size: 56 * uiScale)
@@ -426,7 +426,7 @@ struct HairSalonView: View {
     private func pick(_ item: Tray) {
         Haptics.tap()
         tray = item
-        Speaker.shared.say(item.name)
+        Speaker.shared.say(Speaker.book + item.name)
     }
 
     private func showOff() {

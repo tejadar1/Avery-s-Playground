@@ -70,7 +70,7 @@ struct StickerBookView: View {
             Haptics.tap()
             Sounds.shared.play(.pop)
             cheerCount += 1
-            Speaker.shared.say(name)
+            Speaker.shared.say(Speaker.book + name)
         } label: {
             Picture(name, size: 66 * uiScale)
                 .opacity(have ? 1 : 0)

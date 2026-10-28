@@ -131,7 +131,7 @@ struct SpellView: View {
             let hooray = Hooray.random
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "\(word)! You spelled it! \(hooray)" }
             cheerCount += 1
-            Speaker.shared.say("\(word)! You spelled it!", then: hooray)
+            Speaker.shared.say(Speaker.book + "\(word)! You spelled it!", then: hooray)
             try? await Task.sleep(for: .seconds(2.6))
             var newWord = Phonics.words.randomElement()!
             while newWord.text == word { newWord = Phonics.words.randomElement()! }

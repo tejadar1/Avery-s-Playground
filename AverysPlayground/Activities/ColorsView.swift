@@ -443,7 +443,7 @@ struct ColorsView: View {
     private func choose(_ item: NamedColor) {
         Haptics.tap()
         selected = item
-        say("\(item.name)! Like \(item.exampleName).")
+        say("\(item.name)! Like \(item.exampleName).", voice: Speaker.book)
     }
 
     private func fill(_ region: Int) {
@@ -468,11 +468,11 @@ struct ColorsView: View {
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
-    private func say(_ text: String, hint: String = "") {
+    private func say(_ text: String, hint: String = "", voice: String = "") {
         let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        if !text.isEmpty { Speaker.shared.say(text) }
+        if !text.isEmpty { Speaker.shared.say(voice + text) }
     }
 }
 

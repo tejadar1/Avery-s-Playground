@@ -105,7 +105,7 @@ struct DressUpView: View {
                     Button {
                         Haptics.tap()
                         tray = item
-                        Speaker.shared.say(item.name)
+                        Speaker.shared.say(Speaker.book + item.name)
                     } label: {
                         Picture(item.picture, size: 36 * uiScale)
                             .frame(width: 52 * uiScale, height: 52 * uiScale)

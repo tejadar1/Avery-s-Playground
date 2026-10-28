@@ -309,7 +309,7 @@ struct PianoView: View {
     private func choose(_ song: PianoSong?) {
         lesson = song.map { SongLesson(song: $0) }
         if let song {
-            say("\(song.name)!", hint: "Press the key with the star.")
+            say("\(song.name)!", hint: "Press the key with the star.", voice: Speaker.book)
         } else {
             say("Free play!", hint: "Tap any key.")
         }
@@ -336,11 +336,11 @@ struct PianoView: View {
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.
-    private func say(_ text: String, hint: String = "") {
+    private func say(_ text: String, hint: String = "", voice: String = "") {
         let line = [text, hint].filter { !$0.isEmpty }.joined(separator: " ")
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
         cheerCount += 1
-        if !text.isEmpty { Speaker.shared.say(text) }
+        if !text.isEmpty { Speaker.shared.say(voice + text) }
     }
 }
 

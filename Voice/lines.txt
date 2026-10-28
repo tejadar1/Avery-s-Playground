@@ -1,51 +1,6 @@
 %02d
 -over
 -under
-1
-1 plus 1 is 2!
-1 plus 2 is 3!
-1 plus 3 is 4!
-1 plus 4 is 5!
-1 plus 5 is 6!
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-2
-2 plus 1 is 3!
-2 plus 2 is 4!
-2 plus 3 is 5!
-2 plus 4 is 6!
-2 plus 5 is 7!
-20
-3
-3 plus 1 is 4!
-3 plus 2 is 5!
-3 plus 3 is 6!
-3 plus 4 is 7!
-3 plus 5 is 8!
-4
-4 plus 1 is 5!
-4 plus 2 is 6!
-4 plus 3 is 7!
-4 plus 4 is 8!
-4 plus 5 is 9!
-5
-5 plus 1 is 6!
-5 plus 2 is 7!
-5 plus 3 is 8!
-5 plus 4 is 9!
-5 plus 5 is 10!
-6
-7
-8
-9
 A
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
@@ -104,10 +59,8 @@ Big nail
 Bingo card
 Bingo! You filled your card! Holy guacamole!
 Black
-Black! Like a hat.
 Blow dryer
 Blue
-Blue! Like a whale.
 Bobo
 Boop! You booped my nose!
 Boots
@@ -125,11 +78,9 @@ Bow! Wowza bowza!
 Bows
 Breakfast
 Brown
-Brown! Like a bear.
 Brush
 Brush hair
 Brush teeth
-Brush!
 Bubble bath, all clean!
 Buns
 Buns! So cute!
@@ -345,9 +296,7 @@ Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Fish
 Fix
-Fix!
 Floss
-Floss!
 Flower crown
 Flower crown! Fashion show time!
 Flower crown! Holy guacamole, I love it!
@@ -378,7 +327,6 @@ Gown! Wowza bowza!
 Grandma, what big eyes you have! All the better to see you with!
 Grapes
 Green
-Green! Like a frog.
 Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
@@ -513,7 +461,6 @@ Horse
 Hose
 Hot
 Hot Cross Buns
-Hot Cross Buns!
 Hot diggity dog!
 Hugs and kisses
 Hurry
@@ -568,7 +515,6 @@ Looking good!
 M
 Ma
 Mary Had a Little Lamb
-Mary Had a Little Lamb!
 Maze board
 Maze. Drag Mochi to the bone.
 Mia
@@ -651,7 +597,6 @@ Ooh, fancy pattern!
 Ooh, shiny!
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
-Orange! Like an orange.
 Order
 Overalls
 Overalls! Fashion show time!
@@ -681,7 +626,6 @@ Picture
 Pigtails
 Pigtails! So cute!
 Pink
-Pink! Like a flower.
 Play
 Play again
 Please let me go, said the mouse. One day I will help you.
@@ -697,7 +641,6 @@ Puff
 Puff! So cute!
 Puppy
 Purple
-Purple! Like grapes.
 Purse
 Purse! Fashion show time!
 Purse! Holy guacamole, I love it!
@@ -710,12 +653,10 @@ R
 Rainbow
 Ready for school! Have a great day!
 Red
-Red! Like a strawberry.
 Remover
 Reset
 Rinse
 Rinse off all the bubbles!
-Rinse!
 Rosa
 Rub rub rub! Happy puppy!
 Rub shampoo all over her hair!
@@ -899,7 +840,6 @@ Tutu! So stylish!
 Tutu! Wowza bowza!
 Twin
 Twinkle Twinkle
-Twinkle Twinkle!
 Twinkle twinkle, little nail!
 U
 Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!
@@ -927,7 +867,6 @@ What color should it be?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Which picture is it?
 White
-White! Like a cloud.
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who's silly? You're silly! Snap snap!
@@ -946,7 +885,6 @@ Wowza! You colored the whole night sky!
 X
 Y
 Yellow
-Yellow! Like a banana.
 Yippee skippy!
 Yo-yo
 You beat the timer! Holy guacamole!
@@ -998,7 +936,6 @@ apple and pig!
 apple and star!
 apple and sun!
 apple and tree!
-apple!
 apples
 are.
 as
@@ -1030,20 +967,15 @@ ball and pig!
 ball and star!
 ball and sun!
 ball and tree!
-ball!
 balloon
 banana
 bananas
 bat
-bat! You read it!
-bat! You spelled it!
 bathtub
 beach
 beanie
 bear
 bed
-bed! You read it!
-bed! You spelled it!
 bedtimeOrder
 bee
 bee and apple!
@@ -1070,7 +1002,6 @@ bee and pig!
 bee and star!
 bee and sun!
 bee and tree!
-bee!
 bingo
 bird
 bird and apple!
@@ -1097,7 +1028,6 @@ bird and pig!
 bird and star!
 bird and sun!
 bird and tree!
-bird!
 boat
 boat and apple!
 boat and ball!
@@ -1123,11 +1053,55 @@ boat and pig!
 boat and star!
 boat and sun!
 boat and tree!
-boat!
 body
 body-over
 bone
 book
+book:1
+book:1 plus 1 is 2!
+book:1 plus 2 is 3!
+book:1 plus 3 is 4!
+book:1 plus 4 is 5!
+book:1 plus 5 is 6!
+book:10
+book:11
+book:12
+book:13
+book:14
+book:15
+book:16
+book:17
+book:18
+book:19
+book:2
+book:2 plus 1 is 3!
+book:2 plus 2 is 4!
+book:2 plus 3 is 5!
+book:2 plus 4 is 6!
+book:2 plus 5 is 7!
+book:20
+book:3
+book:3 plus 1 is 4!
+book:3 plus 2 is 5!
+book:3 plus 3 is 6!
+book:3 plus 4 is 7!
+book:3 plus 5 is 8!
+book:4
+book:4 plus 1 is 5!
+book:4 plus 2 is 6!
+book:4 plus 3 is 7!
+book:4 plus 4 is 8!
+book:4 plus 5 is 9!
+book:5
+book:5 plus 1 is 6!
+book:5 plus 2 is 7!
+book:5 plus 3 is 8!
+book:5 plus 4 is 9!
+book:5 plus 5 is 10!
+book:6
+book:7
+book:8
+book:9
 book:A
 book:A big bad wolf saw her. Where are you going? he asked.
 book:A big lion was sleeping in the sun.
@@ -1142,19 +1116,39 @@ book:At
 book:At the top was a giant's castle. Fee, fi, fo, fum!
 book:B is for Bear!
 book:B!
+book:Black! Like a hat.
+book:Blow dryer
+book:Blue
+book:Blue! Like a whale.
+book:Bows
+book:Brown
+book:Brown! Like a bear.
+book:Brush!
+book:Buns
 book:But
 book:But he could not blow down the brick house. The three pigs were safe!
 book:But the gingerbread man jumped to the other side and ran all the way home!
 book:C is for Cat!
 book:C!
+book:Clothes
+book:Cloud
+book:Colors
+book:Comb
+book:Coral
+book:Curly
 book:D is for Dog!
 book:D!
+book:Designs
+book:Down
 book:E is for Elephant!
 book:E!
 book:Everyone
+book:Extras
 book:F is for Fish!
 book:F!
 book:Fee
+book:Fix!
+book:Floss!
 book:Fox ends with X!
 book:G is for Grapes!
 book:G!
@@ -1163,11 +1157,14 @@ book:Goldilocks and the Three Bears
 book:Goldilocks went for a walk in the woods.
 book:Grandma
 book:Grandma, what big eyes you have! All the better to see you with!
+book:Green
+book:Green! Like a frog.
 book:H is for Horse!
 book:H!
 book:Hare
 book:Hare ran far ahead and took a nap under a tree.
 book:Hare was fast. Tortoise was slow.
+book:Hats
 book:He
 book:He came to a river. A sly fox said, hop on my back!
 book:He climbed down fast and took the hen home to his mom.
@@ -1175,6 +1172,7 @@ book:He did it again. Everyone came running. No wolf!
 book:He jumped up and ran away! Run, run, as fast as you can!
 book:He planted the beans, and they grew up into the sky overnight!
 book:Hood
+book:Hot Cross Buns!
 book:I
 book:I is for Ice cream!
 book:I!
@@ -1197,9 +1195,12 @@ book:Little Red Riding Hood
 book:Little Red Riding Hood went to visit her grandma.
 book:M is for Moon!
 book:M!
+book:Mary Had a Little Lamb!
+book:Mustard
 book:My
 book:N is for Nest!
 book:N!
+book:Navy
 book:No
 book:No, said the hen. My chicks and I will eat it!
 book:Nobody
@@ -1207,19 +1208,31 @@ book:Not
 book:O is for Octopus!
 book:O!
 book:One
+book:Orange! Like an orange.
 book:P is for Penguin!
 book:P!
+book:Pigtails
+book:Pink
+book:Pink! Like a flower.
 book:Please
 book:Please let me go, said the mouse. One day I will help you.
+book:Ponytail
+book:Puff
+book:Purple! Like grapes.
 book:Q is for Queen!
 book:Q!
 book:R is for Rainbow!
 book:R!
 book:Red
+book:Red! Like a strawberry.
 book:Riding
+book:Rinse
+book:Rinse!
 book:Run
 book:S is for Sun!
 book:S!
+book:Scissors
+book:Shampoo
 book:She
 book:She baked the wheat into bread.
 book:She found a little house. Nobody was home.
@@ -1227,11 +1240,16 @@ book:She tried three beds and fell fast asleep.
 book:She tried three bowls of porridge. This one is just right!
 book:She tried three chairs. This one is just right!
 book:She walked through the woods and picked flowers.
+book:Shoes
+book:Sky
 book:Slow
 book:So
 book:So she planted it all by herself. The wheat grew tall.
+book:Stickers
+book:Styles
 book:T is for Turtle!
 book:T!
+book:Teal
 book:The
 book:The Boy Who Cried Wolf
 book:The Gingerbread Man
@@ -1260,13 +1278,17 @@ book:Three little pigs went out to build three little houses.
 book:Tortoise
 book:Tortoise kept going, slow and steady.
 book:Tortoise won the race! Slow and steady wins.
+book:Twinkle Twinkle!
 book:U is for Umbrella!
 book:U!
 book:V is for Violin!
 book:V!
 book:W is for Whale!
 book:W!
+book:Wash
 book:Where
+book:White
+book:White! Like a cloud.
 book:Who
 book:Who will help me eat it? I will, said the dog, the cat, and the duck.
 book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
@@ -1275,6 +1297,8 @@ book:Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 book:X!
 book:Y is for Yo-yo!
 book:Y!
+book:Yellow
+book:Yellow! Like a banana.
 book:You
 book:Z is for Zebra!
 book:Z!
@@ -1284,6 +1308,8 @@ book:ahead
 book:all
 book:always
 book:and
+book:apple
+book:apple!
 book:are
 book:as
 book:asked
@@ -1292,65 +1318,116 @@ book:away
 book:back
 book:bad
 book:baked
+book:ball!
+book:balloon
+book:banana
 book:bat
+book:bat! You read it!
+book:bat! You spelled it!
 book:be
 book:beans
 book:beanstalk
+book:bear
 book:bears
 book:bed
+book:bed! You read it!
+book:bed! You spelled it!
 book:beds
+book:bee
+book:bee!
 book:better
 book:big
+book:bird
+book:bird!
 book:blew
 book:blow
+book:boat
+book:boat!
 book:bowls
 book:box
+book:box! You read it!
+book:box! You spelled it!
 book:boy
 book:bread
 book:brick
 book:bricks
 book:bug
+book:bug! You read it!
+book:bug! You spelled it!
 book:build
 book:built
 book:bus
+book:bus!
+book:bus! You read it!
+book:bus! You spelled it!
+book:butterfly
 book:by
+book:cake
+book:cake!
 book:came
 book:can
 book:can't
+book:car
+book:car!
 book:castle
 book:cat
+book:cat!
+book:cat! You read it!
+book:cat! You spelled it!
 book:catch
 book:chairs
 book:chased
 book:chewed
+book:chick
 book:chicks
 book:climbed
+book:cookie
 book:could
 book:cow
+book:cow!
 book:cried
+book:crown
 book:cup
+book:cup! You read it!
+book:cup! You spelled it!
+book:cupcake
 book:day
 book:did
 book:dog
+book:dog!
+book:dog! You read it!
+book:dog! You spelled it!
 book:down
 book:duck
+book:duck!
 book:eat
+book:egg!
 book:eggs
+book:elephant
 book:eyes
 book:far
 book:fast
 book:fell
 book:fi
 book:first
+book:fish
+book:fish!
+book:flower
+book:flower!
 book:flowers
 book:fo
 book:for
 book:found
 book:fox
+book:fox! You read it!
+book:fox! You spelled it!
 book:free
 book:friends
+book:frog
+book:frog!
 book:fum
 book:fun
+book:gem
 book:giant's
 book:gingerbread
 book:go
@@ -1359,14 +1436,22 @@ book:golden
 book:got
 book:grandma
 book:grandma's
+book:grapes
 book:grew
 book:had
 book:hat
+book:hat!
+book:hat! You read it!
+book:hat! You spelled it!
 book:have
 book:he
+book:heart
+book:heart!
 book:help
 book:helpers
 book:hen
+book:hen! You read it!
+book:hen! You spelled it!
 book:her
 book:herself
 book:hid
@@ -1377,6 +1462,7 @@ book:home
 book:hop
 book:horse
 book:house
+book:house!
 book:houses
 book:huffed
 book:hug
@@ -1388,6 +1474,8 @@ book:it
 book:jumped
 book:just
 book:kept
+book:kite
+book:ladybug
 book:laid
 book:learned
 book:let
@@ -1397,6 +1485,8 @@ book:magic
 book:man
 book:me
 book:mom
+book:moon
+book:moon!
 book:mouse
 book:my
 book:nap
@@ -1404,6 +1494,7 @@ book:net
 book:nobody
 book:nose
 book:not
+book:octopus
 book:of
 book:old
 book:on
@@ -1413,14 +1504,23 @@ book:out
 book:over
 book:overnight
 book:pen
+book:pen! You read it!
+book:pen! You spelled it!
+book:penguin
 book:picked
 book:pig
+book:pig!
+book:pig! You read it!
+book:pig! You spelled it!
 book:pigs
+book:pizza
 book:plant
 book:planted
 book:porridge
 book:puffed
+book:rabbit
 book:race
+book:rainbow
 book:ran
 book:real
 book:red
@@ -1443,12 +1543,18 @@ book:sleeping
 book:slow
 book:sly
 book:some
+book:star
+book:star!
 book:steady
 book:stick
 book:sticks
 book:straw
+book:strawberry
 book:stuck
 book:sun
+book:sun!
+book:sun! You read it!
+book:sun! You spelled it!
 book:tall
 book:tell
 book:that
@@ -1462,11 +1568,17 @@ book:took
 book:top
 book:traded
 book:tree
+book:tree!
 book:tried
+book:trophy
 book:truth
+book:turtle
+book:umbrella
 book:under
 book:up
 book:van
+book:van! You read it!
+book:van! You spelled it!
 book:visit
 book:walk
 book:walked
@@ -1474,8 +1586,11 @@ book:was
 book:watched
 book:way
 book:web
+book:web! You read it!
+book:web! You spelled it!
 book:went
 book:were
+book:whale
 book:what
 book:wheat
 book:will
@@ -1488,20 +1603,17 @@ book:won
 book:woodcutter
 book:woods
 book:you
+book:zebra
 boots
 bove
 bow
 bowl
 box
-box! You read it!
-box! You spelled it!
 boy
 bread
 bricks
 bubbles
 bug
-bug! You read it!
-bug! You spelled it!
 buh
 buns
 buns!
@@ -1530,9 +1642,6 @@ bus and pig!
 bus and star!
 bus and sun!
 bus and tree!
-bus!
-bus! You read it!
-bus! You spelled it!
 butterfly
 c
 cake
@@ -1560,7 +1669,6 @@ cake and pig!
 cake and star!
 cake and sun!
 cake and tree!
-cake!
 car
 car and apple!
 car and ball!
@@ -1586,7 +1694,6 @@ car and pig!
 car and star!
 car and sun!
 car and tree!
-car!
 cat
 cat and apple!
 cat and ball!
@@ -1612,9 +1719,6 @@ cat and pig!
 cat and star!
 cat and sun!
 cat and tree!
-cat!
-cat! You read it!
-cat! You spelled it!
 caterpillar
 chair
 checkmark
@@ -1649,13 +1753,10 @@ cow and pig!
 cow and star!
 cow and sun!
 cow and tree!
-cow!
 crocodile
 cross
 crown
 cup
-cup! You read it!
-cup! You spelled it!
 cupcake
 cupcakes
 d
@@ -1686,9 +1787,6 @@ dog and pig!
 dog and star!
 dog and sun!
 dog and tree!
-dog!
-dog! You read it!
-dog! You spelled it!
 dogbed
 dogbowl
 dogbowl-empty
@@ -1813,7 +1911,6 @@ duck and pig!
 duck and star!
 duck and sun!
 duck and tree!
-duck!
 duh
 e
 egg
@@ -1841,7 +1938,6 @@ egg and pig!
 egg and star!
 egg and sun!
 egg and tree!
-egg!
 eh
 elephant
 es:A
@@ -2207,7 +2303,6 @@ fish and pig!
 fish and star!
 fish and sun!
 fish and tree!
-fish!
 flag
 flats
 fleece
@@ -2237,12 +2332,9 @@ flower and pig!
 flower and star!
 flower and sun!
 flower and tree!
-flower!
 flowercrown
 footprints
 fox
-fox! You read it!
-fox! You spelled it!
 frog
 frog and apple!
 frog and ball!
@@ -2268,7 +2360,6 @@ frog and pig!
 frog and star!
 frog and sun!
 frog and tree!
-frog!
 g
 garden
 gem
@@ -2309,9 +2400,6 @@ hat and pig!
 hat and star!
 hat and sun!
 hat and tree!
-hat!
-hat! You read it!
-hat! You spelled it!
 heart
 heart and apple!
 heart and ball!
@@ -2337,11 +2425,8 @@ heart and pig!
 heart and star!
 heart and sun!
 heart and tree!
-heart!
 heels
 hen
-hen! You read it!
-hen! You spelled it!
 high,
 horse
 hot
@@ -2371,7 +2456,6 @@ house and pig!
 house and star!
 house and sun!
 house and tree!
-house!
 how
 hug
 huh
@@ -2421,7 +2505,6 @@ moon and pig!
 moon and star!
 moon and sun!
 moon and tree!
-moon!
 morningOrder
 mouse
 mouthwash
@@ -2444,8 +2527,6 @@ pajamas
 palette
 party
 pen
-pen! You read it!
-pen! You spelled it!
 penguin
 pig
 pig and apple!
@@ -2472,9 +2553,6 @@ pig and pig!
 pig and star!
 pig and sun!
 pig and tree!
-pig!
-pig! You read it!
-pig! You spelled it!
 pizza
 polish
 puh
@@ -2545,7 +2623,6 @@ star and pig!
 star and star!
 star and sun!
 star and tree!
-star!
 star,
 stickerWins
 stickers
@@ -2577,9 +2654,6 @@ sun and pig!
 sun and star!
 sun and sun!
 sun and tree!
-sun!
-sun! You read it!
-sun! You spelled it!
 sunHat
 sunHatBand
 sunglasses
@@ -2618,7 +2692,6 @@ tree and pig!
 tree and star!
 tree and sun!
 tree and tree!
-tree!
 trophy
 tshirt
 tuh
@@ -2631,8 +2704,6 @@ uh
 umbrella
 v
 van
-van! You read it!
-van! You spelled it!
 violin
 vitamins
 vvv
@@ -2640,8 +2711,6 @@ w
 wand
 was
 web
-web! You read it!
-web! You spelled it!
 whale
 what
 wheat

@@ -102,7 +102,7 @@ struct DrawingView: View {
                 Button {
                     Haptics.tap()
                     color = crayon.color
-                    Speaker.shared.say(crayon.name)
+                    Speaker.shared.say(Speaker.book + crayon.name)
                 } label: {
                     Circle()
                         .fill(crayon.color)

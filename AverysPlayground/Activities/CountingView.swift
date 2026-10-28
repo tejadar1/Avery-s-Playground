@@ -76,10 +76,10 @@ struct CountingView: View {
         }
         if isDone {
             wins += 1
-            say("\(number)")  // the last number; the confetti does the cheering
+            say("\(number)", voice: Speaker.book)  // the last number; the confetti does the cheering
         } else {
             Haptics.tap()
-            say("\(counted.count)")
+            say("\(counted.count)", voice: Speaker.book)
         }
     }
 
@@ -89,11 +89,11 @@ struct CountingView: View {
         say("Let's count to \(value)!", hint: "Tap each one.")
     }
 
-    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.
-    private func say(_ text: String, hint: String = "") {
+    /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, in Coco's voice or `voice` (like Speaker.book).
+    private func say(_ text: String, hint: String = "", voice: String = "") {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = [text, hint].filter { !$0.isEmpty }.joined(separator: " ") }
         cheerCount += 1
-        Speaker.shared.say(text)
+        Speaker.shared.say(voice + text)
     }
 }
 
