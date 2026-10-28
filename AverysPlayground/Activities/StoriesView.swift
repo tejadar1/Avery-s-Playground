@@ -48,6 +48,44 @@ struct Story: Hashable {
             Page(pictures: ["dog", "cat", "duck", "bread"], text: "Who will help me eat it? I will, said the dog, the cat, and the duck.", setting: .home),
             Page(pictures: ["hen", "chick", "bread"], text: "No, said the hen. My chicks and I will eat it!", setting: .home),
         ]),
+        Story(title: "The Gingerbread Man", cover: "gingerbread", color: Color(red: 0.8, green: 0.52, blue: 0.3), pages: [
+            Page(pictures: ["grandma", "fire"], text: "A little old woman baked a gingerbread man.", setting: .home),
+            Page(pictures: ["gingerbread", "footprints"], text: "He jumped up and ran away! Run, run, as fast as you can!"),
+            Page(pictures: ["cow", "horse", "gingerbread"], text: "The cow and the horse chased him. You can't catch me, I'm the gingerbread man!"),
+            Page(pictures: ["river", "fox"], text: "He came to a river. A sly fox said, hop on my back!"),
+            Page(pictures: ["gingerbread", "house"], text: "But the gingerbread man jumped to the other side and ran all the way home!"),
+        ]),
+        Story(title: "Little Red Riding Hood", cover: "girl", color: Color(red: 0.86, green: 0.25, blue: 0.3), pages: [
+            Page(pictures: ["girl", "grandma"], text: "Little Red Riding Hood went to visit her grandma."),
+            Page(pictures: ["girl", "flower", "tree"], text: "She walked through the woods and picked flowers."),
+            Page(pictures: ["wolf", "tree"], text: "A big bad wolf saw her. Where are you going? he asked."),
+            Page(pictures: ["wolf", "bed"], text: "The wolf ran to grandma's house and hid in her bed.", setting: .home),
+            Page(pictures: ["girl", "wolf"], text: "Grandma, what big eyes you have! All the better to see you with!", setting: .home),
+            Page(pictures: ["girl", "grandma", "heart"], text: "A woodcutter chased the wolf away, and they all had a big hug.", setting: .home),
+        ]),
+        Story(title: "The Lion and the Mouse", cover: "lion", color: Color(red: 0.93, green: 0.7, blue: 0.3), pages: [
+            Page(pictures: ["lion", "sleep"], text: "A big lion was sleeping in the sun."),
+            Page(pictures: ["mouse", "lion"], text: "A little mouse ran over his nose and woke him up!"),
+            Page(pictures: ["lion", "mouse"], text: "Please let me go, said the mouse. One day I will help you."),
+            Page(pictures: ["lion", "web"], text: "Then the lion got stuck in a hunter's net."),
+            Page(pictures: ["mouse", "web"], text: "The little mouse chewed and chewed the ropes."),
+            Page(pictures: ["lion", "mouse", "heart"], text: "The lion was free! Little friends can be big helpers."),
+        ]),
+        Story(title: "Jack and the Beanstalk", cover: "sprout", color: Color(red: 0.4, green: 0.68, blue: 0.4), pages: [
+            Page(pictures: ["boy", "cow"], text: "Jack traded his cow for some magic beans."),
+            Page(pictures: ["sprout", "moon"], text: "He planted the beans, and they grew up into the sky overnight!", setting: .night),
+            Page(pictures: ["boy", "sprout"], text: "Jack climbed up, up, up the beanstalk."),
+            Page(pictures: ["house", "footprints"], text: "At the top was a giant's castle. Fee, fi, fo, fum!"),
+            Page(pictures: ["hen", "egg"], text: "Jack found a hen that laid golden eggs.", setting: .home),
+            Page(pictures: ["boy", "hen", "house"], text: "He climbed down fast and took the hen home to his mom."),
+        ]),
+        Story(title: "The Boy Who Cried Wolf", cover: "sheep", color: Color(red: 0.55, green: 0.62, blue: 0.85), pages: [
+            Page(pictures: ["boy", "sheep"], text: "A boy watched the sheep on a hill."),
+            Page(pictures: ["boy", "house"], text: "Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!"),
+            Page(pictures: ["boy", "sheep"], text: "He did it again. Everyone came running. No wolf!"),
+            Page(pictures: ["wolf", "sheep"], text: "Then a real wolf came. Wolf! Wolf! he cried. But nobody came."),
+            Page(pictures: ["boy", "heart"], text: "The boy learned to always tell the truth."),
+        ]),
     ]
 
     /// Retold in simple Spanish. Juan Bobo and La Ciguapa come from Dominican folklore;

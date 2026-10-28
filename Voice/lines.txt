@@ -48,14 +48,20 @@
 9
 A
 A beach!
+A big bad wolf saw her. Where are you going? he asked.
+A big lion was sleeping in the sun.
+A boy watched the sheep on a hill.
 A coral reef!
 A farm!
 A garden!
+A little mouse ran over his nose and woke him up!
+A little old woman baked a gingerbread man.
 A match! Go again!
 A night sky!
 A sharp
 A sticker to find
 A treat! Mochi does a happy dance!
+A woodcutter chased the wolf away, and they all had a big hug.
 ABC
 AVERY
 All clean!
@@ -68,6 +74,7 @@ All rinsed!
 Another sticker! Yay!
 Anywhere
 Apple
+At the top was a giant's castle. Fee, fi, fo, fum!
 Avery
 Avery! You wrote your name!
 B
@@ -127,6 +134,7 @@ Bubble bath, all clean!
 Buns
 Buns! So cute!
 But he could not blow down the brick house. The three pigs were safe!
+But the gingerbread man jumped to the other side and ran all the way home!
 C
 C sharp
 Canvas
@@ -367,6 +375,7 @@ Gown! Holy guacamole, I love it!
 Gown! Ooh la la!
 Gown! So stylish!
 Gown! Wowza bowza!
+Grandma, what big eyes you have! All the better to see you with!
 Grapes
 Green
 Green! Like a frog.
@@ -381,6 +390,11 @@ Halfway there! Keep going!
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
 Hats
+He came to a river. A sly fox said, hop on my back!
+He climbed down fast and took the hen home to his mom.
+He did it again. Everyone came running. No wolf!
+He jumped up and ran away! Run, run, as fast as you can!
+He planted the beans, and they grew up into the sky overnight!
 Hear the word
 Hearts
 Hearts win! Snap snap!
@@ -515,6 +529,10 @@ Ice cream
 In the lines
 It's a tie! Everybody wins a hug!
 J
+Jack and the Beanstalk
+Jack climbed up, up, up the beanstalk.
+Jack found a hen that laid golden eggs.
+Jack traded his cow for some magic beans.
 Juice
 Jumping jellybeans!
 K
@@ -543,6 +561,8 @@ Let's wash your hair! Rub on the shampoo.
 Lights out
 Lily
 Lion
+Little Red Riding Hood
+Little Red Riding Hood went to visit her grandma.
 Look at that shine!
 Looking good!
 M
@@ -664,6 +684,7 @@ Pink
 Pink! Like a flower.
 Play
 Play again
+Please let me go, said the mouse. One day I will help you.
 Ponytail
 Ponytail! So cute!
 Poof! All gone!
@@ -714,6 +735,7 @@ She found a little house. Nobody was home.
 She tried three beds and fell fast asleep.
 She tried three bowls of porridge. This one is just right!
 She tried three chairs. This one is just right!
+She walked through the woods and picked flowers.
 She wants it down to her shoulders!
 She wants it short and cute!
 She wants just a little trim!
@@ -833,15 +855,25 @@ That color is so pretty!
 That sticker is so silly!
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
+The Boy Who Cried Wolf
+The Gingerbread Man
+The Lion and the Mouse
 The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
+The boy learned to always tell the truth.
+The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 The first pig built a house of straw.
+The lion was free! Little friends can be big helpers.
+The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
 The second pig built a house of sticks.
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
+The wolf ran to grandma's house and hid in her bed.
+Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
+Then the lion got stuck in a hunter's net.
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
@@ -902,6 +934,7 @@ Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
+Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
 Woof woof!
 Wowza bowza!
@@ -1095,42 +1128,73 @@ body
 body-over
 bone
 book
+book:A
+book:A big bad wolf saw her. Where are you going? he asked.
+book:A big lion was sleeping in the sun.
+book:A boy watched the sheep on a hill.
 book:A is for Apple!
+book:A little mouse ran over his nose and woke him up!
+book:A little old woman baked a gingerbread man.
+book:A woodcutter chased the wolf away, and they all had a big hug.
 book:A!
+book:All
+book:At
+book:At the top was a giant's castle. Fee, fi, fo, fum!
 book:B is for Bear!
 book:B!
 book:But
 book:But he could not blow down the brick house. The three pigs were safe!
+book:But the gingerbread man jumped to the other side and ran all the way home!
 book:C is for Cat!
 book:C!
 book:D is for Dog!
 book:D!
 book:E is for Elephant!
 book:E!
+book:Everyone
 book:F is for Fish!
 book:F!
+book:Fee
 book:Fox ends with X!
 book:G is for Grapes!
 book:G!
 book:Goldilocks
 book:Goldilocks and the Three Bears
 book:Goldilocks went for a walk in the woods.
+book:Grandma
+book:Grandma, what big eyes you have! All the better to see you with!
 book:H is for Horse!
 book:H!
 book:Hare
 book:Hare ran far ahead and took a nap under a tree.
 book:Hare was fast. Tortoise was slow.
+book:He
+book:He came to a river. A sly fox said, hop on my back!
+book:He climbed down fast and took the hen home to his mom.
+book:He did it again. Everyone came running. No wolf!
+book:He jumped up and ran away! Run, run, as fast as you can!
+book:He planted the beans, and they grew up into the sky overnight!
+book:Hood
 book:I
 book:I is for Ice cream!
 book:I!
+book:I'm
 book:J is for Juice!
 book:J!
+book:Jack
+book:Jack and the Beanstalk
+book:Jack climbed up, up, up the beanstalk.
+book:Jack found a hen that laid golden eggs.
+book:Jack traded his cow for some magic beans.
 book:K is for Kite!
 book:K!
 book:L is for Lion!
 book:L!
 book:Let's
 book:Let's have a race, said Hare.
+book:Little
+book:Little Red Riding Hood
+book:Little Red Riding Hood went to visit her grandma.
 book:M is for Moon!
 book:M!
 book:My
@@ -1142,12 +1206,18 @@ book:Nobody
 book:Not
 book:O is for Octopus!
 book:O!
+book:One
 book:P is for Penguin!
 book:P!
+book:Please
+book:Please let me go, said the mouse. One day I will help you.
 book:Q is for Queen!
 book:Q!
 book:R is for Rainbow!
 book:R!
+book:Red
+book:Riding
+book:Run
 book:S is for Sun!
 book:S!
 book:She
@@ -1156,22 +1226,34 @@ book:She found a little house. Nobody was home.
 book:She tried three beds and fell fast asleep.
 book:She tried three bowls of porridge. This one is just right!
 book:She tried three chairs. This one is just right!
+book:She walked through the woods and picked flowers.
 book:Slow
 book:So
 book:So she planted it all by herself. The wheat grew tall.
 book:T is for Turtle!
 book:T!
 book:The
+book:The Boy Who Cried Wolf
+book:The Gingerbread Man
+book:The Lion and the Mouse
 book:The Little Red Hen
 book:The Three Little Pigs
 book:The Tortoise and the Hare
 book:The big bad wolf huffed and puffed and blew the straw and stick houses down!
+book:The boy learned to always tell the truth.
+book:The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 book:The end!
 book:The first pig built a house of straw.
+book:The lion was free! Little friends can be big helpers.
+book:The little mouse chewed and chewed the ropes.
 book:The little red hen found some wheat.
 book:The second pig built a house of sticks.
 book:The third pig built a house of bricks.
 book:The three bears came home! Goldilocks woke up and ran all the way home.
+book:The wolf ran to grandma's house and hid in her bed.
+book:Then
+book:Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
+book:Then the lion got stuck in a hunter's net.
 book:This
 book:Three
 book:Three little pigs went out to build three little houses.
@@ -1184,30 +1266,46 @@ book:V is for Violin!
 book:V!
 book:W is for Whale!
 book:W!
+book:Where
 book:Who
 book:Who will help me eat it? I will, said the dog, the cat, and the duck.
 book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
+book:Wolf
+book:Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 book:X!
 book:Y is for Yo-yo!
 book:Y!
+book:You
 book:Z is for Zebra!
 book:Z!
 book:a
+book:again
 book:ahead
 book:all
+book:always
 book:and
+book:are
+book:as
+book:asked
 book:asleep
+book:away
+book:back
 book:bad
 book:baked
 book:bat
+book:be
+book:beans
+book:beanstalk
 book:bears
 book:bed
 book:beds
+book:better
 book:big
 book:blew
 book:blow
 book:bowls
 book:box
+book:boy
 book:bread
 book:brick
 book:bricks
@@ -1217,48 +1315,105 @@ book:built
 book:bus
 book:by
 book:came
+book:can
+book:can't
+book:castle
 book:cat
+book:catch
 book:chairs
+book:chased
+book:chewed
 book:chicks
+book:climbed
 book:could
+book:cow
+book:cried
 book:cup
+book:day
+book:did
 book:dog
 book:down
 book:duck
 book:eat
+book:eggs
+book:eyes
 book:far
 book:fast
 book:fell
+book:fi
 book:first
+book:flowers
+book:fo
 book:for
 book:found
 book:fox
+book:free
+book:friends
+book:fum
+book:fun
+book:giant's
+book:gingerbread
+book:go
 book:going
+book:golden
+book:got
+book:grandma
+book:grandma's
 book:grew
+book:had
 book:hat
 book:have
 book:he
 book:help
+book:helpers
 book:hen
+book:her
 book:herself
+book:hid
+book:hill
+book:him
+book:his
 book:home
+book:hop
+book:horse
 book:house
 book:houses
 book:huffed
+book:hug
+book:hunter's
 book:in
 book:into
 book:is
 book:it
+book:jumped
 book:just
 book:kept
+book:laid
+book:learned
+book:let
+book:lion
 book:little
+book:magic
+book:man
 book:me
+book:mom
+book:mouse
+book:my
 book:nap
+book:net
+book:nobody
+book:nose
 book:not
 book:of
+book:old
+book:on
 book:one
+book:other
 book:out
+book:over
+book:overnight
 book:pen
+book:picked
 book:pig
 book:pigs
 book:plant
@@ -1267,43 +1422,72 @@ book:porridge
 book:puffed
 book:race
 book:ran
+book:real
 book:red
 book:right
+book:river
+book:ropes
+book:run
+book:running
 book:safe
 book:said
+book:saw
 book:second
+book:see
 book:she
+book:sheep
+book:shouted
+book:side
+book:sky
+book:sleeping
 book:slow
+book:sly
 book:some
 book:steady
 book:stick
 book:sticks
 book:straw
+book:stuck
 book:sun
 book:tall
+book:tell
+book:that
 book:the
+book:they
 book:third
 book:three
+book:through
 book:to
 book:took
+book:top
+book:traded
 book:tree
 book:tried
+book:truth
 book:under
 book:up
 book:van
+book:visit
 book:walk
+book:walked
 book:was
+book:watched
 book:way
 book:web
 book:went
 book:were
+book:what
 book:wheat
 book:will
 book:wins
+book:with
 book:woke
 book:wolf
+book:woman
 book:won
+book:woodcutter
 book:woods
+book:you
 boots
 bove
 bow
@@ -1311,6 +1495,7 @@ bowl
 box
 box! You read it!
 box! You spelled it!
+boy
 bread
 bricks
 bubbles
@@ -1996,6 +2181,7 @@ eyes-under
 f
 farm
 fff
+fire
 fish
 fish and apple!
 fish and ball!
@@ -2086,8 +2272,10 @@ frog!
 g
 garden
 gem
+gingerbread
 girl
 gown
+grandma
 grapes
 guh
 h
@@ -2294,6 +2482,7 @@ purse
 queen
 rabbit
 rainbow
+river
 room
 ry
 s
