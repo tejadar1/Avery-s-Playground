@@ -109,5 +109,7 @@ for a in bingo:
 friends = re.findall(r'Friend\(name: "(\w+)"', (app / "Support" / "Customers.swift").read_text())
 patients = re.findall(r'case \.(?:lion|bear|bunny|kitty): "(\w+)"', src["DentistView.swift"])
 lines.update(f"Hi {name}!" for name in friends + patients)
+tools = re.search(r'enum DentistTool.*?\n(.*?)\n', src["DentistView.swift"]).group(1)
+lines.update(name + "!" for name in re.findall(r'= "(\w+)"', tools))
 
 print("\n".join(sorted(lines)))

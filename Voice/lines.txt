@@ -117,6 +117,7 @@ Brown! Like a bear.
 Brush
 Brush hair
 Brush teeth
+Brush!
 Bubble bath, all clean!
 Buns
 Buns! So cute!
@@ -324,7 +325,9 @@ Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Fish
 Fix
+Fix!
 Floss
+Floss!
 Flower crown
 Flower crown! Fashion show time!
 Flower crown! Holy guacamole, I love it!
@@ -668,6 +671,7 @@ Red! Like a strawberry.
 Remover
 Rinse
 Rinse off all the bubbles!
+Rinse!
 Rosa
 Rub shampoo all over her hair!
 S
