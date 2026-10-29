@@ -403,7 +403,7 @@ struct PianoView: View {
         stopListening()
         lesson = song.map { SongLesson(song: $0) }
         if let song {
-            say("\(song.name)!", hint: "Press the key with the star, or tap Listen.", voice: Speaker.book)
+            say("\(song.name)!", hint: "Play the star key, or tap Listen.", voice: Speaker.book)
         } else {
             say("Free play!", hint: "Tap any key.")
         }
