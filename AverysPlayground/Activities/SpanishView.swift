@@ -142,15 +142,35 @@ enum SpanishLesson: CaseIterable {
     }
 }
 
+/// "¿Dónde está…?": she hears a Spanish word and finds its picture among three. Recalling a word teaches it
+/// better than only hearing it.
+struct SpanishQuiz: Equatable {
+    let answer: SpanishWord
+    let choices: [SpanishWord]
+
+    /// Three words with different pictures, never the same answer twice in a row.
+    static func random(from words: [SpanishWord], after last: SpanishWord? = nil) -> SpanishQuiz {
+        var seen = Set<String>()
+        let distinct = words.shuffled().filter { seen.insert($0.picture).inserted }
+        let answer = distinct.first { $0 != last } ?? distinct[0]
+        return SpanishQuiz(answer: answer, choices: ([answer] + distinct.filter { $0 != answer }.prefix(2)).shuffled())
+    }
+}
+
 struct SpanishView: View {
     @State private var lesson = SpanishLesson.phrases
     @State private var selected: SpanishWord?
+    @State private var quiz: SpanishQuiz?
+    @State private var isSolved = false
+    @State private var wrongPick: SpanishWord?
+    @State private var shakes = 0
+    @State private var wins = 0
     @State private var cheer = "¡Hola! Tap a card to hear it in Spanish."
     @State private var cheerCount = 0
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: shakes)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12 * uiScale) {
@@ -174,33 +194,124 @@ struct SpanishView: View {
                 .padding(.vertical, 8 * uiScale)
             }
 
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 16 * uiScale)], spacing: 20 * uiScale) {
-                    ForEach(lesson.words, id: \.self) { word in
-                        Button { say(word) } label: {
-                            VStack(spacing: 6 * uiScale) {
-                                picture(word)
-                                Text(word.spanish)
-                                    .font(.kid(24))
-                                    .lineLimit(1)
-                                    .foregroundStyle(Color.outline)
-                                Text(word.english)
-                                    .font(.system(size: 16 * uiScale, weight: .semibold, design: .rounded))
-                                    .foregroundStyle(.secondary)
+            Button(action: toggleQuiz) {
+                Label(quiz == nil ? "¿Dónde está?" : "Cards", systemImage: quiz == nil ? "questionmark.circle.fill" : "square.grid.2x2.fill")
+                    .font(.kid(20))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 18 * uiScale)
+                    .frame(height: 46 * uiScale)
+                    .cartoonCard(Color(red: 0.95, green: 0.55, blue: 0.4), cornerRadius: 23 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+
+            if let quiz { quizView(quiz) } else {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 16 * uiScale)], spacing: 20 * uiScale) {
+                        ForEach(lesson.words, id: \.self) { word in
+                            Button { say(word) } label: {
+                                VStack(spacing: 6 * uiScale) {
+                                    picture(word)
+                                    Text(word.spanish)
+                                        .font(.kid(24))
+                                        .lineLimit(1)
+                                        .foregroundStyle(Color.outline)
+                                    Text(word.english)
+                                        .font(.system(size: 16 * uiScale, weight: .semibold, design: .rounded))
+                                        .foregroundStyle(.secondary)
+                                }
+                                .multilineTextAlignment(.center)
+                                .minimumScaleFactor(0.6)
+                                .frame(maxWidth: .infinity, minHeight: 150 * uiScale)
+                                .padding(.horizontal, 8 * uiScale)
+                                .cartoonCard(word == selected ? .yellow : .white)
                             }
-                            .multilineTextAlignment(.center)
-                            .minimumScaleFactor(0.6)
-                            .frame(maxWidth: .infinity, minHeight: 150 * uiScale)
-                            .padding(.horizontal, 8 * uiScale)
-                            .cartoonCard(word == selected ? .yellow : .white)
+                            .buttonStyle(SquishyButtonStyle())
                         }
-                        .buttonStyle(SquishyButtonStyle())
                     }
+                    .padding()
                 }
-                .padding()
             }
         }
         .background(Scenery(.fiesta).ignoresSafeArea())
+        .celebration(wins)
+    }
+
+    /// The Spanish word to find (tap to hear it again) over three pictures.
+    @ViewBuilder private func quizView(_ quiz: SpanishQuiz) -> some View {
+        Button { Speaker.shared.say(quiz.answer.spanish, language: "es-MX") } label: {
+            Label(quiz.answer.spanish, systemImage: "speaker.wave.2.fill")
+                .font(.kid(34))
+                .foregroundStyle(Color.outline)
+                .padding(.horizontal, 24 * uiScale)
+                .frame(height: 80 * uiScale)
+                .cartoonCard(Color(red: 1.0, green: 0.95, blue: 0.75), cornerRadius: 30 * uiScale)
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .padding(.top, 12 * uiScale)
+
+        Spacer()
+
+        HStack(spacing: 16 * uiScale) {
+            ForEach(quiz.choices, id: \.self) { choice in
+                Button { answer(choice) } label: {
+                    VStack(spacing: 4 * uiScale) {
+                        picture(choice)
+                        if isSolved && choice == quiz.answer {
+                            Text(choice.english).font(.kid(16)).foregroundStyle(Color.outline).lineLimit(1).minimumScaleFactor(0.6)
+                        }
+                    }
+                    .frame(width: 110 * uiScale, height: 120 * uiScale)
+                    .cartoonCard(isSolved && choice == quiz.answer ? Color(red: 0.6, green: 0.85, blue: 0.55) : .white)
+                }
+                .buttonStyle(SquishyButtonStyle())
+                .phaseAnimator([CGFloat(0), -14, 14, 0], trigger: shakes) { content, x in
+                    content.offset(x: choice == wrongPick ? x : 0)
+                } animation: { _ in .linear(duration: 0.08) }
+                .accessibilityLabel(choice.english)
+            }
+        }
+        .padding(.bottom, 40 * uiScale)
+    }
+
+    private func toggleQuiz() {
+        Haptics.tap()
+        if quiz == nil { nextQuiz() } else { withAnimation(.spring) { quiz = nil } }
+    }
+
+    private func nextQuiz() {
+        withAnimation(.spring) {
+            quiz = .random(from: lesson.words, after: quiz?.answer)
+            isSolved = false
+            wrongPick = nil
+            cheer = "¿Dónde está…? Tap the picture!"
+        }
+        cheerCount += 1
+        if let quiz { Speaker.shared.say(quiz.answer.spanish, language: "es-MX") }
+    }
+
+    private func answer(_ choice: SpanishWord) {
+        guard let quiz, !isSolved else { return }
+        if choice == quiz.answer {
+            wins += 1
+            withAnimation(.spring) {
+                isSolved = true
+                cheer = "¡Sí! \(quiz.answer.spanish) is \(quiz.answer.english)!"
+            }
+            cheerCount += 1
+            // The English meaning in Bella's voice, then Coco cheers
+            Speaker.shared.say(Speaker.book + quiz.answer.english, then: Hooray.random)
+            Task {
+                try? await Task.sleep(for: .seconds(2.5))
+                if self.quiz == quiz { nextQuiz() }
+            }
+        } else {
+            Haptics.tap()
+            wrongPick = choice
+            shakes += 1
+            withAnimation { cheer = "Hee hee, look again! ¿Dónde está…?" }
+            cheerCount += 1
+            Speaker.shared.say(quiz.answer.spanish, language: "es-MX")
+        }
     }
 
     private static let colors: [String: Color] = [
@@ -229,6 +340,7 @@ struct SpanishView: View {
     private func pick(_ item: SpanishLesson) {
         Haptics.tap()
         withAnimation { lesson = item; selected = nil }
+        if quiz != nil { return nextQuiz() }  // a new lesson's words in the quiz
         Speaker.shared.say(spanish: item.title, english: item.english)
     }
 
