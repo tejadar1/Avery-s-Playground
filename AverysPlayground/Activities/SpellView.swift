@@ -1,6 +1,7 @@
 import SwiftUI
 
 /// Spelling a word from letter tiles: its letters plus two extras, mixed up, placed into the slots in order.
+/// Like sound boxes (Elkonin boxes): one box per sound, and "Say it slowly" stretches the word out sound by sound.
 struct Spelling {
     let word: ReadingWord
     let tiles: [Character]
@@ -35,6 +36,8 @@ struct SpellView: View {
     /// After a wrong letter, the right one lights up.
     @State private var hintTile: Int?
     @State private var shakes = 0
+    /// The box whose sound is playing while the word is said slowly.
+    @State private var sounding: Int?
     @State private var cheer = "Spell the word! Tap the letters in order. Tap the picture to hear it."
     @State private var cheerCount = 0
     @State private var wins = 0
@@ -53,6 +56,16 @@ struct SpellView: View {
             .buttonStyle(SquishyButtonStyle())
             .accessibilityLabel("Hear the word")
 
+            Button(action: sayItSlowly) {
+                Label("Say it slowly", systemImage: "waveform")
+                    .font(.kid(20))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 18 * uiScale)
+                    .frame(height: 46 * uiScale)
+                    .cartoonCard(Color(red: 0.36, green: 0.61, blue: 0.84), cornerRadius: 23 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+
             // The slots, filling in left to right
             HStack(spacing: 12 * uiScale) {
                 ForEach(Array(spelling.word.text.enumerated()), id: \.offset) { index, letter in
@@ -67,7 +80,9 @@ struct SpellView: View {
                                 .strokeBorder(Color.outline.opacity(filled ? 1 : 0.4),
                                               style: StrokeStyle(lineWidth: 3 * uiScale, dash: filled ? [] : [8 * uiScale, 6 * uiScale]))
                         )
-                        .scaleEffect(filled ? 1 : 0.95)
+                        .scaleEffect(index == sounding ? 1.15 : filled ? 1 : 0.95)
+                        .background(Color(red: 1.0, green: 0.85, blue: 0.3).opacity(index == sounding ? 0.9 : 0),
+                                    in: RoundedRectangle(cornerRadius: 22 * uiScale, style: .continuous).inset(by: -6 * uiScale))
                 }
             }
             .accessibilityElement(children: .ignore)
@@ -140,6 +155,22 @@ struct SpellView: View {
                 hintTile = nil
             }
             say(newWord.text, voice: Speaker.book)
+            try? await Task.sleep(for: .seconds(1.2))
+            sayItSlowly()
+        }
+    }
+
+    /// Each sound in turn, with its box lighting up: /c/ /a/ /t/.
+    private func sayItSlowly() {
+        let word = spelling.word
+        Task {
+            for (index, letter) in word.text.enumerated() {
+                guard spelling.word == word, let sound = Phonics.sounds[letter] else { break }
+                withAnimation(.spring(response: 0.25, dampingFraction: 0.5)) { sounding = index }
+                Speaker.shared.say(sound.spelled, ipa: sound.ipa)
+                try? await Task.sleep(for: .seconds(0.8))
+            }
+            withAnimation { sounding = nil }
         }
     }
 

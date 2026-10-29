@@ -3,6 +3,7 @@
 -alt
 -over
 -under
+5 and 2
 A
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
@@ -442,6 +443,7 @@ Cool beans!
 Copy this nail
 Copy this!
 Coral
+Count
 Cozy pajamas!
 Croc-tacular!
 Crocodile-tastic!
@@ -657,6 +659,7 @@ Hi Mia!
 Hi Rosa!
 Hi Zoe!
 Hi!
+Hidden dots
 High C
 High heels
 High heels! Fashion show time!
@@ -682,6 +685,8 @@ Hose
 Hot
 Hot Cross Buns
 Hot diggity dog!
+How many did you see?
+How many dots?
 Hugs and kisses
 Hurry
 I
@@ -737,6 +742,7 @@ Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
 Lon
 London Bridge
+Look again!
 Look at that shine!
 Looking good!
 M
@@ -890,6 +896,8 @@ Purse! Wowza bowza!
 Put toys away
 Q
 Queen
+Quick look
+Quick look! Don't count!
 R
 Rainbow
 Ready for school! Have a great day!
@@ -912,6 +920,7 @@ Sandals! Ooh la la!
 Sandals! So stylish!
 Sandals! Wowza bowza!
 Say cheese! Snap snap!
+Say it slowly
 Scissors
 Scrub the teeth until they shine.
 Second picture
@@ -3203,6 +3212,7 @@ wa
 wand
 was
 washed
+waveform
 web
 went
 whale

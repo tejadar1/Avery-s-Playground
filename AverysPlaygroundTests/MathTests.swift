@@ -38,3 +38,17 @@ final class MathTests: XCTestCase {
         XCTAssertTrue(MathProblem(kind: .missingPart, first: 1, second: 2, food: pizza, choices: []).question.contains("1 is on the plate"))
     }
 }
+
+final class TenFrameTests: XCTestCase {
+    func testQuickLookOffersThreeNumbersIncludingTheDots() {
+        var last: Int?
+        for _ in 0..<200 {
+            let round = TenFrameRound.random(after: last)
+            XCTAssertNotEqual(round.dots, last, "never the same twice in a row")
+            XCTAssertTrue((1...10).contains(round.dots))
+            XCTAssertEqual(Set(round.choices).count, 3)
+            XCTAssertTrue(round.choices.contains(round.dots))
+            last = round.dots
+        }
+    }
+}
