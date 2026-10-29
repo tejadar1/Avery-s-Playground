@@ -520,6 +520,8 @@ Levels
 Lights out
 Lily
 Lion
+Listen
+Listen!
 Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
 Lon
@@ -657,6 +659,7 @@ Ponytail
 Ponytail! So cute!
 Poof! All gone!
 Potty time, all done! Wash your hands!
+Press the key with the star, or tap Listen.
 Press the key with the star.
 Pretty hair!
 Pretty pretty pretty!
@@ -778,6 +781,7 @@ Start over
 Stick it anywhere!
 Stick! A sticker!
 Stickers
+Stop
 Stop the timer
 Story
 Story time!
@@ -892,6 +896,7 @@ Wand! Ooh la la!
 Wand! So stylish!
 Wand! Wowza bowza!
 Wash
+Watch the keys.
 Whale
 What a design!
 What color should it be?
@@ -934,6 +939,7 @@ You played Twinkle Twinkle! Holy guacamole, what a song!
 You played Wheels on the Bus! Holy guacamole, what a song!
 You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
+Your turn!
 Yum yum, breakfast!
 Z
 Zebra

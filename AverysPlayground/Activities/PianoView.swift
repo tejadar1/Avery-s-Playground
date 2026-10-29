@@ -154,6 +154,8 @@ struct PianoView: View {
     @State private var wins = 0
     @State private var oops = 0
     @State private var lyricsHeight: CGFloat = 0
+    /// The piano playing the song by itself, while she listens and watches the keys.
+    @State private var autoPlay: Task<Void, Never>?
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
@@ -168,6 +170,10 @@ struct PianoView: View {
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 8 * uiScale)
+            }
+
+            if lesson != nil {
+                listenButton
             }
 
             if let lesson {
@@ -203,6 +209,54 @@ struct PianoView: View {
         }
         .background(Scenery(.stage).ignoresSafeArea())
         .celebration(wins)
+        .onDisappear { stopListening() }
+    }
+
+    /// Plays the whole song by itself, or stops it.
+    private var listenButton: some View {
+        Button(action: listen) {
+            Label(autoPlay == nil ? "Listen" : "Stop", systemImage: autoPlay == nil ? "play.fill" : "stop.fill")
+                .font(.kid(20))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 20 * uiScale)
+                .frame(height: 48 * uiScale)
+                .cartoonCard(autoPlay == nil ? Color(red: 0.45, green: 0.72, blue: 0.42) : Color(red: 0.91, green: 0.4, blue: 0.43), cornerRadius: 24 * uiScale)
+        }
+        .buttonStyle(SquishyButtonStyle())
+    }
+
+    /// The piano plays the song: each key goes down in turn with its word lit up, a little longer at the end of a line.
+    /// Then it's back at the start for her to play.
+    private func listen() {
+        Haptics.tap()
+        guard autoPlay == nil else { return stopListening() }
+        guard let song = lesson?.song else { return }
+        lesson = SongLesson(song: song)
+        say("Listen!", hint: "Watch the keys.")
+        autoPlay = Task {
+            try? await Task.sleep(for: .seconds(0.8))
+            for (index, key) in song.notes.enumerated() {
+                guard !Task.isCancelled else { return }
+                withAnimation(.easeOut(duration: 0.08)) { pressed = key }
+                PianoSound.shared.play(key)
+                try? await Task.sleep(for: .seconds(0.3))
+                guard !Task.isCancelled else { return }
+                withAnimation(.easeOut(duration: 0.15)) { pressed = nil }
+                if var current = lesson, current.play(key) { lesson = current }
+                let endOfLine = song.words[index].last.map { ",.!?".contains($0) } ?? false
+                try? await Task.sleep(for: .seconds(endOfLine ? 0.45 : 0.15))
+            }
+            guard !Task.isCancelled else { return }
+            lesson = SongLesson(song: song)
+            autoPlay = nil
+            say("Your turn!", hint: "Press the key with the star.")
+        }
+    }
+
+    private func stopListening() {
+        autoPlay?.cancel()
+        autoPlay = nil
+        pressed = nil
     }
 
     private var keyboard: some View {
@@ -346,15 +400,20 @@ struct PianoView: View {
     }
 
     private func choose(_ song: PianoSong?) {
+        stopListening()
         lesson = song.map { SongLesson(song: $0) }
         if let song {
-            say("\(song.name)!", hint: "Press the key with the star.", voice: Speaker.book)
+            say("\(song.name)!", hint: "Press the key with the star, or tap Listen.", voice: Speaker.book)
         } else {
             say("Free play!", hint: "Tap any key.")
         }
     }
 
     private func press(_ key: Int) {
+        if autoPlay != nil {  // her own playing takes over from listening
+            stopListening()
+            if let song = lesson?.song { lesson = SongLesson(song: song) }
+        }
         pressed = key
         PianoSound.shared.play(key)
         Haptics.tap()
