@@ -16,7 +16,7 @@ struct Feeling: Equatable {
         Feeling(name: "happy", face: "face-happy", group: "up", help: "Happy! Share your smile with someone.", helpPicture: "sun"),
         Feeling(name: "excited", face: "face-starstruck", group: "up", help: "Excited! Do a happy dance!", helpPicture: "party"),
         Feeling(name: "loved", face: "face-hug", group: "up", help: "Loved. Say I love you too!", helpPicture: "heart"),
-        Feeling(name: "silly", face: "face-yum", group: "silly", help: "Silly! Make a funny face back!", helpPicture: "balloon"),
+        Feeling(name: "silly", face: "face-yum", group: "up", help: "Silly! Make a funny face back!", helpPicture: "balloon"),
         Feeling(name: "sad", face: "face-sad", group: "down", help: "Sad. A big hug can help.", helpPicture: "hug"),
         Feeling(name: "worried", face: "face-please", group: "down", help: "Worried. Tell a grown-up what's on your mind.", helpPicture: "mom"),
         Feeling(name: "scared", face: "face-scared", group: "down", help: "Scared. Hold a grown-up's hand.", helpPicture: "hand"),

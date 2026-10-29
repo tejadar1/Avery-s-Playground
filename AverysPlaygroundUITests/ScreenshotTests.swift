@@ -135,12 +135,14 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Number Race", {
                 self.tap(self.button("Spin"))
-                self.tap(self.button("Square 1"))
+                self.tap(self.app.buttons["Square 1"])  // not "Square 10"
             }),
             ("Coco Says", { self.tap(self.button("Start")) }),
             ("I Spy", {}),
             ("Charades", {
-                self.find("Hold to peek").press(forDuration: 1)
+                let card = self.app.buttons["Hold to peek"]  // the button, not its text, which has the same label
+                _ = card.waitForExistence(timeout: 5)
+                card.press(forDuration: 1)
             }),
             ("Puzzles", {}),
             ("Routines", {

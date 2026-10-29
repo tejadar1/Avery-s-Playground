@@ -59,9 +59,7 @@ struct NumberRaceView: View {
             }
             .padding(.horizontal)
 
-            Spacer()
             board
-            Spacer()
 
             if race.winner != nil {
                 Button(action: newGame) {
@@ -82,18 +80,26 @@ struct NumberRaceView: View {
         .celebration(wins)
     }
 
-    /// Start, then squares 1 to 10 in one straight line, with each side's piece on its square.
+    /// Start, then squares 1 to 10 in one straight line, with each side's piece on its square. On a tall screen
+    /// the line goes up (1 at the bottom), so the squares can be big; it stays one straight numbered line.
     private var board: some View {
         GeometryReader { geo in
             let gap = 4 * uiScale
-            let cell = min((geo.size.width - gap * 10) / 11, 90 * uiScale)
-            HStack(spacing: gap) {
-                ForEach(0...NumberRace.finish, id: \.self) { square in
+            let up = geo.size.height > geo.size.width * 1.2
+            // Each square's width and height.
+            let across = min((geo.size.width - gap * 10) / 11, geo.size.height / 1.3, 110 * uiScale)
+            let width = up ? min(geo.size.width * 0.6, 280 * uiScale) : across
+            let height = up ? min((geo.size.height - gap * 10) / 11, 90 * uiScale) : across * 1.3
+            let size = min(width, height)
+            let line = up ? AnyLayout(VStackLayout(spacing: gap)) : AnyLayout(HStackLayout(spacing: gap))
+            line {
+                ForEach(up ? Array((0...NumberRace.finish).reversed()) : Array(0...NumberRace.finish), id: \.self) { square in
                     let isNext = race.next == square
+                    let inside = up ? AnyLayout(HStackLayout(spacing: size * 0.15)) : AnyLayout(VStackLayout(spacing: 2 * uiScale))
                     Button { hop(square) } label: {
-                        VStack(spacing: 2 * uiScale) {
+                        inside {
                             Text(square == 0 ? "Go" : "\(square)")
-                                .font(.system(size: cell * 0.42, weight: .heavy, design: .rounded))
+                                .font(.system(size: size * (up ? 0.6 : 0.42), weight: .heavy, design: .rounded))
                                 .foregroundStyle(square == 0 ? Color.outline : .white)
                             HStack(spacing: 0) {
                                 ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
@@ -104,16 +110,15 @@ struct NumberRaceView: View {
                                     }
                                 }
                             }
-                            .font(.system(size: cell * 0.3, weight: .bold))
-                            .frame(height: cell * 0.34)
+                            .font(.system(size: size * (up ? 0.55 : 0.3), weight: .bold))
                         }
-                        .frame(width: cell, height: cell * 1.3)
-                        .cartoonCard(square == 0 ? .white : Self.colors[square - 1], cornerRadius: cell * 0.2)
-                        .scaleEffect(isNext ? 1.12 : 1)
+                        .frame(width: width, height: height)
+                        .cartoonCard(square == 0 ? .white : Self.colors[square - 1], cornerRadius: size * 0.2)
+                        .scaleEffect(isNext ? 1.08 : 1)
                         .overlay {
                             if isNext {
-                                RoundedRectangle(cornerRadius: cell * 0.2).strokeBorder(.white, lineWidth: 4 * uiScale)
-                                    .scaleEffect(1.12)
+                                RoundedRectangle(cornerRadius: size * 0.2).strokeBorder(.white, lineWidth: 4 * uiScale)
+                                    .scaleEffect(1.08)
                             }
                         }
                     }
@@ -124,7 +129,6 @@ struct NumberRaceView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(height: 140 * uiScale)
         .padding(.horizontal)
     }
 
