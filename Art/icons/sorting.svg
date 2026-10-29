@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Sort It: an apple going into one basket, a fish in the other -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <circle cx="56" cy="104" r="20" fill="#E9646E"/>
+    <path d="M56 84 Q58 74 64 70" fill="none"/>
+    <path d="M128 104 Q146 86 166 104 Q146 122 128 104Z M128 104 L116 92 L116 116Z" fill="#6FB8F0"/>
+    <path d="M18 122 L94 122 L86 182 L26 182Z" fill="#F2A04A"/>
+    <path d="M106 122 L182 122 L174 182 L114 182Z" fill="#8EC9EE"/>
+    <path d="M100 20 L100 60 M86 46 L100 60 L114 46" fill="none"/>
+  </g>
+  <circle cx="153" cy="101" r="3.5" fill="#4A2C2A"/>
+</svg>

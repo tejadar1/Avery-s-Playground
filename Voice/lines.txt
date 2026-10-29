@@ -44,6 +44,7 @@ All dry!
 All fixed! Holy guacamole!
 All nails
 All rinsed!
+All sorted!
 All the chores are done! What a big helper! Holy guacamole!
 Another sticker! Yay!
 Anywhere
@@ -74,6 +75,7 @@ Bella
 Belly rubs are the best!
 Big hug!
 Big nail
+Big or small?
 Bingo card
 Bingo! You filled your card! Holy guacamole!
 Black
@@ -106,6 +108,7 @@ But he could not blow down the brick house. The three pigs were safe!
 But the gingerbread man jumped to the other side and ran all the way home!
 C
 C sharp
+Calm. Nice and cozy, like a quiet story.
 Canvas
 Cat
 Chore time! Let's help at home.
@@ -514,10 +517,12 @@ Flower crown! Ooh la la!
 Flower crown! So stylish!
 Flower crown! Wowza bowza!
 Food bowl
+Food or clothes?
 Fox
 Fox ends with X!
 Free play
 Free play!
+Fruit or animals?
 G
 G sharp
 Get dressed
@@ -547,6 +552,7 @@ Ha ha ha! That's funny! You did it!
 Hair
 Hair color
 Halfway there! Keep going!
+Happy! Share your smile with someone.
 Hard
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
@@ -573,7 +579,23 @@ Hee hee, not 6!
 Hee hee, not 7!
 Hee hee, not 8!
 Hee hee, not 9!
+Hee hee, not the apple!
+Hee hee, not the banana!
+Hee hee, not the duck!
+Hee hee, not the fish!
+Hee hee, not the flower!
+Hee hee, not the heart!
+Hee hee, not the moon!
+Hee hee, not the star!
+Hee hee, not the strawberry!
+Hee hee, not the sun!
 Hee hee, she likes belly rubs!
+Hee hee, that one feels calm!
+Hee hee, that one feels happy!
+Hee hee, that one feels mad!
+Hee hee, that one feels sad!
+Hee hee, that one feels scared!
+Hee hee, that one feels surprised!
 Hee hee, that's a apple!
 Hee hee, that's a balloon!
 Hee hee, that's a bat!
@@ -657,6 +679,7 @@ Hee hee, the pig isn't on your card.
 Hee hee, the star isn't on your card.
 Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
+Hee hee, try the other one!
 Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
 Hi Avery!
@@ -710,6 +733,7 @@ I'll keep your crayon inside the lines!
 Ice cream
 In the box
 In the lines
+In the sky or in the water?
 It's a tie! Everybody wins a hug!
 Itsy Bitsy Spider
 J
@@ -754,6 +778,7 @@ Looking good!
 M
 Ma
 Mac
+Mad. Take a big breath, and blow it out slowly.
 Make your bed
 Mary Had a Little Lamb
 Maze board
@@ -868,6 +893,7 @@ Party dress! Holy guacamole, I love it!
 Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
+Pattern
 Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
@@ -918,6 +944,7 @@ Rub rub rub! Happy puppy!
 Rub shampoo all over her hair!
 Russian math
 S
+Sad. A big hug can help.
 Sandals
 Sandals! Fashion show time!
 Sandals! Holy guacamole, I love it!
@@ -926,6 +953,7 @@ Sandals! So stylish!
 Sandals! Wowza bowza!
 Say cheese! Snap snap!
 Say it slowly
+Scared. Hold a grown-up's hand.
 Scissors
 Scrub the teeth until they shine.
 Second picture
@@ -1031,6 +1059,7 @@ Sunglasses! Ooh la la!
 Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
 Super duper pooper scooper!
+Surprised! Tell someone what you saw.
 Sweep sweep! Sparkly floor!
 Sweep the floor
 Swish swish! Minty fresh! What a great smile!
@@ -1130,9 +1159,16 @@ Water the plants
 Whale
 What a design!
 What color should it be?
+What comes next?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Wheels on the Bus
 Which house did the wolf not blow down?
+Which one feels calm?
+Which one feels happy?
+Which one feels mad?
+Which one feels sad?
+Which one feels scared?
+Which one feels surprised?
 Which one rhymes with balloon?
 Which one rhymes with bat?
 Which one rhymes with bear?
@@ -1237,6 +1273,7 @@ all through the town
 alphabet
 an orange
 and
+animals
 apple
 apple and apple!
 apple and ball!
@@ -1266,6 +1303,7 @@ apples
 are.
 as
 avery
+avocado
 b
 backpack
 ball
@@ -1331,6 +1369,7 @@ bee and sun!
 bee and tree!
 bench
 bg
+big
 bingo
 bird
 bird and apple!
@@ -1498,6 +1537,7 @@ book:But he could not blow down the brick house. The three pigs were safe!
 book:But the gingerbread man jumped to the other side and ran all the way home!
 book:C is for Cat!
 book:C!
+book:Calm. Nice and cozy, like a quiet story.
 book:Clothes
 book:Cloud
 book:Coco has fewer!
@@ -1544,6 +1584,7 @@ book:Green
 book:Green! Like a frog.
 book:H is for Horse!
 book:H!
+book:Happy! Share your smile with someone.
 book:Hare
 book:Hare ran far ahead and took a nap under a tree.
 book:Hare was fast. Tortoise was slow.
@@ -1588,6 +1629,7 @@ book:Little Red Riding Hood went to visit her grandma.
 book:London Bridge!
 book:M is for Moon!
 book:M!
+book:Mad. Take a big breath, and blow it out slowly.
 book:Mary Had a Little Lamb!
 book:Mochi has fewer!
 book:Mochi has more!
@@ -1634,6 +1676,8 @@ book:Row Your Boat!
 book:Run
 book:S is for Sun!
 book:S!
+book:Sad. A big hug can help.
+book:Scared. Hold a grown-up's hand.
 book:Scissors
 book:Shampoo
 book:She
@@ -1650,6 +1694,7 @@ book:So
 book:So she planted it all by herself. The wheat grew tall.
 book:Stickers
 book:Styles
+book:Surprised! Tell someone what you saw.
 book:T is for Turtle!
 book:T!
 book:Teal
@@ -1729,6 +1774,7 @@ book:ahead
 book:all
 book:always
 book:and
+book:animals!
 book:apple
 book:apple!
 book:are
@@ -1736,6 +1782,7 @@ book:as
 book:asked
 book:asleep
 book:avocado
+book:avocado!
 book:away
 book:back
 book:bad
@@ -1745,6 +1792,7 @@ book:balloon
 book:balloon and moon rhyme!
 book:balloon!
 book:banana
+book:banana!
 book:bat
 book:bat and cat rhyme!
 book:bat and hat rhyme!
@@ -1752,6 +1800,7 @@ book:bat!
 book:bat! You read it!
 book:bat! You spelled it!
 book:be
+book:beanie!
 book:beans
 book:beanstalk
 book:bear
@@ -1767,6 +1816,7 @@ book:bee and tree rhyme!
 book:bee!
 book:better
 book:big
+book:big!
 book:bird
 book:bird!
 book:black
@@ -1775,6 +1825,7 @@ book:blow
 book:blue
 book:boat
 book:boat!
+book:boots!
 book:bowls
 book:box
 book:box and fox rhyme!
@@ -1783,6 +1834,7 @@ book:box! You read it!
 book:box! You spelled it!
 book:boy
 book:bread
+book:bread!
 book:brick
 book:bricks
 book:bug
@@ -1797,6 +1849,7 @@ book:bus!
 book:bus! You read it!
 book:bus! You spelled it!
 book:butterfly
+book:butterfly!
 book:by
 book:cake
 book:cake!
@@ -1819,11 +1872,15 @@ book:chair!
 book:chairs
 book:chased
 book:cheese
+book:cheese!
 book:chewed
 book:chick
+book:chick!
 book:chicks
 book:climbed
+book:clothes!
 book:cookie
+book:cookie!
 book:could
 book:cow
 book:cow!
@@ -1849,6 +1906,7 @@ book:egg!
 book:eggs
 book:eight
 book:elephant
+book:elephant!
 book:eyes
 book:far
 book:fast
@@ -1862,6 +1920,7 @@ book:flower
 book:flower!
 book:flowers
 book:fo
+book:food!
 book:for
 book:found
 book:four
@@ -1877,6 +1936,7 @@ book:friends
 book:frog
 book:frog and dog rhyme!
 book:frog!
+book:fruit!
 book:fum
 book:fun
 book:gem
@@ -1890,6 +1950,7 @@ book:got
 book:grandma
 book:grandma's
 book:grapes
+book:grapes!
 book:green
 book:grew
 book:had
@@ -1921,6 +1982,7 @@ book:his
 book:home
 book:hop
 book:horse
+book:horse!
 book:house
 book:house and mouse rhyme!
 book:house!
@@ -1929,6 +1991,7 @@ book:huffed
 book:hug
 book:hunter's
 book:ice cream
+book:ice cream!
 book:in
 book:into
 book:is
@@ -1937,15 +2000,19 @@ book:jumped
 book:just
 book:kept
 book:kite
+book:kite!
 book:ladybug
+book:ladybug!
 book:laid
 book:learned
 book:let
 book:lion
+book:lion!
 book:little
 book:magic
 book:man
 book:mango
+book:mango!
 book:mashed plantains
 book:me
 book:milk
@@ -1978,6 +2045,7 @@ book:other
 book:out
 book:over
 book:overnight
+book:pajamas!
 book:pen
 book:pen and hen rhyme!
 book:pen!
@@ -1992,6 +2060,7 @@ book:pig! You spelled it!
 book:pigs
 book:pink
 book:pizza
+book:pizza!
 book:plant
 book:plantain
 book:planted
@@ -1999,6 +2068,7 @@ book:porridge
 book:puffed
 book:purple
 book:rabbit
+book:rabbit!
 book:race
 book:rainbow
 book:ran
@@ -2026,6 +2096,8 @@ book:sky
 book:sleeping
 book:slow
 book:sly
+book:small!
+book:sneakers!
 book:some
 book:star
 book:star and car rhyme!
@@ -2036,12 +2108,14 @@ book:stick
 book:sticks
 book:straw
 book:strawberry
+book:strawberry!
 book:stuck
 book:sun
 book:sun and bun rhyme!
 book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
+book:sunhat!
 book:tall
 book:tell
 book:ten
@@ -2062,7 +2136,9 @@ book:tree!
 book:tried
 book:trophy
 book:truth
+book:tshirt!
 book:turtle
+book:turtle!
 book:two
 book:umbrella
 book:umbrella!
@@ -2087,6 +2163,7 @@ book:web! You spelled it!
 book:went
 book:were
 book:whale
+book:whale!
 book:what
 book:wheat
 book:white
@@ -2173,6 +2250,7 @@ cake and pig!
 cake and star!
 cake and sun!
 cake and tree!
+calm
 came
 car
 car and apple!
@@ -2230,10 +2308,12 @@ chair1
 chalkhouse
 chalksun
 checkmark
+cheese
 chick
 choresOrder
 climbed
 clock
+clothes
 cloud1
 cloud2
 coloringInLines
@@ -2719,6 +2799,12 @@ eyes
 eyes-over
 eyes-under
 f
+face-calm
+face-happy
+face-mad
+face-sad
+face-scared
+face-shock
 fair
 fall
 farm
@@ -2781,6 +2867,7 @@ flower and sun!
 flower and tree!
 flowercrown
 flowers
+food
 footprints
 fox
 frame
@@ -2831,6 +2918,7 @@ hairFront
 hairdryer
 hamster
 hand
+happy
 hat
 hat and apple!
 hat and ball!
@@ -2917,9 +3005,12 @@ hug
 huh
 hurry up
 i
+ice cream
 icecream
 ih
 in
+in the sky
+in the water
 ing
 is
 it
@@ -2947,6 +3038,8 @@ living
 ly
 ly,
 m
+mad
+mango
 mer
 mmm
 mochi
@@ -3057,8 +3150,10 @@ row,
 rug
 ry
 s
+sad
 sandals
 satpinmdgockeurhbfljvwxyz
+scared
 school
 scissors
 shampoo
@@ -3074,6 +3169,7 @@ slice of pizza
 slices of pizza
 slide
 slippers
+small
 sneakers
 snow.
 so
@@ -3170,6 +3266,7 @@ sunHatBand
 sunglasses
 sunhat
 sunrise
+surprised
 swing
 sy
 t

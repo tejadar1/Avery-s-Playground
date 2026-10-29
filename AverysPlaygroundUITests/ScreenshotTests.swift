@@ -91,6 +91,12 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Spell", {}),
             ("Rhyme Time", {}),
+            ("What's Next?", {}),
+            ("Sort It", {
+                self.tap(self.button("Fruit"))
+                self.tap(self.button("Animals"))
+            }),
+            ("Feelings", {}),
             ("Spot It", {
                 self.tap(self.button("Easy"))
                 sleep(1)
@@ -137,7 +143,7 @@ final class ScreenshotTests: XCTestCase {
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Rhyme Time", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe", "Memory", "Routines", "Chores"]
+        let learn = ["Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Piano"], teamUp = ["Bingo", "Tic-Tac-Toe", "Memory", "Routines", "Chores"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
@@ -232,6 +238,8 @@ final class ScreenshotTests: XCTestCase {
     }
 
     private func snap(_ name: String, _ device: String, _ dir: URL) throws {
-        try XCUIScreen.main.screenshot().pngRepresentation.write(to: dir.appendingPathComponent("\(device) \(name).png"))
+        // The artifact upload refuses file names with a "?" (What's Next?)
+        let file = "\(device) \(name).png".replacingOccurrences(of: "?", with: "")
+        try XCUIScreen.main.screenshot().pngRepresentation.write(to: dir.appendingPathComponent(file))
     }
 }

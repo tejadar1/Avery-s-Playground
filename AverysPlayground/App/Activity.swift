@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, maze, spot, piano, reading, rhyme, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines, chores
+    case nails, hair, dressup, dentist, pet, maze, spot, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines, chores
 
     var id: String { rawValue }
 
@@ -17,6 +17,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .piano: "Piano"
         case .reading: "Read"
         case .rhyme: "Rhyme Time"
+        case .patterns: "What's Next?"
+        case .sorting: "Sort It"
+        case .feelings: "Feelings"
         case .math: "Math"
         case .spanish: "Español"
         case .abc: "ABC"
@@ -35,7 +38,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
     var section: HomeSection {
         switch self {
-        case .reading, .rhyme, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
+        case .reading, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .dentist, .pet, .maze, .spot, .colors, .drawing: .play
         case .bingo, .tictactoe, .memory, .routines, .chores: .teamUp
         }
@@ -49,7 +52,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .pet, .maze, .spot: .pet
         case .colors, .drawing: .art
         case .bingo, .tictactoe, .memory, .routines, .chores: .teamUp
-        case .reading, .rhyme, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
+        case .reading, .rhyme, .patterns, .sorting, .feelings, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
         }
     }
 
@@ -68,6 +71,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .piano: Color(red: 0.42, green: 0.5, blue: 0.85)
         case .reading: Color(red: 0.31, green: 0.67, blue: 0.75)
         case .rhyme: Color(red: 0.93, green: 0.45, blue: 0.6)
+        case .patterns: Color(red: 0.62, green: 0.55, blue: 0.9)
+        case .sorting: Color(red: 0.45, green: 0.72, blue: 0.42)
+        case .feelings: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .math: Color(red: 0.9, green: 0.72, blue: 0.3)
         case .spanish: Color(red: 0.36, green: 0.75, blue: 0.68)
         case .abc: Color(red: 0.9, green: 0.42, blue: 0.38)
@@ -97,6 +103,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .piano: PianoView()
         case .reading: StoriesView()
         case .rhyme: RhymeView()
+        case .patterns: PatternView()
+        case .sorting: SortView()
+        case .feelings: FeelingsView()
         case .math: MathView()
         case .spanish: SpanishView()
         case .abc: ABCView()

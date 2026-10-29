@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- What's Next?: red, yellow, red, and a question mark -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round">
+    <circle cx="34" cy="70" r="22" fill="#E9646E"/>
+    <circle cx="86" cy="70" r="22" fill="#F6C945"/>
+    <circle cx="138" cy="70" r="22" fill="#E9646E"/>
+    <rect x="62" y="110" width="76" height="76" rx="16" fill="#9E8CE6"/>
+  </g>
+  <text x="100" y="170" font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="bold" font-size="64" text-anchor="middle" fill="#fff" stroke="#4A2C2A" stroke-width="3">?</text>
+</svg>

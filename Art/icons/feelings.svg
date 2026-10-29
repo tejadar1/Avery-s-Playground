@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Feelings: a happy face and a sad face -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <circle cx="128" cy="118" r="54" fill="#8EC9EE"/>
+    <circle cx="74" cy="84" r="58" fill="#F6C945"/>
+  </g>
+  <circle cx="54" cy="76" r="7" fill="#4A2C2A"/><circle cx="94" cy="76" r="7" fill="#4A2C2A"/>
+  <ellipse cx="44" cy="96" rx="9" ry="6" fill="#F49AC1" opacity=".8"/><ellipse cx="104" cy="96" rx="9" ry="6" fill="#F49AC1" opacity=".8"/>
+  <path d="M56 100 Q74 120 92 100" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="132" cy="140" r="6" fill="#4A2C2A"/><circle cx="160" cy="140" r="6" fill="#4A2C2A"/>
+  <path d="M134 162 Q146 152 158 162" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M168 148 Q164 160 168 166 Q174 160 168 148Z" fill="#fff" stroke="#4A2C2A" stroke-width="2.5"/>
+</svg>

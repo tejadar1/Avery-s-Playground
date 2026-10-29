@@ -83,6 +83,16 @@ for group in groups:
 for word in re.findall(r'text: "(\w+)"', rhyme):
     lines.update({f"Hee hee, that's a {word}!", f"book:{word}!"})
 
+# What's Next?, Sort It and Feelings: Bella names the picture; the "Hee hee" lines name the wrong one
+for word in re.findall(r'text: "(\w+)"', src["PatternView.swift"]):
+    lines.update({f"book:{word}!", f"Hee hee, not the {word}!"})
+for word in re.findall(r'"(\w+)"', src["SortView.swift"].split("static let all")[1].split("private static")[0]):
+    lines.add("book:" + ("ice cream" if word == "icecream" else word) + "!")
+for sort in re.findall(r'Basket\(name: "([^"]+)"[^\n]+\n\s+right: Basket\(name: "([^"]+)"', src["SortView.swift"]):
+    lines.add(f"{sort[0].capitalize()} or {sort[1]}?")
+for name, help in re.findall(r'Feeling\(name: "(\w+)", face: "[^"]+", help: "([^"]+)"', src["FeelingsView.swift"]):
+    lines.update({f"Which one feels {name}?", f"Hee hee, that one feels {name}!", "book:" + help})
+
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):
     name = page[0] or page[1]
