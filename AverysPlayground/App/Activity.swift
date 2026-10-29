@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, maze, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines
+    case nails, hair, dressup, dentist, pet, maze, spot, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines
 
     var id: String { rawValue }
 
@@ -13,6 +13,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .dentist: "Dentist"
         case .pet: "Mochi"
         case .maze: "Maze"
+        case .spot: "Spot It"
         case .piano: "Piano"
         case .reading: "Read"
         case .math: "Math"
@@ -33,7 +34,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     var section: HomeSection {
         switch self {
         case .reading, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .dentist, .pet, .maze, .colors, .drawing: .play
+        case .nails, .hair, .dressup, .dentist, .pet, .maze, .spot, .colors, .drawing: .play
         case .bingo, .tictactoe, .memory, .routines: .teamUp
         }
     }
@@ -43,7 +44,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .piano: nil
         case .nails, .hair, .dressup, .dentist: .salon
-        case .pet, .maze: .pet
+        case .pet, .maze, .spot: .pet
         case .colors, .drawing: .art
         case .bingo, .tictactoe, .memory, .routines: .teamUp
         case .reading, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
@@ -61,6 +62,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .dentist: Color(red: 0.4, green: 0.72, blue: 0.9)
         case .pet: Color(red: 0.72, green: 0.52, blue: 0.42)
         case .maze: Color(red: 0.38, green: 0.72, blue: 0.4)
+        case .spot: Color(red: 0.95, green: 0.55, blue: 0.4)
         case .piano: Color(red: 0.42, green: 0.5, blue: 0.85)
         case .reading: Color(red: 0.31, green: 0.67, blue: 0.75)
         case .math: Color(red: 0.9, green: 0.72, blue: 0.3)
@@ -87,6 +89,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .dentist: DentistView()
         case .pet: PetView()
         case .maze: MazeView()
+        case .spot: SpotView()
         case .piano: PianoView()
         case .reading: StoriesView()
         case .math: MathView()

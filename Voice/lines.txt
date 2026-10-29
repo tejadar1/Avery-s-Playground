@@ -285,6 +285,8 @@ Drag the hose to spray Mochi.
 Drag to spray Mochi
 Drink of water
 E
+Eagle eyes!
+Easy
 Easy peasy, lemon squeezy!
 Elephant
 Extras
@@ -294,6 +296,10 @@ Fashion show time!
 Feed
 Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
+Find 3 differences!
+Find 5 differences!
+Find 7 differences! Look closely!
+First picture
 Fish
 Fix
 Floss
@@ -315,6 +321,7 @@ Glitter
 Glitter makes everything better!
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
+Good eye!
 Good morning! Let's get ready for school.
 Good morning, sunshine!
 Good night!
@@ -335,6 +342,7 @@ Ha ha ha! That's funny! You did it!
 Hair
 Hair color
 Halfway there! Keep going!
+Hard
 Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
 Hats
@@ -445,6 +453,7 @@ High heels! Holy guacamole, I love it!
 High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
+Hmm, look again! What's different?
 Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
@@ -505,6 +514,7 @@ Let's get her dressed! Pick some clothes.
 Let's have a race, said Hare.
 Let's read! Tap each letter to hear its sound.
 Let's wash your hair! Rub on the shampoo.
+Levels
 Lights out
 Lily
 Lion
@@ -517,6 +527,7 @@ Ma
 Mary Had a Little Lamb
 Maze board
 Maze. Drag Mochi to the bone.
+Medium
 Mia
 Mia's turn
 Mochi
@@ -560,6 +571,7 @@ Necklace! Wowza bowza!
 Nest
 New maze
 New nails
+New pictures
 New sticker!
 Next picture
 Night night, Mochi. Shh!
@@ -595,6 +607,7 @@ Ooh la la!
 Ooh la la, fancy!
 Ooh, fancy pattern!
 Ooh, shiny!
+Ooh, that's different!
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Order
@@ -622,6 +635,7 @@ Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick another nail!
+Pick easy, medium or hard.
 Picture
 Pigtails
 Pigtails! So cute!
@@ -670,6 +684,7 @@ Sandals! Wowza bowza!
 Say cheese! Snap snap!
 Scissors
 Scrub the teeth until they shine.
+Second picture
 Shampoo
 She baked the wheat into bread.
 She found a little house. Nobody was home.
@@ -694,6 +709,7 @@ Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
 Snap snap, hooray!
+Snap snap, you spotted it!
 Snap! I need the apple!
 Snap! I need the ball!
 Snap! I need the bee!
@@ -738,6 +754,7 @@ Sparkle sparkle!
 Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
+Spot the difference! Pick easy, medium or hard.
 Squeaky clean! Shake shake shake!
 Squeaky clean! Start again!
 Stars
@@ -790,6 +807,7 @@ Tap each picture when you do it!
 Tap the keys to play! Or pick a song.
 Tap the nail!
 Tap the teeth with a hole to fix them.
+Tap what's different in the second picture.
 Teal
 Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card.
 That color is so pretty!
@@ -885,10 +903,13 @@ Wowza! You colored the whole night sky!
 X
 Y
 Yellow
+Yes! Keep looking!
 Yippee skippy!
 Yo-yo
 You beat the timer! Holy guacamole!
 You did it, you silly goose!
+You found one!
+You found them all! Holy guacamole, eagle eyes!
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
@@ -2722,6 +2743,7 @@ won
 world
 wuh
 x
+xmark
 you
 yoyo
 zebra

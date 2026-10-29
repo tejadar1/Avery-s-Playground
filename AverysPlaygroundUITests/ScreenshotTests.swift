@@ -89,6 +89,11 @@ final class ScreenshotTests: XCTestCase {
                 }
             }),
             ("Spell", {}),
+            ("Spot It", {
+                self.tap(self.button("Easy"))
+                sleep(1)
+                self.find("First picture").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }),
             ("Coloring", {
                 let picture = self.find("Picture")
                 for (crayon, x, y) in [("Red", 0.56, 0.2), ("Yellow", 0.5, 0.3), ("Green", 0.4, 0.6), ("Orange", 0.5, 0.85)] {

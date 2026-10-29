@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Spot the difference: two little pictures, one with a missing sun, and a magnifying glass -->
+  <g stroke="#4A2C2A" stroke-width="4.5" stroke-linejoin="round">
+    <rect x="14" y="44" width="80" height="96" rx="12" fill="#BFE3F7" transform="rotate(-6 54 92)"/>
+    <rect x="106" y="44" width="80" height="96" rx="12" fill="#BFE3F7" transform="rotate(6 146 92)"/>
+  </g>
+  <g transform="rotate(-6 54 92)">
+    <path d="M16 112 Q54 98 92 112 L92 128 Q92 138 82 138 L26 138 Q16 138 16 128Z" fill="#8FCB6E"/>
+    <circle cx="70" cy="66" r="12" fill="#F6C945" stroke="#4A2C2A" stroke-width="3.5"/>
+    <path d="M30 118 L44 92 L58 118Z" fill="#EE6A8A" stroke="#4A2C2A" stroke-width="3.5" stroke-linejoin="round"/>
+  </g>
+  <g transform="rotate(6 146 92)">
+    <path d="M108 112 Q146 98 184 112 L184 128 Q184 138 174 138 L118 138 Q108 138 108 128Z" fill="#8FCB6E"/>
+    <path d="M122 118 L136 92 L150 118Z" fill="#EE6A8A" stroke="#4A2C2A" stroke-width="3.5" stroke-linejoin="round"/>
+  </g>
+  <g stroke="#4A2C2A" stroke-linecap="round">
+    <line x1="172" y1="170" x2="150" y2="146" stroke-width="16"/>
+    <line x1="172" y1="170" x2="150" y2="146" stroke="#C98A4B" stroke-width="9"/>
+    <circle cx="136" cy="128" r="26" fill="#fff" fill-opacity="0.55" stroke-width="7"/>
+  </g>
+  <ellipse cx="128" cy="118" rx="9" ry="5" fill="#fff" transform="rotate(-30 128 118)"/>
+</svg>
