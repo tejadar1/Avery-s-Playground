@@ -19,6 +19,7 @@ A sharp
 A sticker to find
 A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
+A! /a/! A is for apple!
 ABC
 All clean!
 All done with the bath!
@@ -2892,6 +2893,7 @@ ing
 is
 it
 its
+j
 juice
 k
 kidball
@@ -2899,6 +2901,7 @@ kite
 kle
 ks
 kuh
+l
 la
 ladybug
 lamb,
@@ -3002,7 +3005,9 @@ plant
 polish
 puh
 purse
+q
 queen
+r
 rabbit
 rain
 rain,
@@ -3213,7 +3218,9 @@ world
 wuh
 x
 xmark
+y
 you
 your
 yoyo
+z
 zebra

@@ -98,7 +98,12 @@ struct ABCView: View {
     private func choose(_ item: Letter) {
         selected = item
         Haptics.tap()
-        Speaker.shared.say(Speaker.book + item.spoken)  // Bella says the letter and word, clearly
+        // Bella says the letter, its sound, then the word: "A! /a/! A is for apple!" Sounds matter more than names for reading.
+        if let sound = Phonics.sounds[Character(item.letter.lowercased())] {
+            Speaker.shared.say(Speaker.book + "\(item.letter)!", then: "sound:" + sound.ipa, Speaker.book + item.spoken)
+        } else {
+            Speaker.shared.say(Speaker.book + item.spoken)
+        }
         bounceCount += 1
     }
 }

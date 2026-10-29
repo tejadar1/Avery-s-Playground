@@ -38,13 +38,15 @@ final class Speaker {
         speak(utterance)
     }
 
-    /// Says two lines one after the other, like a letter and then a cheer.
-    func say(_ first: String, then second: String) {
-        if let one = Self.recording(for: first), let two = Self.recording(for: second) {
-            play([one, two], pauses: [0.15])
+    /// Says lines one after the other, like a letter and then a cheer.
+    func say(_ first: String, then rest: String...) {
+        let lines = [first] + rest
+        let urls = lines.compactMap { Self.recording(for: $0) }
+        if urls.count == lines.count {
+            play(urls, pauses: Array(repeating: 0.15, count: lines.count - 1))
             return
         }
-        speak(AVSpeechUtterance(string: Self.words(first)), AVSpeechUtterance(string: Self.words(second)))
+        speak(lines.map { AVSpeechUtterance(string: Self.words($0)) })
     }
 
     /// Speaks a sound written in IPA, like "æ" for the a in "cat": Coco's recording ("sound:" + the IPA) when there is one,
@@ -98,6 +100,10 @@ final class Speaker {
     }
 
     private func speak(_ utterances: AVSpeechUtterance...) {
+        speak(utterances)
+    }
+
+    private func speak(_ utterances: [AVSpeechUtterance]) {
         recordings?.cancel()
         player?.stop()
         synthesizer.stopSpeaking(at: .immediate)

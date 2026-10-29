@@ -13,6 +13,18 @@ final class TracingTests: XCTestCase {
         }
     }
 
+    func testEveryLowercaseLetterCanBeTraced() {
+        XCTAssertEqual(Set(TraceLetter.lowercase.map(\.letter)), Set("abcdefghijklmnopqrstuvwxyz".map(String.init)))
+        for letter in TraceLetter.lowercase {
+            var tracing = Tracing(letter: letter)
+            for stroke in letter.strokes {
+                for point in TraceLetter.resample(stroke, every: 0.02) { _ = tracing.touch(point) }
+                XCTAssertTrue(stroke.allSatisfy { (0...1).contains($0.x) && (0...1).contains($0.y) }, "\(letter.letter) stays on the board")
+            }
+            XCTAssertTrue(tracing.isDone, letter.letter)
+        }
+    }
+
     func testStrokesGoInAnyOrderAndScribblesDontCount() {
         var tracing = Tracing(letter: TraceLetter.named("T"))
         // The stem first is fine: it finishes the stem but not the top bar.

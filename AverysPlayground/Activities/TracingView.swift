@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// A capital letter to trace: its strokes in the order they're written, each a line of points in a 0...1 square.
+/// A letter to trace: its strokes in the order they're written, each a line of points in a 0...1 square.
 struct TraceLetter {
     let letter: String
     let strokes: [[CGPoint]]
@@ -73,6 +73,43 @@ struct TraceLetter {
         TraceLetter("Y", [[p(0.22, 0.15), p(0.5, 0.5)], [p(0.78, 0.15), p(0.5, 0.5), p(0.5, 0.85)]]),
         TraceLetter("Z", [[p(0.22, 0.15), p(0.78, 0.15), p(0.22, 0.85), p(0.78, 0.85)]]),
     ]
+
+    /// Lowercase, which is most of what she'll read, on the writing-paper lines: tall letters from the top line, small
+    /// ones from the dashed middle, tails below the bottom. In the order handwriting programs teach them, the ones
+    /// that start like a c first (c a d g o q), then the easy straight ones, the humps, and the slants.
+    static let lowercase: [TraceLetter] = {
+        let cy: CGFloat = 0.675, r: CGFloat = 0.175  // the round part sits between the middle and bottom lines
+        let hump = { (x: CGFloat) in [p(x, 0.64)] + arc(x + 0.18, 0.65, 0.18, 180, 360) + [p(x + 0.36, 0.85)] }
+        return [
+            TraceLetter("c", [arc(0.52, cy, r, -40, -320)]),
+            TraceLetter("a", [arc(0.48, cy, r, -20, -380), [p(0.655, 0.5), p(0.655, 0.85)]]),
+            TraceLetter("d", [arc(0.46, cy, r, -20, -380), [p(0.635, 0.15), p(0.635, 0.85)]]),
+            TraceLetter("g", [arc(0.46, cy, r, -20, -380), [p(0.635, 0.5), p(0.635, 0.86)] + arc(0.51, 0.86, 0.125, 0, 160)]),
+            TraceLetter("o", [arc(0.5, cy, r, -90, -450)]),
+            TraceLetter("q", [arc(0.46, cy, r, -20, -380), [p(0.635, 0.5), p(0.635, 0.98)]]),
+            TraceLetter("e", [[p(0.325, cy), p(0.675, cy)] + arc(0.5, cy, r, 0, -320)]),
+            TraceLetter("s", [arc(0.5, 0.5875, 0.0875, -30, -270) + arc(0.5, 0.7625, 0.0875, -90, 150)]),
+            TraceLetter("l", [[p(0.5, 0.15), p(0.5, 0.85)]]),
+            TraceLetter("t", [[p(0.5, 0.22), p(0.5, 0.85)], [p(0.36, 0.5), p(0.64, 0.5)]]),
+            TraceLetter("i", [[p(0.5, 0.5), p(0.5, 0.85)], [p(0.5, 0.33), p(0.5, 0.35)]]),
+            TraceLetter("j", [[p(0.55, 0.5), p(0.55, 0.88)] + arc(0.43, 0.88, 0.12, 0, 160), [p(0.55, 0.33), p(0.55, 0.35)]]),
+            TraceLetter("k", [[p(0.32, 0.15), p(0.32, 0.85)], [p(0.66, 0.5), p(0.32, 0.7)], [p(0.44, 0.63), p(0.68, 0.85)]]),
+            TraceLetter("p", [[p(0.32, 0.5), p(0.32, 0.98)], [p(0.32, 0.56)] + arc(0.5, cy, r, -140, 140)]),
+            TraceLetter("r", [[p(0.34, 0.5), p(0.34, 0.85)], [p(0.34, 0.64)] + arc(0.5, 0.65, 0.16, 180, 320)]),
+            TraceLetter("n", [[p(0.32, 0.5), p(0.32, 0.85)], hump(0.32)]),
+            TraceLetter("m", [[p(0.2, 0.5), p(0.2, 0.85)], [p(0.2, 0.64)] + arc(0.35, 0.64, 0.15, 180, 360) + [p(0.5, 0.85)],
+                              [p(0.5, 0.64)] + arc(0.65, 0.64, 0.15, 180, 360) + [p(0.8, 0.85)]]),
+            TraceLetter("h", [[p(0.32, 0.15), p(0.32, 0.85)], hump(0.32)]),
+            TraceLetter("b", [[p(0.32, 0.15), p(0.32, 0.85)], [p(0.32, 0.6)] + arc(0.5, cy, r, -150, 150)]),
+            TraceLetter("u", [[p(0.32, 0.5), p(0.32, 0.67)] + arc(0.5, 0.67, 0.18, 180, 0) + [p(0.68, 0.5)], [p(0.68, 0.5), p(0.68, 0.85)]]),
+            TraceLetter("y", [[p(0.3, 0.5), p(0.5, 0.85)], [p(0.7, 0.5), p(0.42, 0.98)]]),
+            TraceLetter("w", [[p(0.15, 0.5), p(0.32, 0.85), p(0.5, 0.6), p(0.68, 0.85), p(0.85, 0.5)]]),
+            TraceLetter("v", [[p(0.28, 0.5), p(0.5, 0.85), p(0.72, 0.5)]]),
+            TraceLetter("x", [[p(0.3, 0.5), p(0.7, 0.85)], [p(0.7, 0.5), p(0.3, 0.85)]]),
+            TraceLetter("z", [[p(0.3, 0.5), p(0.7, 0.5), p(0.3, 0.85), p(0.7, 0.85)]]),
+            TraceLetter("f", [arc(0.6, 0.3, 0.12, -20, -180) + [p(0.48, 0.85)], [p(0.36, 0.52), p(0.64, 0.52)]]),
+        ]
+    }()
 }
 
 /// Which parts of a letter the finger has traced. Any part, in any order: being close to the line is enough.
@@ -112,7 +149,7 @@ struct Tracing {
 }
 
 struct TracingView: View {
-    private enum Mode { case abc, name }
+    private enum Mode { case abc, lower, name }
 
     private static let inks: [Color] = [
         Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.38, green: 0.72, blue: 0.4),
@@ -128,7 +165,13 @@ struct TracingView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
 
-    private var letters: [TraceLetter] { mode == .abc ? TraceLetter.alphabet : Kid.letters().map { TraceLetter.named(String($0)) } }
+    private var letters: [TraceLetter] {
+        switch mode {
+        case .abc: TraceLetter.alphabet
+        case .lower: TraceLetter.lowercase
+        case .name: Kid.letters().map { TraceLetter.named(String($0)) }
+        }
+    }
     private var color: Color { Self.inks[index % Self.inks.count] }
 
     var body: some View {
@@ -137,6 +180,7 @@ struct TracingView: View {
 
             HStack(spacing: 12 * uiScale) {
                 modeButton("ABC", .abc)
+                modeButton("abc", .lower)
                 modeButton("My name", .name, picture: "avery")
             }
 
@@ -259,11 +303,11 @@ struct TracingView: View {
         tracing = Tracing(letter: letters[number])
         ink = []
         isDrawing = false
-        say("\(tracing.letter.letter)!", hint: "Trace the gray lines with your finger.", voice: Speaker.book)
+        say("\(tracing.letter.letter.uppercased())!", hint: "Trace the gray lines with your finger.", voice: Speaker.book)
     }
 
     private func finishLetter() {
-        let letter = tracing.letter.letter
+        let letter = tracing.letter.letter.uppercased()  // Bella's recordings say the letter's name, the same either case
         let isLast = index == letters.count - 1
         if mode == .name {
             if isLast {
