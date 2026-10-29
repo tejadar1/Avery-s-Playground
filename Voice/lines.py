@@ -73,6 +73,16 @@ for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)"
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
     lines.update({f"book:{word}! You read it!", f"Hee hee, that's a {word}!", f"book:{word}! You spelled it!", "book:" + word})
 
+# Rhyme Time: Coco asks, Bella says the answer
+rhyme = src["RhymeView.swift"]
+groups = [re.findall(r'text: "(\w+)"', g) for g in re.findall(r'\[(\.init\(text: [^\]]+)\]', rhyme.split("static let starts")[0])]
+for group in groups:
+    for a in group:
+        lines.add(f"Which one rhymes with {a}?")
+        lines.update(f"book:{a} and {b} rhyme!" for b in group if b != a)
+for word in re.findall(r'text: "(\w+)"', rhyme):
+    lines.update({f"Hee hee, that's a {word}!", f"book:{word}!"})
+
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):
     name = page[0] or page[1]

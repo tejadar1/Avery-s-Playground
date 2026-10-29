@@ -16,12 +16,23 @@ enum Phonics {
         ReadingWord(text: "hen", picture: "hen"), ReadingWord(text: "box", picture: "box"),
         ReadingWord(text: "van", picture: "van"), ReadingWord(text: "web", picture: "web"),
         ReadingWord(text: "pen", picture: "pen"), ReadingWord(text: "bat", picture: "bat"),
+        ReadingWord(text: "mud", picture: "mud"),
     ]
+
+    /// The order phonics programs teach letter sounds in, so real words come early: s a t p i n first.
+    static let order = Array("satpinmdgockeurhbfljvwxyz")
+
+    /// The words in teaching order: each needs only the sounds taught by then.
+    static let inOrder = words.sorted { level($0) < level($1) }
+
+    static func level(_ word: ReadingWord) -> Int {
+        word.text.map { order.firstIndex(of: $0) ?? order.count }.max()!
+    }
 
     /// Each letter's sound (not its name): IPA for the voice, and a spelling to fall back on.
     static let sounds: [Character: (ipa: String, spelled: String)] = [
         "a": ("æ", "a"), "b": ("b", "buh"), "c": ("k", "kuh"), "d": ("d", "duh"),
-        "e": ("ɛ", "eh"), "f": ("f", "fff"), "g": ("ɡ", "guh"), "h": ("h", "huh"),
+        "e": ("ɛ", "eh"), "m": ("m", "mmm"), "f": ("f", "fff"), "g": ("ɡ", "guh"), "h": ("h", "huh"),
         "i": ("ɪ", "ih"), "n": ("n", "nnn"), "o": ("ɑ", "ah"), "p": ("p", "puh"),
         "s": ("s", "sss"), "t": ("t", "tuh"), "u": ("ʌ", "uh"), "v": ("v", "vvv"),
         "w": ("w", "wuh"), "x": ("ks", "ks"),
@@ -34,7 +45,10 @@ enum Phonics {
 }
 
 struct ReadingView: View {
-    @State private var word = Phonics.words.randomElement()!
+    /// How many words (in Phonics.inOrder) she's working on; one more opens up after every 3 she reads.
+    @AppStorage("readingUnlocked") private var unlocked = 3
+    @AppStorage("readingRead") private var read = 0
+    @State private var word = Phonics.inOrder[0]
     @State private var choices: [ReadingWord] = []
     @State private var tapped: Set<Int> = []
     @State private var bounceIndex = 0
@@ -131,6 +145,8 @@ struct ReadingView: View {
                 stars += 1
                 cheer = "\(word.text.capitalized)! You read it! \(hooray)"
             }
+            read += 1
+            if read % 3 == 0 { unlocked = min(Phonics.inOrder.count, unlocked + 1) }
             cheerCount += 1
             Speaker.shared.say(Speaker.book + "\(word.text)! You read it!", then: hooray)
             Task {
@@ -147,8 +163,10 @@ struct ReadingView: View {
     }
 
     private func next(intro: String) {
-        var newWord = Phonics.words.randomElement()!
-        while newWord == word, !choices.isEmpty { newWord = Phonics.words.randomElement()! }
+        // The newest word comes up often, mixed with ones she already knows.
+        let pool = Array(Phonics.inOrder.prefix(unlocked))
+        var newWord = Bool.random() ? pool.last! : pool.randomElement()!
+        while newWord == word, !choices.isEmpty, pool.count > 1 { newWord = pool.randomElement()! }
         withAnimation(.spring) {
             word = newWord
             choices = Phonics.choices(for: newWord)

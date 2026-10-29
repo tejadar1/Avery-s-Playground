@@ -561,20 +561,38 @@ Hee hee, not 7!
 Hee hee, not 8!
 Hee hee, not 9!
 Hee hee, she likes belly rubs!
+Hee hee, that's a apple!
+Hee hee, that's a balloon!
 Hee hee, that's a bat!
+Hee hee, that's a bear!
 Hee hee, that's a bed!
+Hee hee, that's a bee!
 Hee hee, that's a box!
 Hee hee, that's a bug!
+Hee hee, that's a bun!
 Hee hee, that's a bus!
+Hee hee, that's a car!
 Hee hee, that's a cat!
+Hee hee, that's a chair!
 Hee hee, that's a cup!
 Hee hee, that's a dog!
+Hee hee, that's a egg!
 Hee hee, that's a fox!
+Hee hee, that's a frog!
 Hee hee, that's a hat!
 Hee hee, that's a hen!
+Hee hee, that's a house!
+Hee hee, that's a moon!
+Hee hee, that's a mouse!
+Hee hee, that's a mud!
+Hee hee, that's a nest!
+Hee hee, that's a octopus!
 Hee hee, that's a pen!
 Hee hee, that's a pig!
+Hee hee, that's a star!
 Hee hee, that's a sun!
+Hee hee, that's a tree!
+Hee hee, that's a umbrella!
 Hee hee, that's a van!
 Hee hee, that's a web!
 Hee hee, that's not the apple!
@@ -1106,6 +1124,28 @@ What a design!
 What color should it be?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Wheels on the Bus
+Which one rhymes with balloon?
+Which one rhymes with bat?
+Which one rhymes with bear?
+Which one rhymes with bee?
+Which one rhymes with box?
+Which one rhymes with bun?
+Which one rhymes with car?
+Which one rhymes with cat?
+Which one rhymes with chair?
+Which one rhymes with dog?
+Which one rhymes with fox?
+Which one rhymes with frog?
+Which one rhymes with hat?
+Which one rhymes with hen?
+Which one rhymes with house?
+Which one rhymes with moon?
+Which one rhymes with mouse?
+Which one rhymes with pen?
+Which one rhymes with star?
+Which one rhymes with sun?
+Which one rhymes with tree?
+Which one starts with
 Which picture is it?
 White
 Who has fewer apples, Coco or Mochi?
@@ -1674,20 +1714,28 @@ book:bad
 book:baked
 book:ball!
 book:balloon
+book:balloon and moon rhyme!
+book:balloon!
 book:banana
 book:bat
+book:bat and cat rhyme!
+book:bat and hat rhyme!
+book:bat!
 book:bat! You read it!
 book:bat! You spelled it!
 book:be
 book:beans
 book:beanstalk
 book:bear
+book:bear and chair rhyme!
+book:bear!
 book:bears
 book:bed
 book:bed! You read it!
 book:bed! You spelled it!
 book:beds
 book:bee
+book:bee and tree rhyme!
 book:bee!
 book:better
 book:big
@@ -1701,6 +1749,8 @@ book:boat
 book:boat!
 book:bowls
 book:box
+book:box and fox rhyme!
+book:box!
 book:box! You read it!
 book:box! You spelled it!
 book:boy
@@ -1712,6 +1762,8 @@ book:bug! You read it!
 book:bug! You spelled it!
 book:build
 book:built
+book:bun and sun rhyme!
+book:bun!
 book:bus
 book:bus!
 book:bus! You read it!
@@ -1724,13 +1776,18 @@ book:came
 book:can
 book:can't
 book:car
+book:car and star rhyme!
 book:car!
 book:castle
 book:cat
+book:cat and bat rhyme!
+book:cat and hat rhyme!
 book:cat!
 book:cat! You read it!
 book:cat! You spelled it!
 book:catch
+book:chair and bear rhyme!
+book:chair!
 book:chairs
 book:chased
 book:cheese
@@ -1752,6 +1809,7 @@ book:cupcake
 book:day
 book:did
 book:dog
+book:dog and frog rhyme!
 book:dog!
 book:dog! You read it!
 book:dog! You spelled it!
@@ -1780,6 +1838,8 @@ book:for
 book:found
 book:four
 book:fox
+book:fox and box rhyme!
+book:fox!
 book:fox! You read it!
 book:fox! You spelled it!
 book:free
@@ -1787,6 +1847,7 @@ book:fried cheese
 book:fried plantains
 book:friends
 book:frog
+book:frog and dog rhyme!
 book:frog!
 book:fum
 book:fun
@@ -1804,6 +1865,8 @@ book:green
 book:grew
 book:had
 book:hat
+book:hat and bat rhyme!
+book:hat and cat rhyme!
 book:hat!
 book:hat! You read it!
 book:hat! You spelled it!
@@ -1814,6 +1877,8 @@ book:heart!
 book:help
 book:helpers
 book:hen
+book:hen and pen rhyme!
+book:hen!
 book:hen! You read it!
 book:hen! You spelled it!
 book:her
@@ -1826,6 +1891,7 @@ book:home
 book:hop
 book:horse
 book:house
+book:house and mouse rhyme!
 book:house!
 book:houses
 book:huffed
@@ -1854,16 +1920,24 @@ book:me
 book:milk
 book:mom
 book:moon
+book:moon and balloon rhyme!
 book:moon!
 book:mouse
+book:mouse and house rhyme!
+book:mouse!
+book:mud
+book:mud! You read it!
+book:mud! You spelled it!
 book:my
 book:nap
+book:nest!
 book:net
 book:nine
 book:nobody
 book:nose
 book:not
 book:octopus
+book:octopus!
 book:of
 book:old
 book:on
@@ -1874,6 +1948,8 @@ book:out
 book:over
 book:overnight
 book:pen
+book:pen and hen rhyme!
+book:pen!
 book:pen! You read it!
 book:pen! You spelled it!
 book:penguin
@@ -1921,6 +1997,7 @@ book:slow
 book:sly
 book:some
 book:star
+book:star and car rhyme!
 book:star!
 book:steady
 book:stew
@@ -1930,6 +2007,7 @@ book:straw
 book:strawberry
 book:stuck
 book:sun
+book:sun and bun rhyme!
 book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
@@ -1947,6 +2025,7 @@ book:took
 book:top
 book:traded
 book:tree
+book:tree and bee rhyme!
 book:tree!
 book:tried
 book:trophy
@@ -1954,9 +2033,11 @@ book:truth
 book:turtle
 book:two
 book:umbrella
+book:umbrella!
 book:under
 book:up
 book:van
+book:van!
 book:van! You read it!
 book:van! You spelled it!
 book:visit
@@ -1967,6 +2048,7 @@ book:watched
 book:water
 book:way
 book:web
+book:web!
 book:web! You read it!
 book:web! You spelled it!
 book:went
@@ -2002,6 +2084,7 @@ bubbles
 bucket
 bug
 buh
+bun
 bunny
 buns
 buns!
@@ -2829,7 +2912,9 @@ lit
 living
 ly
 ly,
+m
 mer
+mmm
 mochi
 mond
 moon
@@ -2922,6 +3007,8 @@ rabbit
 rain
 rain,
 rainbow
+readingRead
+readingUnlocked
 ri
 river
 robot
@@ -2935,6 +3022,7 @@ rug
 ry
 s
 sandals
+satpinmdgockeurhbfljvwxyz
 school
 scissors
 shampoo
@@ -2955,12 +3043,14 @@ snow.
 so
 soap
 sock
+sound:
 sound:b
 sound:d
 sound:f
 sound:h
 sound:k
 sound:ks
+sound:m
 sound:n
 sound:p
 sound:s

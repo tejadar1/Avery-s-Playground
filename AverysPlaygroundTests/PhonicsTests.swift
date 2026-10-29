@@ -18,4 +18,10 @@ final class PhonicsTests: XCTestCase {
             XCTAssertTrue(choices.contains(answer))
         }
     }
+
+    func testWordsComeInTeachingOrder() {
+        let first = Phonics.inOrder.prefix(3).map(\.text)
+        XCTAssertTrue(first.allSatisfy { word in word.allSatisfy { "satpinmdgoc".contains($0) } }, "the first words use the first sounds: \(first)")
+        XCTAssertEqual(Phonics.inOrder.map(Phonics.level), Phonics.inOrder.map(Phonics.level).sorted())
+    }
 }
