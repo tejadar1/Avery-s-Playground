@@ -71,7 +71,7 @@ struct Story: Hashable {
             Page(pictures: ["wolf", "bed"], text: "The wolf ran to grandma's house and hid in her bed.", setting: .home),
             Page(pictures: ["girl", "wolf"], text: "Grandma, what big eyes you have! All the better to see you with!", setting: .home),
             Page(pictures: ["girl", "grandma", "heart"], text: "A woodcutter chased the wolf away, and they all had a big hug.", setting: .home),
-        ], question: .init(text: "Who was hiding in grandma"s bed?", answer: "wolf", others: ["grandma", "girl"])),
+        ], question: .init(text: "Who was hiding in grandma's bed?", answer: "wolf", others: ["grandma", "girl"])),
         Story(title: "The Lion and the Mouse", cover: "lion", color: Color(red: 0.93, green: 0.7, blue: 0.3), pages: [
             Page(pictures: ["lion", "sleep"], text: "A big lion was sleeping in the sun."),
             Page(pictures: ["mouse", "lion"], text: "A little mouse ran over his nose and woke him up!"),
