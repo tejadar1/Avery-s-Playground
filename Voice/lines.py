@@ -92,14 +92,25 @@ for item in items:
 for song in re.findall(r'name: "([^"]+)", picture:', src["PianoView.swift"]):
     lines.update({f"book:{song}!", f"You played {song}! Holy guacamole, what a song!"})
 
+# Math's four kinds of problems (MathProblem): questions in Coco's voice, solutions in Bella's
 for one, many in re.findall(r'Food\(picture: "[^"]+", one: "([^"]+)", many: "([^"]+)"\)', src["MathView.swift"]):
+    count = lambda n: f"{n} {one if n == 1 else many}"
     for a in range(1, 6):
         for b in range(1, 6):
-            lines.add(f"Coco has {a} {one if a == 1 else many}. Mochi brings {b} more. How many now?")
+            lines.add(f"Coco has {count(a)}. Mochi brings {b} more. How many now?")
+    lines.update(f"Who has {which} {many}, Coco or Mochi?" for which in ["more", "fewer"])
+    for whole in range(2, 7):
+        for part in range(1, whole):
+            lines.add(f"Coco has {count(whole)}. {part} {'is' if part == 1 else 'are'} on the plate. How many are in the box?")
+            lines.add(f"Coco has {count(whole)}. Mochi eats {part}. How many are left?")
 for a in range(1, 6):
     for b in range(1, 6):
         lines.add(f"book:{a} plus {b} is {a + b}!")
-lines.update(f"Hee hee, not {n}!" for n in range(1, 11))
+for whole in range(2, 7):
+    for part in range(1, whole):
+        lines.update({f"book:{part} and {whole - part} make {whole}!", f"book:{whole} take away {part} is {whole - part}!"})
+lines.update(f"book:{who} has {which}!" for who in ["Coco", "Mochi"] for which in ["more", "fewer"])
+lines.update(f"Hee hee, not {n}!" for n in range(0, 11))
 
 bingo = re.findall(r'BingoTile\(word: "([^"]+)"', src["BingoView.swift"])
 for a in bingo:

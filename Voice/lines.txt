@@ -1,4 +1,5 @@
 %02d
+) on the plate. How many are in the box?
 -over
 -under
 A
@@ -125,127 +126,306 @@ Coco has 1 strawberry. Mochi brings 2 more. How many now?
 Coco has 1 strawberry. Mochi brings 3 more. How many now?
 Coco has 1 strawberry. Mochi brings 4 more. How many now?
 Coco has 1 strawberry. Mochi brings 5 more. How many now?
+Coco has 2 apples. 1 is on the plate. How many are in the box?
 Coco has 2 apples. Mochi brings 1 more. How many now?
 Coco has 2 apples. Mochi brings 2 more. How many now?
 Coco has 2 apples. Mochi brings 3 more. How many now?
 Coco has 2 apples. Mochi brings 4 more. How many now?
 Coco has 2 apples. Mochi brings 5 more. How many now?
+Coco has 2 apples. Mochi eats 1. How many are left?
+Coco has 2 bananas. 1 is on the plate. How many are in the box?
 Coco has 2 bananas. Mochi brings 1 more. How many now?
 Coco has 2 bananas. Mochi brings 2 more. How many now?
 Coco has 2 bananas. Mochi brings 3 more. How many now?
 Coco has 2 bananas. Mochi brings 4 more. How many now?
 Coco has 2 bananas. Mochi brings 5 more. How many now?
+Coco has 2 bananas. Mochi eats 1. How many are left?
+Coco has 2 cookies. 1 is on the plate. How many are in the box?
 Coco has 2 cookies. Mochi brings 1 more. How many now?
 Coco has 2 cookies. Mochi brings 2 more. How many now?
 Coco has 2 cookies. Mochi brings 3 more. How many now?
 Coco has 2 cookies. Mochi brings 4 more. How many now?
 Coco has 2 cookies. Mochi brings 5 more. How many now?
+Coco has 2 cookies. Mochi eats 1. How many are left?
+Coco has 2 cupcakes. 1 is on the plate. How many are in the box?
 Coco has 2 cupcakes. Mochi brings 1 more. How many now?
 Coco has 2 cupcakes. Mochi brings 2 more. How many now?
 Coco has 2 cupcakes. Mochi brings 3 more. How many now?
 Coco has 2 cupcakes. Mochi brings 4 more. How many now?
 Coco has 2 cupcakes. Mochi brings 5 more. How many now?
-Coco has 2 slices of pizza. Mochi brings 1 more.
+Coco has 2 cupcakes. Mochi eats 1. How many are left?
+Coco has 2 slices of pizza. 1 is on the plate. How many are in the box?
 Coco has 2 slices of pizza. Mochi brings 1 more. How many now?
 Coco has 2 slices of pizza. Mochi brings 2 more. How many now?
 Coco has 2 slices of pizza. Mochi brings 3 more. How many now?
 Coco has 2 slices of pizza. Mochi brings 4 more. How many now?
 Coco has 2 slices of pizza. Mochi brings 5 more. How many now?
+Coco has 2 slices of pizza. Mochi eats 1. How many are left?
+Coco has 2 strawberries. 1 is on the plate. How many are in the box?
 Coco has 2 strawberries. Mochi brings 1 more. How many now?
 Coco has 2 strawberries. Mochi brings 2 more. How many now?
 Coco has 2 strawberries. Mochi brings 3 more. How many now?
 Coco has 2 strawberries. Mochi brings 4 more. How many now?
 Coco has 2 strawberries. Mochi brings 5 more. How many now?
+Coco has 2 strawberries. Mochi eats 1. How many are left?
+Coco has 3 apples. 1 is on the plate. How many are in the box?
+Coco has 3 apples. 2 are on the plate. How many are in the box?
 Coco has 3 apples. Mochi brings 1 more. How many now?
 Coco has 3 apples. Mochi brings 2 more. How many now?
 Coco has 3 apples. Mochi brings 3 more. How many now?
 Coco has 3 apples. Mochi brings 4 more. How many now?
 Coco has 3 apples. Mochi brings 5 more. How many now?
+Coco has 3 apples. Mochi eats 1. How many are left?
+Coco has 3 apples. Mochi eats 2. How many are left?
+Coco has 3 bananas. 1 is on the plate. How many are in the box?
+Coco has 3 bananas. 2 are on the plate. How many are in the box?
 Coco has 3 bananas. Mochi brings 1 more. How many now?
 Coco has 3 bananas. Mochi brings 2 more. How many now?
 Coco has 3 bananas. Mochi brings 3 more. How many now?
 Coco has 3 bananas. Mochi brings 4 more. How many now?
 Coco has 3 bananas. Mochi brings 5 more. How many now?
+Coco has 3 bananas. Mochi eats 1. How many are left?
+Coco has 3 bananas. Mochi eats 2. How many are left?
+Coco has 3 cookies. 1 is on the plate. How many are in the box?
+Coco has 3 cookies. 2 are on the plate. How many are in the box?
 Coco has 3 cookies. Mochi brings 1 more. How many now?
 Coco has 3 cookies. Mochi brings 2 more. How many now?
 Coco has 3 cookies. Mochi brings 3 more. How many now?
 Coco has 3 cookies. Mochi brings 4 more. How many now?
 Coco has 3 cookies. Mochi brings 5 more. How many now?
+Coco has 3 cookies. Mochi eats 1. How many are left?
+Coco has 3 cookies. Mochi eats 2. How many are left?
+Coco has 3 cupcakes. 1 is on the plate. How many are in the box?
+Coco has 3 cupcakes. 2 are on the plate. How many are in the box?
 Coco has 3 cupcakes. Mochi brings 1 more. How many now?
 Coco has 3 cupcakes. Mochi brings 2 more. How many now?
 Coco has 3 cupcakes. Mochi brings 3 more. How many now?
 Coco has 3 cupcakes. Mochi brings 4 more. How many now?
 Coco has 3 cupcakes. Mochi brings 5 more. How many now?
+Coco has 3 cupcakes. Mochi eats 1. How many are left?
+Coco has 3 cupcakes. Mochi eats 2. How many are left?
+Coco has 3 slices of pizza. 1 is on the plate. How many are in the box?
+Coco has 3 slices of pizza. 2 are on the plate. How many are in the box?
 Coco has 3 slices of pizza. Mochi brings 1 more. How many now?
 Coco has 3 slices of pizza. Mochi brings 2 more. How many now?
 Coco has 3 slices of pizza. Mochi brings 3 more. How many now?
 Coco has 3 slices of pizza. Mochi brings 4 more. How many now?
 Coco has 3 slices of pizza. Mochi brings 5 more. How many now?
+Coco has 3 slices of pizza. Mochi eats 1. How many are left?
+Coco has 3 slices of pizza. Mochi eats 2. How many are left?
+Coco has 3 strawberries. 1 is on the plate. How many are in the box?
+Coco has 3 strawberries. 2 are on the plate. How many are in the box?
 Coco has 3 strawberries. Mochi brings 1 more. How many now?
 Coco has 3 strawberries. Mochi brings 2 more. How many now?
 Coco has 3 strawberries. Mochi brings 3 more. How many now?
 Coco has 3 strawberries. Mochi brings 4 more. How many now?
 Coco has 3 strawberries. Mochi brings 5 more. How many now?
+Coco has 3 strawberries. Mochi eats 1. How many are left?
+Coco has 3 strawberries. Mochi eats 2. How many are left?
+Coco has 4 apples. 1 is on the plate. How many are in the box?
+Coco has 4 apples. 2 are on the plate. How many are in the box?
+Coco has 4 apples. 3 are on the plate. How many are in the box?
 Coco has 4 apples. Mochi brings 1 more. How many now?
 Coco has 4 apples. Mochi brings 2 more. How many now?
 Coco has 4 apples. Mochi brings 3 more. How many now?
 Coco has 4 apples. Mochi brings 4 more. How many now?
 Coco has 4 apples. Mochi brings 5 more. How many now?
+Coco has 4 apples. Mochi eats 1. How many are left?
+Coco has 4 apples. Mochi eats 2. How many are left?
+Coco has 4 apples. Mochi eats 3. How many are left?
+Coco has 4 bananas. 1 is on the plate. How many are in the box?
+Coco has 4 bananas. 2 are on the plate. How many are in the box?
+Coco has 4 bananas. 3 are on the plate. How many are in the box?
 Coco has 4 bananas. Mochi brings 1 more. How many now?
 Coco has 4 bananas. Mochi brings 2 more. How many now?
 Coco has 4 bananas. Mochi brings 3 more. How many now?
 Coco has 4 bananas. Mochi brings 4 more. How many now?
 Coco has 4 bananas. Mochi brings 5 more. How many now?
+Coco has 4 bananas. Mochi eats 1. How many are left?
+Coco has 4 bananas. Mochi eats 2. How many are left?
+Coco has 4 bananas. Mochi eats 3. How many are left?
+Coco has 4 cookies. 1 is on the plate. How many are in the box?
+Coco has 4 cookies. 2 are on the plate. How many are in the box?
+Coco has 4 cookies. 3 are on the plate. How many are in the box?
 Coco has 4 cookies. Mochi brings 1 more. How many now?
 Coco has 4 cookies. Mochi brings 2 more. How many now?
 Coco has 4 cookies. Mochi brings 3 more. How many now?
 Coco has 4 cookies. Mochi brings 4 more. How many now?
 Coco has 4 cookies. Mochi brings 5 more. How many now?
+Coco has 4 cookies. Mochi eats 1. How many are left?
+Coco has 4 cookies. Mochi eats 2. How many are left?
+Coco has 4 cookies. Mochi eats 3. How many are left?
+Coco has 4 cupcakes. 1 is on the plate. How many are in the box?
+Coco has 4 cupcakes. 2 are on the plate. How many are in the box?
+Coco has 4 cupcakes. 3 are on the plate. How many are in the box?
 Coco has 4 cupcakes. Mochi brings 1 more. How many now?
 Coco has 4 cupcakes. Mochi brings 2 more. How many now?
 Coco has 4 cupcakes. Mochi brings 3 more. How many now?
 Coco has 4 cupcakes. Mochi brings 4 more. How many now?
 Coco has 4 cupcakes. Mochi brings 5 more. How many now?
+Coco has 4 cupcakes. Mochi eats 1. How many are left?
+Coco has 4 cupcakes. Mochi eats 2. How many are left?
+Coco has 4 cupcakes. Mochi eats 3. How many are left?
+Coco has 4 slices of pizza. 1 is on the plate. How many are in the box?
+Coco has 4 slices of pizza. 2 are on the plate. How many are in the box?
+Coco has 4 slices of pizza. 3 are on the plate. How many are in the box?
 Coco has 4 slices of pizza. Mochi brings 1 more. How many now?
 Coco has 4 slices of pizza. Mochi brings 2 more. How many now?
 Coco has 4 slices of pizza. Mochi brings 3 more. How many now?
 Coco has 4 slices of pizza. Mochi brings 4 more. How many now?
 Coco has 4 slices of pizza. Mochi brings 5 more. How many now?
+Coco has 4 slices of pizza. Mochi eats 1. How many are left?
+Coco has 4 slices of pizza. Mochi eats 2. How many are left?
+Coco has 4 slices of pizza. Mochi eats 3. How many are left?
+Coco has 4 strawberries. 1 is on the plate. How many are in the box?
+Coco has 4 strawberries. 2 are on the plate. How many are in the box?
+Coco has 4 strawberries. 3 are on the plate. How many are in the box?
 Coco has 4 strawberries. Mochi brings 1 more. How many now?
 Coco has 4 strawberries. Mochi brings 2 more. How many now?
 Coco has 4 strawberries. Mochi brings 3 more. How many now?
 Coco has 4 strawberries. Mochi brings 4 more. How many now?
 Coco has 4 strawberries. Mochi brings 5 more. How many now?
+Coco has 4 strawberries. Mochi eats 1. How many are left?
+Coco has 4 strawberries. Mochi eats 2. How many are left?
+Coco has 4 strawberries. Mochi eats 3. How many are left?
+Coco has 5 apples. 1 is on the plate. How many are in the box?
+Coco has 5 apples. 2 are on the plate. How many are in the box?
+Coco has 5 apples. 3 are on the plate. How many are in the box?
+Coco has 5 apples. 4 are on the plate. How many are in the box?
 Coco has 5 apples. Mochi brings 1 more. How many now?
 Coco has 5 apples. Mochi brings 2 more. How many now?
 Coco has 5 apples. Mochi brings 3 more. How many now?
 Coco has 5 apples. Mochi brings 4 more. How many now?
 Coco has 5 apples. Mochi brings 5 more. How many now?
+Coco has 5 apples. Mochi eats 1. How many are left?
+Coco has 5 apples. Mochi eats 2. How many are left?
+Coco has 5 apples. Mochi eats 3. How many are left?
+Coco has 5 apples. Mochi eats 4. How many are left?
+Coco has 5 bananas. 1 is on the plate. How many are in the box?
+Coco has 5 bananas. 2 are on the plate. How many are in the box?
+Coco has 5 bananas. 3 are on the plate. How many are in the box?
+Coco has 5 bananas. 4 are on the plate. How many are in the box?
 Coco has 5 bananas. Mochi brings 1 more. How many now?
 Coco has 5 bananas. Mochi brings 2 more. How many now?
 Coco has 5 bananas. Mochi brings 3 more. How many now?
 Coco has 5 bananas. Mochi brings 4 more. How many now?
 Coco has 5 bananas. Mochi brings 5 more. How many now?
+Coco has 5 bananas. Mochi eats 1. How many are left?
+Coco has 5 bananas. Mochi eats 2. How many are left?
+Coco has 5 bananas. Mochi eats 3. How many are left?
+Coco has 5 bananas. Mochi eats 4. How many are left?
+Coco has 5 cookies. 1 is on the plate. How many are in the box?
+Coco has 5 cookies. 2 are on the plate. How many are in the box?
+Coco has 5 cookies. 3 are on the plate. How many are in the box?
+Coco has 5 cookies. 4 are on the plate. How many are in the box?
 Coco has 5 cookies. Mochi brings 1 more. How many now?
 Coco has 5 cookies. Mochi brings 2 more. How many now?
 Coco has 5 cookies. Mochi brings 3 more. How many now?
 Coco has 5 cookies. Mochi brings 4 more. How many now?
 Coco has 5 cookies. Mochi brings 5 more. How many now?
+Coco has 5 cookies. Mochi eats 1. How many are left?
+Coco has 5 cookies. Mochi eats 2. How many are left?
+Coco has 5 cookies. Mochi eats 3. How many are left?
+Coco has 5 cookies. Mochi eats 4. How many are left?
+Coco has 5 cupcakes. 1 is on the plate. How many are in the box?
+Coco has 5 cupcakes. 2 are on the plate. How many are in the box?
+Coco has 5 cupcakes. 3 are on the plate. How many are in the box?
+Coco has 5 cupcakes. 4 are on the plate. How many are in the box?
 Coco has 5 cupcakes. Mochi brings 1 more. How many now?
 Coco has 5 cupcakes. Mochi brings 2 more. How many now?
 Coco has 5 cupcakes. Mochi brings 3 more. How many now?
 Coco has 5 cupcakes. Mochi brings 4 more. How many now?
 Coco has 5 cupcakes. Mochi brings 5 more. How many now?
+Coco has 5 cupcakes. Mochi eats 1. How many are left?
+Coco has 5 cupcakes. Mochi eats 2. How many are left?
+Coco has 5 cupcakes. Mochi eats 3. How many are left?
+Coco has 5 cupcakes. Mochi eats 4. How many are left?
+Coco has 5 slices of pizza. 1 is on the plate. How many are in the box?
+Coco has 5 slices of pizza. 2 are on the plate. How many are in the box?
+Coco has 5 slices of pizza. 3 are on the plate. How many are in the box?
+Coco has 5 slices of pizza. 4 are on the plate. How many are in the box?
 Coco has 5 slices of pizza. Mochi brings 1 more. How many now?
 Coco has 5 slices of pizza. Mochi brings 2 more. How many now?
 Coco has 5 slices of pizza. Mochi brings 3 more. How many now?
 Coco has 5 slices of pizza. Mochi brings 4 more. How many now?
 Coco has 5 slices of pizza. Mochi brings 5 more. How many now?
+Coco has 5 slices of pizza. Mochi eats 1. How many are left?
+Coco has 5 slices of pizza. Mochi eats 2. How many are left?
+Coco has 5 slices of pizza. Mochi eats 3. How many are left?
+Coco has 5 slices of pizza. Mochi eats 4. How many are left?
+Coco has 5 strawberries. 1 is on the plate. How many are in the box?
+Coco has 5 strawberries. 2 are on the plate. How many are in the box?
+Coco has 5 strawberries. 3 are on the plate. How many are in the box?
+Coco has 5 strawberries. 4 are on the plate. How many are in the box?
 Coco has 5 strawberries. Mochi brings 1 more. How many now?
 Coco has 5 strawberries. Mochi brings 2 more. How many now?
 Coco has 5 strawberries. Mochi brings 3 more. How many now?
 Coco has 5 strawberries. Mochi brings 4 more. How many now?
 Coco has 5 strawberries. Mochi brings 5 more. How many now?
+Coco has 5 strawberries. Mochi eats 1. How many are left?
+Coco has 5 strawberries. Mochi eats 2. How many are left?
+Coco has 5 strawberries. Mochi eats 3. How many are left?
+Coco has 5 strawberries. Mochi eats 4. How many are left?
+Coco has 6 apples. 1 is on the plate. How many are in the box?
+Coco has 6 apples. 2 are on the plate. How many are in the box?
+Coco has 6 apples. 3 are on the plate. How many are in the box?
+Coco has 6 apples. 4 are on the plate. How many are in the box?
+Coco has 6 apples. 5 are on the plate. How many are in the box?
+Coco has 6 apples. Mochi eats 1. How many are left?
+Coco has 6 apples. Mochi eats 2. How many are left?
+Coco has 6 apples. Mochi eats 3. How many are left?
+Coco has 6 apples. Mochi eats 4. How many are left?
+Coco has 6 apples. Mochi eats 5. How many are left?
+Coco has 6 bananas. 1 is on the plate. How many are in the box?
+Coco has 6 bananas. 2 are on the plate. How many are in the box?
+Coco has 6 bananas. 3 are on the plate. How many are in the box?
+Coco has 6 bananas. 4 are on the plate. How many are in the box?
+Coco has 6 bananas. 5 are on the plate. How many are in the box?
+Coco has 6 bananas. Mochi eats 1. How many are left?
+Coco has 6 bananas. Mochi eats 2. How many are left?
+Coco has 6 bananas. Mochi eats 3. How many are left?
+Coco has 6 bananas. Mochi eats 4. How many are left?
+Coco has 6 bananas. Mochi eats 5. How many are left?
+Coco has 6 cookies. 1 is on the plate. How many are in the box?
+Coco has 6 cookies. 2 are on the plate. How many are in the box?
+Coco has 6 cookies. 3 are on the plate. How many are in the box?
+Coco has 6 cookies. 4 are on the plate. How many are in the box?
+Coco has 6 cookies. 5 are on the plate. How many are in the box?
+Coco has 6 cookies. Mochi eats 1. How many are left?
+Coco has 6 cookies. Mochi eats 2. How many are left?
+Coco has 6 cookies. Mochi eats 3. How many are left?
+Coco has 6 cookies. Mochi eats 4. How many are left?
+Coco has 6 cookies. Mochi eats 5. How many are left?
+Coco has 6 cupcakes. 1 is on the plate. How many are in the box?
+Coco has 6 cupcakes. 2 are on the plate. How many are in the box?
+Coco has 6 cupcakes. 3 are on the plate. How many are in the box?
+Coco has 6 cupcakes. 4 are on the plate. How many are in the box?
+Coco has 6 cupcakes. 5 are on the plate. How many are in the box?
+Coco has 6 cupcakes. Mochi eats 1. How many are left?
+Coco has 6 cupcakes. Mochi eats 2. How many are left?
+Coco has 6 cupcakes. Mochi eats 3. How many are left?
+Coco has 6 cupcakes. Mochi eats 4. How many are left?
+Coco has 6 cupcakes. Mochi eats 5. How many are left?
+Coco has 6 slices of pizza. 1 is on the plate. How many are in the box?
+Coco has 6 slices of pizza. 2 are on the plate. How many are in the box?
+Coco has 6 slices of pizza. 3 are on the plate. How many are in the box?
+Coco has 6 slices of pizza. 4 are on the plate. How many are in the box?
+Coco has 6 slices of pizza. 5 are on the plate. How many are in the box?
+Coco has 6 slices of pizza. Mochi eats 1. How many are left?
+Coco has 6 slices of pizza. Mochi eats 2. How many are left?
+Coco has 6 slices of pizza. Mochi eats 3. How many are left?
+Coco has 6 slices of pizza. Mochi eats 4. How many are left?
+Coco has 6 slices of pizza. Mochi eats 5. How many are left?
+Coco has 6 strawberries. 1 is on the plate. How many are in the box?
+Coco has 6 strawberries. 2 are on the plate. How many are in the box?
+Coco has 6 strawberries. 3 are on the plate. How many are in the box?
+Coco has 6 strawberries. 4 are on the plate. How many are in the box?
+Coco has 6 strawberries. 5 are on the plate. How many are in the box?
+Coco has 6 strawberries. Mochi eats 1. How many are left?
+Coco has 6 strawberries. Mochi eats 2. How many are left?
+Coco has 6 strawberries. Mochi eats 3. How many are left?
+Coco has 6 strawberries. Mochi eats 4. How many are left?
+Coco has 6 strawberries. Mochi eats 5. How many are left?
 Color anywhere you like!
 Coloring anywhere
 Coloring inside the lines
@@ -360,6 +540,8 @@ Hee hee hee! You're so funny! You made me giggle!
 Hee hee! That tickles!
 Hee hee! You're silly! You're a silly, silly goose!
 Hee hee, I love that sticker!
+Hee hee, look again!
+Hee hee, not 0!
 Hee hee, not 1!
 Hee hee, not 10!
 Hee hee, not 2!
@@ -483,6 +665,7 @@ I want my claws painted too!
 I wish I had hair like that!
 I'll keep your crayon inside the lines!
 Ice cream
+In the box
 In the lines
 It's a tie! Everybody wins a hug!
 Itsy Bitsy Spider
@@ -613,6 +796,7 @@ Okay!
 Okey dokey, artichokey!
 Old
 Old MacDonald
+On the plate
 One
 Ooh la la!
 Ooh la la, fancy!
@@ -689,6 +873,7 @@ Row Your Boat
 Row,
 Rub rub rub! Happy puppy!
 Rub shampoo all over her hair!
+Russian math
 S
 Sandals
 Sandals! Fashion show time!
@@ -904,6 +1089,18 @@ What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Wheels on the Bus
 Which picture is it?
 White
+Who has fewer apples, Coco or Mochi?
+Who has fewer bananas, Coco or Mochi?
+Who has fewer cookies, Coco or Mochi?
+Who has fewer cupcakes, Coco or Mochi?
+Who has fewer slices of pizza, Coco or Mochi?
+Who has fewer strawberries, Coco or Mochi?
+Who has more apples, Coco or Mochi?
+Who has more bananas, Coco or Mochi?
+Who has more cookies, Coco or Mochi?
+Who has more cupcakes, Coco or Mochi?
+Who has more slices of pizza, Coco or Mochi?
+Who has more strawberries, Coco or Mochi?
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who's silly? You're silly! Snap snap!
@@ -1109,6 +1306,11 @@ body-over
 bone
 book
 book:1
+book:1 and 1 make 2!
+book:1 and 2 make 3!
+book:1 and 3 make 4!
+book:1 and 4 make 5!
+book:1 and 5 make 6!
 book:1 plus 1 is 2!
 book:1 plus 2 is 3!
 book:1 plus 3 is 4!
@@ -1125,31 +1327,56 @@ book:17
 book:18
 book:19
 book:2
+book:2 and 1 make 3!
+book:2 and 2 make 4!
+book:2 and 3 make 5!
+book:2 and 4 make 6!
 book:2 plus 1 is 3!
 book:2 plus 2 is 4!
 book:2 plus 3 is 5!
 book:2 plus 4 is 6!
 book:2 plus 5 is 7!
+book:2 take away 1 is 1!
 book:20
 book:3
+book:3 and 1 make 4!
+book:3 and 2 make 5!
+book:3 and 3 make 6!
 book:3 plus 1 is 4!
 book:3 plus 2 is 5!
 book:3 plus 3 is 6!
 book:3 plus 4 is 7!
 book:3 plus 5 is 8!
+book:3 take away 1 is 2!
+book:3 take away 2 is 1!
 book:4
+book:4 and 1 make 5!
+book:4 and 2 make 6!
 book:4 plus 1 is 5!
 book:4 plus 2 is 6!
 book:4 plus 3 is 7!
 book:4 plus 4 is 8!
 book:4 plus 5 is 9!
+book:4 take away 1 is 3!
+book:4 take away 2 is 2!
+book:4 take away 3 is 1!
 book:5
+book:5 and 1 make 6!
 book:5 plus 1 is 6!
 book:5 plus 2 is 7!
 book:5 plus 3 is 8!
 book:5 plus 4 is 9!
 book:5 plus 5 is 10!
+book:5 take away 1 is 4!
+book:5 take away 2 is 3!
+book:5 take away 3 is 2!
+book:5 take away 4 is 1!
 book:6
+book:6 take away 1 is 5!
+book:6 take away 2 is 4!
+book:6 take away 3 is 3!
+book:6 take away 4 is 2!
+book:6 take away 5 is 1!
 book:7
 book:8
 book:9
@@ -1188,6 +1415,8 @@ book:C is for Cat!
 book:C!
 book:Clothes
 book:Cloud
+book:Coco has fewer!
+book:Coco has more!
 book:Colors
 book:Comb
 book:Come here, my love
@@ -1275,6 +1504,8 @@ book:London Bridge!
 book:M is for Moon!
 book:M!
 book:Mary Had a Little Lamb!
+book:Mochi has fewer!
+book:Mochi has more!
 book:Mom
 book:Mustard
 book:My
