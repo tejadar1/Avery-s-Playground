@@ -38,8 +38,8 @@ struct BingoGame: Equatable {
     func needs(_ tile: BingoTile) -> Bool { card.contains(tile) && !covered.contains(tile) }
     func cocoNeeds(_ tile: BingoTile) -> Bool { cocoCard.contains(tile) && !cocoCovered.contains(tile) }
 
-    /// The first tile out that Coco still needs.
-    var cocoWants: BingoTile? { shown.first(where: cocoNeeds) }
+    /// The first tile out that Coco still needs, other than the one in Avery's hand.
+    func cocoWants(except held: BingoTile? = nil) -> BingoTile? { shown.first { cocoNeeds($0) && $0 != held } }
 
     /// Slides out the next two tiles. Tiles nobody took go back under the deck if someone still needs them.
     mutating func slide() {
@@ -254,11 +254,12 @@ struct BingoView: View {
         } else if let only = game.shown.first {
             say("\(only.word)!")
         }
-        // Coco grabs a tile she needs, but slowly, so Avery has time to find hers first.
+        // Coco grabs a tile she needs, but slowly, so Avery has time to find hers first,
+        // and never the one in Avery's hand.
         let thisRound = round
         Task {
             try? await Task.sleep(for: .seconds(3.5))
-            guard round == thisRound, !isOver, let tile = game.cocoWants else { return }
+            guard round == thisRound, !isOver, let tile = game.cocoWants(except: dragging) else { return }
             withAnimation(.spring) { game.cocoTakes(tile) }
             if game.cocoWon {
                 say("Snap snap! I filled my card! Good game! Want to play again?")

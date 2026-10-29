@@ -30,11 +30,19 @@ final class BingoTests: XCTestCase {
             var slides = 0
             while !(game.won && game.cocoWon) && slides < 500 {
                 game.slide()
-                while let tile = game.cocoWants { game.cocoTakes(tile) }
+                while let tile = game.cocoWants() { game.cocoTakes(tile) }
                 for tile in game.shown { _ = game.claim(tile) }
                 slides += 1
             }
             XCTAssertTrue(game.won && game.cocoWon, "stuck after \(slides) slides")
         }
+    }
+
+    func testCocoNeverTakesTheTileInYourHand() {
+        var game = BingoGame.new()
+        // Slide until a tile Coco needs comes out.
+        while game.cocoWants() == nil { game.slide() }
+        let held = game.cocoWants()!
+        XCTAssertNotEqual(game.cocoWants(except: held), held)
     }
 }
