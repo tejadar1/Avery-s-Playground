@@ -89,12 +89,12 @@ for old in out.glob("*.mp3"):
 
 voices = (here / "voice.txt").read_text().splitlines()
 # Each voice: (voice and pitch, language, file suffix, its lines, Kokoro speed). Nobody is sped up, so they sound natural;
-# Dora speaks a little slower, so Spanish words are clear for learning.
+# Dora speaks at her own pace too: slowed down, she sounded a little off.
 for (voice, pitch), lang, suffix, mine, speed in [
     (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:", "sound:")), 1.0),
-    (voices[1].split(), "es", "-es", lambda l: l.startswith("es:"), 0.9),
-    # The friends, and the English meanings of Spanish words: Dora's voice speaking English
-    (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:"), 0.9),
+    (voices[1].split(), "es", "-es", lambda l: l.startswith("es:"), 1.0),
+    # The friends: Dora's voice speaking English
+    (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:"), 1.0),
     # Bella: the storyteller for the English books, and the teacher for letters, letter sounds and words
     (voices[2].split(), "en-us", "-book", lambda l: l.startswith(("book:", "sound:")), 1.0),
 ]:
