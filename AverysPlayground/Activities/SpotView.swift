@@ -1,24 +1,12 @@
 import SwiftUI
 
-/// Two pictures that are almost the same: find the things that changed in the second one.
-/// Spots are fractions of the picture, which is 4:3.
+/// Two pictures of the same room (living room or bedroom, drawn in Art/spot.js): find what's different in the second.
+/// Things go missing or change color. Easy changes the biggest things; Hard, the smallest.
 struct SpotTheDifference {
     enum Level: String, CaseIterable {
         case easy = "Easy", medium = "Medium", hard = "Hard"
 
         var differences: Int { switch self { case .easy: 3; case .medium: 5; case .hard: 7 } }
-        /// Columns and rows of the grid things are scattered over.
-        var grid: (columns: Int, rows: Int) { switch self { case .easy: (3, 2); case .medium: (3, 3); case .hard: (4, 3) } }
-        /// How big each thing is, as a share of the picture's width.
-        var size: CGFloat { switch self { case .easy: 0.2; case .medium: 0.16; case .hard: 0.13 } }
-        /// Easy changes are big ones (gone, or something else); harder levels add a new color and turning around.
-        var changes: [Change] {
-            switch self {
-            case .easy: [.missing, .swapped]
-            case .medium: [.missing, .swapped, .recolored]
-            case .hard: [.missing, .swapped, .recolored, .flipped]
-            }
-        }
         var intro: String {
             switch self {
             case .easy: "Find 3 differences!"
@@ -28,61 +16,58 @@ struct SpotTheDifference {
         }
     }
 
-    enum Change { case missing, swapped, recolored, flipped }
+    enum Change { case missing, recolored }
 
-    struct Thing: Identifiable {
-        let id: Int
-        let picture: String
-        let spot: CGPoint
+    struct Room {
+        let name: String
+        let things: [Thing]
     }
 
-    static let pictures = [
-        "cat", "dog", "bird", "fish", "cow", "pig", "frog", "duck", "bee", "horse", "sun", "tree", "flower", "house",
-        "car", "ball", "apple", "balloon", "kite", "star", "butterfly", "ladybug", "umbrella", "boat", "rabbit", "turtle",
-    ]
-
-    /// Things that face one way, so turning them around shows.
-    static let facing: Set = ["cat", "dog", "bird", "fish", "cow", "pig", "duck", "horse", "car", "boat", "rabbit", "turtle", "kite", "bee"]
+    /// One layer of a room (the Spot-<room>-<id> image). Its spot is a fraction of the picture, which is 4:3;
+    /// size is its width or height, whichever is bigger, as a share of the picture's width.
+    struct Thing: Identifiable {
+        let id: String
+        let spot: CGPoint
+        let size: CGFloat
+        let canHide: Bool
+        let canRecolor: Bool
+    }
 
     let level: Level
-    let things: [Thing]
+    let room: Room
     /// What changed in the second picture, by thing.
-    let changes: [Int: Change]
-    /// For swapped things, what's there instead.
-    let swaps: [Int: String]
-    private(set) var found: Set<Int> = []
+    let changes: [String: Change]
+    private(set) var found: Set<String> = []
 
-    init(_ level: Level) {
+    init(_ level: Level, room: Room = rooms.randomElement()!) {
         self.level = level
-        let (columns, rows) = level.grid
-        var pool = Self.pictures.shuffled()
-        things = (0..<columns * rows).map { cell in
-            let x = (CGFloat(cell % columns) + .random(in: 0.4...0.6)) / CGFloat(columns)
-            let y = 0.1 + 0.8 * (CGFloat(cell / columns) + .random(in: 0.4...0.6)) / CGFloat(rows)
-            return Thing(id: cell, picture: pool.removeFirst(), spot: CGPoint(x: x, y: y))
+        self.room = room
+        let candidates = room.things.filter { $0.canHide || $0.canRecolor }.sorted { $0.size > $1.size }
+        // Easy picks among the biggest things, Hard among the smallest, Medium from all of them.
+        let pool = switch level {
+        case .easy: Array(candidates.prefix(8))
+        case .medium: candidates
+        case .hard: Array(candidates.suffix(12))
         }
-        var changes: [Int: Change] = [:], swaps: [Int: String] = [:]
-        for (n, id) in things.indices.shuffled().prefix(level.differences).enumerated() {
-            // Each kind of change once before any repeats
-            var change = level.changes[n % level.changes.count]
-            if change == .flipped, !Self.facing.contains(things[id].picture) { change = .recolored }
-            changes[id] = change
-            if change == .swapped { swaps[id] = pool.removeFirst() }
+        var changes: [String: Change] = [:]
+        for thing in pool.shuffled().prefix(level.differences) {
+            changes[thing.id] = thing.canHide && thing.canRecolor ? [.missing, .recolored].randomElement()! : thing.canHide ? .missing : .recolored
         }
         self.changes = changes
-        self.swaps = swaps
     }
 
     var isDone: Bool { found.count == changes.count }
 
     /// Marks the difference under a tap in either picture. Returns it, or nil if there's no difference there
-    /// (or it's already found). Generous: anywhere on the thing, and a little around it.
-    mutating func tap(at point: CGPoint) -> Int? {
-        let reach = level.size * 0.75
-        guard let hit = things.first(where: { thing in
-            changes[thing.id] != nil && !found.contains(thing.id)
-                && hypot(thing.spot.x - point.x, (thing.spot.y - point.y) * 0.75) < reach
-        }) else { return nil }
+    /// (or it's already found). Generous: anywhere on the thing and a little around it. When they overlap (a clock
+    /// by a lamp), the one the tap is most squarely on wins.
+    mutating func tap(at point: CGPoint) -> String? {
+        func closeness(_ thing: Thing) -> CGFloat {
+            hypot(thing.spot.x - point.x, (thing.spot.y - point.y) * 0.75) / max(thing.size * 0.6, 0.06)
+        }
+        guard let hit = room.things
+            .filter({ changes[$0.id] != nil && !found.contains($0.id) && closeness($0) < 1 })
+            .min(by: { closeness($0) < closeness($1) }) else { return nil }
         found.insert(hit.id)
         return hit.id
     }
@@ -181,20 +166,20 @@ struct SpotView: View {
             let width = min(geo.size.width, geo.size.height * 4 / 3)
             let height = width * 3 / 4
             ZStack(alignment: .topLeading) {
-                Scenery(.outdoors)
-                ForEach(game.things) { thing in
+                // The room, then each thing in it as a layer: left out if it's missing, the other color if it changed.
+                let room = "Spot-\(game.room.name)-"
+                Image(room + "bg").resizable()
+                ForEach(game.room.things) { thing in
                     let change = changed ? game.changes[thing.id] : nil
                     if change != .missing {
-                        Picture(change == .swapped ? game.swaps[thing.id]! : thing.picture, size: game.level.size * width)
-                            .hueRotation(.degrees(change == .recolored ? 150 : 0))
-                            .scaleEffect(x: change == .flipped ? -1 : 1)
-                            .position(x: thing.spot.x * width, y: thing.spot.y * height)
+                        Image(room + thing.id + (change == .recolored ? "-alt" : "")).resizable()
                     }
                 }
-                ForEach(game.things.filter { game.found.contains($0.id) }) { thing in
+                ForEach(game.room.things.filter { game.found.contains($0.id) }) { thing in
+                    let ring = max(thing.size * 1.15, 0.08) * width
                     Circle()
                         .strokeBorder(Color(red: 0.9, green: 0.2, blue: 0.56), lineWidth: 5 * uiScale)
-                        .frame(width: game.level.size * width * 1.4, height: game.level.size * width * 1.4)
+                        .frame(width: ring, height: ring)
                         .position(x: thing.spot.x * width, y: thing.spot.y * height)
                         .transition(.scale.combined(with: .opacity))
                 }

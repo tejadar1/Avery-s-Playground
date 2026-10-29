@@ -24,8 +24,8 @@ for (const part of mochiParts) {
 for (const file of fs.readdirSync(path.join(__dirname, 'icons'))) {
   images[`Icon-${path.basename(file, '.svg')}`] = [`icons/${file}`, 600];
 }
-// The Dress Up doll, one image per layer, stacked in DressUpView, and the hair salon customer's face the same way (doll.js writes both).
-for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salon.svg', 800]]) {
+// One image per layer: the Dress Up doll and the hair salon customer's face (doll.js writes both), and Spot It's rooms (spot.js).
+for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salon.svg', 800], ['Spot-living', 'spot-living.svg', 1200], ['Spot-bedroom', 'spot-bedroom.svg', 1200]]) {
   const svg = fs.readFileSync(path.join(__dirname, file), 'utf8');
   const parts = [...svg.matchAll(/<g id="([\w-]+)" class="part">/g)].map((m) => m[1]);
   for (const part of parts) {

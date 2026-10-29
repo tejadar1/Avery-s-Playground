@@ -4,32 +4,36 @@ import XCTest
 
 final class SpotTests: XCTestCase {
     func testEachLevelHasItsDifferencesAndFindingThemAllWins() {
-        for level in SpotTheDifference.Level.allCases {
-            var game = SpotTheDifference(level)
-            XCTAssertEqual(game.changes.count, level.differences, level.rawValue)
-            XCTAssertEqual(game.things.count, level.grid.columns * level.grid.rows)
-            for (id, change) in game.changes {
-                if change == .flipped { XCTAssertTrue(SpotTheDifference.facing.contains(game.things[id].picture), "flipping only shows on things that face a way") }
-                if change == .swapped { XCTAssertNotEqual(game.swaps[id], game.things[id].picture) }
+        for room in SpotTheDifference.rooms {
+            for level in SpotTheDifference.Level.allCases {
+                var game = SpotTheDifference(level, room: room)
+                XCTAssertEqual(game.changes.count, level.differences, "\(room.name) \(level.rawValue)")
+                for (id, change) in game.changes {
+                    let thing = room.things.first { $0.id == id }!
+                    XCTAssertTrue(change == .missing ? thing.canHide : thing.canRecolor, id)
+                }
+                for thing in room.things where game.changes[thing.id] != nil {
+                    XCTAssertEqual(game.tap(at: thing.spot), thing.id, "\(room.name) \(thing.id)")
+                    XCTAssertNil(game.tap(at: thing.spot), "found ones don't count twice")
+                }
+                XCTAssertTrue(game.isDone)
             }
-            for thing in game.things where game.changes[thing.id] != nil {
-                XCTAssertEqual(game.tap(at: thing.spot), thing.id)
-                XCTAssertNil(game.tap(at: thing.spot), "found ones don't count twice")
-            }
-            XCTAssertTrue(game.isDone)
         }
     }
 
-    func testTappingSomethingThatDidntChangeIsAMiss() throws {
-        var game = SpotTheDifference(.easy)
-        let same = try XCTUnwrap(game.things.first { game.changes[$0.id] == nil })
-        XCTAssertNil(game.tap(at: same.spot))
+    func testTappingTheEmptyFloorIsAMiss() {
+        var game = SpotTheDifference(.medium, room: SpotTheDifference.rooms[0])
+        XCTAssertNil(game.tap(at: CGPoint(x: 0.02, y: 0.98)))
         XCTAssertTrue(game.found.isEmpty)
     }
 
-    func testEveryPictureExists() {
-        for picture in SpotTheDifference.pictures {
-            XCTAssertNotNil(UIImage(named: "Picture-\(picture)"), picture)
+    func testEveryLayerIsDrawn() {
+        for room in SpotTheDifference.rooms {
+            XCTAssertNotNil(UIImage(named: "Spot-\(room.name)-bg"))
+            for thing in room.things {
+                XCTAssertNotNil(UIImage(named: "Spot-\(room.name)-\(thing.id)"), thing.id)
+                if thing.canRecolor { XCTAssertNotNil(UIImage(named: "Spot-\(room.name)-\(thing.id)-alt"), thing.id) }
+            }
         }
     }
 }
