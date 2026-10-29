@@ -12,8 +12,12 @@ final class SpotTests: XCTestCase {
                     XCTAssertTrue(room.things.first { $0.id == id }!.changes.contains(change), id)
                 }
                 for thing in room.things where game.changes[thing.id] != nil {
-                    XCTAssertEqual(game.tap(at: thing.spot), thing.id, "\(room.name) \(thing.id)")
-                    XCTAssertNil(game.tap(at: thing.spot), "found ones don't count twice")
+                    // A second tap on a thing nearby may have found it already.
+                    if !game.found.contains(thing.id) {
+                        XCTAssertEqual(game.tap(at: thing.spot), thing.id, "\(room.name) \(thing.id)")
+                    }
+                    // Tapping again can find a neighbor (the garland around the clock), never the same thing twice.
+                    XCTAssertNotEqual(game.tap(at: thing.spot), thing.id, "found ones don't count twice")
                 }
                 XCTAssertTrue(game.isDone)
             }
