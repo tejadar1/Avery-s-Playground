@@ -7,6 +7,8 @@
 A
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
+A big box, just for you!
+A big box, just for you! How would you feel?
 A big lion was sleeping in the sun.
 A boy watched the sheep on a hill.
 A coral reef!
@@ -482,6 +484,7 @@ Eagle eyes!
 Easy
 Easy peasy, lemon squeezy!
 Elephant
+Excited! Do a happy dance!
 Extras
 F
 F sharp
@@ -528,6 +531,8 @@ Gown! Holy guacamole, I love it!
 Gown! Ooh la la!
 Gown! So stylish!
 Gown! Wowza bowza!
+Grandma is coming to visit today!
+Grandma is coming to visit today! How would you feel?
 Grandma, what big eyes you have! All the better to see you with!
 Grapes
 Green
@@ -581,11 +586,16 @@ Hee hee, not the strawberry!
 Hee hee, not the sun!
 Hee hee, she likes belly rubs!
 Hee hee, that one feels calm!
+Hee hee, that one feels excited!
 Hee hee, that one feels happy!
+Hee hee, that one feels loved!
 Hee hee, that one feels mad!
 Hee hee, that one feels sad!
 Hee hee, that one feels scared!
+Hee hee, that one feels silly!
+Hee hee, that one feels sleepy!
 Hee hee, that one feels surprised!
+Hee hee, that one feels worried!
 Hee hee, that's a apple!
 Hee hee, that's a balloon!
 Hee hee, that's a bat!
@@ -710,6 +720,7 @@ Hot Cross Buns
 Hot diggity dog!
 How many did you see?
 How many dots?
+How would you feel?
 Hugs and kisses
 Hurry
 I
@@ -725,6 +736,8 @@ In the box
 In the lines
 In the sky or in the water?
 It's a tie! Everybody wins a hug!
+It's your birthday party!
+It's your birthday party! How would you feel?
 Itsy Bitsy Spider
 J
 Jack and the Beanstalk
@@ -769,6 +782,7 @@ London Bridge
 Look again!
 Look at that shine!
 Looking good!
+Loved. Say I love you too!
 M
 Ma
 Mac
@@ -782,6 +796,8 @@ Mer
 Mia
 Mia's turn
 Mochi
+Mochi does a wiggly dance!
+Mochi does a wiggly dance! How would you feel?
 Mochi found her bone! Woof woof!
 Mochi had a good nap! Good morning!
 Mochi is full! Burp! Hee hee!
@@ -803,6 +819,8 @@ MochiLegFarFront
 MochiLegFront
 MochiRoom
 MochiTail
+Mommy gives you a big hug.
+Mommy gives you a big hug. How would you feel?
 Moon
 Morning
 Mouth
@@ -967,10 +985,12 @@ Shh! Mochi is sleeping.
 Shoes
 Shoes on
 Shoes on, ready to go!
+Silly! Make a funny face back!
 Sit, Mochi! Good girl! Here's your treat!
 Skin color
 Sky
 Sleep
+Sleepy. Time for a cozy rest.
 Slide the floss over the bits of food between the teeth.
 Slide!
 Snap snap! I filled my card! Good game! Want to play again?
@@ -1011,6 +1031,8 @@ Sneakers! So stylish!
 Sneakers! Wowza bowza!
 Snip snip! Don't cut my tail!
 Snip snip, perfect!
+Snuggled in bed with a story.
+Snuggled in bed with a story. How would you feel?
 So bubbly!
 So fancy!
 So much glitter! It's like stars!
@@ -1018,6 +1040,8 @@ So she planted it all by herself. The wheat grew tall.
 So smooth!
 So sparkly my tail is wiggling!
 So stylish!
+Someone knocked down your tower!
+Someone knocked down your tower! How would you feel?
 Sparkle sparkle!
 Sparkly teeth!
 Sparkly teeth! Snap snap!
@@ -1112,6 +1136,8 @@ Then the lion got stuck in a hunter's net.
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
+Thunder goes boom in the night!
+Thunder goes boom in the night! How would you feel?
 Time to get ready for bed.
 Time's up
 Time's up!
@@ -1168,11 +1194,16 @@ What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Wheels on the Bus
 Which house did the wolf not blow down?
 Which one feels calm?
+Which one feels excited?
 Which one feels happy?
+Which one feels loved?
 Which one feels mad?
 Which one feels sad?
 Which one feels scared?
+Which one feels silly?
+Which one feels sleepy?
 Which one feels surprised?
+Which one feels worried?
 Which one rhymes with balloon?
 Which one rhymes with bat?
 Which one rhymes with bear?
@@ -1225,6 +1256,7 @@ Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
 Woof woof!
+Worried. Tell a grown-up what's on your mind.
 Wowza bowza!
 Wowza! You colored the whole beach!
 Wowza! You colored the whole coral reef!
@@ -1238,6 +1270,8 @@ Yes! Keep looking!
 Yippee skippy!
 Yo-yo
 You beat the timer! Holy guacamole!
+You can't find your favorite toy.
+You can't find your favorite toy. How would you feel?
 You did it, you silly goose!
 You found one!
 You found them all! Holy guacamole, eagle eyes!
@@ -1249,9 +1283,19 @@ You played Old MacDonald! Holy guacamole, what a song!
 You played Row Your Boat! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
 You played Wheels on the Bus! Holy guacamole, what a song!
+You played all day, and now it's night.
+You played all day, and now it's night. How would you feel?
+You see a big dog barking!
+You see a big dog barking! How would you feel?
 You wrote your name!
 You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
+Your first day at a new school.
+Your first day at a new school. How would you feel?
+Your friend has to go home.
+Your friend has to go home. How would you feel?
+Your ice cream fell on the floor!
+Your ice cream fell on the floor! How would you feel?
 Your turn!
 Yum yum, breakfast!
 Z
@@ -1560,6 +1604,7 @@ book:E is for Elephant!
 book:E!
 book:Enjoy your meal
 book:Everyone
+book:Excited! Do a happy dance!
 book:Excuse me
 book:Extras
 book:F is for Fish!
@@ -1630,6 +1675,7 @@ book:Little
 book:Little Red Riding Hood
 book:Little Red Riding Hood went to visit her grandma.
 book:London Bridge!
+book:Loved. Say I love you too!
 book:M is for Moon!
 book:M!
 book:Mad. Take a big breath, and blow it out slowly.
@@ -1691,7 +1737,9 @@ book:She tried three bowls of porridge. This one is just right!
 book:She tried three chairs. This one is just right!
 book:She walked through the woods and picked flowers.
 book:Shoes
+book:Silly! Make a funny face back!
 book:Sky
+book:Sleepy. Time for a cozy rest.
 book:Slow
 book:So
 book:So she planted it all by herself. The wheat grew tall.
@@ -1760,6 +1808,7 @@ book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
 book:Who won the race?
 book:Wolf
 book:Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
+book:Worried. Tell a grown-up what's on your mind.
 book:X!
 book:Y is for Yo-yo!
 book:Y!
@@ -2799,16 +2848,22 @@ es:¿Cómo estás?
 es:¿Quieres mangú?
 es:árbol
 es:él
+excited
 eyes
 eyes-over
 eyes-under
 f
 face-calm
 face-happy
+face-hug
 face-mad
+face-please
 face-sad
 face-scared
 face-shock
+face-sleepy
+face-starstruck
+face-yum
 fair
 fall
 farm
@@ -2911,6 +2966,7 @@ gingerbread
 girl
 globe
 go
+goodbye
 gown
 grandma
 grapes
@@ -3039,6 +3095,7 @@ like
 lion
 lit
 living
+loved
 ly
 ly,
 m
@@ -3047,6 +3104,7 @@ mango
 mer
 mmm
 mochi
+mom
 mond
 moon
 moon and apple!
@@ -3142,6 +3200,7 @@ rain,
 rainbow
 readingRead
 readingUnlocked
+rest
 ri
 river
 robot
@@ -3167,8 +3226,10 @@ shelfbear
 shelfbooks
 shelfdino
 shower
+silly
 sky.
 sleep
+sleepy
 slice of pizza
 slices of pizza
 slide
@@ -3348,6 +3409,8 @@ wind
 wolf
 won
 world
+worried
+wow
 wuh
 x
 xmark

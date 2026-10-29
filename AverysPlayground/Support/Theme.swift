@@ -359,3 +359,18 @@ private struct Confetti: View {
         }
     }
 }
+
+/// Sizes a grid of same-size cards to fill a space, as big as they can be (Memory, Feelings).
+enum CardGrid {
+    /// How many columns (each dividing the cards evenly) give the widest cards in `size`, and that width.
+    /// `aspect` is a card's width over its height.
+    static func fit(count: Int, in size: CGSize, gap: CGFloat, aspect: CGFloat) -> (columns: Int, width: CGFloat) {
+        (1...count).filter { count % $0 == 0 }
+            .map { columns -> (columns: Int, width: CGFloat) in
+                let rows = CGFloat(count / columns), cols = CGFloat(columns)
+                let width = min((size.width - gap * (cols - 1)) / cols, (size.height - gap * (rows - 1)) / rows * aspect)
+                return (columns, max(width, 0))
+            }
+            .max { $0.width < $1.width }!
+    }
+}

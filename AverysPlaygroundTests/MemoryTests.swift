@@ -44,10 +44,10 @@ final class MemoryTests: XCTestCase {
 
     func testCardsFillTheSpaceInTheBestColumns() {
         // Tall phone: 3 across. Wide iPad: 6 across in two rows.
-        XCTAssertEqual(MemoryView.layout(count: 12, in: CGSize(width: 360, height: 560), gap: 10).columns, 3)
-        XCTAssertEqual(MemoryView.layout(count: 12, in: CGSize(width: 1300, height: 600), gap: 10).columns, 6)
-        let fit = MemoryView.layout(count: 12, in: CGSize(width: 360, height: 560), gap: 10)
+        XCTAssertEqual(CardGrid.fit(count: 12, in: CGSize(width: 360, height: 560), gap: 10, aspect: 0.8).columns, 3)
+        XCTAssertEqual(CardGrid.fit(count: 12, in: CGSize(width: 1300, height: 600), gap: 10, aspect: 0.8).columns, 6)
+        let fit = CardGrid.fit(count: 12, in: CGSize(width: 360, height: 560), gap: 10, aspect: 0.8)
         XCTAssertLessThanOrEqual(fit.width * 3 + 20, 360.001)
-        XCTAssertLessThanOrEqual(fit.width / MemoryView.aspect * 4 + 30, 560.001)
+        XCTAssertLessThanOrEqual(fit.width / 0.8 * 4 + 30, 560.001)
     }
 }

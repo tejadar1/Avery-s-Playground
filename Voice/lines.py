@@ -90,8 +90,10 @@ for word in re.findall(r'"(\w+)"', src["SortView.swift"].split("static let all")
     lines.add("book:" + ("ice cream" if word == "icecream" else word) + "!")
 for sort in re.findall(r'Basket\(name: "([^"]+)"[^\n]+\n\s+right: Basket\(name: "([^"]+)"', src["SortView.swift"]):
     lines.add(f"{sort[0].capitalize()} or {sort[1]}?")
-for name, help in re.findall(r'Feeling\(name: "(\w+)", face: "[^"]+", help: "([^"]+)"', src["FeelingsView.swift"]):
+feelings = src["FeelingsView.swift"]
+for name, help in re.findall(r'Feeling\(name: "(\w+)", face: "[^"]+", group: "\w+", help: "([^"]+)"', feelings):
     lines.update({f"Which one feels {name}?", f"Hee hee, that one feels {name}!", "book:" + help})
+lines.update(f"{text} How would you feel?" for text in re.findall(r'FeelingMoment\(text: "([^"]+)"', feelings))
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):

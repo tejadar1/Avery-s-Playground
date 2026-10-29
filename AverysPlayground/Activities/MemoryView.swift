@@ -64,7 +64,7 @@ struct MemoryView: View {
             GeometryReader { geo in
                 let gap = 10 * uiScale, pad = 14 * uiScale
                 let room = CGSize(width: geo.size.width - 2 * pad, height: geo.size.height - 2 * pad)
-                let fit = Self.layout(count: game.cards.count, in: room, gap: gap)
+                let fit = CardGrid.fit(count: game.cards.count, in: room, gap: gap, aspect: Self.aspect)
                 Grid(horizontalSpacing: gap, verticalSpacing: gap) {
                     ForEach(0..<game.cards.count / fit.columns, id: \.self) { row in
                         GridRow {
@@ -98,18 +98,7 @@ struct MemoryView: View {
     }
 
     /// Card shape: a bit taller than wide.
-    nonisolated static let aspect: CGFloat = 0.8
-
-    /// How many columns (each dividing the cards evenly) give the widest cards in `size`, and that width.
-    nonisolated static func layout(count: Int, in size: CGSize, gap: CGFloat) -> (columns: Int, width: CGFloat) {
-        (1...count).filter { count % $0 == 0 }
-            .map { columns -> (columns: Int, width: CGFloat) in
-                let rows = CGFloat(count / columns), cols = CGFloat(columns)
-                let width = min((size.width - gap * (cols - 1)) / cols, (size.height - gap * (rows - 1)) / rows * aspect)
-                return (columns, max(width, 0))
-            }
-            .max { $0.width < $1.width }!
-    }
+    static let aspect: CGFloat = 0.8
 
     private func card(_ index: Int, width: CGFloat) -> some View {
         let showing = game.isShowing(index)

@@ -32,19 +32,26 @@ final class LearnGamesTests: XCTestCase {
         }
     }
 
-    func testFeelingsRoundsHaveThreeDifferentFaces() {
-        for _ in 0..<100 {
-            let round = FeelingsRound.random(after: Feeling.all[0])
-            XCTAssertNotEqual(round.answer, Feeling.all[0])
-            XCTAssertEqual(Set(round.choices.map(\.name)).count, 3)
-            XCTAssertTrue(round.choices.contains(round.answer))
+    func testFeelingsRoundsHaveThreeClearlyDifferentFaces() {
+        for moment in [false, true] {
+            for _ in 0..<200 {
+                let round = FeelingsRound.random(moment: moment, after: Feeling.all[0])
+                XCTAssertNotEqual(round.answer, Feeling.all[0], "not the same feeling twice in a row")
+                XCTAssertEqual(Set(round.choices.map(\.group)).count, 3, "no look-alike faces together")
+                XCTAssertTrue(round.choices.contains(round.answer))
+                XCTAssertEqual(round.moment != nil, moment)
+                if let picked = round.moment { XCTAssertEqual(picked.feeling, round.answer.name) }
+            }
+        }
+        for moment in FeelingMoment.all {
+            XCTAssertTrue(Feeling.all.contains { $0.name == moment.feeling }, moment.text)
         }
     }
 
     func testEveryPictureExists() {
         let pictures = PatternRound.things.map(\.picture)
             + Sorting.all.flatMap { [$0.left, $0.right] }.flatMap { [$0.picture] + $0.things.map(\.picture) }
-            + Feeling.all.flatMap { [$0.face, $0.helpPicture] }
+            + Feeling.all.flatMap { [$0.face, $0.helpPicture] } + FeelingMoment.all.map(\.picture)
         for picture in pictures {
             XCTAssertNotNil(UIImage(named: "Picture-\(picture)"), picture)
         }
