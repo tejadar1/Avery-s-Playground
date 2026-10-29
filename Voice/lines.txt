@@ -1133,11 +1133,16 @@ book:A little old woman baked a gingerbread man.
 book:A woodcutter chased the wolf away, and they all had a big hug.
 book:A!
 book:All
+book:Animals
 book:At
 book:At the top was a giant's castle. Fee, fi, fo, fum!
 book:B is for Bear!
 book:B!
 book:Black! Like a hat.
+book:Bless me, Dad
+book:Bless me, Grandma
+book:Bless me, Grandpa
+book:Bless me, Mom
 book:Blow dryer
 book:Blue
 book:Blue! Like a whale.
@@ -1155,29 +1160,42 @@ book:Clothes
 book:Cloud
 book:Colors
 book:Comb
+book:Come here, my love
 book:Coral
 book:Curly
 book:D is for Dog!
 book:D!
+book:Dad
 book:Designs
+book:Do you want mangú?
 book:Down
 book:E is for Elephant!
 book:E!
+book:Enjoy your meal
 book:Everyone
+book:Excuse me
 book:Extras
 book:F is for Fish!
 book:F!
+book:Family
 book:Fee
 book:Fix!
 book:Floss!
+book:Food
 book:Fox ends with X!
 book:G is for Grapes!
 book:G!
+book:Give me a hug
+book:God bless you
 book:Goldilocks
 book:Goldilocks and the Three Bears
 book:Goldilocks went for a walk in the woods.
+book:Good morning
+book:Good night
+book:Goodbye
 book:Grandma
 book:Grandma, what big eyes you have! All the better to see you with!
+book:Grandpa
 book:Green
 book:Green! Like a frog.
 book:H is for Horse!
@@ -1192,12 +1210,19 @@ book:He climbed down fast and took the hen home to his mom.
 book:He did it again. Everyone came running. No wolf!
 book:He jumped up and ran away! Run, run, as fast as you can!
 book:He planted the beans, and they grew up into the sky overnight!
+book:Hello
+book:Hello!
 book:Hood
 book:Hot Cross Buns!
+book:How are you?
+book:How cool!
 book:I
 book:I is for Ice cream!
+book:I love you so much
 book:I!
 book:I'm
+book:I'm hungry
+book:In a little bit
 book:J is for Juice!
 book:J!
 book:Jack
@@ -1211,14 +1236,19 @@ book:L is for Lion!
 book:L!
 book:Let's
 book:Let's have a race, said Hare.
+book:Let's play!
 book:Little
 book:Little Red Riding Hood
 book:Little Red Riding Hood went to visit her grandma.
 book:M is for Moon!
 book:M!
 book:Mary Had a Little Lamb!
+book:Mom
 book:Mustard
 book:My
+book:My brother
+book:My name is Avery
+book:My sister
 book:N is for Nest!
 book:N!
 book:Navy
@@ -1226,6 +1256,7 @@ book:No
 book:No, said the hen. My chicks and I will eat it!
 book:Nobody
 book:Not
+book:Numbers
 book:O is for Octopus!
 book:O!
 book:One
@@ -1240,6 +1271,7 @@ book:Please let me go, said the mouse. One day I will help you.
 book:Ponytail
 book:Puff
 book:Purple! Like grapes.
+book:Put on your flip-flops
 book:Q is for Queen!
 book:Q!
 book:R is for Rainbow!
@@ -1271,6 +1303,7 @@ book:Styles
 book:T is for Turtle!
 book:T!
 book:Teal
+book:Thank you
 book:The
 book:The Boy Who Cried Wolf
 book:The Gingerbread Man
@@ -1304,6 +1337,7 @@ book:U is for Umbrella!
 book:U!
 book:V is for Violin!
 book:V!
+book:Very good
 book:W is for Whale!
 book:W!
 book:Wash
@@ -1320,7 +1354,10 @@ book:Y is for Yo-yo!
 book:Y!
 book:Yellow
 book:Yellow! Like a banana.
+book:Yes, Dad
+book:Yes, Mom
 book:You
+book:Yummy!
 book:Z is for Zebra!
 book:Z!
 book:a
@@ -1335,6 +1372,7 @@ book:are
 book:as
 book:asked
 book:asleep
+book:avocado
 book:away
 book:back
 book:bad
@@ -1360,8 +1398,10 @@ book:better
 book:big
 book:bird
 book:bird!
+book:black
 book:blew
 book:blow
+book:blue
 book:boat
 book:boat!
 book:bowls
@@ -1398,6 +1438,7 @@ book:cat! You spelled it!
 book:catch
 book:chairs
 book:chased
+book:cheese
 book:chewed
 book:chick
 book:chicks
@@ -1407,6 +1448,7 @@ book:could
 book:cow
 book:cow!
 book:cried
+book:crocodile
 book:crown
 book:cup
 book:cup! You read it!
@@ -1424,6 +1466,7 @@ book:duck!
 book:eat
 book:egg!
 book:eggs
+book:eight
 book:elephant
 book:eyes
 book:far
@@ -1433,16 +1476,20 @@ book:fi
 book:first
 book:fish
 book:fish!
+book:five
 book:flower
 book:flower!
 book:flowers
 book:fo
 book:for
 book:found
+book:four
 book:fox
 book:fox! You read it!
 book:fox! You spelled it!
 book:free
+book:fried cheese
+book:fried plantains
 book:friends
 book:frog
 book:frog!
@@ -1458,6 +1505,7 @@ book:got
 book:grandma
 book:grandma's
 book:grapes
+book:green
 book:grew
 book:had
 book:hat
@@ -1488,6 +1536,7 @@ book:houses
 book:huffed
 book:hug
 book:hunter's
+book:ice cream
 book:in
 book:into
 book:is
@@ -1504,7 +1553,10 @@ book:lion
 book:little
 book:magic
 book:man
+book:mango
+book:mashed plantains
 book:me
+book:milk
 book:mom
 book:moon
 book:moon!
@@ -1512,6 +1564,7 @@ book:mouse
 book:my
 book:nap
 book:net
+book:nine
 book:nobody
 book:nose
 book:not
@@ -1520,6 +1573,7 @@ book:of
 book:old
 book:on
 book:one
+book:orange
 book:other
 book:out
 book:over
@@ -1534,17 +1588,21 @@ book:pig!
 book:pig! You read it!
 book:pig! You spelled it!
 book:pigs
+book:pink
 book:pizza
 book:plant
+book:plantain
 book:planted
 book:porridge
 book:puffed
+book:purple
 book:rabbit
 book:race
 book:rainbow
 book:ran
 book:real
 book:red
+book:rice and beans
 book:right
 book:river
 book:ropes
@@ -1552,13 +1610,16 @@ book:run
 book:running
 book:safe
 book:said
+book:salami
 book:saw
 book:second
 book:see
+book:seven
 book:she
 book:sheep
 book:shouted
 book:side
+book:six
 book:sky
 book:sleeping
 book:slow
@@ -1567,6 +1628,7 @@ book:some
 book:star
 book:star!
 book:steady
+book:stew
 book:stick
 book:sticks
 book:straw
@@ -1578,6 +1640,7 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:tall
 book:tell
+book:ten
 book:that
 book:the
 book:they
@@ -1594,6 +1657,7 @@ book:tried
 book:trophy
 book:truth
 book:turtle
+book:two
 book:umbrella
 book:under
 book:up
@@ -1605,6 +1669,7 @@ book:walk
 book:walked
 book:was
 book:watched
+book:water
 book:way
 book:web
 book:web! You read it!
@@ -1614,6 +1679,7 @@ book:were
 book:whale
 book:what
 book:wheat
+book:white
 book:will
 book:wins
 book:with
@@ -1623,6 +1689,7 @@ book:woman
 book:won
 book:woodcutter
 book:woods
+book:yellow
 book:you
 book:zebra
 boots
@@ -1812,100 +1879,15 @@ dogbed
 dogbowl
 dogbowl-empty
 dora:Ahh, minty fresh! Thank you, Coco!
-dora:Animals
-dora:Bless me, Dad
-dora:Bless me, Grandma
-dora:Bless me, Grandpa
-dora:Bless me, Mom
-dora:Colors
-dora:Come here, my love
-dora:Dad
-dora:Do you want mangú?
-dora:Enjoy your meal
-dora:Excuse me
-dora:Family
-dora:Food
-dora:Give me a hug
-dora:God bless you
-dora:Good morning
-dora:Good night
-dora:Goodbye
 dora:Gracias, Coco! I love it!
-dora:Grandma
-dora:Grandpa
-dora:Hello
-dora:Hello!
 dora:Hi Coco! I'm so excited!
 dora:Hi Coco! Make me look fabulous!
 dora:Hola Coco! Holy guacamole, it's my turn!
 dora:Holy guacamole, look at me!
-dora:How are you?
-dora:How cool!
 dora:I love it! Thank you, Coco!
-dora:I love you so much
-dora:I'm hungry
-dora:In a little bit
-dora:Let's play!
 dora:Look at my smile! Gracias!
-dora:Mom
-dora:My brother
-dora:My name is Avery
-dora:My sister
 dora:My teeth are so sparkly! Thank you!
-dora:Numbers
-dora:Please
-dora:Put on your flip-flops
-dora:Thank you
-dora:Very good
 dora:Wow! I look amazing!
-dora:Yes, Dad
-dora:Yes, Mom
-dora:Yummy!
-dora:apple
-dora:avocado
-dora:banana
-dora:bird
-dora:black
-dora:blue
-dora:bread
-dora:cake
-dora:cat
-dora:cheese
-dora:cookie
-dora:cow
-dora:crocodile
-dora:dog
-dora:eight
-dora:fish
-dora:five
-dora:four
-dora:fried cheese
-dora:fried plantains
-dora:frog
-dora:green
-dora:horse
-dora:ice cream
-dora:mango
-dora:mashed plantains
-dora:milk
-dora:nine
-dora:one
-dora:orange
-dora:pink
-dora:plantain
-dora:purple
-dora:red
-dora:rice and beans
-dora:salami
-dora:seven
-dora:six
-dora:stew
-dora:ten
-dora:three
-dora:two
-dora:water
-dora:white
-dora:yellow
 drill
 duck
 duck and apple!

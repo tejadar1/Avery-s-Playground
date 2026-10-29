@@ -48,13 +48,13 @@ lines.add("book:The end!")
 lines |= story_lines(src["StoriesView.swift"].split("static let spanish")[1], "es:")
 lines.add("es:¡Colorín colorado, este cuento se ha acabado!")
 spanish = src["SpanishView.swift"]
-# English meanings are said in Dora's voice ("dora:"), like the Spanish
+# English meanings are said in Bella's voice ("book:"), right after the Spanish
 for es, en in re.findall(r'SpanishWord\(spanish: "([^"]+)", english: "([^"]+)"', spanish):
-    lines.update({"es:" + es, "dora:" + en})
+    lines.update({"es:" + es, "book:" + en})
 titles = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var title")[1].split("var english")[0]))
 meanings = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var english")[1].split("var picture")[0]))
 for case, title in titles.items():
-    lines.update({"es:" + title, "dora:" + meanings[case]})
+    lines.update({"es:" + title, "book:" + meanings[case]})
 
 # Letter tracing: the letter's name, said before a silly cheer when it's traced
 lines.update(f"book:{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")  # in Bella's voice

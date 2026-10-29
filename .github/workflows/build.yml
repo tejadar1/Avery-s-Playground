@@ -47,6 +47,13 @@ jobs:
           curl -sSLO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
       - if: inputs.voice == 'samples'
         run: |
+          # Piper's Spanish voices, to compare with Kokoro's
+          pip install -q piper-tts
+          for v in es_MX/claude/high/es_MX-claude-high es_MX/ald/medium/es_MX-ald-medium es_AR/daniela/high/es_AR-daniela-high es_ES/sharvard/medium/es_ES-sharvard-medium es_ES/davefx/medium/es_ES-davefx-medium; do
+            curl -sSfL -o "Voice/$(basename $v).onnx" "https://huggingface.co/rhasspy/piper-voices/resolve/main/es/$v.onnx" \
+              && curl -sSfL -o "Voice/$(basename $v).onnx.json" "https://huggingface.co/rhasspy/piper-voices/resolve/main/es/$v.onnx.json" \
+              || echo "No $v"
+          done
           python Voice/make.py --samples
           cd Voice/samples && git init -q -b voice-samples && git add .
           git -c user.name=github-actions -c user.email=actions@github.com commit -qm "Voice samples"

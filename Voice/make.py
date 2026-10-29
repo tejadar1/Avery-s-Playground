@@ -9,6 +9,7 @@ gone, and re-records a language's lines when its voice changes.
 The key is the first 16 hex digits of the line's SHA-256 ("es:" included), matching Speaker.recording(for:language:).
 """
 import hashlib
+import json
 import subprocess
 import sys
 import tempfile
@@ -54,11 +55,22 @@ def record(line, voice, pitch, path, lang="en-us", speed=1.0, quicker=1.0):
 if "--samples" in sys.argv:
     out = here / "samples"
     out.mkdir(exist_ok=True)
-    # Storyteller voices for the books: warm women's voices at their own pitch, reading the same page.
-    line = "Once upon a time, three little pigs went out to build three little houses. The first pig built a house of straw."
-    for voice in ["af_bella", "af_heart", "af_nicole", "af_sarah", "af_aoede", "af_kore", "bf_emma", "bf_isabella", "ef_dora"]:
-        for pitch in [1.0, 1.08]:
-            record(line, voice, pitch, out / f"{voice}-{pitch}.mp3")
+    # Spanish voices for Español and the cuentos: Kokoro's only Spanish woman (Dora) at two speeds, and the Spanish
+    # voices from Piper, another free voice engine, that the workflow downloads next to this file (es_*.onnx).
+    line = "¡Hola! Me llamo Avery. Bendición, abuela. La cucarachita Martina barría su casita y encontró una moneda."
+    for speed in [0.9, 1.0]:
+        record(line, "ef_dora", 1.0, out / f"kokoro-dora-{speed}.mp3", "es", speed)
+    for model in sorted(here.glob("es_*.onnx")):
+        try:
+            speakers = json.loads(Path(f"{model}.json").read_text()).get("num_speakers", 1)
+            for speaker in range(min(speakers, 3)):
+                with tempfile.NamedTemporaryFile(suffix=".wav") as wav:
+                    subprocess.run(["piper", "--model", str(model), "--speaker", str(speaker), "--output_file", wav.name],
+                                   input=line.encode(), check=True)
+                    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav.name, "-b:a", "64k",
+                                    str(out / f"piper-{model.stem}-{speaker}.mp3")], check=True)
+        except Exception as error:  # a voice that didn't download or doesn't run is just left out
+            print(f"Skipped {model.name}: {error}")
     sys.exit()
 
 out = here.parent / "AverysPlayground" / "Voice"

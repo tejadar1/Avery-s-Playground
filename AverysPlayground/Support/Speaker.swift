@@ -63,22 +63,17 @@ final class Speaker {
         speak(AVSpeechUtterance(attributedString: sound))
     }
 
-    /// Says the Spanish, the English meaning, then the Spanish again with a pause so the child can repeat it.
+    /// Says the Spanish, then the English meaning in Bella's voice, once each.
     func say(spanish: String, english: String) {
-        // The English meaning in Dora's voice too, so the whole card is one voice.
-        if let word = Self.recording(for: spanish, language: "es-MX"), let meaning = Self.recording(for: Self.dora + english) ?? Self.recording(for: english) {
-            play([word, meaning, word], pauses: [0.3, 0.6])
+        if let word = Self.recording(for: spanish, language: "es-MX"), let meaning = Self.recording(for: Self.book + english) ?? Self.recording(for: english) {
+            play([word, meaning], pauses: [0.4])
             return
         }
         let first = AVSpeechUtterance(string: spanish)
+        first.voice = voice("es-MX")
         let meaning = AVSpeechUtterance(string: english)
-        let again = AVSpeechUtterance(string: spanish)
-        for utterance in [first, again] {
-            utterance.voice = voice("es-MX")
-        }
-        meaning.preUtteranceDelay = 0.3
-        again.preUtteranceDelay = 0.6
-        speak(first, meaning, again)
+        meaning.preUtteranceDelay = 0.4
+        speak(first, meaning)
     }
 
     /// Waits until Coco is done talking.
