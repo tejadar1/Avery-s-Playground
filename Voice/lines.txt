@@ -1,5 +1,22 @@
 %02d
 ) on the plate. How many are in the box?
+),
+            Page(pictures: [
+),
+        ], question: .init(text: 
+, answer: 
+, color: Color(red: 0.4, green: 0.68, blue: 0.4), pages: [
+            Page(pictures: [
+, color: Color(red: 0.55, green: 0.62, blue: 0.85), pages: [
+            Page(pictures: [
+, color: Color(red: 0.93, green: 0.7, blue: 0.3), pages: [
+            Page(pictures: [
+, cover: 
+, others: [
+, setting: .home),
+            Page(pictures: [
+, setting: .night),
+            Page(pictures: [
 -alt
 -over
 -under
@@ -7,12 +24,9 @@
 A
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
-A big lion was sleeping in the sun.
-A boy watched the sheep on a hill.
 A coral reef!
 A farm!
 A garden!
-A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
 A match! Go again!
 A night sky!
@@ -34,7 +48,6 @@ All the chores are done! What a big helper! Holy guacamole!
 Another sticker! Yay!
 Anywhere
 Apple
-At the top was a giant's castle. Fee, fi, fo, fum!
 Avery! You wrote your name!
 B
 Backpack
@@ -539,10 +552,7 @@ Hare ran far ahead and took a nap under a tree.
 Hare was fast. Tortoise was slow.
 Hats
 He came to a river. A sly fox said, hop on my back!
-He climbed down fast and took the hen home to his mom.
-He did it again. Everyone came running. No wolf!
 He jumped up and ran away! Run, run, as fast as you can!
-He planted the beans, and they grew up into the sky overnight!
 Hear the word
 Hearts
 Hearts win! Snap snap!
@@ -703,10 +713,6 @@ In the lines
 It's a tie! Everybody wins a hug!
 Itsy Bitsy Spider
 J
-Jack and the Beanstalk
-Jack climbed up, up, up the beanstalk.
-Jack found a hen that laid golden eggs.
-Jack traded his cow for some magic beans.
 Juice
 Jumping jellybeans!
 K
@@ -874,7 +880,6 @@ Pink
 Play
 Play again
 Play the star key, or tap Listen.
-Please let me go, said the mouse. One day I will help you.
 Ponytail
 Ponytail! So cute!
 Poof! All gone!
@@ -1060,26 +1065,19 @@ That sticker is so silly!
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
 The
-The Boy Who Cried Wolf
 The Gingerbread Man
-The Lion and the Mouse
 The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
-The boy learned to always tell the truth.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 The first pig built a house of straw.
-The lion was free! Little friends can be big helpers.
-The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
 The second pig built a house of sticks.
 The table's ready! Let's eat!
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
 The wolf ran to grandma's house and hid in her bed.
-Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
-Then the lion got stuck in a hunter's net.
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
@@ -1134,6 +1132,7 @@ What a design!
 What color should it be?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Wheels on the Bus
+Which house did the wolf not blow down?
 Which one rhymes with balloon?
 Which one rhymes with bat?
 Which one rhymes with bear?
@@ -1158,6 +1157,7 @@ Which one rhymes with tree?
 Which one starts with
 Which picture is it?
 White
+Who came home and found Goldilocks?
 Who has fewer apples, Coco or Mochi?
 Who has fewer bananas, Coco or Mochi?
 Who has fewer cookies, Coco or Mochi?
@@ -1170,14 +1170,17 @@ Who has more cookies, Coco or Mochi?
 Who has more cupcakes, Coco or Mochi?
 Who has more slices of pizza, Coco or Mochi?
 Who has more strawberries, Coco or Mochi?
+Who planted the wheat?
+Who said hop on my back?
+Who was hiding in grandma
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
+Who won the race?
 Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
 Wipe the table
-Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
 Woof woof!
 Wowza bowza!
@@ -1212,6 +1215,9 @@ Yum yum, breakfast!
 Z
 Zebra
 Zoe
+])),
+        Story(title: 
+], text: 
 a
 a banana
 a bear
@@ -1648,6 +1654,7 @@ book:T is for Turtle!
 book:T!
 book:Teal
 book:Thank you
+book:That's right!
 book:The
 book:The Boy Who Cried Wolf
 book:The Gingerbread Man
@@ -1685,13 +1692,24 @@ book:Very good
 book:W is for Whale!
 book:W!
 book:Wash
+book:What
+book:What did Jack trade for the magic beans?
+book:What did the boy watch on the hill?
 book:Wheels on the Bus!
 book:Where
+book:Which
+book:Which house did the wolf not blow down?
 book:White
 book:White! Like a cloud.
 book:Who
+book:Who came home and found Goldilocks?
+book:Who helped the lion get free?
+book:Who planted the wheat?
+book:Who said hop on my back?
+book:Who was hiding in grandma
 book:Who will help me eat it? I will, said the dog, the cat, and the duck.
 book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
+book:Who won the race?
 book:Wolf
 book:Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 book:X!
@@ -1862,6 +1880,7 @@ book:frog!
 book:fum
 book:fun
 book:gem
+book:get
 book:giant's
 book:gingerbread
 book:go
@@ -1885,6 +1904,7 @@ book:he
 book:heart
 book:heart!
 book:help
+book:helped
 book:helpers
 book:hen
 book:hen and pen rhyme!
@@ -1894,6 +1914,7 @@ book:hen! You spelled it!
 book:her
 book:herself
 book:hid
+book:hiding
 book:hill
 book:him
 book:his
@@ -2033,6 +2054,7 @@ book:through
 book:to
 book:took
 book:top
+book:trade
 book:traded
 book:tree
 book:tree and bee rhyme!
@@ -2054,6 +2076,7 @@ book:visit
 book:walk
 book:walked
 book:was
+book:watch
 book:watched
 book:water
 book:way
@@ -2085,7 +2108,6 @@ bove
 bow
 bowl
 box
-boy
 bread
 bricks
 bridge

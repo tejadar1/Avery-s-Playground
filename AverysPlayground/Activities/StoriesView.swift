@@ -15,6 +15,15 @@ struct Story: Hashable {
     let color: Color
     let pages: [Page]
     var language = "en-US"
+    /// One easy question at the end, answered by tapping a picture: talking about a story while reading it builds
+    /// words and understanding (dialogic reading).
+    var question: Question?
+
+    struct Question: Hashable {
+        let text: String
+        let answer: String
+        let others: [String]
+    }
 
     static let all = [
         Story(title: "The Three Little Pigs", cover: "pig", color: .pink, pages: [
@@ -24,7 +33,7 @@ struct Story: Hashable {
             Page(pictures: ["bricks", "house"], text: "The third pig built a house of bricks."),
             Page(pictures: ["wolf", "wind"], text: "The big bad wolf huffed and puffed and blew the straw and stick houses down!"),
             Page(pictures: ["bricks", "pig", "pig", "pig"], text: "But he could not blow down the brick house. The three pigs were safe!"),
-        ]),
+        ], question: .init(text: "Which house did the wolf not blow down?", answer: "bricks", others: ["wheat", "sticks"])),
         Story(title: "Goldilocks and the Three Bears", cover: "bear", color: .orange, pages: [
             Page(pictures: ["girl", "tree"], text: "Goldilocks went for a walk in the woods."),
             Page(pictures: ["house"], text: "She found a little house. Nobody was home."),
@@ -32,14 +41,14 @@ struct Story: Hashable {
             Page(pictures: ["chair", "chair", "chair"], text: "She tried three chairs. This one is just right!", setting: .home),
             Page(pictures: ["bed", "sleep"], text: "She tried three beds and fell fast asleep.", setting: .home),
             Page(pictures: ["bear", "bear", "bear"], text: "The three bears came home! Goldilocks woke up and ran all the way home.", setting: .home),
-        ]),
+        ], question: .init(text: "Who came home and found Goldilocks?", answer: "bear", others: ["wolf", "pig"])),
         Story(title: "The Tortoise and the Hare", cover: "turtle", color: .green, pages: [
             Page(pictures: ["rabbit", "turtle"], text: "Hare was fast. Tortoise was slow."),
             Page(pictures: ["flag"], text: "Let's have a race, said Hare."),
             Page(pictures: ["rabbit", "sleep", "tree"], text: "Hare ran far ahead and took a nap under a tree."),
             Page(pictures: ["turtle", "footprints"], text: "Tortoise kept going, slow and steady."),
             Page(pictures: ["turtle", "trophy"], text: "Tortoise won the race! Slow and steady wins."),
-        ]),
+        ], question: .init(text: "Who won the race?", answer: "turtle", others: ["rabbit", "fox"])),
         Story(title: "The Little Red Hen", cover: "hen", color: .red, pages: [
             Page(pictures: ["hen", "wheat"], text: "The little red hen found some wheat."),
             Page(pictures: ["dog", "cat", "duck"], text: "Who will help me plant it? Not I, said the dog, the cat, and the duck."),
@@ -47,14 +56,14 @@ struct Story: Hashable {
             Page(pictures: ["bread"], text: "She baked the wheat into bread.", setting: .home),
             Page(pictures: ["dog", "cat", "duck", "bread"], text: "Who will help me eat it? I will, said the dog, the cat, and the duck.", setting: .home),
             Page(pictures: ["hen", "chick", "bread"], text: "No, said the hen. My chicks and I will eat it!", setting: .home),
-        ]),
+        ], question: .init(text: "Who planted the wheat?", answer: "hen", others: ["dog", "cat"])),
         Story(title: "The Gingerbread Man", cover: "gingerbread", color: Color(red: 0.8, green: 0.52, blue: 0.3), pages: [
             Page(pictures: ["grandma", "fire"], text: "A little old woman baked a gingerbread man.", setting: .home),
             Page(pictures: ["gingerbread", "footprints"], text: "He jumped up and ran away! Run, run, as fast as you can!"),
             Page(pictures: ["cow", "horse", "gingerbread"], text: "The cow and the horse chased him. You can't catch me, I'm the gingerbread man!"),
             Page(pictures: ["river", "fox"], text: "He came to a river. A sly fox said, hop on my back!"),
             Page(pictures: ["gingerbread", "house"], text: "But the gingerbread man jumped to the other side and ran all the way home!"),
-        ]),
+        ], question: .init(text: "Who said hop on my back?", answer: "fox", others: ["cow", "horse"])),
         Story(title: "Little Red Riding Hood", cover: "girl", color: Color(red: 0.86, green: 0.25, blue: 0.3), pages: [
             Page(pictures: ["girl", "grandma"], text: "Little Red Riding Hood went to visit her grandma."),
             Page(pictures: ["girl", "flower", "tree"], text: "She walked through the woods and picked flowers."),
@@ -62,7 +71,7 @@ struct Story: Hashable {
             Page(pictures: ["wolf", "bed"], text: "The wolf ran to grandma's house and hid in her bed.", setting: .home),
             Page(pictures: ["girl", "wolf"], text: "Grandma, what big eyes you have! All the better to see you with!", setting: .home),
             Page(pictures: ["girl", "grandma", "heart"], text: "A woodcutter chased the wolf away, and they all had a big hug.", setting: .home),
-        ]),
+        ], question: .init(text: "Who was hiding in grandma"s bed?", answer: "wolf", others: ["grandma", "girl"])),
         Story(title: "The Lion and the Mouse", cover: "lion", color: Color(red: 0.93, green: 0.7, blue: 0.3), pages: [
             Page(pictures: ["lion", "sleep"], text: "A big lion was sleeping in the sun."),
             Page(pictures: ["mouse", "lion"], text: "A little mouse ran over his nose and woke him up!"),
@@ -70,7 +79,7 @@ struct Story: Hashable {
             Page(pictures: ["lion", "web"], text: "Then the lion got stuck in a hunter's net."),
             Page(pictures: ["mouse", "web"], text: "The little mouse chewed and chewed the ropes."),
             Page(pictures: ["lion", "mouse", "heart"], text: "The lion was free! Little friends can be big helpers."),
-        ]),
+        ], question: .init(text: "Who helped the lion get free?", answer: "mouse", others: ["bird", "bear"])),
         Story(title: "Jack and the Beanstalk", cover: "sprout", color: Color(red: 0.4, green: 0.68, blue: 0.4), pages: [
             Page(pictures: ["boy", "cow"], text: "Jack traded his cow for some magic beans."),
             Page(pictures: ["sprout", "moon"], text: "He planted the beans, and they grew up into the sky overnight!", setting: .night),
@@ -78,14 +87,14 @@ struct Story: Hashable {
             Page(pictures: ["house", "footprints"], text: "At the top was a giant's castle. Fee, fi, fo, fum!"),
             Page(pictures: ["hen", "egg"], text: "Jack found a hen that laid golden eggs.", setting: .home),
             Page(pictures: ["boy", "hen", "house"], text: "He climbed down fast and took the hen home to his mom."),
-        ]),
+        ], question: .init(text: "What did Jack trade for the magic beans?", answer: "cow", others: ["pig", "horse"])),
         Story(title: "The Boy Who Cried Wolf", cover: "sheep", color: Color(red: 0.55, green: 0.62, blue: 0.85), pages: [
             Page(pictures: ["boy", "sheep"], text: "A boy watched the sheep on a hill."),
             Page(pictures: ["boy", "house"], text: "Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!"),
             Page(pictures: ["boy", "sheep"], text: "He did it again. Everyone came running. No wolf!"),
             Page(pictures: ["wolf", "sheep"], text: "Then a real wolf came. Wolf! Wolf! he cried. But nobody came."),
             Page(pictures: ["boy", "heart"], text: "The boy learned to always tell the truth."),
-        ]),
+        ], question: .init(text: "What did the boy watch on the hill?", answer: "sheep", others: ["cow", "pig"])),
     ]
 
     /// Retold in simple Spanish. Juan Bobo and La Ciguapa come from Dominican folklore;
@@ -305,6 +314,11 @@ private struct StoryReader: View {
     @State private var frames: [Int: CGRect] = [:]
     @State private var current: Int?
     @State private var isSwiping = false
+    /// The question at the end: showing, its pictures in a shuffled order, and the wrong one picked.
+    @State private var isAsking = false
+    @State private var choices: [String] = []
+    @State private var wrongPick: String?
+    @State private var shakes = 0
 
     private var page: Story.Page { story.pages[pageIndex] }
     private var words: [String] { page.text.split(separator: " ").map(String.init) }
@@ -317,6 +331,7 @@ private struct StoryReader: View {
             let wide = geo.size.width > geo.size.height * 1.05
             VStack(spacing: 16 * uiScale) {
                 book(wide: wide)
+                    .overlay { if isAsking, let question = story.question { ask(question) } }
                 controls
             }
         }
@@ -410,8 +425,14 @@ private struct StoryReader: View {
             Spacer()
             if isLastPage {
                 pageButton("house.fill", hidden: false) {
-                    read(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!")
-                    dismiss()
+                    if let question = story.question, !isAsking {
+                        // One question before the end
+                        choices = ([question.answer] + question.others).shuffled()
+                        withAnimation(.spring) { isAsking = true }
+                        read(question.text)
+                    } else {
+                        finish()
+                    }
                 }
             } else {
                 pageButton("chevron.right", hidden: false) { turn(by: 1) }
@@ -430,6 +451,56 @@ private struct StoryReader: View {
         .buttonStyle(SquishyButtonStyle())
         .opacity(hidden ? 0 : 1)
         .disabled(hidden)
+    }
+
+    /// The question over the book, with three pictures to answer it.
+    private func ask(_ question: Story.Question) -> some View {
+        VStack(spacing: 20 * uiScale) {
+            Button { read(question.text) } label: {
+                Label(question.text, systemImage: "speaker.wave.2.fill")
+                    .font(.kid(28))
+                    .foregroundStyle(Color.outline)
+                    .multilineTextAlignment(.center)
+            }
+            HStack(spacing: 16 * uiScale) {
+                ForEach(choices, id: \.self) { choice in
+                    Button {
+                        if choice == question.answer {
+                            Sounds.shared.play(.sparkle)
+                            Haptics.success()
+                            Speaker.shared.say(Speaker.book + "That's right!", then: Hooray.random)
+                            Task {
+                                try? await Task.sleep(for: .seconds(2.8))
+                                finish()
+                            }
+                        } else {
+                            Haptics.tap()
+                            wrongPick = choice
+                            shakes += 1
+                            read(question.text)
+                        }
+                    } label: {
+                        Picture(choice, size: 90 * uiScale)
+                            .frame(width: 110 * uiScale, height: 110 * uiScale)
+                            .cartoonCard(.white)
+                    }
+                    .buttonStyle(SquishyButtonStyle())
+                    .phaseAnimator([CGFloat(0), -14, 14, 0], trigger: shakes) { content, x in
+                        content.offset(x: choice == wrongPick ? x : 0)
+                    } animation: { _ in .linear(duration: 0.08) }
+                    .accessibilityLabel(choice)
+                }
+            }
+        }
+        .padding(28 * uiScale)
+        .cartoonCard(Self.paperColor, cornerRadius: 28 * uiScale)
+        .padding(20 * uiScale)
+        .transition(.scale.combined(with: .opacity))
+    }
+
+    private func finish() {
+        read(story.language == "en-US" ? "The end!" : "¡Colorín colorado, este cuento se ha acabado!")
+        dismiss()
     }
 
     /// Reads the word under the finger, or just above it, once per word.

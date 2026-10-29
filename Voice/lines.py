@@ -42,7 +42,7 @@ def story_lines(stories, prefix=""):
 
 # English books are read by the storyteller ("book:"); Coco only says a book's name when its cover is tapped.
 lines |= story_lines(english["StoriesView.swift"], "book:")
-lines.add("book:The end!")
+lines.update({"book:The end!", "book:That's right!"})
 
 # Spanish, in Coco's Spanish voice: the stories, the end, and the Spanish cards with their English meanings.
 lines |= story_lines(src["StoriesView.swift"].split("static let spanish")[1], "es:")
