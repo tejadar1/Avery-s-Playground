@@ -294,3 +294,17 @@ struct SpotView: View {
 #Preview {
     NavigationStack { SpotView() }
 }
+
+/// A whole Spot It room as one picture, with nothing changed (I Spy and Puzzles).
+struct RoomPicture: View {
+    let room: SpotTheDifference.Room
+
+    var body: some View {
+        ZStack {
+            Image("Spot-\(room.name)-bg").resizable()
+            ForEach(room.things) { thing in
+                Image("Spot-\(room.name)-\(thing.id)").resizable()
+            }
+        }
+    }
+}

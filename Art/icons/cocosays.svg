@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Coco Says: a kid jumping with arms up, and a speech bubble -->
+  <path d="M110 18 h70 a12 12 0 0 1 12 12 v30 a12 12 0 0 1 -12 12 h-46 l-16 14 l2 -14 h-10 a12 12 0 0 1 -12 -12 v-30 a12 12 0 0 1 12 -12Z" fill="#fff" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+  <g fill="#74B86B"><circle cx="128" cy="45" r="7"/><circle cx="146" cy="45" r="7"/><circle cx="164" cy="45" r="7"/></g>
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 120 L40 70 M90 120 L118 76" fill="none" stroke-width="12"/>
+    <path d="M70 120 L40 70 M90 120 L118 76" fill="none" stroke="#F6CFA8" stroke-width="6"/>
+    <path d="M62 112 h36 l6 52 h-48Z" fill="#9E8CE6"/>
+    <path d="M66 164 L56 190 M94 164 L104 190" fill="none" stroke-width="12"/>
+    <path d="M66 164 L56 190 M94 164 L104 190" fill="none" stroke="#F6CFA8" stroke-width="6"/>
+    <circle cx="80" cy="88" r="22" fill="#F6CFA8"/>
+  </g>
+  <circle cx="73" cy="86" r="3.5" fill="#4A2C2A"/><circle cx="87" cy="86" r="3.5" fill="#4A2C2A"/>
+  <path d="M72 96 Q80 104 88 96" fill="none" stroke="#4A2C2A" stroke-width="4" stroke-linecap="round"/>
+</svg>

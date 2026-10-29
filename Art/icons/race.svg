@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Number Race: a straight row of numbered squares with a star and a heart on them -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round">
+    <rect x="12" y="96" width="40" height="52" rx="8" fill="#EE7A9A"/>
+    <rect x="58" y="96" width="40" height="52" rx="8" fill="#F2A04A"/>
+    <rect x="104" y="96" width="40" height="52" rx="8" fill="#F6C945"/>
+    <rect x="150" y="96" width="40" height="52" rx="8" fill="#74B86B"/>
+  </g>
+  <g font-family="Arial Rounded MT Bold, Arial, sans-serif" font-weight="bold" font-size="30" fill="#fff" stroke="#4A2C2A" stroke-width="2" text-anchor="middle">
+    <text x="32" y="133">1</text><text x="78" y="133">2</text><text x="124" y="133">3</text><text x="170" y="133">4</text>
+  </g>
+  <path d="M78 34 L86 52 L105 53 L90 65 L95 84 L78 73 L61 84 L66 65 L51 53 L70 52Z" fill="#F9C440" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M124 82 C96 64 104 40 124 52 C144 40 152 64 124 82Z" fill="#EE5C7A" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M30 172 L170 172 M156 160 L170 172 L156 184" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

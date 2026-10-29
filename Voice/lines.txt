@@ -1,9 +1,12 @@
+! You got it!
 %02d
 ) on the plate. How many are in the box?
 -alt
 -over
 -under
+4 pieces
 5 and 2
+9 pieces
 A
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
@@ -102,12 +105,14 @@ Canvas
 Cat
 Chore time! Let's help at home.
 Chores
+Clap your hands!
 Clear
 Clothes
 Clothes color
 Clothes in the hamper
 Cloud
 Coco
+Coco Says
 Coco has 1 apple. Mochi brings 1 more. How many now?
 Coco has 1 apple. Mochi brings 2 more. How many now?
 Coco has 1 apple. Mochi brings 3 more. How many now?
@@ -438,6 +443,22 @@ Coco has 6 strawberries. Mochi eats 2. How many are left?
 Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
+Coco says
+Coco says, clap your hands!
+Coco says, flap your arms like a bird!
+Coco says, hop like a bunny!
+Coco says, jump up and down!
+Coco says, make a silly face!
+Coco says, pat your head!
+Coco says, reach up high!
+Coco says, spin around!
+Coco says, stand on one foot!
+Coco says, stand up! Do what Coco says, but only if I say Coco says!
+Coco says, stomp like a dinosaur!
+Coco says, touch your nose!
+Coco says, touch your toes!
+Coco says, wave hello!
+Coco says, wiggle your fingers!
 Color anywhere you like!
 Coloring anywhere
 Coloring inside the lines
@@ -465,8 +486,11 @@ Curly! So cute!
 Cut along the dotted line.
 D
 D sharp
+Dance when the music plays. When it stops, freeze!
+Dance!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
+Do what Coco says, but only if I say Coco says!
 Dog
 Doll
 Doll-
@@ -499,6 +523,7 @@ Find 7 differences! Look closely!
 First picture
 Fish
 Fix
+Flap your arms like a bird!
 Floss
 Flower crown
 Flower crown! Fashion show time!
@@ -512,6 +537,8 @@ Fox
 Fox ends with X!
 Free play
 Free play!
+Freeze Dance
+Freeze!
 Fruit or animals?
 G
 G sharp
@@ -519,6 +546,7 @@ Get dressed
 Glitter
 Glitter makes everything better!
 Glug glug! Happy plants!
+Go
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good eye!
@@ -556,9 +584,58 @@ He jumped up and ran away! Run, run, as fast as you can!
 He planted the beans, and they grew up into the sky overnight!
 Hear the word
 Hearts
+Hearts found it! 
 Hearts win! Snap snap!
 Hearts' turn!
+Hearts' turn! Spin!
+Hearts, 
+Hearts, I spy a bag you take to school!
+Hearts, I spy a ball that shows the whole world!
+Hearts, I spy a book on the table!
+Hearts, I spy a bug with pretty wings!
+Hearts, I spy a cold treat!
+Hearts, I spy a dinosaur toy!
+Hearts, I spy a little bear sitting on a shelf!
+Hearts, I spy a little pet with fluffy cheeks!
+Hearts, I spy a picture on the wall!
+Hearts, I spy a soft bear to hug!
+Hearts, I spy a toy that goes beep boop!
+Hearts, I spy a toy that says quack!
+Hearts, I spy a toy with long ears!
+Hearts, I spy an animal that can fly!
+Hearts, I spy an animal that says meow!
+Hearts, I spy an animal that says woof!
+Hearts, I spy something cozy you wear on your feet!
+Hearts, I spy something green growing in a pot!
+Hearts, I spy something hot and bright in the sky!
+Hearts, I spy something pretty that smells nice!
+Hearts, I spy something red and crunchy for the teacher!
+Hearts, I spy something red that grows on a tree!
+Hearts, I spy something round to roll and kick!
+Hearts, I spy something soft for your head!
+Hearts, I spy something that covers the window!
+Hearts, I spy something that flies on a windy day!
+Hearts, I spy something that floats up, up, up!
+Hearts, I spy something that goes back and forth!
+Hearts, I spy something that lights up the room!
+Hearts, I spy something that tells the time!
+Hearts, I spy something that twinkles at night!
+Hearts, I spy something to carry sand or water!
+Hearts, I spy something you bang to make music!
+Hearts, I spy something you color with!
+Hearts, I spy something you drink from!
+Hearts, I spy something you go down, wheee!
+Hearts, I spy something you sleep in!
+Hearts, I spy something you stack up high!
+Hearts, I spy something you wear on your foot!
+Hearts, I spy something you write with!
+Hearts, I spy something your family sits on together!
+Hearts, I spy something yummy and healthy to eat!
+Hearts, I spy somewhere to sit at the park!
+Hearts, make a face! Hold the card to peek. Shh, don't say it!
+Hearts, what's the feeling? Tap the face!
 Hee hee hee! You're so funny! You made me giggle!
+Hee hee! I didn't say Coco says! Did you stay still?
 Hee hee! That tickles!
 Hee hee! You're silly! You're a silly, silly goose!
 Hee hee, I love that sticker!
@@ -574,6 +651,60 @@ Hee hee, not 6!
 Hee hee, not 7!
 Hee hee, not 8!
 Hee hee, not 9!
+Hee hee, not calm! Make the face again!
+Hee hee, not excited! Make the face again!
+Hee hee, not happy! Make the face again!
+Hee hee, not loved! Make the face again!
+Hee hee, not mad! Make the face again!
+Hee hee, not sad! Make the face again!
+Hee hee, not scared! Make the face again!
+Hee hee, not silly! Make the face again!
+Hee hee, not sleepy! Make the face again!
+Hee hee, not surprised! Make the face again!
+Hee hee, not that one! 
+Hee hee, not that one! I spy a bag you take to school!
+Hee hee, not that one! I spy a ball that shows the whole world!
+Hee hee, not that one! I spy a book on the table!
+Hee hee, not that one! I spy a bug with pretty wings!
+Hee hee, not that one! I spy a cold treat!
+Hee hee, not that one! I spy a dinosaur toy!
+Hee hee, not that one! I spy a little bear sitting on a shelf!
+Hee hee, not that one! I spy a little pet with fluffy cheeks!
+Hee hee, not that one! I spy a picture on the wall!
+Hee hee, not that one! I spy a soft bear to hug!
+Hee hee, not that one! I spy a toy that goes beep boop!
+Hee hee, not that one! I spy a toy that says quack!
+Hee hee, not that one! I spy a toy with long ears!
+Hee hee, not that one! I spy an animal that can fly!
+Hee hee, not that one! I spy an animal that says meow!
+Hee hee, not that one! I spy an animal that says woof!
+Hee hee, not that one! I spy something cozy you wear on your feet!
+Hee hee, not that one! I spy something green growing in a pot!
+Hee hee, not that one! I spy something hot and bright in the sky!
+Hee hee, not that one! I spy something pretty that smells nice!
+Hee hee, not that one! I spy something red and crunchy for the teacher!
+Hee hee, not that one! I spy something red that grows on a tree!
+Hee hee, not that one! I spy something round to roll and kick!
+Hee hee, not that one! I spy something soft for your head!
+Hee hee, not that one! I spy something that covers the window!
+Hee hee, not that one! I spy something that flies on a windy day!
+Hee hee, not that one! I spy something that floats up, up, up!
+Hee hee, not that one! I spy something that goes back and forth!
+Hee hee, not that one! I spy something that lights up the room!
+Hee hee, not that one! I spy something that tells the time!
+Hee hee, not that one! I spy something that twinkles at night!
+Hee hee, not that one! I spy something to carry sand or water!
+Hee hee, not that one! I spy something you bang to make music!
+Hee hee, not that one! I spy something you color with!
+Hee hee, not that one! I spy something you drink from!
+Hee hee, not that one! I spy something you go down, wheee!
+Hee hee, not that one! I spy something you sleep in!
+Hee hee, not that one! I spy something you stack up high!
+Hee hee, not that one! I spy something you wear on your foot!
+Hee hee, not that one! I spy something you write with!
+Hee hee, not that one! I spy something your family sits on together!
+Hee hee, not that one! I spy something yummy and healthy to eat!
+Hee hee, not that one! I spy somewhere to sit at the park!
 Hee hee, not the apple!
 Hee hee, not the banana!
 Hee hee, not the duck!
@@ -584,6 +715,7 @@ Hee hee, not the moon!
 Hee hee, not the star!
 Hee hee, not the strawberry!
 Hee hee, not the sun!
+Hee hee, not worried! Make the face again!
 Hee hee, she likes belly rubs!
 Hee hee, that one feels calm!
 Hee hee, that one feels excited!
@@ -596,6 +728,7 @@ Hee hee, that one feels silly!
 Hee hee, that one feels sleepy!
 Hee hee, that one feels surprised!
 Hee hee, that one feels worried!
+Hee hee, that piece goes somewhere else!
 Hee hee, that's a apple!
 Hee hee, that's a balloon!
 Hee hee, that's a bat!
@@ -701,6 +834,7 @@ High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
 Hmm, look again! What's different?
+Hold to peek
 Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
@@ -713,6 +847,7 @@ Holy guacamole, so stylish!
 Holy guacamole, what a great haircut!
 Holy guacamole, you did it!
 Holy moly, guacamole!
+Hop like a bunny!
 Horse
 Hose
 Hot
@@ -727,6 +862,8 @@ I
 I ate a crayon once. It tasted purple!
 I can see my face in it! Hee hee!
 I have lots and lots of teeth, and I brush every one!
+I spy something that
+/// tells the time
 I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
 I want my claws painted too!
 I wish I had hair like that!
@@ -745,6 +882,7 @@ Jack climbed up, up, up the beanstalk.
 Jack found a hen that laid golden eggs.
 Jack traded his cow for some magic beans.
 Juice
+Jump up and down!
 Jumping jellybeans!
 K
 Keep blowing!
@@ -787,6 +925,7 @@ M
 Ma
 Mac
 Mad. Take a big breath, and blow it out slowly.
+Make a silly face!
 Make your bed
 Mary Had a Little Lamb
 Maze board
@@ -842,6 +981,7 @@ New maze
 New nails
 New pictures
 New sticker!
+Next
 Next picture
 Night night, Mochi. Shh!
 No hat
@@ -905,6 +1045,7 @@ Party dress! Holy guacamole, I love it!
 Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
+Pat your head!
 Pattern
 Penguin
 Perfect! Just how she wanted it!
@@ -938,12 +1079,14 @@ Purse! Ooh la la!
 Purse! So stylish!
 Purse! Wowza bowza!
 Put toys away
+Puzzle board
 Q
 Queen
 Quick look
 Quick look! Don't count!
 R
 Rainbow
+Reach up high!
 Ready for school! Have a great day!
 Red
 Remover
@@ -993,11 +1136,13 @@ Sleep
 Sleepy. Time for a cozy rest.
 Slide the floss over the bits of food between the teeth.
 Slide!
+Snap snap! Good job!
 Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
 Snap snap, hooray!
 Snap snap, you spotted it!
+Snap! Hearts' turn!
 Snap! I need the apple!
 Snap! I need the ball!
 Snap! I need the bee!
@@ -1022,6 +1167,7 @@ Snap! I need the pig!
 Snap! I need the star!
 Snap! I need the sun!
 Snap! I need the tree!
+Snap! Stars' turn!
 Snap! Your picture is saved!
 Sneakers
 Sneakers! Fashion show time!
@@ -1046,19 +1192,73 @@ Sparkle sparkle!
 Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
+Spin
+Spin around!
 Spot the difference! Pick easy, medium or hard.
 Squeaky clean!
 Squeaky clean! Shake shake shake!
 Squeaky clean! Start again!
+Stand on one foot!
 Stars
+Stars found it! 
+Stars go first! Tap Spin.
 Stars go first! Turn over two cards to find a match.
 Stars go first, then hearts. Get three in a row!
 Stars win! Holy guacamole!
 Stars' turn!
+Stars' turn! Spin!
+Stars, 
+Stars, I spy a bag you take to school!
+Stars, I spy a ball that shows the whole world!
+Stars, I spy a book on the table!
+Stars, I spy a bug with pretty wings!
+Stars, I spy a cold treat!
+Stars, I spy a dinosaur toy!
+Stars, I spy a little bear sitting on a shelf!
+Stars, I spy a little pet with fluffy cheeks!
+Stars, I spy a picture on the wall!
+Stars, I spy a soft bear to hug!
+Stars, I spy a toy that goes beep boop!
+Stars, I spy a toy that says quack!
+Stars, I spy a toy with long ears!
+Stars, I spy an animal that can fly!
+Stars, I spy an animal that says meow!
+Stars, I spy an animal that says woof!
+Stars, I spy something cozy you wear on your feet!
+Stars, I spy something green growing in a pot!
+Stars, I spy something hot and bright in the sky!
+Stars, I spy something pretty that smells nice!
+Stars, I spy something red and crunchy for the teacher!
+Stars, I spy something red that grows on a tree!
+Stars, I spy something round to roll and kick!
+Stars, I spy something soft for your head!
+Stars, I spy something that covers the window!
+Stars, I spy something that flies on a windy day!
+Stars, I spy something that floats up, up, up!
+Stars, I spy something that goes back and forth!
+Stars, I spy something that lights up the room!
+Stars, I spy something that tells the time!
+Stars, I spy something that twinkles at night!
+Stars, I spy something to carry sand or water!
+Stars, I spy something you bang to make music!
+Stars, I spy something you color with!
+Stars, I spy something you drink from!
+Stars, I spy something you go down, wheee!
+Stars, I spy something you sleep in!
+Stars, I spy something you stack up high!
+Stars, I spy something you wear on your foot!
+Stars, I spy something you write with!
+Stars, I spy something your family sits on together!
+Stars, I spy something yummy and healthy to eat!
+Stars, I spy somewhere to sit at the park!
+Stars, make a face! Hold the card to peek. Shh, don't say it!
+Stars, what's the feeling? Tap the face!
+Start
 Start over
 Stick it anywhere!
 Stick! A sticker!
 Stickers
+Stomp like a dinosaur!
 Stop
 Stop the timer
 Story
@@ -1095,6 +1295,7 @@ Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
 Take a picture
+Take turns! Stars, drag a piece to where it goes.
 Take vitamins
 Tap a nail to paint it!
 Tap any key.
@@ -1104,6 +1305,7 @@ Tap each one.
 Tap each picture when you do it!
 Tap the keys to play! Or pick a song.
 Tap the nail!
+Tap the next square and say its number!
 Tap the teeth with a hole to fix them.
 Tap what's different in the second picture.
 Teal
@@ -1144,6 +1346,8 @@ Time's up!
 Timer
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
+Touch your nose!
+Touch your toes!
 Toys all tidy! Snap snap!
 Trace board
 Trace the A with your finger!
@@ -1184,6 +1388,7 @@ Wand! Wowza bowza!
 Wash
 Watch the keys.
 Water the plants
+Wave hello!
 Whale
 What a design!
 What color should it be?
@@ -1252,6 +1457,7 @@ Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
+Wiggle your fingers!
 Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
@@ -1272,7 +1478,9 @@ Yo-yo
 You beat the timer! Holy guacamole!
 You can't find your favorite toy.
 You can't find your favorite toy. How would you feel?
+You did it together! Holy guacamole!
 You did it, you silly goose!
+You found everything! Holy guacamole!
 You found one!
 You found them all! Holy guacamole, eagle eyes!
 You played Hot Cross Buns! Holy guacamole, what a song!
@@ -1287,6 +1495,8 @@ You played all day, and now it's night.
 You played all day, and now it's night. How would you feel?
 You see a big dog barking!
 You see a big dog barking! How would you feel?
+You spun 1! Hop 1 square.
+You spun 2! Hop 2 squares.
 You wrote your name!
 You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
@@ -1302,13 +1512,26 @@ Z
 Zebra
 Zoe
 a
+a bag you take to school
+a ball that shows the whole world
 a banana
 a bear
+a book on the table
+a bug with pretty wings
 a cloud
+a cold treat
+a dinosaur toy
 a flower
 a frog
 a hat
+a little bear sitting on a shelf
+a little pet with fluffy cheeks
+a picture on the wall
+a soft bear to hug
 a strawberry
+a toy that goes beep boop
+a toy that says quack
+a toy with long ears
 a whale
 abc
 aeiou
@@ -1318,6 +1541,9 @@ ald
 all
 all through the town
 alphabet
+an animal that can fly
+an animal that says meow
+an animal that says woof
 an orange
 and
 animals
@@ -1905,6 +2131,7 @@ book:butterfly!
 book:by
 book:cake
 book:cake!
+book:calm!
 book:came
 book:can
 book:can't
@@ -1959,6 +2186,7 @@ book:eggs
 book:eight
 book:elephant
 book:elephant!
+book:excited!
 book:eyes
 book:far
 book:fast
@@ -2006,6 +2234,7 @@ book:grapes!
 book:green
 book:grew
 book:had
+book:happy!
 book:hat
 book:hat and bat rhyme!
 book:hat and cat rhyme!
@@ -2061,6 +2290,8 @@ book:let
 book:lion
 book:lion!
 book:little
+book:loved!
+book:mad!
 book:magic
 book:man
 book:mango
@@ -2132,10 +2363,12 @@ book:river
 book:ropes
 book:run
 book:running
+book:sad!
 book:safe
 book:said
 book:salami
 book:saw
+book:scared!
 book:second
 book:see
 book:seven
@@ -2143,9 +2376,11 @@ book:she
 book:sheep
 book:shouted
 book:side
+book:silly!
 book:six
 book:sky
 book:sleeping
+book:sleepy!
 book:slow
 book:sly
 book:small!
@@ -2168,6 +2403,7 @@ book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
 book:sunhat!
+book:surprised!
 book:tall
 book:tell
 book:ten
@@ -2228,6 +2464,7 @@ book:woman
 book:won
 book:woodcutter
 book:woods
+book:worried!
 book:yellow
 book:you
 book:zebra
@@ -2364,6 +2601,7 @@ checkmark
 cheese
 chick
 choresOrder
+clap your hands
 climbed
 clock
 clothes
@@ -2896,6 +3134,7 @@ fish and star!
 fish and sun!
 fish and tree!
 flag
+flap your arms like a bird
 flats
 fleece
 floss
@@ -3032,6 +3271,7 @@ heart and tree!
 heels
 hen
 high,
+hop like a bunny
 horse
 hot
 hourglass
@@ -3077,6 +3317,7 @@ it
 its
 j
 juice
+jump up and down
 k
 kidball
 kite
@@ -3100,6 +3341,7 @@ ly
 ly,
 m
 mad
+make a silly face
 mango
 mer
 mmm
@@ -3157,6 +3399,7 @@ palette
 paper
 park
 party
+pat your head
 pen
 pencil
 penguin
@@ -3191,6 +3434,7 @@ plant
 polish
 puh
 purse
+puzzle
 q
 queen
 r
@@ -3198,6 +3442,7 @@ rabbit
 rain
 rain,
 rainbow
+reach up high
 readingRead
 readingUnlocked
 rest
@@ -3237,9 +3482,37 @@ slippers
 small
 sneakers
 snow.
+snowflake
 so
 soap
 sock
+something cozy you wear on your feet
+something green growing in a pot
+something hot and bright in the sky
+something pretty that smells nice
+something red and crunchy for the teacher
+something red that grows on a tree
+something round to roll and kick
+something soft for your head
+something that covers the window
+something that flies on a windy day
+something that floats up, up, up
+something that goes back and forth
+something that lights up the room
+something that tells the time
+something that twinkles at night
+something to carry sand or water
+something you bang to make music
+something you color with
+something you drink from
+something you go down, wheee
+something you sleep in
+something you stack up high
+something you wear on your foot
+something you write with
+something your family sits on together
+something yummy and healthy to eat
+somewhere to sit at the park
 sound:
 sound:b
 sound:d
@@ -3263,10 +3536,12 @@ sound:ʌ
 sparkle
 sparkles
 spi
+spin around
 spout
 spout.
 sprout
 sss
+stand on one foot
 star
 star and apple!
 star and ball!
@@ -3297,6 +3572,7 @@ stars
 stickerWins
 stickers
 sticks
+stomp like a dinosaur
 strawberries
 strawberry
 stream.
@@ -3345,6 +3621,8 @@ tle
 toilet
 toothbrush
 tophat
+touch your nose
+touch your toes
 town!
 toybox
 toyduck
@@ -3396,6 +3674,7 @@ wa
 wand
 was
 washed
+wave hello
 waveform
 web
 went
@@ -3405,6 +3684,7 @@ wheat
 wheels
 white
 whoopsie!
+wiggle your fingers
 wind
 wolf
 won

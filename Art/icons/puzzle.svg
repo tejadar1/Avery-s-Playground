@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Puzzles: two puzzle pieces fitting together -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round">
+    <path d="M24 40 h56 v18 a14 14 0 1 0 0 28 v18 h-56Z" fill="#74B86B"/>
+    <path d="M80 40 h56 v64 h-56 v-18 a14 14 0 1 1 0 -28Z" fill="#6FB8F0"/>
+    <path d="M40 120 h64 v18 a14 14 0 1 1 0 28 v18 h-64Z" fill="#F2A04A" transform="rotate(10 72 152)"/>
+    <path d="M124 128 h52 v52 h-52Z" fill="#EE7A9A" transform="rotate(-12 150 154)"/>
+  </g>
+</svg>

@@ -305,6 +305,23 @@ private struct PageTurn: ViewModifier {
     }
 }
 
+extension Story {
+    /// Read Together's question for the grown-up on each page, from dialogic reading: ask, listen, then repeat
+    /// her answer back with a little more added.
+    static func together(page: Int, of count: Int) -> String {
+        if page == 0 { return "Ask: What do you see in the picture? Then say her answer back with one more word." }
+        if page == count - 1 { return "Ask: What was your favorite part? Why?" }
+        if page == count - 2 { return "Ask: What do you think will happen next?" }
+        let middle = [
+            "Ask: What is happening here?",
+            "Ask: How do you think they feel?",
+            "Ask: Has something like this ever happened to you?",
+            "Point to a word and say it together.",
+        ]
+        return middle[(page - 1) % middle.count]
+    }
+}
+
 private struct StoryReader: View {
     let story: Story
 
@@ -319,6 +336,8 @@ private struct StoryReader: View {
     @State private var choices: [String] = []
     @State private var wrongPick: String?
     @State private var shakes = 0
+    /// Read Together: a question on each page for the grown-up to ask, for reading out loud together.
+    @AppStorage("readTogether") private var isReadingTogether = false
 
     private var page: Story.Page { story.pages[pageIndex] }
     private var words: [String] { page.text.split(separator: " ").map(String.init) }
@@ -407,6 +426,15 @@ private struct StoryReader: View {
                     .onEnded { _ in isSwiping = false }  // the last word stays lit so she can look at it
             )
 
+            if isReadingTogether {
+                Label(Story.together(page: pageIndex, of: story.pages.count), systemImage: "person.2.fill")
+                    .font(.kid(20))
+                    .foregroundStyle(Color.outline)
+                    .padding(12 * uiScale)
+                    .background(Color(red: 1.0, green: 0.92, blue: 0.55), in: RoundedRectangle(cornerRadius: 14 * uiScale))
+                    .accessibilityIdentifier("Ask")
+            }
+
             if pageIndex == 0 {
                 Text("Slide your finger under the words")
                     .font(.kid(18))
@@ -422,6 +450,18 @@ private struct StoryReader: View {
             Text("\(pageIndex + 1) / \(story.pages.count)")
                 .font(.kid(22))
                 .foregroundStyle(Color.outline)
+            Button {
+                Haptics.tap()
+                withAnimation(.spring) { isReadingTogether.toggle() }
+            } label: {
+                Image(systemName: "person.2.fill")
+                    .font(.system(size: 24 * uiScale, weight: .bold))
+                    .foregroundStyle(isReadingTogether ? .white : Color.outline)
+                    .frame(width: 56 * uiScale, height: 48 * uiScale)
+                    .cartoonCard(isReadingTogether ? story.color : .white, cornerRadius: 18 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+            .accessibilityLabel("Read Together")
             Spacer()
             if isLastPage {
                 pageButton("house.fill", hidden: false) {

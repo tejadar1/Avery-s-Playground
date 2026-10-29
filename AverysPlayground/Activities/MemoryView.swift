@@ -55,8 +55,9 @@ struct MemoryView: View {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
             HStack(spacing: 16 * uiScale) {
-                player(.star, name: "Stars")
-                player(.heart, name: "Hearts")
+                ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
+                    PlayerBadge(piece: piece, score: game.score[piece] ?? 0, isTurn: game.turn == piece && !game.isOver)
+                }
             }
             .padding(.horizontal)
 
@@ -118,34 +119,6 @@ struct MemoryView: View {
         }
         .buttonStyle(SquishyButtonStyle())
         .accessibilityLabel(showing ? "Card \(index + 1), \(game.cards[index])" : "Card \(index + 1)")
-    }
-
-    /// Whose turn it is lights up; each side shows its pairs.
-    private func player(_ piece: TicTacToe.Piece, name: String) -> some View {
-        let isTurn = game.turn == piece && !game.isOver
-        return HStack(spacing: 8 * uiScale) {
-            Image(systemName: piece == .star ? "star.fill" : "heart.fill")
-                .font(.system(size: 30 * uiScale, weight: .bold))
-                .foregroundStyle(piece == .star ? Color(red: 0.98, green: 0.78, blue: 0.25) : Color(red: 0.93, green: 0.36, blue: 0.48))
-                .shadow(color: Color.outline.opacity(0.6), radius: 0, x: 2, y: 2)
-            Text(name)
-                .font(.kid(22))
-                .foregroundStyle(Color.outline)
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
-            Text("\(game.score[piece] ?? 0)")
-                .font(.kid(22))
-                .foregroundStyle(.white)
-                .frame(minWidth: 36 * uiScale, minHeight: 36 * uiScale)
-                .background(Color.outline.opacity(0.75), in: Circle())
-                .contentTransition(.numericText())
-        }
-        .padding(.horizontal, 14 * uiScale)
-        .frame(maxWidth: .infinity, minHeight: 60 * uiScale)
-        .cartoonCard(isTurn ? Color(red: 1.0, green: 0.92, blue: 0.55) : .white, cornerRadius: 30 * uiScale)
-        .scaleEffect(isTurn ? 1.05 : 1)
-        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isTurn)
-        .accessibilityElement(children: .combine)
     }
 
     private func flip(_ index: Int) {

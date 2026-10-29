@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- I Spy: a magnifying glass over a star -->
+  <path d="M74 50 L82 68 L101 69 L86 81 L91 100 L74 89 L57 100 L62 81 L47 69 L66 68Z" fill="#F9C440" stroke="#4A2C2A" stroke-width="4" stroke-linejoin="round"/>
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M118 120 L172 174" stroke-width="22"/>
+    <path d="M118 120 L172 174" stroke="#B07A4F" stroke-width="12"/>
+    <circle cx="76" cy="78" r="54" fill="#BFE3F7" fill-opacity=".45"/>
+  </g>
+  <path d="M44 62 Q52 42 72 36" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+</svg>
