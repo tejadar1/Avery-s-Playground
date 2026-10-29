@@ -108,7 +108,8 @@ struct SpotView: View {
             if let game {
                 progress(game)
                 GeometryReader { geo in
-                    let wide = geo.size.width > geo.size.height
+                    // Side by side or stacked, whichever makes the pictures bigger (4:3 each)
+                    let wide = min(geo.size.width / 2, geo.size.height * 4 / 3) > min(geo.size.width, geo.size.height / 2 * 4 / 3)
                     let layout = wide ? AnyLayout(HStackLayout(spacing: 14 * uiScale)) : AnyLayout(VStackLayout(spacing: 14 * uiScale))
                     layout {
                         picture(game, changed: false)
