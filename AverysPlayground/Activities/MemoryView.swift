@@ -60,16 +60,25 @@ struct MemoryView: View {
             }
             .padding(.horizontal)
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10 * uiScale), count: 4), spacing: 10 * uiScale) {
-                ForEach(game.cards.indices, id: \.self) { index in
-                    card(index)
+            // The cards fill the space left, in whichever number of columns makes them biggest.
+            GeometryReader { geo in
+                let gap = 10 * uiScale, pad = 14 * uiScale
+                let room = CGSize(width: geo.size.width - 2 * pad, height: geo.size.height - 2 * pad)
+                let fit = Self.layout(count: game.cards.count, in: room, gap: gap)
+                Grid(horizontalSpacing: gap, verticalSpacing: gap) {
+                    ForEach(0..<game.cards.count / fit.columns, id: \.self) { row in
+                        GridRow {
+                            ForEach(0..<fit.columns, id: \.self) { column in
+                                card(row * fit.columns + column, width: fit.width)
+                            }
+                        }
+                    }
                 }
+                .padding(pad)
+                .cartoonCard(Color(red: 0.36, green: 0.75, blue: 0.68), cornerRadius: 26 * uiScale)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(14 * uiScale)
-            .cartoonCard(Color(red: 0.36, green: 0.75, blue: 0.68), cornerRadius: 26 * uiScale)
-            .frame(maxWidth: 560 * uiScale)
             .padding(.horizontal)
-            .frame(maxHeight: .infinity)
 
             if game.isOver {
                 Button(action: newGame) {
@@ -88,20 +97,33 @@ struct MemoryView: View {
         .celebration(wins)
     }
 
-    private func card(_ index: Int) -> some View {
+    /// Card shape: a bit taller than wide.
+    nonisolated static let aspect: CGFloat = 0.8
+
+    /// How many columns (each dividing the cards evenly) give the widest cards in `size`, and that width.
+    nonisolated static func layout(count: Int, in size: CGSize, gap: CGFloat) -> (columns: Int, width: CGFloat) {
+        (1...count).filter { count % $0 == 0 }
+            .map { columns -> (columns: Int, width: CGFloat) in
+                let rows = CGFloat(count / columns), cols = CGFloat(columns)
+                let width = min((size.width - gap * (cols - 1)) / cols, (size.height - gap * (rows - 1)) / rows * aspect)
+                return (columns, max(width, 0))
+            }
+            .max { $0.width < $1.width }!
+    }
+
+    private func card(_ index: Int, width: CGFloat) -> some View {
         let showing = game.isShowing(index)
         return Button { flip(index) } label: {
             ZStack {
                 if showing {
-                    Picture(game.cards[index], size: 64 * uiScale)
+                    Picture(game.cards[index], size: width * 0.75)
                 } else {
                     Text("?")
-                        .font(.kid(40))
+                        .font(.system(size: width * 0.5, weight: .heavy, design: .rounded))
                         .foregroundStyle(.white)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .aspectRatio(0.8, contentMode: .fit)
+            .frame(width: width, height: width / Self.aspect)
             .cartoonCard(showing ? .white : Color(red: 0.62, green: 0.55, blue: 0.9), cornerRadius: 16 * uiScale)
             .opacity(game.matched.contains(index) ? 0.55 : 1)
         }
