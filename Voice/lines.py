@@ -50,7 +50,8 @@ lines.add("es:¡Colorín colorado, este cuento se ha acabado!")
 spanish = src["SpanishView.swift"]
 # English meanings are said in Bella's voice ("book:"), right after the Spanish
 for es, en in re.findall(r'SpanishWord\(spanish: "([^"]+)", english: "([^"]+)"', spanish):
-    lines.update({"es:" + es, "book:" + en})
+    if "\\(" not in es:  # "Me llamo \(Kid.name)" is below, with the child's name
+        lines.update({"es:" + es, "book:" + en})
 titles = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var title")[1].split("var english")[0]))
 meanings = dict(re.findall(r'case \.(\w+): "([^"]+)"', spanish.split("var english")[1].split("var picture")[0]))
 for case, title in titles.items():
@@ -120,7 +121,20 @@ for a in bingo:
 # Coco says hi to each customer by name: the friends at the salon and in dress up, and the dentist's animals
 friends = re.findall(r'Friend\(name: "(\w+)"', (app / "Support" / "Customers.swift").read_text())
 patients = re.findall(r'case \.(?:lion|bear|bunny|kitty): "(\w+)"', src["DentistView.swift"])
-lines.update(f"Hi {name}!" for name in friends + patients)
+lines.update(f"Hi {name}!" for name in friends + patients + ["Avery"])
+
+# The child's name (Kid.swift): lines with it are recorded for Avery, and also without it, for any other name
+lines.update({"es:Me llamo Avery", "book:My name is Avery", "All done! Sweet dreams, Avery!", "Avery! You wrote your name!"})
+
+
+def unnamed(line, name="Avery"):
+    out = line.replace(f"Hi {name}!", "Hi!").replace(f", {name}!", "!").replace(f"{name}! ", "")
+    return out if out != line else None
+
+
+for line in [l for l in lines if "Avery" in l]:
+    if unnamed(line):
+        lines.add(unnamed(line))
 tools = re.search(r'enum DentistTool.*?\n(.*?)\n', src["DentistView.swift"]).group(1)
 lines.update(f"book:{name}!" for name in re.findall(r'= "(\w+)"', tools))
 

@@ -19,9 +19,9 @@ A sticker to find
 A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
 ABC
-AVERY
 All clean!
 All done with the bath!
+All done! Sweet dreams!
 All done! Sweet dreams, Avery!
 All dry!
 All fixed! Holy guacamole!
@@ -31,7 +31,6 @@ Another sticker! Yay!
 Anywhere
 Apple
 At the top was a giant's castle. Fee, fi, fo, fum!
-Avery
 Avery! You wrote your name!
 B
 Backpack
@@ -629,6 +628,7 @@ Hi Lily!
 Hi Mia!
 Hi Rosa!
 Hi Zoe!
+Hi!
 High C
 High heels
 High heels! Fashion show time!
@@ -1134,6 +1134,7 @@ You played Old MacDonald! Holy guacamole, what a song!
 You played Row Your Boat! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
 You played Wheels on the Bus! Holy guacamole, what a song!
+You wrote your name!
 You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
 Your turn!

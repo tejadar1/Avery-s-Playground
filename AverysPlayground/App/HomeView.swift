@@ -2,6 +2,9 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var stickers: [String] = []
+    @State private var isNaming = false
+    @AppStorage(Kid.key) private var kidName = ""
+    private var name: String { kidName.isEmpty ? "Avery" : kidName }
 
     var body: some View {
         NavigationStack {
@@ -61,6 +64,7 @@ struct HomeView: View {
             }
         }
         .tint(Color.outline)
+        .sheet(isPresented: $isNaming) { NameEntry() }
     }
 }
 
@@ -115,16 +119,25 @@ private extension HomeView {
                 .phaseAnimator([0.0, -4, 0, 4]) { content, angle in
                     content.rotationEffect(.degrees(angle), anchor: .bottom)  // a happy little sway
                 } animation: { _ in .easeInOut(duration: 0.9) }
-                .accessibilityLabel("Avery")
+                .accessibilityLabel(name)
         }
     }
 
     var title: some View {
         VStack(spacing: 2 * uiScale) {
-            Text("Avery's World")
-                .font(.kid(38))
-                .foregroundStyle(Color.outline)
-            Text("Hi Avery and friends! What should we do today?")
+            HStack(spacing: 8 * uiScale) {
+                Text("\(name)'s World")
+                    .font(.kid(38))
+                    .foregroundStyle(Color.outline)
+                // For the grown-up: change the name
+                Button { isNaming = true } label: {
+                    Image(systemName: "pencil.circle.fill")
+                        .font(.system(size: 26 * uiScale))
+                        .foregroundStyle(Color.outline.opacity(0.35))
+                }
+                .accessibilityLabel("Change name")
+            }
+            Text("Hi \(name) and friends! What should we do today?")
                 .font(.kid(20))
                 .foregroundStyle(Color.outline.opacity(0.7))
         }

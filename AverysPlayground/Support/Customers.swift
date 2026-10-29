@@ -7,13 +7,14 @@ struct Friend: Hashable {
     let hair: Color
     let eyes: Color
 
-    static let all = [
+    /// The fifth friend is the child herself, by her name.
+    static var all: [Friend] { [
         Friend(name: "Mia", skin: Color(red: 0.86, green: 0.63, blue: 0.46), hair: Color(red: 0.45, green: 0.28, blue: 0.15), eyes: Color(red: 0.55, green: 0.36, blue: 0.2)),
         Friend(name: "Lily", skin: Color(red: 0.99, green: 0.84, blue: 0.72), hair: Color(red: 0.98, green: 0.82, blue: 0.4), eyes: Color(red: 0.3, green: 0.55, blue: 0.85)),
         Friend(name: "Zoe", skin: Color(red: 0.6, green: 0.4, blue: 0.27), hair: Color(red: 0.2, green: 0.14, blue: 0.13), eyes: Color(red: 0.35, green: 0.22, blue: 0.14)),
         Friend(name: "Rosa", skin: Color(red: 0.92, green: 0.72, blue: 0.58), hair: Color(red: 0.75, green: 0.32, blue: 0.18), eyes: Color(red: 0.36, green: 0.6, blue: 0.38)),
-        Friend(name: "Avery", skin: Color(red: 0.98, green: 0.85, blue: 0.75), hair: Color(red: 0.79, green: 0.58, blue: 0.38), eyes: Color(red: 0.42, green: 0.28, blue: 0.18)),
-    ]
+        Friend(name: Kid.name, skin: Color(red: 0.98, green: 0.85, blue: 0.75), hair: Color(red: 0.79, green: 0.58, blue: 0.38), eyes: Color(red: 0.42, green: 0.28, blue: 0.18)),
+    ] }
 }
 
 /// What the customers say back to Coco, in Dora's voice.

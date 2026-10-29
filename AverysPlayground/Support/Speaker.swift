@@ -112,9 +112,12 @@ final class Speaker {
     }
 
     /// Coco's recording of `text`, if Voice/make.py has made one. Spanish lines are recorded as "es:" + the line.
+    /// A line with a child's name other than Avery's uses the recording without the name (Kid.unnamed).
     nonisolated static func recording(for text: String, language: String = "en-US") -> URL? {
-        let line: String? = language == "en-US" ? text : language.hasPrefix("es") ? "es:" + text : nil
-        return line.flatMap { Bundle.main.url(forResource: key(for: $0), withExtension: "mp3") }
+        let prefix = language == "en-US" ? "" : language.hasPrefix("es") ? "es:" : nil
+        return prefix.flatMap { prefix in
+            [text, Kid.unnamed(text)].compactMap { $0 }.lazy.compactMap { Bundle.main.url(forResource: key(for: prefix + $0), withExtension: "mp3") }.first
+        }
     }
 
     /// A recording's file name: the first 16 hex digits of the line's SHA-256, as Voice/make.py names it.

@@ -311,7 +311,7 @@ struct ColorsView: View {
             .padding(.horizontal)
             .padding(.bottom, 8 * uiScale)
         }
-        .photo(photo, caption: "Avery", flashes: flashes, size: 220 * uiScale)
+        .photo(photo, caption: Kid.name, flashes: flashes, size: 220 * uiScale)
         .background(Scenery(.studio).ignoresSafeArea())
         .celebration(wins)
     }

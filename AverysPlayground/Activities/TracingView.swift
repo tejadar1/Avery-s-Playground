@@ -114,7 +114,6 @@ struct Tracing {
 struct TracingView: View {
     private enum Mode { case abc, name }
 
-    private static let name = "AVERY"
     private static let inks: [Color] = [
         Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.38, green: 0.72, blue: 0.4),
         Color(red: 0.36, green: 0.61, blue: 0.84), Color(red: 0.66, green: 0.5, blue: 0.85), Color(red: 0.95, green: 0.47, blue: 0.6),
@@ -129,7 +128,7 @@ struct TracingView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
 
-    private var letters: [TraceLetter] { mode == .abc ? TraceLetter.alphabet : Self.name.map { TraceLetter.named(String($0)) } }
+    private var letters: [TraceLetter] { mode == .abc ? TraceLetter.alphabet : Kid.letters().map { TraceLetter.named(String($0)) } }
     private var color: Color { Self.inks[index % Self.inks.count] }
 
     var body: some View {
@@ -269,7 +268,7 @@ struct TracingView: View {
         if mode == .name {
             if isLast {
                 wins += 1
-                say("Avery! You wrote your name!")
+                say("\(Kid.name)! You wrote your name!")
             } else {
                 Sounds.shared.play(.sparkle)
                 say("\(letter)!", voice: Speaker.book)

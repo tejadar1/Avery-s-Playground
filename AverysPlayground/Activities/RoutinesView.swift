@@ -45,7 +45,7 @@ enum RoutineKind: String, CaseIterable {
     }
 
     var finished: String {
-        self == .morning ? "Ready for school! Have a great day!" : "All done! Sweet dreams, Avery!"
+        self == .morning ? "Ready for school! Have a great day!" : "All done! Sweet dreams, \(Kid.name)!"
     }
 }
 

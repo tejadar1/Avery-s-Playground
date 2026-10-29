@@ -18,6 +18,7 @@ final class ScreenshotTests: XCTestCase {
     }
 
     private func playEveryGame(saving dir: URL, as device: String) throws {
+        app.launchArguments = ["-kidName", "Avery"]  // skip the first-time name screen
         app.launch()
         try snap("00a-Getting ready", device, dir)
         XCTAssertTrue(app.descendants(matching: .any)["Getting ready"].waitForNonExistence(timeout: 5))

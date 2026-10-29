@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct AverysPlaygroundApp: App {
     @State private var isReady = false
+    @AppStorage(Kid.key) private var kidName = ""
 
     var body: some Scene {
         WindowGroup {
@@ -15,6 +16,8 @@ struct AverysPlaygroundApp: App {
                     .transition(.opacity)
                 }
             }
+            // The first time, a grown-up types the child's name before playing.
+            .sheet(isPresented: .constant(isReady && kidName.isEmpty)) { NameEntry() }
         }
     }
 }

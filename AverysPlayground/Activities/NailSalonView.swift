@@ -264,7 +264,7 @@ struct NailSalonView: View {
                 toolTray
             }
         }
-        .photo(photo, caption: "Avery", flashes: flashes, size: 220 * uiScale)
+        .photo(photo, caption: Kid.name, flashes: flashes, size: 220 * uiScale)
         .background(HeartPattern().ignoresSafeArea())
         .celebration(wins)
     }
