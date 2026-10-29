@@ -276,6 +276,7 @@ Did you know crocodiles can't stick out their tongues? Blehhh!
 Dog
 Doll
 Doll-
+Don
 Done
 Done!
 Dots and stripes, oh my!
@@ -484,6 +485,7 @@ I'll keep your crayon inside the lines!
 Ice cream
 In the lines
 It's a tie! Everybody wins a hug!
+Itsy Bitsy Spider
 J
 Jack and the Beanstalk
 Jack climbed up, up, up the beanstalk.
@@ -520,14 +522,18 @@ Lily
 Lion
 Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
+Lon
+London Bridge
 Look at that shine!
 Looking good!
 M
 Ma
+Mac
 Mary Had a Little Lamb
 Maze board
 Maze. Drag Mochi to the bone.
 Medium
+Mer
 Mia
 Mia's turn
 Mochi
@@ -599,9 +605,12 @@ Now rinse it with water.
 Now tap Rinse to swish!
 Now the scissors!
 O
+O!
 Octopus
 Okay!
 Okey dokey, artichokey!
+Old
+Old MacDonald
 One
 Ooh la la!
 Ooh la la, fancy!
@@ -611,6 +620,7 @@ Ooh, that's different!
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Order
+Out
 Overalls
 Overalls! Fashion show time!
 Overalls! Holy guacamole, I love it!
@@ -672,6 +682,8 @@ Reset
 Rinse
 Rinse off all the bubbles!
 Rosa
+Row Your Boat
+Row,
 Rub rub rub! Happy puppy!
 Rub shampoo all over her hair!
 S
@@ -814,6 +826,7 @@ That color is so pretty!
 That sticker is so silly!
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
+The
 The Boy Who Cried Wolf
 The Gingerbread Man
 The Lion and the Mouse
@@ -883,6 +896,7 @@ Whale
 What a design!
 What color should it be?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
+Wheels on the Bus
 Which picture is it?
 White
 Who will help me eat it? I will, said the dog, the cat, and the duck.
@@ -911,8 +925,13 @@ You did it, you silly goose!
 You found one!
 You found them all! Holy guacamole, eagle eyes!
 You played Hot Cross Buns! Holy guacamole, what a song!
+You played Itsy Bitsy Spider! Holy guacamole, what a song!
+You played London Bridge! Holy guacamole, what a song!
 You played Mary Had a Little Lamb! Holy guacamole, what a song!
+You played Old MacDonald! Holy guacamole, what a song!
+You played Row Your Boat! Holy guacamole, what a song!
 You played Twinkle Twinkle! Holy guacamole, what a song!
+You played Wheels on the Bus! Holy guacamole, what a song!
 You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
 Yum yum, breakfast!
@@ -931,7 +950,11 @@ a whale
 aeiou
 ah
 ahh
+ald
+all
+all through the town
 an orange
+and
 apple
 apple and apple!
 apple and ball!
@@ -1049,6 +1072,7 @@ bird and pig!
 bird and star!
 bird and sun!
 bird and tree!
+bit
 boat
 boat and apple!
 boat and ball!
@@ -1223,6 +1247,7 @@ book:I!
 book:I'm
 book:I'm hungry
 book:In a little bit
+book:Itsy Bitsy Spider!
 book:J is for Juice!
 book:J!
 book:Jack
@@ -1240,6 +1265,7 @@ book:Let's play!
 book:Little
 book:Little Red Riding Hood
 book:Little Red Riding Hood went to visit her grandma.
+book:London Bridge!
 book:M is for Moon!
 book:M!
 book:Mary Had a Little Lamb!
@@ -1259,6 +1285,7 @@ book:Not
 book:Numbers
 book:O is for Octopus!
 book:O!
+book:Old MacDonald!
 book:One
 book:Orange! Like an orange.
 book:P is for Penguin!
@@ -1281,6 +1308,7 @@ book:Red! Like a strawberry.
 book:Riding
 book:Rinse
 book:Rinse!
+book:Row Your Boat!
 book:Run
 book:S is for Sun!
 book:S!
@@ -1341,6 +1369,7 @@ book:Very good
 book:W is for Whale!
 book:W!
 book:Wash
+book:Wheels on the Bus!
 book:Where
 book:White
 book:White! Like a cloud.
@@ -1700,6 +1729,7 @@ box
 boy
 bread
 bricks
+bridge
 bubbles
 bug
 buh
@@ -1730,6 +1760,7 @@ bus and pig!
 bus and star!
 bus and sun!
 bus and tree!
+but
 butterfly
 c
 cake
@@ -1757,6 +1788,7 @@ cake and pig!
 cake and star!
 cake and sun!
 cake and tree!
+came
 car
 car and apple!
 car and ball!
@@ -1811,6 +1843,7 @@ caterpillar
 chair
 checkmark
 chick
+climbed
 coloringInLines
 comb
 cookie
@@ -1878,6 +1911,7 @@ dog and tree!
 dogbed
 dogbowl
 dogbowl-empty
+don
 dora:Ahh, minty fresh! Thank you, Coco!
 dora:Gracias, Coco! I love it!
 dora:Hi Coco! I'm so excited!
@@ -1888,6 +1922,11 @@ dora:I love it! Thank you, Coco!
 dora:Look at my smile! Gracias!
 dora:My teeth are so sparkly! Thank you!
 dora:Wow! I look amazing!
+down
+down,
+down.
+dream.
+dried
 drill
 duck
 duck and apple!
@@ -1915,6 +1954,7 @@ duck and star!
 duck and sun!
 duck and tree!
 duh
+dy!
 e
 egg
 egg and apple!
@@ -2278,7 +2318,10 @@ eyes
 eyes-over
 eyes-under
 f
+fair
+fall
 farm
+farm,
 fff
 fire
 fish
@@ -2364,10 +2407,13 @@ frog and star!
 frog and sun!
 frog and tree!
 g
+gain!
 garden
 gem
+gent
 gingerbread
 girl
+go
 gown
 grandma
 grapes
@@ -2467,6 +2513,9 @@ i
 icecream
 ih
 in
+ing
+is
+it
 its
 juice
 k
@@ -2474,13 +2523,18 @@ kite
 kle
 ks
 kuh
+la
 ladybug
 lamb,
 lamb.
+life
 lightning
 like
 lion
 lit
+ly
+ly,
+mer
 mochi
 mond
 moon
@@ -2512,6 +2566,7 @@ morningOrder
 mouse
 mouthwash
 mud
+my
 n
 necklace
 nest
@@ -2522,7 +2577,9 @@ note
 ny,
 o
 octopus
+on
 oopsie
+out.
 overalls
 p
 paintbrush
@@ -2562,9 +2619,17 @@ puh
 purse
 queen
 rabbit
+rain
+rain,
 rainbow
+ri
 river
 room
+round
+round,
+round.
+row
+row,
 ry
 s
 sandals
@@ -2599,6 +2664,9 @@ sound:ɪ
 sound:ʌ
 sparkle
 sparkles
+spi
+spout
+spout.
 sprout
 sss
 star
@@ -2632,6 +2700,7 @@ stickers
 sticks
 strawberries
 strawberry
+stream.
 sun
 sun and apple!
 sun and ball!
@@ -2662,13 +2731,17 @@ sunHatBand
 sunglasses
 sunhat
 sunrise
+sy
 t
 tennis
+ter
 the
+through
 tle
 toilet
 toothbrush
 tophat
+town!
 trash
 tree
 tree and apple!
@@ -2705,18 +2778,23 @@ two
 u
 uh
 umbrella
+up
 v
 van
 violin
 vitamins
 vvv
 w
+wa
 wand
 was
+washed
 web
+went
 whale
 what
 wheat
+wheels
 white
 whoopsie!
 wind
@@ -2727,5 +2805,6 @@ wuh
 x
 xmark
 you
+your
 yoyo
 zebra

@@ -9,7 +9,7 @@ struct PianoSong: Hashable {
     /// One word or syllable per note.
     let words: [String]
 
-    static let all = [twinkle, mary, hotCrossBuns]
+    static let all = [twinkle, mary, hotCrossBuns, rowYourBoat, oldMacDonald, londonBridge, wheelsOnTheBus, itsyBitsySpider]
 
     static let twinkle = PianoSong(
         name: "Twinkle Twinkle", picture: "star",
@@ -30,6 +30,45 @@ struct PianoSong: Hashable {
         name: "Hot Cross Buns", picture: "buns",
         notes: [2, 1, 0, 2, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0],
         words: ["Hot", "cross", "buns!", "Hot", "cross", "buns!", "One", "a", "pen", "ny,", "two", "a", "pen", "ny,", "hot", "cross", "buns!"]
+    )
+
+    static let rowYourBoat = PianoSong(
+        name: "Row Your Boat", picture: "boat",
+        notes: [0, 0, 0, 1, 2, 2, 1, 2, 3, 4, 7, 7, 7, 4, 4, 4, 2, 2, 2, 0, 0, 0, 4, 3, 2, 1, 0],
+        words: ["Row,", "row,", "row", "your", "boat", "gent", "ly", "down", "the", "stream.",
+                "Mer", "ri", "ly,", "mer", "ri", "ly,", "mer", "ri", "ly,", "mer", "ri", "ly,", "life", "is", "but", "a", "dream."]
+    )
+
+    static let oldMacDonald = PianoSong(
+        name: "Old MacDonald", picture: "cow",
+        notes: [0, 0, 0, 4, 5, 5, 4, 2, 2, 1, 1, 0],
+        words: ["Old", "Mac", "Don", "ald", "had", "a", "farm,", "E", "I", "E", "I", "O!"]
+    )
+
+    static let londonBridge = PianoSong(
+        name: "London Bridge", picture: "bricks",
+        notes: [4, 5, 4, 3, 2, 3, 4, 1, 2, 3, 2, 3, 4, 4, 5, 4, 3, 2, 3, 4, 1, 4, 2, 0],
+        words: ["Lon", "don", "bridge", "is", "fall", "ing", "down,", "fall", "ing", "down,", "fall", "ing", "down.",
+                "Lon", "don", "bridge", "is", "fall", "ing", "down,", "my", "fair", "la", "dy!"]
+    )
+
+    // Its "all through the town" dips below the keyboard, so it lands on the low C instead.
+    static let wheelsOnTheBus = PianoSong(
+        name: "Wheels on the Bus", picture: "bus",
+        notes: [0, 3, 3, 3, 3, 5, 7, 5, 3, 4, 2, 0, 7, 5, 3, 0, 3, 3, 3, 3, 5, 7, 5, 3, 4, 0, 0, 3],
+        words: ["The", "wheels", "on", "the", "bus", "go", "round", "and", "round,", "round", "and", "round,", "round", "and", "round.",
+                "The", "wheels", "on", "the", "bus", "go", "round", "and", "round,", "all", "through", "the", "town!"]
+    )
+
+    // Starts on C instead of the low G under the keyboard.
+    static let itsyBitsySpider = PianoSong(
+        name: "Itsy Bitsy Spider", picture: "web",
+        notes: [0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 1, 2, 0, 2, 2, 3, 4, 4, 3, 2, 3, 4, 2, 0, 0, 1, 2, 2, 1, 0, 1, 2, 0,
+                0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 1, 2, 0],
+        words: ["The", "it", "sy", "bit", "sy", "spi", "der", "climbed", "up", "the", "wa", "ter", "spout.",
+                "Down", "came", "the", "rain", "and", "washed", "the", "spi", "der", "out.",
+                "Out", "came", "the", "sun", "and", "dried", "up", "all", "the", "rain,",
+                "and", "the", "it", "sy", "bit", "sy", "spi", "der", "went", "up", "the", "spout", "a", "gain!"]
     )
 }
 
