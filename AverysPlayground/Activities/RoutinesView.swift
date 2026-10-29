@@ -7,9 +7,15 @@ struct RoutineStep: Hashable {
 }
 
 enum RoutineKind: String, CaseIterable {
-    case morning = "Morning", bedtime = "Bedtime"
+    case morning = "Morning", bedtime = "Bedtime", chores = "Chores"
 
-    var picture: String { self == .morning ? "sunrise" : "moon" }
+    var picture: String {
+        switch self {
+        case .morning: "sunrise"
+        case .bedtime: "moon"
+        case .chores: "broom"
+        }
+    }
 
     var steps: [RoutineStep] {
         switch self {
@@ -34,6 +40,16 @@ enum RoutineKind: String, CaseIterable {
             RoutineStep(name: "Hugs and kisses", picture: "hug", cheer: "Big hug!"),
             RoutineStep(name: "Lights out", picture: "moon", cheer: "Good night!"),
         ]
+        case .chores: [
+            RoutineStep(name: "Make your bed", picture: "bed", cheer: "Bed all made! So neat!"),
+            RoutineStep(name: "Put toys away", picture: "box", cheer: "Toys all tidy! Snap snap!"),
+            RoutineStep(name: "Clothes in the hamper", picture: "tshirt", cheer: "Swish! Clothes in the hamper!"),
+            RoutineStep(name: "Feed the pet", picture: "dogbowl", cheer: "Crunch crunch! Happy pet!"),
+            RoutineStep(name: "Set the table", picture: "bowl", cheer: "The table's ready! Let's eat!"),
+            RoutineStep(name: "Water the plants", picture: "sprout", cheer: "Glug glug! Happy plants!"),
+            RoutineStep(name: "Sweep the floor", picture: "broom", cheer: "Sweep sweep! Sparkly floor!"),
+            RoutineStep(name: "Wipe the table", picture: "soap", cheer: "Squeaky clean!"),
+        ]
         }
     }
 
@@ -45,11 +61,23 @@ enum RoutineKind: String, CaseIterable {
     }
 
     var finished: String {
-        self == .morning ? "Ready for school! Have a great day!" : "All done! Sweet dreams, \(Kid.name)!"
+        switch self {
+        case .morning: "Ready for school! Have a great day!"
+        case .bedtime: "All done! Sweet dreams, \(Kid.name)!"
+        case .chores: "All the chores are done! What a big helper! Holy guacamole!"
+        }
+    }
+
+    var start: String {
+        switch self {
+        case .morning: "Good morning! Let's get ready for school."
+        case .bedtime: "Time to get ready for bed."
+        case .chores: "Chore time! Let's help at home."
+        }
     }
 }
 
-/// A morning or bedtime checklist: the child taps each step as they do it.
+/// A morning, bedtime or chores checklist: the child taps each step as they do it.
 struct Routine: Equatable {
     let kind: RoutineKind
     let steps: [RoutineStep]
@@ -74,7 +102,9 @@ struct RoutinesView: View {
     private static let green = Color(red: 0.45, green: 0.75, blue: 0.45)
     private static let red = Color(red: 0.91, green: 0.3, blue: 0.33)
 
-    @State private var routine = Routine(Calendar.current.component(.hour, from: .now) < 14 ? .morning : .bedtime)
+    /// Routines switches between morning and bedtime; Chores is its own game with just one.
+    let kinds: [RoutineKind]
+    @State private var routine: Routine
     /// The grown-up's timer: when it runs out, and how long it was set for.
     @State private var timerEnd: Date?
     @State private var timerLength: TimeInterval = 0
@@ -87,26 +117,18 @@ struct RoutinesView: View {
     /// The grown-up's own order for each routine: step names joined by "|", empty for the usual order.
     @AppStorage("morningOrder") private var morningOrder = ""
     @AppStorage("bedtimeOrder") private var bedtimeOrder = ""
+    @AppStorage("choresOrder") private var choresOrder = ""
+
+    init(kinds: [RoutineKind] = [.morning, .bedtime]) {
+        self.kinds = kinds
+        _routine = State(initialValue: Routine(kinds.count == 1 ? kinds[0] : Calendar.current.component(.hour, from: .now) < 14 ? .morning : .bedtime))
+    }
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: oops)
 
-            HStack(spacing: 12 * uiScale) {
-                ForEach(RoutineKind.allCases, id: \.self) { kind in
-                    Button { switchTo(kind) } label: {
-                        HStack(spacing: 8 * uiScale) {
-                            Picture(kind.picture, size: 34 * uiScale)
-                            Text(kind.rawValue).font(.kid(22))
-                        }
-                        .foregroundStyle(kind == routine.kind ? .white : Color.outline)
-                        .padding(.horizontal, 16 * uiScale)
-                        .frame(height: 54 * uiScale)
-                        .cartoonCard(kind == routine.kind ? Color(red: 0.42, green: 0.5, blue: 0.85) : .white, cornerRadius: 27 * uiScale)
-                    }
-                    .buttonStyle(SquishyButtonStyle())
-                }
-            }
+            if kinds.count > 1 { kindPicker }
 
             if let timerEnd { timerBar(until: timerEnd) }
 
@@ -121,7 +143,7 @@ struct RoutinesView: View {
 
             grownUpBar
         }
-        .background(Scenery(routine.kind == .morning ? .outdoors : .night).ignoresSafeArea())
+        .background(Scenery(routine.kind == .bedtime ? .night : .outdoors).ignoresSafeArea())
         .celebration(wins)
         .task(id: timerEnd) { await runTimer() }
         .onAppear { routine = Routine(routine.kind, order: order(for: routine.kind)) }
@@ -129,7 +151,12 @@ struct RoutinesView: View {
     }
 
     private func order(for kind: RoutineKind) -> [String] {
-        (kind == .morning ? morningOrder : bedtimeOrder).split(separator: "|").map(String.init)
+        let saved = switch kind {
+        case .morning: morningOrder
+        case .bedtime: bedtimeOrder
+        case .chores: choresOrder
+        }
+        return saved.split(separator: "|").map(String.init)
     }
 
     /// For the grown-up: drag the steps into their family's order. Saved on this device.
@@ -139,7 +166,11 @@ struct RoutinesView: View {
             get: { kind.steps(in: order(for: kind)) },
             set: { steps in
                 let names = steps.map(\.name).joined(separator: "|")
-                if kind == .morning { morningOrder = names } else { bedtimeOrder = names }
+                switch kind {
+                case .morning: morningOrder = names
+                case .bedtime: bedtimeOrder = names
+                case .chores: choresOrder = names
+                }
             }
         )
         return NavigationStack {
@@ -162,6 +193,25 @@ struct RoutinesView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { isReordering = false }
                 }
+            }
+        }
+    }
+
+    /// Morning or bedtime.
+    private var kindPicker: some View {
+        HStack(spacing: 12 * uiScale) {
+            ForEach(kinds, id: \.self) { kind in
+                Button { switchTo(kind) } label: {
+                    HStack(spacing: 8 * uiScale) {
+                        Picture(kind.picture, size: 34 * uiScale)
+                        Text(kind.rawValue).font(.kid(22))
+                    }
+                    .foregroundStyle(kind == routine.kind ? .white : Color.outline)
+                    .padding(.horizontal, 16 * uiScale)
+                    .frame(height: 54 * uiScale)
+                    .cartoonCard(kind == routine.kind ? Color(red: 0.42, green: 0.5, blue: 0.85) : .white, cornerRadius: 27 * uiScale)
+                }
+                .buttonStyle(SquishyButtonStyle())
             }
         }
     }
@@ -296,7 +346,7 @@ struct RoutinesView: View {
         Haptics.tap()
         withAnimation(.spring) { routine = Routine(kind, order: order(for: kind)) }
         stopTimer()
-        say(kind == .morning ? "Good morning! Let's get ready for school." : "Time to get ready for bed.", hint: "Tap each picture when you do it!")
+        say(kind.start, hint: "Tap each picture when you do it!")
     }
 
     private func startTimer(_ minutes: Int) {

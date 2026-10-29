@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, maze, spot, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines
+    case nails, hair, dressup, dentist, pet, maze, spot, piano, reading, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, tictactoe, memory, routines, chores
 
     var id: String { rawValue }
 
@@ -28,6 +28,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .tictactoe: "Tic-Tac-Toe"
         case .memory: "Memory"
         case .routines: "Routines"
+        case .chores: "Chores"
         }
     }
 
@@ -35,7 +36,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .reading, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .dentist, .pet, .maze, .spot, .colors, .drawing: .play
-        case .bingo, .tictactoe, .memory, .routines: .teamUp
+        case .bingo, .tictactoe, .memory, .routines, .chores: .teamUp
         }
     }
 
@@ -46,7 +47,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .nails, .hair, .dressup, .dentist: .salon
         case .pet, .maze, .spot: .pet
         case .colors, .drawing: .art
-        case .bingo, .tictactoe, .memory, .routines: .teamUp
+        case .bingo, .tictactoe, .memory, .routines, .chores: .teamUp
         case .reading, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
         }
     }
@@ -77,6 +78,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .tictactoe: Color(red: 0.62, green: 0.55, blue: 0.9)
         case .memory: Color(red: 0.36, green: 0.75, blue: 0.68)
         case .routines: Color(red: 0.42, green: 0.5, blue: 0.85)
+        case .chores: Color(red: 0.45, green: 0.72, blue: 0.42)
         }
     }
 
@@ -104,6 +106,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .tictactoe: TicTacToeView()
         case .memory: MemoryView()
         case .routines: RoutinesView()
+        case .chores: RoutinesView(kinds: [.chores])
         }
     }
 }

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Chores: a broom sweeping by a bucket with a sponge and bubbles -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M118 150 L126 40" fill="none" stroke-width="9"/>
+    <path d="M118 150 L126 40" fill="none" stroke="#C98A4B" stroke-width="4"/>
+    <path d="M96 150 L140 150 L148 182 L88 182Z" fill="#F6C945"/>
+    <path d="M104 160 L102 182 M118 160 L118 182 M132 160 L134 182" fill="none" stroke="#D9A52A" stroke-width="3"/>
+    <path d="M30 110 L86 110 L80 176 Q58 184 36 176Z" fill="#6FB8F0"/>
+    <path d="M26 104 L90 104 L90 116 L26 116Z" fill="#4F9AD6"/>
+    <rect x="40" y="82" width="36" height="24" rx="6" fill="#8FCB6E"/>
+  </g>
+  <circle cx="44" cy="70" r="9" fill="#fff" stroke="#9FD3F2" stroke-width="3"/>
+  <circle cx="64" cy="58" r="6" fill="#fff" stroke="#9FD3F2" stroke-width="3"/>
+  <circle cx="160" cy="120" r="7" fill="#fff" stroke="#9FD3F2" stroke-width="3"/>
+  <path d="M164 160 l6 -14 l6 14 l14 6 l-14 6 l-6 14 l-6 -14 l-14 -6Z" fill="#F6C945" stroke="#4A2C2A" stroke-width="3" stroke-linejoin="round"/>
+</svg>

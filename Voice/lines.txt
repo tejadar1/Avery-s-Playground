@@ -1,5 +1,6 @@
 %02d
 ) on the plate. How many are in the box?
+-alt
 -over
 -under
 A
@@ -27,6 +28,7 @@ All dry!
 All fixed! Holy guacamole!
 All nails
 All rinsed!
+All the chores are done! What a big helper! Holy guacamole!
 Another sticker! Yay!
 Anywhere
 Apple
@@ -51,6 +53,7 @@ Beanie! Ooh la la!
 Beanie! So stylish!
 Beanie! Wowza bowza!
 Bear
+Bed all made! So neat!
 Bedtime
 Bella
 Belly rubs are the best!
@@ -90,9 +93,12 @@ C
 C sharp
 Canvas
 Cat
+Chore time! Let's help at home.
+Chores
 Clear
 Clothes
 Clothes color
+Clothes in the hamper
 Cloud
 Coco
 Coco has 1 apple. Mochi brings 1 more. How many now?
@@ -444,6 +450,7 @@ Crown! Holy guacamole, I love it!
 Crown! Ooh la la!
 Crown! So stylish!
 Crown! Wowza bowza!
+Crunch crunch! Happy pet!
 Crunch crunch! Yummy!
 Curly
 Curly! So cute!
@@ -474,6 +481,7 @@ F
 F sharp
 Fashion show time!
 Feed
+Feed the pet
 Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Find 3 differences!
@@ -499,6 +507,7 @@ G sharp
 Get dressed
 Glitter
 Glitter makes everything better!
+Glug glug! Happy plants!
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good eye!
@@ -714,6 +723,7 @@ Looking good!
 M
 Ma
 Mac
+Make your bed
 Mary Had a Little Lamb
 Maze board
 Maze. Drag Mochi to the bone.
@@ -858,6 +868,7 @@ Purse! Holy guacamole, I love it!
 Purse! Ooh la la!
 Purse! So stylish!
 Purse! Wowza bowza!
+Put toys away
 Q
 Queen
 R
@@ -885,6 +896,7 @@ Say cheese! Snap snap!
 Scissors
 Scrub the teeth until they shine.
 Second picture
+Set the table
 Shampoo
 She baked the wheat into bread.
 She found a little house. Nobody was home.
@@ -955,6 +967,7 @@ Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
 Spot the difference! Pick easy, medium or hard.
+Squeaky clean!
 Squeaky clean! Shake shake shake!
 Squeaky clean! Start again!
 Stars
@@ -985,8 +998,11 @@ Sunglasses! Ooh la la!
 Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
 Super duper pooper scooper!
+Sweep sweep! Sparkly floor!
+Sweep the floor
 Swish swish! Minty fresh! What a great smile!
 Swish swish, paint paint!
+Swish! Clothes in the hamper!
 T
 T-shirt
 T-shirt! Fashion show time!
@@ -1030,6 +1046,7 @@ The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
 The second pig built a house of sticks.
+The table's ready! Let's eat!
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
 The wolf ran to grandma's house and hid in her bed.
@@ -1044,6 +1061,7 @@ Time's up!
 Timer
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
+Toys all tidy! Snap snap!
 Trace board
 Trace the A with your finger!
 Trace the gray lines with your finger.
@@ -1082,6 +1100,7 @@ Wand! So stylish!
 Wand! Wowza bowza!
 Wash
 Watch the keys.
+Water the plants
 Whale
 What a design!
 What color should it be?
@@ -1107,6 +1126,7 @@ Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
+Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
 Woof woof!
@@ -1151,12 +1171,14 @@ a frog
 a hat
 a strawberry
 a whale
+abc
 aeiou
 ah
 ahh
 ald
 all
 all through the town
+alphabet
 an orange
 and
 apple
@@ -1224,6 +1246,7 @@ beach
 beanie
 bear
 bed
+bedroom
 bedtimeOrder
 bee
 bee and apple!
@@ -1250,6 +1273,8 @@ bee and pig!
 bee and star!
 bee and sun!
 bee and tree!
+bench
+bg
 bingo
 bird
 bird and apple!
@@ -1276,7 +1301,10 @@ bird and pig!
 bird and star!
 bird and sun!
 bird and tree!
+birdhouse
 bit
+blanket
+blocks
 boat
 boat and apple!
 boat and ball!
@@ -1959,6 +1987,7 @@ book:woods
 book:yellow
 book:you
 book:zebra
+books
 boots
 bove
 bow
@@ -1968,9 +1997,12 @@ boy
 bread
 bricks
 bridge
+broom
 bubbles
+bucket
 bug
 buh
+bunny
 buns
 buns!
 bus
@@ -2079,14 +2111,22 @@ cat and sun!
 cat and tree!
 caterpillar
 chair
+chair1
+chalkhouse
+chalksun
 checkmark
 chick
+choresOrder
 climbed
+clock
+cloud1
+cloud2
 coloringInLines
 comb
 cookie
 cookies
 coral reef
+couch
 cow
 cow and apple!
 cow and ball!
@@ -2112,14 +2152,20 @@ cow and pig!
 cow and star!
 cow and sun!
 cow and tree!
+crayons
 crocodile
 cross
 crown
 cup
 cupcake
 cupcakes
+curtains
+cushion1
+cushion2
 d
 der
+desk1
+desk2
 dia
 dog
 dog and apple!
@@ -2163,9 +2209,11 @@ dora:Wow! I look amazing!
 down
 down,
 down.
+drawing
 dream.
 dried
 drill
+drum
 duck
 duck and apple!
 duck and ball!
@@ -2617,8 +2665,10 @@ flower and star!
 flower and sun!
 flower and tree!
 flowercrown
+flowers
 footprints
 fox
+frame
 frog
 frog and apple!
 frog and ball!
@@ -2644,13 +2694,16 @@ frog and pig!
 frog and star!
 frog and sun!
 frog and tree!
+fruit
 g
 gain!
 garden
+garland
 gem
 gent
 gingerbread
 girl
+globe
 go
 gown
 grandma
@@ -2661,6 +2714,7 @@ had
 hairBack
 hairFront
 hairdryer
+hamster
 hand
 hat
 hat and apple!
@@ -2757,6 +2811,7 @@ it
 its
 juice
 k
+kidball
 kite
 kle
 ks
@@ -2765,11 +2820,13 @@ la
 ladybug
 lamb,
 lamb.
+lamp
 life
 lightning
 like
 lion
 lit
+living
 ly
 ly,
 mer
@@ -2823,8 +2880,11 @@ p
 paintbrush
 pajamas
 palette
+paper
+park
 party
 pen
+pencil
 penguin
 pig
 pig and apple!
@@ -2851,7 +2911,9 @@ pig and pig!
 pig and star!
 pig and sun!
 pig and tree!
+pillow
 pizza
+plant
 polish
 puh
 purse
@@ -2862,26 +2924,37 @@ rain,
 rainbow
 ri
 river
+robot
 room
 round
 round,
 round.
 row
 row,
+rug
 ry
 s
 sandals
+school
 scissors
 shampoo
 sheep
+shelfball
+shelfbear
+shelfbooks
+shelfdino
 shower
 sky.
 sleep
 slice of pizza
 slices of pizza
+slide
+slippers
 sneakers
 snow.
 so
+soap
+sock
 sound:b
 sound:d
 sound:f
@@ -2933,12 +3006,14 @@ star and star!
 star and sun!
 star and tree!
 star,
+stars
 stickerWins
 stickers
 sticks
 strawberries
 strawberry
 stream.
+sum
 sun
 sun and apple!
 sun and ball!
@@ -2969,8 +3044,11 @@ sunHatBand
 sunglasses
 sunhat
 sunrise
+swing
 sy
 t
+table
+teddy
 tennis
 ter
 the
@@ -2980,6 +3058,8 @@ toilet
 toothbrush
 tophat
 town!
+toybox
+toyduck
 trash
 tree
 tree and apple!
@@ -3019,6 +3099,7 @@ umbrella
 up
 v
 van
+vase
 violin
 vitamins
 vvv

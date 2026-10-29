@@ -1,7 +1,8 @@
 import SwiftUI
 
-/// Two pictures of the same room (living room or bedroom, drawn in Art/spot.js): find what's different in the second.
-/// Things go missing or change color. Easy changes the biggest things; Hard, the smallest.
+/// Two pictures of the same place (a living room, a bedroom, the park, a classroom, drawn in Art/spot.js): find what's
+/// different in the second.
+/// Things go missing, change color, move, turn around or grow. Easy changes the biggest things; Hard, the smallest.
 struct SpotTheDifference {
     enum Level: String, CaseIterable {
         case easy = "Easy", medium = "Medium", hard = "Hard"
@@ -16,7 +17,7 @@ struct SpotTheDifference {
         }
     }
 
-    enum Change { case missing, recolored }
+    enum Change { case missing, recolored, moved, flipped, bigger }
 
     struct Room {
         let name: String
@@ -31,6 +32,15 @@ struct SpotTheDifference {
         let size: CGFloat
         let canHide: Bool
         let canRecolor: Bool
+        /// Where it can move to, as fractions of the picture, when there's a clear spot for it.
+        var move: CGPoint?
+        /// Things that face one way, so turning them around shows.
+        var canFlip = false
+
+        /// Everything that can happen to it in the second picture.
+        var changes: [Change] {
+            (canHide ? [.missing] : []) + (canHide && size < 0.2 ? [.bigger] : []) + (canRecolor ? [.recolored] : []) + (move != nil ? [.moved] : []) + (canFlip ? [.flipped] : [])
+        }
     }
 
     let level: Level
@@ -42,7 +52,7 @@ struct SpotTheDifference {
     init(_ level: Level, room: Room = rooms.randomElement()!) {
         self.level = level
         self.room = room
-        let candidates = room.things.filter { $0.canHide || $0.canRecolor }.sorted { $0.size > $1.size }
+        let candidates = room.things.filter { !$0.changes.isEmpty }.sorted { $0.size > $1.size }
         // Easy picks among the biggest things, Hard among the smallest, Medium from all of them.
         let pool = switch level {
         case .easy: Array(candidates.prefix(8))
@@ -51,7 +61,9 @@ struct SpotTheDifference {
         }
         var changes: [String: Change] = [:]
         for thing in pool.shuffled().prefix(level.differences) {
-            changes[thing.id] = thing.canHide && thing.canRecolor ? [.missing, .recolored].randomElement()! : thing.canHide ? .missing : .recolored
+            // Easy sticks to the obvious ones: gone, or a new color.
+            let obvious = thing.changes.filter { $0 == .missing || $0 == .recolored }
+            changes[thing.id] = (level == .easy && !obvious.isEmpty ? obvious : thing.changes).randomElement()!
         }
         self.changes = changes
     }
@@ -63,7 +75,9 @@ struct SpotTheDifference {
     /// by a lamp), the one the tap is most squarely on wins.
     mutating func tap(at point: CGPoint) -> String? {
         func closeness(_ thing: Thing) -> CGFloat {
-            hypot(thing.spot.x - point.x, (thing.spot.y - point.y) * 0.75) / max(thing.size * 0.6, 0.06)
+            // A moved thing counts where it was and where it went.
+            let spots = [thing.spot] + (changes[thing.id] == .moved ? [CGPoint(x: thing.spot.x + thing.move!.x, y: thing.spot.y + thing.move!.y)] : [])
+            return spots.map { hypot($0.x - point.x, ($0.y - point.y) * 0.75) }.min()! / max(thing.size * 0.6, 0.06)
         }
         guard let hit = room.things
             .filter({ changes[$0.id] != nil && !found.contains($0.id) && closeness($0) < 1 })
@@ -80,6 +94,8 @@ struct SpotView: View {
     }
 
     @State private var game: SpotTheDifference?
+    /// The places take turns: a home room, the park, school...
+    @State private var nextRoom = Int.random(in: 0..<SpotTheDifference.rooms.count)
     @State private var misses: [Miss] = []
     @State private var cheer = "Spot the difference! Pick easy, medium or hard."
     @State private var cheerCount = 0
@@ -173,6 +189,9 @@ struct SpotView: View {
                     let change = changed ? game.changes[thing.id] : nil
                     if change != .missing {
                         Image(room + thing.id + (change == .recolored ? "-alt" : "")).resizable()
+                            .scaleEffect(x: change == .flipped ? -1 : change == .bigger ? 1.3 : 1, y: change == .bigger ? 1.3 : 1,
+                                         anchor: UnitPoint(x: thing.spot.x, y: thing.spot.y))
+                            .offset(x: change == .moved ? thing.move!.x * width : 0, y: change == .moved ? thing.move!.y * height : 0)
                     }
                 }
                 ForEach(game.room.things.filter { game.found.contains($0.id) }) { thing in
@@ -233,7 +252,9 @@ struct SpotView: View {
     private func start(_ level: SpotTheDifference.Level) {
         Haptics.tap()
         misses = []
-        withAnimation(.spring) { game = SpotTheDifference(level) }
+        let room = SpotTheDifference.rooms[nextRoom % SpotTheDifference.rooms.count]
+        nextRoom += 1
+        withAnimation(.spring) { game = SpotTheDifference(level, room: room) }
         say(level.intro, hint: "Tap what's different in the second picture.")
     }
 
