@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, maze, spot, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, race, tictactoe, memory, cocosays, ispy, charades, puzzle, routines, chores
+    case nails, hair, dressup, dentist, pet, hop, maze, spot, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, colors, drawing, bingo, race, tictactoe, memory, cocosays, ispy, charades, puzzle, routines, chores
 
     var id: String { rawValue }
 
@@ -12,6 +12,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .dressup: "Dress Up"
         case .dentist: "Dentist"
         case .pet: "Mochi"
+        case .hop: "Coco Hop"
         case .maze: "Maze"
         case .spot: "Spot It"
         case .piano: "Piano"
@@ -44,7 +45,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     var section: HomeSection {
         switch self {
         case .reading, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .dentist, .pet, .maze, .spot, .colors, .drawing: .play
+        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .colors, .drawing: .play
         case .bingo, .race, .tictactoe, .memory, .cocosays, .ispy, .charades, .puzzle, .routines, .chores: .teamUp
         }
     }
@@ -54,7 +55,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .piano: nil
         case .nails, .hair, .dressup, .dentist: .salon
-        case .pet, .maze, .spot: .pet
+        case .pet, .hop, .maze, .spot: .pet
         case .colors, .drawing: .art
         case .bingo, .race, .tictactoe, .memory, .cocosays, .ispy, .charades, .puzzle, .routines, .chores: .teamUp
         case .reading, .rhyme, .patterns, .sorting, .feelings, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
@@ -71,6 +72,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .dressup: Color(red: 0.92, green: 0.55, blue: 0.75)
         case .dentist: Color(red: 0.4, green: 0.72, blue: 0.9)
         case .pet: Color(red: 0.72, green: 0.52, blue: 0.42)
+        case .hop: Color(red: 0.55, green: 0.36, blue: 0.85)
         case .maze: Color(red: 0.38, green: 0.72, blue: 0.4)
         case .spot: Color(red: 0.95, green: 0.55, blue: 0.4)
         case .piano: Color(red: 0.42, green: 0.5, blue: 0.85)
@@ -108,6 +110,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .dressup: DressUpView()
         case .dentist: DentistView()
         case .pet: PetView()
+        case .hop: HopView()
         case .maze: MazeView()
         case .spot: SpotView()
         case .piano: PianoView()

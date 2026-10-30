@@ -95,4 +95,38 @@ final class TeamUpTests: XCTestCase {
         XCTAssertFalse(iPad.up)
         XCTAssertLessThanOrEqual(iPad.width * (10 + NumberRaceView.start) + 60, 1300.01, "fits across")
     }
+
+    func testCocoHopGroundBeansNeedNoHopAndAirBeansDo() {
+        // Run without hopping: only ground beans get picked up.
+        var game = HopGame()
+        var seen: [HopGame.Bean] = []
+        for _ in 0..<300 {
+            seen += game.beans.filter { !seen.contains($0) }
+            _ = game.step(1 / 60)
+            XCTAssertTrue(game.isOnGround)
+        }
+        XCTAssertGreaterThan(game.collected, 0)
+        XCTAssertLessThanOrEqual(game.collected, seen.filter { $0.y == 0 }.count, "no air beans without a hop")
+
+        // Hop whenever an air bean is just ahead: those count too.
+        game = HopGame()
+        var steps = 0
+        while !game.isDone && steps < 20_000 {
+            if game.beans.contains(where: { $0.y > 0 && (0.08...0.12).contains($0.x - game.distance) }) { game.jump() }
+            _ = game.step(1 / 60)
+            steps += 1
+        }
+        XCTAssertTrue(game.isDone, "ten beans")
+        XCTAssertEqual(game.collected, HopGame.goal)
+    }
+
+    func testCocoHopOnlyHopsFromTheGround() {
+        var game = HopGame()
+        game.jump()
+        _ = game.step(0.1)
+        XCTAssertFalse(game.isOnGround)
+        let up = game.velocity
+        game.jump()
+        XCTAssertEqual(game.velocity, up, "no hop in the air")
+    }
 }

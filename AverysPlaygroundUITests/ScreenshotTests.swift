@@ -97,6 +97,10 @@ final class ScreenshotTests: XCTestCase {
                 self.tap(self.button("Animals"))
             }),
             ("Feelings", {}),
+            ("Coco Hop", {
+                sleep(2)
+                self.find("Tap to hop").tap()
+            }),
             ("Spot It", {
                 self.tap(self.button("Easy"))
                 sleep(1)
