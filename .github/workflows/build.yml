@@ -17,7 +17,8 @@ on:
 
 # A newer run on the same branch stops the one it replaces.
 concurrency:
-  group: build-${{ github.ref }}
+  # Voice runs and app builds are separate groups, so recording voice never cancels a build that's running.
+  group: build-${{ github.ref }}-${{ inputs.voice }}
   cancel-in-progress: true
 
 # Every run tests on one iPhone, then uploads to TestFlight. Screenshots of every game (iPhone and iPad) run only when ticked.
