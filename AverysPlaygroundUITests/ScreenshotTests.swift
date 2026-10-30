@@ -141,7 +141,6 @@ final class ScreenshotTests: XCTestCase {
             ("I Spy", {}),
             ("Act It Out", {
                 self.tap(self.button("Animals"))
-                sleep(4)  // the 3, 2, 1
                 self.tap(self.button("Got it"))
             }),
             ("Puzzles", {}),

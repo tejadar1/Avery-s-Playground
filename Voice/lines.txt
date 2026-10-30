@@ -569,7 +569,8 @@ Grandma is coming to visit today! How would you feel?
 Grandma, what big eyes you have! All the better to see you with!
 Grapes
 Green
-Grown-up, hold the iPad on your forehead, facing out. Kids, act it out! Pick a deck.
+Grown-up's turn! Hold the card to peek. No peeking, kids!
+Grown-up: hold to peek
 Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
@@ -805,6 +806,7 @@ Hee hee, the pig isn't on your card.
 Hee hee, the star isn't on your card.
 Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
+Hee hee, try again!
 Hee hee, try the other one!
 Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
@@ -827,6 +829,7 @@ High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
 Hmm, look again! What's different?
+Hold to peek
 Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
@@ -884,6 +887,7 @@ Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
 Leo
+Let's act it out! Pick a deck.
 Let's count to 1!
 Let's count to 10!
 Let's count to 2!
@@ -1009,7 +1013,6 @@ Okey dokey, artichokey!
 Old
 Old MacDonald
 On the plate
-On your forehead!
 One
 Ooh la la!
 Ooh la la, fancy!
@@ -1040,7 +1043,6 @@ Party dress! Holy guacamole, I love it!
 Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
-Pass
 Pat your head!
 Pattern
 Penguin
@@ -1127,6 +1129,7 @@ Shoes on, ready to go!
 Silly! Make a funny face back!
 Sit, Mochi! Good girl! Here's your treat!
 Skin color
+Skip
 Sky
 Sleep
 Sleepy. Time for a cozy rest.
@@ -1337,40 +1340,7 @@ Thunder goes boom in the night! How would you feel?
 Time to get ready for bed.
 Time's up
 Time's up!
-Time's up! You got 0! Holy guacamole!
-Time's up! You got 1! Holy guacamole!
-Time's up! You got 1! Snap snap!
-Time's up! You got 10! Holy guacamole!
-Time's up! You got 11! Holy guacamole!
-Time's up! You got 12! Holy guacamole!
-Time's up! You got 13! Holy guacamole!
-Time's up! You got 14! Holy guacamole!
-Time's up! You got 15! Holy guacamole!
-Time's up! You got 16! Holy guacamole!
-Time's up! You got 17! Holy guacamole!
-Time's up! You got 18! Holy guacamole!
-Time's up! You got 19! Holy guacamole!
-Time's up! You got 2! Holy guacamole!
-Time's up! You got 20! Holy guacamole!
-Time's up! You got 21! Holy guacamole!
-Time's up! You got 22! Holy guacamole!
-Time's up! You got 23! Holy guacamole!
-Time's up! You got 24! Holy guacamole!
-Time's up! You got 25! Holy guacamole!
-Time's up! You got 26! Holy guacamole!
-Time's up! You got 27! Holy guacamole!
-Time's up! You got 28! Holy guacamole!
-Time's up! You got 29! Holy guacamole!
-Time's up! You got 3! Holy guacamole!
-Time's up! You got 30! Holy guacamole!
-Time's up! You got 4! Holy guacamole!
-Time's up! You got 5! Holy guacamole!
-Time's up! You got 6! Holy guacamole!
-Time's up! You got 7! Holy guacamole!
-Time's up! You got 8! Holy guacamole!
-Time's up! You got 9! Holy guacamole!
 Timer
-Tip it down when you guess it. Tip it up to pass.
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Touch your nose!
@@ -1423,6 +1393,7 @@ What comes next?
 What did Jack trade for the magic beans?
 What did the boy watch on the hill?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
+What is it? Tap the picture!
 Wheels on the Bus
 Which house did the wolf not blow down?
 Which one feels calm?
@@ -1534,6 +1505,10 @@ Your friend has to go home. How would you feel?
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
 Your turn!
+Your turn! Act it out! 
+Your turn! Act it out! Act it out, no talking!
+Your turn! Act it out! Make its sound and move like it!
+Your turn! Act it out! Make the face!
 Yum yum, breakfast!
 Z
 Zebra
@@ -2128,6 +2103,7 @@ book:bird!
 book:black
 book:blew
 book:blow
+book:blow bubbles!
 book:blue
 book:boat
 book:boat!
@@ -2143,6 +2119,7 @@ book:bread
 book:bread!
 book:brick
 book:bricks
+book:brush your teeth!
 book:bug
 book:bug! You read it!
 book:bug! You spelled it!
@@ -2159,6 +2136,7 @@ book:butterfly!
 book:by
 book:cake
 book:cake!
+book:calm!
 book:came
 book:can
 book:can't
@@ -2185,6 +2163,7 @@ book:chick!
 book:chicks
 book:climbed
 book:clothes!
+book:comb your hair!
 book:cookie
 book:cookie!
 book:could
@@ -2205,14 +2184,18 @@ book:dog!
 book:dog! You read it!
 book:dog! You spelled it!
 book:down
+book:drink milk!
+book:drive a car!
 book:duck
 book:duck!
 book:eat
+book:eat pizza!
 book:egg!
 book:eggs
 book:eight
 book:elephant
 book:elephant!
+book:excited!
 book:eyes
 book:far
 book:fast
@@ -2225,6 +2208,7 @@ book:five
 book:flower
 book:flower!
 book:flowers
+book:fly a kite!
 book:fo
 book:food!
 book:for
@@ -2249,7 +2233,9 @@ book:gem
 book:get
 book:giant's
 book:gingerbread
+book:give a big hug!
 book:go
+book:go to sleep!
 book:going
 book:golden
 book:got
@@ -2260,6 +2246,7 @@ book:grapes!
 book:green
 book:grew
 book:had
+book:happy!
 book:hat
 book:hat and bat rhyme!
 book:hat and cat rhyme!
@@ -2312,9 +2299,12 @@ book:ladybug!
 book:laid
 book:learned
 book:let
+book:lick an ice cream!
 book:lion
 book:lion!
 book:little
+book:loved!
+book:mad!
 book:magic
 book:man
 book:mango
@@ -2358,6 +2348,7 @@ book:pen!
 book:pen! You read it!
 book:pen! You spelled it!
 book:penguin
+book:penguin!
 book:picked
 book:pig
 book:pig!
@@ -2370,6 +2361,8 @@ book:pizza!
 book:plant
 book:plantain
 book:planted
+book:play tennis!
+book:play the violin!
 book:porridge
 book:puffed
 book:purple
@@ -2381,25 +2374,33 @@ book:ran
 book:real
 book:red
 book:rice and beans
+book:ride a horse!
 book:right
 book:river
+book:rooster!
 book:ropes
+book:row a boat!
 book:run
 book:running
+book:sad!
 book:safe
 book:said
 book:salami
 book:saw
+book:scared!
 book:second
 book:see
 book:seven
 book:she
 book:sheep
+book:sheep!
 book:shouted
 book:side
+book:silly!
 book:six
 book:sky
 book:sleeping
+book:sleepy!
 book:slow
 book:sly
 book:small!
@@ -2422,6 +2423,9 @@ book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
 book:sunhat!
+book:surprised!
+book:sweep the floor!
+book:take a bath!
 book:tall
 book:tell
 book:ten
@@ -2431,6 +2435,7 @@ book:they
 book:third
 book:three
 book:through
+book:throw a ball!
 book:to
 book:took
 book:top
@@ -2458,9 +2463,11 @@ book:visit
 book:walk
 book:walked
 book:was
+book:wash your hands!
 book:watch
 book:watched
 book:water
+book:wave goodbye!
 book:way
 book:web
 book:web!
@@ -2478,10 +2485,12 @@ book:wins
 book:with
 book:woke
 book:wolf
+book:wolf!
 book:woman
 book:won
 book:woodcutter
 book:woods
+book:worried!
 book:yellow
 book:you
 book:zebra

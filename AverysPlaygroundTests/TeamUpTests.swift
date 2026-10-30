@@ -66,17 +66,17 @@ final class TeamUpTests: XCTestCase {
         }
     }
 
-    func testActItOutPassedCardsComeBackAndTiltNeedsAClearNod() {
+    func testActItOutTurnsSwapAndTheKidPicksFromThree() {
         var game = ActItOut(deck: .animals)
-        let first = game.card!, second = game.cards[1]
-        game.answer(.up)
-        XCTAssertEqual(game.card, second)
-        XCTAssertEqual(game.cards.last, first, "a passed card goes to the back")
-        game.answer(.down)
-        XCTAssertEqual(game.got, [second])
-        XCTAssertEqual(ActItOut.tilt(z: 0.9), .down)
-        XCTAssertEqual(ActItOut.tilt(z: -0.9), .up)
-        XCTAssertNil(ActItOut.tilt(z: 0.3), "upright on a forehead")
+        XCTAssertTrue(game.kidActs)
+        for _ in 0..<60 {  // more than the deck, so it starts over
+            XCTAssertEqual(Set(game.choices.map(\.word)).count, 3)
+            XCTAssertTrue(game.choices.contains(game.card))
+            let acted = game.kidActs
+            game.next(guessed: true)
+            XCTAssertNotEqual(game.kidActs, acted)
+        }
+        XCTAssertEqual(game.got, 60)
     }
 
     func testEveryActItOutPictureExists() {
