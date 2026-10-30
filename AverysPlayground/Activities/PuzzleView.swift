@@ -7,8 +7,9 @@ struct Puzzle {
     /// The sizes to pick from: 4, 9 and 12 pieces.
     static let sizes = [(columns: 2, rows: 2), (columns: 3, rows: 3), (columns: 4, rows: 3)]
 
-    /// Drawn in Art/puzzles.js: Coco in the bath, at a party, with a giant pizza, on balloons, riding Mochi, at ballet.
-    static let pictures = ["bath", "party", "pizza", "balloons", "mochi", "ballet"]
+    /// Drawn in Art/puzzles.js: Coco in the bath, at a party, with a giant pizza, on balloons, riding Mochi, at ballet,
+    /// at the beach, and surfing on the bus.
+    static let pictures = ["bath", "party", "pizza", "balloons", "mochi", "ballet", "beach", "bus"]
 
     let columns: Int
     let rows: Int

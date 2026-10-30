@@ -71,6 +71,23 @@ const scenes = {
     ${coco(240, 140, 310)}${pic('tutu', 270, 320, 240)}
     ${pic('crown', 305, 60, 110, { rotate: -10 })}${pic('wand', 470, 210, 150, { rotate: 25 })}
     ${pic('sparkles', 540, 120, 110)}${pic('sparkles', 180, 170, 90)}`,
+
+  // A day at the beach: sunhat, sunglasses and an ice cream.
+  beach: `<rect width="800" height="600" fill="#BFE6FA"/>${cloud(80, 100, 0.9)}${pic('sun', 620, 20, 150)}
+    <rect y="300" width="800" height="120" fill="#5DB4E6"/><path d="M0 330 Q40 320 80 330 T160 330 T240 330 T320 330 T400 330 T480 330 T560 330 T640 330 T720 330 T800 330" fill="none" stroke="#fff" stroke-width="4"/>
+    <path d="M0 400 Q400 370 800 400 V600 H0Z" fill="#F4DCA0" stroke="${O}" stroke-width="5"/>
+    ${pic('boat', 560, 200, 170)}${pic('umbrella', 40, 170, 300)}
+    ${coco(290, 190, 300)}
+    ${pic('sunhat', 300, 120, 200, { rotate: -10 })}${pic('sunglasses', 325, 215, 160)}
+    ${pic('icecream', 560, 300, 140, { rotate: 15 })}${pic('sandals', 120, 470, 120)}`,
+
+  // Surfing on the school bus roof, with friends riding inside and a frog driving.
+  bus: `${sky}<rect y="500" width="800" height="100" fill="#8E8E9A"/><path d="M0 500 H800" stroke="${O}" stroke-width="5"/>
+    ${Array.from({ length: 6 }, (_, i) => `<rect x="${i * 150 + 20}" y="545" width="80" height="10" rx="5" fill="#fff"/>`).join('')}
+    ${coco(250, 30, 230, { rotate: -8 })}
+    ${pic('bus', 120, 122, 560)}
+    ${pic('cat', 186, 300, 92)}${pic('pig', 292, 300, 92)}${pic('duck', 396, 300, 92)}${pic('frog', 512, 298, 100)}
+    ${pic('sunglasses', 280, 82, 130, { rotate: -8 })}`,
 };
 
 for (const [name, body] of Object.entries(scenes)) {
