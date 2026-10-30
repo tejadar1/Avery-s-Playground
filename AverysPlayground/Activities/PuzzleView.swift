@@ -84,7 +84,7 @@ struct JigsawShape: Shape {
 
 struct PuzzleView: View {
     @State private var nextRoom = Int.random(in: 0..<SpotTheDifference.rooms.count)
-    @State private var puzzle = Puzzle(columns: 2, rows: 2, room: SpotTheDifference.rooms[0])
+    @State private var puzzle = Puzzle(columns: 3, rows: 3, room: SpotTheDifference.rooms[0])
     /// Where each loose piece sits, as a share of the play area.
     @State private var spots: [Int: CGPoint] = [:]
     @State private var dragging: Int?
@@ -157,7 +157,7 @@ struct PuzzleView: View {
         .padding(.bottom, 12 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
-        .onAppear { start(Puzzle.sizes[0]) }
+        .onAppear { start(Puzzle.sizes[1]) }  // 9 pieces to start
     }
 
     private func sizeButton(_ index: Int) -> some View {
