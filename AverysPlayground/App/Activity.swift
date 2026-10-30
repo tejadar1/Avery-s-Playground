@@ -45,8 +45,8 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     var section: HomeSection {
         switch self {
         case .reading, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .colors, .drawing: .play
-        case .bingo, .race, .tictactoe, .memory, .cocosays, .ispy, .charades, .puzzle, .routines, .chores: .teamUp
+        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .puzzle, .colors, .drawing: .play
+        case .bingo, .race, .tictactoe, .memory, .cocosays, .ispy, .charades, .routines, .chores: .teamUp
         }
     }
 

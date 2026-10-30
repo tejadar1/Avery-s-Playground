@@ -2,7 +2,7 @@ import UIKit
 import XCTest
 @testable import AverysPlayground
 
-/// Number Race, Coco Says, I Spy, Puzzles and Read Together.
+/// Number Race, Coco Says, I Spy, Act It Out, Coco Hop, Puzzles and Read Together.
 final class TeamUpTests: XCTestCase {
     func testNumberRaceHopsOneSquareAtATimeAndTakesTurns() {
         var race = NumberRace()
@@ -48,13 +48,21 @@ final class TeamUpTests: XCTestCase {
         XCTAssertFalse(game.tap(at: CGPoint(x: 2, y: 2)), "off the picture is a miss")
     }
 
-    func testPuzzlePiecesOnlyGoWhereTheyBelong() {
-        var puzzle = Puzzle(size: 3, room: SpotTheDifference.rooms[0])
-        XCTAssertEqual(puzzle.tray.count, 9)
-        XCTAssertFalse(puzzle.place(0, at: 1))
-        for piece in 0..<9 { XCTAssertTrue(puzzle.place(piece, at: piece)) }
-        XCTAssertTrue(puzzle.isDone)
-        XCTAssertEqual(puzzle.score[.star]! + puzzle.score[.heart]!, 9)
+    func testPuzzlePiecesFitTheirNeighborsAndSnapWhenClose() {
+        for size in Puzzle.sizes {
+            var puzzle = Puzzle(columns: size.columns, rows: size.rows, room: SpotTheDifference.rooms[0])
+            for piece in 0..<puzzle.count {
+                let edges = puzzle.edges(of: piece), column = piece % size.columns, row = piece / size.columns
+                if column + 1 < size.columns { XCTAssertEqual(edges[1], -puzzle.edges(of: piece + 1)[3], "knob meets hole") }
+                if row + 1 < size.rows { XCTAssertEqual(edges[2], -puzzle.edges(of: piece + size.columns)[0]) }
+                XCTAssertEqual(edges[0] == 0, row == 0, "flat only along the edge")
+                XCTAssertEqual(edges[3] == 0, column == 0)
+            }
+            XCTAssertFalse(puzzle.drop(0, offBy: 1), "too far: stays where she let go")
+            for piece in 0..<puzzle.count { XCTAssertTrue(puzzle.drop(piece, offBy: 0.2)) }
+            XCTAssertTrue(puzzle.isDone)
+            XCTAssertFalse(puzzle.drop(0, offBy: 0), "placed pieces stay placed")
+        }
     }
 
     func testReadTogetherHasAQuestionOnEveryPage() {

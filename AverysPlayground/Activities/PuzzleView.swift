@@ -1,201 +1,240 @@
 import SwiftUI
 
-/// Jigsaw puzzles of the Spot It rooms, for a kid and a grown-up taking turns: drag a piece to where it goes.
-/// Puzzle play at this age goes with better spatial skills later (Levine and colleagues, University of Chicago).
+/// Jigsaw puzzles of the Spot It rooms: real knobbed pieces scattered around a faint picture; drag each one onto its
+/// place and it snaps in when it's close. Puzzle play at this age goes with better spatial skills later (Levine and
+/// colleagues, University of Chicago).
 struct Puzzle {
-    /// Pieces across and down: 2 makes 4 pieces, 3 makes 9.
-    let size: Int
-    let room: SpotTheDifference.Room
-    /// Pieces still in the tray, in the order shown.
-    private(set) var tray: [Int]
-    private(set) var turn = TicTacToe.Piece.star
-    private(set) var score: [TicTacToe.Piece: Int] = [.star: 0, .heart: 0]
+    /// The sizes to pick from: 4, 9 and 12 pieces.
+    static let sizes = [(columns: 2, rows: 2), (columns: 3, rows: 3), (columns: 4, rows: 3)]
 
-    init(size: Int, room: SpotTheDifference.Room) {
-        self.size = size
+    let columns: Int
+    let rows: Int
+    let room: SpotTheDifference.Room
+    private(set) var placed: Set<Int> = []
+
+    init(columns: Int, rows: Int, room: SpotTheDifference.Room) {
+        self.columns = columns
+        self.rows = rows
         self.room = room
-        tray = Array(0..<size * size).shuffled()
     }
 
-    var isDone: Bool { tray.isEmpty }
+    var count: Int { columns * rows }
+    var isDone: Bool { placed.count == count }
 
-    /// Puts `piece` down in `cell` if that's where it goes; then it's the other side's turn.
-    mutating func place(_ piece: Int, at cell: Int) -> Bool {
-        guard piece == cell, let index = tray.firstIndex(of: piece) else { return false }
-        tray.remove(at: index)
-        score[turn]! += 1
-        turn = turn.other
+    /// Each side of a piece, clockwise from the top: 0 flat (the puzzle's edge), 1 a knob sticking out, -1 a hole.
+    /// Neighbors always fit: a knob on one side meets a hole on the other.
+    func edges(of piece: Int) -> [Int] {
+        let column = piece % columns, row = piece / columns
+        func across(_ r: Int, _ c: Int) -> Int { (r + c).isMultiple(of: 2) ? 1 : -1 }   // below row r, at column c
+        func down(_ r: Int, _ c: Int) -> Int { (r + c).isMultiple(of: 2) ? -1 : 1 }     // right of column c, at row r
+        return [
+            row == 0 ? 0 : -across(row - 1, column),
+            column == columns - 1 ? 0 : down(row, column),
+            row == rows - 1 ? 0 : across(row, column),
+            column == 0 ? 0 : -down(row, column - 1),
+        ]
+    }
+
+    /// Snaps `piece` in if it was let go within `reach` of its place (all in the picture's units: 1 is a piece).
+    mutating func drop(_ piece: Int, offBy distance: Double, reach: Double = 0.4) -> Bool {
+        guard distance < reach, !placed.contains(piece) else { return false }
+        placed.insert(piece)
         return true
+    }
+}
+
+/// A jigsaw piece's outline in a box with room around the middle square for knobs (`knob` of the square on each side).
+struct JigsawShape: Shape {
+    static let knob: CGFloat = 0.22
+    let edges: [Int]
+
+    func path(in rect: CGRect) -> Path {
+        let k = Self.knob, w = rect.width / (1 + 2 * k), h = rect.height / (1 + 2 * k)
+        let square = CGRect(x: rect.minX + w * k, y: rect.minY + h * k, width: w, height: h)
+        let corners = [CGPoint(x: square.minX, y: square.minY), CGPoint(x: square.maxX, y: square.minY),
+                       CGPoint(x: square.maxX, y: square.maxY), CGPoint(x: square.minX, y: square.maxY)]
+        var path = Path()
+        path.move(to: corners[0])
+        for side in 0..<4 {
+            let a = corners[side], b = corners[(side + 1) % 4]
+            let along = CGPoint(x: b.x - a.x, y: b.y - a.y)
+            // Outward is to the left of the way round, for a clockwise path in screen coordinates; knobs are sized
+            // by the shorter side, so they fit the room around the square either way.
+            let length = hypot(along.x, along.y), unit = min(w, h)
+            let out = CGPoint(x: along.y / length * unit, y: -along.x / length * unit)
+            let point = { (t: CGFloat, o: CGFloat) in
+                CGPoint(x: a.x + along.x * t + out.x * o * CGFloat(edges[side]),
+                        y: a.y + along.y * t + out.y * o * CGFloat(edges[side]))
+            }
+            if edges[side] == 0 {
+                path.addLine(to: b)
+                continue
+            }
+            // A narrow neck, then a round head.
+            path.addLine(to: point(0.4, 0))
+            path.addCurve(to: point(0.36, k * 0.82), control1: point(0.43, k * 0.3), control2: point(0.3, k * 0.55))
+            path.addCurve(to: point(0.64, k * 0.82), control1: point(0.42, k * 1.08), control2: point(0.58, k * 1.08))
+            path.addCurve(to: point(0.6, 0), control1: point(0.7, k * 0.55), control2: point(0.57, k * 0.3))
+            path.addLine(to: b)
+        }
+        path.closeSubpath()
+        return path
     }
 }
 
 struct PuzzleView: View {
     @State private var nextRoom = Int.random(in: 0..<SpotTheDifference.rooms.count)
-    @State private var puzzle = Puzzle(size: 2, room: SpotTheDifference.rooms[0])
+    @State private var puzzle = Puzzle(columns: 2, rows: 2, room: SpotTheDifference.rooms[0])
+    /// Where each loose piece sits, as a share of the play area.
+    @State private var spots: [Int: CGPoint] = [:]
     @State private var dragging: Int?
     @State private var dragOffset = CGSize.zero
-    @State private var boardFrame = CGRect.zero
-    @State private var wrongPick: Int?
-    @State private var shakes = 0
     @State private var cheer = ""
     @State private var cheerCount = 0
     @State private var wins = 0
 
     var body: some View {
-        VStack(spacing: 12 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: shakes)
-
-            HStack(spacing: 12 * uiScale) {
-                ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
-                    PlayerBadge(piece: piece, score: puzzle.score[piece]!, isTurn: puzzle.turn == piece && !puzzle.isDone)
-                }
+        VStack(spacing: 10 * uiScale) {
+            HStack(alignment: .top, spacing: 12 * uiScale) {
+                CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                ForEach(Puzzle.sizes.indices, id: \.self) { index in sizeButton(index) }
             }
             .padding(.horizontal)
 
             GeometryReader { geo in
-                // The board takes most of the height; the tray of pieces sits under it.
-                let width = min(geo.size.width, geo.size.height * 0.62 * 4 / 3)
-                VStack(spacing: 16 * uiScale) {
-                    board(width: width)
-                    HStack(alignment: .top, spacing: 12 * uiScale) {
-                        tray(cell: width / CGFloat(puzzle.size) * 0.55)
-                            .frame(maxWidth: .infinity)
-                        VStack(spacing: 10 * uiScale) {
-                            sizeButton(2)
-                            sizeButton(3)
+                let area = geo.size
+                // The picture in the middle, leaving room around it for the pieces.
+                let width = min(area.width * 0.62, area.height * 0.62 * 4 / 3)
+                let height = width * 3 / 4
+                let board = CGRect(x: (area.width - width) / 2, y: (area.height - height) / 2, width: width, height: height)
+                let cell = CGSize(width: width / CGFloat(puzzle.columns), height: height / CGFloat(puzzle.rows))
+                ZStack(alignment: .topLeading) {
+                    RoomPicture(room: puzzle.room)
+                        .opacity(0.25)
+                        .frame(width: width, height: height)
+                        .background(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 10 * uiScale))
+                        .overlay(RoundedRectangle(cornerRadius: 10 * uiScale).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                        .offset(x: board.minX, y: board.minY)
+
+                    // Placed pieces first, so loose ones are on top.
+                    ForEach(Array(puzzle.placed), id: \.self) { index in
+                        piece(index, board: board, cell: cell)
+                            .position(home(of: index, board: board, cell: cell))
+                    }
+                    ForEach(0..<puzzle.count, id: \.self) { index in
+                        if !puzzle.placed.contains(index), let spot = spots[index] {
+                            piece(index, board: board, cell: cell)
+                                .shadow(color: Color.outline.opacity(0.35), radius: dragging == index ? 8 : 3, y: dragging == index ? 6 : 2)
+                                .scaleEffect(dragging == index ? 1.08 : 1)
+                                .position(x: spot.x * area.width + (dragging == index ? dragOffset.width : 0),
+                                          y: spot.y * area.height + (dragging == index ? dragOffset.height : 0))
+                                .zIndex(dragging == index ? 2 : 1)
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { value in
+                                            if dragging == nil { Haptics.tap() }
+                                            dragging = index
+                                            dragOffset = value.translation
+                                        }
+                                        .onEnded { value in
+                                            drop(index, at: CGPoint(x: spot.x * area.width + value.translation.width,
+                                                                    y: spot.y * area.height + value.translation.height),
+                                                 area: area, home: home(of: index, board: board, cell: cell), cell: cell)
+                                        }
+                                )
+                                .accessibilityLabel("Piece \(index + 1)")
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .frame(width: area.width, height: area.height)
+                .onAppear { if spots.isEmpty { scatter(board: board, in: area) } }
+                .onChange(of: puzzle.count) { scatter(board: board, in: area) }
+                .onChange(of: puzzle.room.name) { scatter(board: board, in: area) }
             }
             .padding(.horizontal)
         }
         .padding(.bottom, 12 * uiScale)
-        .coordinateSpace(.named("puzzle"))
-        .background(Scenery(.picnic).ignoresSafeArea())
+        .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
-        .onAppear { start(size: 2) }
+        .onAppear { start(Puzzle.sizes[0]) }
     }
 
-    private func sizeButton(_ size: Int) -> some View {
-        Button { start(size: size) } label: {
-            Image(systemName: size == 2 ? "square.grid.2x2.fill" : "square.grid.3x3.fill")
-                .font(.system(size: 26 * uiScale, weight: .bold))
-                .foregroundStyle(puzzle.size == size ? .white : Color.outline)
+    private func sizeButton(_ index: Int) -> some View {
+        let size = Puzzle.sizes[index]
+        let isOn = puzzle.columns == size.columns && puzzle.rows == size.rows
+        return Button { start(size) } label: {
+            Text("\(size.columns * size.rows)")
+                .font(.kid(24))
+                .foregroundStyle(isOn ? .white : Color.outline)
                 .frame(width: 56 * uiScale, height: 56 * uiScale)
-                .cartoonCard(puzzle.size == size ? Color(red: 0.36, green: 0.75, blue: 0.68) : .white, cornerRadius: 18 * uiScale)
+                .cartoonCard(isOn ? Color(red: 0.36, green: 0.75, blue: 0.68) : .white, cornerRadius: 18 * uiScale)
         }
         .buttonStyle(SquishyButtonStyle())
-        .accessibilityLabel(size == 2 ? "4 pieces" : "9 pieces")
+        .accessibilityLabel("\(size.columns * size.rows) pieces")
     }
 
-    /// The faint picture to follow, with the placed pieces on top.
-    private func board(width: CGFloat) -> some View {
-        let height = width * 3 / 4, cell = width / CGFloat(puzzle.size)
-        return ZStack(alignment: .topLeading) {
-            RoomPicture(room: puzzle.room).opacity(0.25)
-            ForEach(0..<puzzle.size * puzzle.size, id: \.self) { index in
-                let column = CGFloat(index % puzzle.size), row = CGFloat(index / puzzle.size)
-                Group {
-                    if !puzzle.tray.contains(index) {
-                        piece(index, cell: cell).transition(.scale)
-                    } else {
-                        Rectangle().strokeBorder(Color.outline.opacity(0.35), style: StrokeStyle(lineWidth: 2 * uiScale, dash: [8 * uiScale, 6 * uiScale]))
-                    }
-                }
-                .frame(width: cell, height: cell * 3 / 4)
-                .offset(x: column * cell, y: row * cell * 3 / 4)
-            }
-        }
-        .frame(width: width, height: height)
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
-        .background(GeometryReader { geo in
-            Color.clear
-                .onAppear { boardFrame = geo.frame(in: .named("puzzle")) }
-                .onChange(of: geo.frame(in: .named("puzzle"))) { _, frame in boardFrame = frame }
-        })
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Puzzle board")
-        .accessibilityIdentifier("Puzzle board")
-    }
-
-    /// The pieces left, to drag onto the board.
-    private func tray(cell: CGFloat) -> some View {
-        FlowLayout(spacing: 12 * uiScale, lineSpacing: 12 * uiScale) {
-            ForEach(puzzle.tray, id: \.self) { index in
-                piece(index, cell: cell)
-                    .overlay(Rectangle().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
-                    .shadow(color: Color.outline.opacity(0.3), radius: 3, y: 2)
-                    .scaleEffect(dragging == index ? 1.15 : 1)
-                    .offset(dragging == index ? dragOffset : .zero)
-                    .zIndex(dragging == index ? 1 : 0)
-                    .phaseAnimator([CGFloat(0), -12, 12, 0], trigger: shakes) { content, x in
-                        content.offset(x: index == wrongPick ? x : 0)
-                    } animation: { _ in .linear(duration: 0.08) }
-                    .gesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .named("puzzle"))
-                            .onChanged { value in
-                                if dragging == nil { Haptics.tap() }
-                                dragging = index
-                                dragOffset = value.translation
-                            }
-                            .onEnded { value in drop(index, at: value.location) }
-                    )
-                    .accessibilityLabel("Piece \(index + 1)")
-            }
-        }
-        .zIndex(1)  // a dragged piece passes over the board
-    }
-
-    /// One piece: its part of the room, cut out of the whole picture.
-    private func piece(_ index: Int, cell: CGFloat) -> some View {
-        let column = CGFloat(index % puzzle.size), row = CGFloat(index / puzzle.size)
-        let width = cell * CGFloat(puzzle.size)
+    /// One piece: its part of the room, cut out with knobs.
+    private func piece(_ index: Int, board: CGRect, cell: CGSize) -> some View {
+        let column = CGFloat(index % puzzle.columns), row = CGFloat(index / puzzle.columns)
+        let k = JigsawShape.knob
+        let shape = JigsawShape(edges: puzzle.edges(of: index))
         return RoomPicture(room: puzzle.room)
-            .frame(width: width, height: width * 3 / 4)
-            .offset(x: -column * cell, y: -row * cell * 3 / 4)
-            .frame(width: cell, height: cell * 3 / 4, alignment: .topLeading)
-            .clipped()
+            .frame(width: board.width, height: board.height)
+            .offset(x: -column * cell.width + cell.width * k, y: -row * cell.height + cell.height * k)
+            .frame(width: cell.width * (1 + 2 * k), height: cell.height * (1 + 2 * k), alignment: .topLeading)
+            .clipShape(shape)
+            .overlay(shape.stroke(Color.outline, lineWidth: 2.5 * uiScale))
+            .contentShape(shape)
     }
 
-    private func drop(_ piece: Int, at location: CGPoint) {
-        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
-            dragging = nil
-            dragOffset = .zero
-        }
-        guard boardFrame.contains(location) else { return }  // let go somewhere else: back to the tray
-        let cell = boardFrame.width / CGFloat(puzzle.size)
-        let column = min(Int((location.x - boardFrame.minX) / cell), puzzle.size - 1)
-        let row = min(Int((location.y - boardFrame.minY) / (cell * 3 / 4)), puzzle.size - 1)
-        let placer = puzzle.turn
-        if withAnimation(.spring(response: 0.35, dampingFraction: 0.6), { puzzle.place(piece, at: row * puzzle.size + column) }) {
+    private func home(of index: Int, board: CGRect, cell: CGSize) -> CGPoint {
+        CGPoint(x: board.minX + (CGFloat(index % puzzle.columns) + 0.5) * cell.width,
+                y: board.minY + (CGFloat(index / puzzle.columns) + 0.5) * cell.height)
+    }
+
+    /// Loose pieces go around the picture: in the space to its left and right, or above and below if that's bigger.
+    private func scatter(board: CGRect, in area: CGSize) {
+        let sides = board.minX > board.minY
+        spots = Dictionary(uniqueKeysWithValues: (0..<puzzle.count).shuffled().enumerated().map { order, index in
+            let first = order.isMultiple(of: 2)
+            let along = (CGFloat(order / 2) + 0.5) / CGFloat((puzzle.count + 1) / 2)
+            let point = sides
+                ? CGPoint(x: first ? board.minX / 2 : (board.maxX + area.width) / 2, y: along * area.height)
+                : CGPoint(x: along * area.width, y: first ? board.minY / 2 : (board.maxY + area.height) / 2)
+            return (index, CGPoint(x: point.x / area.width, y: point.y / area.height))
+        })
+    }
+
+    private func drop(_ index: Int, at point: CGPoint, area: CGSize, home: CGPoint, cell: CGSize) {
+        let distance = hypot((point.x - home.x) / cell.width, (point.y - home.y) / cell.height)
+        dragging = nil
+        dragOffset = .zero
+        if withAnimation(.spring(response: 0.3, dampingFraction: 0.7), { puzzle.drop(index, offBy: distance) }) {
             Haptics.tap()
             Sounds.shared.play(.pop)
             if puzzle.isDone {
                 wins += 1
-                say("You did it together! Holy guacamole!")
+                Sounds.shared.play(.sparkle)
+                say("You did it! Holy guacamole, what a puzzle!")
                 Task {
                     try? await Task.sleep(for: .seconds(3.5))
-                    start(size: puzzle.size)
+                    start((puzzle.columns, puzzle.rows))
                 }
-            } else {
-                say(placer == .star ? "Snap! Hearts' turn!" : "Snap! Stars' turn!")
             }
         } else {
-            Haptics.tap()
-            wrongPick = piece
-            shakes += 1
-            say("Hee hee, that piece goes somewhere else!")
+            // Stays where she let go, like a real puzzle piece.
+            spots[index] = CGPoint(x: min(max(point.x / area.width, 0.05), 0.95), y: min(max(point.y / area.height, 0.05), 0.95))
         }
     }
 
-    private func start(size: Int) {
+    private func start(_ size: (columns: Int, rows: Int)) {
         Haptics.tap()
-        withAnimation(.spring) { puzzle = Puzzle(size: size, room: SpotTheDifference.rooms[nextRoom]) }
+        withAnimation(.spring) {
+            puzzle = Puzzle(columns: size.columns, rows: size.rows, room: SpotTheDifference.rooms[nextRoom])
+        }
         nextRoom = (nextRoom + 1) % SpotTheDifference.rooms.count
-        say("Take turns! Stars, drag a piece to where it goes.")
+        say("Drag each piece to where it goes in the picture!")
     }
 
     private func say(_ text: String) {

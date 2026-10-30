@@ -3,9 +3,7 @@
 -alt
 -over
 -under
-4 pieces
 5 and 2
-9 pieces
 A
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
@@ -503,6 +501,7 @@ Done!
 Dots and stripes, oh my!
 Down
 Down! So cute!
+Drag each piece to where it goes in the picture!
 Drag the hose to spray Mochi.
 Drag to spray Mochi
 Drink of water
@@ -723,7 +722,6 @@ Hee hee, that one feels silly!
 Hee hee, that one feels sleepy!
 Hee hee, that one feels surprised!
 Hee hee, that one feels worried!
-Hee hee, that piece goes somewhere else!
 Hee hee, that's a apple!
 Hee hee, that's a balloon!
 Hee hee, that's a bat!
@@ -1079,7 +1077,6 @@ Purse! Ooh la la!
 Purse! So stylish!
 Purse! Wowza bowza!
 Put toys away
-Puzzle board
 Q
 Queen
 Quick look
@@ -1143,7 +1140,6 @@ Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
 Snap snap, hooray!
 Snap snap, you spotted it!
-Snap! Hearts' turn!
 Snap! I need the apple!
 Snap! I need the ball!
 Snap! I need the bee!
@@ -1168,7 +1164,6 @@ Snap! I need the pig!
 Snap! I need the star!
 Snap! I need the sun!
 Snap! I need the tree!
-Snap! Stars' turn!
 Snap! Your picture is saved!
 Sneakers
 Sneakers! Fashion show time!
@@ -1294,7 +1289,6 @@ Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! Your nails look amazing!
 Take a picture
-Take turns! Stars, drag a piece to where it goes.
 Take vitamins
 Tap a nail to paint it!
 Tap any key.
@@ -1480,7 +1474,7 @@ Yo-yo
 You beat the timer! Holy guacamole!
 You can't find your favorite toy.
 You can't find your favorite toy. How would you feel?
-You did it together! Holy guacamole!
+You did it! Holy guacamole, what a puzzle!
 You did it, you silly goose!
 You found everything! Holy guacamole!
 You found one!
@@ -3476,7 +3470,6 @@ play the violin
 polish
 puh
 purse
-puzzle
 q
 queen
 r
