@@ -982,6 +982,7 @@ Next
 Next leaf
 Next picture
 Night night, Mochi. Shh!
+No bean there! Look for the beans!
 No hat
 No hat! Fashion show time!
 No hat! Holy guacamole, I love it!
@@ -1048,7 +1049,7 @@ Pattern
 Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
-Pick a leaf and tap it to hop!
+Pick a leaf and tap it to hop! Follow the beans!
 Pick another nail!
 Pick easy, medium or hard.
 Picture
@@ -1479,6 +1480,16 @@ You did it, you silly goose!
 You found everything! Holy guacamole!
 You found one!
 You found them all! Holy guacamole, eagle eyes!
+You got 0 beans! Snap snap, you climbed to the clouds!
+You got 1 bean! Snap snap, you climbed to the clouds!
+You got 2 beans! Snap snap, you climbed to the clouds!
+You got 3 beans! Snap snap, you climbed to the clouds!
+You got 4 beans! Snap snap, you climbed to the clouds!
+You got 5 beans! Snap snap, you climbed to the clouds!
+You got 6 beans! Snap snap, you climbed to the clouds!
+You got 7 beans! Snap snap, you climbed to the clouds!
+You got 8 beans! Snap snap, you climbed to the clouds!
+You got 9 beans! Snap snap, you climbed to the clouds!
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Itsy Bitsy Spider! Holy guacamole, what a song!
 You played London Bridge! Holy guacamole, what a song!

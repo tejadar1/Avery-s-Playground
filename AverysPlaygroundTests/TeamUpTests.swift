@@ -107,19 +107,27 @@ final class TeamUpTests: XCTestCase {
         XCTAssertLessThanOrEqual(iPad.width * (10 + NumberRaceView.start) + 60, 1300.01, "fits across")
     }
 
-    func testCocoHopOffersAChoiceOfLeavesEachStepUp() {
+    func testCocoHopOffersAChoiceAndOnlyTheBeanPathFillsTheTray() {
         for _ in 0..<20 {
             var game = LeafHop()
             for row in 1...LeafHop.goal {
                 let choices = game.leaves.indices.filter { game.canHop(to: $0) }
                 XCTAssertTrue((2...3).contains(choices.count), "two or three leaves to pick from")
                 XCTAssertTrue(choices.allSatisfy { game.leaves[$0].row == row })
+                XCTAssertEqual(choices.filter { game.leaves[$0].hasBean }.count, 1, "one bean in each row")
                 let behind = game.leaves.indices.first { game.leaves[$0].row < game.row }
                 if let behind { XCTAssertFalse(game.tap(behind), "no hopping back down") }
-                XCTAssertTrue(game.tap(choices.randomElement()!))
-                XCTAssertEqual(game.collected, row)
+                XCTAssertTrue(game.tap(choices.first { game.leaves[$0].hasBean }!))
+                XCTAssertEqual(game.collected, row, "following the beans gets every one")
             }
             XCTAssertTrue(game.isDone)
+
+            // Never taking a bean leaf still reaches the cloud, with no beans.
+            var wanderer = LeafHop()
+            while !wanderer.isDone {
+                XCTAssertTrue(wanderer.tap(wanderer.leaves.indices.first { wanderer.canHop(to: $0) && !wanderer.leaves[$0].hasBean }!))
+            }
+            XCTAssertEqual(wanderer.collected, 0)
             XCTAssertLessThan(game.leaves.last!.spot.y, game.leaves.first!.spot.y, "it climbs")
         }
     }

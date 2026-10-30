@@ -1,14 +1,15 @@
 import SwiftUI
 
-/// Coco Hop: up a beanstalk, choosing which leaf to hop to. Each step up has two or three leaves on little branches;
-/// all of them bob, and whichever she taps, Coco jumps there and picks up its bean, which fills the tray while Bella
-/// counts. Ten steps reach the cloud at the top. Nothing to lose, so a toddler can play it alone.
+/// Coco Hop: up a beanstalk, choosing which leaf to hop to. Each step up has two or three leaves on little branches,
+/// and only one holds a magic bean, so following the beans is the way to fill the tray (Bella counts each one). Any
+/// leaf is still a hop up, and ten steps reach the cloud. Nothing to lose, so a toddler can play it alone.
 struct LeafHop {
     struct Leaf: Equatable {
         /// 0 is where Coco starts; each row up is one hop.
         let row: Int
         /// In screen sizes: x across, y down from the top of the first screen (rows above it go negative).
         let spot: CGPoint
+        let hasBean: Bool
     }
 
     static let goal = 10
@@ -20,15 +21,20 @@ struct LeafHop {
     let leaves: [Leaf]
     /// The leaf Coco is on.
     private(set) var current = 0
+    /// Beans picked up so far.
+    private(set) var collected = 0
 
     init() {
-        leaves = [Leaf(row: 0, spot: CGPoint(x: 0.5, y: 0.78))] + (1...Self.goal).flatMap { row in
-            Self.across[Int.random(in: 2...3)]!.map { Leaf(row: row, spot: CGPoint(x: $0, y: 0.78 - Double(row) * Self.rise)) }
+        leaves = [Leaf(row: 0, spot: CGPoint(x: 0.5, y: 0.78), hasBean: false)] + (1...Self.goal).flatMap { row in
+            let across = Self.across[Int.random(in: 2...3)]!
+            let bean = Int.random(in: 0..<across.count)  // one leaf in each row has the bean
+            return across.enumerated().map { index, x in
+                Leaf(row: row, spot: CGPoint(x: x, y: 0.78 - Double(row) * Self.rise), hasBean: index == bean)
+            }
         }
     }
 
     var row: Int { leaves[current].row }
-    var collected: Int { row }
     var isDone: Bool { row == Self.goal }
 
     /// True for the leaves she can hop to now: any in the next row up.
@@ -38,6 +44,7 @@ struct LeafHop {
     mutating func tap(_ leaf: Int) -> Bool {
         guard canHop(to: leaf) else { return false }
         current = leaf
+        if leaves[leaf].hasBean { collected += 1 }
         return true
     }
 }
@@ -51,8 +58,13 @@ struct HopView: View {
     /// Where Coco is drawn, in the same units as the leaves; it moves along an arc during a hop.
     @State private var coco = LeafHop().leaves[0].spot
     @State private var isHopping = false
+    /// Coco's squash and stretch, which way she faces, and her spin, for a bouncier Coco.
+    @State private var squash = CGSize(width: 1, height: 1)
+    @State private var facesLeft = false
+    @State private var spin = 0.0
+    @State private var wiggle = 0
     @State private var hint = 0
-    @State private var cheer = "Pick a leaf and tap it to hop!"
+    @State private var cheer = "Pick a leaf and tap it to hop! Follow the beans!"
     @State private var cheerCount = 0
     @State private var wins = 0
 
@@ -80,7 +92,16 @@ struct HopView: View {
                     }
 
                     Picture("crocodile", size: size)
-                        .rotationEffect(.degrees(isHopping ? -12 : 0))
+                        .scaleEffect(x: (facesLeft ? -1 : 1) * squash.width, y: squash.height, anchor: .bottom)
+                        .rotationEffect(.degrees(spin))
+                        // A happy wiggle when she gets a bean.
+                        .phaseAnimator([0.0, -12, 12, -8, 0], trigger: wiggle) { content, angle in
+                            content.rotationEffect(.degrees(angle), anchor: .bottom)
+                        } animation: { _ in .easeInOut(duration: 0.1) }
+                        // A gentle bob while she waits.
+                        .phaseAnimator(isHopping ? [CGFloat(0)] : [CGFloat(0), -5]) { content, y in
+                            content.offset(y: y)
+                        } animation: { _ in .easeInOut(duration: 0.7) }
                         .position(x: coco.x * width, y: (coco.y - camera) * height - size * 0.45)
                         .allowsHitTesting(false)
                 }
@@ -92,7 +113,7 @@ struct HopView: View {
         .padding(.bottom, 12 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
-        .onAppear { say("Pick a leaf and tap it to hop!") }
+        .onAppear { say("Pick a leaf and tap it to hop! Follow the beans!") }
     }
 
     /// The beanstalk: a thick stalk winding up the middle, with a little branch out to each leaf.
@@ -130,7 +151,7 @@ struct HopView: View {
                 .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                 .overlay(Rectangle().fill(Color.outline.opacity(0.4)).frame(width: size * 0.9, height: 2 * uiScale))
                 .frame(width: size * 1.2, height: size * 0.45)
-            if game.leaves[index].row > game.row {
+            if game.leaves[index].hasBean && game.leaves[index].row > game.row {
                 Capsule()
                     .fill(Self.bean)
                     .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2.5 * uiScale))
@@ -189,34 +210,62 @@ struct HopView: View {
         hop(from: from, to: leaf)
     }
 
-    /// Coco jumps in an arc, then picks up the bean.
+    /// Coco crouches, springs up in an arc (stretching, sometimes with a flip), lands with a squish, then picks up
+    /// the bean if that leaf had one.
     private func hop(from: CGPoint, to leaf: Int) {
         let to = game.leaves[leaf].spot
+        let flips = Int.random(in: 0..<4) == 0
         isHopping = true
+        facesLeft = to.x < from.x - 0.01 ? true : to.x > from.x + 0.01 ? false : facesLeft
         Task {
-            let frames = 24
+            withAnimation(.easeOut(duration: 0.12)) { squash = CGSize(width: 1.15, height: 0.78) }
+            try? await Task.sleep(for: .milliseconds(120))
+            let frames = 26
             for frame in 1...frames {
-                let t = Double(frame) / Double(frames)
-                coco = CGPoint(x: from.x + (to.x - from.x) * t, y: from.y + (to.y - from.y) * t - sin(.pi * t) * 0.1)
+                let t = Double(frame) / Double(frames), up = sin(.pi * t)
+                coco = CGPoint(x: from.x + (to.x - from.x) * t, y: from.y + (to.y - from.y) * t - up * 0.1)
+                squash = CGSize(width: 1 - 0.1 * up, height: 1 + 0.15 * up)
+                spin = flips ? (facesLeft ? -360 : 360) * t : (facesLeft ? -10 : 10) * up
                 try? await Task.sleep(for: .milliseconds(16))
             }
+            spin = 0
+            withAnimation(.spring(response: 0.25, dampingFraction: 0.4)) { squash = CGSize(width: 1.2, height: 0.8) }
+            try? await Task.sleep(for: .milliseconds(90))
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) { squash = CGSize(width: 1, height: 1) }
             isHopping = false
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { _ = game.tap(leaf) }
-            Sounds.shared.play(.sparkle)
-            Speaker.shared.say(Speaker.book + "\(game.collected)")
+            if game.leaves[leaf].hasBean {
+                wiggle += 1
+                Sounds.shared.play(.sparkle)
+                Speaker.shared.say(Speaker.book + "\(game.collected)")
+            } else if !game.isDone {
+                say("No bean there! Look for the beans!")
+            }
             if game.isDone { await finish() }
         }
     }
 
+    /// At the cloud: a spinning dance, and how many beans she got.
     private func finish() async {
         wins += 1
-        say("Ten magic beans! Holy guacamole, you climbed to the clouds!")
-        try? await Task.sleep(for: .seconds(4))
+        let line = game.collected == LeafHop.goal ? "Ten magic beans! Holy guacamole, you climbed to the clouds!"
+            : game.collected == 1 ? "You got 1 bean! Snap snap, you climbed to the clouds!"
+            : "You got \(game.collected) beans! Snap snap, you climbed to the clouds!"
+        say(line)
+        for turn in 1...3 {
+            withAnimation(.easeInOut(duration: 0.35)) { spin = Double(turn) * 360 }
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.4)) { squash = CGSize(width: 0.9, height: 1.15) }
+            try? await Task.sleep(for: .milliseconds(380))
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.4)) { squash = CGSize(width: 1, height: 1) }
+            facesLeft.toggle()
+        }
+        spin = 0
+        try? await Task.sleep(for: .seconds(3))
         withAnimation(.spring) {
             game = LeafHop()
             coco = game.leaves[0].spot
         }
-        say("Pick a leaf and tap it to hop!")
+        say("Pick a leaf and tap it to hop! Follow the beans!")
     }
 
     private func say(_ text: String) {

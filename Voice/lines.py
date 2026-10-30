@@ -100,6 +100,9 @@ for action in literals(re.search(r"static let actions = \[([^\]]+)\]", src["Coco
     lines.update({f"Coco says, {action}!", action[0].upper() + action[1:] + "!"})
 for clue in re.findall(r'"\w+": "([^"]+)"', src["ISpyView.swift"]):
     lines.update({f"Stars, I spy {clue}!", f"Hearts, I spy {clue}!", f"Hee hee, not that one! I spy {clue}!"})
+# Coco Hop: how many beans she got on the way up (one is its own line in the app)
+lines.update(f"You got {n} beans! Snap snap, you climbed to the clouds!" for n in [0] + list(range(2, 10)))
+
 # Act It Out: Bella names the picture the kid guessed; Coco reads each deck's hint
 act = src["CharadesView.swift"]
 for word in re.findall(r'\("([a-z ]+)", "[a-z-]+"\)', act) + re.findall(r'"([a-z]+)"', act.split("case .animals:\n")[1].split(".map")[0]):
