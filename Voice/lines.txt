@@ -709,8 +709,8 @@ Hee hee, not the moon!
 Hee hee, not the star!
 Hee hee, not the strawberry!
 Hee hee, not the sun!
+Hee hee, pick a bouncing leaf!
 Hee hee, she likes belly rubs!
-Hee hee, tap the bouncing leaf!
 Hee hee, that one feels calm!
 Hee hee, that one feels excited!
 Hee hee, that one feels happy!
@@ -1048,6 +1048,7 @@ Pattern
 Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
+Pick a leaf and tap it to hop!
 Pick another nail!
 Pick easy, medium or hard.
 Picture
@@ -1296,7 +1297,6 @@ Tap each letter to hear its sound!
 Tap each letter!
 Tap each one.
 Tap each picture when you do it!
-Tap the bouncing leaf to hop!
 Tap the keys to play! Or pick a song.
 Tap the nail!
 Tap the next square and say its number!

@@ -1,32 +1,42 @@
 import SwiftUI
 
-/// Coco Hop: leaf to leaf, straight up a beanstalk. The next leaf bounces; tap it and Coco jumps there and picks up its bean,
-/// which fills the tray while Bella counts. Ten leaves reach the cloud at the top. Nothing to lose, so a toddler
-/// can play it alone.
+/// Coco Hop: up a beanstalk, choosing which leaf to hop to. Each step up has two or three leaves on little branches;
+/// all of them bob, and whichever she taps, Coco jumps there and picks up its bean, which fills the tray while Bella
+/// counts. Ten steps reach the cloud at the top. Nothing to lose, so a toddler can play it alone.
 struct LeafHop {
-    static let goal = 10
-    /// How far up each leaf is from the last, in screen heights.
-    static let rise = 0.24
+    struct Leaf: Equatable {
+        /// 0 is where Coco starts; each row up is one hop.
+        let row: Int
+        /// In screen sizes: x across, y down from the top of the first screen (rows above it go negative).
+        let spot: CGPoint
+    }
 
-    /// Each leaf's place, in screen sizes: x across, y down from the top of the first screen (so the leaves above
-    /// go negative). Leaf 0 is where Coco starts; leaves 1 to 10 each hold a bean.
-    let leaves: [CGPoint]
+    static let goal = 10
+    /// How far up each row is from the last, in screen heights.
+    static let rise = 0.24
+    /// Leaves across for a row of two or of three.
+    static let across: [Int: [Double]] = [2: [0.27, 0.73], 3: [0.18, 0.5, 0.82]]
+
+    let leaves: [Leaf]
+    /// The leaf Coco is on.
     private(set) var current = 0
 
     init() {
-        // Left, right, left... straight up the stalk toward the cloud.
-        leaves = (0...Self.goal).map { i in
-            CGPoint(x: i.isMultiple(of: 2) ? 0.34 : 0.66, y: 0.75 - Double(i) * Self.rise)
+        leaves = [Leaf(row: 0, spot: CGPoint(x: 0.5, y: 0.78))] + (1...Self.goal).flatMap { row in
+            Self.across[Int.random(in: 2...3)]!.map { Leaf(row: row, spot: CGPoint(x: $0, y: 0.78 - Double(row) * Self.rise)) }
         }
     }
 
-    var collected: Int { current }
-    var isDone: Bool { current == Self.goal }
-    var next: Int? { isDone ? nil : current + 1 }
+    var row: Int { leaves[current].row }
+    var collected: Int { row }
+    var isDone: Bool { row == Self.goal }
 
-    /// True if `leaf` is the next one: Coco hops there.
+    /// True for the leaves she can hop to now: any in the next row up.
+    func canHop(to leaf: Int) -> Bool { leaves[leaf].row == row + 1 }
+
+    /// Hops to `leaf` if it's in the next row up.
     mutating func tap(_ leaf: Int) -> Bool {
-        guard leaf == next else { return false }
+        guard canHop(to: leaf) else { return false }
         current = leaf
         return true
     }
@@ -39,10 +49,10 @@ struct HopView: View {
 
     @State private var game = LeafHop()
     /// Where Coco is drawn, in the same units as the leaves; it moves along an arc during a hop.
-    @State private var coco = LeafHop().leaves[0]
+    @State private var coco = LeafHop().leaves[0].spot
     @State private var isHopping = false
     @State private var hint = 0
-    @State private var cheer = "Tap the bouncing leaf to hop!"
+    @State private var cheer = "Pick a leaf and tap it to hop!"
     @State private var cheerCount = 0
     @State private var wins = 0
 
@@ -60,13 +70,13 @@ struct HopView: View {
                         .font(.system(size: size * 1.4))
                         .foregroundStyle(.white)
                         .shadow(color: Color.outline.opacity(0.3), radius: 0, x: 3, y: 3)
-                        .position(x: 0.5 * width, y: (game.leaves.last!.y - 0.2 - camera) * height)
+                        .position(x: 0.5 * width, y: (game.leaves.last!.spot.y - 0.2 - camera) * height)
 
-                    stalk(through: game.leaves.map { CGPoint(x: $0.x * width, y: ($0.y - camera) * height) })
+                    stalk(width: width, height: height, camera: camera)
 
                     ForEach(game.leaves.indices, id: \.self) { index in
                         leafView(index, size: size)
-                            .position(x: game.leaves[index].x * width, y: (game.leaves[index].y - camera) * height)
+                            .position(x: game.leaves[index].spot.x * width, y: (game.leaves[index].spot.y - camera) * height)
                     }
 
                     Picture("crocodile", size: size)
@@ -82,37 +92,45 @@ struct HopView: View {
         .padding(.bottom, 12 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
-        .onAppear { say("Tap the bouncing leaf to hop!") }
+        .onAppear { say("Pick a leaf and tap it to hop!") }
     }
 
-    /// The beanstalk: a thick curvy green line through the leaves, with a dark outline.
-    private func stalk(through points: [CGPoint]) -> some View {
+    /// The beanstalk: a thick stalk winding up the middle, with a little branch out to each leaf.
+    private func stalk(width: CGFloat, height: CGFloat, camera: Double) -> some View {
+        // Where the stalk is at each row, swaying a little side to side.
+        let middle = { (row: Int) in
+            CGPoint(x: (0.5 + (row.isMultiple(of: 2) ? -0.04 : 0.04)) * width, y: (0.82 - Double(row) * LeafHop.rise - camera) * height)
+        }
         let path = Path { path in
-            guard let first = points.first else { return }
-            path.move(to: CGPoint(x: first.x, y: first.y + 600 * uiScale))  // down past the bottom of the screen
-            path.addLine(to: first)
-            for (a, b) in zip(points, points.dropFirst()) {
-                // Curving out to the side between leaves, so it winds up.
-                path.addQuadCurve(to: b, control: CGPoint(x: (a.x + b.x) / 2 + (b.x - a.x) * 0.6, y: (a.y + b.y) / 2 + 30 * uiScale))
+            path.move(to: CGPoint(x: middle(0).x, y: middle(0).y + 600 * uiScale))  // down past the bottom of the screen
+            for row in 0...LeafHop.goal {
+                path.addLine(to: middle(row))
+            }
+            for leaf in game.leaves where leaf.row > 0 {
+                path.move(to: middle(leaf.row))
+                let end = CGPoint(x: leaf.spot.x * width, y: (leaf.spot.y - camera) * height)
+                path.addQuadCurve(to: end, control: CGPoint(x: (middle(leaf.row).x + end.x) / 2, y: end.y + 20 * uiScale))
             }
         }
         return ZStack {
-            path.stroke(Color.outline, style: StrokeStyle(lineWidth: 26 * uiScale, lineCap: .round, lineJoin: .round))
-            path.stroke(Self.stalk, style: StrokeStyle(lineWidth: 20 * uiScale, lineCap: .round, lineJoin: .round))
+            path.stroke(Color.outline, style: StrokeStyle(lineWidth: 22 * uiScale, lineCap: .round, lineJoin: .round))
+            path.stroke(Self.stalk, style: StrokeStyle(lineWidth: 16 * uiScale, lineCap: .round, lineJoin: .round))
         }
         .allowsHitTesting(false)
     }
 
-    /// A leaf, with its bean until Coco gets there. The next one bounces.
+    /// A leaf, with its bean until Coco gets past it. The ones she can hop to bob up and down.
     private func leafView(_ index: Int, size: CGFloat) -> some View {
-        let isNext = index == game.next
+        let canHop = game.canHop(to: index)
+        // The first choice is "Next leaf" for the screenshot test; the others are numbered.
+        let name = canHop ? (game.leaves[index - 1].row == game.row ? "Next leaf" : "Next leaf \(index)") : "Leaf \(index)"
         return ZStack {
             Ellipse()
                 .fill(Self.leaf)
                 .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                 .overlay(Rectangle().fill(Color.outline.opacity(0.4)).frame(width: size * 0.9, height: 2 * uiScale))
                 .frame(width: size * 1.2, height: size * 0.45)
-            if index > game.current {
+            if game.leaves[index].row > game.row {
                 Capsule()
                     .fill(Self.bean)
                     .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2.5 * uiScale))
@@ -124,17 +142,16 @@ struct HopView: View {
         }
         .frame(width: size * 1.4, height: size)  // a big target for small fingers
         .contentShape(Rectangle())
-        // The next leaf bobs up and down, and jumps when she taps the wrong one.
-        .phaseAnimator(isNext ? [CGFloat(0), -10] : [CGFloat(0)]) { content, y in
+        .phaseAnimator(canHop ? [CGFloat(0), -10] : [CGFloat(0)]) { content, y in
             content.offset(y: y)
         } animation: { _ in .easeInOut(duration: 0.5) }
         .phaseAnimator([CGFloat(1), 1.2, 1], trigger: hint) { content, scale in
-            content.scaleEffect(isNext ? scale : 1)
+            content.scaleEffect(canHop ? scale : 1)
         }
         .onTapGesture { tap(index) }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(isNext ? "Next leaf" : "Leaf \(index)")
-        .accessibilityIdentifier(isNext ? "Next leaf" : "Leaf \(index)")
+        .accessibilityLabel(name)
+        .accessibilityIdentifier(name)
         .accessibilityAddTraits(.isButton)
     }
 
@@ -160,11 +177,11 @@ struct HopView: View {
 
     private func tap(_ leaf: Int) {
         guard !isHopping else { return }
-        let from = game.leaves[game.current]
-        guard leaf == game.next else {
+        let from = game.leaves[game.current].spot
+        guard game.canHop(to: leaf) else {
             Haptics.tap()
             hint += 1
-            say("Hee hee, tap the bouncing leaf!")
+            say("Hee hee, pick a bouncing leaf!")
             return
         }
         Haptics.tap()
@@ -174,7 +191,7 @@ struct HopView: View {
 
     /// Coco jumps in an arc, then picks up the bean.
     private func hop(from: CGPoint, to leaf: Int) {
-        let to = game.leaves[leaf]
+        let to = game.leaves[leaf].spot
         isHopping = true
         Task {
             let frames = 24
@@ -197,9 +214,9 @@ struct HopView: View {
         try? await Task.sleep(for: .seconds(4))
         withAnimation(.spring) {
             game = LeafHop()
-            coco = game.leaves[0]
+            coco = game.leaves[0].spot
         }
-        say("Tap the bouncing leaf to hop!")
+        say("Pick a leaf and tap it to hop!")
     }
 
     private func say(_ text: String) {

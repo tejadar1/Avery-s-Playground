@@ -107,18 +107,20 @@ final class TeamUpTests: XCTestCase {
         XCTAssertLessThanOrEqual(iPad.width * (10 + NumberRaceView.start) + 60, 1300.01, "fits across")
     }
 
-    func testCocoHopGoesLeafByLeafToTheTop() {
-        var game = LeafHop()
-        XCTAssertEqual(game.leaves.count, LeafHop.goal + 1)
-        XCTAssertFalse(game.tap(2), "only the next leaf")
-        XCTAssertFalse(game.tap(0))
-        for leaf in 1...LeafHop.goal {
-            XCTAssertEqual(game.next, leaf)
-            XCTAssertTrue(game.tap(leaf))
+    func testCocoHopOffersAChoiceOfLeavesEachStepUp() {
+        for _ in 0..<20 {
+            var game = LeafHop()
+            for row in 1...LeafHop.goal {
+                let choices = game.leaves.indices.filter { game.canHop(to: $0) }
+                XCTAssertTrue((2...3).contains(choices.count), "two or three leaves to pick from")
+                XCTAssertTrue(choices.allSatisfy { game.leaves[$0].row == row })
+                let behind = game.leaves.indices.first { game.leaves[$0].row < game.row }
+                if let behind { XCTAssertFalse(game.tap(behind), "no hopping back down") }
+                XCTAssertTrue(game.tap(choices.randomElement()!))
+                XCTAssertEqual(game.collected, row)
+            }
+            XCTAssertTrue(game.isDone)
+            XCTAssertLessThan(game.leaves.last!.spot.y, game.leaves.first!.spot.y, "it climbs")
         }
-        XCTAssertTrue(game.isDone)
-        XCTAssertEqual(game.collected, LeafHop.goal)
-        XCTAssertNil(game.next)
-        XCTAssertLessThan(game.leaves.last!.y, game.leaves.first!.y, "it climbs")
     }
 }
