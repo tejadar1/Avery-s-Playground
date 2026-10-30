@@ -1,21 +1,24 @@
 import SwiftUI
 
-/// Jigsaw puzzles of the Spot It rooms: real knobbed pieces scattered around a faint picture; drag each one onto its
+/// Jigsaw puzzles of silly Coco pictures: real knobbed pieces scattered around a faint picture; drag each one onto its
 /// place and it snaps in when it's close. Puzzle play at this age goes with better spatial skills later (Levine and
 /// colleagues, University of Chicago).
 struct Puzzle {
     /// The sizes to pick from: 4, 9 and 12 pieces.
     static let sizes = [(columns: 2, rows: 2), (columns: 3, rows: 3), (columns: 4, rows: 3)]
 
+    /// Drawn in Art/puzzles.js: Coco in the bath, at a party, with a giant pizza, on balloons, riding Mochi, at ballet.
+    static let pictures = ["bath", "party", "pizza", "balloons", "mochi", "ballet"]
+
     let columns: Int
     let rows: Int
-    let room: SpotTheDifference.Room
+    let picture: String
     private(set) var placed: Set<Int> = []
 
-    init(columns: Int, rows: Int, room: SpotTheDifference.Room) {
+    init(columns: Int, rows: Int, picture: String) {
         self.columns = columns
         self.rows = rows
-        self.room = room
+        self.picture = picture
     }
 
     var count: Int { columns * rows }
@@ -83,8 +86,8 @@ struct JigsawShape: Shape {
 }
 
 struct PuzzleView: View {
-    @State private var nextRoom = Int.random(in: 0..<SpotTheDifference.rooms.count)
-    @State private var puzzle = Puzzle(columns: 3, rows: 3, room: SpotTheDifference.rooms[0])
+    @State private var nextPicture = Int.random(in: 0..<Puzzle.pictures.count)
+    @State private var puzzle = Puzzle(columns: 3, rows: 3, picture: Puzzle.pictures[0])
     /// Where each loose piece sits, as a share of the play area.
     @State private var spots: [Int: CGPoint] = [:]
     @State private var dragging: Int?
@@ -109,7 +112,7 @@ struct PuzzleView: View {
                 let board = CGRect(x: (area.width - width) / 2, y: (area.height - height) / 2, width: width, height: height)
                 let cell = CGSize(width: width / CGFloat(puzzle.columns), height: height / CGFloat(puzzle.rows))
                 ZStack(alignment: .topLeading) {
-                    RoomPicture(room: puzzle.room)
+                    Image("Puzzle-\(puzzle.picture)").resizable()
                         .opacity(0.25)
                         .frame(width: width, height: height)
                         .background(.white)
@@ -150,7 +153,7 @@ struct PuzzleView: View {
                 .frame(width: area.width, height: area.height)
                 .onAppear { if spots.isEmpty { scatter(board: board, in: area) } }
                 .onChange(of: puzzle.count) { scatter(board: board, in: area) }
-                .onChange(of: puzzle.room.name) { scatter(board: board, in: area) }
+                .onChange(of: puzzle.picture) { scatter(board: board, in: area) }
             }
             .padding(.horizontal)
         }
@@ -174,12 +177,12 @@ struct PuzzleView: View {
         .accessibilityLabel("\(size.columns * size.rows) pieces")
     }
 
-    /// One piece: its part of the room, cut out with knobs.
+    /// One piece: its part of the picture, cut out with knobs.
     private func piece(_ index: Int, board: CGRect, cell: CGSize) -> some View {
         let column = CGFloat(index % puzzle.columns), row = CGFloat(index / puzzle.columns)
         let k = JigsawShape.knob
         let shape = JigsawShape(edges: puzzle.edges(of: index))
-        return RoomPicture(room: puzzle.room)
+        return Image("Puzzle-\(puzzle.picture)").resizable()
             .frame(width: board.width, height: board.height)
             .offset(x: -column * cell.width + cell.width * k, y: -row * cell.height + cell.height * k)
             .frame(width: cell.width * (1 + 2 * k), height: cell.height * (1 + 2 * k), alignment: .topLeading)
@@ -231,9 +234,9 @@ struct PuzzleView: View {
     private func start(_ size: (columns: Int, rows: Int)) {
         Haptics.tap()
         withAnimation(.spring) {
-            puzzle = Puzzle(columns: size.columns, rows: size.rows, room: SpotTheDifference.rooms[nextRoom])
+            puzzle = Puzzle(columns: size.columns, rows: size.rows, picture: Puzzle.pictures[nextPicture])
         }
-        nextRoom = (nextRoom + 1) % SpotTheDifference.rooms.count
+        nextPicture = (nextPicture + 1) % Puzzle.pictures.count
         say("Drag each piece to where it goes in the picture!")
     }
 

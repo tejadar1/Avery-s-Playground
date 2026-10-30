@@ -50,7 +50,7 @@ final class TeamUpTests: XCTestCase {
 
     func testPuzzlePiecesFitTheirNeighborsAndSnapWhenClose() {
         for size in Puzzle.sizes {
-            var puzzle = Puzzle(columns: size.columns, rows: size.rows, room: SpotTheDifference.rooms[0])
+            var puzzle = Puzzle(columns: size.columns, rows: size.rows, picture: Puzzle.pictures[0])
             for piece in 0..<puzzle.count {
                 let edges = puzzle.edges(of: piece), column = piece % size.columns, row = piece / size.columns
                 if column + 1 < size.columns { XCTAssertEqual(edges[1], -puzzle.edges(of: piece + 1)[3], "knob meets hole") }
@@ -62,6 +62,9 @@ final class TeamUpTests: XCTestCase {
             for piece in 0..<puzzle.count { XCTAssertTrue(puzzle.drop(piece, offBy: 0.2)) }
             XCTAssertTrue(puzzle.isDone)
             XCTAssertFalse(puzzle.drop(0, offBy: 0), "placed pieces stay placed")
+        }
+        for picture in Puzzle.pictures {
+            XCTAssertNotNil(UIImage(named: "Puzzle-\(picture)"), picture)
         }
     }
 

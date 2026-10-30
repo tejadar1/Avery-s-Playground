@@ -36,6 +36,10 @@ for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salo
 for (const file of fs.readdirSync(path.join(__dirname, 'pictures'))) {
   images[`Picture-${path.basename(file, '.svg')}`] = [`pictures/${file}`, 400];
 }
+// The Puzzles pictures (Art/puzzles.js writes them) are named Puzzle-<file name>.
+for (const file of fs.readdirSync(path.join(__dirname, 'puzzles'))) {
+  images[`Puzzle-${path.basename(file, '.svg')}`] = [`puzzles/${file}`, 1200];
+}
 images['Picture-crocodile'] = ['coco.svg', 400];
 images['Picture-avery'] = ['avery.svg', 400];
 const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');text{font-family:Nunito;font-weight:900}";
