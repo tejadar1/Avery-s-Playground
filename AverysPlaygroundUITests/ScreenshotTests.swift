@@ -98,8 +98,10 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("Feelings", {}),
             ("Coco Hop", {
-                sleep(2)
-                self.find("Tap to hop").tap()
+                for _ in 0..<2 {
+                    self.find("Next leaf").tap()
+                    sleep(1)
+                }
             }),
             ("Spot It", {
                 self.tap(self.button("Easy"))
