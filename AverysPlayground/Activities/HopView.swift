@@ -1,23 +1,22 @@
 import SwiftUI
 
-/// Coco Hop: leaf to leaf up a beanstalk. The next leaf bounces; tap it and Coco jumps there and picks up its bean,
+/// Coco Hop: leaf to leaf, straight up a beanstalk. The next leaf bounces; tap it and Coco jumps there and picks up its bean,
 /// which fills the tray while Bella counts. Ten leaves reach the cloud at the top. Nothing to lose, so a toddler
 /// can play it alone.
 struct LeafHop {
     static let goal = 10
-    /// Leaves across, in screen widths.
-    static let spacing = 0.3
+    /// How far up each leaf is from the last, in screen heights.
+    static let rise = 0.24
 
-    /// Each leaf's place: x in screen widths along the stalk, y as a share of the height (0 at the top). Leaf 0 is
-    /// where Coco starts; leaves 1 to 10 each hold a bean.
+    /// Each leaf's place, in screen sizes: x across, y down from the top of the first screen (so the leaves above
+    /// go negative). Leaf 0 is where Coco starts; leaves 1 to 10 each hold a bean.
     let leaves: [CGPoint]
     private(set) var current = 0
 
     init() {
-        // Up and down along the stalk, climbing toward the cloud at the end.
+        // Left, right, left... straight up the stalk toward the cloud.
         leaves = (0...Self.goal).map { i in
-            let climb = 0.72 - 0.4 * Double(i) / Double(Self.goal)
-            return CGPoint(x: 0.25 + Double(i) * Self.spacing, y: climb + (i.isMultiple(of: 2) ? 0.06 : -0.06))
+            CGPoint(x: i.isMultiple(of: 2) ? 0.34 : 0.66, y: 0.75 - Double(i) * Self.rise)
         }
     }
 
@@ -53,26 +52,26 @@ struct HopView: View {
             GeometryReader { geo in
                 let width = geo.size.width, height = geo.size.height
                 let size = min(width, height) * 0.2
-                // The view slides along so Coco stays near the left.
-                let camera = coco.x - 0.25
+                // The view scrolls up as Coco climbs, keeping her low on the screen.
+                let camera = coco.y - 0.7
                 ZStack(alignment: .topLeading) {
                     // The cloud at the top, past the last leaf.
                     Image(systemName: "cloud.fill")
                         .font(.system(size: size * 1.4))
                         .foregroundStyle(.white)
                         .shadow(color: Color.outline.opacity(0.3), radius: 0, x: 3, y: 3)
-                        .position(x: (game.leaves.last!.x + 0.12 - camera) * width, y: (game.leaves.last!.y - 0.12) * height)
+                        .position(x: 0.5 * width, y: (game.leaves.last!.y - 0.2 - camera) * height)
 
-                    stalk(through: game.leaves.map { CGPoint(x: ($0.x - camera) * width, y: $0.y * height) })
+                    stalk(through: game.leaves.map { CGPoint(x: $0.x * width, y: ($0.y - camera) * height) })
 
                     ForEach(game.leaves.indices, id: \.self) { index in
                         leafView(index, size: size)
-                            .position(x: (game.leaves[index].x - camera) * width, y: game.leaves[index].y * height)
+                            .position(x: game.leaves[index].x * width, y: (game.leaves[index].y - camera) * height)
                     }
 
                     Picture("crocodile", size: size)
                         .rotationEffect(.degrees(isHopping ? -12 : 0))
-                        .position(x: (coco.x - camera) * width, y: coco.y * height - size * 0.45)
+                        .position(x: coco.x * width, y: (coco.y - camera) * height - size * 0.45)
                         .allowsHitTesting(false)
                 }
                 .frame(width: width, height: height)
@@ -90,10 +89,11 @@ struct HopView: View {
     private func stalk(through points: [CGPoint]) -> some View {
         let path = Path { path in
             guard let first = points.first else { return }
-            path.move(to: CGPoint(x: first.x - 300 * uiScale, y: first.y + 160 * uiScale))
+            path.move(to: CGPoint(x: first.x, y: first.y + 600 * uiScale))  // down past the bottom of the screen
             path.addLine(to: first)
             for (a, b) in zip(points, points.dropFirst()) {
-                path.addQuadCurve(to: b, control: CGPoint(x: (a.x + b.x) / 2, y: max(a.y, b.y) + 40 * uiScale))
+                // Curving out to the side between leaves, so it winds up.
+                path.addQuadCurve(to: b, control: CGPoint(x: (a.x + b.x) / 2 + (b.x - a.x) * 0.6, y: (a.y + b.y) / 2 + 30 * uiScale))
             }
         }
         return ZStack {
@@ -180,7 +180,7 @@ struct HopView: View {
             let frames = 24
             for frame in 1...frames {
                 let t = Double(frame) / Double(frames)
-                coco = CGPoint(x: from.x + (to.x - from.x) * t, y: from.y + (to.y - from.y) * t - sin(.pi * t) * 0.18)
+                coco = CGPoint(x: from.x + (to.x - from.x) * t, y: from.y + (to.y - from.y) * t - sin(.pi * t) * 0.1)
                 try? await Task.sleep(for: .milliseconds(16))
             }
             isHopping = false
