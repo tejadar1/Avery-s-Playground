@@ -80,16 +80,28 @@ struct NumberRaceView: View {
         .celebration(wins)
     }
 
+    /// The Go strip's share of a square.
+    nonisolated static let start: CGFloat = 0.6
+
+    /// Squares as big as `size` allows: across in a row, or up in a column (1 at the bottom) when that makes them
+    /// bigger, as on an upright phone.
+    nonisolated static func squares(in size: CGSize, gap: CGFloat) -> (up: Bool, width: CGFloat, height: CGFloat) {
+        let count = CGFloat(NumberRace.finish) + start, gaps = gap * CGFloat(NumberRace.finish)
+        let acrossWidth = (size.width - gaps) / count
+        let across = (width: acrossWidth, height: min(acrossWidth * 1.8, size.height))
+        let upHeight = (size.height - gaps) / count
+        let up = (width: min(size.width * 0.7, upHeight * 6), height: upHeight)
+        return min(up.width, up.height) > min(across.width, across.height)
+            ? (true, up.width, up.height) : (false, across.width, across.height)
+    }
+
     /// Start, then squares 1 to 10 in one straight line, with each side's piece on its square. On a tall screen
     /// the line goes up (1 at the bottom), so the squares can be big; it stays one straight numbered line.
     private var board: some View {
         GeometryReader { geo in
             let gap = 4 * uiScale
-            let up = geo.size.height > geo.size.width * 1.2
-            // Each square's width and height.
-            let across = min((geo.size.width - gap * 10) / 11, geo.size.height / 1.3, 110 * uiScale)
-            let width = up ? min(geo.size.width * 0.6, 280 * uiScale) : across
-            let height = up ? min((geo.size.height - gap * 10) / 11, 90 * uiScale) : across * 1.3
+            let fit = Self.squares(in: geo.size, gap: gap)
+            let up = fit.up, width = fit.width, height = fit.height
             let size = min(width, height)
             let line = up ? AnyLayout(VStackLayout(spacing: gap)) : AnyLayout(HStackLayout(spacing: gap))
             line {
@@ -99,7 +111,7 @@ struct NumberRaceView: View {
                     Button { hop(square) } label: {
                         inside {
                             Text(square == 0 ? "Go" : "\(square)")
-                                .font(.system(size: size * (up ? 0.6 : 0.42), weight: .heavy, design: .rounded))
+                                .font(.system(size: size * (up ? 0.6 : 0.42) * (square == 0 ? Self.start : 1), weight: .heavy, design: .rounded))
                                 .foregroundStyle(square == 0 ? Color.outline : .white)
                             HStack(spacing: 0) {
                                 ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
@@ -112,7 +124,8 @@ struct NumberRaceView: View {
                             }
                             .font(.system(size: size * (up ? 0.55 : 0.3), weight: .bold))
                         }
-                        .frame(width: width, height: height)
+                        // Go is a thin strip, so the numbered squares get the room.
+                        .frame(width: square == 0 && !up ? width * Self.start : width, height: square == 0 && up ? height * Self.start : height)
                         .cartoonCard(square == 0 ? .white : Self.colors[square - 1], cornerRadius: size * 0.2)
                         .scaleEffect(isNext ? 1.08 : 1)
                         .overlay {

@@ -86,4 +86,13 @@ final class TeamUpTests: XCTestCase {
             }
         }
     }
+
+    func testNumberRaceSquaresGoUpOnAnUprightPhone() {
+        let phone = NumberRaceView.squares(in: CGSize(width: 358, height: 440), gap: 4)
+        XCTAssertTrue(phone.up)
+        XCTAssertGreaterThan(min(phone.width, phone.height), 38, "bigger than in a row (about 30)")
+        let iPad = NumberRaceView.squares(in: CGSize(width: 1300, height: 400), gap: 6)
+        XCTAssertFalse(iPad.up)
+        XCTAssertLessThanOrEqual(iPad.width * (10 + NumberRaceView.start) + 60, 1300.01, "fits across")
+    }
 }
