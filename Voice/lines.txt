@@ -1,4 +1,3 @@
-! You got it!
 %02d
 ) on the plate. How many are in the box?
 -alt
@@ -27,6 +26,8 @@ A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
 A! /a/! A is for apple!
 ABC
+Act it out, no talking!
+Actions
 All clean!
 All done with the bath!
 All done! Sweet dreams!
@@ -37,6 +38,7 @@ All nails
 All rinsed!
 All sorted!
 All the chores are done! What a big helper! Holy guacamole!
+Animals
 Another sticker! Yay!
 Anywhere
 Apple
@@ -488,6 +490,7 @@ D
 D sharp
 Dance when the music plays. When it stops, freeze!
 Dance!
+Decks
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
 Do what Coco says, but only if I say Coco says!
@@ -515,6 +518,7 @@ F sharp
 Fashion show time!
 Feed
 Feed the pet
+Feelings
 Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Find 3 differences!
@@ -553,6 +557,7 @@ Good eye!
 Good morning! Let's get ready for school.
 Good morning, sunshine!
 Good night!
+Got it!
 Gown
 Gown! Fashion show time!
 Gown! Holy guacamole, I love it!
@@ -564,6 +569,7 @@ Grandma is coming to visit today! How would you feel?
 Grandma, what big eyes you have! All the better to see you with!
 Grapes
 Green
+Grown-up, hold the iPad on your forehead, facing out. Kids, act it out! Pick a deck.
 Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
@@ -632,8 +638,6 @@ Hearts, I spy something you write with!
 Hearts, I spy something your family sits on together!
 Hearts, I spy something yummy and healthy to eat!
 Hearts, I spy somewhere to sit at the park!
-Hearts, make a face! Hold the card to peek. Shh, don't say it!
-Hearts, what's the feeling? Tap the face!
 Hee hee hee! You're so funny! You made me giggle!
 Hee hee! I didn't say Coco says! Did you stay still?
 Hee hee! That tickles!
@@ -651,16 +655,6 @@ Hee hee, not 6!
 Hee hee, not 7!
 Hee hee, not 8!
 Hee hee, not 9!
-Hee hee, not calm! Make the face again!
-Hee hee, not excited! Make the face again!
-Hee hee, not happy! Make the face again!
-Hee hee, not loved! Make the face again!
-Hee hee, not mad! Make the face again!
-Hee hee, not sad! Make the face again!
-Hee hee, not scared! Make the face again!
-Hee hee, not silly! Make the face again!
-Hee hee, not sleepy! Make the face again!
-Hee hee, not surprised! Make the face again!
 Hee hee, not that one! 
 Hee hee, not that one! I spy a bag you take to school!
 Hee hee, not that one! I spy a ball that shows the whole world!
@@ -715,7 +709,6 @@ Hee hee, not the moon!
 Hee hee, not the star!
 Hee hee, not the strawberry!
 Hee hee, not the sun!
-Hee hee, not worried! Make the face again!
 Hee hee, she likes belly rubs!
 Hee hee, that one feels calm!
 Hee hee, that one feels excited!
@@ -834,7 +827,6 @@ High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
 Hmm, look again! What's different?
-Hold to peek
 Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
@@ -926,6 +918,8 @@ Ma
 Mac
 Mad. Take a big breath, and blow it out slowly.
 Make a silly face!
+Make its sound and move like it!
+Make the face!
 Make your bed
 Mary Had a Little Lamb
 Maze board
@@ -1015,6 +1009,7 @@ Okey dokey, artichokey!
 Old
 Old MacDonald
 On the plate
+On your forehead!
 One
 Ooh la la!
 Ooh la la, fancy!
@@ -1045,6 +1040,7 @@ Party dress! Holy guacamole, I love it!
 Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
+Pass
 Pat your head!
 Pattern
 Penguin
@@ -1251,8 +1247,6 @@ Stars, I spy something you write with!
 Stars, I spy something your family sits on together!
 Stars, I spy something yummy and healthy to eat!
 Stars, I spy somewhere to sit at the park!
-Stars, make a face! Hold the card to peek. Shh, don't say it!
-Stars, what's the feeling? Tap the face!
 Start
 Start over
 Stick it anywhere!
@@ -1343,7 +1337,40 @@ Thunder goes boom in the night! How would you feel?
 Time to get ready for bed.
 Time's up
 Time's up!
+Time's up! You got 0! Holy guacamole!
+Time's up! You got 1! Holy guacamole!
+Time's up! You got 1! Snap snap!
+Time's up! You got 10! Holy guacamole!
+Time's up! You got 11! Holy guacamole!
+Time's up! You got 12! Holy guacamole!
+Time's up! You got 13! Holy guacamole!
+Time's up! You got 14! Holy guacamole!
+Time's up! You got 15! Holy guacamole!
+Time's up! You got 16! Holy guacamole!
+Time's up! You got 17! Holy guacamole!
+Time's up! You got 18! Holy guacamole!
+Time's up! You got 19! Holy guacamole!
+Time's up! You got 2! Holy guacamole!
+Time's up! You got 20! Holy guacamole!
+Time's up! You got 21! Holy guacamole!
+Time's up! You got 22! Holy guacamole!
+Time's up! You got 23! Holy guacamole!
+Time's up! You got 24! Holy guacamole!
+Time's up! You got 25! Holy guacamole!
+Time's up! You got 26! Holy guacamole!
+Time's up! You got 27! Holy guacamole!
+Time's up! You got 28! Holy guacamole!
+Time's up! You got 29! Holy guacamole!
+Time's up! You got 3! Holy guacamole!
+Time's up! You got 30! Holy guacamole!
+Time's up! You got 4! Holy guacamole!
+Time's up! You got 5! Holy guacamole!
+Time's up! You got 6! Holy guacamole!
+Time's up! You got 7! Holy guacamole!
+Time's up! You got 8! Holy guacamole!
+Time's up! You got 9! Holy guacamole!
 Timer
+Tip it down when you guess it. Tip it up to pass.
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Touch your nose!
@@ -1673,6 +1700,7 @@ birdhouse
 bit
 blanket
 blocks
+blow bubbles
 boat
 boat and apple!
 boat and ball!
@@ -2131,7 +2159,6 @@ book:butterfly!
 book:by
 book:cake
 book:cake!
-book:calm!
 book:came
 book:can
 book:can't
@@ -2186,7 +2213,6 @@ book:eggs
 book:eight
 book:elephant
 book:elephant!
-book:excited!
 book:eyes
 book:far
 book:fast
@@ -2234,7 +2260,6 @@ book:grapes!
 book:green
 book:grew
 book:had
-book:happy!
 book:hat
 book:hat and bat rhyme!
 book:hat and cat rhyme!
@@ -2290,8 +2315,6 @@ book:let
 book:lion
 book:lion!
 book:little
-book:loved!
-book:mad!
 book:magic
 book:man
 book:mango
@@ -2363,12 +2386,10 @@ book:river
 book:ropes
 book:run
 book:running
-book:sad!
 book:safe
 book:said
 book:salami
 book:saw
-book:scared!
 book:second
 book:see
 book:seven
@@ -2376,11 +2397,9 @@ book:she
 book:sheep
 book:shouted
 book:side
-book:silly!
 book:six
 book:sky
 book:sleeping
-book:sleepy!
 book:slow
 book:sly
 book:small!
@@ -2403,7 +2422,6 @@ book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
 book:sunhat!
-book:surprised!
 book:tall
 book:tell
 book:ten
@@ -2464,7 +2482,6 @@ book:woman
 book:won
 book:woodcutter
 book:woods
-book:worried!
 book:yellow
 book:you
 book:zebra
@@ -2479,6 +2496,7 @@ bread
 bricks
 bridge
 broom
+brush your teeth
 bubbles
 bucket
 bug
@@ -2609,6 +2627,7 @@ cloud1
 cloud2
 coloringInLines
 comb
+comb your hair
 cookie
 cookies
 coral reef
@@ -2699,6 +2718,8 @@ drawing
 dream.
 dried
 drill
+drink milk
+drive a car
 drum
 duck
 duck and apple!
@@ -2728,6 +2749,7 @@ duck and tree!
 duh
 dy!
 e
+eat pizza
 egg
 egg and apple!
 egg and ball!
@@ -3165,6 +3187,7 @@ flower and sun!
 flower and tree!
 flowercrown
 flowers
+fly a kite
 food
 footprints
 fox
@@ -3203,8 +3226,10 @@ gem
 gent
 gingerbread
 girl
+give a big hug
 globe
 go
+go to sleep
 goodbye
 gown
 grandma
@@ -3330,6 +3355,7 @@ ladybug
 lamb,
 lamb.
 lamp
+lick an ice cream
 life
 lightning
 like
@@ -3344,6 +3370,7 @@ mad
 make a silly face
 mango
 mer
+milk
 mmm
 mochi
 mom
@@ -3431,6 +3458,8 @@ pig and tree!
 pillow
 pizza
 plant
+play tennis
+play the violin
 polish
 puh
 purse
@@ -3447,13 +3476,16 @@ readingRead
 readingUnlocked
 rest
 ri
+ride a horse
 river
 robot
 room
+rooster
 round
 round,
 round.
 row
+row a boat
 row,
 rug
 ry
@@ -3608,15 +3640,18 @@ sunglasses
 sunhat
 sunrise
 surprised
+sweep the floor
 swing
 sy
 t
 table
+take a bath
 teddy
 tennis
 ter
 the
 through
+throw a ball
 tle
 toilet
 toothbrush
@@ -3673,7 +3708,10 @@ w
 wa
 wand
 was
+wash your hands
 washed
+wave
+wave goodbye
 wave hello
 waveform
 web

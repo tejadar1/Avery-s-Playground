@@ -1,3 +1,4 @@
+import UIKit
 import XCTest
 @testable import AverysPlayground
 
@@ -62,6 +63,27 @@ final class TeamUpTests: XCTestCase {
             XCTAssertTrue(prompts.first!.contains("What do you see"))
             XCTAssertTrue(prompts.last!.contains("favorite part"))
             XCTAssertFalse(prompts.contains(""))
+        }
+    }
+
+    func testActItOutPassedCardsComeBackAndTiltNeedsAClearNod() {
+        var game = ActItOut(deck: .animals)
+        let first = game.card!, second = game.cards[1]
+        game.answer(.up)
+        XCTAssertEqual(game.card, second)
+        XCTAssertEqual(game.cards.last, first, "a passed card goes to the back")
+        game.answer(.down)
+        XCTAssertEqual(game.got, [second])
+        XCTAssertEqual(ActItOut.tilt(z: 0.9), .down)
+        XCTAssertEqual(ActItOut.tilt(z: -0.9), .up)
+        XCTAssertNil(ActItOut.tilt(z: 0.3), "upright on a forehead")
+    }
+
+    func testEveryActItOutPictureExists() {
+        for deck in ActItOut.Deck.allCases {
+            for card in deck.cards + [ActItOut.Card(word: deck.rawValue, picture: deck.picture)] {
+                XCTAssertNotNil(UIImage(named: "Picture-\(card.picture)"), card.word)
+            }
         }
     }
 }

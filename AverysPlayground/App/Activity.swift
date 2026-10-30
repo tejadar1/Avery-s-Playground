@@ -34,7 +34,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .race: "Number Race"
         case .cocosays: "Coco Says"
         case .ispy: "I Spy"
-        case .charades: "Charades"
+        case .charades: "Act It Out"
         case .puzzle: "Puzzles"
         case .routines: "Routines"
         case .chores: "Chores"

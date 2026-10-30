@@ -95,13 +95,12 @@ for name, help in re.findall(r'Feeling\(name: "(\w+)", face: "[^"]+", group: "\w
     lines.update({f"Which one feels {name}?", f"Hee hee, that one feels {name}!", "book:" + help})
 lines.update(f"{text} How would you feel?" for text in re.findall(r'FeelingMoment\(text: "([^"]+)"', feelings))
 
-# Team Up: Coco Says calls out actions (a third are tricks), I Spy's clues, and the charades guesses
+# Team Up: Coco Says calls out actions (a third are tricks), I Spy's clues, and Act It Out's score
 for action in literals(re.search(r"static let actions = \[([^\]]+)\]", src["CocoSaysView.swift"]).group(1)):
     lines.update({f"Coco says, {action}!", action[0].upper() + action[1:] + "!"})
 for clue in re.findall(r'"\w+": "([^"]+)"', src["ISpyView.swift"]):
     lines.update({f"Stars, I spy {clue}!", f"Hearts, I spy {clue}!", f"Hee hee, not that one! I spy {clue}!"})
-for name in re.findall(r'Feeling\(name: "(\w+)"', feelings):
-    lines.update({f"book:{name}!", f"Hee hee, not {name}! Make the face again!"})
+lines.update(f"Time's up! You got {n}! Holy guacamole!" for n in range(0, 31))  # Act It Out
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):
