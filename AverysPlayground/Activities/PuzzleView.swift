@@ -42,14 +42,17 @@ struct Puzzle {
     /// Where loose pieces start: random spots in `area` around the picture (`board`), not on it, and spread out. Each
     /// spot tries a few random places and keeps the one farthest from the pieces already placed.
     static func scatter(count: Int, piece: CGSize, around board: CGRect, in area: CGSize) -> [CGPoint] {
-        let keepOff = board.insetBy(dx: -piece.width * 0.3, dy: -piece.height * 0.3)
+        // Clear of the picture if there's room; on a cramped screen, a little overlap.
+        let clear = board.insetBy(dx: -piece.width / 2, dy: -piece.height / 2)
+        let nearly = board.insetBy(dx: -piece.width * 0.3, dy: -piece.height * 0.3)
         var points: [CGPoint] = []
         for _ in 0..<count {
             let tries = (0..<80).map { _ in
                 CGPoint(x: .random(in: piece.width / 2...max(piece.width / 2, area.width - piece.width / 2)),
                         y: .random(in: piece.height / 2...max(piece.height / 2, area.height - piece.height / 2)))
             }
-            let off = tries.filter { !keepOff.contains($0) }
+            let clearOf = tries.filter { !clear.contains($0) }
+            let off = clearOf.isEmpty ? tries.filter { !nearly.contains($0) } : clearOf
             let room = { (p: CGPoint) in points.map { hypot($0.x - p.x, $0.y - p.y) }.min() ?? 0 }
             let best = (off.isEmpty ? tries : off).max { room($0) < room($1) }!
             points.append(best)
