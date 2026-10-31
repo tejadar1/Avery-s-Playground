@@ -381,7 +381,8 @@ private struct StoryReader: View {
 
             wordsPage
                 .padding(26 * uiScale)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                // Upright, the words take only the room they need and the picture gets the rest.
+                .frame(maxWidth: .infinity, maxHeight: wide ? .infinity : nil, alignment: .topLeading)
                 .background(paper(spineAt: wide ? .leading : .top))
         }
         .id(pageIndex)

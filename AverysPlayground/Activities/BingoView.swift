@@ -76,6 +76,9 @@ struct BingoView: View {
     @State private var cheer = "Team up with your grown-up against Coco! Slide out two pictures, then drag each one onto the same picture on your card."
     @State private var cheerCount = 0
     @State private var wins = 0
+    @Environment(\.isWide) private var isWide
+    /// Bigger tiles on an upright iPad, where there's room below the machine.
+    private var big: CGFloat { uiScale > 1 && !isWide ? 1.2 : 1 }
 
     private var isOver: Bool { game.won || game.cocoWon }
 
@@ -100,7 +103,7 @@ struct BingoView: View {
                         card
                         if game.won { Sparkles() }
                     }
-                    .frame(maxWidth: 520 * uiScale, maxHeight: .infinity, alignment: wide ? .center : .bottom)
+                    .frame(maxWidth: 520 * uiScale * big, maxHeight: .infinity, alignment: wide ? .center : .bottom)
                     .padding(.horizontal)
                 }
 
@@ -135,7 +138,7 @@ struct BingoView: View {
                 ForEach(0..<2, id: \.self) { slot in
                     if slot < game.shown.count {
                         let tile = game.shown[slot]
-                        tileFace(tile, size: 84 * uiScale)
+                        tileFace(tile, size: 84 * uiScale * big)
                             .cartoonCard(Color(red: 1.0, green: 0.97, blue: 0.86), cornerRadius: 16 * uiScale)
                             .scaleEffect(dragging == tile ? 1.15 : 1)
                             .offset(dragging == tile ? dragOffset : .zero)
@@ -161,7 +164,7 @@ struct BingoView: View {
                     } else {
                         RoundedRectangle(cornerRadius: 16 * uiScale, style: .continuous)
                             .fill(.white.opacity(0.35))
-                            .frame(width: 84 * uiScale, height: 84 * uiScale)
+                            .frame(width: 84 * uiScale * big, height: 84 * uiScale * big)
                     }
                 }
             }
@@ -190,7 +193,7 @@ struct BingoView: View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10 * uiScale), count: 3), spacing: 10 * uiScale) {
             ForEach(game.card, id: \.self) { tile in
                 let hovered = dragging != nil && spots[tile]?.contains(dragLocation) == true
-                tileFace(tile, size: 100 * uiScale)
+                tileFace(tile, size: 100 * uiScale * big)
                     .frame(maxWidth: .infinity)
                     .background(hovered ? Color(red: 1.0, green: 0.92, blue: 0.55) : .clear, in: RoundedRectangle(cornerRadius: 14 * uiScale, style: .continuous))
                     .onGeometryChange(for: CGRect.self) { $0.frame(in: .named("bingo")) } action: { spots[tile] = $0 }

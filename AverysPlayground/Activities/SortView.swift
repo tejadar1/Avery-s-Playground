@@ -49,6 +49,7 @@ struct SortView: View {
     @State private var cheer = ""
     @State private var cheerCount = 0
     @State private var wins = 0
+    @Environment(\.isWide) private var isWide
 
     private var current: ReadingWord? { pile.first { !sorted.contains($0) } }
 
@@ -58,15 +59,15 @@ struct SortView: View {
 
             ZStack {
                 if let current {
-                    Picture(current.picture, size: 130 * uiScale)
-                        .frame(width: 180 * uiScale, height: 180 * uiScale)
+                    Picture(current.picture, size: 130 * uiScale * roomy(isWide))
+                        .frame(width: 180 * uiScale * roomy(isWide), height: 180 * uiScale * roomy(isWide))
                         .cartoonCard(.white)
                         .id(current.text)
                         .transition(.scale.combined(with: .opacity))
                         .accessibilityLabel(current.text)
                 }
             }
-            .frame(height: 190 * uiScale)
+            .frame(height: 190 * uiScale * roomy(isWide))
 
             Spacer()
 
@@ -86,7 +87,7 @@ struct SortView: View {
         let inside = sorted.filter(group.things.contains)
         return Button { drop(in: group, isLeft: isLeft) } label: {
             VStack(spacing: 8 * uiScale) {
-                Picture(group.picture, size: 70 * uiScale)
+                Picture(group.picture, size: 70 * uiScale * roomy(isWide))
                 Text(group.name.capitalized).font(.kid(24)).foregroundStyle(Color.outline)
                 // What's been sorted in so far
                 HStack(spacing: -10 * uiScale) {
@@ -94,7 +95,7 @@ struct SortView: View {
                 }
                 .frame(height: 44 * uiScale)
             }
-            .frame(maxWidth: 260 * uiScale)
+            .frame(maxWidth: 260 * uiScale * roomy(isWide))
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16 * uiScale)
             .cartoonCard(isLeft ? Color(red: 1.0, green: 0.88, blue: 0.7) : Color(red: 0.78, green: 0.9, blue: 1.0))
