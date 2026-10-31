@@ -356,7 +356,10 @@ private struct StoryReader: View {
         }
         .padding(16 * uiScale)
         .background(Scenery(.library).ignoresSafeArea())
-        .onAppear { read(story.title) }
+        .onAppear {
+            Speaker.shared.gameOpened()  // opening a book closed the shelf, which quiets Speaker for a moment
+            read(story.title)
+        }
     }
 
     private func book(wide: Bool) -> some View {

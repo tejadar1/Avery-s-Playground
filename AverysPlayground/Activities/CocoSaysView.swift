@@ -30,6 +30,8 @@ struct CocoSaysView: View {
     /// Freeze dance: dancing, or frozen while the music's off.
     @State private var isDancing = false
     @State private var isFrozen = false
+    /// Counts each Dance tap, so a Stop and quick Dance doesn't leave the old song loop running too.
+    @State private var dance = 0
     @State private var cheer = "Coco says, stand up! Do what Coco says, but only if I say Coco says!"
     @State private var cheerCount = 0
     @State private var wins = 0
@@ -134,19 +136,21 @@ struct CocoSaysView: View {
     private func startDancing() {
         Haptics.tap()
         isDancing = true
+        dance += 1
+        let mine = dance
         Task {
-            while isDancing {
+            while isDancing, dance == mine {
                 withAnimation { isFrozen = false }
                 Music.shared.play(.teamUp)
                 say("Dance!")
                 try? await Task.sleep(for: .seconds(Double.random(in: 4...10)))
-                guard isDancing else { return }
+                guard isDancing, dance == mine else { return }
                 Music.shared.play(nil)
                 withAnimation(.spring) { isFrozen = true }
                 Haptics.success()
                 say("Freeze!")
                 try? await Task.sleep(for: .seconds(3))
-                if isDancing { wins += 1 }
+                if isDancing, dance == mine { wins += 1 }
             }
         }
     }

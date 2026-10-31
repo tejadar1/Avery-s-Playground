@@ -55,9 +55,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .piano: nil
         case .nails, .hair, .dressup, .dentist: .salon
-        case .pet, .hop, .maze, .spot: .pet
+        case .pet, .hop, .maze, .spot, .puzzle: .pet
         case .colors, .drawing: .art
-        case .bingo, .race, .tictactoe, .memory, .cocosays, .ispy, .charades, .puzzle, .routines, .chores: .teamUp
+        case .bingo, .race, .tictactoe, .memory, .cocosays, .ispy, .charades, .routines, .chores: .teamUp
         case .reading, .rhyme, .patterns, .sorting, .feelings, .math, .spanish, .abc, .tracing, .spelling, .counting: .learn
         }
     }

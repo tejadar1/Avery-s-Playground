@@ -59,7 +59,11 @@ struct HomeView: View {
                 activity.destination
                     .navigationTitle(activity.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .onAppear { Music.shared.play(activity.tune) }
+                    .onAppear {
+                        Music.shared.play(activity.tune)
+                        Speaker.shared.gameOpened()
+                    }
+                    .onDisappear { Speaker.shared.gameClosed() }
                     .toolbar { ToolbarItem(placement: .topBarTrailing) { MusicButton() } }
             }
         }

@@ -11,6 +11,9 @@ final class Speaker {
     private var voices: [String: AVSpeechSynthesisVoice] = [:]
     private var player: AVAudioPlayer?
     private var recordings: Task<Void, Never>?
+    /// When a game was last closed, while no game is open. Games say things a few seconds after a tap ("What comes
+    /// next?"); this keeps those from talking over the home screen after she leaves.
+    private var closedGameAt: Date?
 
     private init() {
         // Play even when the ring/silent switch is on, and duck any music.
@@ -84,8 +87,22 @@ final class Speaker {
         while synthesizer.isSpeaking { try? await Task.sleep(for: .seconds(0.1)) }
     }
 
+    /// A game opened: its lines play.
+    func gameOpened() { closedGameAt = nil }
+
+    /// A game closed: what it was saying stops, and lines it says in the next few seconds are dropped.
+    func gameClosed() {
+        closedGameAt = .now
+        recordings?.cancel()
+        player?.stop()
+        synthesizer.stopSpeaking(at: .immediate)
+    }
+
+    private var isQuiet: Bool { closedGameAt.map { Date.now.timeIntervalSince($0) < 6 } ?? false }
+
     /// Plays recordings one after another, with a pause after each one that has one.
     private func play(_ urls: [URL], pauses: [Double] = []) {
+        guard !isQuiet else { return }
         synthesizer.stopSpeaking(at: .immediate)
         recordings?.cancel()
         recordings = Task {
@@ -104,6 +121,7 @@ final class Speaker {
     }
 
     private func speak(_ utterances: [AVSpeechUtterance]) {
+        guard !isQuiet else { return }
         recordings?.cancel()
         player?.stop()
         synthesizer.stopSpeaking(at: .immediate)
