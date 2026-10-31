@@ -2,8 +2,8 @@
 
 Runs on GitHub's Linux machines (.github/workflows/build.yml, "voice" input). Voice/voice.txt holds the Kokoro
 voice and how much to raise its pitch, one per line: Coco in English, then Spanish (Dora), then the storyteller
-for the English books, like "af_heart 1.25". Lines starting with "es:" are Spanish, "dora:" are Dora speaking
-English (the friends, and the meanings in Español), and "book:" are the storyteller. Records only lines without a file yet, removes files for lines that are
+for the English books, then the friends (the salon and dentist customers), like "af_heart 1.25". Lines starting
+with "es:" are Spanish, "dora:" are the friends talking, and "book:" are the storyteller. Records only lines without a file yet, removes files for lines that are
 gone, and re-records a language's lines when its voice changes.
 `--samples` instead records a few lines in several voices and pitches to Voice/samples/ for choosing one.
 The key is the first 16 hex digits of the line's SHA-256 ("es:" included), matching Speaker.recording(for:language:).
@@ -93,8 +93,8 @@ voices = (here / "voice.txt").read_text().splitlines()
 for (voice, pitch), lang, suffix, mine, speed in [
     (voices[0].split(), "en-us", "", lambda l: not l.startswith(("es:", "dora:", "book:", "sound:")), 1.0),
     (voices[1].split(), "es", "-es", lambda l: l.startswith("es:"), 1.0),
-    # The friends: Dora's voice speaking English
-    (voices[1].split(), "en-us", "-dora", lambda l: l.startswith("dora:"), 1.0),
+    # The friends: a young American girl's voice (Sky); Dora reading English sounded low and accented
+    (voices[3].split(), "en-us", "-dora", lambda l: l.startswith("dora:"), 1.0),
     # Bella: the storyteller for the English books, and the teacher for letters, letter sounds and words
     (voices[2].split(), "en-us", "-book", lambda l: l.startswith(("book:", "sound:")), 1.0),
 ]:

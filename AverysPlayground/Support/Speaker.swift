@@ -20,7 +20,8 @@ final class Speaker {
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.duckOthers])
     }
 
-    /// Lines starting with this are a friend talking, recorded in Dora's voice (the Spanish one) speaking English.
+    /// Lines starting with this are a friend talking (the salon and dentist customers), recorded in the friends' voice
+    /// (Voice/voice.txt, fourth line). The name is from when Dora, the Spanish voice, said them.
     static let dora = "dora:"
     /// Lines starting with this are in Bella's voice (Voice/voice.txt, third line): the storyteller, and the teacher
     /// who says letters, letter sounds and words to learn, clearly and at a natural pitch.

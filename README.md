@@ -131,8 +131,8 @@ The Nail Salon hand is drawn in code (`Hand` in `NailSalonView.swift`) so its sk
 Coco's lines are recorded with [Kokoro](https://github.com/hexgrad/kokoro), a free open-source voice, with the
 pitch raised for a cartoon sound, so she doesn't sound like the iPad's built-in voice. Spanish (the Spanish cards and
 stories) uses Kokoro's Spanish voice the same way. `Voice/lines.txt` lists every line, Spanish ones starting with
-`es:` (made by `python3 Voice/lines.py > Voice/lines.txt`), and `Voice/voice.txt` names the English then the Spanish
-voice and pitch. Run
+`es:` (made by `python3 Voice/lines.py > Voice/lines.txt`), and `Voice/voice.txt` names the voice and pitch for
+Coco, Spanish, Bella (the storyteller and teacher) and the friends (Sky, a young girl's voice), one per line. Run
 Actions → Build → Run workflow with **voice: record** to record new lines into `AverysPlayground/Voice/` (free, on
 Linux), or **voice: samples** to hear several voices on the `voice-samples` branch. Lines without a recording use the iPad's
 voice.
