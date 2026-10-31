@@ -26,6 +26,7 @@ struct Spelling {
 }
 
 struct SpellView: View {
+    @Environment(\.isWide) private var isWide
     private static let tileColors: [Color] = [
         Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.38, green: 0.72, blue: 0.4),
         Color(red: 0.36, green: 0.61, blue: 0.84), Color(red: 0.66, green: 0.5, blue: 0.85),
@@ -49,7 +50,7 @@ struct SpellView: View {
             Spacer(minLength: 0)
 
             Button { Speaker.shared.say(Speaker.book + spelling.word.text) } label: {
-                Picture(spelling.word.picture, size: 130 * uiScale)
+                Picture(spelling.word.picture, size: 130 * uiScale * roomy(isWide))
                     .padding(18 * uiScale)
                     .cartoonCard(.white, cornerRadius: 36 * uiScale)
             }
@@ -73,7 +74,7 @@ struct SpellView: View {
                     Text(filled ? String(letter) : " ")
                         .font(.kid(64))
                         .foregroundStyle(filled ? Self.tileColors[spelling.placed[index] % Self.tileColors.count] : .clear)
-                        .frame(width: 86 * uiScale, height: 100 * uiScale)
+                        .frame(width: 86 * uiScale * roomy(isWide), height: 100 * uiScale * roomy(isWide))
                         .background(.white.opacity(filled ? 1 : 0.6), in: RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
                         .overlay(
                             RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
@@ -98,7 +99,7 @@ struct SpellView: View {
                         Text(String(letter))
                             .font(.kid(48))
                             .foregroundStyle(.white)
-                            .frame(width: 58 * uiScale, height: 76 * uiScale)  // five fit on the smallest iPhone
+                            .frame(width: 58 * uiScale * roomy(isWide), height: 76 * uiScale * roomy(isWide))  // five fit on the smallest iPhone
                             .cartoonCard(Self.tileColors[index % Self.tileColors.count], cornerRadius: 18 * uiScale)
                             .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
                                 .strokeBorder(Color(red: 1.0, green: 0.85, blue: 0.3), lineWidth: index == hintTile ? 6 * uiScale : 0))

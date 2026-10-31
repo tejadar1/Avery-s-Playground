@@ -31,7 +31,7 @@ struct HomeView: View {
                     LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         ForEach(HomeSection.allCases) { section in
                             NavigationLink(value: section) {
-                                SectionTile(section: section)
+                                SectionTile(section: section, height: sideways ? homeTileHeight * 1.3 : homeTileHeight)
                             }
                             .buttonStyle(SquishyButtonStyle())
                         }
@@ -40,7 +40,7 @@ struct HomeView: View {
                                 .navigationTitle("Stickers")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            StickerTile(stickers: stickers)
+                            StickerTile(stickers: stickers, height: sideways ? homeTileHeight * 1.3 : homeTileHeight)
                         }
                         .buttonStyle(SquishyButtonStyle())
                     }
@@ -165,6 +165,7 @@ private extension HomeView {
 /// The sticker book on the home screen, with her newest stickers fanned out and how many she has.
 private struct StickerTile: View {
     let stickers: [String]
+    let height: CGFloat
 
     var body: some View {
         let shown = stickers.isEmpty ? ["star", "heart", "crown"] : Array(stickers.suffix(3))
@@ -193,7 +194,7 @@ private struct StickerTile: View {
         }
         .padding(.horizontal, 12 * uiScale)
         .padding(.bottom, 16 * uiScale)
-        .frame(maxWidth: .infinity, minHeight: homeTileHeight)
+        .frame(maxWidth: .infinity, minHeight: height)
         .cartoonCard(Color(red: 0.62, green: 0.5, blue: 0.88))
         .accessibilityElement(children: .combine)
     }
@@ -205,6 +206,7 @@ private struct StickerTile: View {
 /// A big home-screen choice, showing a few of its games' icons fanned out.
 private struct SectionTile: View {
     let section: HomeSection
+    let height: CGFloat
 
     var body: some View {
         VStack(spacing: 6 * uiScale) {
@@ -233,7 +235,7 @@ private struct SectionTile: View {
         }
         .padding(.horizontal, 12 * uiScale)
         .padding(.bottom, 16 * uiScale)
-        .frame(maxWidth: .infinity, minHeight: homeTileHeight)
+        .frame(maxWidth: .infinity, minHeight: height)
         .cartoonCard(section.color)
         .accessibilityElement(children: .combine)
     }

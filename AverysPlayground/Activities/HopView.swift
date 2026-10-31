@@ -87,26 +87,32 @@ struct HopView: View {
                 ZStack(alignment: .topLeading) {
                     scenery(width: width, height: height, camera: camera)
 
-                    stalk(width: width, height: height, camera: camera)
+                    // The stalk keeps to a middle column on a wide screen, so the leaves aren't spread far apart.
+                    let lane = min(width, height)
+                    ZStack(alignment: .topLeading) {
+                        stalk(width: lane, height: height, camera: camera)
 
-                    ForEach(game.leaves.indices, id: \.self) { index in
-                        leafView(index, size: size)
-                            .position(x: game.leaves[index].spot.x * width, y: (game.leaves[index].spot.y - camera) * height)
+                        ForEach(game.leaves.indices, id: \.self) { index in
+                            leafView(index, size: size)
+                                .position(x: game.leaves[index].spot.x * lane, y: (game.leaves[index].spot.y - camera) * height)
+                        }
+
+                        Picture("crocodile", size: size)
+                            .scaleEffect(x: (facesLeft ? -1 : 1) * squash.width, y: squash.height, anchor: .bottom)
+                            .rotationEffect(.degrees(spin))
+                            // A happy wiggle when she gets a bean.
+                            .phaseAnimator([0.0, -12, 12, -8, 0], trigger: wiggle) { content, angle in
+                                content.rotationEffect(.degrees(angle), anchor: .bottom)
+                            } animation: { _ in .easeInOut(duration: 0.1) }
+                            // A gentle bob while she waits.
+                            .phaseAnimator(isHopping ? [CGFloat(0)] : [CGFloat(0), -5]) { content, y in
+                                content.offset(y: y)
+                            } animation: { _ in .easeInOut(duration: 0.7) }
+                            .position(x: coco.x * lane, y: (coco.y - camera) * height - size * 0.45)
+                            .allowsHitTesting(false)
                     }
-
-                    Picture("crocodile", size: size)
-                        .scaleEffect(x: (facesLeft ? -1 : 1) * squash.width, y: squash.height, anchor: .bottom)
-                        .rotationEffect(.degrees(spin))
-                        // A happy wiggle when she gets a bean.
-                        .phaseAnimator([0.0, -12, 12, -8, 0], trigger: wiggle) { content, angle in
-                            content.rotationEffect(.degrees(angle), anchor: .bottom)
-                        } animation: { _ in .easeInOut(duration: 0.1) }
-                        // A gentle bob while she waits.
-                        .phaseAnimator(isHopping ? [CGFloat(0)] : [CGFloat(0), -5]) { content, y in
-                            content.offset(y: y)
-                        } animation: { _ in .easeInOut(duration: 0.7) }
-                        .position(x: coco.x * width, y: (coco.y - camera) * height - size * 0.45)
-                        .allowsHitTesting(false)
+                    .frame(width: lane, height: height)
+                    .position(x: width / 2, y: height / 2)
                 }
                 .frame(width: width, height: height)
                 .clipped()

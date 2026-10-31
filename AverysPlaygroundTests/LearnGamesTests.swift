@@ -56,4 +56,16 @@ final class LearnGamesTests: XCTestCase {
             XCTAssertNotNil(UIImage(named: "Picture-\(picture)"), picture)
         }
     }
+
+    func testCountingThingsFillAWideStripInOneRow() {
+        // An iPad on its side: a short, wide space should put five things in one row, as big as the height allows.
+        let wide = CountingView.fit(5, in: CGSize(width: 1100, height: 260), gap: 10)
+        XCTAssertEqual(wide.columns, 5)
+        XCTAssertEqual(wide.side, 240, accuracy: 0.01, "capped")
+        // An upright phone: more rows, and everything fits.
+        let tall = CountingView.fit(9, in: CGSize(width: 350, height: 500), gap: 10)
+        let rows = CGFloat((9 + tall.columns - 1) / tall.columns)
+        XCTAssertLessThanOrEqual(tall.side * CGFloat(tall.columns), 350)
+        XCTAssertLessThanOrEqual(tall.side * rows, 500)
+    }
 }

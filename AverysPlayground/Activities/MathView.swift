@@ -87,6 +87,7 @@ struct MathProblem: Equatable {
 }
 
 struct MathView: View {
+    @Environment(\.isWide) private var isWide
     @State private var problem = MathProblem.random(.add, food: MathProblem.foods[0])
     @State private var counted: [Int] = []
     @State private var isSolved = false
@@ -147,14 +148,14 @@ struct MathView: View {
                         Group {
                             if problem.kind == .compare {
                                 VStack(spacing: 2 * uiScale) {
-                                    Picture(choice == MathProblem.coco ? "crocodile" : "dog", size: 56 * uiScale)
+                                    Picture(choice == MathProblem.coco ? "crocodile" : "dog", size: 56 * uiScale * roomy(isWide))
                                     Text(choice == MathProblem.coco ? "Coco" : "Mochi").font(.kid(20))
                                 }
-                                .frame(width: 130 * uiScale, height: 100 * uiScale)
+                                .frame(width: 130 * uiScale * roomy(isWide), height: 100 * uiScale * roomy(isWide))
                             } else {
                                 Text("\(choice)")
                                     .font(.kid(48))
-                                    .frame(width: 100 * uiScale, height: 100 * uiScale)
+                                    .frame(width: 100 * uiScale * roomy(isWide), height: 100 * uiScale * roomy(isWide))
                             }
                         }
                         .foregroundStyle(Color.outline)
@@ -192,7 +193,7 @@ struct MathView: View {
     /// The closed box hiding the missing part.
     private var mysteryBox: some View {
         VStack(spacing: 6 * uiScale) {
-            Picture("box", size: 100 * uiScale)
+            Picture("box", size: 100 * uiScale * roomy(isWide))
                 .overlay { Text("?").font(.kid(40)).foregroundStyle(.white).shadow(color: Color.outline, radius: 0, x: 2, y: 2) }
                 .frame(minHeight: 120 * uiScale)
             Text("In the box").font(.kid(18)).foregroundStyle(Color.outline.opacity(0.7))
@@ -210,10 +211,10 @@ struct MathView: View {
                 ForEach(start..<(start + count), id: \.self) { piece in
                     let isEaten = piece >= start + count - eaten
                     Button { tapPiece(piece) } label: {
-                        Picture(problem.food.picture, size: 60 * uiScale)
+                        Picture(problem.food.picture, size: 60 * uiScale * roomy(isWide))
                             .opacity(isEaten ? 0.25 : 1)
-                            .overlay { if isEaten { Image(systemName: "xmark").font(.system(size: 30 * uiScale, weight: .heavy)).foregroundStyle(Color.outline.opacity(0.6)) } }
-                            .frame(width: 62 * uiScale, height: 62 * uiScale)
+                            .overlay { if isEaten { Image(systemName: "xmark").font(.system(size: 30 * uiScale * roomy(isWide), weight: .heavy)).foregroundStyle(Color.outline.opacity(0.6)) } }
+                            .frame(width: 62 * uiScale * roomy(isWide), height: 62 * uiScale * roomy(isWide))
                             .overlay(alignment: .topTrailing) {
                                 if let order = counted.firstIndex(of: piece) {
                                     Text("\(order + 1)")

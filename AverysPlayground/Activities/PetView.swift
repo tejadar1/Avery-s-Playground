@@ -66,6 +66,7 @@ struct PetView: View {
     private static let floor = Color(red: 0.93, green: 0.75, blue: 0.56)
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.isWide) private var isWide
     @AppStorage("mochi") private var saved = Data()
     @State private var needs = PetNeeds()
     @State private var roomSize = CGSize(width: 1, height: 1)
@@ -274,7 +275,7 @@ struct PetView: View {
         .accessibilityHint("Drag to spray Mochi")
     }
 
-    private var trayHeight: CGFloat { 96 * uiScale }
+    private var trayHeight: CGFloat { 96 * uiScale * roomy(isWide) }
 
     private var tray: some View {
         HStack(spacing: 8 * uiScale) {
@@ -290,7 +291,7 @@ struct PetView: View {
 
     private func meter(_ picture: String, _ value: Double, _ color: Color) -> some View {
         HStack(spacing: 4 * uiScale) {
-            Picture(picture, size: 26 * uiScale)
+            Picture(picture, size: 26 * uiScale * roomy(isWide))
             Capsule()
                 .fill(.white)
                 .overlay(alignment: .leading) {
@@ -299,7 +300,7 @@ struct PetView: View {
                     }
                 }
                 .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
-                .frame(width: 50 * uiScale, height: 16 * uiScale)
+                .frame(width: 50 * uiScale * roomy(isWide), height: 16 * uiScale * roomy(isWide))
                 .animation(.spring, value: value)
         }
     }
@@ -307,14 +308,14 @@ struct PetView: View {
     private func action(_ picture: String, _ name: String, _ perform: @escaping () -> Void, isOn: Bool = false) -> some View {
         Button(action: perform) {
             VStack(spacing: 0) {
-                Picture(picture, size: 40 * uiScale)
+                Picture(picture, size: 40 * uiScale * roomy(isWide))
                 Text(name)
-                    .font(.kid(15))
+                    .font(.kid(15 * roomy(isWide)))
                     .foregroundStyle(Color.outline)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
-            .frame(width: 58 * uiScale, height: 76 * uiScale)
+            .frame(width: 58 * uiScale * roomy(isWide), height: 76 * uiScale * roomy(isWide))
             .cartoonCard(isOn ? .yellow : .white, cornerRadius: 22 * uiScale)
         }
         .buttonStyle(SquishyButtonStyle())

@@ -35,6 +35,8 @@ struct GettingReady: View {
                     .fixedSize()
                     .offset(y: 80)
                 }
+                // Small on a big iPad screen, so it grows once it starts, without jumping from the launch screen.
+                .scaleEffect(uiScale > 1 && step > 0 ? 1.6 : 1)
         }
         .ignoresSafeArea()  // the launch screen centers its image on the whole screen, not the safe area
         .contentShape(Rectangle())

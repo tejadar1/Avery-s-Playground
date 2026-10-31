@@ -450,3 +450,7 @@ struct SceneWithTools<Scene: View, Tools: View>: View {
         }
     }
 }
+
+/// How much bigger a game's main cards and choices are drawn: more on an iPad held upright, where there's room
+/// above and below, a little on its side, where height is short.
+@MainActor func roomy(_ isWide: Bool) -> CGFloat { uiScale == 1 ? 1 : isWide ? 1.1 : 1.35 }

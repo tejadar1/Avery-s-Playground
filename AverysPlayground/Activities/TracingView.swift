@@ -151,6 +151,7 @@ struct Tracing {
 }
 
 struct TracingView: View {
+    @Environment(\.isWide) private var isWide
     private enum Mode { case abc, lower, name }
 
     private static let inks: [Color] = [
@@ -180,17 +181,20 @@ struct TracingView: View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
-            HStack(spacing: 12 * uiScale) {
-                modeButton("ABC", .abc)
-                modeButton("abc", .lower)
-                modeButton("My name", .name, picture: "avery")
-            }
+            // On a wide screen the mode buttons go beside the board, so it can be taller.
+            (isWide ? AnyLayout(HStackLayout(spacing: 16 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))) {
+                ToolLine(spacing: 12 * uiScale) {
+                    modeButton("ABC", .abc)
+                    modeButton("abc", .lower)
+                    modeButton("My name", .name, picture: "avery")
+                }
 
-            GeometryReader { geo in
-                let side = min(geo.size.width, geo.size.height)
-                board(side: side)
-                    .frame(width: side, height: side)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                GeometryReader { geo in
+                    let side = min(geo.size.width, geo.size.height)
+                    board(side: side)
+                        .frame(width: side, height: side)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
             .padding(.horizontal)
 

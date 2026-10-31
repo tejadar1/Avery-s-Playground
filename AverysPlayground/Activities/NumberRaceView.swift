@@ -90,7 +90,7 @@ struct NumberRaceView: View {
     nonisolated static func squares(in size: CGSize, gap: CGFloat) -> (up: Bool, width: CGFloat, height: CGFloat) {
         let count = CGFloat(NumberRace.finish) + start, gaps = gap * CGFloat(NumberRace.finish)
         let acrossWidth = (size.width - gaps) / count
-        let across = (width: acrossWidth, height: min(acrossWidth * 1.8, size.height))
+        let across = (width: acrossWidth, height: min(acrossWidth * 2.4, size.height))
         let upHeight = (size.height - gaps) / count
         let up = (width: min(size.width * 0.7, upHeight * 6), height: upHeight)
         return min(up.width, up.height) > min(across.width, across.height)

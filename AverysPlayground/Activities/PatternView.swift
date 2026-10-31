@@ -32,6 +32,7 @@ struct PatternRound: Equatable {
 }
 
 struct PatternView: View {
+    @Environment(\.isWide) private var isWide
     @State private var stars = 0
     @State private var round = PatternRound.random(stars: 0)
     @State private var wrongPick: ReadingWord?
@@ -55,16 +56,16 @@ struct PatternView: View {
 
             FlowLayout(spacing: 10 * uiScale, lineSpacing: 10 * uiScale) {
                 ForEach(Array(round.shown.enumerated()), id: \.offset) { _, thing in
-                    Picture(thing.picture, size: 64 * uiScale)
+                    Picture(thing.picture, size: 64 * uiScale * roomy(isWide))
                 }
                 Group {
                     if isSolved {
-                        Picture(round.answer.picture, size: 64 * uiScale).transition(.scale)
+                        Picture(round.answer.picture, size: 64 * uiScale * roomy(isWide)).transition(.scale)
                     } else {
                         Text("?").font(.kid(48)).foregroundStyle(.white)
                     }
                 }
-                .frame(width: 72 * uiScale, height: 72 * uiScale)
+                .frame(width: 72 * uiScale * roomy(isWide), height: 72 * uiScale * roomy(isWide))
                 .cartoonCard(isSolved ? .green : Color(red: 0.62, green: 0.55, blue: 0.9), cornerRadius: 16 * uiScale)
             }
             .padding(20 * uiScale)
@@ -78,8 +79,8 @@ struct PatternView: View {
             HStack(spacing: 16 * uiScale) {
                 ForEach(round.choices, id: \.text) { choice in
                     Button { pick(choice) } label: {
-                        Picture(choice.picture, size: 86 * uiScale)
-                            .frame(width: 104 * uiScale, height: 104 * uiScale)
+                        Picture(choice.picture, size: 86 * uiScale * roomy(isWide))
+                            .frame(width: 104 * uiScale * roomy(isWide), height: 104 * uiScale * roomy(isWide))
                             .cartoonCard(isSolved && choice == round.answer ? .green : .white)
                     }
                     .buttonStyle(SquishyButtonStyle())

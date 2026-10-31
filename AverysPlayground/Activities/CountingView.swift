@@ -67,37 +67,25 @@ struct CountingView: View {
     }
 
     @ViewBuilder private var countingGame: some View {
-        // The things to count, laid out on a picnic blanket.
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 96 * uiScale), spacing: 14 * uiScale)], spacing: 14 * uiScale) {
-            ForEach(0..<number, id: \.self) { index in
-                let order = counted.firstIndex(of: index)
-                Button { count(index) } label: {
-                    Picture(thing, size: 70 * uiScale)
-                        .frame(width: 96 * uiScale, height: 96 * uiScale)
-                        .cartoonCard(order == nil ? .white : Color(red: 1.0, green: 0.9, blue: 0.72), cornerRadius: 48 * uiScale)
-                        .overlay(alignment: .topTrailing) {
-                            if let order {
-                                Text("\(order + 1)")
-                                    .font(.kid(22))
-                                    .foregroundStyle(.white)
-                                    .frame(width: 38 * uiScale, height: 38 * uiScale)
-                                    .background(Self.orange, in: Circle())
-                                    .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2.5 * uiScale))
-                                    .offset(x: 6 * uiScale, y: -6 * uiScale)
-                                    .transition(.scale)
-                            }
+        // The things to count, laid out on a picnic blanket, as big as the space allows.
+        GeometryReader { geo in
+            let gap = 14 * uiScale
+            let fit = Self.fit(number, in: CGSize(width: geo.size.width - 48 * uiScale, height: geo.size.height - 48 * uiScale), gap: gap)
+            Grid(horizontalSpacing: gap, verticalSpacing: gap) {
+                ForEach(0..<(number + fit.columns - 1) / fit.columns, id: \.self) { row in
+                    GridRow {
+                        ForEach(0..<fit.columns, id: \.self) { column in
+                            let index = row * fit.columns + column
+                            if index < number { item(index, size: fit.side) } else { Color.clear.gridCellUnsizedAxes([.horizontal, .vertical]) }
                         }
+                    }
                 }
-                .buttonStyle(SquishyButtonStyle())
-                .disabled(order != nil)
-                .accessibilityLabel(order.map { "\(thing), \($0 + 1)" } ?? thing)
             }
+            .padding(24 * uiScale)
+            .cartoonCard(Color(red: 1.0, green: 0.96, blue: 0.88), cornerRadius: 32 * uiScale)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(24 * uiScale)
-        .frame(maxWidth: 720 * uiScale)
-        .cartoonCard(Color(red: 1.0, green: 0.96, blue: 0.88), cornerRadius: 32 * uiScale)
         .padding(.horizontal)
-        .frame(maxHeight: .infinity)
 
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10 * uiScale) {
@@ -114,6 +102,40 @@ struct CountingView: View {
             }
             .padding()
         }
+    }
+
+    private func item(_ index: Int, size: CGFloat) -> some View {
+        let order = counted.firstIndex(of: index)
+        return Button { count(index) } label: {
+            Picture(thing, size: size * 0.72)
+                .frame(width: size, height: size)
+                .cartoonCard(order == nil ? .white : Color(red: 1.0, green: 0.9, blue: 0.72), cornerRadius: size / 2)
+                .overlay(alignment: .topTrailing) {
+                    if let order {
+                        Text("\(order + 1)")
+                            .font(.system(size: size * 0.24, weight: .heavy, design: .rounded))
+                            .foregroundStyle(.white)
+                            .frame(width: size * 0.4, height: size * 0.4)
+                            .background(Self.orange, in: Circle())
+                            .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2.5 * uiScale))
+                            .offset(x: size * 0.06, y: -size * 0.06)
+                            .transition(.scale)
+                    }
+                }
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .disabled(order != nil)
+        .accessibilityLabel(order.map { "\(thing), \($0 + 1)" } ?? thing)
+    }
+
+    /// Columns and size for `count` round things to fill `size`, as big as they can be (up to 240 points).
+    nonisolated static func fit(_ count: Int, in size: CGSize, gap: CGFloat) -> (columns: Int, side: CGFloat) {
+        (1...max(1, count)).map { columns -> (columns: Int, side: CGFloat) in
+            let rows = CGFloat((count + columns - 1) / columns), cols = CGFloat(columns)
+            let side = min((size.width - gap * (cols - 1)) / cols, (size.height - gap * (rows - 1)) / rows, 240)
+            return (columns, max(side, 40))
+        }
+        .max { $0.side < $1.side }!
     }
 
     /// The ten-frame: dots fill the top row left to right, then the bottom. They hide after a moment.

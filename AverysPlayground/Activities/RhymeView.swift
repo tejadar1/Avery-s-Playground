@@ -57,6 +57,7 @@ struct RhymeRound: Equatable {
 }
 
 struct RhymeView: View {
+    @Environment(\.isWide) private var isWide
     @State private var round = RhymeRound.random(.rhyme)
     @State private var wrongPick: ReadingWord?
     @State private var shakes = 0
@@ -82,7 +83,7 @@ struct RhymeView: View {
             Button(action: ask) {
                 VStack(spacing: 6 * uiScale) {
                     if round.kind == .rhyme {
-                        Picture(round.target.picture, size: 120 * uiScale)
+                        Picture(round.target.picture, size: 120 * uiScale * roomy(isWide))
                         Text(round.target.text).font(.kid(36))
                     } else {
                         Text(String(round.target.text.first!)).font(.kid(110))
@@ -90,7 +91,7 @@ struct RhymeView: View {
                     Label("Listen", systemImage: "speaker.wave.2.fill").font(.kid(18)).foregroundStyle(Color.outline.opacity(0.6))
                 }
                 .foregroundStyle(Color.outline)
-                .frame(width: 220 * uiScale, height: 230 * uiScale)
+                .frame(width: 220 * uiScale * roomy(isWide), height: 230 * uiScale * roomy(isWide))
                 .cartoonCard(Color(red: 1.0, green: 0.95, blue: 0.75))
             }
             .buttonStyle(SquishyButtonStyle())
@@ -101,8 +102,8 @@ struct RhymeView: View {
             HStack(spacing: 16 * uiScale) {
                 ForEach(round.choices, id: \.text) { choice in
                     Button { pick(choice) } label: {
-                        Picture(choice.picture, size: 86 * uiScale)
-                            .frame(width: 104 * uiScale, height: 104 * uiScale)
+                        Picture(choice.picture, size: 86 * uiScale * roomy(isWide))
+                            .frame(width: 104 * uiScale * roomy(isWide), height: 104 * uiScale * roomy(isWide))
                             .cartoonCard(isSolved && choice == round.answer ? .green : .white)
                     }
                     .buttonStyle(SquishyButtonStyle())

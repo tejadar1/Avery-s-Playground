@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ABCView: View {
+    @Environment(\.isWide) private var isWide
     private struct Letter: Identifiable {
         let letter: String
         let word: String
@@ -57,7 +58,7 @@ struct ABCView: View {
                 .font(.kid(88))
                 .foregroundStyle(.red)
 
-                Picture(selected.picture, size: 100 * uiScale)
+                Picture(selected.picture, size: 100 * uiScale * roomy(isWide))
                     .phaseAnimator([CGFloat(1), 1.3], trigger: bounceCount) { content, scale in
                         content.scaleEffect(scale)
                     } animation: { _ in
