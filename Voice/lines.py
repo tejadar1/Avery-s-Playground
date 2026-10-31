@@ -95,20 +95,11 @@ for name, help in re.findall(r'Feeling\(name: "(\w+)", face: "[^"]+", group: "\w
     lines.update({f"Which one feels {name}?", f"Hee hee, that one feels {name}!", "book:" + help})
 lines.update(f"{text} How would you feel?" for text in re.findall(r'FeelingMoment\(text: "([^"]+)"', feelings))
 
-# Team Up: Coco Says calls out actions (a third are tricks), I Spy's clues, and Act It Out
-for action in literals(re.search(r"static let actions = \[([^\]]+)\]", src["CocoSaysView.swift"]).group(1)):
-    lines.update({f"Coco says, {action}!", action[0].upper() + action[1:] + "!"})
+# Team Up: I Spy's clues
 for clue in re.findall(r'"\w+": "([^"]+)"', src["ISpyView.swift"]):
     lines.update({f"Stars, I spy {clue}!", f"Hearts, I spy {clue}!", f"Hee hee, not that one! I spy {clue}!"})
 # Coco Hop: how many beans she got on the way up (one is its own line in the app)
 lines.update(f"You got {n} beans! Snap snap, you climbed to the clouds!" for n in [0] + list(range(2, 10)))
-
-# Act It Out: Bella names the picture the kid guessed; Coco reads each deck's hint
-act = src["CharadesView.swift"]
-for word in re.findall(r'\("([a-z ]+)", "[a-z-]+"\)', act) + re.findall(r'"([a-z]+)"', act.split("case .animals:\n")[1].split(".map")[0]):
-    lines.add(f"book:{word}!")
-lines.update(f"book:{name}!" for name in re.findall(r'Feeling\(name: "(\w+)"', feelings))
-lines.update("Your turn! Act it out! " + hint for hint in re.findall(r'case \.\w+: "([^"]+!)"', act.split("var hint")[1].split("var picture")[0]))
 
 colors = src["ColorsView.swift"]
 for page in re.findall(r'ColoringPage\(name: "([^"]+)"|^\s+name: "([^"]+)",', colors, re.M):

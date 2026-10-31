@@ -2,7 +2,7 @@ import UIKit
 import XCTest
 @testable import AverysPlayground
 
-/// Number Race, Coco Says, I Spy, Act It Out, Coco Hop, Puzzles and Read Together.
+/// Number Race, I Spy, Coco Hop, Puzzles and Read Together.
 final class TeamUpTests: XCTestCase {
     func testNumberRaceHopsOneSquareAtATimeAndTakesTurns() {
         var race = NumberRace()
@@ -26,12 +26,6 @@ final class TeamUpTests: XCTestCase {
         XCTAssertEqual(race.spot[race.winner!], NumberRace.finish)
         XCTAssertFalse(race.canSpin)
         XCTAssertLessThanOrEqual(race.spot.values.max()!, NumberRace.finish, "never past the end")
-    }
-
-    func testCocoSaysLines() {
-        XCTAssertEqual(CocoSaysRound(action: "touch your nose", says: true).line, "Coco says, touch your nose!")
-        XCTAssertEqual(CocoSaysRound(action: "touch your nose", says: false).line, "Touch your nose!")
-        XCTAssertNotEqual(CocoSaysRound.random(after: "spin around").action, "spin around")
     }
 
     func testISpyCluesAreInEveryRoomAndFoundWhereTheyAre() {
@@ -81,27 +75,6 @@ final class TeamUpTests: XCTestCase {
             XCTAssertTrue(prompts.first!.contains("What do you see"))
             XCTAssertTrue(prompts.last!.contains("favorite part"))
             XCTAssertFalse(prompts.contains(""))
-        }
-    }
-
-    func testActItOutTurnsSwapAndTheKidPicksFromThree() {
-        var game = ActItOut(deck: .animals)
-        XCTAssertTrue(game.kidActs)
-        for _ in 0..<60 {  // more than the deck, so it starts over
-            XCTAssertEqual(Set(game.choices.map(\.word)).count, 3)
-            XCTAssertTrue(game.choices.contains(game.card))
-            let acted = game.kidActs
-            game.next(guessed: true)
-            XCTAssertNotEqual(game.kidActs, acted)
-        }
-        XCTAssertEqual(game.got, 60)
-    }
-
-    func testEveryActItOutPictureExists() {
-        for deck in ActItOut.Deck.allCases {
-            for card in deck.cards + [ActItOut.Card(word: deck.rawValue, picture: deck.picture)] {
-                XCTAssertNotNil(UIImage(named: "Picture-\(card.picture)"), card.word)
-            }
         }
     }
 

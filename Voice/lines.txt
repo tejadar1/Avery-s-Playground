@@ -24,8 +24,6 @@ A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
 A! /a/! A is for apple!
 ABC
-Act it out, no talking!
-Actions
 All clean!
 All done with the bath!
 All done! Sweet dreams!
@@ -36,7 +34,6 @@ All nails
 All rinsed!
 All sorted!
 All the chores are done! What a big helper! Holy guacamole!
-Animals
 Another sticker! Yay!
 Anywhere
 Apple
@@ -105,14 +102,12 @@ Canvas
 Cat
 Chore time! Let's help at home.
 Chores
-Clap your hands!
 Clear
 Clothes
 Clothes color
 Clothes in the hamper
 Cloud
 Coco
-Coco Says
 Coco has 1 apple. Mochi brings 1 more. How many now?
 Coco has 1 apple. Mochi brings 2 more. How many now?
 Coco has 1 apple. Mochi brings 3 more. How many now?
@@ -443,22 +438,6 @@ Coco has 6 strawberries. Mochi eats 2. How many are left?
 Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
-Coco says
-Coco says, clap your hands!
-Coco says, flap your arms like a bird!
-Coco says, hop like a bunny!
-Coco says, jump up and down!
-Coco says, make a silly face!
-Coco says, pat your head!
-Coco says, reach up high!
-Coco says, spin around!
-Coco says, stand on one foot!
-Coco says, stand up! Do what Coco says, but only if I say Coco says!
-Coco says, stomp like a dinosaur!
-Coco says, touch your nose!
-Coco says, touch your toes!
-Coco says, wave hello!
-Coco says, wiggle your fingers!
 Color anywhere you like!
 Coloring anywhere
 Coloring inside the lines
@@ -486,12 +465,8 @@ Curly! So cute!
 Cut along the dotted line.
 D
 D sharp
-Dance when the music plays. When it stops, freeze!
-Dance!
-Decks
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
-Do what Coco says, but only if I say Coco says!
 Dog
 Doll
 Doll-
@@ -517,7 +492,6 @@ F sharp
 Fashion show time!
 Feed
 Feed the pet
-Feelings
 Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
 Find 3 differences!
@@ -526,7 +500,6 @@ Find 7 differences! Look closely!
 First picture
 Fish
 Fix
-Flap your arms like a bird!
 Floss
 Flower crown
 Flower crown! Fashion show time!
@@ -540,8 +513,6 @@ Fox
 Fox ends with X!
 Free play
 Free play!
-Freeze Dance
-Freeze!
 Fruit or animals?
 G
 G sharp
@@ -556,7 +527,6 @@ Good eye!
 Good morning! Let's get ready for school.
 Good morning, sunshine!
 Good night!
-Got it!
 Gown
 Gown! Fashion show time!
 Gown! Holy guacamole, I love it!
@@ -568,8 +538,6 @@ Grandma is coming to visit today! How would you feel?
 Grandma, what big eyes you have! All the better to see you with!
 Grapes
 Green
-Grown-up's turn! Hold the card to peek. No peeking, kids!
-Grown-up: hold to peek
 Guacamole is my favorite food. It's green, just like me!
 Gulp gulp!
 H
@@ -639,7 +607,6 @@ Hearts, I spy something your family sits on together!
 Hearts, I spy something yummy and healthy to eat!
 Hearts, I spy somewhere to sit at the park!
 Hee hee hee! You're so funny! You made me giggle!
-Hee hee! I didn't say Coco says! Did you stay still?
 Hee hee! That tickles!
 Hee hee! You're silly! You're a silly, silly goose!
 Hee hee, I love that sticker!
@@ -805,7 +772,6 @@ Hee hee, the pig isn't on your card.
 Hee hee, the star isn't on your card.
 Hee hee, the sun isn't on your card.
 Hee hee, the tree isn't on your card.
-Hee hee, try again!
 Hee hee, try the other one!
 Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
@@ -828,7 +794,6 @@ High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
 Hmm, look again! What's different?
-Hold to peek
 Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
@@ -841,7 +806,6 @@ Holy guacamole, so stylish!
 Holy guacamole, what a great haircut!
 Holy guacamole, you did it!
 Holy moly, guacamole!
-Hop like a bunny!
 Horse
 Hose
 Hot
@@ -876,7 +840,6 @@ Jack climbed up, up, up the beanstalk.
 Jack found a hen that laid golden eggs.
 Jack traded his cow for some magic beans.
 Juice
-Jump up and down!
 Jumping jellybeans!
 K
 Keep blowing!
@@ -886,7 +849,6 @@ Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
 Leo
-Let's act it out! Pick a deck.
 Let's count to 1!
 Let's count to 10!
 Let's count to 2!
@@ -920,9 +882,6 @@ M
 Ma
 Mac
 Mad. Take a big breath, and blow it out slowly.
-Make a silly face!
-Make its sound and move like it!
-Make the face!
 Make your bed
 Mary Had a Little Lamb
 Maze board
@@ -978,7 +937,6 @@ New maze
 New nails
 New pictures
 New sticker!
-Next
 Next leaf
 Next picture
 Night night, Mochi. Shh!
@@ -1044,7 +1002,6 @@ Party dress! Holy guacamole, I love it!
 Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
-Pat your head!
 Pattern
 Penguin
 Perfect! Just how she wanted it!
@@ -1085,7 +1042,6 @@ Quick look
 Quick look! Don't count!
 R
 Rainbow
-Reach up high!
 Ready for school! Have a great day!
 Red
 Remover
@@ -1130,13 +1086,11 @@ Shoes on, ready to go!
 Silly! Make a funny face back!
 Sit, Mochi! Good girl! Here's your treat!
 Skin color
-Skip
 Sky
 Sleep
 Sleepy. Time for a cozy rest.
 Slide the floss over the bits of food between the teeth.
 Slide!
-Snap snap! Good job!
 Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
@@ -1191,12 +1145,10 @@ Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
 Spin
-Spin around!
 Spot the difference! Pick easy, medium or hard.
 Squeaky clean!
 Squeaky clean! Shake shake shake!
 Squeaky clean! Start again!
-Stand on one foot!
 Stars
 Stars found it! 
 Stars go first! Tap Spin.
@@ -1254,7 +1206,6 @@ Start over
 Stick it anywhere!
 Stick! A sticker!
 Stickers
-Stomp like a dinosaur!
 Stop
 Stop the timer
 Story
@@ -1342,8 +1293,6 @@ Time's up!
 Timer
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
-Touch your nose!
-Touch your toes!
 Toys all tidy! Snap snap!
 Trace board
 Trace the A with your finger!
@@ -1384,7 +1333,6 @@ Wand! Wowza bowza!
 Wash
 Watch the keys.
 Water the plants
-Wave hello!
 Whale
 What a design!
 What color should it be?
@@ -1392,7 +1340,6 @@ What comes next?
 What did Jack trade for the magic beans?
 What did the boy watch on the hill?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
-What is it? Tap the picture!
 Wheels on the Bus
 Which house did the wolf not blow down?
 Which one feels calm?
@@ -1454,7 +1401,6 @@ Who's silly? You're silly! Snap snap!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
-Wiggle your fingers!
 Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
@@ -1514,10 +1460,6 @@ Your friend has to go home. How would you feel?
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
 Your turn!
-Your turn! Act it out! 
-Your turn! Act it out! Act it out, no talking!
-Your turn! Act it out! Make its sound and move like it!
-Your turn! Act it out! Make the face!
 Yum yum, breakfast!
 Z
 Zebra
@@ -1687,7 +1629,6 @@ birdhouse
 bit
 blanket
 blocks
-blow bubbles
 boat
 boat and apple!
 boat and ball!
@@ -2115,7 +2056,6 @@ book:bird!
 book:black
 book:blew
 book:blow
-book:blow bubbles!
 book:blue
 book:boat
 book:boat!
@@ -2131,7 +2071,6 @@ book:bread
 book:bread!
 book:brick
 book:bricks
-book:brush your teeth!
 book:bug
 book:bug! You read it!
 book:bug! You spelled it!
@@ -2148,7 +2087,6 @@ book:butterfly!
 book:by
 book:cake
 book:cake!
-book:calm!
 book:came
 book:can
 book:can't
@@ -2175,7 +2113,6 @@ book:chick!
 book:chicks
 book:climbed
 book:clothes!
-book:comb your hair!
 book:cookie
 book:cookie!
 book:could
@@ -2196,18 +2133,14 @@ book:dog!
 book:dog! You read it!
 book:dog! You spelled it!
 book:down
-book:drink milk!
-book:drive a car!
 book:duck
 book:duck!
 book:eat
-book:eat pizza!
 book:egg!
 book:eggs
 book:eight
 book:elephant
 book:elephant!
-book:excited!
 book:eyes
 book:far
 book:fast
@@ -2220,7 +2153,6 @@ book:five
 book:flower
 book:flower!
 book:flowers
-book:fly a kite!
 book:fo
 book:food!
 book:for
@@ -2245,9 +2177,7 @@ book:gem
 book:get
 book:giant's
 book:gingerbread
-book:give a big hug!
 book:go
-book:go to sleep!
 book:going
 book:golden
 book:got
@@ -2258,7 +2188,6 @@ book:grapes!
 book:green
 book:grew
 book:had
-book:happy!
 book:hat
 book:hat and bat rhyme!
 book:hat and cat rhyme!
@@ -2311,12 +2240,9 @@ book:ladybug!
 book:laid
 book:learned
 book:let
-book:lick an ice cream!
 book:lion
 book:lion!
 book:little
-book:loved!
-book:mad!
 book:magic
 book:man
 book:mango
@@ -2360,7 +2286,6 @@ book:pen!
 book:pen! You read it!
 book:pen! You spelled it!
 book:penguin
-book:penguin!
 book:picked
 book:pig
 book:pig!
@@ -2373,8 +2298,6 @@ book:pizza!
 book:plant
 book:plantain
 book:planted
-book:play tennis!
-book:play the violin!
 book:porridge
 book:puffed
 book:purple
@@ -2386,33 +2309,25 @@ book:ran
 book:real
 book:red
 book:rice and beans
-book:ride a horse!
 book:right
 book:river
-book:rooster!
 book:ropes
-book:row a boat!
 book:run
 book:running
-book:sad!
 book:safe
 book:said
 book:salami
 book:saw
-book:scared!
 book:second
 book:see
 book:seven
 book:she
 book:sheep
-book:sheep!
 book:shouted
 book:side
-book:silly!
 book:six
 book:sky
 book:sleeping
-book:sleepy!
 book:slow
 book:sly
 book:small!
@@ -2435,9 +2350,6 @@ book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
 book:sunhat!
-book:surprised!
-book:sweep the floor!
-book:take a bath!
 book:tall
 book:tell
 book:ten
@@ -2447,7 +2359,6 @@ book:they
 book:third
 book:three
 book:through
-book:throw a ball!
 book:to
 book:took
 book:top
@@ -2475,11 +2386,9 @@ book:visit
 book:walk
 book:walked
 book:was
-book:wash your hands!
 book:watch
 book:watched
 book:water
-book:wave goodbye!
 book:way
 book:web
 book:web!
@@ -2497,12 +2406,10 @@ book:wins
 book:with
 book:woke
 book:wolf
-book:wolf!
 book:woman
 book:won
 book:woodcutter
 book:woods
-book:worried!
 book:yellow
 book:you
 book:zebra
@@ -2517,7 +2424,6 @@ bread
 bricks
 bridge
 broom
-brush your teeth
 bubbles
 bucket
 bug
@@ -2640,7 +2546,6 @@ checkmark
 cheese
 chick
 choresOrder
-clap your hands
 climbed
 clock
 clothes
@@ -2648,7 +2553,6 @@ cloud1
 cloud2
 coloringInLines
 comb
-comb your hair
 cookie
 cookies
 coral reef
@@ -2739,8 +2643,6 @@ drawing
 dream.
 dried
 drill
-drink milk
-drive a car
 drum
 duck
 duck and apple!
@@ -2770,7 +2672,6 @@ duck and tree!
 duh
 dy!
 e
-eat pizza
 egg
 egg and apple!
 egg and ball!
@@ -3177,7 +3078,6 @@ fish and star!
 fish and sun!
 fish and tree!
 flag
-flap your arms like a bird
 flats
 fleece
 floss
@@ -3208,7 +3108,6 @@ flower and sun!
 flower and tree!
 flowercrown
 flowers
-fly a kite
 food
 footprints
 fox
@@ -3247,10 +3146,8 @@ gem
 gent
 gingerbread
 girl
-give a big hug
 globe
 go
-go to sleep
 goodbye
 gown
 grandma
@@ -3317,7 +3214,6 @@ heart and tree!
 heels
 hen
 high,
-hop like a bunny
 horse
 hot
 hourglass
@@ -3363,7 +3259,6 @@ it
 its
 j
 juice
-jump up and down
 k
 kidball
 kite
@@ -3376,7 +3271,6 @@ ladybug
 lamb,
 lamb.
 lamp
-lick an ice cream
 life
 lightning
 like
@@ -3388,10 +3282,8 @@ ly
 ly,
 m
 mad
-make a silly face
 mango
 mer
-milk
 mmm
 mochi
 mom
@@ -3447,7 +3339,6 @@ palette
 paper
 park
 party
-pat your head
 pen
 pencil
 penguin
@@ -3479,8 +3370,6 @@ pig and tree!
 pillow
 pizza
 plant
-play tennis
-play the violin
 polish
 puh
 purse
@@ -3491,21 +3380,17 @@ rabbit
 rain
 rain,
 rainbow
-reach up high
 readingRead
 readingUnlocked
 rest
 ri
-ride a horse
 river
 robot
 room
-rooster
 round
 round,
 round.
 row
-row a boat
 row,
 rug
 ry
@@ -3534,7 +3419,6 @@ slippers
 small
 sneakers
 snow.
-snowflake
 so
 soap
 sock
@@ -3588,12 +3472,10 @@ sound:ʌ
 sparkle
 sparkles
 spi
-spin around
 spout
 spout.
 sprout
 sss
-stand on one foot
 star
 star and apple!
 star and ball!
@@ -3624,7 +3506,6 @@ stars
 stickerWins
 stickers
 sticks
-stomp like a dinosaur
 strawberries
 strawberry
 stream.
@@ -3660,24 +3541,19 @@ sunglasses
 sunhat
 sunrise
 surprised
-sweep the floor
 swing
 sy
 t
 table
-take a bath
 teddy
 tennis
 ter
 the
 through
-throw a ball
 tle
 toilet
 toothbrush
 tophat
-touch your nose
-touch your toes
 town!
 toybox
 toyduck
@@ -3728,11 +3604,7 @@ w
 wa
 wand
 was
-wash your hands
 washed
-wave
-wave goodbye
-wave hello
 waveform
 web
 went
@@ -3742,7 +3614,6 @@ wheat
 wheels
 white
 whoopsie!
-wiggle your fingers
 wind
 wolf
 won

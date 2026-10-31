@@ -46,13 +46,17 @@ struct HomeView: View {
             .background(PlayfulBackground())
             .onAppear {
                 Music.shared.play(.home)
+                Speaker.shared.noGameOpen()
                 stickers = StickerBook.earned()
             }
             .navigationDestination(for: HomeSection.self) { section in
                 SectionView(section: section)
                     .navigationTitle(section.title)
                     .navigationBarTitleDisplayMode(.inline)
-                    .onAppear { Music.shared.play(.home) }
+                    .onAppear {
+                        Music.shared.play(.home)
+                        Speaker.shared.noGameOpen()
+                    }
                     .toolbar { ToolbarItem(placement: .topBarTrailing) { MusicButton() } }
             }
             .navigationDestination(for: Activity.self) { activity in

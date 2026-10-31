@@ -29,4 +29,12 @@ final class PianoTests: XCTestCase {
         XCTAssertEqual(PianoView.key(at: CGPoint(x: 900, y: 200), keyWidth: width, blackHeight: black), 7)  // past the end: high C
         XCTAssertEqual(PianoSound.frequencies.count, 8 + PianoView.blackKeysAfter.count)
     }
+
+    func testEverySongHasALengthForEachNote() {
+        for song in PianoSong.all {
+            XCTAssertEqual(song.beats.count, song.notes.count, song.name)
+            XCTAssertTrue(song.beats.allSatisfy { $0 > 0 }, song.name)
+            XCTAssertTrue(song.notes.allSatisfy { (0...7).contains($0) }, "\(song.name) stays on the white keys")
+        }
+    }
 }

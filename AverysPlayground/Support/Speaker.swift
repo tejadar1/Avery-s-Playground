@@ -11,8 +11,10 @@ final class Speaker {
     private var voices: [String: AVSpeechSynthesisVoice] = [:]
     private var player: AVAudioPlayer?
     private var recordings: Task<Void, Never>?
-    /// When a game was last closed, while no game is open. Games say things a few seconds after a tap ("What comes
-    /// next?"); this keeps those from talking over the home screen after she leaves.
+    /// Game screens open now (a book open from the shelf counts as a second one), and when the last one closed.
+    /// Games say things a few seconds after a tap ("What comes next?"); this keeps those from talking over the
+    /// home screen after she leaves.
+    private var openGames = 0
     private var closedGameAt: Date?
 
     private init() {
@@ -88,18 +90,31 @@ final class Speaker {
         while synthesizer.isSpeaking { try? await Task.sleep(for: .seconds(0.1)) }
     }
 
-    /// A game opened: its lines play.
-    func gameOpened() { closedGameAt = nil }
+    /// A game screen opened: its lines play.
+    func gameOpened() {
+        openGames += 1
+        closedGameAt = nil
+    }
 
-    /// A game closed: what it was saying stops, and lines it says in the next few seconds are dropped.
+    /// A game screen closed. When it was the last one, what it was saying stops, and lines said in the next few
+    /// seconds are dropped. (Opening a book closes the shelf only after the book has opened, so that doesn't count.)
     func gameClosed() {
+        openGames = max(0, openGames - 1)
+        guard openGames == 0 else { return }
         closedGameAt = .now
         recordings?.cancel()
         player?.stop()
         synthesizer.stopSpeaking(at: .immediate)
     }
 
-    private var isQuiet: Bool { closedGameAt.map { Date.now.timeIntervalSince($0) < 6 } ?? false }
+    /// Back on the home screen or a section page: no game is open, whatever the counts say.
+    func noGameOpen() {
+        guard openGames > 0 else { return }  // already closed and quiet
+        openGames = 1
+        gameClosed()
+    }
+
+    private var isQuiet: Bool { openGames == 0 && closedGameAt.map { Date.now.timeIntervalSince($0) < 6 } ?? false }
 
     /// Plays recordings one after another, with a pause after each one that has one.
     private func play(_ urls: [URL], pauses: [Double] = []) {

@@ -8,6 +8,8 @@ struct PianoSong: Hashable {
     let notes: [Int]
     /// One word or syllable per note.
     let words: [String]
+    /// How long each note lasts, in beats (1 is a quarter note), so Listen plays the song's real rhythm.
+    let beats: [Double]
 
     static let all = [twinkle, mary, hotCrossBuns, rowYourBoat, oldMacDonald, londonBridge, wheelsOnTheBus, itsyBitsySpider]
 
@@ -16,40 +18,46 @@ struct PianoSong: Hashable {
         notes: [0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0, 4, 4, 3, 3, 2, 2, 1, 4, 4, 3, 3, 2, 2, 1, 0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0],
         words: ["Twin", "kle", "twin", "kle", "lit", "tle", "star,", "how", "I", "won", "der", "what", "you", "are.",
                 "Up", "a", "bove", "the", "world", "so", "high,", "like", "a", "dia", "mond", "in", "the", "sky.",
-                "Twin", "kle", "twin", "kle", "lit", "tle", "star,", "how", "I", "won", "der", "what", "you", "are."]
+                "Twin", "kle", "twin", "kle", "lit", "tle", "star,", "how", "I", "won", "der", "what", "you", "are."],
+        beats: Array(repeating: [1, 1, 1, 1, 1, 1, 2], count: 6).flatMap { $0 }
     )
 
     static let mary = PianoSong(
         name: "Mary Had a Little Lamb", picture: "sheep",
         notes: [2, 1, 0, 1, 2, 2, 2, 1, 1, 1, 2, 4, 4, 2, 1, 0, 1, 2, 2, 2, 2, 1, 1, 2, 1, 0],
         words: ["Ma", "ry", "had", "a", "lit", "tle", "lamb,", "lit", "tle", "lamb,", "lit", "tle", "lamb.",
-                "Ma", "ry", "had", "a", "lit", "tle", "lamb,", "its", "fleece", "was", "white", "as", "snow."]
+                "Ma", "ry", "had", "a", "lit", "tle", "lamb,", "its", "fleece", "was", "white", "as", "snow."],
+        beats: [1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4]
     )
 
     static let hotCrossBuns = PianoSong(
         name: "Hot Cross Buns", picture: "buns",
         notes: [2, 1, 0, 2, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 1, 0],
-        words: ["Hot", "cross", "buns!", "Hot", "cross", "buns!", "One", "a", "pen", "ny,", "two", "a", "pen", "ny,", "hot", "cross", "buns!"]
+        words: ["Hot", "cross", "buns!", "Hot", "cross", "buns!", "One", "a", "pen", "ny,", "two", "a", "pen", "ny,", "hot", "cross", "buns!"],
+        beats: [1, 1, 2, 1, 1, 2, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 2]
     )
 
     static let rowYourBoat = PianoSong(
         name: "Row Your Boat", picture: "boat",
         notes: [0, 0, 0, 1, 2, 2, 1, 2, 3, 4, 7, 7, 7, 4, 4, 4, 2, 2, 2, 0, 0, 0, 4, 3, 2, 1, 0],
         words: ["Row,", "row,", "row", "your", "boat", "gent", "ly", "down", "the", "stream.",
-                "Mer", "ri", "ly,", "mer", "ri", "ly,", "mer", "ri", "ly,", "mer", "ri", "ly,", "life", "is", "but", "a", "dream."]
+                "Mer", "ri", "ly,", "mer", "ri", "ly,", "mer", "ri", "ly,", "mer", "ri", "ly,", "life", "is", "but", "a", "dream."],
+        beats: [1.5, 1.5, 1, 0.5, 1.5, 1, 0.5, 1, 0.5, 3] + Array(repeating: 0.5, count: 12) + [1, 0.5, 1, 0.5, 3]
     )
 
     static let oldMacDonald = PianoSong(
         name: "Old MacDonald", picture: "cow",
         notes: [0, 0, 0, 4, 5, 5, 4, 2, 2, 1, 1, 0],
-        words: ["Old", "Mac", "Don", "ald", "had", "a", "farm,", "E", "I", "E", "I", "O!"]
+        words: ["Old", "Mac", "Don", "ald", "had", "a", "farm,", "E", "I", "E", "I", "O!"],
+        beats: [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2]
     )
 
     static let londonBridge = PianoSong(
         name: "London Bridge", picture: "bricks",
         notes: [4, 5, 4, 3, 2, 3, 4, 1, 2, 3, 2, 3, 4, 4, 5, 4, 3, 2, 3, 4, 1, 4, 2, 0],
         words: ["Lon", "don", "bridge", "is", "fall", "ing", "down,", "fall", "ing", "down,", "fall", "ing", "down.",
-                "Lon", "don", "bridge", "is", "fall", "ing", "down,", "my", "fair", "la", "dy!"]
+                "Lon", "don", "bridge", "is", "fall", "ing", "down,", "my", "fair", "la", "dy!"],
+        beats: [1.5, 0.5, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1.5, 0.5, 1, 1, 1, 1, 2, 2, 2, 1, 3]
     )
 
     // Its "all through the town" dips below the keyboard, so it lands on the low C instead.
@@ -57,18 +65,26 @@ struct PianoSong: Hashable {
         name: "Wheels on the Bus", picture: "bus",
         notes: [0, 3, 3, 3, 3, 5, 7, 5, 3, 4, 2, 0, 7, 5, 3, 0, 3, 3, 3, 3, 5, 7, 5, 3, 4, 0, 0, 3],
         words: ["The", "wheels", "on", "the", "bus", "go", "round", "and", "round,", "round", "and", "round,", "round", "and", "round.",
-                "The", "wheels", "on", "the", "bus", "go", "round", "and", "round,", "all", "through", "the", "town!"]
+                "The", "wheels", "on", "the", "bus", "go", "round", "and", "round,", "all", "through", "the", "town!"],
+        beats: [1, 1, 0.5, 0.5, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 2, 2, 1, 1, 3]
     )
 
-    // Starts on C instead of the low G under the keyboard.
+    // Its pickup notes are the G under the keyboard, so they're played on the G above: "The" (G) "it-sy" (C C).
     static let itsyBitsySpider = PianoSong(
         name: "Itsy Bitsy Spider", picture: "web",
-        notes: [0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 1, 2, 0, 2, 2, 3, 4, 4, 3, 2, 3, 4, 2, 0, 0, 1, 2, 2, 1, 0, 1, 2, 0,
-                0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 1, 2, 0],
+        notes: [4, 0, 0, 0, 1, 2, 2, 2, 1, 0, 1, 2, 0,
+                2, 2, 3, 4, 4, 3, 2, 3, 4, 2,
+                0, 0, 1, 2, 2, 1, 0, 1, 2, 0,
+                4, 4, 0, 0, 0, 1, 2, 2, 2, 1, 0, 1, 2, 0],
         words: ["The", "it", "sy", "bit", "sy", "spi", "der", "climbed", "up", "the", "wa", "ter", "spout.",
                 "Down", "came", "the", "rain", "and", "washed", "the", "spi", "der", "out.",
                 "Out", "came", "the", "sun", "and", "dried", "up", "all", "the", "rain,",
-                "and", "the", "it", "sy", "bit", "sy", "spi", "der", "went", "up", "the", "spout", "a", "gain!"]
+                "and", "the", "it", "sy", "bit", "sy", "spi", "der", "went", "up", "the", "spout", "a", "gain!"],
+        // A swaying 6/8: long-short, long-short.
+        beats: [0.5, 1, 0.5, 1, 0.5, 1.5, 1, 0.5, 1, 0.5, 1, 0.5, 2.5,
+                1.5, 1, 0.5, 1.5, 1, 0.5, 1, 0.5, 1, 2.5,
+                1.5, 1, 0.5, 1.5, 1, 0.5, 1, 0.5, 1, 2.5,
+                0.5, 0.5, 1, 0.5, 1, 0.5, 1.5, 1, 0.5, 1, 0.5, 1, 0.5, 2.5]
     )
 }
 
@@ -194,7 +210,7 @@ struct PianoView: View {
                         .padding(12 * uiScale)
                         .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { lyricsHeight = $0 }
                     }
-                    .frame(maxHeight: lyricsHeight)  // as tall as the words, or less when the screen is short
+                    .frame(minHeight: 40 * uiScale, maxHeight: lyricsHeight)  // as tall as the words, or less when the screen is short
                     .scrollBounceBehavior(.basedOnSize)
                     .onChange(of: lesson.position) { _, position in
                         withAnimation { scroll.scrollTo(position, anchor: .center) }
@@ -225,7 +241,9 @@ struct PianoView: View {
         .buttonStyle(SquishyButtonStyle())
     }
 
-    /// The piano plays the song: each key goes down in turn with its word lit up, a little longer at the end of a line.
+    static let beat = 0.42
+
+    /// The piano plays the song in its rhythm: each key goes down in turn with its word lit up.
     /// Then it's back at the start for her to play.
     private func listen() {
         Haptics.tap()
@@ -237,14 +255,15 @@ struct PianoView: View {
             try? await Task.sleep(for: .seconds(0.8))
             for (index, key) in song.notes.enumerated() {
                 guard !Task.isCancelled else { return }
+                // A beat is 0.42 seconds; the key stays down for most of its note, then lifts before the next.
+                let length = song.beats[index] * Self.beat
                 withAnimation(.easeOut(duration: 0.08)) { pressed = key }
                 PianoSound.shared.play(key)
-                try? await Task.sleep(for: .seconds(0.3))
+                try? await Task.sleep(for: .seconds(length * 0.75))
                 guard !Task.isCancelled else { return }
-                withAnimation(.easeOut(duration: 0.15)) { pressed = nil }
+                withAnimation(.easeOut(duration: 0.12)) { pressed = nil }
                 if var current = lesson, current.play(key) { lesson = current }
-                let endOfLine = song.words[index].last.map { ",.!?".contains($0) } ?? false
-                try? await Task.sleep(for: .seconds(endOfLine ? 0.45 : 0.15))
+                try? await Task.sleep(for: .seconds(length * 0.25))
             }
             guard !Task.isCancelled else { return }
             lesson = SongLesson(song: song)
@@ -286,7 +305,9 @@ struct PianoView: View {
                     .onEnded { _ in withAnimation(.easeOut(duration: 0.18)) { pressed = nil } }  // a quick tap still shows the key going down
             )
         }
-        .frame(height: 260 * uiScale)
+        // Shorter when the screen is (an iPad on its side with a song's words up), so the keys always fit.
+        .frame(minHeight: 150 * uiScale, maxHeight: 260 * uiScale)
+        .layoutPriority(1)
         .overlay(alignment: .top) {
             // The red felt the keys tuck under.
             Rectangle().fill(Color(red: 0.62, green: 0.12, blue: 0.2)).frame(height: 5 * uiScale)

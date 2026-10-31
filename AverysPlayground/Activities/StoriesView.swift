@@ -356,10 +356,12 @@ private struct StoryReader: View {
         }
         .padding(16 * uiScale)
         .background(Scenery(.library).ignoresSafeArea())
+        // The book is a game screen of its own, on top of the shelf.
         .onAppear {
-            Speaker.shared.gameOpened()  // opening a book closed the shelf, which quiets Speaker for a moment
+            Speaker.shared.gameOpened()
             read(story.title)
         }
+        .onDisappear { Speaker.shared.gameClosed() }
     }
 
     private func book(wide: Bool) -> some View {
