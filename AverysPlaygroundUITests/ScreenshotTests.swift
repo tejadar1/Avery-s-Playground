@@ -169,6 +169,8 @@ final class ScreenshotTests: XCTestCase {
                 sleep(1)
             }
             tap(tile)
+            // A tap can be missed (the Read tile once didn't open on iPad): tap again if the game isn't showing.
+            if !app.navigationBars[game.title].waitForExistence(timeout: 3), tile.exists { tap(tile) }
             sleep(1)
             game.play()
             sleep(1)
