@@ -17,6 +17,19 @@ final class TeamUpTests: XCTestCase {
         XCTAssertTrue(race.canSpin)
     }
 
+    func testNumberRaceSpinsOneToThreeWithoutThreeInARow() {
+        var last: [Int] = []
+        var seen = Set<Int>()
+        for _ in 0..<500 {
+            let value = NumberRace.spin(after: last)
+            XCTAssertTrue((1...3).contains(value))
+            XCTAssertFalse(last.count == 2 && last.allSatisfy { $0 == value }, "never three the same in a row")
+            last = Array((last + [value]).suffix(2))
+            seen.insert(value)
+        }
+        XCTAssertEqual(seen, [1, 2, 3])
+    }
+
     func testNumberRaceEndsOnSquareTen() {
         var race = NumberRace()
         while race.winner == nil {

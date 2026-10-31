@@ -13,6 +13,7 @@ A big lion was sleeping in the sun.
 A boy watched the sheep on a hill.
 A coral reef!
 A farm!
+A fresh page!
 A garden!
 A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
@@ -485,6 +486,8 @@ Eagle eyes!
 Easy
 Easy peasy, lemon squeezy!
 Elephant
+Eraser
+Eraser! Rub out any oopsies!
 Excited! Do a happy dance!
 Extras
 F
@@ -1062,6 +1065,7 @@ Sandals! Holy guacamole, I love it!
 Sandals! Ooh la la!
 Sandals! So stylish!
 Sandals! Wowza bowza!
+Save
 Say cheese! Snap snap!
 Say it slowly
 Scared. Hold a grown-up's hand.
@@ -1203,6 +1207,7 @@ Stars, I spy something yummy and healthy to eat!
 Stars, I spy somewhere to sit at the park!
 Start
 Start over
+Start this picture over?
 Stick it anywhere!
 Stick! A sticker!
 Stickers
@@ -1450,6 +1455,7 @@ You see a big dog barking!
 You see a big dog barking! How would you feel?
 You spun 1! Hop 1 square.
 You spun 2! Hop 2 squares.
+You spun 3! Hop 3 squares.
 You wrote your name!
 You're a nail artist!
 You're so silly! Ha ha ha! Let's be silly together!
@@ -2551,6 +2557,7 @@ clock
 clothes
 cloud1
 cloud2
+coloring
 coloringInLines
 comb
 cookie
@@ -3256,6 +3263,7 @@ in the water
 ing
 is
 it
+it-sy
 its
 j
 juice

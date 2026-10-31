@@ -45,7 +45,10 @@ struct Memory: Equatable {
 }
 
 struct MemoryView: View {
-    @State private var game = Memory()
+    /// 8 pairs on an iPad, which has room for a fourth row; 6 on a phone.
+    private static let pairs = uiScale > 1 ? 8 : 6
+
+    @State private var game = Memory(pairs: MemoryView.pairs)
     @State private var cheer = "Stars go first! Turn over two cards to find a match."
     @State private var cheerCount = 0
     @State private var wins = 0
@@ -148,7 +151,7 @@ struct MemoryView: View {
 
     private func newGame() {
         Haptics.tap()
-        withAnimation(.spring) { game = Memory() }
+        withAnimation(.spring) { game = Memory(pairs: Self.pairs) }
         say("", hint: "Stars go first! Turn over two cards to find a match.")
     }
 

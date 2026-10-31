@@ -128,7 +128,9 @@ struct PuzzleView: View {
             GeometryReader { geo in
                 let area = geo.size
                 // The picture in the middle, leaving room around it for the pieces.
-                let width = min(area.width * 0.55, area.height * 0.55 * 4 / 3)
+                // Bigger on an iPad, which has room around it for the pieces too.
+                let share: CGFloat = uiScale > 1 ? 0.66 : 0.55
+                let width = min(area.width * share, area.height * share * 4 / 3)
                 let height = width * 3 / 4
                 let board = CGRect(x: (area.width - width) / 2, y: (area.height - height) / 2, width: width, height: height)
                 let cell = CGSize(width: width / CGFloat(puzzle.columns), height: height / CGFloat(puzzle.rows))

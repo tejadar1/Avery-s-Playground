@@ -42,6 +42,12 @@ final class MemoryTests: XCTestCase {
         XCTAssertEqual(game.winner, .star)
     }
 
+    func testAnIPadGameHasEightPairs() {
+        let game = Memory(pairs: 8)
+        XCTAssertEqual(game.cards.count, 16)
+        XCTAssertTrue(Dictionary(grouping: game.cards, by: { $0 }).values.allSatisfy { $0.count == 2 })
+    }
+
     func testCardsFillTheSpaceInTheBestColumns() {
         // Tall phone: 3 across. Wide iPad: 6 across in two rows.
         XCTAssertEqual(CardGrid.fit(count: 12, in: CGSize(width: 360, height: 560), gap: 10, aspect: 0.8).columns, 3)

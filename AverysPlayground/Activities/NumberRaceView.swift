@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// A race along a straight line of squares numbered 1 to 10, for a kid and a grown-up. Spin 1 or 2, then tap each
+/// A race along a straight line of squares numbered 1 to 10, for a kid and a grown-up. Spin 1, 2 or 3, then tap each
 /// square you hop onto as Bella says its number. Siegler and Ramani found that a few short games like this, on a
 /// straight numbered board, made preschoolers much better at judging how big numbers are.
 struct NumberRace {
@@ -16,6 +16,12 @@ struct NumberRace {
     var canSpin: Bool { hopsLeft == 0 && winner == nil }
     /// The square to tap next.
     var next: Int? { hopsLeft > 0 ? spot[turn]! + 1 : nil }
+
+    /// 1, 2 or 3, but never the same number three times in a row, so it feels fair.
+    static func spin(after last: [Int]) -> Int {
+        let repeated = last.count >= 2 && last.suffix(2).allSatisfy { $0 == last.last } ? last.last : nil
+        return (1...3).filter { $0 != repeated }.randomElement()!
+    }
 
     mutating func spin(_ value: Int) {
         guard canSpin else { return }
@@ -43,6 +49,7 @@ struct NumberRaceView: View {
 
     @State private var race = NumberRace()
     @State private var spun: Int?
+    @State private var lastSpins: [Int] = []
     @State private var spins = 0
     @State private var cheer = "Stars go first! Tap Spin."
     @State private var cheerCount = 0
@@ -59,20 +66,15 @@ struct NumberRaceView: View {
             }
             .padding(.horizontal)
 
-            board
-
-            if race.winner != nil {
-                Button(action: newGame) {
-                    Text("Play again")
-                        .font(.kid(28))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 28 * uiScale)
-                        .frame(height: 60 * uiScale)
-                        .cartoonCard(Color(red: 0.95, green: 0.62, blue: 0.3), cornerRadius: 30 * uiScale)
+            // On a phone the button sits beside the board, so the squares get the whole height.
+            if uiScale == 1 {
+                HStack(spacing: 4) {
+                    board
+                    action.frame(maxWidth: 130)
                 }
-                .buttonStyle(SquishyButtonStyle())
             } else {
-                spinner
+                board
+                action
             }
         }
         .padding(.bottom, 24 * uiScale)
@@ -145,10 +147,30 @@ struct NumberRaceView: View {
         .padding(.horizontal)
     }
 
-    /// Spins 1 or 2, like the spinner in the study.
+    @ViewBuilder private var action: some View {
+        if race.winner != nil {
+            Button(action: newGame) {
+                Text("Play again")
+                    .font(.kid(28))
+                    .foregroundStyle(.white)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+                    .padding(.horizontal, 20 * uiScale)
+                    .frame(height: 60 * uiScale)
+                    .cartoonCard(Color(red: 0.95, green: 0.62, blue: 0.3), cornerRadius: 30 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+        } else {
+            spinner
+        }
+    }
+
+    /// Spins 1, 2 or 3.
     private var spinner: some View {
-        Button(action: spin) {
-            HStack(spacing: 14 * uiScale) {
+        // Beside the board on a phone, so the arrow goes over the number to keep it narrow.
+        let layout = uiScale == 1 ? AnyLayout(VStackLayout(spacing: 4)) : AnyLayout(HStackLayout(spacing: 14 * uiScale))
+        return Button(action: spin) {
+            layout {
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .rotationEffect(.degrees(Double(spins) * 360))
                     .animation(.spring(response: 0.6, dampingFraction: 0.7), value: spins)
@@ -156,8 +178,8 @@ struct NumberRaceView: View {
             }
             .font(.kid(34))
             .foregroundStyle(.white)
-            .padding(.horizontal, 34 * uiScale)
-            .frame(height: 76 * uiScale)
+            .padding(.horizontal, (uiScale == 1 ? 18 : 34) * uiScale)
+            .frame(height: (uiScale == 1 ? 110 : 76) * uiScale)
             .cartoonCard(race.canSpin ? Color(red: 0.62, green: 0.55, blue: 0.9) : .gray, cornerRadius: 38 * uiScale)
         }
         .buttonStyle(SquishyButtonStyle())
@@ -168,11 +190,17 @@ struct NumberRaceView: View {
     private func spin() {
         guard race.canSpin else { return }
         Haptics.tap()
-        let value = Int.random(in: 1...2)
+        let value = NumberRace.spin(after: lastSpins)
+        lastSpins = Array((lastSpins + [value]).suffix(2))
         spins += 1
         spun = value
         race.spin(value)
-        say(value == 1 ? "You spun 1! Hop 1 square." : "You spun 2! Hop 2 squares.", hint: "Tap the next square and say its number!")
+        let line = switch value {
+        case 1: "You spun 1! Hop 1 square."
+        case 2: "You spun 2! Hop 2 squares."
+        default: "You spun 3! Hop 3 squares."
+        }
+        say(line, hint: "Tap the next square and say its number!")
     }
 
     private func hop(_ square: Int) {

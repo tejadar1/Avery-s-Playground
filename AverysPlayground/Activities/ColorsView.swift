@@ -250,6 +250,8 @@ struct ColorsView: View {
         NamedColor(name: "Black", color: .black, exampleName: "a hat"),
         NamedColor(name: "White", color: .white, exampleName: "a cloud"),
     ]
+    /// Colors with the paper's white, which rubs out crayon and fills.
+    private static let eraser = NamedColor(name: "Eraser", color: .white, exampleName: "")
 
     @State private var selected = ColorsView.palette[0]
     @State private var pageIndex = 0
@@ -260,6 +262,9 @@ struct ColorsView: View {
     @State private var cheerCount = 0
     @State private var wins = 0
     @State private var celebrated: Set<Int> = []
+    @State private var isClearing = false
+    /// The page's size on screen, for saving a picture of it.
+    @State private var pageSize = CGSize(width: 400, height: 300)
     /// Crayon stays inside each part, or (off) colors anywhere, over the lines too.
     @AppStorage("coloringInLines") private var inLines = true
     @State private var photo: Image?
@@ -268,52 +273,116 @@ struct ColorsView: View {
     private var page: ColoringPage { ColoringPage.all[pageIndex] }
 
     var body: some View {
-        VStack(spacing: 10 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
-
-            GeometryReader { geo in
-                // As big as fits, keeping the page's 4:3 shape.
-                let width = min(geo.size.width, geo.size.height * ColoringPage.aspect)
-                let size = CGSize(width: width, height: width / ColoringPage.aspect)
-                canvas(size: size)
-                    .frame(width: size.width, height: size.height)
-                    .clipShape(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
-                    .overlay(alignment: .topTrailing) { linesButton.padding(8 * uiScale) }
-                    .overlay(alignment: .topLeading) { PhotoButton { takePhoto(size: size) }.padding(8 * uiScale) }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .padding(.horizontal)
-
-            HStack(spacing: 6 * uiScale) {
-                pageButton("chevron.left", by: -1)
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 14 * uiScale) {
-                        ForEach(Self.palette) { item in
-                            Button { choose(item) } label: {
-                                Circle()
-                                    .fill(item.color)
-                                    .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
-                                    .frame(width: 56 * uiScale, height: 56 * uiScale)
-                                    .offset(y: item.id == selected.id ? -10 * uiScale : 0)
-                                    .scaleEffect(item.id == selected.id ? 1.15 : 1)
-                                    .animation(.spring(response: 0.25, dampingFraction: 0.5), value: selected.id)
-                            }
-                            .buttonStyle(SquishyButtonStyle())
-                            .accessibilityLabel(item.name)
+        GeometryReader { screen in
+            // On an iPad on its side the crayons go in a column beside the page, so the page gets the height.
+            let sideways = uiScale > 1 && screen.size.width > screen.size.height * 1.15
+            VStack(spacing: 10 * uiScale) {
+                CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                if sideways {
+                    HStack(spacing: 10 * uiScale) {
+                        VStack(spacing: 10 * uiScale) {
+                            pageButton("chevron.up", by: -1)
+                            crayons(vertical: true)
+                            pageButton("chevron.down", by: 1)
                         }
+                        pageView
+                        tools(vertical: true)
                     }
-                    .padding(.horizontal, 6 * uiScale)
-                    .padding(.vertical, 16 * uiScale)
+                    .padding(.horizontal)
+                    .padding(.bottom, 8 * uiScale)
+                } else {
+                    pageView.padding(.horizontal)
+                    HStack(spacing: 6 * uiScale) {
+                        pageButton("chevron.left", by: -1)
+                        crayons(vertical: false)
+                        pageButton("chevron.right", by: 1)
+                    }
+                    .padding(.horizontal)
+                    tools(vertical: false)
+                        .padding(.bottom, 8 * uiScale)
                 }
-                pageButton("chevron.right", by: 1)
             }
-            .padding(.horizontal)
-            .padding(.bottom, 8 * uiScale)
         }
         .photo(photo, caption: Kid.name, flashes: flashes, size: 220 * uiScale)
         .background(Scenery(.studio).ignoresSafeArea())
         .celebration(wins)
+        .onAppear(perform: load)
+        .confirmationDialog("Start this picture over?", isPresented: $isClearing, titleVisibility: .visible) {
+            Button("Start over", role: .destructive, action: clearPage)
+        }
+    }
+
+    /// The page, as big as fits, keeping its 4:3 shape.
+    private var pageView: some View {
+        GeometryReader { geo in
+            let width = min(geo.size.width, geo.size.height * ColoringPage.aspect)
+            let size = CGSize(width: width, height: width / ColoringPage.aspect)
+            canvas(size: size)
+                .frame(width: size.width, height: size.height)
+                .clipShape(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
+                .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear { pageSize = size }
+                .onChange(of: size) { _, new in pageSize = new }
+        }
+    }
+
+    /// The crayons, in a row or (beside the page) a column, then the eraser.
+    private func crayons(vertical: Bool) -> some View {
+        let layout = vertical ? AnyLayout(VStackLayout(spacing: 14 * uiScale)) : AnyLayout(HStackLayout(spacing: 14 * uiScale))
+        return ScrollView(vertical ? .vertical : .horizontal, showsIndicators: false) {
+            layout {
+                ForEach(Self.palette + [Self.eraser]) { item in
+                    Button { choose(item) } label: {
+                        Group {
+                            if item.id == Self.eraser.id {
+                                Image(systemName: "eraser.fill")
+                                    .font(.system(size: 24 * uiScale, weight: .bold))
+                                    .foregroundStyle(Color(red: 0.93, green: 0.45, blue: 0.6))
+                                    .frame(width: 56 * uiScale, height: 56 * uiScale)
+                                    .background(.white, in: Circle())
+                            } else {
+                                Circle().fill(item.color).frame(width: 56 * uiScale, height: 56 * uiScale)
+                            }
+                        }
+                        .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                        .offset(x: vertical && item.id == selected.id ? 10 * uiScale : 0, y: !vertical && item.id == selected.id ? -10 * uiScale : 0)
+                        .scaleEffect(item.id == selected.id ? 1.15 : 1)
+                        .animation(.spring(response: 0.25, dampingFraction: 0.5), value: selected.id)
+                    }
+                    .buttonStyle(SquishyButtonStyle())
+                    .accessibilityLabel(item.name)
+                }
+            }
+            .padding(vertical ? .vertical : .horizontal, 6 * uiScale)
+            .padding(vertical ? .horizontal : .vertical, 16 * uiScale)
+        }
+    }
+
+    /// For the grown-up, off the page so they don't get in the way: in the lines or anywhere, save, start over.
+    private func tools(vertical: Bool) -> some View {
+        let layout = vertical ? AnyLayout(VStackLayout(spacing: 10 * uiScale)) : AnyLayout(HStackLayout(spacing: 10 * uiScale))
+        return layout {
+            linesButton
+            toolButton("Save", "camera.fill") { takePhoto(size: pageSize) }
+            toolButton("Start over", "arrow.counterclockwise") { isClearing = true }
+        }
+    }
+
+    private func toolButton(_ title: String, _ symbol: String, action: @escaping () -> Void) -> some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Label(title, systemImage: symbol)
+                .font(.kid(15))
+                .foregroundStyle(Color.outline)
+                .padding(.horizontal, 12 * uiScale)
+                .frame(height: 40 * uiScale)
+                .background(.white.opacity(0.9), in: Capsule())
+                .overlay(Capsule().strokeBorder(Color.outline.opacity(0.5), lineWidth: 1.5))
+        }
+        .buttonStyle(SquishyButtonStyle())
     }
 
     /// The page: each part's fill, then crayon kept inside that part, then the outlines on top.
@@ -443,7 +512,11 @@ struct ColorsView: View {
     private func choose(_ item: NamedColor) {
         Haptics.tap()
         selected = item
-        say("\(item.name)! Like \(item.exampleName).", voice: Speaker.book)
+        if item.id == Self.eraser.id {
+            say("Eraser! Rub out any oopsies!")
+        } else {
+            say("\(item.name)! Like \(item.exampleName).", voice: Speaker.book)
+        }
     }
 
     private func fill(_ region: Int) {
@@ -453,8 +526,9 @@ struct ColorsView: View {
         checkDone()
     }
 
-    /// Cheers once every part of the page has some color.
+    /// Cheers once every part of the page has some color. Saves the coloring too, so it's there next time.
     private func checkDone() {
+        save()
         let colored = page.regions.indices.allSatisfy { index in
             fills[pageIndex][index] != .white || strokes[pageIndex].contains { stroke in
                 stroke.color != .white && (stroke.region == index
@@ -465,6 +539,41 @@ struct ColorsView: View {
         celebrated.insert(pageIndex)
         wins += 1
         say("Wowza! You colored the whole \(page.name)!")
+    }
+
+    /// Every page's coloring, kept on the device as crayon numbers, so it's there when she comes back.
+    private struct Saved: Codable {
+        struct Stroke: Codable {
+            let region: Int
+            let crayon: Int
+            let points: [CGPoint]
+        }
+        let fills: [[Int]]
+        let strokes: [[Stroke]]
+    }
+
+    private static func crayon(_ color: Color) -> Int { palette.firstIndex { $0.color == color } ?? palette.count - 1 }
+
+    private func save() {
+        let saved = Saved(fills: fills.map { $0.map(Self.crayon) },
+                          strokes: strokes.map { $0.map { Saved.Stroke(region: $0.region, crayon: Self.crayon($0.color), points: $0.points) } })
+        UserDefaults.standard.set(try? JSONEncoder().encode(saved), forKey: "coloring")
+    }
+
+    private func load() {
+        guard let data = UserDefaults.standard.data(forKey: "coloring"),
+              let saved = try? JSONDecoder().decode(Saved.self, from: data),
+              saved.fills.map(\.count) == fills.map(\.count), saved.strokes.count == strokes.count else { return }
+        fills = saved.fills.map { $0.map { Self.palette[$0].color } }
+        strokes = saved.strokes.map { $0.map { ColorStroke(region: $0.region, color: Self.palette[$0.crayon].color, points: $0.points) } }
+    }
+
+    private func clearPage() {
+        fills[pageIndex] = Array(repeating: .white, count: page.regions.count)
+        strokes[pageIndex] = []
+        celebrated.remove(pageIndex)
+        save()
+        say("A fresh page!", hint: "What color should it be?")
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud, so Coco doesn't narrate what to do.

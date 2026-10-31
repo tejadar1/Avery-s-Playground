@@ -101,30 +101,50 @@ struct MazeView: View {
     @State private var wins = 0
 
     var body: some View {
-        VStack(spacing: 12 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+        GeometryReader { screen in
+            // On a screen wider than tall (an iPad on its side), Coco and the button go beside the square maze,
+            // so it can be the full height.
+            let wide = screen.size.width > screen.size.height * 1.15
+            let layout = wide ? AnyLayout(HStackLayout(spacing: 12 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
+            layout {
+                if wide {
+                    VStack(spacing: 20 * uiScale) {
+                        CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                        Spacer()
+                        newMazeButton
+                    }
+                    .frame(width: min(screen.size.width * 0.3, 360 * uiScale))
+                    .padding(.vertical, 12 * uiScale)
+                } else {
+                    CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                }
 
-            GeometryReader { geo in
-                let side = min(geo.size.width, geo.size.height)
-                board(side: side)
-                    .frame(width: side, height: side)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .padding(.horizontal)
+                GeometryReader { geo in
+                    let side = min(geo.size.width, geo.size.height)
+                    board(side: side)
+                        .frame(width: side, height: side)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .padding(wide ? .vertical : .horizontal)
 
-            Button(action: newMaze) {
-                Text("New maze")
-                    .font(.kid(24))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 26 * uiScale)
-                    .frame(height: 56 * uiScale)
-                    .cartoonCard(Self.hedge, cornerRadius: 28 * uiScale)
+                if !wide { newMazeButton }
             }
-            .buttonStyle(SquishyButtonStyle())
             .padding(.bottom, 12 * uiScale)
         }
         .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
+    }
+
+    private var newMazeButton: some View {
+        Button(action: newMaze) {
+            Text("New maze")
+                .font(.kid(24))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 26 * uiScale)
+                .frame(height: 56 * uiScale)
+                .cartoonCard(Self.hedge, cornerRadius: 28 * uiScale)
+        }
+        .buttonStyle(SquishyButtonStyle())
     }
 
     private func board(side: CGFloat) -> some View {

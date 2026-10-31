@@ -8,6 +8,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
+            GeometryReader { screen in
             ScrollView {
                 VStack(spacing: 24 * uiScale) {
                     // Coco and Avery beside the title, or above it when that doesn't fit (an iPhone)
@@ -23,8 +24,11 @@ struct HomeView: View {
                     }
                     .padding(.top, 8 * uiScale)
 
-                    // Narrow enough that all three sit in one row on an iPad held sideways.
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)], spacing: 20 * uiScale) {
+                    // All four in one row on an iPad held sideways, so the menu fits without scrolling.
+                    let sideways = uiScale > 1 && screen.size.width > screen.size.height
+                    let columns = sideways ? Array(repeating: GridItem(.flexible(), spacing: 20 * uiScale), count: 4)
+                        : [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)]
+                    LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         ForEach(HomeSection.allCases) { section in
                             NavigationLink(value: section) {
                                 SectionTile(section: section)
@@ -42,6 +46,7 @@ struct HomeView: View {
                     }
                 }
                 .padding(20 * uiScale)
+            }
             }
             .background(PlayfulBackground())
             .onAppear {
@@ -174,6 +179,8 @@ private struct StickerTile: View {
             .accessibilityHidden(true)
             Text("Stickers")
                 .font(.kid(40))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
                 .foregroundStyle(.white)
                 .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
             Text("\(stickers.count) of \(StickerBook.all.count) found")
@@ -182,11 +189,14 @@ private struct StickerTile: View {
         }
         .padding(.horizontal, 12 * uiScale)
         .padding(.bottom, 16 * uiScale)
-        .frame(maxWidth: .infinity, minHeight: 230 * uiScale)
+        .frame(maxWidth: .infinity, minHeight: homeTileHeight)
         .cartoonCard(Color(red: 0.62, green: 0.5, blue: 0.88))
         .accessibilityElement(children: .combine)
     }
 }
+
+/// Home tiles are a little shorter on an iPad, so the whole menu fits on the screen.
+@MainActor private let homeTileHeight: CGFloat = (uiScale > 1 ? 200 : 230) * uiScale
 
 /// A big home-screen choice, showing a few of its games' icons fanned out.
 private struct SectionTile: View {
@@ -208,6 +218,8 @@ private struct SectionTile: View {
             .accessibilityHidden(true)
             Text(section.title)
                 .font(.kid(40))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
                 .foregroundStyle(.white)
                 .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
             Text(section.subtitle)
@@ -217,7 +229,7 @@ private struct SectionTile: View {
         }
         .padding(.horizontal, 12 * uiScale)
         .padding(.bottom, 16 * uiScale)
-        .frame(maxWidth: .infinity, minHeight: 230 * uiScale)
+        .frame(maxWidth: .infinity, minHeight: homeTileHeight)
         .cartoonCard(section.color)
         .accessibilityElement(children: .combine)
     }
