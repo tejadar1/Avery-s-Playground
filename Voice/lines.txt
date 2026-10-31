@@ -66,6 +66,7 @@ Belly rubs are the best!
 Big hug!
 Big nail
 Big or small?
+Bingo bango bongo!
 Bingo card
 Bingo! You filled your card! Holy guacamole!
 Black
@@ -512,6 +513,7 @@ Flower crown! So stylish!
 Flower crown! Wowza bowza!
 Food bowl
 Food or clothes?
+For real life? You did it!
 Fox
 Fox ends with X!
 Free play
@@ -809,6 +811,7 @@ Holy guacamole, so stylish!
 Holy guacamole, what a great haircut!
 Holy guacamole, you did it!
 Holy moly, guacamole!
+Hooray! Wackadoo!
 Horse
 Hose
 Hot
@@ -866,6 +869,7 @@ Let's count to 9!
 Let's get her dressed! Pick some clothes.
 Let's have a race, said Hare.
 Let's read! Tap each letter to hear its sound.
+Let's roll, Coco patrol!
 Let's wash your hair! Rub on the shampoo.
 Levels
 Lights out
@@ -950,6 +954,7 @@ No hat! Holy guacamole, I love it!
 No hat! Ooh la la!
 No hat! So stylish!
 No hat! Wowza bowza!
+No job is too big, no croc is too small!
 No more food stuck! Yay!
 No, said the hen. My chicks and I will eat it!
 Nom nom nom! Yummy!
@@ -1006,6 +1011,7 @@ Party dress! Ooh la la!
 Party dress! So stylish!
 Party dress! Wowza bowza!
 Pattern
+Paw-some!
 Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
@@ -1046,6 +1052,7 @@ Quick look! Don't count!
 R
 Rainbow
 Ready for school! Have a great day!
+Ready, set, snap!
 Red
 Remover
 Reset
@@ -1266,6 +1273,7 @@ That color is so pretty!
 That sticker is so silly!
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
+That's what I call croc-tastic teamwork!
 The
 The Boy Who Cried Wolf
 The Gingerbread Man
@@ -1420,6 +1428,7 @@ Wowza! You colored the whole night sky!
 X
 Y
 Yellow
+Yes yes yes, that's the best!
 Yes! Keep looking!
 Yippee skippy!
 Yo-yo
@@ -1451,13 +1460,14 @@ You played Twinkle Twinkle! Holy guacamole, what a song!
 You played Wheels on the Bus! Holy guacamole, what a song!
 You played all day, and now it's night.
 You played all day, and now it's night. How would you feel?
-You see a big dog barking!
-You see a big dog barking! How would you feel?
+You shared your snack with a friend.
+You shared your snack with a friend. How would you feel?
 You spun 1! Hop 1 square.
 You spun 2! Hop 2 squares.
 You spun 3! Hop 3 squares.
 You wrote your name!
 You're a nail artist!
+You're a superstar, for real life!
 You're so silly! Ha ha ha! Let's be silly together!
 Your first day at a new school.
 Your first day at a new school. How would you feel?

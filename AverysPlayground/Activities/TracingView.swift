@@ -114,9 +114,10 @@ struct TraceLetter {
 
 /// Which parts of a letter the finger has traced. Any part, in any order: being close to the line is enough.
 struct Tracing {
-    /// Forgiving, for little fingers: near the line counts, and most of a stroke is enough.
-    static let reach: CGFloat = 0.14
-    static let enough = 0.7
+    /// Near the line counts, for little fingers, but not so near another stroke that it counts too, and a stroke
+    /// is done only when nearly all of it is traced, end to end (it finished too soon at 0.14 and 70%).
+    static let reach: CGFloat = 0.09
+    static let enough = 0.9
 
     let letter: TraceLetter
     /// The strokes traced so far.
@@ -139,7 +140,8 @@ struct Tracing {
             for (index, spot) in checkpoints.enumerated() where hypot(spot.x - point.x, spot.y - point.y) < Self.reach {
                 hits[stroke].insert(index)
             }
-            if Double(hits[stroke].count) >= Double(checkpoints.count) * Self.enough {
+            let ends = hits[stroke].contains(0) && hits[stroke].contains(checkpoints.count - 1)
+            if ends && Double(hits[stroke].count) >= Double(checkpoints.count) * Self.enough {
                 traced.insert(stroke)
                 finished = true
             }

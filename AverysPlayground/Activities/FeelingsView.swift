@@ -48,7 +48,7 @@ struct FeelingMoment: Equatable {
         FeelingMoment(text: "Mochi does a wiggly dance!", picture: "dog", feeling: "silly"),
         FeelingMoment(text: "Your first day at a new school.", picture: "backpack", feeling: "worried"),
         FeelingMoment(text: "Your friend has to go home.", picture: "goodbye", feeling: "sad"),
-        FeelingMoment(text: "You see a big dog barking!", picture: "dog", feeling: "scared"),
+        FeelingMoment(text: "You shared your snack with a friend.", picture: "cookie", feeling: "happy"),
         FeelingMoment(text: "You can't find your favorite toy.", picture: "box", feeling: "worried"),
     ]
 }

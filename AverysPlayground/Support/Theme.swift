@@ -138,6 +138,10 @@ enum Hooray {
         "Okey dokey, artichokey!", "Woo hoo, kangaroo!", "Super duper pooper scooper!",
         "Ha ha ha! That's funny! You did it!", "Hee hee, that's so funny! Again, again!",
         "You did it, you silly goose!", "Hee hee, you're so silly! You did it!",
+        // Little sayings from her favorite shows, the Coco way
+        "For real life? You did it!", "Hooray! Wackadoo!", "Paw-some!", "No job is too big, no croc is too small!",
+        "Let's roll, Coco patrol!", "Yes yes yes, that's the best!", "Bingo bango bongo!", "You're a superstar, for real life!",
+        "Ready, set, snap!", "That's what I call croc-tastic teamwork!",
     ]
 
     /// A silly cheer she hasn't said lately.

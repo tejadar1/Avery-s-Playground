@@ -36,4 +36,15 @@ final class TracingTests: XCTestCase {
         XCTAssertFalse(fresh.touch(CGPoint(x: 0.95, y: 0.95)))
         XCTAssertTrue(fresh.hits.allSatisfy(\.isEmpty))
     }
+
+    func testHalfAStrokeOrTheStrokeNextDoorDoesNotFinishIt() {
+        // Two thirds of the way down E's stem isn't the whole stem.
+        var tracing = Tracing(letter: TraceLetter.named("E"))
+        for point in TraceLetter.resample([CGPoint(x: 0.3, y: 0.15), CGPoint(x: 0.3, y: 0.62)], every: 0.02) { _ = tracing.touch(point) }
+        XCTAssertFalse(tracing.traced.contains(0))
+        // Tracing B's stem doesn't count for its round parts beside it.
+        var b = Tracing(letter: TraceLetter.named("B"))
+        for point in TraceLetter.resample([CGPoint(x: 0.3, y: 0.15), CGPoint(x: 0.3, y: 0.85)], every: 0.02) { _ = b.touch(point) }
+        XCTAssertEqual(b.traced, [0])
+    }
 }
