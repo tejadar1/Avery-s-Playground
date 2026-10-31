@@ -39,6 +39,24 @@ struct Puzzle {
         ]
     }
 
+    /// Where loose pieces start: random spots in `area` around the picture (`board`), not on it, and spread out. Each
+    /// spot tries a few random places and keeps the one farthest from the pieces already placed.
+    static func scatter(count: Int, piece: CGSize, around board: CGRect, in area: CGSize) -> [CGPoint] {
+        let keepOff = board.insetBy(dx: -piece.width * 0.3, dy: -piece.height * 0.3)
+        var points: [CGPoint] = []
+        for _ in 0..<count {
+            let tries = (0..<80).map { _ in
+                CGPoint(x: .random(in: piece.width / 2...max(piece.width / 2, area.width - piece.width / 2)),
+                        y: .random(in: piece.height / 2...max(piece.height / 2, area.height - piece.height / 2)))
+            }
+            let off = tries.filter { !keepOff.contains($0) }
+            let room = { (p: CGPoint) in points.map { hypot($0.x - p.x, $0.y - p.y) }.min() ?? 0 }
+            let best = (off.isEmpty ? tries : off).max { room($0) < room($1) }!
+            points.append(best)
+        }
+        return points
+    }
+
     /// Snaps `piece` in if it was let go within `reach` of its place (all in the picture's units: 1 is a piece).
     mutating func drop(_ piece: Int, offBy distance: Double, reach: Double = 0.4) -> Bool {
         guard distance < reach, !placed.contains(piece) else { return false }
@@ -99,16 +117,15 @@ struct PuzzleView: View {
 
     var body: some View {
         VStack(spacing: 10 * uiScale) {
-            HStack(alignment: .top, spacing: 12 * uiScale) {
-                CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+            HStack(spacing: 12 * uiScale) {
                 ForEach(Puzzle.sizes.indices, id: \.self) { index in sizeButton(index) }
             }
-            .padding(.horizontal)
 
             GeometryReader { geo in
                 let area = geo.size
                 // The picture in the middle, leaving room around it for the pieces.
-                let width = min(area.width * 0.62, area.height * 0.62 * 4 / 3)
+                let width = min(area.width * 0.55, area.height * 0.55 * 4 / 3)
                 let height = width * 3 / 4
                 let board = CGRect(x: (area.width - width) / 2, y: (area.height - height) / 2, width: width, height: height)
                 let cell = CGSize(width: width / CGFloat(puzzle.columns), height: height / CGFloat(puzzle.rows))
@@ -152,9 +169,9 @@ struct PuzzleView: View {
                     }
                 }
                 .frame(width: area.width, height: area.height)
-                .onAppear { if spots.isEmpty { scatter(board: board, in: area) } }
-                .onChange(of: puzzle.count) { scatter(board: board, in: area) }
-                .onChange(of: puzzle.picture) { scatter(board: board, in: area) }
+                .onAppear { if spots.isEmpty { scatter(board: board, cell: cell, in: area) } }
+                .onChange(of: puzzle.count) { scatter(board: board, cell: cell, in: area) }
+                .onChange(of: puzzle.picture) { scatter(board: board, cell: cell, in: area) }
             }
             .padding(.horizontal)
         }
@@ -197,16 +214,11 @@ struct PuzzleView: View {
                 y: board.minY + (CGFloat(index / puzzle.columns) + 0.5) * cell.height)
     }
 
-    /// Loose pieces go around the picture: in the space to its left and right, or above and below if that's bigger.
-    private func scatter(board: CGRect, in area: CGSize) {
-        let sides = board.minX > board.minY
-        spots = Dictionary(uniqueKeysWithValues: (0..<puzzle.count).shuffled().enumerated().map { order, index in
-            let first = order.isMultiple(of: 2)
-            let along = (CGFloat(order / 2) + 0.5) / CGFloat((puzzle.count + 1) / 2)
-            let point = sides
-                ? CGPoint(x: first ? board.minX / 2 : (board.maxX + area.width) / 2, y: along * area.height)
-                : CGPoint(x: along * area.width, y: first ? board.minY / 2 : (board.maxY + area.height) / 2)
-            return (index, CGPoint(x: point.x / area.width, y: point.y / area.height))
+    private func scatter(board: CGRect, cell: CGSize, in area: CGSize) {
+        let piece = CGSize(width: cell.width * (1 + 2 * JigsawShape.knob), height: cell.height * (1 + 2 * JigsawShape.knob))
+        let points = Puzzle.scatter(count: puzzle.count, piece: piece, around: board, in: area)
+        spots = Dictionary(uniqueKeysWithValues: points.enumerated().map { index, point in
+            (index, CGPoint(x: point.x / area.width, y: point.y / area.height))
         })
     }
 

@@ -63,6 +63,13 @@ final class TeamUpTests: XCTestCase {
             XCTAssertTrue(puzzle.isDone)
             XCTAssertFalse(puzzle.drop(0, offBy: 0), "placed pieces stay placed")
         }
+        // Loose pieces start around the picture, not on it, on a phone and on an iPad.
+        for (area, board) in [(CGSize(width: 358, height: 560), CGRect(x: 80, y: 206, width: 197, height: 148)),
+                              (CGSize(width: 1000, height: 1000), CGRect(x: 225, y: 331, width: 550, height: 412))] {
+            let points = Puzzle.scatter(count: 9, piece: CGSize(width: board.width / 3 * 1.44, height: board.height / 3 * 1.44), around: board, in: area)
+            XCTAssertEqual(points.count, 9)
+            XCTAssertTrue(points.allSatisfy { !board.contains($0) && $0.x >= 0 && $0.x <= area.width && $0.y >= 0 && $0.y <= area.height })
+        }
         for picture in Puzzle.pictures {
             XCTAssertNotNil(UIImage(named: "Puzzle-\(picture)"), picture)
         }
