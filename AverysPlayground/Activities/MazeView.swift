@@ -102,32 +102,22 @@ struct MazeView: View {
 
     var body: some View {
         GeometryReader { screen in
-            // On a screen wider than tall (an iPad on its side), Coco and the button go beside the square maze,
-            // so it can be the full height.
+            // On a screen wider than tall (an iPad on its side), the button goes beside the square maze, so it can
+            // be taller; Coco stays across the top, where her bubble has room.
             let wide = screen.size.width > screen.size.height * 1.15
-            let layout = wide ? AnyLayout(HStackLayout(spacing: 12 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
-            layout {
-                if wide {
-                    VStack(spacing: 20 * uiScale) {
-                        CocoSays(text: cheer, hops: cheerCount, cheers: wins)
-                        Spacer()
-                        newMazeButton
+            VStack(spacing: 12 * uiScale) {
+                CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                let layout = wide ? AnyLayout(HStackLayout(spacing: 20 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
+                layout {
+                    GeometryReader { geo in
+                        let side = min(geo.size.width, geo.size.height)
+                        board(side: side)
+                            .frame(width: side, height: side)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .frame(width: min(screen.size.width * 0.3, 360 * uiScale))
-                    .padding(.vertical, 12 * uiScale)
-                } else {
-                    CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                    newMazeButton
                 }
-
-                GeometryReader { geo in
-                    let side = min(geo.size.width, geo.size.height)
-                    board(side: side)
-                        .frame(width: side, height: side)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .padding(wide ? .vertical : .horizontal)
-
-                if !wide { newMazeButton }
+                .padding(.horizontal)
             }
             .padding(.bottom, 12 * uiScale)
         }

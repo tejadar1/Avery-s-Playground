@@ -43,13 +43,17 @@ struct TicTacToeView: View {
             }
             .padding(.horizontal)
 
-            // Square, and only as big as the space left, so it fits an iPad held sideways too.
-            ZStack {
-                board
-                if game.winner != nil { Sparkles() }
+            // Square, and only as big as the space left (the grid works out its height from its width, so it's
+            // sized here), which keeps Play again on screen on an iPad held sideways.
+            GeometryReader { geo in
+                let side = min(geo.size.width, geo.size.height, 600 * uiScale)
+                ZStack {
+                    board
+                    if game.winner != nil { Sparkles() }
+                }
+                .frame(width: side, height: side)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .aspectRatio(1, contentMode: .fit)
-            .frame(maxWidth: 520 * uiScale, maxHeight: .infinity)
             .padding(.horizontal)
 
             if game.winner != nil || game.isTie {

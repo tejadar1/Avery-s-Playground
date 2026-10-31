@@ -65,7 +65,11 @@ struct HomeView: View {
                     .toolbar { ToolbarItem(placement: .topBarTrailing) { MusicButton() } }
             }
             .navigationDestination(for: Activity.self) { activity in
-                activity.destination
+                // Games lay out differently on a screen much wider than tall (an iPad on its side).
+                GeometryReader { screen in
+                    activity.destination
+                        .environment(\.isWide, uiScale > 1 && screen.size.width > screen.size.height * 1.15)
+                }
                     .navigationTitle(activity.title)
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {

@@ -252,16 +252,19 @@ struct NailSalonView: View {
     var body: some View {
         VStack(spacing: 0) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
-            if let zoomed {
-                bigNail(zoomed)
-            } else {
-                hand
-            }
-            if isShowingOff {
-                PhotoOrNext(next: "New nails", takePhoto: takePhoto, goNext: reset)
-                    .padding(.vertical, 8 * uiScale)
-            } else {
-                toolTray
+            SceneWithTools {
+                if let zoomed {
+                    bigNail(zoomed)
+                } else {
+                    hand
+                }
+            } tools: {
+                if isShowingOff {
+                    PhotoOrNext(next: "New nails", takePhoto: takePhoto, goNext: reset)
+                        .padding(.vertical, 8 * uiScale)
+                } else {
+                    toolTray
+                }
             }
         }
         .photo(photo, caption: Kid.name, flashes: flashes, size: 220 * uiScale)
@@ -459,8 +462,8 @@ struct NailSalonView: View {
     }
 
     private var toolTray: some View {
-        VStack(spacing: 10 * uiScale) {
-            HStack(spacing: 14 * uiScale) {
+        ToolCross(spacing: 10 * uiScale) {
+            ToolLine(spacing: 14 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button { pick(item) } label: {
                         Picture(item.picture, size: 30 * uiScale)
@@ -482,8 +485,7 @@ struct NailSalonView: View {
                 .buttonStyle(SquishyButtonStyle())
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 14 * uiScale) {
+            ToolScroll(spacing: 14 * uiScale) {
                     switch tray {
                     case .polish:
                         ForEach(Self.polishes, id: \.self) { color in
@@ -511,9 +513,6 @@ struct NailSalonView: View {
                             }
                         }
                     }
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 14 * uiScale)
             }
         }
         .padding(.top, 12 * uiScale)

@@ -129,6 +129,7 @@ struct Mouth: Equatable {
 }
 
 struct DentistView: View {
+    @Environment(\.isWide) private var isWide
     @State private var mouth = Mouth()
     /// Whose turn it is, in Patient.allCases.
     @State private var turn = 0
@@ -147,26 +148,28 @@ struct DentistView: View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
-            GeometryReader { geo in
-                let side = min(geo.size.width, geo.size.height)
-                mouthView(side: side)
-                    .frame(width: side, height: side)
-                    .photo(photo, caption: patient.name, flashes: flashes, size: side * 0.6)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .padding(.horizontal)
-            .overlay(alignment: .topTrailing) {
-                UpNext(count: Patient.allCases.count, current: turn) { index in
-                    let waiting = Patient.allCases[index]
-                    Canvas { context, size in DentistArt.draw(nil, patient: waiting, in: &context, size: size) }
+            SceneWithTools {
+                GeometryReader { geo in
+                    let side = min(geo.size.width, geo.size.height)
+                    mouthView(side: side)
+                        .frame(width: side, height: side)
+                        .photo(photo, caption: patient.name, flashes: flashes, size: side * 0.6)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .padding(.trailing)
-            }
-
-            if mouth.isClean {
-                PhotoOrNext(next: "\(nextPatient.name)'s turn", takePhoto: takePhoto, goNext: newPatient)
-            } else {
-                toolTray
+                .padding(.horizontal)
+                .overlay(alignment: .topTrailing) {
+                    UpNext(count: Patient.allCases.count, current: turn) { index in
+                        let waiting = Patient.allCases[index]
+                        Canvas { context, size in DentistArt.draw(nil, patient: waiting, in: &context, size: size) }
+                    }
+                    .padding(.trailing)
+                }
+            } tools: {
+                if mouth.isClean {
+                    PhotoOrNext(next: "\(nextPatient.name)'s turn", takePhoto: takePhoto, goNext: newPatient)
+                } else {
+                    toolTray
+                }
             }
         }
         .background(Scenery(.salon).ignoresSafeArea())
@@ -175,7 +178,7 @@ struct DentistView: View {
 
     /// Four big tools with their names. The one to use next bounces, so it's easy to see what to press.
     private var toolTray: some View {
-        HStack(spacing: 12 * uiScale) {
+        ToolLine(spacing: 12 * uiScale) {
             ForEach(DentistTool.allCases, id: \.self) { item in
                 Button { pick(item) } label: {
                     VStack(spacing: 2 * uiScale) {
@@ -194,8 +197,8 @@ struct DentistView: View {
                 .accessibilityLabel(item.rawValue)
             }
         }
-        .padding(.vertical, 14 * uiScale)
-        .frame(maxWidth: .infinity)
+        .padding(14 * uiScale)
+        .frame(maxWidth: isWide ? nil : .infinity, maxHeight: isWide ? .infinity : nil)  // a full-width shelf, or a column
         .background(Color.white.opacity(0.7).ignoresSafeArea(edges: .bottom))
     }
 

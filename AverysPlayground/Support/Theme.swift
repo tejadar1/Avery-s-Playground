@@ -191,12 +191,14 @@ struct CocoSays: View {
     ]
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// Smaller on a wide screen, where height is short and the game needs it.
+    @Environment(\.isWide) private var isWide
     @State private var joke: String?
     @State private var spins = 0
 
     var body: some View {
         HStack(alignment: .center, spacing: 4 * uiScale) {
-            CocoFigure(height: 100 * uiScale)
+            CocoFigure(height: (isWide ? 66 : 100) * uiScale)
                 .phaseAnimator([CGFloat(0), -14], trigger: hops) { content, lift in
                     content.offset(y: lift)
                 } animation: { _ in
@@ -222,7 +224,7 @@ struct CocoSays: View {
                 .accessibilityAddTraits(.isButton)
 
             Text(joke ?? text)
-                .font(.kid(22))
+                .font(.kid(isWide ? 19 : 22))
                 .foregroundStyle(Color.outline)
                 .padding(.leading, 28 * uiScale)
                 .padding(.trailing, 16 * uiScale)
@@ -376,5 +378,75 @@ enum CardGrid {
                 return (columns, max(width, 0))
             }
             .max { $0.width < $1.width }!
+    }
+}
+
+/// Whether the game is on a screen much wider than tall (an iPad on its side). Set for every game in HomeView.
+private struct WideKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var isWide: Bool {
+        get { self[WideKey.self] }
+        set { self[WideKey.self] = newValue }
+    }
+}
+
+/// A row of tools, or a column on a wide screen, where the tools go beside the picture so it can be the full height.
+struct ToolLine<Content: View>: View {
+    @Environment(\.isWide) private var isWide
+    var spacing: CGFloat
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        (isWide ? AnyLayout(VStackLayout(spacing: spacing)) : AnyLayout(HStackLayout(spacing: spacing))) { content }
+    }
+}
+
+/// Rows of tools stacked (one above the other), or side by side as columns on a wide screen.
+struct ToolCross<Content: View>: View {
+    @Environment(\.isWide) private var isWide
+    var spacing: CGFloat
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        (isWide ? AnyLayout(HStackLayout(alignment: .top, spacing: spacing)) : AnyLayout(VStackLayout(spacing: spacing))) { content }
+    }
+}
+
+/// A scrolling row of tools, or a scrolling column on a wide screen.
+struct ToolScroll<Content: View>: View {
+    @Environment(\.isWide) private var isWide
+    var spacing: CGFloat
+    @ViewBuilder var content: Content
+
+    var body: some View {
+        ScrollView(isWide ? .vertical : .horizontal, showsIndicators: false) {
+            ToolLine(spacing: spacing) { content }
+                .padding(isWide ? .vertical : .horizontal)
+                .padding(isWide ? .horizontal : .vertical, 14 * uiScale)
+        }
+    }
+}
+
+/// A game's picture with its tools under it, or beside it on a wide screen, so the picture gets the height.
+struct SceneWithTools<Scene: View, Tools: View>: View {
+    @Environment(\.isWide) private var isWide
+    @ViewBuilder var scene: Scene
+    @ViewBuilder var tools: Tools
+
+    var body: some View {
+        if isWide {
+            HStack(spacing: 12 * uiScale) {
+                scene
+                tools.padding(.trailing)
+            }
+        } else {
+            VStack(spacing: 0) {
+                scene
+                tools
+            }
+        }
     }
 }

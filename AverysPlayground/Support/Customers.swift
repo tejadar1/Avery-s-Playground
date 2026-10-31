@@ -105,7 +105,7 @@ struct PhotoOrNext: View {
     let goNext: () -> Void
 
     var body: some View {
-        HStack(spacing: 14 * uiScale) {
+        ToolLine(spacing: 14 * uiScale) {  // a column beside the picture on a wide screen
             Button(action: takePhoto) {
                 Label("Picture", systemImage: "camera.fill")
                     .font(.kid(24))

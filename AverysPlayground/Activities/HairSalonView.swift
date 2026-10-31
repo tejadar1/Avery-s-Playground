@@ -212,14 +212,17 @@ struct HairSalonView: View {
     var body: some View {
         VStack(spacing: 0) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
-            head
-            if isShowingOff {
-                PhotoOrNext(next: "\(Friend.all[(customer + 1) % Friend.all.count].name)'s turn", takePhoto: takePhoto) {
-                    customer = (customer + 1) % Friend.all.count
-                    newCustomer()
+            SceneWithTools {
+                head
+            } tools: {
+                if isShowingOff {
+                    PhotoOrNext(next: "\(Friend.all[(customer + 1) % Friend.all.count].name)'s turn", takePhoto: takePhoto) {
+                        customer = (customer + 1) % Friend.all.count
+                        newCustomer()
+                    }
+                } else {
+                    toolTray
                 }
-            } else {
-                toolTray
             }
         }
         .background(Scenery(.salon).ignoresSafeArea())
@@ -275,8 +278,8 @@ struct HairSalonView: View {
     }
 
     private var toolTray: some View {
-        VStack(spacing: 10 * uiScale) {
-            HStack(spacing: 14 * uiScale) {
+        ToolCross(spacing: 10 * uiScale) {
+            ToolLine(spacing: 14 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button { pick(item) } label: {
                         Picture(item.picture, size: 38 * uiScale)
@@ -298,8 +301,7 @@ struct HairSalonView: View {
                 .buttonStyle(SquishyButtonStyle())
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 14 * uiScale) {
+            ToolScroll(spacing: 14 * uiScale) {
                     switch tray {
                     case .wash:
                         ForEach(HairTool.allCases, id: \.self) { item in
@@ -360,9 +362,6 @@ struct HairSalonView: View {
                             }
                         }
                     }
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 14 * uiScale)
             }
         }
         .padding(.top, 12 * uiScale)

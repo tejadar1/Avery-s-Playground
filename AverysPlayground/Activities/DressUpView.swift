@@ -61,34 +61,36 @@ struct DressUpView: View {
         VStack(spacing: 0) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
 
-            ZStack {
-                Doll(outfit: outfit, friend: friend)
-                    .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Doll")
-                    .accessibilityIdentifier("Doll")
-                if isShowingOff { Sparkles() }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .photo(photo, caption: friend.name, flashes: flashes, size: 220 * uiScale)
-            .padding(.horizontal)
-            .overlay(alignment: .bottomTrailing) {  // beside the hem, clear of her head
-                UpNext(count: Friend.all.count, current: model) { index in
-                    // Just her face: the whole doll, zoomed in on the head
-                    let width = 150 * uiScale
-                    Doll(friend: Friend.all[index])
-                        .frame(width: width, height: width * Doll.height)
-                        .offset(y: width * (Doll.height / 2 - 0.165))
+            SceneWithTools {
+                ZStack {
+                    Doll(outfit: outfit, friend: friend)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("Doll")
+                        .accessibilityIdentifier("Doll")
+                    if isShowingOff { Sparkles() }
                 }
-                .padding(.trailing)
-            }
-
-            if isShowingOff {
-                PhotoOrNext(next: "\(Friend.all[(model + 1) % Friend.all.count].name)'s turn", takePhoto: takePhoto) {
-                    model = (model + 1) % Friend.all.count
-                    newDoll()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .photo(photo, caption: friend.name, flashes: flashes, size: 220 * uiScale)
+                .padding(.horizontal)
+                .overlay(alignment: .bottomTrailing) {  // beside the hem, clear of her head
+                    UpNext(count: Friend.all.count, current: model) { index in
+                        // Just her face: the whole doll, zoomed in on the head
+                        let width = 150 * uiScale
+                        Doll(friend: Friend.all[index])
+                            .frame(width: width, height: width * Doll.height)
+                            .offset(y: width * (Doll.height / 2 - 0.165))
+                    }
+                    .padding(.trailing)
                 }
-            } else {
-                trayView
+            } tools: {
+                if isShowingOff {
+                    PhotoOrNext(next: "\(Friend.all[(model + 1) % Friend.all.count].name)'s turn", takePhoto: takePhoto) {
+                        model = (model + 1) % Friend.all.count
+                        newDoll()
+                    }
+                } else {
+                    trayView
+                }
             }
         }
         .background(Scenery(.salon).ignoresSafeArea())
@@ -99,8 +101,8 @@ struct DressUpView: View {
     }
 
     private var trayView: some View {
-        VStack(spacing: 10 * uiScale) {
-            HStack(spacing: 8 * uiScale) {
+        ToolCross(spacing: 10 * uiScale) {
+            ToolLine(spacing: 8 * uiScale) {
                 ForEach(Tray.allCases, id: \.self) { item in
                     Button {
                         Haptics.tap()
@@ -131,8 +133,7 @@ struct DressUpView: View {
                 .buttonStyle(SquishyButtonStyle())
             }
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 12 * uiScale) {
+            ToolScroll(spacing: 12 * uiScale) {
                     switch tray {
                     case .clothes:
                         ForEach(Outfit.Clothes.allCases, id: \.self) { item in
@@ -171,9 +172,6 @@ struct DressUpView: View {
                                    isOn: outfit.extra == item) { outfit.extra = item }
                         }
                     }
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 14 * uiScale)
             }
         }
         .padding(.top, 10 * uiScale)
