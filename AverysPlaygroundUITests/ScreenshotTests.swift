@@ -260,7 +260,7 @@ final class ScreenshotTests: XCTestCase {
     }
 
     private func goHome() {
-        for _ in 0..<4 where !app.staticTexts["Step Up"].exists {
+        for _ in 0..<4 where !app.staticTexts["Avery's World"].exists {
             app.navigationBars.buttons.element(boundBy: 0).tap()
         }
     }
