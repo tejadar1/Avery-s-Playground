@@ -79,12 +79,17 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     images: [{ filename: 'LaunchCoco.png', idiom: 'universal', scale: '3x' }],
     info: { author: 'xcode', version: 1 },
   }, null, 2) + '\n');
-  // App icon: Coco standing on the A block at the top of her toy-block stack, flat like the rest of the art.
-  const iconSvg = fs.readFileSync(path.join(__dirname, 'app-icon.svg'), 'utf8').replace('<g id="coco"/>',
-    coco.replace('<svg ', '<svg x="292" y="62" width="430" height="450" '));
+  // App icon: Coco on a stack of books, in light, dark and tinted (iOS 18). Coco's outlines are thinner here so
+  // color does the work at small sizes; in the tinted one she's grey, like the rest.
+  const iconCoco = coco.replace(/stroke-width="([0-9.]+)"/g, (m, w) => `stroke-width="${(w * 0.55).toFixed(1)}"`)
+    .replace('<svg ', '<svg x="250" y="58" width="520" height="545" ');
   const icon = await browser.newPage({ viewport: { width: 1024, height: 1024 } });
-  await icon.setContent(`<style>html,body{margin:0}svg{display:block;width:100vw;height:100vh}</style>${iconSvg}`);
-  await icon.screenshot({ path: path.join(assets, 'AppIcon.appiconset/AppIcon.png') });  // no transparency: the App Store refuses it
+  for (const [file, png, grey] of [['app-icon.svg', 'AppIcon.png'], ['app-icon-dark.svg', 'AppIcon-dark.png'], ['app-icon-tinted.svg', 'AppIcon-tinted.png', true]]) {
+    const svg = fs.readFileSync(path.join(__dirname, file), 'utf8')
+      .replace('<g id="coco"/>', grey ? `<g style="filter:grayscale(1) brightness(1.2)">${iconCoco}</g>` : iconCoco);
+    await icon.setContent(`<style>html,body{margin:0}svg{display:block;width:100vw;height:100vh}</style>${svg}`);
+    await icon.screenshot({ path: path.join(assets, 'AppIcon.appiconset', png) });  // no transparency: the App Store refuses it
+  }
   await icon.close();
   await browser.close();
 })();
