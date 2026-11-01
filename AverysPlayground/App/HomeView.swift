@@ -147,13 +147,9 @@ private extension HomeView {
 
     var title: some View {
         VStack(spacing: 2 * uiScale) {
-            // Her world, big; the app's name small underneath.
             Text("\(name)'s World")
                 .font(.kid(40))
                 .foregroundStyle(Color.outline)
-            Text("Step Up · Learn & Play with Coco")
-                .font(.kid(18))
-                .foregroundStyle(Color(red: 0.2, green: 0.6, blue: 0.55))
             HStack(spacing: 8 * uiScale) {
                 Text("Hi \(name)! What should we do today?")
                     .font(.kid(20))
