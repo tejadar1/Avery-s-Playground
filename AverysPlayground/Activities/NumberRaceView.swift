@@ -93,7 +93,7 @@ struct NumberRaceView: View {
         let across = (width: acrossWidth, height: min(acrossWidth * 3.5, size.height))
         let upHeight = (size.height - gaps) / count
         let up = (width: min(size.width * 0.7, upHeight * 6), height: upHeight)
-        return min(up.width, up.height) > min(across.width, across.height)
+        return size.height > size.width || min(up.width, up.height) > min(across.width, across.height)
             ? (true, up.width, up.height) : (false, across.width, across.height)
     }
 

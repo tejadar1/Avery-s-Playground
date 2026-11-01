@@ -101,7 +101,7 @@ struct Routine: Equatable {
 struct RoutinesView: View {
     @Environment(\.isWide) private var isWide
     /// Taller cards and bigger pictures on an upright iPad, so the steps fill the screen.
-    private var tall: CGFloat { uiScale > 1 && !isWide ? 1.15 : 1 }
+    private var tall: CGFloat { uiScale > 1 && !isWide ? 1.25 : 1 }
     private static let green = Color(red: 0.45, green: 0.75, blue: 0.45)
     private static let red = Color(red: 0.91, green: 0.3, blue: 0.33)
 
@@ -136,7 +136,7 @@ struct RoutinesView: View {
             if let timerEnd { timerBar(until: timerEnd) }
 
             ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 140 * uiScale), spacing: 14 * uiScale)], spacing: 14 * uiScale) {
+                LazyVGrid(columns: tall > 1 ? Array(repeating: GridItem(.flexible(), spacing: 14 * uiScale), count: 3) : [GridItem(.adaptive(minimum: 140 * uiScale), spacing: 14 * uiScale)], spacing: 14 * uiScale) {
                     ForEach(Array(routine.steps.enumerated()), id: \.offset) { index, step in
                         stepButton(index, step)
                     }

@@ -59,12 +59,15 @@ struct SoundSpyView: View {
             GeometryReader { geo in
                 let gap = 16 * uiScale
                 // Three across on an iPad, even upright, where one column left the sides empty.
-                let fit = uiScale > 1 ? (columns: 3, width: min((geo.size.width - 2 * gap) / 3, geo.size.height)) : CardGrid.fit(count: round.choices.count, in: geo.size, gap: gap, aspect: 1)
+                let upright = geo.size.height > geo.size.width
+                let fit = uiScale == 1 ? CardGrid.fit(count: round.choices.count, in: geo.size, gap: gap, aspect: 1)
+                    : upright ? (columns: 2, width: min((geo.size.width - gap) / 2, (geo.size.height - gap) / 2))
+                    : (columns: 3, width: min((geo.size.width - 2 * gap) / 3, geo.size.height))
                 Grid(horizontalSpacing: gap, verticalSpacing: gap) {
-                    ForEach(0..<round.choices.count / fit.columns, id: \.self) { row in
+                    ForEach(0..<(round.choices.count + fit.columns - 1) / fit.columns, id: \.self) { row in
                         GridRow {
                             ForEach(0..<fit.columns, id: \.self) { column in
-                                card(round.choices[row * fit.columns + column], size: fit.width)
+                                if row * fit.columns + column < round.choices.count { card(round.choices[row * fit.columns + column], size: fit.width) }
                             }
                         }
                     }
