@@ -228,6 +228,7 @@ struct BingoView: View {
                         .opacity(game.cocoCovered.contains(tile) ? 0.6 : 1)
                 }
             }
+            .fixedSize()  // a grid stretches to the room it's offered, which pushed the machine off a phone's edge
         }
         .padding(10 * uiScale)
         .cartoonCard(.white, cornerRadius: 18 * uiScale)
