@@ -14,7 +14,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .pet: "Mochi"
         case .hop: "Coco Hop"
         case .maze: "Maze"
-        case .spot: "Spot It"
+        case .spot: "Find It"
         case .piano: "Piano"
         case .reading: "Read"
         case .rhyme: "Rhyme Time"
@@ -38,8 +38,8 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .hide: "Hide Coco"
         case .ispy: "I Spy"
         case .puzzle: "Puzzles"
-        case .routines: "Routines"
-        case .chores: "Chores"
+        case .routines: "Day & Night"
+        case .chores: "Helper"
         }
     }
 

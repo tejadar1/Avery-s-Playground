@@ -103,7 +103,7 @@ final class ScreenshotTests: XCTestCase {
                     sleep(1)
                 }
             }),
-            ("Spot It", {
+            ("Find It", {
                 self.tap(self.button("Easy"))
                 sleep(1)
                 self.find("First picture").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
@@ -154,17 +154,17 @@ final class ScreenshotTests: XCTestCase {
                 self.tap(self.button("Spin"))
             }),
             ("Puzzles", {}),
-            ("Routines", {
+            ("Day & Night", {
                 self.tap(self.button("Morning"))
                 for step in ["Wake up", "Take vitamins", "Get dressed"] { self.tap(self.button(step)) }
             }),
-            ("Chores", {
+            ("Helper", {
                 for step in ["Make your bed", "Put toys away"] { self.tap(self.button(step)) }
             }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy"], myDay = ["Routines", "Chores"]
+        let learn = ["Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy"], myDay = ["Day & Night", "Helper"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
