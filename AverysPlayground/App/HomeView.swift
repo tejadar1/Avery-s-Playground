@@ -25,15 +25,17 @@ struct HomeView: View {
                     }
                     .padding(.top, 8 * uiScale)
 
-                    // All five in one row on an iPad held sideways, so the menu fits without scrolling.
+                    // All five in one row on an iPad held sideways, and three across upright, so the menu fits without
+                    // scrolling; a phone scrolls.
                     let sideways = uiScale > 1 && screen.size.width > screen.size.height
-                    let columns = sideways ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: HomeSection.allCases.count + 1)
+                    let columns = uiScale > 1 ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: sideways ? HomeSection.allCases.count + 1 : 3)
                         : [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)]
+                    let iconHeight = (uiScale > 1 ? sideways ? 70 : 80 : 110) * uiScale
                     LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         // A section whose games are all hidden doesn't show.
                         ForEach(HomeSection.allCases.filter { !$0.shown(hiding: hiddenGames).isEmpty }) { section in
                             NavigationLink(value: section) {
-                                SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: (sideways ? 70 : 110) * uiScale)
+                                SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: iconHeight)
                             }
                             .buttonStyle(SquishyButtonStyle())
                         }
@@ -42,7 +44,7 @@ struct HomeView: View {
                                 .navigationTitle("Stickers")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            StickerTile(stickers: stickers, height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: (sideways ? 70 : 110) * uiScale)
+                            StickerTile(stickers: stickers, height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: iconHeight)
                         }
                         .buttonStyle(SquishyButtonStyle())
                     }
@@ -83,7 +85,7 @@ struct HomeView: View {
             }
         }
         .tint(Color.outline)
-        .sheet(isPresented: $isNaming) { GrownUpSettings() }
+        .fullScreenCover(isPresented: $isNaming) { GrownUpSettings() }
     }
 }
 

@@ -46,7 +46,7 @@ struct ABCView: View {
     @State private var selected = ABCView.letters[0]
     @State private var bounceCount = 0
 
-    private let columns = [GridItem(.adaptive(minimum: 64 * uiScale), spacing: 12 * uiScale)]
+    private var columns: [GridItem] { [GridItem(.adaptive(minimum: 64 * uiScale * roomy(isWide)), spacing: 12 * uiScale)] }
 
     var body: some View {
         VStack(spacing: 16 * uiScale) {
@@ -79,9 +79,9 @@ struct ABCView: View {
                     ForEach(Array(Self.letters.enumerated()), id: \.element.id) { index, item in
                         Button { choose(item) } label: {
                             Text(item.letter)
-                                .font(.kid(36))
+                                .font(.kid(36 * roomy(isWide)))
                                 .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity, minHeight: 64 * uiScale)
+                                .frame(maxWidth: .infinity, minHeight: 64 * uiScale * roomy(isWide))
                                 .background(
                                     Self.tileColors[index % Self.tileColors.count].gradient,
                                     in: RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)

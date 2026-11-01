@@ -70,7 +70,7 @@ struct CountingView: View {
         // The things to count, laid out on a picnic blanket, as big as the space allows.
         GeometryReader { geo in
             let gap = 14 * uiScale
-            let fit = Self.fit(number, in: CGSize(width: geo.size.width - 48 * uiScale, height: geo.size.height - 48 * uiScale), gap: gap)
+            let fit = Self.fit(number, in: CGSize(width: geo.size.width - 48 * uiScale, height: geo.size.height - 48 * uiScale), gap: gap, cap: 240 * uiScale)
             Grid(horizontalSpacing: gap, verticalSpacing: gap) {
                 ForEach(0..<(number + fit.columns - 1) / fit.columns, id: \.self) { row in
                     GridRow {
@@ -129,10 +129,10 @@ struct CountingView: View {
     }
 
     /// Columns and size for `count` round things to fill `size`, as big as they can be (up to 240 points).
-    nonisolated static func fit(_ count: Int, in size: CGSize, gap: CGFloat) -> (columns: Int, side: CGFloat) {
+    nonisolated static func fit(_ count: Int, in size: CGSize, gap: CGFloat, cap: CGFloat = 240) -> (columns: Int, side: CGFloat) {
         (1...max(1, count)).map { columns -> (columns: Int, side: CGFloat) in
             let rows = CGFloat((count + columns - 1) / columns), cols = CGFloat(columns)
-            let side = min((size.width - gap * (cols - 1)) / cols, (size.height - gap * (rows - 1)) / rows, 240)
+            let side = min((size.width - gap * (cols - 1)) / cols, (size.height - gap * (rows - 1)) / rows, cap)
             return (columns, max(side, 40))
         }
         .max { $0.side < $1.side }!

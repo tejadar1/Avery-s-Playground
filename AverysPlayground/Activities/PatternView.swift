@@ -54,6 +54,8 @@ struct PatternView: View {
             .foregroundStyle(Color.outline)
             .contentTransition(.numericText())
 
+            Spacer()
+
             FlowLayout(spacing: 10 * uiScale, lineSpacing: 10 * uiScale) {
                 ForEach(Array(round.shown.enumerated()), id: \.offset) { _, thing in
                     Picture(thing.picture, size: 64 * uiScale * roomy(isWide))
@@ -74,7 +76,7 @@ struct PatternView: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Pattern")
 
-            Spacer()
+            Spacer().frame(maxHeight: 60 * uiScale)
 
             HStack(spacing: 16 * uiScale) {
                 ForEach(round.choices, id: \.text) { choice in
@@ -90,7 +92,8 @@ struct PatternView: View {
                     .accessibilityLabel(choice.text)
                 }
             }
-            .padding(.bottom, 40 * uiScale)
+
+            Spacer()
         }
         .padding(.horizontal)
         .background(Scenery(.classroom).ignoresSafeArea())

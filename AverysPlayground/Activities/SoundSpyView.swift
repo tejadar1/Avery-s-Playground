@@ -58,7 +58,8 @@ struct SoundSpyView: View {
             // The pictures, as big as the space allows.
             GeometryReader { geo in
                 let gap = 16 * uiScale
-                let fit = CardGrid.fit(count: round.choices.count, in: geo.size, gap: gap, aspect: 1)
+                // Three across on an iPad, even upright, where one column left the sides empty.
+                let fit = uiScale > 1 ? (columns: 3, width: min((geo.size.width - 2 * gap) / 3, geo.size.height)) : CardGrid.fit(count: round.choices.count, in: geo.size, gap: gap, aspect: 1)
                 Grid(horizontalSpacing: gap, verticalSpacing: gap) {
                     ForEach(0..<round.choices.count / fit.columns, id: \.self) { row in
                         GridRow {

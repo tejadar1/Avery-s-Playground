@@ -21,8 +21,9 @@ struct AverysPlaygroundApp: App {
                     .transition(.opacity)
                 }
             }
-            // The first time, a grown-up types the child's name and picks their age before playing.
-            .sheet(isPresented: .constant(isReady && (kidName.isEmpty || kidAge.isEmpty || nextAge != nil))) {
+            // The first time, a grown-up types the child's name and picks their age before playing. Full screen, since a
+            // sheet on an iPad is a small card in the middle.
+            .fullScreenCover(isPresented: .constant(isReady && (kidName.isEmpty || kidAge.isEmpty || nextAge != nil))) {
                 if kidName.isEmpty { NameEntry() } else { AgeEntry(suggesting: kidAge.isEmpty ? nil : nextAge) }
             }
         }

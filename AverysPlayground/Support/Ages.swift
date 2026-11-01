@@ -88,6 +88,8 @@ struct AgeEntry: View {
                         } label: {
                             Text(Ages.label(choice))
                                 .font(.kid(choice == "all" ? 20 : 26))
+                                .lineLimit(1)
+                                .fixedSize()
                                 .foregroundStyle(age == choice ? .white : Color.outline)
                                 .padding(.horizontal, 14 * uiScale)
                                 .frame(minWidth: 56 * uiScale, minHeight: 56 * uiScale)
@@ -150,8 +152,10 @@ struct AgeEntry: View {
                                 Image(activity.icon).resizable().scaledToFit().frame(width: 40 * uiScale, height: 40 * uiScale)
                                 VStack(alignment: .leading, spacing: 0) {
                                     Text(activity.title).font(.kid(17)).foregroundStyle(Color.outline)
+                                        .lineLimit(1).minimumScaleFactor(0.6)
                                     if activity.fromAge > 2 {
                                         Text("Best from age \(activity.fromAge)").font(.kid(13)).foregroundStyle(Color.outline.opacity(0.6))
+                                            .lineLimit(1).minimumScaleFactor(0.6)
                                     }
                                 }
                                 Spacer(minLength: 0)
@@ -184,6 +188,8 @@ struct AgeEntry: View {
 
 /// The pencil on the home screen: the child's name, and which games show.
 struct GrownUpSettings: View {
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 18 * uiScale) {
@@ -195,6 +201,13 @@ struct GrownUpSettings: View {
             .padding(30 * uiScale)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(PlayfulBackground())
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button { dismiss() } label: { Image(systemName: "xmark.circle.fill").font(.title) }
+                        .tint(Color.outline)
+                        .accessibilityLabel("Close")
+                }
+            }
         }
     }
 

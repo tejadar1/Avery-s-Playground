@@ -99,6 +99,9 @@ struct Routine: Equatable {
 }
 
 struct RoutinesView: View {
+    @Environment(\.isWide) private var isWide
+    /// Taller cards and bigger pictures on an upright iPad, so the steps fill the screen.
+    private var tall: CGFloat { uiScale > 1 && !isWide ? 1.15 : 1 }
     private static let green = Color(red: 0.45, green: 0.75, blue: 0.45)
     private static let red = Color(red: 0.91, green: 0.3, blue: 0.33)
 
@@ -221,7 +224,7 @@ struct RoutinesView: View {
         let isNext = routine.next == index
         return Button { check(index) } label: {
             VStack(spacing: 4 * uiScale) {
-                Picture(step.picture, size: 72 * uiScale)
+                Picture(step.picture, size: 72 * uiScale * tall * tall)
                     .opacity(isDone ? 0.5 : 1)
                 Text(step.name)
                     .font(.kid(20))
@@ -231,7 +234,7 @@ struct RoutinesView: View {
                     .minimumScaleFactor(0.7)
             }
             .padding(10 * uiScale)
-            .frame(maxWidth: .infinity, minHeight: 140 * uiScale)
+            .frame(maxWidth: .infinity, minHeight: 140 * uiScale * tall)
             .cartoonCard(isDone ? Self.green : isNext ? Color(red: 1.0, green: 0.92, blue: 0.55) : .white, cornerRadius: 24 * uiScale)
             .overlay(alignment: .topLeading) {
                 // The step's number, or a check once it's done

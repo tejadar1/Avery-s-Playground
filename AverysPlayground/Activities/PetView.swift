@@ -291,7 +291,7 @@ struct PetView: View {
 
     private func meter(_ picture: String, _ value: Double, _ color: Color) -> some View {
         HStack(spacing: 4 * uiScale) {
-            Picture(picture, size: 26 * uiScale * roomy(isWide))
+            Picture(picture, size: 26 * uiScale * (uiScale > 1 ? 1.5 : 1))
             Capsule()
                 .fill(.white)
                 .overlay(alignment: .leading) {
@@ -300,7 +300,7 @@ struct PetView: View {
                     }
                 }
                 .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
-                .frame(width: 50 * uiScale * roomy(isWide), height: 16 * uiScale * roomy(isWide))
+                .frame(width: 50 * uiScale * (uiScale > 1 ? 1.5 : 1), height: 16 * uiScale * (uiScale > 1 ? 1.5 : 1))
                 .animation(.spring, value: value)
         }
     }
