@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Coco Hop: up a beanstalk, leaf to leaf. Each step up has two or three leaves on little branches, and one in each
+/// Coco Hop: up a beanstalk, leaf to leaf. Each step up has two leaves on little branches, and one in each
 /// row holds a magic bean. She can hop to any leaf next to her (up, sideways or back down) to gather the beans; a
 /// leaf two rows up is too far, and Coco tumbles down a row with a silly bounce. Reaching the cloud ends the climb,
 /// and the goal is to bring all ten beans. Nothing to lose, so a toddler can play it alone.
@@ -16,8 +16,8 @@ struct LeafHop {
     static let goal = 10
     /// How far up each row is from the last, in screen heights.
     static let rise = 0.24
-    /// Leaves across for a row of two or of three.
-    static let across: [Int: [Double]] = [2: [0.27, 0.73], 3: [0.18, 0.5, 0.82]]
+    /// Two leaves a row, one each side of the stalk, so none hides the stalk and a phone isn't crowded.
+    static let across = [0.24, 0.76]
 
     let leaves: [Leaf]
     /// The leaf Coco is on.
@@ -28,9 +28,8 @@ struct LeafHop {
 
     init() {
         leaves = [Leaf(row: 0, spot: CGPoint(x: 0.5, y: 0.78), hasBean: false)] + (1...Self.goal).flatMap { row in
-            let across = Self.across[Int.random(in: 2...3)]!
-            let bean = Int.random(in: 0..<across.count)  // one leaf in each row has the bean
-            return across.enumerated().map { index, x in
+            let bean = Int.random(in: 0..<Self.across.count)  // one leaf in each row has the bean
+            return Self.across.enumerated().map { index, x in
                 Leaf(row: row, spot: CGPoint(x: x, y: 0.78 - Double(row) * Self.rise), hasBean: index == bean)
             }
         }
@@ -200,10 +199,12 @@ struct HopView: View {
         let top = game.leaves.last!.spot.y
         return ZStack(alignment: .topLeading) {
             // Clouds up the sky, at a third of the stalk's speed.
-            ForEach(0..<9, id: \.self) { n in
-                let y = 0.15 - Double(n) * 0.38
+            // Twice as many on a wide screen, out at the edges too, so the sky beside the stalk isn't empty.
+            let edges: [Double] = width > height * 1.15 ? [0.16, 0.84, 0.05, 0.95] : [0.16, 0.84]
+            ForEach(0..<(9 * edges.count / 2), id: \.self) { n in
+                let y = 0.15 - Double(n) * 0.38 * 2 / Double(edges.count)
                 cloud(scale: n.isMultiple(of: 3) ? 1.2 : 0.8)
-                    .position(x: (n.isMultiple(of: 2) ? 0.16 : 0.84) * width, y: (y - camera * 0.35) * height)
+                    .position(x: edges[n % edges.count] * width, y: (y - camera * 0.35) * height)
             }
             // Far hills, then the near hill with a house, a fence and trees, where she starts.
             Ellipse().fill(Self.hillFar)
@@ -285,7 +286,7 @@ struct HopView: View {
                 }
                 .overlay(LeafVein().stroke(Self.leafDark, style: StrokeStyle(lineWidth: 2 * uiScale, lineCap: .round)))
                 .overlay(LeafShape().stroke(Color.outline, lineWidth: 3 * uiScale))
-                .frame(width: size * 1.35, height: size * 0.62)
+                .frame(width: size * 1.35, height: size * 0.75)
                 .scaleEffect(x: onLeft ? -1 : 1)  // the stem end toward the stalk
                 .rotationEffect(.degrees(onLeft ? -8 : 8))
             if game.hasBean(index) {
@@ -448,17 +449,17 @@ struct HopView: View {
     NavigationStack { HopView() }
 }
 
-/// A big round leaf, like a cartoon beanstalk's: rounded at the stem end, a soft point at the tip.
+/// A big round leaf, like a cartoon beanstalk's: full and round at the stem end, a soft point at the tip.
 private struct LeafShape: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in
             let tip = CGPoint(x: rect.maxX, y: rect.midY)
             path.move(to: CGPoint(x: rect.minX + rect.width * 0.04, y: rect.midY))
-            path.addCurve(to: tip, control1: CGPoint(x: rect.minX, y: rect.minY - rect.height * 0.25),
-                          control2: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.minY - rect.height * 0.05))
+            path.addCurve(to: tip, control1: CGPoint(x: rect.minX + rect.width * 0.02, y: rect.minY - rect.height * 0.45),
+                          control2: CGPoint(x: rect.maxX - rect.width * 0.12, y: rect.minY - rect.height * 0.25))
             path.addCurve(to: CGPoint(x: rect.minX + rect.width * 0.04, y: rect.midY),
-                          control1: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.maxY + rect.height * 0.05),
-                          control2: CGPoint(x: rect.minX, y: rect.maxY + rect.height * 0.25))
+                          control1: CGPoint(x: rect.maxX - rect.width * 0.12, y: rect.maxY + rect.height * 0.25),
+                          control2: CGPoint(x: rect.minX + rect.width * 0.02, y: rect.maxY + rect.height * 0.45))
         }
     }
 }

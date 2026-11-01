@@ -105,7 +105,7 @@ final class TeamUpTests: XCTestCase {
             var game = LeafHop()
             for row in 1...LeafHop.goal {
                 let up = game.leaves.indices.filter { game.isNextUp($0) }
-                XCTAssertTrue((2...3).contains(up.count), "two or three leaves to pick from")
+                XCTAssertEqual(up.count, 2, "a leaf each side to pick from")
                 XCTAssertEqual(up.filter { game.leaves[$0].hasBean }.count, 1, "one bean in each row")
                 XCTAssertTrue(up.allSatisfy(game.canHop))
                 let tooFar = game.leaves.indices.filter { game.leaves[$0].row >= row + 1 }
