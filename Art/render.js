@@ -80,8 +80,11 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     info: { author: 'xcode', version: 1 },
   }, null, 2) + '\n');
   // App icon: Coco peeking over ABC and 123 toy blocks on a sky gradient, opaque, 1024×1024.
+  // Coco's own drawing goes in, big, with only her head and hands showing above the blocks.
+  const iconSvg = fs.readFileSync(path.join(__dirname, 'app-icon.svg'), 'utf8').replace('<g id="coco"/>',
+    `<g clip-path="inset(0 0 ${1024 - 660}px 0)">${coco.replace('<svg ', '<svg x="32" y="80" width="907" height="950" ')}</g>`);
   const icon = await browser.newPage({ viewport: { width: 1024, height: 1024 } });
-  await icon.setContent(`<style>html,body{margin:0}svg{display:block;width:100vw;height:100vh}</style>${fs.readFileSync(path.join(__dirname, 'app-icon.svg'), 'utf8')}`);
+  await icon.setContent(`<style>html,body{margin:0}svg{display:block;width:100vw;height:100vh}</style>${iconSvg}`);
   await icon.screenshot({ path: path.join(assets, 'AppIcon.appiconset/AppIcon.png') });  // no transparency: the App Store refuses it
   await icon.close();
   await browser.close();

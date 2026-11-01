@@ -23,36 +23,15 @@
     <line x1="944" y1="149" x2="992" y2="137"/>
   </g>
   <circle cx="830" cy="180" r="90" fill="#FFE27A" fill-opacity=".9"/>
+  <!-- Coco (Art/coco.svg) goes here; render.js puts her in, peeking over the blocks. -->
+  <g id="coco"/>
   <g stroke="#4A2C2A" stroke-width="16" stroke-linejoin="round" stroke-linecap="round">
-    <!-- Coco's head, peeking over the top block: snout to the right, eye bumps on top -->
-    <path d="M300 560 Q290 420 400 396 Q440 300 520 340 Q590 280 650 340 Q700 368 702 410 L830 436 Q902 452 892 516 Q884 560 820 560Z" fill="#7CC46B"/>
-    <path d="M330 560 Q340 500 420 488 L860 508 Q880 530 872 560Z" fill="#5FA653" stroke="none"/>
-    <circle cx="500" cy="352" r="62" fill="#fff"/>
-    <circle cx="628" cy="352" r="62" fill="#fff"/>
-    <!-- Hands holding the edge -->
-    <ellipse cx="360" cy="566" rx="46" ry="30" fill="#7CC46B"/>
-    <ellipse cx="640" cy="566" rx="46" ry="30" fill="#7CC46B"/>
     <!-- Blocks: A and B on the bottom, C on top as a step -->
     <rect x="96" y="740" width="250" height="230" rx="34" fill="#F2635F"/>
     <rect x="346" y="740" width="250" height="230" rx="34" fill="#F6C945"/>
     <rect x="300" y="566" width="420" height="180" rx="34" fill="#5B8DEF" stroke="none"/>
     <rect x="300" y="566" width="420" height="180" rx="34" fill="none"/>
     <rect x="610" y="740" width="250" height="230" rx="34" fill="#8E6FE0"/>
-  </g>
-  <!-- Pupils, nostril, smile -->
-  <g fill="#4A2C2A">
-    <circle cx="512" cy="360" r="24"/>
-    <circle cx="616" cy="360" r="24"/>
-    <circle cx="850" cy="480" r="11"/>
-  </g>
-  <path d="M520 486 Q680 520 820 500" fill="none" stroke="#4A2C2A" stroke-width="14" stroke-linecap="round"/>
-  <!-- Her flower -->
-  <g transform="translate(430 300)" stroke="#4A2C2A" stroke-width="10">
-    <g fill="#F7A8C4">
-      <circle cx="0" cy="-34" r="25"/><circle cx="32" cy="-10" r="25"/><circle cx="20" cy="28" r="25"/>
-      <circle cx="-20" cy="28" r="25"/><circle cx="-32" cy="-10" r="25"/>
-    </g>
-    <circle r="18" fill="#F6C945"/>
   </g>
   <!-- Letters on the blocks -->
   <g font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-weight="900" font-size="170" text-anchor="middle" fill="#fff" stroke="#4A2C2A" stroke-width="12" paint-order="stroke" stroke-linejoin="round">
