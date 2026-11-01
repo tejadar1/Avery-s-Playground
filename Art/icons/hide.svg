@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Hide Coco: Coco peeking over the top of a box -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Coco's snout and eye bumps, peeking up -->
+    <path d="M52 112 Q50 74 82 70 Q96 52 112 66 Q128 54 140 72 Q166 80 160 112Z" fill="#7CC46B"/>
+    <path d="M60 112 Q62 94 84 90 L150 94 Q158 100 156 112Z" fill="#5FA653" stroke="none"/>
+    <circle cx="98" cy="74" r="13" fill="#fff"/>
+    <circle cx="126" cy="74" r="13" fill="#fff"/>
+    <circle cx="101" cy="76" r="5" fill="#4A2C2A" stroke="none"/>
+    <circle cx="123" cy="76" r="5" fill="#4A2C2A" stroke="none"/>
+    <circle cx="66" cy="96" r="3" fill="#4A2C2A" stroke="none"/>
+    <!-- Little hands on the edge -->
+    <ellipse cx="70" cy="114" rx="11" ry="8" fill="#7CC46B"/>
+    <ellipse cx="146" cy="114" rx="11" ry="8" fill="#7CC46B"/>
+    <!-- The box -->
+    <path d="M34 116 L166 116 L158 178 L42 178Z" fill="#E3A866"/>
+    <path d="M42 116 L158 116 L156 132 L44 132Z" fill="#C98A4B" stroke="none"/>
+    <path d="M34 116 L166 116 L158 178 L42 178Z" fill="none"/>
+    <path d="M100 116 L100 178" stroke-width="3"/>
+  </g>
+  <!-- A giggle -->
+  <path d="M150 40 l8 -10 M162 50 l12 -4 M140 34 l0 -12" stroke="#F06D8C" stroke-width="5" stroke-linecap="round"/>
+</svg>

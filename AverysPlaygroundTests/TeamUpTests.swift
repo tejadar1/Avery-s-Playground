@@ -137,4 +137,29 @@ final class TeamUpTests: XCTestCase {
             XCTAssertLessThan(game.leaves.last!.spot.y, game.leaves.first!.spot.y, "it climbs")
         }
     }
+
+    func testHideCocoFindingHerScoresAndSwapsWhoHides() {
+        for room in SpotTheDifference.rooms {
+            var game = HideAndSeek(room: room)
+            // Hide her behind the thing in the room whose own spot picks it.
+            let hidingPlace = room.things.first { game.thing(at: $0.spot)?.id == $0.id }!
+            XCTAssertFalse(game.seek(at: hidingPlace.spot), "nothing to find before she hides")
+            XCTAssertTrue(game.hide(at: hidingPlace.spot))
+            XCTAssertFalse(game.hide(at: hidingPlace.spot), "already hidden")
+            XCTAssertEqual(game.seeker, .heart)
+
+            // Somewhere else is a miss.
+            let elsewhere = room.things.max { hypot($0.spot.x - hidingPlace.spot.x, $0.spot.y - hidingPlace.spot.y)
+                < hypot($1.spot.x - hidingPlace.spot.x, $1.spot.y - hidingPlace.spot.y) }!
+            XCTAssertFalse(game.seek(at: elsewhere.spot))
+            XCTAssertEqual(game.misses, 1)
+
+            XCTAssertTrue(game.seek(at: hidingPlace.spot))
+            XCTAssertEqual(game.score[.heart], 1)
+            XCTAssertEqual(game.hider, .heart, "the finder hides next")
+            game.nextRound(in: room)
+            XCTAssertNil(game.spot)
+            XCTAssertEqual(game.score[.heart], 1, "the score carries on")
+        }
+    }
 }
