@@ -1,43 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- The app icon: Coco peeking over a step of ABC toy blocks, on a sunny sky gradient. -->
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0" stop-color="#7DD3F5"/>
-      <stop offset="1" stop-color="#3B9EE6"/>
-    </linearGradient>
-  </defs>
-  <rect width="1024" height="1024" fill="url(#bg)"/>
-  <!-- The sun, with rays -->
-  <g stroke="#FFE27A" stroke-width="26" stroke-linecap="round" stroke-opacity=".9">
-    <line x1="944" y1="211" x2="992" y2="223"/>
-    <line x1="913" y1="263" x2="949" y2="299"/>
-    <line x1="861" y1="294" x2="873" y2="342"/>
-    <line x1="799" y1="294" x2="787" y2="342"/>
-    <line x1="747" y1="263" x2="711" y2="299"/>
-    <line x1="716" y1="211" x2="668" y2="223"/>
-    <line x1="716" y1="149" x2="668" y2="137"/>
-    <line x1="747" y1="97" x2="711" y2="61"/>
-    <line x1="799" y1="66" x2="787" y2="18"/>
-    <line x1="861" y1="66" x2="873" y2="18"/>
-    <line x1="913" y1="97" x2="949" y2="61"/>
-    <line x1="944" y1="149" x2="992" y2="137"/>
+  <!-- Step Up, flat: Coco has climbed a stack of toy blocks and stands on A, waving. Same flat two-tone style as the app's art. -->
+  <rect width="1024" height="1024" fill="#7CCBF5"/>
+  <circle cx="512" cy="380" r="300" fill="#9AD8F8"/>
+  <!-- Two puffy clouds at the bottom corners: a dark ring under each puff, then white on top, so they merge into one outline -->
+  <g fill="#4A2C2A"><circle cx="70" cy="930" r="100"/><circle cx="170" cy="890" r="95"/><circle cx="260" cy="950" r="85"/><circle cx="-10" cy="990" r="95"/><circle cx="955" cy="930" r="100"/><circle cx="855" cy="895" r="90"/><circle cx="770" cy="955" r="85"/><circle cx="1030" cy="990" r="95"/></g>
+  <g fill="#FFFFFF"><circle cx="70" cy="930" r="90"/><circle cx="170" cy="890" r="85"/><circle cx="260" cy="950" r="75"/><circle cx="-10" cy="990" r="85"/><circle cx="955" cy="930" r="90"/><circle cx="855" cy="895" r="80"/><circle cx="770" cy="955" r="75"/><circle cx="1030" cy="990" r="85"/></g>
+  <g stroke="#4A2C2A" stroke-width="10" stroke-linejoin="round">
+    <path d="M235 735 L471 735 L525.0 695.0 L289.0 695.0 Z" fill="#FBDD86"/>
+    <path d="M471 735 L525.0 695.0 L525.0 921.0 L471 977 Z" fill="#D9A52A"/>
+    <rect x="225" y="735" width="250" height="250" rx="25" fill="#F6C945"/>
   </g>
-  <circle cx="830" cy="180" r="90" fill="#FFE27A" fill-opacity=".9"/>
-  <!-- Coco (Art/coco.svg) goes here; render.js puts her in, peeking over the blocks. -->
+  <text x="350.0" y="928" text-anchor="middle" font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-weight="900" font-size="170" fill="#fff" stroke="#4A2C2A" stroke-width="10" paint-order="stroke" stroke-linejoin="round">B</text>
+  <g stroke="#4A2C2A" stroke-width="10" stroke-linejoin="round">
+    <path d="M515 735 L751 735 L805.0 695.0 L569.0 695.0 Z" fill="#93C0F6"/>
+    <path d="M751 735 L805.0 695.0 L805.0 921.0 L751 977 Z" fill="#3F7BCB"/>
+    <rect x="505" y="735" width="250" height="250" rx="25" fill="#5B9DEF"/>
+  </g>
+  <text x="630.0" y="928" text-anchor="middle" font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-weight="900" font-size="170" fill="#fff" stroke="#4A2C2A" stroke-width="10" paint-order="stroke" stroke-linejoin="round">C</text>
+  <g stroke="#4A2C2A" stroke-width="10" stroke-linejoin="round">
+    <path d="M375 485 L611 485 L665.0 445.0 L429.0 445.0 Z" fill="#F8948F"/>
+    <path d="M611 485 L665.0 445.0 L665.0 671.0 L611 727 Z" fill="#C9474A"/>
+    <rect x="365" y="485" width="250" height="250" rx="25" fill="#F2635F"/>
+  </g>
+  <text x="490.0" y="678" text-anchor="middle" font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-weight="900" font-size="170" fill="#fff" stroke="#4A2C2A" stroke-width="10" paint-order="stroke" stroke-linejoin="round">A</text>
   <g id="coco"/>
-  <g stroke="#4A2C2A" stroke-width="16" stroke-linejoin="round" stroke-linecap="round">
-    <!-- Blocks: A and B on the bottom, C on top as a step -->
-    <rect x="96" y="740" width="250" height="230" rx="34" fill="#F2635F"/>
-    <rect x="346" y="740" width="250" height="230" rx="34" fill="#F6C945"/>
-    <rect x="300" y="566" width="420" height="180" rx="34" fill="#5B8DEF" stroke="none"/>
-    <rect x="300" y="566" width="420" height="180" rx="34" fill="none"/>
-    <rect x="610" y="740" width="250" height="230" rx="34" fill="#8E6FE0"/>
-  </g>
-  <!-- Letters on the blocks -->
-  <g font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-weight="900" font-size="170" text-anchor="middle" fill="#fff" stroke="#4A2C2A" stroke-width="12" paint-order="stroke" stroke-linejoin="round">
-    <text x="221" y="915">A</text>
-    <text x="471" y="915">B</text>
-    <text x="735" y="915">C</text>
-    <text x="510" y="720" font-size="140">1 2 3</text>
-  </g>
 </svg>
