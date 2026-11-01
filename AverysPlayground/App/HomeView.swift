@@ -142,21 +142,24 @@ private extension HomeView {
 
     var title: some View {
         VStack(spacing: 2 * uiScale) {
+            Text("Step Up")
+                .font(.kid(38))
+                .foregroundStyle(Color.outline)
+            Text("Learn & Play with Coco")
+                .font(.kid(22))
+                .foregroundStyle(Color(red: 0.2, green: 0.6, blue: 0.55))
             HStack(spacing: 8 * uiScale) {
-                Text("\(name)'s World")
-                    .font(.kid(38))
-                    .foregroundStyle(Color.outline)
+                Text("Hi \(name)! What should we do today?")
+                    .font(.kid(20))
+                    .foregroundStyle(Color.outline.opacity(0.7))
                 // For the grown-up: change the name
                 Button { isNaming = true } label: {
                     Image(systemName: "pencil.circle.fill")
-                        .font(.system(size: 26 * uiScale))
+                        .font(.system(size: 22 * uiScale))
                         .foregroundStyle(Color.outline.opacity(0.35))
                 }
                 .accessibilityLabel("Change name")
             }
-            Text("Hi \(name) and friends! What should we do today?")
-                .font(.kid(20))
-                .foregroundStyle(Color.outline.opacity(0.7))
         }
         .multilineTextAlignment(.center)
     }

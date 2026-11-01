@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- The app icon: a simple white Coco head on a green-to-teal gradient, climbing up three steps. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8EDB6A"/>
+      <stop offset="0.55" stop-color="#3FC08F"/>
+      <stop offset="1" stop-color="#1E9BB0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <!-- Three steps going up, soft white -->
+  <g fill="#fff" fill-opacity=".28">
+    <rect x="150" y="760" width="250" height="120" rx="28"/>
+    <rect x="390" y="660" width="250" height="220" rx="28"/>
+    <rect x="630" y="560" width="250" height="320" rx="28"/>
+  </g>
+  <!-- Coco's head: a long rounded snout with two eye bumps, in white -->
+  <g fill="#fff">
+    <path d="M250 520 Q238 380 360 352 Q410 250 500 300 Q570 238 640 300 Q700 330 700 380 L812 404 Q880 420 872 480 Q866 540 800 548 L330 560 Q258 560 250 520Z"/>
+    <circle cx="455" cy="318" r="72"/>
+    <circle cx="600" cy="318" r="72"/>
+  </g>
+  <!-- Dot eyes and a nostril, in a deep teal so it reads as one with the background -->
+  <g fill="#17606E">
+    <circle cx="470" cy="322" r="26"/>
+    <circle cx="585" cy="322" r="26"/>
+    <circle cx="828" cy="440" r="12"/>
+  </g>
+  <!-- A happy smile -->
+  <path d="M470 470 Q640 520 800 486" fill="none" stroke="#17606E" stroke-width="18" stroke-linecap="round"/>
+  <!-- Her pink flower -->
+  <g transform="translate(380 230)">
+    <g fill="#F7A8C4">
+      <circle cx="0" cy="-34" r="26"/><circle cx="32" cy="-10" r="26"/><circle cx="20" cy="28" r="26"/>
+      <circle cx="-20" cy="28" r="26"/><circle cx="-32" cy="-10" r="26"/>
+    </g>
+    <circle r="20" fill="#F6C945"/>
+  </g>
+</svg>

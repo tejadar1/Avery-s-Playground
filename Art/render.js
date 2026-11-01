@@ -79,9 +79,10 @@ const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@
     images: [{ filename: 'LaunchCoco.png', idiom: 'universal', scale: '3x' }],
     info: { author: 'xcode', version: 1 },
   }, null, 2) + '\n');
-  // App icon: Coco and Avery waving on a hill in front of a sunburst, opaque, 1024×1024.
-  const avery = fs.readFileSync(path.join(__dirname, 'avery.svg'), 'utf8');
-  await compose('icon-background.svg', 1024, 1024, [40, 200, 560, 586], path.join(assets, 'AppIcon.appiconset/AppIcon.png'),
-    [[avery, [470, 250, 520, 572]]]);
+  // App icon: a white Coco head climbing steps on a green-to-teal gradient, opaque, 1024×1024.
+  const icon = await browser.newPage({ viewport: { width: 1024, height: 1024 } });
+  await icon.setContent(`<style>html,body{margin:0}svg{display:block;width:100vw;height:100vh}</style>${fs.readFileSync(path.join(__dirname, 'app-icon.svg'), 'utf8')}`);
+  await icon.screenshot({ path: path.join(assets, 'AppIcon.appiconset/AppIcon.png') });  // no transparency: the App Store refuses it
+  await icon.close();
   await browser.close();
 })();
