@@ -4,6 +4,11 @@ import SwiftUI
 struct AverysPlaygroundApp: App {
     @State private var isReady = false
     @AppStorage(Kid.key) private var kidName = ""
+    @AppStorage(Ages.ageKey) private var kidAge = ""
+    @AppStorage(Ages.setOnKey) private var ageSetOn = 0.0
+
+    /// A year after the age was picked, the next age's games to suggest.
+    private var nextAge: String? { Ages.nextAge(after: kidAge, setOn: ageSetOn) }
 
     var body: some Scene {
         WindowGroup {
@@ -16,8 +21,10 @@ struct AverysPlaygroundApp: App {
                     .transition(.opacity)
                 }
             }
-            // The first time, a grown-up types the child's name before playing.
-            .sheet(isPresented: .constant(isReady && kidName.isEmpty)) { NameEntry() }
+            // The first time, a grown-up types the child's name and picks their age before playing.
+            .sheet(isPresented: .constant(isReady && (kidName.isEmpty || kidAge.isEmpty || nextAge != nil))) {
+                if kidName.isEmpty { NameEntry() } else { AgeEntry(suggesting: kidAge.isEmpty ? nil : nextAge) }
+            }
         }
     }
 }

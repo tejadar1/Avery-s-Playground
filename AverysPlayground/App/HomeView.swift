@@ -4,6 +4,7 @@ struct HomeView: View {
     @State private var stickers: [String] = []
     @State private var isNaming = false
     @AppStorage(Kid.key) private var kidName = ""
+    @AppStorage(Ages.hiddenKey) private var hiddenGames = ""
     private var name: String { kidName.isEmpty ? "Avery" : kidName }
 
     var body: some View {
@@ -29,9 +30,10 @@ struct HomeView: View {
                     let columns = sideways ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: HomeSection.allCases.count + 1)
                         : [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)]
                     LazyVGrid(columns: columns, spacing: 20 * uiScale) {
-                        ForEach(HomeSection.allCases) { section in
+                        // A section whose games are all hidden doesn't show.
+                        ForEach(HomeSection.allCases.filter { !$0.shown(hiding: hiddenGames).isEmpty }) { section in
                             NavigationLink(value: section) {
-                                SectionTile(section: section, height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: (sideways ? 70 : 110) * uiScale)
+                                SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: (sideways ? 70 : 110) * uiScale)
                             }
                             .buttonStyle(SquishyButtonStyle())
                         }
@@ -81,7 +83,7 @@ struct HomeView: View {
             }
         }
         .tint(Color.outline)
-        .sheet(isPresented: $isNaming) { NameEntry() }
+        .sheet(isPresented: $isNaming) { GrownUpSettings() }
     }
 }
 
@@ -105,12 +107,13 @@ private struct MusicButton: View {
 /// One section's games.
 private struct SectionView: View {
     let section: HomeSection
+    @AppStorage(Ages.hiddenKey) private var hiddenGames = ""
     private let columns = [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 20 * uiScale)]
 
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20 * uiScale) {
-                ForEach(section.activities) { activity in
+                ForEach(section.shown(hiding: hiddenGames)) { activity in
                     NavigationLink(value: activity) {
                         ActivityTile(activity: activity)
                     }
@@ -158,7 +161,7 @@ private extension HomeView {
                         .font(.system(size: 22 * uiScale))
                         .foregroundStyle(Color.outline.opacity(0.35))
                 }
-                .accessibilityLabel("Change name")
+                .accessibilityLabel("For grown-ups")
             }
         }
         .multilineTextAlignment(.center)
@@ -210,13 +213,14 @@ private struct StickerTile: View {
 /// A big home-screen choice, showing a few of its games' icons fanned out.
 private struct SectionTile: View {
     let section: HomeSection
+    let games: [Activity]
     let height: CGFloat
     let iconHeight: CGFloat
 
     var body: some View {
         VStack(spacing: 6 * uiScale) {
             HStack(spacing: -34 * uiScale) {
-                ForEach(Array(section.activities.prefix(3).enumerated()), id: \.offset) { index, activity in
+                ForEach(Array(games.prefix(3).enumerated()), id: \.offset) { index, activity in
                     Image(activity.icon)
                         .resizable()
                         .scaledToFit()
