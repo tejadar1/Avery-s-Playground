@@ -1,8 +1,9 @@
 import SwiftUI
 
-/// Coco Hop: up a beanstalk, choosing which leaf to hop to. Each step up has two or three leaves on little branches,
-/// and only one holds a magic bean, so following the beans is the way to fill the tray (Bella counts each one). Any
-/// leaf is still a hop up, and ten steps reach the cloud. Nothing to lose, so a toddler can play it alone.
+/// Coco Hop: up a beanstalk, leaf to leaf. Each step up has two or three leaves on little branches, and one in each
+/// row holds a magic bean. She can hop to any leaf next to her (up, sideways or back down) to gather the beans; a
+/// leaf two rows up is too far, and Coco tumbles down a row with a silly bounce. Reaching the cloud ends the climb,
+/// and the goal is to bring all ten beans. Nothing to lose, so a toddler can play it alone.
 struct LeafHop {
     struct Leaf: Equatable {
         /// 0 is where Coco starts; each row up is one hop.
@@ -21,8 +22,9 @@ struct LeafHop {
     let leaves: [Leaf]
     /// The leaf Coco is on.
     private(set) var current = 0
-    /// Beans picked up so far.
-    private(set) var collected = 0
+    /// The leaves whose beans she has picked up.
+    private(set) var picked: Set<Int> = []
+    var collected: Int { picked.count }
 
     init() {
         leaves = [Leaf(row: 0, spot: CGPoint(x: 0.5, y: 0.78), hasBean: false)] + (1...Self.goal).flatMap { row in
@@ -37,15 +39,26 @@ struct LeafHop {
     var row: Int { leaves[current].row }
     var isDone: Bool { row == Self.goal }
 
-    /// True for the leaves she can hop to now: any in the next row up.
-    func canHop(to leaf: Int) -> Bool { leaves[leaf].row == row + 1 }
+    /// True for the leaves she can reach: any other leaf in her row or the rows just above and below.
+    func canHop(to leaf: Int) -> Bool { leaf != current && abs(leaves[leaf].row - row) <= 1 }
+    /// True for the leaves to hop up to, which bob to show the way.
+    func isNextUp(_ leaf: Int) -> Bool { leaves[leaf].row == row + 1 }
+    /// True if the leaf still has its bean.
+    func hasBean(_ leaf: Int) -> Bool { leaves[leaf].hasBean && !picked.contains(leaf) }
 
-    /// Hops to `leaf` if it's in the next row up.
+    /// Hops to `leaf` if she can reach it, picking up its bean.
     mutating func tap(_ leaf: Int) -> Bool {
-        guard canHop(to: leaf) else { return false }
+        guard canHop(to: leaf), !isDone else { return false }
         current = leaf
-        if leaves[leaf].hasBean { collected += 1 }
+        if leaves[leaf].hasBean { picked.insert(leaf) }
         return true
+    }
+
+    /// After a hop that was too far: down to the nearest leaf in the row below (or back to her leaf at the bottom).
+    mutating func fall() {
+        let below = leaves.indices.filter { leaves[$0].row == max(row - 1, 0) }
+        current = below.min { abs(leaves[$0].spot.x - leaves[current].spot.x) < abs(leaves[$1].spot.x - leaves[current].spot.x) }!
+        if leaves[current].hasBean { picked.insert(current) }
     }
 }
 
@@ -55,6 +68,7 @@ struct HopView: View {
     private static let stalk = Color(red: 0.3, green: 0.62, blue: 0.32)
     private static let stalkLight = Color(red: 0.55, green: 0.8, blue: 0.45)
     private static let leafDark = Color(red: 0.38, green: 0.66, blue: 0.3)
+    private static let stalkDark = Color(red: 0.22, green: 0.5, blue: 0.27)
     // Soft and flat, like a cartoon episode: a pale sky, two-tone clouds and hills.
     private static let skyTop = Color(red: 0.55, green: 0.8, blue: 0.97)
     private static let skyBottom = Color(red: 0.86, green: 0.95, blue: 1.0)
@@ -138,6 +152,8 @@ struct HopView: View {
                 let a = middle(row - 1), b = middle(row)
                 path.addQuadCurve(to: b, control: CGPoint(x: a.x * 2 - (a.x + b.x) / 2, y: (a.y + b.y) / 2))
             }
+        }
+        let branches = Path { path in
             for leaf in game.leaves where leaf.row > 0 {
                 path.move(to: middle(leaf.row))
                 let end = CGPoint(x: leaf.spot.x * width, y: (leaf.spot.y - camera) * height)
@@ -158,14 +174,22 @@ struct HopView: View {
                             startAngle: .degrees(side > 0 ? 180 : 0), endAngle: .degrees(side > 0 ? -90 : 270), clockwise: side < 0)
             }
         }
+        // A big chunky stalk: shaded on one side, a light stripe on the other.
+        let thick = 46 * uiScale
+        let round = { (width: CGFloat) in StrokeStyle(lineWidth: width, lineCap: .round, lineJoin: .round) }
         return ZStack {
-            tendrils.stroke(Color.outline, style: StrokeStyle(lineWidth: 7 * uiScale, lineCap: .round))
-            tendrils.stroke(Self.stalk, style: StrokeStyle(lineWidth: 4 * uiScale, lineCap: .round))
-            path.stroke(Color.outline, style: StrokeStyle(lineWidth: 24 * uiScale, lineCap: .round, lineJoin: .round))
-            path.stroke(Self.stalk, style: StrokeStyle(lineWidth: 18 * uiScale, lineCap: .round, lineJoin: .round))
-            path.stroke(Self.stalkLight, style: StrokeStyle(lineWidth: 5 * uiScale, lineCap: .round, lineJoin: .round))
-                .offset(x: -4 * uiScale)
-                .mask(path.stroke(style: StrokeStyle(lineWidth: 18 * uiScale, lineCap: .round, lineJoin: .round)))
+            tendrils.stroke(Color.outline, style: round(10 * uiScale))
+            tendrils.stroke(Self.stalk, style: round(6 * uiScale))
+            branches.stroke(Color.outline, style: round(20 * uiScale))
+            branches.stroke(Self.stalk, style: round(14 * uiScale))
+            path.stroke(Color.outline, style: round(thick + 6 * uiScale))
+            path.stroke(Self.stalk, style: round(thick))
+            path.stroke(Self.stalkDark, style: round(thick * 0.35))
+                .offset(x: thick * 0.32)
+                .mask(path.stroke(style: round(thick)))
+            path.stroke(Self.stalkLight, style: round(thick * 0.16))
+                .offset(x: -thick * 0.24)
+                .mask(path.stroke(style: round(thick)))
         }
         .allowsHitTesting(false)
     }
@@ -247,8 +271,8 @@ struct HopView: View {
 
     /// A leaf, with its bean until Coco gets past it. The ones she can hop to bob up and down.
     private func leafView(_ index: Int, size: CGFloat) -> some View {
-        let canHop = game.canHop(to: index)
-        // The first choice is "Next leaf" for the screenshot test; the others are numbered.
+        let canHop = game.isNextUp(index)
+        // The first leaf up is "Next leaf" for the screenshot test; the others are numbered.
         let name = canHop ? (game.leaves[index - 1].row == game.row ? "Next leaf" : "Next leaf \(index)") : "Leaf \(index)"
         let onLeft = game.leaves[index].spot.x < 0.5
         return ZStack {
@@ -261,9 +285,10 @@ struct HopView: View {
                 }
                 .overlay(LeafVein().stroke(Self.leafDark, style: StrokeStyle(lineWidth: 2 * uiScale, lineCap: .round)))
                 .overlay(LeafShape().stroke(Color.outline, lineWidth: 3 * uiScale))
-                .frame(width: size * 1.25, height: size * 0.45)
+                .frame(width: size * 1.35, height: size * 0.62)
+                .scaleEffect(x: onLeft ? -1 : 1)  // the stem end toward the stalk
                 .rotationEffect(.degrees(onLeft ? -8 : 8))
-            if game.leaves[index].hasBean && game.leaves[index].row > game.row {
+            if game.hasBean(index) {
                 Capsule()
                     .fill(Self.bean)
                     .overlay(Capsule().fill(.white.opacity(0.55)).frame(width: size * 0.05, height: size * 0.12).offset(x: -size * 0.04, y: -size * 0.06))
@@ -312,15 +337,16 @@ struct HopView: View {
     private func tap(_ leaf: Int) {
         guard !isHopping else { return }
         let from = game.leaves[game.current].spot
-        guard game.canHop(to: leaf) else {
-            Haptics.tap()
+        Haptics.tap()
+        if game.canHop(to: leaf) {
+            Sounds.shared.play(.pop)
+            hop(from: from, to: leaf)
+        } else if game.leaves[leaf].row > game.row {
+            tumble(from: from, toward: game.leaves[leaf].spot)
+        } else {
             hint += 1
             say("Hee hee, pick a bouncing leaf!")
-            return
         }
-        Haptics.tap()
-        Sounds.shared.play(.pop)
-        hop(from: from, to: leaf)
     }
 
     /// Coco crouches, springs up in an arc (stretching, sometimes with a flip), lands with a squish, then picks up
@@ -346,15 +372,45 @@ struct HopView: View {
             try? await Task.sleep(for: .milliseconds(90))
             withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) { squash = CGSize(width: 1, height: 1) }
             isHopping = false
+            let before = game.collected
             withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { _ = game.tap(leaf) }
-            if game.leaves[leaf].hasBean {
+            if game.collected > before {
                 wiggle += 1
                 Sounds.shared.play(.sparkle)
                 Speaker.shared.say(Speaker.book + "\(game.collected)")
-            } else if !game.isDone {
+            } else if !game.isDone && !game.leaves[leaf].hasBean {
                 say("No bean there! Look for the beans!")
             }
             if game.isDone { await finish() }
+        }
+    }
+
+    /// A leaf that's too far: Coco leaps, can't reach it, and tumbles down a row with a spin and a bounce.
+    private func tumble(from: CGPoint, toward target: CGPoint) {
+        isHopping = true
+        say("Whoa! Too far! Whoopsie daisy, boing!")
+        Task {
+            let frames = 14
+            for frame in 1...frames {
+                let t = Double(frame) / Double(frames)
+                coco = CGPoint(x: from.x + (target.x - from.x) * 0.3 * t, y: from.y - sin(.pi / 2 * t) * 0.12)
+                squash = CGSize(width: 0.9, height: 1.15)
+                try? await Task.sleep(for: .milliseconds(16))
+            }
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { game.fall() }
+            let peak = coco, land = game.leaves[game.current].spot
+            for frame in 1...22 {
+                let t = Double(frame) / 22
+                coco = CGPoint(x: peak.x + (land.x - peak.x) * t, y: peak.y + (land.y - peak.y) * t * t)
+                spin = (facesLeft ? -360 : 360) * t
+                try? await Task.sleep(for: .milliseconds(16))
+            }
+            spin = 0
+            Sounds.shared.play(.pop)
+            withAnimation(.spring(response: 0.25, dampingFraction: 0.3)) { squash = CGSize(width: 1.3, height: 0.7) }
+            try? await Task.sleep(for: .milliseconds(120))
+            withAnimation(.spring(response: 0.35, dampingFraction: 0.4)) { squash = CGSize(width: 1, height: 1) }
+            isHopping = false
         }
     }
 
@@ -392,13 +448,17 @@ struct HopView: View {
     NavigationStack { HopView() }
 }
 
-/// A leaf: pointed at both ends, fuller on top.
+/// A big round leaf, like a cartoon beanstalk's: rounded at the stem end, a soft point at the tip.
 private struct LeafShape: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in
-            path.move(to: CGPoint(x: rect.minX, y: rect.midY))
-            path.addQuadCurve(to: CGPoint(x: rect.maxX, y: rect.midY), control: CGPoint(x: rect.midX, y: rect.minY - rect.height * 0.45))
-            path.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.midY), control: CGPoint(x: rect.midX, y: rect.maxY + rect.height * 0.35))
+            let tip = CGPoint(x: rect.maxX, y: rect.midY)
+            path.move(to: CGPoint(x: rect.minX + rect.width * 0.04, y: rect.midY))
+            path.addCurve(to: tip, control1: CGPoint(x: rect.minX, y: rect.minY - rect.height * 0.25),
+                          control2: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.minY - rect.height * 0.05))
+            path.addCurve(to: CGPoint(x: rect.minX + rect.width * 0.04, y: rect.midY),
+                          control1: CGPoint(x: rect.maxX - rect.width * 0.25, y: rect.maxY + rect.height * 0.05),
+                          control2: CGPoint(x: rect.minX, y: rect.maxY + rect.height * 0.25))
         }
     }
 }
