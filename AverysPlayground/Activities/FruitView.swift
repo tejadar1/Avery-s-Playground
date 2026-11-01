@@ -200,13 +200,13 @@ struct FruitView: View {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) { game.spin(face) }
         switch face {
         case .fruit(let fruit) where game.picksLeft > 0: say(Self.pickLines[fruit]!, spoken: Self.pickLines[fruit]!)
-        case .fruit: say("That tree is empty! " + next, spoken: "That tree is empty!")
+        case .fruit: say("Oh biscuits, that tree is empty! " + next, spoken: "Oh biscuits, that tree is empty!")
         case .basket: say("The basket! Pick any two fruits!", spoken: "The basket! Pick any two fruits!")
         case .crow:
             if game.lost {
-                say("Caw caw! The crow got here first! Let's try again!", spoken: "Caw caw! The crow got here first! Let's try again!")
+                say("Caw caw! Oh biscuits, the crow got here first! Let's try again!", spoken: "Caw caw! Oh biscuits, the crow got here first! Let's try again!")
             } else {
-                say("Caw caw! The crow hops closer! " + next, spoken: "Caw caw! The crow hops closer!")
+                say("Caw caw! Oh biscuits, the crow hops closer! " + next, spoken: "Caw caw! Oh biscuits, the crow hops closer!")
             }
         }
     }

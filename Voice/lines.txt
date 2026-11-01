@@ -105,9 +105,9 @@ C sharp
 Calm. Nice and cozy, like a quiet story.
 Canvas
 Cat
-Caw caw! The crow got here first! Let's try again!
-Caw caw! The crow hops closer!
-Caw caw! The crow hops closer! 
+Caw caw! Oh biscuits, the crow got here first! Let's try again!
+Caw caw! Oh biscuits, the crow hops closer!
+Caw caw! Oh biscuits, the crow hops closer! 
 Chore time! Let's help at home.
 Chores
 Clear
@@ -991,6 +991,10 @@ Now the scissors!
 O
 O!
 Octopus
+Oh biscuits! Too far! Whoopsie daisy, boing!
+Oh biscuits, that tree is empty!
+Oh biscuits, that tree is empty! 
+Oh biscuits, time's up! Hurry, hurry!
 Oink oink!
 Okay!
 Okey dokey, artichokey!
@@ -1306,8 +1310,6 @@ Team up with your grown-up against Coco! Slide out two pictures, then drag each 
 Ten magic beans! Holy guacamole, you climbed to the clouds!
 That color is so pretty!
 That sticker is so silly!
-That tree is empty!
-That tree is empty! 
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
 That's what I call croc-tastic teamwork!
@@ -1365,7 +1367,6 @@ Twinkle Twinkle
 Twinkle twinkle, little nail!
 U
 Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!
-Uh oh, time's up! Hurry, hurry!
 Umbrella
 Undo
 Up
@@ -1452,7 +1453,6 @@ Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who won the race?
 Who's silly? You're silly! Snap snap!
-Whoa! Too far! Whoopsie daisy, boing!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!

@@ -377,7 +377,7 @@ struct RoutinesView: View {
         withAnimation { timesUp = true }
         oops += 1
         Haptics.tap()
-        say("Uh oh, time's up! Hurry, hurry!")
+        say("Oh biscuits, time's up! Hurry, hurry!")
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.
