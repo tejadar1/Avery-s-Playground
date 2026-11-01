@@ -44,7 +44,8 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .reading, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .puzzle, .colors, .drawing: .play
-        case .bingo, .race, .tictactoe, .memory, .ispy, .routines, .chores: .teamUp
+        case .bingo, .race, .tictactoe, .memory, .ispy: .teamUp
+        case .routines, .chores: .myDay
         }
     }
 
@@ -135,9 +136,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     }
 }
 
-/// The three choices on the home screen; each opens a page of its games.
+/// The choices on the home screen; each opens a page of its games.
 enum HomeSection: String, CaseIterable, Identifiable, Hashable {
-    case learn, play, teamUp
+    case learn, play, teamUp, myDay
 
     var id: String { rawValue }
 
@@ -146,6 +147,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .learn: "Learn"
         case .play: "Play"
         case .teamUp: "Team Up"
+        case .myDay: "My Day"
         }
     }
 
@@ -154,6 +156,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .learn: "Letters, words, numbers and music"
         case .play: "Pretend, dress up and make art"
         case .teamUp: "Play with your grown-up"
+        case .myDay: "Morning, bedtime and helping out"
         }
     }
 
@@ -162,6 +165,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .learn: Color(red: 0.31, green: 0.67, blue: 0.75)
         case .play: Color(red: 0.95, green: 0.47, blue: 0.6)
         case .teamUp: Color(red: 0.95, green: 0.62, blue: 0.3)
+        case .myDay: Color(red: 0.42, green: 0.55, blue: 0.88)
         }
     }
 

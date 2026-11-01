@@ -24,14 +24,14 @@ struct HomeView: View {
                     }
                     .padding(.top, 8 * uiScale)
 
-                    // All four in one row on an iPad held sideways, so the menu fits without scrolling.
+                    // All five in one row on an iPad held sideways, so the menu fits without scrolling.
                     let sideways = uiScale > 1 && screen.size.width > screen.size.height
-                    let columns = sideways ? Array(repeating: GridItem(.flexible(), spacing: 20 * uiScale), count: 4)
+                    let columns = sideways ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: HomeSection.allCases.count + 1)
                         : [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)]
                     LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         ForEach(HomeSection.allCases) { section in
                             NavigationLink(value: section) {
-                                SectionTile(section: section, height: sideways ? homeTileHeight * 1.3 : homeTileHeight)
+                                SectionTile(section: section, height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: (sideways ? 70 : 110) * uiScale)
                             }
                             .buttonStyle(SquishyButtonStyle())
                         }
@@ -40,7 +40,7 @@ struct HomeView: View {
                                 .navigationTitle("Stickers")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            StickerTile(stickers: stickers, height: sideways ? homeTileHeight * 1.3 : homeTileHeight)
+                            StickerTile(stickers: stickers, height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: (sideways ? 70 : 110) * uiScale)
                         }
                         .buttonStyle(SquishyButtonStyle())
                     }
@@ -166,14 +166,15 @@ private extension HomeView {
 private struct StickerTile: View {
     let stickers: [String]
     let height: CGFloat
+    let iconHeight: CGFloat
 
     var body: some View {
         let shown = stickers.isEmpty ? ["star", "heart", "crown"] : Array(stickers.suffix(3))
         VStack(spacing: 6 * uiScale) {
             HStack(spacing: -16 * uiScale) {
                 ForEach(Array(shown.enumerated()), id: \.offset) { index, name in
-                    Picture(name, size: 62 * uiScale)
-                        .padding(10 * uiScale)
+                    Picture(name, size: iconHeight * 0.56)
+                        .padding(iconHeight * 0.09)
                         .background(Circle().fill(.white))
                         .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                         .rotationEffect(.degrees(Double(index - 1) * 12))
@@ -207,6 +208,7 @@ private struct StickerTile: View {
 private struct SectionTile: View {
     let section: HomeSection
     let height: CGFloat
+    let iconHeight: CGFloat
 
     var body: some View {
         VStack(spacing: 6 * uiScale) {
@@ -215,7 +217,7 @@ private struct SectionTile: View {
                     Image(activity.icon)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 110 * uiScale)
+                        .frame(height: iconHeight)
                         .rotationEffect(.degrees(Double(index - 1) * 10))
                 }
             }
