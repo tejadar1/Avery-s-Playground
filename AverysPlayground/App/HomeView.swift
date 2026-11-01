@@ -81,11 +81,37 @@ struct HomeView: View {
                         Speaker.shared.gameOpened()
                     }
                     .onDisappear { Speaker.shared.gameClosed() }
-                    .toolbar { ToolbarItem(placement: .topBarTrailing) { MusicButton() } }
+                    // Leaving a game asks first, so a stray tap (or swipe from the edge) doesn't end it.
+                    .navigationBarBackButtonHidden(true)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) { LeaveGameButton() }
+                        ToolbarItem(placement: .topBarTrailing) { MusicButton() }
+                    }
             }
         }
         .tint(Color.outline)
         .fullScreenCover(isPresented: $isNaming) { GrownUpSettings() }
+    }
+}
+
+/// The back arrow in a game: asks "Leave this game?" first, with Keep playing as the easy answer.
+private struct LeaveGameButton: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var asking = false
+
+    var body: some View {
+        Button {
+            Haptics.tap()
+            asking = true
+        } label: {
+            Image(systemName: "chevron.backward")
+                .font(.system(size: 20, weight: .semibold))
+        }
+        .accessibilityLabel("Back")
+        .alert("Leave this game?", isPresented: $asking) {
+            Button("Keep playing", role: .cancel) {}
+            Button("Leave", role: .destructive) { dismiss() }
+        }
     }
 }
 

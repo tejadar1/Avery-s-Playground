@@ -266,6 +266,9 @@ final class ScreenshotTests: XCTestCase {
     private func goHome() {
         for _ in 0..<4 where !app.staticTexts["Avery's World"].exists {
             app.navigationBars.buttons.element(boundBy: 0).tap()
+            // A game asks before leaving.
+            let leave = app.alerts.buttons["Leave"]
+            if leave.waitForExistence(timeout: 2) { leave.tap() }
         }
     }
 
