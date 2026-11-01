@@ -1,31 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- The dark-mode app icon: Coco on a stack of books (learning, and steps up). One light from the top left, a soft ground
-       shadow, no outlines on the books. render.js puts Coco in at the coco group below. -->
+  <!-- The dark-mode app icon (My World), with stars: Coco standing on a little round world, on a warm sunrise sky. One light from the top
+       left, no outlines on the globe. render.js puts Coco in at the coco group below. -->
   <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24345C"/><stop offset="1" stop-color="#0E1631"/></linearGradient>
-    <radialGradient id="glow" cx="0.2" cy="0.1" r="0.75"><stop offset="0" stop-color="#9FB8FF" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
-    <radialGradient id="ground" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#000" stop-opacity=".5"/><stop offset="1" stop-color="#1D5C99" stop-opacity="0"/></radialGradient>
-    <filter id="lift" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="10"/><feOffset dy="10"/>
-      <feComponentTransfer><feFuncA type="linear" slope=".18"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26355F"/><stop offset="1" stop-color="#0E1631"/></linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.1" r="0.8"><stop offset="0" stop-color="#9FB8FF" stop-opacity=".3"/><stop offset=".5" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="sea" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#7CCBFA"/><stop offset=".6" stop-color="#3D97E3"/><stop offset="1" stop-color="#2A72C4"/></radialGradient>
+    <clipPath id="world"><circle cx="512" cy="710" r="270"/></clipPath>
+    <filter id="lift" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="12"/><feOffset dy="12"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".2"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1024" height="1024" fill="url(#sky)"/><rect width="1024" height="1024" fill="url(#glow)"/>
-  <ellipse cx="512" cy="930" rx="300" ry="40" fill="url(#ground)"/>
+  <circle cx="140" cy="150" r="7" fill="#FFF6D8"/><circle cx="250" cy="90" r="5" fill="#FFF6D8"/><circle cx="820" cy="130" r="8" fill="#FFF6D8"/><circle cx="900" cy="260" r="5" fill="#FFF6D8"/><circle cx="110" cy="330" r="5" fill="#FFF6D8"/><circle cx="760" cy="60" r="4" fill="#FFF6D8"/><circle cx="940" cy="420" r="6" fill="#FFF6D8"/>
   <g filter="url(#lift)">
-    
-  <linearGradient id="b3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B79BFF"/><stop offset="1" stop-color="#8E6FE8"/></linearGradient>
-  <rect x="262" y="790" width="500" height="130" rx="26" fill="url(#b3)"/>
-  <rect x="296" y="844.6" width="432" height="10" rx="5" fill="#FFFFFF" opacity=".55"/>
-  <rect x="262" y="902" width="500" height="18" rx="9" fill="#7458C9" opacity=".9"/>
-    
-  <linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDA6A"/><stop offset="1" stop-color="#F5B83A"/></linearGradient>
-  <rect x="238" y="664" width="548" height="132" rx="26" fill="url(#b2)"/>
-  <rect x="272" y="719.44" width="480" height="10" rx="5" fill="#FFFFFF" opacity=".55"/>
-  <rect x="238" y="778" width="548" height="18" rx="9" fill="#D9971F" opacity=".9"/>
-    
-  <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8E86"/><stop offset="1" stop-color="#F0595B"/></linearGradient>
-  <rect x="296" y="548" width="432" height="122" rx="26" fill="url(#b1)"/>
-  <rect x="330" y="599.24" width="364" height="10" rx="5" fill="#FFFFFF" opacity=".55"/>
-  <rect x="296" y="652" width="432" height="18" rx="9" fill="#C9434A" opacity=".9"/>
+    <circle cx="512" cy="710" r="270" fill="url(#sea)"/>
+    <g clip-path="url(#world)">
+      <!-- Soft green lands, lighter on top, with a darker underside -->
+      <path d="M300 560 Q360 470 470 500 Q540 520 520 600 Q500 660 420 650 Q340 700 300 640 Q260 600 300 560Z" fill="#7CC46B"/>
+      <path d="M560 470 Q660 440 720 520 Q760 600 700 640 Q640 660 610 610 Q580 560 560 470Z" fill="#7CC46B"/>
+      <path d="M380 780 Q480 740 560 790 Q640 850 600 920 Q520 980 430 940 Q350 890 380 780Z" fill="#7CC46B"/>
+      <path d="M690 740 Q760 720 790 780 Q800 840 750 850 Q700 830 690 740Z" fill="#7CC46B"/>
+      <circle cx="512" cy="760" r="300" fill="none" stroke="#1F5FA8" stroke-opacity=".25" stroke-width="80"/>
+      <ellipse cx="400" cy="560" rx="120" ry="60" fill="#fff" opacity=".22" transform="rotate(-25 400 560)"/>
+    </g>
   </g>
   <g filter="url(#lift)"><g id="coco"/></g>
 </svg>
