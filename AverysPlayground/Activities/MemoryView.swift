@@ -2,8 +2,15 @@ import SwiftUI
 
 /// Memory for two people taking turns: stars (the kid) go first, hearts (the grown-up) second.
 /// Turn over two cards; a match is yours and you go again, otherwise they flip back and it's the other turn.
+/// With sounds on, a card makes its animal's noise instead of showing it, so you match by listening.
 struct Memory: Equatable {
     static let animals = ["cat", "dog", "frog", "pig", "duck", "bear", "lion", "rabbit", "whale", "turtle", "penguin", "elephant"]
+    /// What Coco says for each card when sounds are on.
+    static let sounds = [
+        "cat": "Meow meow!", "dog": "Woof woof!", "cow": "Moo moo!", "pig": "Oink oink!", "duck": "Quack quack!",
+        "frog": "Ribbit ribbit!", "sheep": "Baa baa!", "lion": "Roooar!", "bee": "Buzz buzz!", "horse": "Neigh!",
+        "rooster": "Cock-a-doodle-doo!", "mouse": "Squeak squeak!", "bird": "Tweet tweet!", "car": "Beep beep!",
+    ]
 
     let cards: [String]
     private(set) var faceUp: [Int] = []
@@ -11,8 +18,8 @@ struct Memory: Equatable {
     private(set) var turn = TicTacToe.Piece.star
     private(set) var score: [TicTacToe.Piece: Int] = [.star: 0, .heart: 0]
 
-    init(pairs: Int = 6) {
-        cards = Array(Self.animals.shuffled().prefix(pairs)).flatMap { [$0, $0] }.shuffled()
+    init(pairs: Int = 6, sounds: Bool = false) {
+        cards = Array((sounds ? Array(Self.sounds.keys) : Self.animals).shuffled().prefix(pairs)).flatMap { [$0, $0] }.shuffled()
     }
 
     var isOver: Bool { matched.count == cards.count }
@@ -49,6 +56,7 @@ struct MemoryView: View {
     private static let pairs = uiScale > 1 ? 8 : 6
 
     @State private var game = Memory(pairs: MemoryView.pairs)
+    @State private var listening = false
     @State private var cheer = "Stars go first! Turn over two cards to find a match."
     @State private var cheerCount = 0
     @State private var wins = 0
@@ -56,6 +64,11 @@ struct MemoryView: View {
     var body: some View {
         VStack(spacing: 16 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+
+            HStack(spacing: 12 * uiScale) {
+                modeButton("Pictures", listen: false, symbol: "photo.fill")
+                modeButton("Sounds", listen: true, symbol: "speaker.wave.2.fill")
+            }
 
             HStack(spacing: 16 * uiScale) {
                 ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
@@ -108,7 +121,12 @@ struct MemoryView: View {
         let showing = game.isShowing(index)
         return Button { flip(index) } label: {
             ZStack {
-                if showing {
+                if showing && listening && !game.matched.contains(index) {
+                    // Listening: the noise plays, and the picture waits until it's matched.
+                    Image(systemName: "speaker.wave.2.fill")
+                        .font(.system(size: width * 0.4, weight: .bold))
+                        .foregroundStyle(Color(red: 0.62, green: 0.55, blue: 0.9))
+                } else if showing {
                     Picture(game.cards[index], size: width * 0.75)
                 } else {
                     Text("?")
@@ -127,7 +145,7 @@ struct MemoryView: View {
     private func flip(_ index: Int) {
         guard !game.isMiss, !game.isShowing(index) else { return }
         Haptics.tap()
-        Sounds.shared.play(.pop)
+        if listening { Speaker.shared.say(Memory.sounds[game.cards[index]]!) } else { Sounds.shared.play(.pop) }
         let match = withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { game.flip(index) }
         if match {
             if game.isOver {
@@ -142,7 +160,7 @@ struct MemoryView: View {
             }
         } else if game.isMiss {
             Task {
-                try? await Task.sleep(for: .seconds(1.3))  // time to remember what was under them
+                try? await Task.sleep(for: .seconds(listening ? 2 : 1.3))  // time to remember what was under them
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { game.flipBack() }
                 say(game.turn == .star ? "Stars' turn!" : "Hearts' turn!")
             }
@@ -151,8 +169,24 @@ struct MemoryView: View {
 
     private func newGame() {
         Haptics.tap()
-        withAnimation(.spring) { game = Memory(pairs: Self.pairs) }
-        say("", hint: "Stars go first! Turn over two cards to find a match.")
+        withAnimation(.spring) { game = Memory(pairs: Self.pairs, sounds: listening) }
+        say("", hint: listening ? "Stars go first! Listen to two cards and find the same sound." : "Stars go first! Turn over two cards to find a match.")
+    }
+
+    private func modeButton(_ title: String, listen: Bool, symbol: String) -> some View {
+        let on = listening == listen
+        return Button {
+            listening = listen
+            newGame()
+        } label: {
+            Label(title, systemImage: symbol)
+                .font(.kid(20))
+                .foregroundStyle(on ? .white : Color.outline)
+                .padding(.horizontal, 18 * uiScale)
+                .frame(height: 46 * uiScale)
+                .cartoonCard(on ? Color(red: 0.62, green: 0.55, blue: 0.9) : .white, cornerRadius: 23 * uiScale)
+        }
+        .buttonStyle(SquishyButtonStyle())
     }
 
     /// Shows `text` and `hint` in Coco's bubble but only reads `text` aloud.

@@ -56,4 +56,11 @@ final class MemoryTests: XCTestCase {
         XCTAssertLessThanOrEqual(fit.width * 3 + 20, 360.001)
         XCTAssertLessThanOrEqual(fit.width / 0.8 * 4 + 30, 560.001)
     }
+
+    func testASoundGameUsesCardsThatMakeANoise() {
+        let game = Memory(pairs: 8, sounds: true)
+        XCTAssertEqual(game.cards.count, 16)
+        XCTAssertTrue(game.cards.allSatisfy { Memory.sounds[$0] != nil })
+        XCTAssertTrue(Dictionary(grouping: game.cards, by: { $0 }).values.allSatisfy { $0.count == 2 })
+    }
 }
