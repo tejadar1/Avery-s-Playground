@@ -12,9 +12,7 @@
   <rect width="1024" height="1024" fill="url(#sky)"/><rect width="1024" height="1024" fill="url(#glow)"/>
   <circle cx="130" cy="140" r="7" fill="#FFF6D8"/><circle cx="250" cy="80" r="5" fill="#FFF6D8"/><circle cx="850" cy="120" r="8" fill="#FFF6D8"/><circle cx="920" cy="250" r="5" fill="#FFF6D8"/><circle cx="100" cy="330" r="5" fill="#FFF6D8"/><circle cx="760" cy="60" r="4" fill="#FFF6D8"/><circle cx="940" cy="470" r="6" fill="#FFF6D8"/><circle cx="90" cy="620" r="4" fill="#FFF6D8"/>
   <g filter="url(#lift)">
-    <!-- Coco behind the world: her snout reaching right, two eye bumps and her flower -->
-    <path d="M560 360 Q650 330 760 345 Q815 352 812 392 Q808 420 770 420 L560 420Z" fill="url(#green)"/>
-    <circle cx="790" cy="372" r="9" fill="#2E6B33"/>
+    <!-- Coco behind the world: her two eye bumps and her flower -->
     <circle cx="436" cy="300" r="66" fill="url(#green)"/><circle cx="588" cy="300" r="66" fill="url(#green)"/>
     <circle cx="436" cy="304" r="42" fill="#fff"/><circle cx="588" cy="304" r="42" fill="#fff"/>
     <circle cx="446" cy="312" r="19" fill="#3B2A22"/><circle cx="598" cy="312" r="19" fill="#3B2A22"/>
