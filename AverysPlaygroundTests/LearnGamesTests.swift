@@ -68,4 +68,20 @@ final class LearnGamesTests: XCTestCase {
         XCTAssertLessThanOrEqual(tall.side * CGFloat(tall.columns), 350)
         XCTAssertLessThanOrEqual(tall.side * rows, 500)
     }
+
+    func testSoundSpyHasOneRightAnswerWithAKnownSound() {
+        for word in SoundSpy.words {
+            XCTAssertNotNil(Phonics.sounds[SoundSpy.first(word)], "Coco can say how \(word.text) starts")
+            XCTAssertNotNil(UIImage(named: "Picture-\(word.picture)"), word.picture)
+        }
+        var last: Character?
+        for _ in 0..<50 {
+            let round = SoundSpy.round(after: last)
+            XCTAssertEqual(round.choices.count, 3)
+            XCTAssertTrue(round.choices.contains(round.answer))
+            XCTAssertEqual(Set(round.choices.map(SoundSpy.first)).count, 3, "only one picture starts with the sound")
+            XCTAssertNotEqual(SoundSpy.first(round.answer), last, "a new sound each time")
+            last = SoundSpy.first(round.answer)
+        }
+    }
 }

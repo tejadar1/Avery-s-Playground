@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Sound Spy: a magnifying glass over the letter b, with sound waves -->
+  <g fill="none" stroke="#5B9DEF" stroke-width="8" stroke-linecap="round">
+    <path d="M150 40 Q166 56 150 72"/><path d="M162 28 Q186 56 162 84"/>
+  </g>
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M118 120 L172 174" stroke-width="22"/>
+    <path d="M118 120 L172 174" stroke="#B07A4F" stroke-width="12"/>
+    <circle cx="76" cy="78" r="54" fill="#FFF4DC"/>
+  </g>
+  <text x="76" y="104" text-anchor="middle" font-family="Arial Rounded MT Bold, Nunito, Arial, sans-serif" font-weight="900" font-size="80" fill="#F2635F" stroke="#4A2C2A" stroke-width="6" paint-order="stroke" stroke-linejoin="round">b</text>
+  <path d="M44 62 Q52 42 72 36" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+</svg>

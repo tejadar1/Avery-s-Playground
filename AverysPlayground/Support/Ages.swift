@@ -38,7 +38,7 @@ extension Activity {
     /// 4 needs letter sounds, adding or planning ahead.
     var fromAge: Int {
         switch self {
-        case .patterns, .rhyme, .tracing, .maze, .race, .ispy: 3
+        case .patterns, .rhyme, .tracing, .sounds, .maze, .race, .ispy: 3
         case .spelling, .math, .tictactoe: 4
         default: 2
         }

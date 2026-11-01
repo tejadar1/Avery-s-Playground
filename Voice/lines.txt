@@ -105,6 +105,9 @@ C sharp
 Calm. Nice and cozy, like a quiet story.
 Canvas
 Cat
+Caw caw! The crow got here first! Let's try again!
+Caw caw! The crow hops closer!
+Caw caw! The crow hops closer! 
 Chore time! Let's help at home.
 Chores
 Clear
@@ -565,6 +568,7 @@ He climbed down fast and took the hen home to his mom.
 He did it again. Everyone came running. No wolf!
 He jumped up and ran away! Run, run, as fast as you can!
 He planted the beans, and they grew up into the sky overnight!
+Hear the sound again
 Hear the word
 Hearts
 Hearts found it! 
@@ -616,6 +620,7 @@ Hearts, I spy something your family sits on together!
 Hearts, I spy something yummy and healthy to eat!
 Hearts, I spy somewhere to sit at the park!
 Hearts, hide Coco! Tap where she should hide. Stars, close your eyes!
+Hearts, spin!
 Hee hee hee! You're so funny! You made me giggle!
 Hee hee! That tickles!
 Hee hee! You're silly! You're a silly, silly goose!
@@ -874,6 +879,7 @@ Let's count to 8!
 Let's count to 9!
 Let's get her dressed! Pick some clothes.
 Let's have a race, said Hare.
+Let's pick all the fruit before the crow gets here! Stars, spin!
 Let's read! Tap each letter to hear its sound.
 Let's roll, Coco patrol!
 Let's wash your hair! Rub on the shampoo.
@@ -882,6 +888,7 @@ Lights out
 Lily
 Lion
 Listen
+Listen again!
 Listen!
 Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
@@ -1028,8 +1035,12 @@ Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick a leaf and tap it to hop! Follow the beans!
+Pick a red apple!
+Pick a yellow banana!
+Pick an orange! It's orange!
 Pick another nail!
 Pick easy, medium or hard.
+Pick some purple grapes!
 Picture
 Pictures
 Pigtails
@@ -1235,6 +1246,7 @@ Stars, I spy something your family sits on together!
 Stars, I spy something yummy and healthy to eat!
 Stars, I spy somewhere to sit at the park!
 Stars, hide Coco! Tap where she should hide. Hearts, close your eyes!
+Stars, spin!
 Start
 Start over
 Start this picture over?
@@ -1294,6 +1306,8 @@ Team up with your grown-up against Coco! Slide out two pictures, then drag each 
 Ten magic beans! Holy guacamole, you climbed to the clouds!
 That color is so pretty!
 That sticker is so silly!
+That tree is empty!
+That tree is empty! 
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
 That's what I call croc-tastic teamwork!
@@ -1304,6 +1318,7 @@ The Lion and the Mouse
 The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
+The basket! Pick any two fruits!
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
 The boy learned to always tell the truth.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
@@ -1370,6 +1385,7 @@ Wand! Wowza bowza!
 Wash
 Watch the keys.
 Water the plants
+We picked all the fruit! Holy guacamole, we beat the crow!
 Whale
 What a design!
 What color should it be?
@@ -1412,6 +1428,7 @@ Which one rhymes with star?
 Which one rhymes with sun?
 Which one rhymes with tree?
 Which one starts with
+Which one starts with b-b-b?
 Which picture is it?
 White
 Who came home and found Goldilocks?
@@ -1566,6 +1583,7 @@ apple and pig!
 apple and star!
 apple and sun!
 apple and tree!
+apple, a, Holy guacamole!
 apples
 are.
 as
@@ -2627,6 +2645,7 @@ cow and tree!
 crayons
 crocodile
 cross
+crow
 crown
 cup
 cupcake
@@ -3373,6 +3392,7 @@ o
 octopus
 on
 oopsie
+orange
 out.
 overalls
 p

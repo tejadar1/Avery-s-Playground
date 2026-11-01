@@ -162,4 +162,40 @@ final class TeamUpTests: XCTestCase {
             XCTAssertEqual(game.score[.heart], 1, "the score carries on")
         }
     }
+
+    func testFruitPickingSpinsPicksAndTheCrow() {
+        var game = FruitPicking()
+        XCTAssertFalse(game.pick("apple"), "spin first")
+        game.spin(.fruit("apple"))
+        XCTAssertFalse(game.pick("banana"), "only the fruit that was spun")
+        XCTAssertTrue(game.pick("apple"))
+        XCTAssertEqual(game.picked, 1)
+        XCTAssertEqual(game.turn, .heart, "after the pick, the other side's turn")
+
+        game.spin(.basket)
+        XCTAssertTrue(game.pick("grapes"))
+        XCTAssertFalse(game.canSpin, "one more to pick")
+        XCTAssertTrue(game.pick("orange"))
+        XCTAssertEqual(game.turn, .star)
+
+        for _ in 0..<FruitPicking.crowSteps { game.spin(.crow) }
+        XCTAssertTrue(game.lost)
+        XCTAssertFalse(game.canSpin)
+
+        // Picking every fruit wins, and an empty tree just passes the turn.
+        var team = FruitPicking()
+        for fruit in FruitPicking.fruits {
+            for _ in 0..<FruitPicking.perTree {
+                team.spin(.fruit(fruit))
+                XCTAssertTrue(team.pick(fruit))
+            }
+        }
+        XCTAssertTrue(team.won)
+        var empty = FruitPicking()
+        for _ in 0..<FruitPicking.perTree { empty.spin(.fruit("apple")); _ = empty.pick("apple") }
+        let turn = empty.turn
+        empty.spin(.fruit("apple"))
+        XCTAssertEqual(empty.picksLeft, 0)
+        XCTAssertNotEqual(empty.turn, turn)
+    }
 }
