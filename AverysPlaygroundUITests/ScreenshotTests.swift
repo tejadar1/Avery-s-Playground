@@ -215,6 +215,15 @@ final class ScreenshotTests: XCTestCase {
         sleep(1)
         try snap("19-Stickers", device, dir)
         goHome()
+
+        // The grown-ups' pages, from the pencil: age 2's suggested games. Last, so they can't upset the games.
+        tap(app.buttons["For grown-ups"])
+        sleep(1)
+        try snap("31-For grown-ups", device, dir)
+        tap(button("Age and games"))
+        tap(app.buttons["Age 2"])
+        sleep(1)
+        try snap("32-Age and games", device, dir)
     }
 
     /// Waits for an element, scrolls it into view if it's off screen, then taps it.
