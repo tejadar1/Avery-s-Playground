@@ -7,6 +7,21 @@
     </linearGradient>
   </defs>
   <rect width="1024" height="1024" fill="url(#bg)"/>
+  <!-- The sun, with rays -->
+  <g stroke="#FFE27A" stroke-width="26" stroke-linecap="round" stroke-opacity=".9">
+    <line x1="944" y1="211" x2="992" y2="223"/>
+    <line x1="913" y1="263" x2="949" y2="299"/>
+    <line x1="861" y1="294" x2="873" y2="342"/>
+    <line x1="799" y1="294" x2="787" y2="342"/>
+    <line x1="747" y1="263" x2="711" y2="299"/>
+    <line x1="716" y1="211" x2="668" y2="223"/>
+    <line x1="716" y1="149" x2="668" y2="137"/>
+    <line x1="747" y1="97" x2="711" y2="61"/>
+    <line x1="799" y1="66" x2="787" y2="18"/>
+    <line x1="861" y1="66" x2="873" y2="18"/>
+    <line x1="913" y1="97" x2="949" y2="61"/>
+    <line x1="944" y1="149" x2="992" y2="137"/>
+  </g>
   <circle cx="830" cy="180" r="90" fill="#FFE27A" fill-opacity=".9"/>
   <g stroke="#4A2C2A" stroke-width="16" stroke-linejoin="round" stroke-linecap="round">
     <!-- Coco's head, peeking over the top block: snout to the right, eye bumps on top -->
