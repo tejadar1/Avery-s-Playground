@@ -63,11 +63,12 @@ struct SoundSpyView: View {
                 let fit = uiScale == 1 ? CardGrid.fit(count: round.choices.count, in: geo.size, gap: gap, aspect: 1)
                     : upright ? (columns: 2, width: min((geo.size.width - gap) / 2, (geo.size.height - gap) / 2))
                     : (columns: 3, width: min((geo.size.width - 2 * gap) / 3, geo.size.height))
-                Grid(horizontalSpacing: gap, verticalSpacing: gap) {
+                // Rows of cards; a last row with fewer cards is centered.
+                VStack(spacing: gap) {
                     ForEach(0..<(round.choices.count + fit.columns - 1) / fit.columns, id: \.self) { row in
-                        GridRow {
-                            ForEach(0..<fit.columns, id: \.self) { column in
-                                if row * fit.columns + column < round.choices.count { card(round.choices[row * fit.columns + column], size: fit.width) }
+                        HStack(spacing: gap) {
+                            ForEach(row * fit.columns..<min((row + 1) * fit.columns, round.choices.count), id: \.self) { index in
+                                card(round.choices[index], size: fit.width)
                             }
                         }
                     }

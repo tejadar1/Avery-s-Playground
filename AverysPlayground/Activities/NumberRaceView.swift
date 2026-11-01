@@ -40,6 +40,7 @@ struct NumberRace {
 }
 
 struct NumberRaceView: View {
+    @Environment(\.isWide) private var isWide
     private static let colors = [
         Color(red: 0.95, green: 0.47, blue: 0.6), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.98, green: 0.8, blue: 0.3),
         Color(red: 0.45, green: 0.72, blue: 0.42), Color(red: 0.36, green: 0.75, blue: 0.68), Color(red: 0.4, green: 0.72, blue: 0.9),
@@ -87,13 +88,13 @@ struct NumberRaceView: View {
 
     /// Squares as big as `size` allows: across in a row, or up in a column (1 at the bottom) when that makes them
     /// bigger, as on an upright phone.
-    nonisolated static func squares(in size: CGSize, gap: CGFloat) -> (up: Bool, width: CGFloat, height: CGFloat) {
+    nonisolated static func squares(in size: CGSize, gap: CGFloat, preferUp: Bool = false) -> (up: Bool, width: CGFloat, height: CGFloat) {
         let count = CGFloat(NumberRace.finish) + start, gaps = gap * CGFloat(NumberRace.finish)
         let acrossWidth = (size.width - gaps) / count
         let across = (width: acrossWidth, height: min(acrossWidth * 3.5, size.height))
         let upHeight = (size.height - gaps) / count
         let up = (width: min(size.width * 0.7, upHeight * 6), height: upHeight)
-        return size.height > size.width || min(up.width, up.height) > min(across.width, across.height)
+        return preferUp || size.height > size.width || min(up.width, up.height) > min(across.width, across.height)
             ? (true, up.width, up.height) : (false, across.width, across.height)
     }
 
@@ -102,7 +103,8 @@ struct NumberRaceView: View {
     private var board: some View {
         GeometryReader { geo in
             let gap = 4 * uiScale
-            let fit = Self.squares(in: geo.size, gap: gap)
+            // On an upright iPad the board runs up like on a phone: a row across left the screen mostly empty.
+            let fit = Self.squares(in: geo.size, gap: gap, preferUp: uiScale > 1 && !isWide)
             let up = fit.up, width = fit.width, height = fit.height
             let size = min(width, height)
             let line = up ? AnyLayout(VStackLayout(spacing: gap)) : AnyLayout(HStackLayout(spacing: gap))
