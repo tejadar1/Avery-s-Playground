@@ -485,6 +485,7 @@ Done!
 Dots and stripes, oh my!
 Down
 Down! So cute!
+Drag Coco to where she should hide
 Drag each piece to where it goes in the picture!
 Drag the hose to spray Mochi.
 Drag to spray Mochi
@@ -621,9 +622,10 @@ Hearts, I spy something you write with!
 Hearts, I spy something your family sits on together!
 Hearts, I spy something yummy and healthy to eat!
 Hearts, I spy somewhere to sit at the park!
-Hearts, hide Coco! Tap where she should hide. Stars, close your eyes!
+Hearts, hide Coco! Drag her to a hiding spot. Stars, close your eyes!
 Hearts, spin!
 Hee hee hee! You're so funny! You made me giggle!
+Hee hee! Drag me onto something to hide behind!
 Hee hee! That tickles!
 Hee hee! You're silly! You're a silly, silly goose!
 Hee hee, I love that sticker!
@@ -1257,7 +1259,7 @@ Stars, I spy something you write with!
 Stars, I spy something your family sits on together!
 Stars, I spy something yummy and healthy to eat!
 Stars, I spy somewhere to sit at the park!
-Stars, hide Coco! Tap where she should hide. Hearts, close your eyes!
+Stars, hide Coco! Drag her to a hiding spot. Hearts, close your eyes!
 Stars, spin!
 Start
 Start over

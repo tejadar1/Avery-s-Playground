@@ -144,9 +144,9 @@ final class ScreenshotTests: XCTestCase {
                 self.tap(self.app.buttons["Square 1"])  // not "Square 10"
             }),
             ("Hide Coco", {
-                // Hide her behind something in the middle of the room, then find her.
+                // Drag Coco onto something in the middle of the room to hide her.
                 let picture = self.find("Picture")
-                picture.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.6)).tap()
+                self.find("Coco").press(forDuration: 0.3, thenDragTo: picture.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.6)))
             }),
             ("I Spy", {}),
             ("Sound Spy", {}),

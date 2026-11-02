@@ -55,6 +55,14 @@ struct HideView: View {
     @State private var game = HideAndSeek(room: SpotTheDifference.rooms[0])
     /// Where Coco shows when she pops out, as a fraction of the picture.
     @State private var found: CGPoint?
+    /// Coco while she's being hidden: where she is (a fraction of the picture), how big, her spin, and the puff of
+    /// sparkles she vanishes in. She waits in the corner until she's dragged onto something.
+    @State private var cocoAt = HideView.corner
+    @State private var cocoScale: CGFloat = 1
+    @State private var cocoSpin = 0.0
+    @State private var poof: CGPoint?
+    @State private var isHiding = false
+    private static let corner = CGPoint(x: 0.86, y: 0.8)
     @State private var hint = false
     @State private var cheer = ""
     @State private var cheerCount = 0
@@ -88,14 +96,39 @@ struct HideView: View {
                             .position(x: found.x * width, y: found.y * height)
                             .transition(.scale(scale: 0.1).combined(with: .opacity))
                     }
+                    if let poof {
+                        Picture("sparkles", size: width * 0.2)
+                            .position(x: poof.x * width, y: poof.y * height)
+                            .transition(.scale(scale: 0.3).combined(with: .opacity))
+                    }
+                    // Coco, to drag onto a hiding spot.
+                    if game.spot == nil || isHiding {
+                        Picture("crocodile", size: width * 0.2)
+                            .scaleEffect(cocoScale)
+                            .rotationEffect(.degrees(cocoSpin))
+                            .gesture(
+                                DragGesture(coordinateSpace: .named("room"))
+                                    .onChanged { value in
+                                        guard !isHiding else { return }
+                                        cocoAt = CGPoint(x: min(max(value.location.x / width, 0), 1), y: min(max(value.location.y / height, 0), 1))
+                                        cocoScale = 1.15
+                                    }
+                                    .onEnded { _ in drop() }
+                            )
+                            .accessibilityLabel("Coco")
+                            .accessibilityIdentifier("Coco")
+                            .accessibilityHint("Drag Coco to where she should hide")
+                            .position(x: cocoAt.x * width, y: cocoAt.y * height)
+                    }
                 }
+                .coordinateSpace(.named("room"))
                 .frame(width: width, height: height)
                 .clipShape(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                 .contentShape(Rectangle())
                 .onTapGesture { location in tap(at: CGPoint(x: location.x / width, y: location.y / height)) }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .accessibilityElement(children: .ignore)
+                .accessibilityElement(children: .contain)
                 .accessibilityLabel("Picture")
                 .accessibilityIdentifier("Picture")
             }
@@ -107,15 +140,48 @@ struct HideView: View {
         .onAppear(perform: newRoom)
     }
 
-    private func tap(at point: CGPoint) {
-        guard found == nil else { return }
-        if game.spot == nil {
-            guard game.hide(at: point) else { return }
+    /// Coco let go: onto something, she hops, spins away into a puff of sparkles and she's hidden; anywhere else
+    /// she bounces back to her corner.
+    private func drop() {
+        guard !isHiding, game.spot == nil else { return }
+        guard game.hide(at: cocoAt), let spot = game.spot else {
             Haptics.tap()
-            Sounds.shared.play(.pop)
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.55)) {
+                cocoAt = Self.corner
+                cocoScale = 1
+            }
+            say("Hee hee! Drag me onto something to hide behind!")
+            return
+        }
+        isHiding = true
+        Haptics.tap()
+        Task {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                cocoAt = spot.spot
+                cocoScale = 1.3  // a happy little hop
+            }
+            try? await Task.sleep(for: .milliseconds(300))
+            Sounds.shared.play(.sparkle)
+            withAnimation(.easeIn(duration: 0.45)) {
+                cocoScale = 0.01
+                cocoSpin = 360
+            }
+            try? await Task.sleep(for: .milliseconds(380))
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) { poof = spot.spot }
+            try? await Task.sleep(for: .milliseconds(450))
+            withAnimation(.easeOut(duration: 0.3)) { poof = nil }
+            isHiding = false
+            cocoScale = 1
+            cocoSpin = 0
+            cocoAt = Self.corner
             say(game.seeker == .star ? "Shh! Coco is hiding. Stars, open your eyes and find her!"
                 : "Shh! Coco is hiding. Hearts, open your eyes and find her!")
-        } else if let spot = game.spot, game.seek(at: point) {
+        }
+    }
+
+    private func tap(at point: CGPoint) {
+        guard found == nil, game.spot != nil, !isHiding else { return }
+        if let spot = game.spot, game.seek(at: point) {
             wins += 1
             Haptics.success()
             Sounds.shared.play(.sparkle)
@@ -149,8 +215,8 @@ struct HideView: View {
             game.nextRound(in: SpotTheDifference.rooms[nextRoom])
         }
         nextRoom = (nextRoom + 1) % SpotTheDifference.rooms.count
-        say(game.hider == .star ? "Stars, hide Coco! Tap where she should hide. Hearts, close your eyes!"
-            : "Hearts, hide Coco! Tap where she should hide. Stars, close your eyes!")
+        say(game.hider == .star ? "Stars, hide Coco! Drag her to a hiding spot. Hearts, close your eyes!"
+            : "Hearts, hide Coco! Drag her to a hiding spot. Stars, close your eyes!")
     }
 
     private func say(_ text: String) {
