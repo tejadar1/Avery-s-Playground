@@ -141,7 +141,8 @@ enum Hooray {
         // Little sayings from her favorite shows, the Coco way
         "For real life? You did it!", "Hooray! Wackadoo!", "Paw-some!", "No job is too big, no croc is too small!",
         "Let's roll, Coco patrol!", "Yes yes yes, that's the best!", "Bingo bango bongo!", "You're a superstar, for real life!",
-        "Ready, set, snap!", "That's what I call croc-tastic teamwork!",
+        "Ready, set, snap!", "That's what I call croc-tastic teamwork!", "Dance mode!", "Whoop whoop, crocodile scoop!",
+        "Ta-da! You're a superstar!", "Too easy!",
     ]
 
     /// A silly cheer she hasn't said lately.
@@ -157,6 +158,29 @@ enum Hooray {
     }
 
     private static var recent: [String] = []
+}
+
+/// What Coco says when something goes a little wrong, before the rest of the line: "Oh crumbs! Too far!"
+enum Oops {
+    static let all = ["Oh biscuits!", "Oh crumbs!", "Fiddlesticks!", "Oopsie noodles!", "Oh, sticky gecko!"]
+
+    /// Says a whoops and then `rest` (after `first`, like the crow's "Caw caw!"), and returns the whole line for
+    /// Coco's bubble.
+    @MainActor @discardableResult static func say(_ rest: String, after first: String? = nil) -> String {
+        let oops = Hooray.pick(from: all)
+        if let first { Speaker.shared.say(first, then: oops, rest) } else { Speaker.shared.say(oops, then: rest) }
+        return [first, oops, rest].compactMap { $0 }.joined(separator: " ")
+    }
+}
+
+/// Coco's goodbye when a game closes, and her hello when the app opens.
+enum Bye {
+    static let all = ["See you later, alligator!", "Hooroo!"]
+}
+
+enum Hello {
+    /// Her name is only in a recorded line for Avery; anyone else gets a plain "Hiya!".
+    static func line(for name: String) -> String { Hooray.pick(from: ["G'day, mate!", name == "Avery" ? "Hiya, Avery!" : "Hiya!"]) }
 }
 
 /// Coco with a speech bubble. She hops each time `hops` changes, jumps for joy when `cheers` changes,

@@ -389,7 +389,9 @@ struct HopView: View {
     /// A leaf that's too far: Coco leaps, can't reach it, and tumbles down a row with a spin and a bounce.
     private func tumble(from: CGPoint, toward target: CGPoint) {
         isHopping = true
-        say("Oh biscuits! Too far! Whoopsie daisy, boing!")
+        let line = Oops.say("Too far! Whoopsie daisy, boing!")
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = line }
+        cheerCount += 1
         Task {
             let frames = 14
             for frame in 1...frames {

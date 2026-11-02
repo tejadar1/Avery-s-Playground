@@ -137,7 +137,7 @@ struct HideView: View {
                 withAnimation(.spring) { hint = true }
                 say("Psst! Look near the sparkles!")
             } else {
-                say("Hee hee, not there! Keep looking!")
+                say(Bool.random() ? "Hee hee, not there! Keep looking!" : "Ooh, so close! One more try!")
             }
         }
     }

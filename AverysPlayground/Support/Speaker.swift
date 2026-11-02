@@ -114,6 +114,12 @@ final class Speaker {
         gameClosed()
     }
 
+    /// Says `text` even though a game just closed, like Coco's goodbye.
+    func sayEvenIfJustClosed(_ text: String) {
+        closedGameAt = nil
+        say(text)
+    }
+
     private var isQuiet: Bool { openGames == 0 && closedGameAt.map { Date.now.timeIntervalSince($0) < 6 } ?? false }
 
     /// Plays recordings one after another, with a pause after each one that has one.

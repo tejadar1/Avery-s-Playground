@@ -200,13 +200,13 @@ struct FruitView: View {
         withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) { game.spin(face) }
         switch face {
         case .fruit(let fruit) where game.picksLeft > 0: say(Self.pickLines[fruit]!, spoken: Self.pickLines[fruit]!)
-        case .fruit: say("Oh biscuits, that tree is empty! " + next, spoken: "Oh biscuits, that tree is empty!")
+        case .fruit: show(Oops.say("That tree is empty!") + " " + next)
         case .basket: say("The basket! Pick any two fruits!", spoken: "The basket! Pick any two fruits!")
         case .crow:
             if game.lost {
-                say("Caw caw! Oh biscuits, the crow got here first! Let's try again!", spoken: "Caw caw! Oh biscuits, the crow got here first! Let's try again!")
+                show(Oops.say("The crow got here first! Let's try again!", after: "Caw caw!"))
             } else {
-                say("Caw caw! Oh biscuits, the crow hops closer! " + next, spoken: "Caw caw! Oh biscuits, the crow hops closer!")
+                show(Oops.say("The crow hops closer!", after: "Caw caw!") + " " + next)
             }
         }
     }
@@ -236,6 +236,12 @@ struct FruitView: View {
         Haptics.tap()
         withAnimation(.spring) { game = FruitPicking() }
         say("Let's pick all the fruit before the crow gets here! Stars, spin!", spoken: "Let's pick all the fruit before the crow gets here! Stars, spin!")
+    }
+
+    /// Shows `text` in Coco's bubble, for lines already spoken.
+    private func show(_ text: String) {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
+        cheerCount += 1
     }
 
     /// Shows `text` in Coco's bubble and says `spoken`.

@@ -17,6 +17,7 @@ struct AverysPlaygroundApp: App {
                 if !isReady {
                     GettingReady {
                         withAnimation(.easeOut(duration: 0.4)) { isReady = true }
+                        Speaker.shared.say(Hello.line(for: Kid.name))
                     }
                     .transition(.opacity)
                 }

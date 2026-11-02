@@ -39,6 +39,7 @@ Another sticker! Yay!
 Anywhere
 Apple
 At the top was a giant's castle. Fee, fi, fo, fum!
+Avery
 Avery! You wrote your name!
 B
 Baa baa!
@@ -105,9 +106,7 @@ C sharp
 Calm. Nice and cozy, like a quiet story.
 Canvas
 Cat
-Caw caw! Oh biscuits, the crow got here first! Let's try again!
-Caw caw! Oh biscuits, the crow hops closer!
-Caw caw! Oh biscuits, the crow hops closer! 
+Caw caw!
 Chore time! Let's help at home.
 Chores
 Clear
@@ -474,6 +473,7 @@ Curly! So cute!
 Cut along the dotted line.
 D
 D sharp
+Dance mode!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
 Dog
@@ -505,6 +505,7 @@ Feed
 Feed the pet
 Fetch! Good pup, Mochi!
 Fetch! Phew, Mochi is getting tired.
+Fiddlesticks!
 Find 3 differences!
 Find 5 differences!
 Find 7 differences! Look closely!
@@ -528,6 +529,7 @@ Free play!
 Fruit or animals?
 G
 G sharp
+G'day, mate!
 Get dressed
 Glitter
 Glitter makes everything better!
@@ -809,6 +811,8 @@ High heels! Holy guacamole, I love it!
 High heels! Ooh la la!
 High heels! So stylish!
 High heels! Wowza bowza!
+Hiya!
+Hiya, Avery!
 Hmm, look again! What's different?
 Holy guacamole!
 Holy guacamole! I sat on a banana! Squish!
@@ -823,6 +827,7 @@ Holy guacamole, what a great haircut!
 Holy guacamole, you did it!
 Holy moly, guacamole!
 Hooray! Wackadoo!
+Hooroo!
 Horse
 Hose
 Hot
@@ -991,10 +996,10 @@ Now the scissors!
 O
 O!
 Octopus
-Oh biscuits! Too far! Whoopsie daisy, boing!
-Oh biscuits, that tree is empty!
-Oh biscuits, that tree is empty! 
-Oh biscuits, time's up! Hurry, hurry!
+Oh biscuits!
+Oh crumbs!
+Oh crumbs! Too far!
+Oh, sticky gecko!
 Oink oink!
 Okay!
 Okey dokey, artichokey!
@@ -1006,7 +1011,9 @@ Ooh la la!
 Ooh la la, fancy!
 Ooh, fancy pattern!
 Ooh, shiny!
+Ooh, so close! One more try!
 Ooh, that's different!
+Oopsie noodles!
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Order
@@ -1111,6 +1118,7 @@ Scared. Hold a grown-up's hand.
 Scissors
 Scrub the teeth until they shine.
 Second picture
+See you later, alligator!
 Set the table
 Shampoo
 She baked the wheat into bread.
@@ -1291,6 +1299,7 @@ T-shirt! So stylish!
 T-shirt! Wowza bowza!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
+Ta-da! You're a superstar!
 Ta-da! Your nails look amazing!
 Take a picture
 Take vitamins
@@ -1310,6 +1319,7 @@ Team up with your grown-up against Coco! Slide out two pictures, then drag each 
 Ten magic beans! Holy guacamole, you climbed to the clouds!
 That color is so pretty!
 That sticker is so silly!
+That tree is empty!
 That's funny! That tickles my tummy! Hee hee!
 That's so cute!
 That's what I call croc-tastic teamwork!
@@ -1324,6 +1334,8 @@ The basket! Pick any two fruits!
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
 The boy learned to always tell the truth.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
+The crow got here first! Let's try again!
+The crow hops closer!
 The first pig built a house of straw.
 The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
@@ -1343,7 +1355,10 @@ Thunder goes boom in the night! How would you feel?
 Time to get ready for bed.
 Time's up
 Time's up!
+Time's up! Hurry, hurry!
 Timer
+Too easy!
+Too far! Whoopsie daisy, boing!
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Toys all tidy! Snap snap!
@@ -1453,6 +1468,7 @@ Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who won the race?
 Who's silly? You're silly! Snap snap!
+Whoop whoop, crocodile scoop!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!

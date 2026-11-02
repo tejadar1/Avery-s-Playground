@@ -110,7 +110,14 @@ private struct LeaveGameButton: View {
         .accessibilityLabel("Back")
         .alert("Leave this game?", isPresented: $asking) {
             Button("Keep playing", role: .cancel) {}
-            Button("Leave", role: .destructive) { dismiss() }
+            Button("Leave", role: .destructive) {
+                dismiss()
+                // "See you later, alligator!" once the game has closed (which hushes it).
+                Task {
+                    try? await Task.sleep(for: .milliseconds(700))
+                    Speaker.shared.sayEvenIfJustClosed(Hooray.pick(from: Bye.all))
+                }
+            }
         }
     }
 }
