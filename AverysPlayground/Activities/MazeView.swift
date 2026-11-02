@@ -40,6 +40,10 @@ struct Maze {
     func isOpen(_ a: Cell, _ b: Cell) -> Bool {
         passages[a]?.contains(b) == true
     }
+
+    /// Levels 1 to 8: a 3 by 3 maze first, one row and column bigger each level, up to 10 by 10.
+    static let levels = 1...8
+    static func size(forLevel level: Int) -> Int { level + 2 }
 }
 
 /// Mochi's way through the maze so far: a trail of cells she can only extend through open passages.
@@ -95,7 +99,10 @@ struct MazeView: View {
     private static let hedge = Color(red: 0.38, green: 0.72, blue: 0.4)
     private static let path = Color(red: 0.99, green: 0.95, blue: 0.84)
 
-    @State private var walk = MazeWalk(maze: Maze(size: 4))
+    /// The level she's playing and the highest she's opened; kept between visits.
+    @AppStorage("mazeLevel") private var level = 1
+    @AppStorage("mazeUnlocked") private var unlocked = 1
+    @State private var walk = MazeWalk(maze: Maze(size: 3))
     @State private var cheer = "Help Mochi find her bone! Drag her along the path."
     @State private var cheerCount = 0
     @State private var wins = 0
@@ -107,6 +114,7 @@ struct MazeView: View {
             let wide = screen.size.width > screen.size.height * 1.15
             VStack(spacing: 12 * uiScale) {
                 CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+                levelRow
                 let layout = wide ? AnyLayout(HStackLayout(spacing: 20 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
                 layout {
                     GeometryReader { geo in
@@ -123,6 +131,29 @@ struct MazeView: View {
         }
         .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
+        .onAppear { walk = MazeWalk(maze: Maze(size: Maze.size(forLevel: level))) }
+    }
+
+    /// The levels, 1 to 8: the ones she's done in green, this one big and yellow, the rest waiting. Tap one she's
+    /// reached to play it.
+    private var levelRow: some View {
+        HStack(spacing: 6 * uiScale) {
+            ForEach(Maze.levels, id: \.self) { n in
+                Button { play(level: n) } label: {
+                    Text("\(n)")
+                        .font(.kid(n == level ? 22 : 17))
+                        .foregroundStyle(n == level ? Color.outline : n <= unlocked ? .white : Color.outline.opacity(0.35))
+                        .frame(width: (n == level ? 44 : 34) * uiScale, height: (n == level ? 44 : 34) * uiScale)
+                        .background(Circle().fill(n == level ? Color(red: 1.0, green: 0.85, blue: 0.35) : n <= unlocked ? Self.hedge : .white.opacity(0.6)))
+                        .overlay(Circle().strokeBorder(Color.outline.opacity(n <= unlocked ? 1 : 0.3), lineWidth: 2 * uiScale))
+                }
+                .buttonStyle(SquishyButtonStyle())
+                .disabled(n > unlocked)
+                .accessibilityLabel("Level \(n)")
+                .accessibilityValue(n == level ? "Playing" : n <= unlocked ? "Open" : "Locked")
+            }
+        }
+        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: level)
     }
 
     private var newMazeButton: some View {
@@ -201,19 +232,37 @@ struct MazeView: View {
     private func finish() {
         wins += 1
         let hooray = Hooray.random
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = "Mochi found her bone! \(hooray)" }
+        // The next level, a bigger maze, once this one's done (the last level just gets new mazes).
+        let levelUp = level < Maze.levels.upperBound
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+            cheer = levelUp ? "Mochi found her bone! \(hooray) Level up!" : "Mochi found her bone! \(hooray)"
+        }
         cheerCount += 1
-        Speaker.shared.say("Mochi found her bone! Woof woof!", then: hooray)
+        if levelUp {
+            Speaker.shared.say("Mochi found her bone! Woof woof!", then: hooray, "Level up! The maze gets bigger!")
+        } else {
+            Speaker.shared.say("Mochi found her bone! Woof woof!", then: hooray)
+        }
         Task {
-            try? await Task.sleep(for: .seconds(2.5))
-            newMaze()
+            try? await Task.sleep(for: .seconds(levelUp ? 3.5 : 2.5))
+            if levelUp {
+                unlocked = max(unlocked, level + 1)
+                play(level: level + 1)
+            } else {
+                newMaze()
+            }
         }
     }
 
-    /// A new maze, one size bigger after each win, up to 8 by 8.
+    private func play(level n: Int) {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { level = n }
+        newMaze()
+    }
+
+    /// A new maze at this level.
     private func newMaze() {
         Haptics.tap()
-        walk = MazeWalk(maze: Maze(size: min(8, 4 + wins)))
+        walk = MazeWalk(maze: Maze(size: Maze.size(forLevel: level)))
         withAnimation { cheer = "Help Mochi find her bone! Drag her along the path." }
     }
 

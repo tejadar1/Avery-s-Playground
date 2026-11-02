@@ -3,7 +3,7 @@ import XCTest
 
 final class MazeTests: XCTestCase {
     func testEveryCellIsReachableByExactlyOnePath() {
-        for size in 4...8 {
+        for size in Maze.levels.map(Maze.size(forLevel:)) {
             let maze = Maze(size: size)
             var seen: Set<Maze.Cell> = [maze.start]
             var queue = [maze.start]
@@ -18,6 +18,11 @@ final class MazeTests: XCTestCase {
             XCTAssertEqual(seen.count, size * size, "every cell can be reached")
             XCTAssertEqual(edges / 2, size * size - 1, "no loops, so one way through")
         }
+    }
+
+    func testLevelsStartSmallAndGrow() {
+        XCTAssertEqual(Maze.size(forLevel: Maze.levels.lowerBound), 3, "level 1 is easy")
+        XCTAssertEqual(Maze.size(forLevel: Maze.levels.upperBound), 10)
     }
 
     func testWallsStopMochiAndBackingUpErasesTheTrail() {

@@ -890,6 +890,7 @@ Let's pick all the fruit before the crow gets here! Stars, spin!
 Let's read! Tap each letter to hear its sound.
 Let's roll, Coco patrol!
 Let's wash your hair! Rub on the shampoo.
+Level up! The maze gets bigger!
 Levels
 Lights out
 Lily
@@ -899,6 +900,7 @@ Listen again!
 Listen!
 Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
+Locked
 Lon
 London Bridge
 Look again!
@@ -1016,6 +1018,7 @@ Ooh, shiny!
 Ooh, so close! One more try!
 Ooh, that's different!
 Oopsie noodles!
+Open
 Open wide! Pick the toothbrush and brush the teeth.
 Orange
 Order
@@ -1062,6 +1065,7 @@ Pink
 Play
 Play again
 Play the star key, or tap Listen.
+Playing
 Please let me go, said the mouse. One day I will help you.
 Ponytail
 Ponytail! So cute!
@@ -3364,6 +3368,8 @@ ly,
 m
 mad
 mango
+mazeLevel
+mazeUnlocked
 mer
 mmm
 mochi

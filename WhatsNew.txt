@@ -1,1 +1,2 @@
 - Sound Spy, ABC, Rhyme Time and Spell: letter sounds are longer, slower and louder, so the first sound is easy to hear.
+- Maze: starts with a small, easy maze and grows one size each level, up to level 8. The levels show above the maze, and she can tap any level she's reached.
