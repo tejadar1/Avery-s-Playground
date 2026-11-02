@@ -24,12 +24,14 @@ kokoro = Kokoro(str(here / "kokoro-v1.0.onnx"), str(here / "voices-v1.0.bin"))
 
 
 def letter_sound(ipa, voice):
-    """A letter's sound ("sound:æ" lines) from its IPA. Stops get a soft vowel so they can be heard; held sounds are held."""
-    phonemes = ipa + ("ə" if ipa in {"b", "d", "ɡ", "k", "p", "t", "h", "w"} else "ː" if ipa in {"f", "s", "v", "n"} else "")
-    audio, rate = kokoro.create(phonemes, voice=voice, speed=0.85, lang="en-us", is_phonemes=True)
+    """A letter's sound ("sound:æ" lines) from its IPA. Stops get a soft vowel so they can be heard; vowels and sounds
+    like mmm and sss are held for about half a second, slowly, and every sound is as loud as Coco's other lines."""
+    stop = {"b", "d", "ɡ", "k", "p", "t", "h", "w"}
+    phonemes = ipa + ("ə" if ipa in stop else "ːː")
+    audio, rate = kokoro.create(phonemes, voice=voice, speed=0.6, lang="en-us", is_phonemes=True)
     if len(audio) < rate * 0.1 or abs(audio).max() < 0.02:
         raise ValueError(f"no sound for {ipa}")
-    return audio, rate
+    return audio * (0.9 / abs(audio).max()), rate
 
 
 def record(line, voice, pitch, path, lang="en-us", speed=1.0, quicker=1.0):
