@@ -82,13 +82,13 @@ struct Hairdo: Equatable {
 
     var averageLength: CGFloat { lengths.reduce(0, +) / CGFloat(lengths.count) }
 
-    /// Spots all over her hair that shampoo lathers up: the top of her head and down both sides, never her face.
-    static let latherSpots: [CGPoint] = stride(from: 0.2, through: 0.8, by: 0.07).flatMap { x in
-        stride(from: 0.12, through: 0.8, by: 0.07).map { y in CGPoint(x: x, y: y) }
+    /// Spots all over her hair that shampoo lathers up: the top of her head and down both sides to the ends, never her face.
+    static let latherSpots: [CGPoint] = stride(from: 0.17, through: 0.84, by: 0.067).flatMap { x in
+        stride(from: 0.12, through: 0.86, by: 0.067).map { y in CGPoint(x: x, y: y) }
     }
     .filter { spot in
         let onTop = pow((spot.x - 0.5) / 0.27, 2) + pow((spot.y - 0.3) / 0.19, 2) <= 1
-        let onSides = (spot.x < 0.31 || spot.x > 0.69) && spot.y >= 0.3
+        let onSides = (spot.x < 0.31 || spot.x > 0.69) && spot.y >= 0.3 && spot.y <= Self.top + Self.maxLength
         // Just the face below her bangs; bubbles on the bangs are fine
         let onFace = pow((spot.x - 0.5) / 0.19, 2) + pow((spot.y - 0.5) / 0.17, 2) < 1
         return (onTop || onSides) && !onFace
@@ -106,28 +106,31 @@ struct Hairdo: Equatable {
 
     /// `previous` is where the finger was a moment ago, so a quick swipe works all along its path.
     mutating func use(_ tool: HairTool, at point: CGPoint, from previous: CGPoint? = nil) {
+        // Every point along the path since the last touch, so a quick swipe doesn't skip any.
+        let from = previous ?? point
+        let steps = max(1, Int(hypot(point.x - from.x, point.y - from.y) / 0.01))
+        let path = (0...steps).map { step in
+            let t = CGFloat(step) / CGFloat(steps)
+            return CGPoint(x: from.x + (point.x - from.x) * t, y: from.y + (point.y - from.y) * t)
+        }
         switch tool {
         case .shampoo:
             // A big soapy hand: every hair spot near the finger lathers up.
-            for spot in Self.latherSpots where hypot(spot.x - point.x, spot.y - point.y) < 0.1 && !foam.contains(spot) {
-                foam.append(spot)
+            for point in path {
+                for spot in Self.latherSpots where hypot(spot.x - point.x, spot.y - point.y) < 0.1 && !foam.contains(spot) {
+                    foam.append(spot)
+                }
             }
             tangles = min(1, tangles + 0.01)
         case .rinse:
-            foam.removeAll { hypot($0.x - point.x, $0.y - point.y) < 0.13 }
+            for point in path { foam.removeAll { hypot($0.x - point.x, $0.y - point.y) < 0.13 } }
             wetness = 1
         case .dryer:
             wetness = max(0, wetness - 0.02)
         case .comb:
             tangles = max(0, tangles - 0.03)
         case .scissors:
-            // Cut all along the path since the last touch, so a quick swipe doesn't skip strands.
-            let from = previous ?? point
-            let steps = max(1, Int(hypot(point.x - from.x, point.y - from.y) / 0.01))
-            for step in 0...steps {
-                let t = CGFloat(step) / CGFloat(steps)
-                cut(at: CGPoint(x: from.x + (point.x - from.x) * t, y: from.y + (point.y - from.y) * t))
-            }
+            for point in path { cut(at: point) }
         }
     }
 

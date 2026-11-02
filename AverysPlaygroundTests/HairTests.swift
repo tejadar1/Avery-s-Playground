@@ -21,6 +21,12 @@ final class HairTests: XCTestCase {
         XCTAssertTrue(hair.isLathered)
     }
 
+    func testAQuickSwipeLathersAllAlongIt() {
+        var hair = Hairdo()
+        hair.use(.shampoo, at: CGPoint(x: 0.84, y: 0.3), from: CGPoint(x: 0.17, y: 0.3))
+        XCTAssertTrue(Hairdo.latherSpots.filter { abs($0.y - 0.3) < 0.04 }.allSatisfy(hair.foam.contains), "no gaps along the swipe")
+    }
+
     func testAQuickSwipeCutsEveryStrandAlongIt() {
         var hair = Hairdo()
         let y = Hairdo.top + Hairdo.maxLength * 0.6

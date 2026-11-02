@@ -45,8 +45,9 @@ struct Nail: Equatable {
 
     /// A nail painted all over in one color.
     static func painted(_ color: Color, glitter: Bool = false, tint: Color? = nil) -> Nail {
-        // Two coats, since each stroke is a little see-through.
-        Nail(strokes: [0.2, 0.5, 0.8, 0.2, 0.5, 0.8].map { Stroke(points: [CGPoint(x: $0, y: 0), CGPoint(x: $0, y: 1)], color: color, glitter: glitter, tint: tint) })
+        // Two coats of thin strokes, since each is a little see-through.
+        let lanes: [CGFloat] = [0.1, 0.26, 0.42, 0.58, 0.74, 0.9]
+        return Nail(strokes: (lanes + lanes).map { Stroke(points: [CGPoint(x: $0, y: 0), CGPoint(x: $0, y: 1)], color: color, glitter: glitter, tint: tint) })
     }
 
     mutating func apply(_ tool: NailTool) {
@@ -668,11 +669,12 @@ private struct NailView: View {
                     var path = Path()
                     path.addLines(stroke.points.map { CGPoint(x: $0.x * canvas.width, y: $0.y * canvas.height) })
                     if stroke.points.count == 1, let dot = path.currentPoint { path.addLine(to: dot) }
-                    let style = StrokeStyle(lineWidth: canvas.width * 0.5, lineCap: .round, lineJoin: .round)
+                    // A thin brush: about five swipes up and down to cover a nail.
+                    let style = StrokeStyle(lineWidth: canvas.width * 0.22, lineCap: .round, lineJoin: .round)
                     // Soft, see-through strokes, so a new color blends with what's under it and the same color builds up.
                     var paint = context
                     paint.opacity = 0.7
-                    paint.addFilter(.blur(radius: canvas.width * 0.05))
+                    paint.addFilter(.blur(radius: canvas.width * 0.025))
                     if let tint = stroke.tint {
                         // Fades across the nail, from one side to the other, wherever it's brushed.
                         let fade = Gradient(colors: [stroke.color, tint])
