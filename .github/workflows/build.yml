@@ -147,3 +147,23 @@ jobs:
             -exportOptionsPlist build/ExportOptions.plist -allowProvisioningUpdates \
             -authenticationKeyPath ~/private_keys/AuthKey_$KEY_ID.p8 \
             -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER_ID"
+
+  # The notes in WhatsNew.txt show in TestFlight as "What to Test". On Linux, since it waits a few minutes for Apple
+  # to receive the build and Mac minutes cost more.
+  whats-new:
+    needs: testflight
+    runs-on: ubuntu-latest
+    env:
+      KEY_ID: LRDVNT6QAA
+      ISSUER_ID: 6e584ffe-8197-4f9f-8aa6-7541bb2bc445
+      KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+    steps:
+      - if: env.KEY != ''
+        uses: actions/checkout@v4
+      - if: env.KEY != ''
+        run: |
+          body=$(printf '%s' "$KEY" | sed 's/BEGIN PRIVATE KEY//; s/END PRIVATE KEY//' | LC_ALL=C tr -cd 'A-Za-z0-9+/=')
+          printf -- '-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----\n' "$(echo "$body" | fold -w 64)" > "$RUNNER_TEMP/key.p8"
+          pip install -q pyjwt cryptography
+          KEY_PATH="$RUNNER_TEMP/key.p8" BUNDLE_ID=com.tejadar1.averysplayground \
+            BUILD_NUMBER=${{ github.run_number }} python3 .github/scripts/whats_new.py

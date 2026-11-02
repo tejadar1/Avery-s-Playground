@@ -97,7 +97,7 @@ needs these one-time steps, all doable in Safari on an iPhone.
    build. Then in App Store Connect → your app → TestFlight → Internal Testing, add yourself as a tester and
    install it with the [TestFlight](https://apps.apple.com/app/testflight/id899247664) app.
 
-After that, each run uploads a new build, and TestFlight offers the update.
+After that, each run uploads a new build, and TestFlight offers the update. The notes in `WhatsNew.txt` show with it as "What to Test" (a few minutes after the upload, once Apple has the build).
 
 ## Project layout
 
