@@ -19,8 +19,10 @@ struct FruitPicking {
     private(set) var face: Face?
     /// Fruit still to pick after this spin.
     private(set) var picksLeft = 0
+    /// The fruit in the basket, in the order it was picked.
+    private(set) var basket: [String] = []
 
-    var picked: Int { Self.fruits.count * Self.perTree - left.values.reduce(0, +) }
+    var picked: Int { basket.count }
     var won: Bool { left.values.allSatisfy { $0 == 0 } }
     var lost: Bool { crow >= Self.crowSteps }
     var canSpin: Bool { !won && !lost && picksLeft == 0 }
@@ -46,6 +48,7 @@ struct FruitPicking {
     mutating func pick(_ fruit: String) -> Bool {
         guard canPick(fruit) else { return false }
         left[fruit]! -= 1
+        basket.append(fruit)
         picksLeft -= 1
         if picksLeft == 0 { turn = turn.other }
         return true
@@ -139,18 +142,35 @@ struct FruitView: View {
         .accessibilityLabel("\(fruit) tree, \(left) left")
     }
 
-    /// The basket, with how many fruits are in it.
+    /// Where each picked fruit lands in the basket (fractions of it), bottom row first, so the pile grows up.
+    private static let pile: [CGPoint] = {
+        let rows: [(y: CGFloat, xs: [CGFloat])] = [
+            (0.46, [0.2, 0.35, 0.5, 0.65, 0.8]), (0.36, [0.27, 0.42, 0.58, 0.73]),
+            (0.27, [0.3, 0.43, 0.57, 0.7]), (0.18, [0.42, 0.58]), (0.1, [0.5]),
+        ]
+        return rows.flatMap { row in row.xs.map { CGPoint(x: $0, y: row.y) } }
+    }()
+
+    /// The basket, big, with every fruit she's picked piling up in it and the count on the front.
     private var basket: some View {
-        HStack(spacing: 6 * uiScale) {
-            Image("Icon-fruit").resizable().scaledToFit().frame(height: 56 * uiScale)
+        let size = 130 * uiScale
+        return ZStack {
+            ForEach(Array(game.basket.enumerated()), id: \.offset) { index, fruit in
+                Picture(fruit, size: size * 0.28)
+                    .position(x: Self.pile[index].x * size, y: Self.pile[index].y * size)
+                    .transition(.offset(y: -size * 0.6).combined(with: .opacity))
+            }
+            Picture("basket", size: size)
             Text("\(game.picked)")
                 .font(.kid(30))
                 .foregroundStyle(Color.outline)
                 .contentTransition(.numericText())
+                .offset(y: size * 0.3)
         }
-        .padding(.horizontal, 14 * uiScale)
-        .frame(height: 76 * uiScale)
-        .cartoonCard(.white, cornerRadius: 24 * uiScale)
+        .frame(width: size, height: size)
+        .phaseAnimator([CGFloat(1), 1.12, 1], trigger: game.picked) { content, scale in
+            content.scaleEffect(scale, anchor: .bottom)
+        } animation: { _ in .spring(response: 0.2, dampingFraction: 0.5) }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(game.picked) fruits in the basket")
     }

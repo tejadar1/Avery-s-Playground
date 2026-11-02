@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Fruit Picking's basket, empty: the picked fruit piles up behind its front -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round">
+    <path d="M22 112 L178 112 L160 176 Q158 184 150 184 L50 184 Q42 184 40 176 Z" fill="#E3A866"/>
+    <path d="M34 134 L166 134 M40 156 L160 156" fill="none" stroke="#C98A4B" stroke-width="6"/>
+    <path d="M22 112 L178 112 L160 176 Q158 184 150 184 L50 184 Q42 184 40 176 Z" fill="none"/>
+    <rect x="16" y="104" width="168" height="16" rx="8" fill="#C98A4B"/>
+  </g>
+</svg>

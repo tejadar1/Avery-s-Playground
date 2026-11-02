@@ -1639,6 +1639,7 @@ balloon
 balloons
 banana
 bananas
+basket
 bat
 bath
 bathtub

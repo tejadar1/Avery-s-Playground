@@ -178,6 +178,7 @@ final class TeamUpTests: XCTestCase {
         XCTAssertFalse(game.canSpin, "one more to pick")
         XCTAssertTrue(game.pick("orange"))
         XCTAssertEqual(game.turn, .star)
+        XCTAssertEqual(game.basket, ["apple", "grapes", "orange"], "the basket fills in the order they're picked")
 
         for _ in 0..<FruitPicking.crowSteps { game.spin(.crow) }
         XCTAssertTrue(game.lost)
