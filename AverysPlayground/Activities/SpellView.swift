@@ -169,7 +169,8 @@ struct SpellView: View {
                 guard spelling.word == word, let sound = Phonics.sounds[letter] else { break }
                 withAnimation(.spring(response: 0.25, dampingFraction: 0.5)) { sounding = index }
                 Speaker.shared.say(sound.spelled, ipa: sound.ipa)
-                try? await Task.sleep(for: .seconds(0.8))
+                await Speaker.shared.finishSpeaking()  // each sound in full before the next
+                try? await Task.sleep(for: .seconds(0.3))
             }
             withAnimation { sounding = nil }
         }

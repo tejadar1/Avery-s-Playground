@@ -52,15 +52,15 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
-    /// The background tune; the piano makes its own music, so it has none.
+    /// The background tune. The piano makes its own music, and games about hearing words and letter sounds stay quiet.
     var tune: Tune? {
         switch self {
-        case .piano: nil
+        case .piano, .spelling, .reading, .rhyme, .sounds, .abc: nil
         case .nails, .hair, .dressup, .dentist: .salon
         case .pet, .hop, .maze, .spot, .puzzle: .pet
         case .colors, .drawing: .art
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .routines, .chores: .teamUp
-        case .reading, .rhyme, .patterns, .sorting, .feelings, .math, .spanish, .abc, .tracing, .spelling, .counting, .sounds: .learn
+        case .patterns, .sorting, .feelings, .math, .spanish, .tracing, .counting: .learn
         }
     }
 

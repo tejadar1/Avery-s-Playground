@@ -10,6 +10,7 @@ The key is the first 16 hex digits of the line's SHA-256 ("es:" included), match
 """
 import hashlib
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -109,8 +110,10 @@ for (voice, pitch), lang, suffix, mine, speed in [
     todo = [(k, l) for k, l in keys.items() if not (out / f"{k}.mp3").exists()]
     print(f"{len(keys)} {lang} lines, {len(todo)} to record with {voice} at pitch {pitch}")
     for n, (k, line) in enumerate(todo, 1):
+        # A word on its own, like "book:cat" in Spell and Read, is said slower so each sound is clear.
+        clear = 0.7 if re.fullmatch(r"book:[a-z]+", line) else speed
         record(line.split(":", 1)[1] if line.startswith(("es:", "dora:", "book:")) else line, voice, float(pitch), out / f"{k}.mp3", lang,
-               speed, quicker=1.0)
+               clear, quicker=1.0)
         if n % 100 == 0:
             print(f"{n} recorded")
 print("Done")
