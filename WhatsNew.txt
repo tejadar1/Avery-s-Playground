@@ -1,5 +1,1 @@
-- Sound Spy, ABC, Rhyme Time and Spell: letter sounds are longer, slower and louder, so the first sound is easy to hear.
-- Maze: starts with a small, easy maze and grows one size each level, up to level 8. The levels show above the maze, and she can tap any level she's reached.
-- Spell, Read, Rhyme Time, Sound Spy and ABC: no background music, so words and letter sounds are easy to hear.
-- Words said on their own (in Spell, Read and the books) are slower and clearer.
-- Spell: "Say it slowly" plays each letter sound in full before the next.
+- Opening the app: Coco says "Hiya, Avery!" (no more "G'day, mate!").

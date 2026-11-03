@@ -180,7 +180,7 @@ enum Bye {
 
 enum Hello {
     /// Her name is only in a recorded line for Avery; anyone else gets a plain "Hiya!".
-    static func line(for name: String) -> String { Hooray.pick(from: ["G'day, mate!", name == "Avery" ? "Hiya, Avery!" : "Hiya!"]) }
+    static func line(for name: String) -> String { name == "Avery" ? "Hiya, Avery!" : "Hiya!" }
 }
 
 /// Coco with a speech bubble. She hops each time `hops` changes, jumps for joy when `cheers` changes,
