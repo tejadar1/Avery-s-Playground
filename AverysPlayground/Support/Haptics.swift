@@ -10,6 +10,11 @@ enum Haptics {
         UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
     }
 
+    /// Something went a little wrong, like the crow hopping closer.
+    static func warning() {
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+    }
+
     static func success() {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
     }

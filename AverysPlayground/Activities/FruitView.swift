@@ -64,10 +64,13 @@ struct FruitView: View {
     @State private var cheer = "Let's pick all the fruit before the crow gets here! Stars, spin!"
     @State private var cheerCount = 0
     @State private var wins = 0
+    /// The crow's turn: the screen darkens, a big crow swoops across, the path shakes and Coco goes whoopsie.
+    @State private var swooping = false
+    @State private var crowHops = 0
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
-            CocoSays(text: cheer, hops: cheerCount, cheers: wins)
+            CocoSays(text: cheer, hops: cheerCount, cheers: wins, oops: crowHops)
 
             crowPath
 
@@ -95,16 +98,38 @@ struct FruitView: View {
         }
         .padding(.bottom, 16 * uiScale)
         .background(Scenery(.outdoors).ignoresSafeArea())
+        .overlay { swoop }
         .celebration(wins)
         .onAppear { Speaker.shared.say(cheer) }
     }
 
-    /// The crow's path: it hops along toward the trees.
+    /// The big crow swooping across a darkened screen, flapping as it goes: in from the right, a pause in the
+    /// middle, out to the left.
+    private var swoop: some View {
+        ZStack {
+            Color.black.opacity(swooping ? 0.35 : 0).ignoresSafeArea()
+            Picture("crow", size: 260 * uiScale)
+                .phaseAnimator([CGFloat(1), 0.8]) { content, flap in
+                    content.scaleEffect(x: 1, y: flap).rotationEffect(.degrees(flap == 1 ? -8 : 8))
+                } animation: { _ in .easeInOut(duration: 0.15) }
+                .phaseAnimator([CGFloat(1200), 0, 0, -1200], trigger: crowHops) { content, x in
+                    content.offset(x: x * uiScale)
+                } animation: { x in
+                    x == 1200 ? nil : x == 0 ? .easeOut(duration: 0.45) : .easeIn(duration: 0.45)
+                }
+                .opacity(swooping ? 1 : 0)
+        }
+        .allowsHitTesting(false)
+    }
+
+    /// The crow's path: it hops along toward the trees; its spot turns red, redder the closer it gets.
     private var crowPath: some View {
         HStack(spacing: 6 * uiScale) {
             ForEach(0...FruitPicking.crowSteps, id: \.self) { step in
                 ZStack {
-                    Circle().fill(step == FruitPicking.crowSteps ? Color(red: 0.45, green: 0.72, blue: 0.42) : .white.opacity(0.8))
+                    Circle().fill(step == FruitPicking.crowSteps ? Color(red: 0.45, green: 0.72, blue: 0.42)
+                        : step == game.crow && step > 0 ? Color(red: 0.95, green: 0.35, blue: 0.3).opacity(0.3 + 0.6 * Double(step) / Double(FruitPicking.crowSteps))
+                        : .white.opacity(0.8))
                         .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
                     if step == game.crow {
                         Picture("crow", size: 44 * uiScale).transition(.scale)
@@ -116,6 +141,9 @@ struct FruitView: View {
             }
         }
         .animation(.spring(response: 0.4, dampingFraction: 0.5), value: game.crow)
+        .phaseAnimator([CGFloat(0), -12, 12, -8, 8, 0], trigger: crowHops) { content, x in
+            content.offset(x: x)
+        } animation: { _ in .linear(duration: 0.07) }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("The crow is \(FruitPicking.crowSteps - game.crow) steps away")
     }
@@ -223,6 +251,13 @@ struct FruitView: View {
         case .fruit: show(Oops.say("That tree is empty!") + " " + next)
         case .basket: say("The basket! Pick any two fruits!", spoken: "The basket! Pick any two fruits!")
         case .crow:
+            Haptics.warning()
+            crowHops += 1
+            withAnimation(.easeOut(duration: 0.4)) { swooping = true }
+            Task {
+                try? await Task.sleep(for: .seconds(1.3))
+                withAnimation(.easeIn(duration: 0.4)) { swooping = false }
+            }
             if game.lost {
                 show(Oops.say("The crow got here first! Let's try again!", after: "Caw caw!"))
             } else {
