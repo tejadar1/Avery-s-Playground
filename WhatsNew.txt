@@ -1,2 +1,1 @@
-- Opening the app: Coco says "Hiya, Avery!" (no more "G'day, mate!").
 - Fruit Picking: when the crow comes, the screen darkens, a big crow swoops across, the phone buzzes and the crow's spot turns red.
