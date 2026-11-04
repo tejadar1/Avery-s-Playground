@@ -366,9 +366,11 @@ private struct StoryReader: View {
 
     private func book(wide: Bool) -> some View {
         let spread = wide ? AnyLayout(HStackLayout(spacing: 0)) : AnyLayout(VStackLayout(spacing: 0))
+        // Forward, the new page sweeps in from the right edge to the left, like turning a real page; back, the other way.
+        let edge: UnitPoint = turningForward ? .trailing : .leading
         let turn = AnyTransition.asymmetric(
-            insertion: .modifier(active: PageTurn(angle: turningForward ? -90 : 90, anchor: turningForward ? .leading : .trailing),
-                                 identity: PageTurn(angle: 0, anchor: turningForward ? .leading : .trailing)),
+            insertion: .modifier(active: PageTurn(angle: turningForward ? 90 : -90, anchor: edge),
+                                 identity: PageTurn(angle: 0, anchor: edge)),
             removal: .opacity)
         return spread {
             Button { read(page.text) } label: {
