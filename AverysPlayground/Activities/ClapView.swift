@@ -91,7 +91,7 @@ struct ClapView: View {
                         .font(.kid(34))
                         .foregroundStyle(lit ? .white : Color.outline.opacity(0.35))
                         .padding(.horizontal, 16 * uiScale)
-                        .frame(minWidth: 70 * uiScale, minHeight: 64 * uiScale)
+                        .frame(minWidth: 58 * uiScale, minHeight: 64 * uiScale)
                         .cartoonCard(lit ? ClapIt.colors[index % ClapIt.colors.count] : .white.opacity(0.7), cornerRadius: 20 * uiScale)
                         .scaleEffect(index == claps - 1 && !solved ? 1.15 : 1)
                 }
