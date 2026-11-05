@@ -1,3 +1,4 @@
 - Grown-ups' Age and games page: the age buttons fit on iPhone, and game names aren't cut off.
 - Clap It: a bigger picture, especially on iPad.
 - The mud picture is now a puddle with splashes.
+- Clap It: the word's beats show under the picture, and each clap lights up the next one in its own color as Coco says it.

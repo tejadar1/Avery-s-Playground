@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// Clap It: hearing the parts of words, the step before hearing single sounds. Two kinds of rounds take turns:
-/// clap the beats in a word (ba-na-na is three claps), and put sounds together (c… a… t is cat).
+/// clap the beats in a word, each lighting up as she claps (ba-na-na is three claps), and put sounds together
+/// (c… a… t is cat).
 enum ClapIt {
     struct Word: Equatable {
         let text: String
@@ -35,18 +36,17 @@ enum ClapIt {
         Word(text: "kite", picture: "kite", beats: ["kaɪt"], spelled: ["kite"]),
     ]
 
-    /// After this long with no clap, her claps are counted.
-    static let pause = 1.4
+    /// A color for each beat as it lights up.
+    static let colors = [Color(red: 0.95, green: 0.39, blue: 0.37), Color(red: 1.0, green: 0.68, blue: 0.2),
+                         Color(red: 0.45, green: 0.72, blue: 0.42), Color(red: 0.36, green: 0.61, blue: 0.84)]
 }
 
 struct ClapView: View {
     @Environment(\.isWide) private var isWide
     @State private var blending = false
     @State private var word = Practice.pick(ClapIt.words, key: { "clap:" + $0.text })!
+    /// Beats clapped so far: each clap lights the next one.
     @State private var claps = 0
-    @State private var lastClap = Date.distantPast
-    /// The beat lit up while Coco claps along.
-    @State private var showing: Int?
     @State private var solved = false
     @State private var blendWord = Phonics.words.randomElement()!
     @State private var choices: [ReadingWord] = []
@@ -79,25 +79,22 @@ struct ClapView: View {
             .buttonStyle(SquishyButtonStyle())
             .accessibilityLabel("Hear the word")
 
-            // A dot for each clap so far; once it's right (or Coco shows her), the beats are written underneath.
-            HStack(spacing: 14 * uiScale) {
-                ForEach(0..<max(claps, solved || showing != nil ? word.beats.count : 0), id: \.self) { index in
-                    VStack(spacing: 6 * uiScale) {
-                        Circle()
-                            .fill(index == showing || (solved && index < word.beats.count) ? Color(red: 1.0, green: 0.75, blue: 0.25) : Color(red: 0.6, green: 0.45, blue: 0.9))
-                            .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
-                            .frame(width: 44 * uiScale, height: 44 * uiScale)
-                            .scaleEffect(index == showing ? 1.3 : 1)
-                        Text(solved || showing != nil ? word.spelled[min(index, word.spelled.count - 1)] : " ")
-                            .font(.kid(24))
-                            .foregroundStyle(Color.outline)
-                    }
-                    .transition(.scale.combined(with: .opacity))
+            // The word in beats, faded until she claps them: each clap lights the next one in its own color.
+            HStack(spacing: 10 * uiScale) {
+                ForEach(word.spelled.indices, id: \.self) { index in
+                    let lit = index < claps
+                    Text(word.spelled[index])
+                        .font(.kid(34))
+                        .foregroundStyle(lit ? .white : Color.outline.opacity(0.35))
+                        .padding(.horizontal, 16 * uiScale)
+                        .frame(minWidth: 70 * uiScale, minHeight: 64 * uiScale)
+                        .cartoonCard(lit ? ClapIt.colors[index % ClapIt.colors.count] : .white.opacity(0.7), cornerRadius: 20 * uiScale)
+                        .scaleEffect(index == claps - 1 && !solved ? 1.15 : 1)
                 }
             }
-            .frame(minHeight: 80 * uiScale)
             .animation(.spring(response: 0.25, dampingFraction: 0.5), value: claps)
-            .animation(.spring(response: 0.25, dampingFraction: 0.5), value: showing)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(word.text): \(word.spelled.joined(separator: " "))")
 
             Spacer(minLength: 0)
 
@@ -109,7 +106,7 @@ struct ClapView: View {
                     .cartoonCard(Color(red: 0.62, green: 0.45, blue: 0.9), cornerRadius: 75 * uiScale)
             }
             .buttonStyle(SquishyButtonStyle())
-            .disabled(solved || showing != nil)
+            .disabled(solved)
             .accessibilityLabel("Clap")
             .accessibilityIdentifier("Clap")
         }
@@ -120,63 +117,28 @@ struct ClapView: View {
             blending = false
             claps = 0
             solved = false
-            showing = nil
         }
         say(Speaker.book + word.text, then: "Clap the beats!", shown: "\(word.text.capitalized)! Clap the beats!")
     }
 
+    /// Lights the next beat and says it; the last one finishes the word.
     private func clap() {
-        guard !solved, showing == nil else { return }
+        guard !solved, claps < word.beats.count else { return }
         Haptics.tap()
-        Sounds.shared.play(.pop)
+        Speaker.shared.say(word.spelled[claps], ipa: word.beats[claps])
         claps += 1
-        let stamp = Date.now
-        lastClap = stamp
+        guard claps == word.beats.count else { return }
+        wins += 1
+        withAnimation(.spring) { solved = true }
+        let hooray = Hooray.random
+        show("\(word.spelled.joined(separator: "-").capitalized)! \(word.beats.count) \(word.beats.count == 1 ? "clap" : "claps")! \(hooray)")
         Task {
-            try? await Task.sleep(for: .seconds(ClapIt.pause))
-            guard lastClap == stamp else { return }  // she's still clapping
-            check()
-        }
-    }
-
-    private func check() {
-        if claps == word.beats.count {
-            Practice.got("clap:" + word.text)
-            wins += 1
+            await Speaker.shared.finishSpeaking()  // the last beat
             Haptics.success()
-            withAnimation(.spring) { solved = true }
-            let hooray = Hooray.random
-            show("\(word.spelled.joined(separator: "-").capitalized)! \(word.beats.count) \(word.beats.count == 1 ? "clap" : "claps")! \(hooray)")
             Speaker.shared.say(Speaker.book + word.text, then: hooray)
-            Task {
-                try? await Task.sleep(for: .seconds(3))
-                startBlend()
-            }
-        } else {
-            Practice.missed("clap:" + word.text)
-            shakes += 1
-            say("Let's clap it together!", shown: "Let's clap it together!")
-            Task {
-                await Speaker.shared.finishSpeaking()
-                await clapAlong()
-                withAnimation { claps = 0 }
-                say("Your turn! Clap the beats!", shown: "Your turn! Clap the beats!")
-            }
+            try? await Task.sleep(for: .seconds(3))
+            startBlend()
         }
-    }
-
-    /// Coco claps the word, lighting each beat as it's said.
-    private func clapAlong() async {
-        withAnimation { claps = 0 }
-        for (index, beat) in word.beats.enumerated() {
-            withAnimation { showing = index }
-            Haptics.tap()
-            Speaker.shared.say(word.spelled[index], ipa: beat)
-            await Speaker.shared.finishSpeaking()
-            try? await Task.sleep(for: .seconds(0.25))
-        }
-        try? await Task.sleep(for: .seconds(0.4))
-        withAnimation { showing = nil }
     }
 
     // MARK: Put sounds together
