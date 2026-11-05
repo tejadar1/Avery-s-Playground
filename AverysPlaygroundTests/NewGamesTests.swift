@@ -1,7 +1,8 @@
+import UIKit
 import XCTest
 @testable import AverysPlayground
 
-/// Bake Shop and Go Fishing.
+/// Bake Shop, Go Fishing, and the books' pictures.
 final class NewGamesTests: XCTestCase {
     func testACupcakeMatchesItsOrder() {
         let order = CupcakeOrder(frosting: .pink, topping: .strawberry, count: 2)
@@ -32,5 +33,13 @@ final class NewGamesTests: XCTestCase {
         let fish = GoFishing.Fish(id: 0, color: "red", phase: 0)
         let open = stride(from: 0.0, to: 40, by: 0.05).filter { GoFishing.isOpen(fish, at: $0) }.count
         XCTAssertEqual(Double(open) / 800, 0.58, accuracy: 0.06)
+    }
+
+    func testEveryBookHasItsPictures() {
+        for story in Story.all + Story.spanish {
+            var names = [story.cover] + story.pages.flatMap(\.pictures)
+            if let question = story.question { names += [question.answer] + question.others }
+            for name in names { XCTAssertNotNil(UIImage(named: "Picture-" + name), "\(story.title): \(name)") }
+        }
     }
 }
