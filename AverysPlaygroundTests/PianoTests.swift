@@ -1,3 +1,4 @@
+import AVFoundation
 import XCTest
 @testable import AverysPlayground
 
@@ -35,6 +36,17 @@ final class PianoTests: XCTestCase {
             XCTAssertEqual(song.beats.count, song.notes.count, song.name)
             XCTAssertTrue(song.beats.allSatisfy { $0 > 0 }, song.name)
             XCTAssertTrue(song.notes.allSatisfy { (0...7).contains($0) }, "\(song.name) stays on the white keys")
+        }
+    }
+
+    func testNotesStartAndEndSilentWithoutClicks() {
+        let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
+        for frequency in [PianoSound.frequencies.min()!, PianoSound.frequencies.max()!] {
+            let buffer = PianoSound.tone(frequency, format: format)
+            let samples = UnsafeBufferPointer(start: buffer.floatChannelData![0], count: Int(buffer.frameLength))
+            XCTAssertEqual(samples.map { abs($0) }.max()!, 0.3, accuracy: 0.001, "every note as loud")
+            XCTAssertLessThan(abs(samples.first!), 0.01, "starts from silence")
+            XCTAssertLessThan(abs(samples.last!), 0.001, "fades to silence, so no click at the end")
         }
     }
 }

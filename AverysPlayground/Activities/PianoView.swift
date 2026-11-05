@@ -112,17 +112,21 @@ final class PianoSound {
     static let frequencies: [Double] = [261.63, 293.66, 329.63, 349.23, 392.0, 440.0, 493.88, 523.25, 277.18, 311.13, 369.99, 415.3, 466.16]
 
     private let engine = AVAudioEngine()
+    /// Two voices per key, so tapping a key again lets the last note ring on instead of cutting it off with a click.
     private var players: [AVAudioPlayerNode] = []
     private var buffers: [AVAudioPCMBuffer] = []
+    private var nextVoice: [Int] = Array(repeating: 0, count: frequencies.count)
 
     private init() {
         _ = Speaker.shared  // sets up the audio session, so notes play even with the silent switch on
         let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
         for frequency in Self.frequencies {
-            let player = AVAudioPlayerNode()
-            engine.attach(player)
-            engine.connect(player, to: engine.mainMixerNode, format: format)
-            players.append(player)
+            for _ in 0..<2 {
+                let player = AVAudioPlayerNode()
+                engine.attach(player)
+                engine.connect(player, to: engine.mainMixerNode, format: format)
+                players.append(player)
+            }
             buffers.append(Self.tone(frequency, format: format))
         }
     }
@@ -132,21 +136,40 @@ final class PianoSound {
             try? engine.start()
             players.forEach { $0.play() }
         }
-        players[key].scheduleBuffer(buffers[key], at: nil, options: .interrupts)
+        let voice = nextVoice[key]
+        nextVoice[key] = 1 - voice
+        players[key * 2 + voice].scheduleBuffer(buffers[key], at: nil, options: .interrupts)
     }
 
-    /// A few harmonics with a fast start and a soft fade, which sounds close to a toy piano.
-    private static func tone(_ frequency: Double, format: AVAudioFormat) -> AVAudioPCMBuffer {
+    /// A piano-like note: six overtones, the higher ones quieter and fading sooner, tuned a hair sharp the way a
+    /// real string's are; a bright strike that settles into a long ring; a tick of hammer at the start; and a short
+    /// fade at the end so nothing clicks.
+    static func tone(_ frequency: Double, format: AVAudioFormat) -> AVAudioPCMBuffer {
         let rate = format.sampleRate
-        let count = AVAudioFrameCount(rate * 1.4)
+        let count = AVAudioFrameCount(rate * 2)
         let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: count)!
         buffer.frameLength = count
         let samples = buffer.floatChannelData![0]
+        let overtones: [Double] = [1, 0.55, 0.32, 0.18, 0.1, 0.06]
+        var generator = SystemRandomNumberGenerator()
+        var peak: Float = 0
+        let end = Double(count) / rate
         for i in 0..<Int(count) {
             let t = Double(i) / rate
-            let wave = sin(2 * .pi * frequency * t) + 0.5 * sin(4 * .pi * frequency * t) + 0.2 * sin(6 * .pi * frequency * t)
-            samples[i] = Float(wave * min(1, t / 0.005) * exp(-3.5 * t) * 0.25)
+            var wave = 0.0
+            for (index, loudness) in overtones.enumerated() {
+                let k = Double(index + 1)
+                let pitch = k * frequency * (1 + 0.0004 * k * k).squareRoot()
+                guard pitch < rate / 2 - 1000 else { break }
+                let decay = 1.6 + 0.9 * (k - 1) + frequency / 400
+                wave += loudness * sin(2 * .pi * pitch * t) * (0.55 * exp(-decay * 4 * t) + 0.45 * exp(-decay * t))
+            }
+            wave += 0.15 * Double.random(in: -1...1, using: &generator) * exp(-t / 0.004)  // the hammer
+            let sample = Float(wave * min(1, t / 0.002) * min(1, (end - t) / 0.05))
+            samples[i] = sample
+            peak = max(peak, abs(sample))
         }
+        for i in 0..<Int(count) { samples[i] *= 0.3 / peak }
         return buffer
     }
 }
