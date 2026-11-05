@@ -24,9 +24,9 @@ final class NewGamesTests: XCTestCase {
         XCTAssertFalse(game.cast(at: 0, mouthOpen: true), "that fish is already caught")
         XCTAssertTrue(game.cast(at: 1, mouthOpen: true))
         XCTAssertNil(game.winner, "one each is a tie")
-        XCTAssertTrue(game.cast(at: 2, mouthOpen: true))
+        XCTAssertTrue(game.cast(at: 2, mouthOpen: true), "Hearts' turn, and a second fish")
         XCTAssertTrue(game.isOver)
-        XCTAssertEqual(game.winner, .star)
+        XCTAssertEqual(game.winner, .heart, "Hearts 2, Stars 1")
     }
 
     func testMouthsOpenAboutHalfTheTime() {
