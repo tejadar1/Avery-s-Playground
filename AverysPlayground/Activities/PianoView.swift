@@ -144,7 +144,7 @@ final class PianoSound {
     /// A piano-like note: six overtones, the higher ones quieter and fading sooner, tuned a hair sharp the way a
     /// real string's are; a bright strike that settles into a long ring; a tick of hammer at the start; and a short
     /// fade at the end so nothing clicks.
-    static func tone(_ frequency: Double, format: AVAudioFormat) -> AVAudioPCMBuffer {
+    nonisolated static func tone(_ frequency: Double, format: AVAudioFormat) -> AVAudioPCMBuffer {
         let rate = format.sampleRate
         let count = AVAudioFrameCount(rate * 2)
         let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: count)!
