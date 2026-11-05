@@ -5,3 +5,4 @@
 - New in Play: Bake Shop. An animal orders a cupcake (like pink frosting and two strawberries); pick the frosting, add the toppings as Bella counts, and serve it.
 - New in Team Up: Go Fishing. The fish swim round the pond opening and closing their mouths; take turns tapping one with its mouth open. Whoever catches more wins.
 - Piano: notes sound more like a real piano, the first note plays right away, and tapping a key again doesn't click.
+- Six new books. English: Stone Soup, The Ant and the Grasshopper, The Elves and the Shoemaker. Spanish: Los pollitos dicen, Los zapaticos de rosa (José Martí), Tío Conejo y Tío Tigre.

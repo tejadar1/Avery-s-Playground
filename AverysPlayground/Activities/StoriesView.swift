@@ -95,10 +95,36 @@ struct Story: Hashable {
             Page(pictures: ["wolf", "sheep"], text: "Then a real wolf came. Wolf! Wolf! he cried. But nobody came."),
             Page(pictures: ["boy", "heart"], text: "The boy learned to always tell the truth."),
         ], question: .init(text: "What did the boy watch on the hill?", answer: "sheep", others: ["cow", "pig"])),
+        Story(title: "Stone Soup", cover: "stone", color: Color(red: 0.6, green: 0.62, blue: 0.66), pages: [
+            Page(pictures: ["boy", "house"], text: "A hungry traveler came to a little town. Nobody wanted to share their food."),
+            Page(pictures: ["stone", "water", "fire"], text: "So he filled a big pot with water and put in a stone. Stone soup! he said."),
+            Page(pictures: ["grandma", "plantain"], text: "Stone soup? said Grandma. It needs a plantain! And she put one in."),
+            Page(pictures: ["mom", "sprout"], text: "Mom brought some yummy greens, and Dad brought bread to dip."),
+            Page(pictures: ["sancocho", "bowl"], text: "Everyone shared a little, and the soup got bigger and better!"),
+            Page(pictures: ["boy", "sancocho", "heart"], text: "They all ate together. When everyone shares, there is enough for all!"),
+        ], question: .init(text: "What did the traveler put in the pot first?", answer: "stone", others: ["apple", "ball"])),
+        Story(title: "The Ant and the Grasshopper", cover: "grasshopper", color: Color(red: 0.55, green: 0.75, blue: 0.4), pages: [
+            Page(pictures: ["ant", "wheat", "sun"], text: "All summer, the little ant worked hard, carrying food to her home."),
+            Page(pictures: ["grasshopper", "violin", "sun"], text: "The grasshopper played music all day. Come and play! he said."),
+            Page(pictures: ["ant", "wheat"], text: "Not yet, said the ant. First I work, then I play."),
+            Page(pictures: ["grasshopper", "wind"], text: "Then winter came. It was cold, and the grasshopper had no food."),
+            Page(pictures: ["ant", "grasshopper", "bread"], text: "The kind ant shared her food. Come inside and get warm!", setting: .home),
+            Page(pictures: ["ant", "grasshopper", "violin"], text: "Next summer, they worked together, and then they played music together!"),
+        ], question: .init(text: "Who worked hard all summer?", answer: "ant", others: ["grasshopper", "bee"])),
+        Story(title: "The Elves and the Shoemaker", cover: "elf", color: Color(red: 0.85, green: 0.4, blue: 0.42), pages: [
+            Page(pictures: ["grandpa", "sneakers"], text: "A kind old shoemaker made shoes all day, but he was very tired.", setting: .home),
+            Page(pictures: ["moon", "elf", "elf"], text: "One night, two tiny elves came in and made shoes for him!", setting: .night),
+            Page(pictures: ["grandpa", "boots", "heels"], text: "In the morning, he found beautiful new shoes. Wow!", setting: .home),
+            Page(pictures: ["elf", "elf", "sneakers"], text: "Every night, the little elves came back to help.", setting: .night),
+            Page(pictures: ["grandma", "tshirt", "heart"], text: "Let's say thank you! said his wife. She sewed them tiny clothes.", setting: .home),
+            Page(pictures: ["elf", "elf", "tshirt"], text: "The elves put on their new clothes and danced. Thank you, thank you!", setting: .night),
+        ], question: .init(text: "Who helped the shoemaker at night?", answer: "elf", others: ["cat", "bear"])),
     ]
 
     /// Retold in simple Spanish. Juan Bobo and La Ciguapa come from Dominican folklore;
-    /// La Cucarachita Martina is told all over the Spanish-speaking Caribbean.
+    /// La Cucarachita Martina is told all over the Spanish-speaking Caribbean. Los pollitos dicen is the song every
+    /// grandparent knows; Los zapaticos de rosa is retold from José Martí's poem (Cuba); Tío Conejo y Tío Tigre come
+    /// from Venezuela and the Caribbean.
     static let spanish = [
         Story(title: "La Cucarachita Martina", cover: "bow", color: Color(red: 0.95, green: 0.47, blue: 0.6), pages: [
             Page(pictures: ["broom", "coin"], text: "La Cucarachita Martina barría su casa y encontró una moneda.", setting: .home),
@@ -147,6 +173,30 @@ struct Story: Hashable {
             Page(pictures: ["rooster", "sheep"], text: "Oveja, ¿me ayudas? Y la oveja dijo: ¡Ahora no!"),
             Page(pictures: ["rooster", "sun"], text: "Sol, ¿me ayudas tú? ¡Claro que sí! dijo el sol, y secó el lodo."),
             Page(pictures: ["rooster", "party", "heart"], text: "Con el pico limpio, el gallo llegó a la boda y cantó: ¡Quiquiriquí!"),
+        ], language: "es-MX"),
+        Story(title: "Los pollitos dicen", cover: "hen", color: Color(red: 0.98, green: 0.8, blue: 0.35), pages: [
+            Page(pictures: ["chick", "chick", "chick"], text: "Los pollitos dicen pío, pío, pío,"),
+            Page(pictures: ["chick", "wind"], text: "cuando tienen hambre, cuando tienen frío."),
+            Page(pictures: ["hen", "wheat"], text: "La gallina busca el maíz y el trigo,"),
+            Page(pictures: ["hen", "chick", "heart"], text: "les da la comida y les presta abrigo."),
+            Page(pictures: ["hen", "chick"], text: "Bajo sus dos alas, acurrucaditos,", setting: .home),
+            Page(pictures: ["chick", "sleep", "moon"], text: "duermen los pollitos hasta el otro día.", setting: .night),
+        ], language: "es-MX"),
+        Story(title: "Los zapaticos de rosa", cover: "flats", color: Color(red: 0.96, green: 0.6, blue: 0.72), pages: [
+            Page(pictures: ["girl", "sunhat", "sun"], text: "Hay sol bueno y mar de espuma. Pilar quiere ir a la playa con su sombrero nuevo."),
+            Page(pictures: ["flats", "heart"], text: "Y lleva sus zapaticos de rosa, ¡los más lindos que tiene!"),
+            Page(pictures: ["girl", "wave"], text: "En la playa, Pilar juega con la arena y el mar."),
+            Page(pictures: ["girl", "sleep"], text: "Allí ve a una niña enferma que no tiene zapatos."),
+            Page(pictures: ["girl", "flats", "heart"], text: "Pilar le da sus zapaticos de rosa. ¡Para que no tengas frío en los pies!"),
+            Page(pictures: ["mom", "girl", "heart"], text: "Su mamá la abraza. Dar con cariño es lo más lindo que hay.", setting: .home),
+        ], language: "es-MX"),
+        Story(title: "Tío Conejo y Tío Tigre", cover: "tiger", color: Color(red: 0.95, green: 0.6, blue: 0.25), pages: [
+            Page(pictures: ["rabbit", "tiger"], text: "Tío Tigre tenía mucha hambre y quería comerse a Tío Conejo."),
+            Page(pictures: ["rabbit", "wind"], text: "¡Cuidado, Tío Tigre! dijo Tío Conejo. ¡Viene un viento muy fuerte!"),
+            Page(pictures: ["tiger", "tree"], text: "¡Ay! ¿Qué hago? dijo el tigre. Te amarro a este árbol, dijo el conejo, y así no te lleva el viento."),
+            Page(pictures: ["tiger", "tree", "rabbit"], text: "Tío Conejo amarró al tigre al árbol, bien fuerte."),
+            Page(pictures: ["rabbit", "sprout"], text: "Y se fue saltando. ¡Adiós, Tío Tigre! No vino ningún viento."),
+            Page(pictures: ["tiger", "rabbit", "heart"], text: "Más tarde soltaron al tigre, y aprendió a no molestar a los más pequeños. ¡Tío Conejo fue el más listo!"),
         ], language: "es-MX"),
     ]
 }

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Tío Tigre: a big orange tiger face, more silly than scary -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round">
+    <circle cx="52" cy="58" r="22" fill="#F7A23B"/><circle cx="52" cy="58" r="10" fill="#F2C09A" stroke-width="4"/>
+    <circle cx="148" cy="58" r="22" fill="#F7A23B"/><circle cx="148" cy="58" r="10" fill="#F2C09A" stroke-width="4"/>
+  </g>
+  <clipPath id="tiger"><ellipse cx="100" cy="110" rx="70" ry="64"/></clipPath>
+  <ellipse cx="100" cy="110" rx="70" ry="64" fill="#F7A23B"/>
+  <g clip-path="url(#tiger)">
+    <ellipse cx="100" cy="200" rx="110" ry="50" fill="#E0832A"/>
+    <g fill="#4A2C2A">
+      <path d="M100 46 L92 72 L108 72Z"/><path d="M80 48 L78 66 L88 62Z"/><path d="M120 48 L122 66 L112 62Z"/>
+      <path d="M30 96 L58 104 L30 112Z"/><path d="M30 120 L54 124 L32 134Z"/>
+      <path d="M170 96 L142 104 L170 112Z"/><path d="M170 120 L146 124 L168 134Z"/>
+    </g>
+  </g>
+  <ellipse cx="100" cy="134" rx="34" ry="26" fill="#FFF4DC"/>
+  <ellipse cx="100" cy="110" rx="70" ry="64" fill="none" stroke="#4A2C2A" stroke-width="7"/>
+  <ellipse cx="100" cy="134" rx="34" ry="26" fill="none" stroke="#4A2C2A" stroke-width="5"/>
+  <circle cx="78" cy="100" r="6" fill="#4A2C2A"/><circle cx="122" cy="100" r="6" fill="#4A2C2A"/>
+  <path d="M90 122 L110 122 L100 132Z" fill="#E9646E" stroke="#4A2C2A" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M100 132 L100 140 M100 140 Q90 148 82 142 M100 140 Q110 148 118 142" fill="none" stroke="#4A2C2A" stroke-width="4" stroke-linecap="round"/>
+</svg>

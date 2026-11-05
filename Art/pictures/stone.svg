@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A smooth grey stone, for Stone Soup -->
+  <clipPath id="stone"><path d="M40 136 C30 100 60 66 104 64 C150 62 176 96 168 130 C162 156 128 166 100 166 C70 166 46 158 40 136Z"/></clipPath>
+  <path d="M40 136 C30 100 60 66 104 64 C150 62 176 96 168 130 C162 156 128 166 100 166 C70 166 46 158 40 136Z" fill="#B2AEA6"/>
+  <g clip-path="url(#stone)">
+    <ellipse cx="104" cy="186" rx="110" ry="46" fill="#8D8981"/>
+    <ellipse cx="80" cy="90" rx="22" ry="10" fill="#fff" opacity=".45"/>
+  </g>
+  <path d="M40 136 C30 100 60 66 104 64 C150 62 176 96 168 130 C162 156 128 166 100 166 C70 166 46 158 40 136Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+</svg>

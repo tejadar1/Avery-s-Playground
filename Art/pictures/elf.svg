@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A tiny helpful elf with a pointy hat, for The Elves and the Shoemaker -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M70 186 L74 150 L126 150 L130 186Z" fill="#62B866"/>
+    <path d="M74 186 L74 178 M126 186 L126 178" fill="none"/>
+    <path d="M58 98 L40 84 L62 112Z" fill="#F7C9A0"/>
+    <path d="M142 98 L160 84 L138 112Z" fill="#F7C9A0"/>
+    <circle cx="100" cy="112" r="40" fill="#F7C9A0"/>
+    <path d="M56 92 Q100 -6 150 92 Q100 80 56 92Z" fill="#E9646E"/>
+    <circle cx="102" cy="42" r="9" fill="#FFD25A"/>
+  </g>
+  <path d="M60 90 Q100 78 146 90" fill="none" stroke="#C94A55" stroke-width="5"/>
+  <circle cx="86" cy="114" r="5" fill="#4A2C2A"/><circle cx="114" cy="114" r="5" fill="#4A2C2A"/>
+  <circle cx="76" cy="128" r="7" fill="#F2A0A6" opacity=".7"/><circle cx="124" cy="128" r="7" fill="#F2A0A6" opacity=".7"/>
+  <path d="M90 132 Q100 140 110 132" fill="none" stroke="#4A2C2A" stroke-width="4" stroke-linecap="round"/>
+</svg>

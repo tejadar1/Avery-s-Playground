@@ -17,6 +17,8 @@ A farm!
 A fresh page!
 A garden!
 A green fish!
+A hungry traveler came to a little town. Nobody wanted to share their food.
+A kind old shoemaker made shoes all day, but he was very tired.
 A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
 A match! Go again!
@@ -40,6 +42,7 @@ All fixed! Holy guacamole!
 All nails
 All rinsed!
 All sorted!
+All summer, the little ant worked hard, carrying food to her home.
 All the chores are done! What a big helper! Holy guacamole!
 An orange fish!
 Another sticker! Yay!
@@ -511,6 +514,8 @@ Easy peasy, lemon squeezy!
 Elephant
 Eraser
 Eraser! Rub out any oopsies!
+Every night, the little elves came back to help.
+Everyone shared a little, and the soup got bigger and better!
 Excited! Do a happy dance!
 Extras
 F
@@ -869,6 +874,7 @@ I'll keep your crayon inside the lines!
 Ice cream
 In the box
 In the lines
+In the morning, he found beautiful new shoes. Wow!
 In the sky or in the water?
 It's a tie! Everybody wins a hug!
 It's a tie! Everyone wins!
@@ -907,6 +913,7 @@ Let's have a race, said Hare.
 Let's pick all the fruit before the crow gets here! Stars, spin!
 Let's read! Tap each letter to hear its sound.
 Let's roll, Coco patrol!
+Let's say thank you! said his wife. She sewed them tiny clothes.
 Let's wash your hair! Rub on the shampoo.
 Level up! The maze gets bigger!
 Levels
@@ -964,6 +971,7 @@ MochiLegFarFront
 MochiLegFront
 MochiRoom
 MochiTail
+Mom brought some yummy greens, and Dad brought bread to dip.
 Mommy gives you a big hug.
 Mommy gives you a big hug. How would you feel?
 Moo moo!
@@ -991,6 +999,7 @@ New pictures
 New sticker!
 Next leaf
 Next picture
+Next summer, they worked together, and then they played music together!
 Night night, Mochi. Shh!
 No bean there! Look for the beans!
 No hat
@@ -1005,6 +1014,7 @@ No, said the hen. My chicks and I will eat it!
 Nom nom nom! Yummy!
 Nom nom! More please!
 Not yet! Tap the one that's bouncing.
+Not yet, said the ant. First I work, then I play.
 Nothing
 Nothing! Fashion show time!
 Nothing! Holy guacamole, I love it!
@@ -1031,6 +1041,7 @@ Old
 Old MacDonald
 On the plate
 One
+One night, two tiny elves came in and made shoes for him!
 Ooh la la!
 Ooh la la, fancy!
 Ooh, fancy pattern!
@@ -1214,6 +1225,7 @@ Snuggled in bed with a story.
 Snuggled in bed with a story. How would you feel?
 So bubbly!
 So fancy!
+So he filled a big pot with water and put in a stone. Stone soup! he said.
 So much glitter! It's like stars!
 So she planted it all by herself. The wheat grew tall.
 So smooth!
@@ -1295,6 +1307,8 @@ Start this picture over?
 Stick it anywhere!
 Stick! A sticker!
 Stickers
+Stone Soup
+Stone soup? said Grandma. It needs a plantain! And she put one in.
 Stop
 Stop the timer
 Story
@@ -1354,7 +1368,9 @@ That's funny! That tickles my tummy! Hee hee!
 That's so cute!
 That's what I call croc-tastic teamwork!
 The
+The Ant and the Grasshopper
 The Boy Who Cried Wolf
+The Elves and the Shoemaker
 The Gingerbread Man
 The Lion and the Mouse
 The Little Red Hen
@@ -1366,7 +1382,10 @@ The boy learned to always tell the truth.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 The crow got here first! Let's try again!
 The crow hops closer!
+The elves put on their new clothes and danced. Thank you, thank you!
 The first pig built a house of straw.
+The grasshopper played music all day. Come and play! he said.
+The kind ant shared her food. Come inside and get warm!
 The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
@@ -1377,6 +1396,8 @@ The three bears came home! Goldilocks woke up and ran all the way home.
 The wolf ran to grandma's house and hid in her bed.
 Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
 Then the lion got stuck in a hunter's net.
+Then winter came. It was cold, and the grasshopper had no food.
+They all ate together. When everyone shares, there is enough for all!
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
@@ -1438,6 +1459,7 @@ What color should it be?
 What comes next?
 What did Jack trade for the magic beans?
 What did the boy watch on the hill?
+What did the traveler put in the pot first?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 Wheels on the Bus
 Which house did the wolf not blow down?
@@ -1491,12 +1513,14 @@ Who has more cupcakes, Coco or Mochi?
 Who has more slices of pizza, Coco or Mochi?
 Who has more strawberries, Coco or Mochi?
 Who helped the lion get free?
+Who helped the shoemaker at night?
 Who planted the wheat?
 Who said hop on my back?
 Who was hiding in grandma's bed?
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who won the race?
+Who worked hard all summer?
 Who's silly? You're silly! Snap snap!
 Whoop whoop, crocodile scoop!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
@@ -1617,6 +1641,7 @@ and two hearts!
 and two stars!
 and two strawberries!
 animals
+ant
 apple
 apple and apple!
 apple and ball!
@@ -1857,12 +1882,16 @@ book:A
 book:A big bad wolf saw her. Where are you going? he asked.
 book:A big lion was sleeping in the sun.
 book:A boy watched the sheep on a hill.
+book:A hungry traveler came to a little town. Nobody wanted to share their food.
 book:A is for Apple!
+book:A kind old shoemaker made shoes all day, but he was very tired.
 book:A little mouse ran over his nose and woke him up!
 book:A little old woman baked a gingerbread man.
 book:A woodcutter chased the wolf away, and they all had a big hug.
 book:A!
 book:All
+book:All summer, the little ant worked hard, carrying food to her home.
+book:And
 book:Animals
 book:At
 book:At the top was a giant's castle. Fee, fi, fo, fum!
@@ -1893,6 +1922,7 @@ book:Coco has fewer!
 book:Coco has more!
 book:Colors
 book:Comb
+book:Come
 book:Come here, my love
 book:Coral
 book:Curly
@@ -1905,7 +1935,10 @@ book:Down
 book:E is for Elephant!
 book:E!
 book:Enjoy your meal
+book:Every
+book:Every night, the little elves came back to help.
 book:Everyone
+book:Everyone shared a little, and the soup got bigger and better!
 book:Excited! Do a happy dance!
 book:Excuse me
 book:Extras
@@ -1913,6 +1946,7 @@ book:F is for Fish!
 book:F!
 book:Family
 book:Fee
+book:First
 book:Fix!
 book:Floss!
 book:Food
@@ -1957,7 +1991,10 @@ book:I love you so much
 book:I!
 book:I'm
 book:I'm hungry
+book:In
 book:In a little bit
+book:In the morning, he found beautiful new shoes. Wow!
+book:It
 book:Itsy Bitsy Spider!
 book:J is for Juice!
 book:J!
@@ -1973,6 +2010,7 @@ book:L!
 book:Let's
 book:Let's have a race, said Hare.
 book:Let's play!
+book:Let's say thank you! said his wife. She sewed them tiny clothes.
 book:Little
 book:Little Red Riding Hood
 book:Little Red Riding Hood went to visit her grandma.
@@ -1985,6 +2023,7 @@ book:Mary Had a Little Lamb!
 book:Mochi has fewer!
 book:Mochi has more!
 book:Mom
+book:Mom brought some yummy greens, and Dad brought bread to dip.
 book:Mustard
 book:My
 book:My brother
@@ -1993,15 +2032,19 @@ book:My sister
 book:N is for Nest!
 book:N!
 book:Navy
+book:Next
+book:Next summer, they worked together, and then they played music together!
 book:No
 book:No, said the hen. My chicks and I will eat it!
 book:Nobody
 book:Not
+book:Not yet, said the ant. First I work, then I play.
 book:Numbers
 book:O is for Octopus!
 book:O!
 book:Old MacDonald!
 book:One
+book:One night, two tiny elves came in and made shoes for him!
 book:Orange! Like an orange.
 book:P is for Penguin!
 book:P!
@@ -2044,17 +2087,24 @@ book:Sky
 book:Sleepy. Time for a cozy rest.
 book:Slow
 book:So
+book:So he filled a big pot with water and put in a stone. Stone soup! he said.
 book:So she planted it all by herself. The wheat grew tall.
 book:Stickers
+book:Stone
+book:Stone Soup
+book:Stone soup? said Grandma. It needs a plantain! And she put one in.
 book:Styles
 book:Surprised! Tell someone what you saw.
 book:T is for Turtle!
 book:T!
 book:Teal
+book:Thank
 book:Thank you
 book:That's right!
 book:The
+book:The Ant and the Grasshopper
 book:The Boy Who Cried Wolf
+book:The Elves and the Shoemaker
 book:The Gingerbread Man
 book:The Lion and the Mouse
 book:The Little Red Hen
@@ -2063,8 +2113,11 @@ book:The Tortoise and the Hare
 book:The big bad wolf huffed and puffed and blew the straw and stick houses down!
 book:The boy learned to always tell the truth.
 book:The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
+book:The elves put on their new clothes and danced. Thank you, thank you!
 book:The end!
 book:The first pig built a house of straw.
+book:The grasshopper played music all day. Come and play! he said.
+book:The kind ant shared her food. Come inside and get warm!
 book:The lion was free! Little friends can be big helpers.
 book:The little mouse chewed and chewed the ropes.
 book:The little red hen found some wheat.
@@ -2075,6 +2128,9 @@ book:The wolf ran to grandma's house and hid in her bed.
 book:Then
 book:Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
 book:Then the lion got stuck in a hunter's net.
+book:Then winter came. It was cold, and the grasshopper had no food.
+book:They
+book:They all ate together. When everyone shares, there is enough for all!
 book:This
 book:Three
 book:Three little pigs went out to build three little houses.
@@ -2093,7 +2149,9 @@ book:Wash
 book:What
 book:What did Jack trade for the magic beans?
 book:What did the boy watch on the hill?
+book:What did the traveler put in the pot first?
 book:Wheels on the Bus!
+book:When
 book:Where
 book:Which
 book:Which house did the wolf not blow down?
@@ -2102,15 +2160,18 @@ book:White! Like a cloud.
 book:Who
 book:Who came home and found Goldilocks?
 book:Who helped the lion get free?
+book:Who helped the shoemaker at night?
 book:Who planted the wheat?
 book:Who said hop on my back?
 book:Who was hiding in grandma's bed?
 book:Who will help me eat it? I will, said the dog, the cat, and the duck.
 book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
 book:Who won the race?
+book:Who worked hard all summer?
 book:Wolf
 book:Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 book:Worried. Tell a grown-up what's on your mind.
+book:Wow
 book:X!
 book:Y is for Yo-yo!
 book:Y!
@@ -2129,12 +2190,15 @@ book:all
 book:always
 book:and
 book:animals!
+book:ant
 book:apple
 book:apple!
 book:are
 book:as
 book:asked
 book:asleep
+book:at
+book:ate
 book:avocado
 book:avocado!
 book:away
@@ -2161,6 +2225,7 @@ book:bear
 book:bear and chair rhyme!
 book:bear!
 book:bears
+book:beautiful
 book:bed
 book:bed! You read it!
 book:bed! You spelled it!
@@ -2171,6 +2236,7 @@ book:bee!
 book:better
 book:big
 book:big!
+book:bigger
 book:bird
 book:bird!
 book:black
@@ -2191,6 +2257,7 @@ book:bread
 book:bread!
 book:brick
 book:bricks
+book:brought
 book:bug
 book:bug! You read it!
 book:bug! You spelled it!
@@ -2202,6 +2269,7 @@ book:bus
 book:bus!
 book:bus! You read it!
 book:bus! You spelled it!
+book:but
 book:butterfly
 book:butterfly!
 book:by
@@ -2213,6 +2281,7 @@ book:can't
 book:car
 book:car and star rhyme!
 book:car!
+book:carrying
 book:castle
 book:cat
 book:cat and bat rhyme!
@@ -2233,7 +2302,9 @@ book:chick!
 book:chicks
 book:chocolate
 book:climbed
+book:clothes
 book:clothes!
+book:cold
 book:cookie
 book:cookie!
 book:could
@@ -2246,8 +2317,10 @@ book:cup
 book:cup! You read it!
 book:cup! You spelled it!
 book:cupcake
+book:danced
 book:day
 book:did
+book:dip
 book:dog
 book:dog and frog rhyme!
 book:dog!
@@ -2262,11 +2335,15 @@ book:eggs
 book:eight
 book:elephant
 book:elephant!
+book:elves
+book:enough
+book:everyone
 book:eyes
 book:far
 book:fast
 book:fell
 book:fi
+book:filled
 book:first
 book:fish
 book:fish!
@@ -2275,6 +2352,7 @@ book:flower
 book:flower!
 book:flowers
 book:fo
+book:food
 book:food!
 book:for
 book:found
@@ -2306,9 +2384,12 @@ book:grandma
 book:grandma's
 book:grapes
 book:grapes!
+book:grasshopper
 book:green
+book:greens
 book:grew
 book:had
+book:hard
 book:hat
 book:hat and bat rhyme!
 book:hat and cat rhyme!
@@ -2344,16 +2425,19 @@ book:house!
 book:houses
 book:huffed
 book:hug
+book:hungry
 book:hunter's
 book:ice cream
 book:ice cream!
 book:in
+book:inside
 book:into
 book:is
 book:it
 book:jumped
 book:just
 book:kept
+book:kind
 book:kite
 book:kite!
 book:ladybug
@@ -2364,6 +2448,7 @@ book:let
 book:lion
 book:lion!
 book:little
+book:made
 book:magic
 book:man
 book:mango
@@ -2375,17 +2460,23 @@ book:mom
 book:moon
 book:moon and balloon rhyme!
 book:moon!
+book:morning
 book:mouse
 book:mouse and house rhyme!
 book:mouse!
 book:mud
 book:mud! You read it!
 book:mud! You spelled it!
+book:music
 book:my
 book:nap
+book:needs
 book:nest!
 book:net
+book:new
+book:night
 book:nine
+book:no
 book:nobody
 book:nose
 book:not
@@ -2419,9 +2510,13 @@ book:pizza!
 book:plant
 book:plantain
 book:planted
+book:play
+book:played
 book:porridge
+book:pot
 book:puffed
 book:purple
+book:put
 book:rabbit
 book:rabbit!
 book:race
@@ -2439,11 +2534,18 @@ book:safe
 book:said
 book:salami
 book:saw
+book:say
 book:second
 book:see
 book:seven
+book:sewed
+book:share
+book:shared
+book:shares
 book:she
 book:sheep
+book:shoemaker
+book:shoes
 book:shouted
 book:side
 book:six
@@ -2454,6 +2556,7 @@ book:sly
 book:small!
 book:sneakers!
 book:some
+book:soup
 book:star
 book:star and car rhyme!
 book:star!
@@ -2461,10 +2564,12 @@ book:steady
 book:stew
 book:stick
 book:sticks
+book:stone
 book:straw
 book:strawberry
 book:strawberry!
 book:stuck
+book:summer
 book:sun
 book:sun and bun rhyme!
 book:sun!
@@ -2474,17 +2579,27 @@ book:sunhat!
 book:tall
 book:tell
 book:ten
+book:thank
 book:that
 book:the
+book:their
+book:them
+book:then
+book:there
 book:they
 book:third
 book:three
 book:through
+book:tiny
+book:tired
 book:to
+book:together
 book:took
 book:top
+book:town
 book:trade
 book:traded
+book:traveler
 book:tree
 book:tree and bee rhyme!
 book:tree!
@@ -2503,9 +2618,12 @@ book:van
 book:van!
 book:van! You read it!
 book:van! You spelled it!
+book:very
 book:visit
 book:walk
 book:walked
+book:wanted
+book:warm
 book:was
 book:watch
 book:watched
@@ -2522,8 +2640,10 @@ book:whale!
 book:what
 book:wheat
 book:white
+book:wife
 book:will
 book:wins
+book:winter
 book:with
 book:woke
 book:wolf
@@ -2531,8 +2651,12 @@ book:woman
 book:won
 book:woodcutter
 book:woods
+book:work
+book:worked
 book:yellow
+book:yet
 book:you
+book:yummy
 book:zebra
 books
 boots
@@ -2822,6 +2946,7 @@ egg and sun!
 egg and tree!
 eh
 elephant
+elf
 es:A
 es:A Avery se le cayó un diente. ¡Qué emoción!
 es:Abuela
@@ -2829,10 +2954,14 @@ es:Abuelo
 es:Adiós
 es:Ahora
 es:Ahorita
+es:Allí
+es:Allí ve a una niña enferma que no tiene zapatos.
 es:Animales
 es:Avery
 es:Ay
 es:Ayúdame
+es:Bajo
+es:Bajo sus dos alas, acurrucaditos,
 es:Bendición, abuela
 es:Bendición, abuelo
 es:Bendición, mami
@@ -2851,10 +2980,13 @@ es:Con
 es:Con el pico limpio, el gallo llegó a la boda y cantó: ¡Quiquiriquí!
 es:Con la moneda compró una cinta roja y se puso muy bonita.
 es:Con permiso
+es:Conejo
 es:Cuando
 es:Cuando el pollito necesitó ayuda, el río, el fuego y el viento lo ayudaron a él. ¡Qué lindo es ayudar!
 es:Cucarachita
+es:Cuidado
 es:Dame un abrazo
+es:Dar
 es:De
 es:De noche llegó el Ratón Pérez, chiquito y elegante.
 es:Dios te bendiga
@@ -2867,12 +2999,15 @@ es:El río le dijo: ¡Ayúdame, quítame estas ramas! Y Medio Pollito lo ayudó.
 es:El viento le dijo: ¡Ayúdame a salir del árbol! Y Medio Pollito lo ayudó.
 es:En
 es:En el camino vio un maíz en el lodo. Pico, pico, ¡y se ensució el pico!
+es:En la playa, Pilar juega con la arena y el mar.
 es:En las montañas vive la Ciguapa, con su pelo largo y negro.
 es:Familia
 es:Gracias
 es:Guau
 es:Había
 es:Había una vez un pollito con un ala y una pata. Se llamaba Medio Pollito.
+es:Hay
+es:Hay sol bueno y mar de espuma. Pilar quiere ir a la playa con su sombrero nuevo.
 es:Hierba
 es:Hierba, ¿me limpias el pico? Y la hierba dijo: ¡Ahora no!
 es:Hola
@@ -2885,11 +3020,16 @@ es:La Ciguapa cuida el bosque, los pájaros y los ríos.
 es:La Ciguapa del bosque
 es:La Cucarachita Martina
 es:La Cucarachita Martina barría su casa y encontró una moneda.
+es:La gallina busca el maíz y el trigo,
 es:La puerca quería ir a misa también.
 es:La puerca salió corriendo y se metió en el lodo.
 es:Las
 es:Lo
 es:Lo puso debajo de la almohada y se fue a dormir.
+es:Los
+es:Los pollitos dicen
+es:Los pollitos dicen pío, pío, pío,
+es:Los zapaticos de rosa
 es:Mami
 es:Mamá
 es:Mamá llegó y se rió mucho. ¡Ay, Juan Bobo!
@@ -2903,16 +3043,21 @@ es:Mi hermana
 es:Mi hermano
 es:Miau
 es:Muy bien
+es:Más
+es:Más tarde soltaron al tigre, y aprendió a no molestar a los más pequeños. ¡Tío Conejo fue el más listo!
 es:No
 es:Números
 es:Oveja
 es:Oveja, ¿me ayudas? Y la oveja dijo: ¡Ahora no!
 es:Papi
+es:Para
 es:Pasó
 es:Pasó el Ratoncito Pérez: ¿Te casas conmigo? Chuí, chuí. ¡Sí, qué voz tan dulce!
 es:Pasó el gato y le dijo: ¿Te casas conmigo? Miau, miau. ¡No, que me asustas!
 es:Pasó el perro y le dijo: ¿Te casas conmigo? Guau, guau. ¡No, que me asustas!
 es:Pico
+es:Pilar
+es:Pilar le da sus zapaticos de rosa. ¡Para que no tengas frío en los pies!
 es:Pollito
 es:Ponte las chancletas
 es:Por
@@ -2930,6 +3075,8 @@ es:Si cuidamos el bosque, la Ciguapa sonríe. ¡Buenas noches!
 es:Sol
 es:Sol, ¿me ayudas tú? ¡Claro que sí! dijo el sol, y secó el lodo.
 es:Sound it out
+es:Su
+es:Su mamá la abraza. Dar con cariño es lo más lindo que hay.
 es:Sí
 es:Sí, mami
 es:Sí, papi
@@ -2938,23 +3085,40 @@ es:Te quiero mucho
 es:Tengo hambre
 es:Tiene
 es:Tiene los pies al revés. Cuando camina para adelante, sus huellas van para atrás.
+es:Tigre
 es:Tomó
 es:Tomó el diente con mucho cuidado. ¡Shh, sin hacer ruido!
+es:Tío
+es:Tío Conejo amarró al tigre al árbol, bien fuerte.
+es:Tío Conejo y Tío Tigre
+es:Tío Tigre tenía mucha hambre y quería comerse a Tío Conejo.
 es:Un
 es:Un domingo, mamá se fue a misa. Juan, cuida la puerca.
 es:Un día dijo: ¡Me voy a ver al rey! Y salió saltando, pata, pata.
 es:Una
 es:Una niña vio unas huellas en el bosque y las siguió.
 es:Ven acá, mi amor
+es:Viene
 es:Y
 es:Y dejó una moneda brillante debajo de la almohada.
+es:Y lleva sus zapaticos de rosa, ¡los más lindos que tiene!
+es:Y se fue saltando. ¡Adiós, Tío Tigre! No vino ningún viento.
 es:a
+es:abraza
+es:abrigo
+es:acurrucaditos
 es:adelante
 es:al
 es:ala
+es:alas
 es:almohada
 es:amarillo
+es:amarro
+es:amarró
+es:aprendió
+es:arena
 es:asustas
+es:así
 es:atrás
 es:ayuda
 es:ayudar
@@ -2963,14 +3127,18 @@ es:ayudas
 es:ayudó
 es:azul
 es:barría
+es:bien
 es:blanco
 es:boda
 es:bonita
 es:bosque
 es:brillante
+es:bueno
+es:busca
 es:camina
 es:camino
 es:cantó
+es:cariño
 es:casa
 es:casaron
 es:casas
@@ -2980,25 +3148,34 @@ es:chuí
 es:cinco
 es:cinta
 es:collar
+es:comerse
+es:comida
 es:compró
 es:con
+es:conejo
 es:conmigo
 es:corriendo
+es:cuando
+es:cuando tienen hambre, cuando tienen frío.
 es:cuatro
 es:cuida
 es:cuidado
 es:cuidamos
+es:da
 es:dame
 es:de
 es:debajo
 es:dejó
 es:del
+es:dicen
 es:diente
 es:diez
 es:dijo
 es:domingo
 es:dormir
 es:dos
+es:duermen
+es:duermen los pollitos hasta el otro día.
 es:dulce
 es:día
 es:el
@@ -3026,21 +3203,32 @@ es:elegante
 es:emoción
 es:en
 es:encontró
+es:enferma
 es:ensució
 es:es
+es:espuma
 es:estas
+es:este
 es:felices
+es:frío
 es:fue
 es:fuego
 es:fueron
+es:fuerte
+es:gallina
 es:gallo
 es:gato
 es:guau
 es:hacer
+es:hago
+es:hambre
+es:hasta
+es:hay
 es:hierba
 es:huellas
 es:iba
 es:ir
+es:juega
 es:la
 es:la galleta
 es:la leche
@@ -3050,51 +3238,69 @@ es:la vaca
 es:largo
 es:las
 es:le
+es:les
+es:les da la comida y les presta abrigo.
 es:limpias
 es:limpio
 es:lindo
+es:lindos
+es:listo
 es:llamaba
 es:llegó
+es:lleva
 es:llevaron
 es:lo
 es:lodo
 es:los
 es:los tostones
 es:mamá
+es:mar
 es:maíz
 es:mañana
 es:me
 es:metió
 es:miau
 es:misa
+es:molestar
 es:moneda
 es:montañas
 es:morado
+es:mucha
 es:mucho
 es:muy
+es:más
 es:naranja
 es:necesitó
 es:negro
+es:ningún
 es:niña
 es:no
 es:noche
 es:noches
 es:nueve
+es:nuevo
 es:ocho
+es:otro
 es:oveja
 es:palito
 es:para
 es:pata
 es:pelo
+es:pequeños
 es:perro
 es:pico
 es:pies
+es:playa
 es:pollito
+es:pollitos
+es:presta
 es:puerca
 es:puso
 es:pájaros
+es:pío
 es:que
 es:quería
+es:quiere
 es:qué
 es:quítame
 es:ramas
@@ -3117,13 +3323,23 @@ es:siete
 es:siguió
 es:sin
 es:sol
+es:soltaron
+es:sombrero
 es:sonríe
 es:su
 es:sus
 es:sí
 es:también
 es:tan
+es:tarde
+es:te
+es:tengas
+es:tenía
+es:tiene
+es:tienen
+es:tigre
 es:tres
+es:trigo
 es:tío
 es:tú
 es:un
@@ -3131,11 +3347,13 @@ es:una
 es:unas
 es:uno
 es:van
+es:ve
 es:ver
 es:verde
 es:vestido
 es:vez
 es:viento
+es:vino
 es:vio
 es:vive
 es:vivía
@@ -3143,7 +3361,11 @@ es:voy
 es:voz
 es:vuelta
 es:y
+es:zapaticos
+es:zapatos
+es:¡Ay! ¿Qué hago? dijo el tigre. Te amarro a este árbol, dijo el conejo, y así no te lleva el viento.
 es:¡Colorín colorado, este cuento se ha acabado!
+es:¡Cuidado, Tío Tigre! dijo Tío Conejo. ¡Viene un viento muy fuerte!
 es:¡Hola!
 es:¡Las huellas la llevaron de vuelta a su casa!
 es:¡Qué chévere!
@@ -3274,7 +3496,9 @@ go
 goodbye
 gown
 grandma
+grandpa
 grapes
+grasshopper
 green
 guh
 h
@@ -3498,6 +3722,7 @@ pig and tree!
 pillow
 pizza
 plant
+plantain
 polish
 puh
 purple
@@ -3527,6 +3752,7 @@ rug
 ry
 s
 sad
+sancocho
 sandals
 satpinmdgockeurhbfljvwxyz
 scared
@@ -3679,6 +3905,7 @@ stars
 stickerWins
 stickers
 sticks
+stone
 strawberries
 strawberry
 stream.
@@ -3778,6 +4005,7 @@ wa
 wand
 was
 washed
+water
 waveform
 web
 went

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A cheerful green grasshopper, for The Ant and the Grasshopper -->
+  <g fill="none" stroke="#4A2C2A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 84 Q160 50 186 40"/><path d="M158 90 Q178 66 194 66"/>
+    <path d="M92 134 L80 162 L66 166"/><path d="M116 136 L118 164 L108 170"/>
+  </g>
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M100 100 L60 60 L30 150" fill="#6FB552"/>
+    <path d="M22 132 C24 108 60 96 110 102 C146 106 156 122 150 132 C140 146 100 148 60 146 C36 144 20 142 22 132Z" fill="#7CC15E"/>
+    <circle cx="150" cy="104" r="24" fill="#8ACB6B"/>
+  </g>
+  <path d="M30 136 C60 140 110 140 146 128" fill="none" stroke="#5A9E44" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="156" cy="98" r="5" fill="#4A2C2A"/>
+  <path d="M150 114 Q158 120 166 112" fill="none" stroke="#4A2C2A" stroke-width="4" stroke-linecap="round"/>
+</svg>
