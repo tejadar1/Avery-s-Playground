@@ -80,9 +80,13 @@ struct ClapView: View {
             .accessibilityLabel("Hear the word")
 
             // The word in beats, faded until she claps them: each clap lights the next one in its own color.
-            HStack(spacing: 10 * uiScale) {
+            HStack(spacing: 8 * uiScale) {
                 ForEach(word.spelled.indices, id: \.self) { index in
                     let lit = index < claps
+                    if index > 0 {
+                        // A little dot between beats: ba · na · na
+                        Circle().fill(Color.outline.opacity(index < claps ? 0.8 : 0.3)).frame(width: 9 * uiScale, height: 9 * uiScale)
+                    }
                     Text(word.spelled[index])
                         .font(.kid(34))
                         .foregroundStyle(lit ? .white : Color.outline.opacity(0.35))
