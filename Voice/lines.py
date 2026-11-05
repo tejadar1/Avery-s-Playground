@@ -22,7 +22,7 @@ def literals(text):
 english = {name: text for name, text in src.items() if name != "SpanishView.swift"}
 english["StoriesView.swift"] = english["StoriesView.swift"].split("static let spanish")[0]
 # Clap It's word table is beats and spellings, recorded below from the IPA, not lines to say as they are
-clap_table = english["ClapView.swift"].split("static let words")[1].split("static let pause")[0]
+clap_table = english["ClapView.swift"].split("static let words")[1].split("static let colors")[0]
 english["ClapView.swift"] = english["ClapView.swift"].replace(clap_table, "")
 for text in list(english.values()) + [theme]:
     for s in literals(text):

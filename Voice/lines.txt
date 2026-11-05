@@ -109,6 +109,8 @@ Cat
 Caw caw!
 Chore time! Let's help at home.
 Chores
+Clap
+Clap the beats!
 Clear
 Clothes
 Clothes color
@@ -571,6 +573,7 @@ He climbed down fast and took the hen home to his mom.
 He did it again. Everyone came running. No wolf!
 He jumped up and ran away! Run, run, as fast as you can!
 He planted the beans, and they grew up into the sky overnight!
+Hear it again
 Hear the sound again
 Hear the word
 Hearts
@@ -898,6 +901,7 @@ Lion
 Listen
 Listen again!
 Listen!
+Listen! Which one is it?
 Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
 Locked
@@ -1524,6 +1528,7 @@ You played Twinkle Twinkle! Holy guacamole, what a song!
 You played Wheels on the Bus! Holy guacamole, what a song!
 You played all day, and now it's night.
 You played all day, and now it's night. How would you feel?
+You put the sounds together!
 You shared your snack with a friend.
 You shared your snack with a friend. How would you feel?
 You spun 1! Hop 1 square.
