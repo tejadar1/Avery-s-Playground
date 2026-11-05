@@ -1,6 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-<clipPath id="k347"><path d="M24 130 C20 100 56 92 70 104 C80 80 120 78 132 100 C150 88 182 100 176 130 C190 150 166 172 140 164 C120 180 80 180 64 166 C40 176 12 156 24 130Z"/></clipPath><path d="M24 130 C20 100 56 92 70 104 C80 80 120 78 132 100 C150 88 182 100 176 130 C190 150 166 172 140 164 C120 180 80 180 64 166 C40 176 12 156 24 130Z" fill="#B07A4F"/><g clip-path="url(#k347)"><ellipse cx="100" cy="190" rx="150" ry="40" fill="#8A5A36"/><path d="M60 120 a12 6 0 1 0 24 0 a12 6 0 1 0 -24 0ZM116 128 a10 5 0 1 0 20 0 a10 5 0 1 0 -20 0Z" fill="#C99566" opacity="1"/></g><path d="M24 130 C20 100 56 92 70 104 C80 80 120 78 132 100 C150 88 182 100 176 130 C190 150 166 172 140 164 C120 180 80 180 64 166 C40 176 12 156 24 130Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
-<clipPath id="k348"><path d="M26 72 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0Z"/></clipPath><path d="M26 72 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0Z" fill="#B07A4F"/><path d="M26 72 a10 10 0 1 0 20 0 a10 10 0 1 0 -20 0Z" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
-<clipPath id="k349"><path d="M152 62 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0Z"/></clipPath><path d="M152 62 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0Z" fill="#B07A4F"/><path d="M152 62 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0Z" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
-<clipPath id="k350"><path d="M97 50 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0Z"/></clipPath><path d="M97 50 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0Z" fill="#B07A4F"/><path d="M97 50 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0Z" fill="none" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+  <!-- A muddy puddle on the grass, wide and flat, with splashes jumping out -->
+  <g stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M14 150 L20 128 L26 148 L32 132 L36 150Z" fill="#62B866"/>
+    <path d="M164 150 L170 130 L176 148 L182 126 L188 150Z" fill="#62B866"/>
+  </g>
+  <clipPath id="puddle"><path d="M30 146 C30 126 64 118 100 120 C140 118 172 128 170 146 C172 166 136 174 100 172 C62 174 28 166 30 146Z"/></clipPath>
+  <path d="M30 146 C30 126 64 118 100 120 C140 118 172 128 170 146 C172 166 136 174 100 172 C62 174 28 166 30 146Z" fill="#9C6A43"/>
+  <g clip-path="url(#puddle)">
+    <ellipse cx="100" cy="182" rx="110" ry="24" fill="#7A4E2E"/>
+    <ellipse cx="100" cy="144" rx="44" ry="10" fill="#7A4E2E"/>
+    <ellipse cx="72" cy="134" rx="14" ry="4" fill="#fff" opacity=".45"/>
+    <ellipse cx="132" cy="138" rx="9" ry="3" fill="#fff" opacity=".45"/>
+  </g>
+  <path d="M30 146 C30 126 64 118 100 120 C140 118 172 128 170 146 C172 166 136 174 100 172 C62 174 28 166 30 146Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+  <g fill="#9C6A43" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round">
+    <path d="M60 92 C52 104 54 114 62 114 C70 114 70 104 60 92Z"/>
+    <path d="M100 74 C90 90 92 102 100 102 C108 102 110 90 100 74Z"/>
+    <path d="M140 92 C132 104 134 114 142 114 C150 114 150 104 140 92Z"/>
+  </g>
 </svg>

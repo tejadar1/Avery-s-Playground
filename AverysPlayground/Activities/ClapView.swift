@@ -72,7 +72,7 @@ struct ClapView: View {
     private var clapRound: some View {
         VStack(spacing: 18 * uiScale) {
             Button { Speaker.shared.say(Speaker.book + word.text) } label: {
-                Picture(word.picture, size: 150 * uiScale * roomy(isWide))
+                Picture(word.picture, size: 190 * uiScale * roomy(isWide))
                     .padding(16 * uiScale)
                     .cartoonCard(.white, cornerRadius: 36 * uiScale)
             }

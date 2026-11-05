@@ -79,24 +79,12 @@ struct AgeEntry: View {
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: 520 * uiScale)
 
-                HStack(spacing: 10 * uiScale) {
-                    ForEach(Ages.choices, id: \.self) { choice in
-                        Button {
-                            Haptics.tap()
-                            age = choice
-                            hidden = Ages.suggestedHidden(for: choice)
-                        } label: {
-                            Text(Ages.label(choice))
-                                .font(.kid(choice == "all" ? 20 : 26))
-                                .lineLimit(1)
-                                .fixedSize()
-                                .foregroundStyle(age == choice ? .white : Color.outline)
-                                .padding(.horizontal, 14 * uiScale)
-                                .frame(minWidth: 56 * uiScale, minHeight: 56 * uiScale)
-                                .cartoonCard(age == choice ? Color(red: 0.36, green: 0.61, blue: 0.84) : .white, cornerRadius: 18 * uiScale)
-                        }
-                        .buttonStyle(SquishyButtonStyle())
-                        .accessibilityLabel(choice == "all" ? "Everyone" : "Age \(Ages.label(choice))")
+                // All five in a row where they fit; on a phone, Everyone goes on a row of its own.
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 10 * uiScale) { ForEach(Ages.choices, id: \.self, content: ageButton) }
+                    VStack(spacing: 10 * uiScale) {
+                        HStack(spacing: 10 * uiScale) { ForEach(Ages.choices.dropLast(), id: \.self, content: ageButton) }
+                        ageButton("all")
                     }
                 }
 
@@ -134,6 +122,25 @@ struct AgeEntry: View {
         }
     }
 
+    private func ageButton(_ choice: String) -> some View {
+        Button {
+            Haptics.tap()
+            age = choice
+            hidden = Ages.suggestedHidden(for: choice)
+        } label: {
+            Text(Ages.label(choice))
+                .font(.kid(choice == "all" ? 20 : 26))
+                .lineLimit(1)
+                .fixedSize()
+                .foregroundStyle(age == choice ? .white : Color.outline)
+                .padding(.horizontal, 14 * uiScale)
+                .frame(minWidth: 56 * uiScale, minHeight: 56 * uiScale)
+                .cartoonCard(age == choice ? Color(red: 0.36, green: 0.61, blue: 0.84) : .white, cornerRadius: 18 * uiScale)
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .accessibilityLabel(choice == "all" ? "Everyone" : "Age \(Ages.label(choice))")
+    }
+
     /// Every game, ticked if it shows; hidden ones say from what age they're best.
     private var checklist: some View {
         VStack(alignment: .leading, spacing: 14 * uiScale) {
@@ -152,10 +159,10 @@ struct AgeEntry: View {
                                 Image(activity.icon).resizable().scaledToFit().frame(width: 40 * uiScale, height: 40 * uiScale)
                                 VStack(alignment: .leading, spacing: 0) {
                                     Text(activity.title).font(.kid(17)).foregroundStyle(Color.outline)
-                                        .lineLimit(1).minimumScaleFactor(0.6)
+                                        .lineLimit(2).minimumScaleFactor(0.8)
                                     if activity.fromAge > 2 {
-                                        Text("Best from age \(activity.fromAge)").font(.kid(13)).foregroundStyle(Color.outline.opacity(0.6))
-                                            .lineLimit(1).minimumScaleFactor(0.6)
+                                        Text("Age \(activity.fromAge)+").font(.kid(13)).foregroundStyle(Color.outline.opacity(0.6))
+                                            .lineLimit(1)
                                     }
                                 }
                                 Spacer(minLength: 0)
