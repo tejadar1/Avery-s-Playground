@@ -131,11 +131,15 @@ final class PianoSound {
         }
     }
 
+    /// Starts the sound engine, so a key plays the moment it's tapped.
+    func warmUp() {
+        guard !engine.isRunning else { return }
+        try? engine.start()
+        players.forEach { $0.play() }
+    }
+
     func play(_ key: Int) {
-        if !engine.isRunning {
-            try? engine.start()
-            players.forEach { $0.play() }
-        }
+        warmUp()
         let voice = nextVoice[key]
         nextVoice[key] = 1 - voice
         players[key * 2 + voice].scheduleBuffer(buffers[key], at: nil, options: .interrupts)
@@ -248,6 +252,7 @@ struct PianoView: View {
         }
         .background(Scenery(.stage).ignoresSafeArea())
         .celebration(wins)
+        .onAppear { PianoSound.shared.warmUp() }  // make the notes and start the sound now, so the first tap is quick
         .onDisappear { stopListening() }
     }
 
