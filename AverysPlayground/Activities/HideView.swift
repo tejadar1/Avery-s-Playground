@@ -116,7 +116,7 @@ struct HideView: View {
                                     .onEnded { _ in drop() }
                             )
                             .accessibilityLabel("Coco")
-                            .accessibilityIdentifier("Coco")
+                            .accessibilityIdentifier("Drag Coco")
                             .accessibilityHint("Drag Coco to where she should hide")
                             .position(x: cocoAt.x * width, y: cocoAt.y * height)
                     }

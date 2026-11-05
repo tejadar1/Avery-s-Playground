@@ -146,7 +146,7 @@ final class ScreenshotTests: XCTestCase {
             ("Hide Coco", {
                 // Drag Coco onto something in the middle of the room to hide her.
                 let picture = self.find("Picture")
-                self.find("Coco").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 0.3, thenDragTo: picture.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.6)))
+                self.find("Drag Coco").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 0.3, thenDragTo: picture.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.6)))
             }),
             ("I Spy", {}),
             ("Sound Spy", {}),
