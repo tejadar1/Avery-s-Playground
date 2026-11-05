@@ -4,8 +4,8 @@ import XCTest
 final class AgesTests: XCTestCase {
     func testEachAgeShowsTheGamesThatSuitIt() {
         let all = Activity.allCases.count
-        XCTAssertEqual(all - Ages.suggestedHidden(for: "2").count, 23)
-        XCTAssertEqual(all - Ages.suggestedHidden(for: "3").count, 31)
+        XCTAssertEqual(all - Ages.suggestedHidden(for: "2").count, 25)
+        XCTAssertEqual(all - Ages.suggestedHidden(for: "3").count, 33)
         XCTAssertTrue(Ages.suggestedHidden(for: "4").isEmpty)
         XCTAssertTrue(Ages.suggestedHidden(for: "5").isEmpty)
         XCTAssertTrue(Ages.suggestedHidden(for: "all").isEmpty, "two kids: every game")

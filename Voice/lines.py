@@ -71,6 +71,9 @@ clap = src["ClapView.swift"]
 lines.update("sound:" + ipa for beats in re.findall(r'beats: \[([^\]]+)\]', clap) for ipa in re.findall(r'"([^"]+)"', beats))
 lines.update("book:" + word for word in re.findall(r'Word\(text: "(\w+)"', clap))
 
+# Bake Shop: Bella names each frosting color as it's picked
+lines.update("book:" + kind for kind in re.search(r"enum Frosting: String, CaseIterable \{ case ([\w, ]+) \}", src["BakeView.swift"]).group(1).split(", "))
+
 numbers = range(1, 21)
 lines.update(f"book:{n}" for n in numbers)  # counting, in Bella's voice
 lines.update(f"Let's count to {n}!" for n in range(1, 11))

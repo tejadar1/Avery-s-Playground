@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Go Fishing: a fish on a line, jumping out of the pond -->
+  <g transform="translate(-42 0)">
+  <path d="M62 20 Q124 8 150 30" fill="none" stroke="#B07A4F" stroke-width="9" stroke-linecap="round"/>
+  <path d="M62 20 Q124 8 150 30" fill="none" stroke="#4A2C2A" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+  <path d="M150 30 L150 74" stroke="#4A2C2A" stroke-width="3"/>
+  </g>
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M18 160 C18 138 58 128 100 128 C142 128 182 138 182 160 C182 182 142 192 100 192 C58 192 18 182 18 160Z" fill="#8CCBF2"/>
+    <path d="M44 158 Q60 150 76 158 M120 166 Q136 158 152 166" fill="none" stroke="#fff" stroke-width="5" opacity=".8"/>
+    <g transform="translate(-42 0)">
+    <!-- the fish, nose up toward the hook -->
+    <path d="M150 128 L128 162 L172 162Z" fill="#F7A23B"/>
+    <ellipse cx="150" cy="104" rx="30" ry="34" fill="#F7A23B"/>
+    <path d="M150 70 C132 74 124 92 126 110" fill="none" stroke="#E0832A" stroke-width="5" opacity=".7"/>
+    <circle cx="140" cy="94" r="3" fill="#4A2C2A"/><circle cx="160" cy="94" r="3" fill="#4A2C2A"/>
+    <circle cx="150" cy="76" r="8" fill="#5A2026"/>
+    </g>
+  </g>
+  <g fill="#8CCBF2" stroke="#4A2C2A" stroke-width="4"><circle cx="146" cy="122" r="6"/><circle cx="158" cy="106" r="4"/></g>
+</svg>

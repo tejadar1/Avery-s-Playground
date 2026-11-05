@@ -2,3 +2,5 @@
 - Clap It: a bigger picture, especially on iPad.
 - The mud picture is now a puddle with splashes.
 - Clap It: the word's beats show under the picture with dots between them (ba · na · na), and each clap lights up the next one in its own color as Coco says it.
+- New in Play: Bake Shop. An animal orders a cupcake (like pink frosting and two strawberries); pick the frosting, add the toppings as Bella counts, and serve it.
+- New in Team Up: Go Fishing. The fish swim round the pond opening and closing their mouths; take turns tapping one with its mouth open. Whoever catches more wins.

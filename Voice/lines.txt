@@ -10,19 +10,25 @@ A big bad wolf saw her. Where are you going? he asked.
 A big box, just for you!
 A big box, just for you! How would you feel?
 A big lion was sleeping in the sun.
+A blue fish!
 A boy watched the sheep on a hill.
 A coral reef!
 A farm!
 A fresh page!
 A garden!
+A green fish!
 A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
 A match! Go again!
+A new order!
 A night sky!
+A purple fish!
+A red fish!
 A sharp
 A sticker to find
 A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
+A yellow fish!
 A! /a/! A is for apple!
 ABC
 All clean!
@@ -35,6 +41,7 @@ All nails
 All rinsed!
 All sorted!
 All the chores are done! What a big helper! Holy guacamole!
+An orange fish!
 Another sticker! Yay!
 Anywhere
 Apple
@@ -75,6 +82,7 @@ Bingo! You filled your card! Holy guacamole!
 Black
 Blow dryer
 Blue
+Blue frosting,
 Bobo
 Boop! You booped my nose!
 Boots
@@ -107,6 +115,7 @@ Calm. Nice and cozy, like a quiet story.
 Canvas
 Cat
 Caw caw!
+Chocolate frosting,
 Chore time! Let's help at home.
 Chores
 Clap
@@ -459,6 +468,7 @@ Copy this nail
 Copy this!
 Coral
 Count
+Count the toppings!
 Cozy pajamas!
 Croc-tacular!
 Crocodile-tastic!
@@ -470,6 +480,7 @@ Crown! So stylish!
 Crown! Wowza bowza!
 Crunch crunch! Happy pet!
 Crunch crunch! Yummy!
+Cupcake
 Curly
 Curly! So cute!
 Cut along the dotted line.
@@ -577,6 +588,7 @@ Hear it again
 Hear the sound again
 Hear the word
 Hearts
+Hearts caught the most fish!
 Hearts found it! 
 Hearts win! Snap snap!
 Hearts' turn!
@@ -625,6 +637,7 @@ Hearts, I spy something you write with!
 Hearts, I spy something your family sits on together!
 Hearts, I spy something yummy and healthy to eat!
 Hearts, I spy somewhere to sit at the park!
+Hearts, catch a fish!
 Hearts, hide Coco! Drag her to a hiding spot. Stars, close your eyes!
 Hearts, spin!
 Hee hee hee! You're so funny! You made me giggle!
@@ -858,8 +871,10 @@ In the box
 In the lines
 In the sky or in the water?
 It's a tie! Everybody wins a hug!
+It's a tie! Everyone wins!
 It's your birthday party!
 It's your birthday party! How would you feel?
+Its mouth was closed!
 Itsy Bitsy Spider
 J
 Jack and the Beanstalk
@@ -909,6 +924,7 @@ Lon
 London Bridge
 Look again!
 Look at that shine!
+Look at the frosting color!
 Looking good!
 Loved. Say I love you too!
 M
@@ -1066,6 +1082,7 @@ Pictures
 Pigtails
 Pigtails! So cute!
 Pink
+Pink frosting,
 Play
 Play again
 Play the star key, or tap Listen.
@@ -1129,6 +1146,7 @@ Scissors
 Scrub the teeth until they shine.
 Second picture
 See you later, alligator!
+Serve!
 Set the table
 Shampoo
 She baked the wheat into bread.
@@ -1215,6 +1233,7 @@ Squeaky clean!
 Squeaky clean! Shake shake shake!
 Squeaky clean! Start again!
 Stars
+Stars caught the most fish!
 Stars found it! 
 Stars go first! Listen to two cards and find the same sound.
 Stars go first! Tap Spin.
@@ -1267,6 +1286,7 @@ Stars, I spy something you write with!
 Stars, I spy something your family sits on together!
 Stars, I spy something yummy and healthy to eat!
 Stars, I spy somewhere to sit at the park!
+Stars, catch a fish!
 Stars, hide Coco! Drag her to a hiding spot. Hearts, close your eyes!
 Stars, spin!
 Start
@@ -1496,6 +1516,7 @@ Wowza! You colored the whole night sky!
 X
 Y
 Yellow
+Yellow frosting,
 Yes yes yes, that's the best!
 Yes! Keep looking!
 Yippee skippy!
@@ -1538,6 +1559,7 @@ You wrote your name!
 You're a nail artist!
 You're a superstar, for real life!
 You're so silly! Ha ha ha! Let's be silly together!
+Your cupcake
 Your first day at a new school.
 Your first day at a new school. How would you feel?
 Your friend has to go home.
@@ -1545,6 +1567,7 @@ Your friend has to go home. How would you feel?
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
 Your turn!
+Yum yum! Thank you!
 Yum yum, breakfast!
 Z
 Zebra
@@ -1584,6 +1607,15 @@ an animal that says meow
 an animal that says woof
 an orange
 and
+and one heart!
+and one star!
+and one strawberry!
+and three hearts!
+and three stars!
+and three strawberries!
+and two hearts!
+and two stars!
+and two strawberries!
 animals
 apple
 apple and apple!
@@ -1716,6 +1748,7 @@ birdhouse
 bit
 blanket
 blocks
+blue
 boat
 boat and apple!
 boat and ball!
@@ -2198,6 +2231,7 @@ book:chewed
 book:chick
 book:chick!
 book:chicks
+book:chocolate
 book:climbed
 book:clothes!
 book:cookie
@@ -3241,6 +3275,7 @@ goodbye
 gown
 grandma
 grapes
+green
 guh
 h
 had
@@ -3465,6 +3500,7 @@ pizza
 plant
 polish
 puh
+purple
 purse
 q
 queen
@@ -3475,6 +3511,7 @@ rain,
 rainbow
 readingRead
 readingUnlocked
+red
 rest
 ri
 river
@@ -3760,6 +3797,7 @@ wuh
 x
 xmark
 y
+yellow
 you
 your
 yoyo
