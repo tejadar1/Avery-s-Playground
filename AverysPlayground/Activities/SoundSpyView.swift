@@ -14,9 +14,12 @@ enum SoundSpy {
 
     static func first(_ word: ReadingWord) -> Character { word.text.first! }
 
-    /// A word to find (not starting with the same sound as last time) and two others that start with other sounds.
+    static func practiceKey(_ word: ReadingWord) -> String { "sound spy:\(first(word))" }
+
+    /// A word to find (not starting with the same sound as last time, and sounds she's missed more often) and two
+    /// others that start with other sounds.
     static func round(after last: Character? = nil) -> (answer: ReadingWord, choices: [ReadingWord]) {
-        let answer = words.filter { first($0) != last }.randomElement()!
+        let answer = Practice.pick(words.filter { first($0) != last }, key: practiceKey)!
         var choices = [answer]
         for word in words.shuffled() where choices.count < 3 && !choices.contains(where: { first($0) == first(word) }) {
             choices.append(word)
@@ -117,6 +120,7 @@ struct SoundSpyView: View {
     private func pick(_ word: ReadingWord) {
         guard !found else { return }
         if word == round.answer {
+            Practice.got(SoundSpy.practiceKey(word))
             wins += 1
             Haptics.success()
             withAnimation(.spring) { found = true }
@@ -134,6 +138,7 @@ struct SoundSpyView: View {
                 ask()
             }
         } else {
+            Practice.missed(SoundSpy.practiceKey(round.answer))
             Haptics.tap()
             wrongPick = word
             shakes += 1

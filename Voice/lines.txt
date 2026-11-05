@@ -109,6 +109,8 @@ Cat
 Caw caw!
 Chore time! Let's help at home.
 Chores
+Clap
+Clap the beats!
 Clear
 Clothes
 Clothes color
@@ -570,6 +572,7 @@ He climbed down fast and took the hen home to his mom.
 He did it again. Everyone came running. No wolf!
 He jumped up and ran away! Run, run, as fast as you can!
 He planted the beans, and they grew up into the sky overnight!
+Hear it again
 Hear the sound again
 Hear the word
 Hearts
@@ -872,6 +875,7 @@ Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
 Leo
+Let's clap it together!
 Let's count to 1!
 Let's count to 10!
 Let's count to 2!
@@ -897,6 +901,7 @@ Lion
 Listen
 Listen again!
 Listen!
+Listen! Which one is it?
 Little Red Riding Hood
 Little Red Riding Hood went to visit her grandma.
 Locked
@@ -1523,6 +1528,7 @@ You played Twinkle Twinkle! Holy guacamole, what a song!
 You played Wheels on the Bus! Holy guacamole, what a song!
 You played all day, and now it's night.
 You played all day, and now it's night. How would you feel?
+You put the sounds together!
 You shared your snack with a friend.
 You shared your snack with a friend. How would you feel?
 You spun 1! Hop 1 square.
@@ -1539,6 +1545,7 @@ Your friend has to go home. How would you feel?
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
 Your turn!
+Your turn! Clap the beats!
 Yum yum, breakfast!
 Z
 Zebra
@@ -3537,26 +3544,68 @@ something you write with
 something your family sits on together
 something yummy and healthy to eat
 somewhere to sit at the park
-sound:
 sound:b
+sound:boʊ
+sound:bə
+sound:bɛ
+sound:bɪt
+sound:bɹə
+sound:bɹɛ
+sound:bʌ
+sound:bʌɡ
 sound:d
+sound:di
+sound:doʊ
+sound:dɔɡ
 sound:f
+sound:flaɪ
+sound:flaʊ
+sound:fənt
+sound:fɪʃ
 sound:h
 sound:k
+sound:kaɪt
+sound:keɪk
 sound:ks
+sound:kɑ
+sound:kʌp
+sound:leɪ
+sound:lə
 sound:m
 sound:n
+sound:næ
+sound:nə
 sound:p
+sound:pit
+sound:pəl
+sound:pɛŋ
+sound:pʊs
 sound:s
+sound:stɹɔ
+sound:sə
+sound:sʌn
 sound:t
+sound:tə
+sound:təl
+sound:tɚ
+sound:tɝ
 sound:v
+sound:və
 sound:w
+sound:zi
 sound:æ
 sound:ɑ
+sound:ɑk
+sound:ɚ
 sound:ɛ
 sound:ɡ
+sound:ɡwɪn
 sound:ɪ
+sound:ɹeɪn
+sound:ɹi
+sound:ɹæ
 sound:ʌ
+sound:ʌm
 sparkle
 sparkles
 spi

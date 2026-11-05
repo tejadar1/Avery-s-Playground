@@ -130,6 +130,7 @@ struct SpellView: View {
             hintTile = nil
             if spelling.isDone { finish() }
         } else {
+            Practice.missed("spell:" + spelling.word.text)
             Haptics.tap()
             wrongTile = index
             shakes += 1
@@ -141,6 +142,7 @@ struct SpellView: View {
 
     private func finish() {
         let word = spelling.word.text
+        Practice.got("spell:" + word)
         wins += 1
         Task {
             try? await Task.sleep(for: .seconds(0.7))  // after the last letter's sound
@@ -149,8 +151,8 @@ struct SpellView: View {
             cheerCount += 1
             Speaker.shared.say(Speaker.book + "\(word)! You spelled it!", then: hooray)
             try? await Task.sleep(for: .seconds(2.6))
-            var newWord = Phonics.words.randomElement()!
-            while newWord.text == word { newWord = Phonics.words.randomElement()! }
+            // Words she's mixed up come back more often.
+            let newWord = Practice.pick(Phonics.words.filter { $0.text != word }, key: { "spell:" + $0.text })!
             withAnimation(.spring) {
                 spelling = Spelling(newWord)
                 hintTile = nil

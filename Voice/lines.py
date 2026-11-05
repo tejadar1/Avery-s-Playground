@@ -21,9 +21,12 @@ def literals(text):
 # Plain strings Coco might say in English. The Spanish ones are listed below.
 english = {name: text for name, text in src.items() if name != "SpanishView.swift"}
 english["StoriesView.swift"] = english["StoriesView.swift"].split("static let spanish")[0]
+# Clap It's word table is beats and spellings, recorded below from the IPA, not lines to say as they are
+clap_table = english["ClapView.swift"].split("static let words")[1].split("static let pause")[0]
+english["ClapView.swift"] = english["ClapView.swift"].replace(clap_table, "")
 for text in list(english.values()) + [theme]:
     for s in literals(text):
-        if "\\(" in s or not re.search(r"[A-Za-z]", s):
+        if "\\(" in s or not re.search(r"[A-Za-z]", s) or s.endswith(":"):  # "spell:" and such are Practice keys
             continue
         if re.fullmatch(r"[a-z0-9]+(\.[a-z0-9]+)+|[a-z]{2}-[A-Z]{2}|(Icon|Picture)-.*", s):
             continue  # SF Symbol names, language codes, asset names
@@ -62,6 +65,11 @@ lines.update(f"book:{letter}!" for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ")  # in
 
 # Each letter's sound for Spell and Sound it out, recorded from its IPA ("sound:æ"); see make.py
 lines.update("sound:" + ipa for ipa in re.findall(r'"\w": \("([^"]+)", "[^"]+"\)', src["ReadingView.swift"]))
+
+# Clap It: each beat of a word, recorded from its IPA like the letter sounds, and the word in Bella's voice
+clap = src["ClapView.swift"]
+lines.update("sound:" + ipa for beats in re.findall(r'beats: \[([^\]]+)\]', clap) for ipa in re.findall(r'"([^"]+)"', beats))
+lines.update("book:" + word for word in re.findall(r'Word\(text: "(\w+)"', clap))
 
 numbers = range(1, 21)
 lines.update(f"book:{n}" for n in numbers)  # counting, in Bella's voice

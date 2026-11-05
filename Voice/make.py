@@ -28,8 +28,10 @@ def letter_sound(ipa, voice):
     """A letter's sound ("sound:æ" lines) from its IPA. Stops get a soft vowel so they can be heard; vowels and sounds
     like mmm and sss are held for about half a second, slowly, and every sound is as loud as Coco's other lines."""
     stop = {"b", "d", "ɡ", "k", "p", "t", "h", "w"}
-    phonemes = ipa + ("ə" if ipa in stop else "ːː")
-    audio, rate = kokoro.create(phonemes, voice=voice, speed=0.6, lang="en-us", is_phonemes=True)
+    # A beat of a word for Clap It, like "næ" in banana, is said as it is, a little slowly.
+    beat = len(ipa) > 1 and ipa != "ks"
+    phonemes = ipa if beat else ipa + ("ə" if ipa in stop else "ːː")
+    audio, rate = kokoro.create(phonemes, voice=voice, speed=0.8 if beat else 0.6, lang="en-us", is_phonemes=True)
     if len(audio) < rate * 0.1 or abs(audio).max() < 0.02:
         raise ValueError(f"no sound for {ipa}")
     return audio * (0.9 / abs(audio).max()), rate

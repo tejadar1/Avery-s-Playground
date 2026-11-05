@@ -138,6 +138,7 @@ struct ReadingView: View {
     private func pick(_ choice: ReadingWord) {
         guard !isSolved else { return }
         if choice == word {
+            Practice.got("read:" + word.text)
             wins += 1
             let hooray = Hooray.random
             withAnimation(.spring) {
@@ -154,6 +155,7 @@ struct ReadingView: View {
                 next(intro: "Tap each letter!")
             }
         } else {
+            Practice.missed("read:" + word.text)
             Haptics.tap()
             wrongPick = choice
             shakeCount += 1
@@ -163,10 +165,10 @@ struct ReadingView: View {
     }
 
     private func next(intro: String) {
-        // The newest word comes up often, mixed with ones she already knows.
+        // The newest word comes up often, mixed with ones she already knows; ones she's missed come back more.
         let pool = Array(Phonics.inOrder.prefix(unlocked))
-        var newWord = Bool.random() ? pool.last! : pool.randomElement()!
-        while newWord == word, !choices.isEmpty, pool.count > 1 { newWord = pool.randomElement()! }
+        let others = pool.filter { $0 != word || choices.isEmpty }
+        let newWord = Bool.random() && pool.last != word ? pool.last! : Practice.pick(others.isEmpty ? pool : others, key: { "read:" + $0.text })!
         withAnimation(.spring) {
             word = newWord
             choices = Phonics.choices(for: newWord)
