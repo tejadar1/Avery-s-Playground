@@ -1,7 +1,8 @@
 import SwiftUI
 
-/// Bake Shop: an animal orders a cupcake, like pink frosting and two strawberries, and she makes it. Pretend
-/// cooking with colors and counting to three.
+/// Bake Shop: an animal orders a cupcake, like pink frosting and two strawberries, and she makes it: picks the
+/// frosting, spreads it on with an icing knife, and drags the toppings on. Pretend cooking with colors, counting
+/// to three, and a lot of dragging for little hands.
 struct CupcakeOrder: Equatable {
     enum Frosting: String, CaseIterable { case pink, blue, yellow, chocolate }
     enum Topping: String, CaseIterable { case strawberry, star, heart }
@@ -19,10 +20,12 @@ struct CupcakeOrder: Equatable {
     }
 
     /// What's wrong with a cupcake, so Coco can point at it, or nil when it's just right.
-    enum Mistake { case frosting, toppings }
+    enum Mistake { case frosting, spread, toppings }
 
-    func check(frosting: Frosting?, toppings: [Topping]) -> Mistake? {
+    /// `spread` is how much of the frosting is on, 0 to 1.
+    func check(frosting: Frosting?, spread: Double = 1, toppings: [Topping]) -> Mistake? {
         if frosting != self.frosting { return .frosting }
+        if spread < 1 { return .spread }
         if toppings.count != count || toppings.contains(where: { $0 != topping }) { return .toppings }
         return nil
     }
@@ -44,6 +47,13 @@ struct BakeView: View {
     @State private var customer = BakeView.customers.randomElement()!
     @State private var frosting: CupcakeOrder.Frosting?
     @State private var toppings: [CupcakeOrder.Topping] = []
+    /// How much frosting is spread on, 0 to 1, and the icing knife under her finger.
+    @State private var spread: CGFloat = 0
+    @State private var knifeAt: CGPoint?
+    @State private var lastKnife: CGPoint?
+    /// A topping being dragged from the tray, where it is, and where the cupcake is, to drop it on.
+    @State private var carrying: (topping: CupcakeOrder.Topping, at: CGPoint)?
+    @State private var cupcakeFrame = CGRect.zero
     @State private var served = 0
     @State private var happy = false
     @State private var cheer = ""
@@ -61,10 +71,35 @@ struct BakeView: View {
                 orderCard
             }
 
-            // As big as the room left, up to a size that suits the screen.
+            // As big as the room left, up to a size that suits the screen. Dragging over it spreads the frosting.
             GeometryReader { geo in
-                Cupcake(frosting: frosting, toppings: toppings, size: min(geo.size.width, geo.size.height, 300 * uiScale))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                let side = min(geo.size.width, geo.size.height, 300 * uiScale)
+                ZStack {
+                    Cupcake(frosting: frosting, spread: spread, toppings: toppings, size: side)
+                    if frosting != nil && spread < 1 || knifeAt != nil {
+                        // The icing knife: resting beside the cupcake and wiggling until she picks it up, then its
+                        // blade follows her finger.
+                        Picture("spatula", size: side * 0.45)
+                            .phaseAnimator([0.0, -10]) { content, tilt in
+                                content.rotationEffect(.degrees(knifeAt == nil ? tilt : 0))
+                            } animation: { _ in .easeInOut(duration: 0.5) }
+                            .position(knifeAt.map { CGPoint(x: $0.x + side * 0.14, y: $0.y - side * 0.16) }
+                                ?? CGPoint(x: min(geo.size.width / 2 + side * 0.5, geo.size.width - side * 0.2), y: geo.size.height / 2 + side * 0.15))
+                            .allowsHitTesting(false)
+                    }
+                }
+                .frame(width: geo.size.width, height: geo.size.height)
+                .contentShape(Rectangle())
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { spreadFrosting(at: $0.location, side: side) }
+                        .onEnded { _ in
+                            knifeAt = nil
+                            lastKnife = nil
+                        }
+                )
+                .onAppear { cupcakeFrame = geo.frame(in: .named("bake")) }
+                .onChange(of: geo.frame(in: .named("bake"))) { _, frame in cupcakeFrame = frame }
             }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("Your cupcake")
@@ -84,14 +119,21 @@ struct BakeView: View {
                 }
             }
             HStack(spacing: 10 * uiScale) {
+                // Toppings come off the tray under her finger, to drop on the cupcake.
                 ForEach(CupcakeOrder.Topping.allCases, id: \.self) { kind in
-                    Button { add(kind) } label: {
-                        Picture(kind.rawValue, size: 46 * uiScale)
-                            .frame(width: 62 * uiScale, height: 62 * uiScale)
-                            .cartoonCard(.white, cornerRadius: 18 * uiScale)
-                    }
-                    .buttonStyle(SquishyButtonStyle())
-                    .accessibilityLabel("Add a \(kind.rawValue)")
+                    Picture(kind.rawValue, size: 46 * uiScale)
+                        .frame(width: 62 * uiScale, height: 62 * uiScale)
+                        .cartoonCard(.white, cornerRadius: 18 * uiScale)
+                        .gesture(
+                            DragGesture(minimumDistance: 0, coordinateSpace: .named("bake"))
+                                .onChanged { carrying = (kind, $0.location) }
+                                .onEnded { drop(kind, at: $0.location, moved: hypot($0.translation.width, $0.translation.height)) }
+                        )
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("Add a \(kind.rawValue)")
+                        .accessibilityIdentifier("Add a \(kind.rawValue)")
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityAction { drop(kind, at: CGPoint(x: cupcakeFrame.midX, y: cupcakeFrame.midY), moved: 100) }
                 }
                 Button(action: startOver) {
                     Image(systemName: "arrow.counterclockwise")
@@ -115,6 +157,14 @@ struct BakeView: View {
             .disabled(happy)
         }
         .padding([.horizontal, .bottom])
+        .coordinateSpace(.named("bake"))
+        .overlay {
+            if let carrying {
+                Picture(carrying.topping.rawValue, size: 70 * uiScale)
+                    .position(x: carrying.at.x, y: carrying.at.y - 30 * uiScale)  // just above her finger, so she can see it
+                    .allowsHitTesting(false)
+            }
+        }
         .background(Scenery(.picnic).ignoresSafeArea())
         .celebration(wins)
         .onAppear(perform: readOrder)
@@ -145,8 +195,61 @@ struct BakeView: View {
     private func pick(_ kind: CupcakeOrder.Frosting) {
         Haptics.tap()
         Sounds.shared.play(.pop)
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { frosting = kind }
-        Speaker.shared.say(Speaker.book + kind.rawValue)
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+            if kind != frosting { spread = 0 }  // a new color starts the spreading over
+            frosting = kind
+        }
+        if spread < 1 {
+            show("Spread it on with the knife!")
+            Speaker.shared.say(Speaker.book + kind.rawValue, then: "Spread it on with the knife!")
+        } else {
+            Speaker.shared.say(Speaker.book + kind.rawValue)
+        }
+    }
+
+    /// The icing knife spreads frosting as it moves: about four swipes back and forth across the cupcake.
+    private func spreadFrosting(at point: CGPoint, side: CGFloat) {
+        guard !happy else { return }
+        guard frosting != nil else {
+            if lastKnife == nil { say("Pick a frosting color first!") }
+            lastKnife = point
+            return
+        }
+        guard spread < 1 || knifeAt != nil else { return }
+        knifeAt = point
+        if let last = lastKnife, spread < 1 {
+            let before = spread
+            withAnimation(.spring(response: 0.25, dampingFraction: 0.7)) {
+                spread = min(1, spread + hypot(point.x - last.x, point.y - last.y) / (side * 3))
+            }
+            // A pop at each swirl of frosting, and a cheer when it's all on
+            if Int(spread * 3) > Int(before * 3) {
+                Haptics.tap()
+                Sounds.shared.play(.pop)
+            }
+            if spread >= 1 {
+                Haptics.success()
+                Sounds.shared.play(.sparkle)
+                say("Smooth! Now add the toppings!")
+            }
+        }
+        lastKnife = point
+    }
+
+    /// A topping let go: on the cupcake (once it's frosted) it sits in the next spot; anywhere else it's gone.
+    private func drop(_ kind: CupcakeOrder.Topping, at point: CGPoint, moved: CGFloat) {
+        carrying = nil
+        guard moved > 12 else {
+            say("Drag it onto the cupcake!")
+            return
+        }
+        guard cupcakeFrame.contains(point), !happy else { return }
+        guard frosting != nil, spread >= 1 else {
+            oops += 1
+            show(Oops.say("Frosting first!"))
+            return
+        }
+        add(kind)
     }
 
     private func add(_ kind: CupcakeOrder.Topping) {
@@ -161,16 +264,20 @@ struct BakeView: View {
         Haptics.tap()
         withAnimation(.spring) {
             frosting = nil
+            spread = 0
             toppings = []
         }
     }
 
     private func serve() {
         guard !happy else { return }
-        switch order.check(frosting: frosting, toppings: toppings) {
+        switch order.check(frosting: frosting, spread: spread, toppings: toppings) {
         case .frosting?:
             oops += 1
             show(Oops.say("Look at the frosting color!"))
+        case .spread?:
+            oops += 1
+            show(Oops.say("Spread more frosting!"))
         case .toppings?:
             oops += 1
             show(Oops.say("Count the toppings!"))
@@ -188,12 +295,18 @@ struct BakeView: View {
                     order = .random(after: order)
                     customer = Self.customers.filter { $0 != customer }.randomElement()!
                     frosting = nil
+                    spread = 0
                     toppings = []
                     happy = false
                 }
                 readOrder()
             }
         }
+    }
+
+    private func say(_ text: String) {
+        show(text)
+        Speaker.shared.say(text)
     }
 
     private func show(_ text: String) {
@@ -206,6 +319,8 @@ struct BakeView: View {
 /// the toppings sitting on it.
 struct Cupcake: View {
     let frosting: CupcakeOrder.Frosting?
+    /// How much frosting is on, 0 to 1: the bottom swirl grows first, then the middle, then the top.
+    var spread: CGFloat = 1
     let toppings: [CupcakeOrder.Topping]
     let size: CGFloat
 
@@ -234,10 +349,13 @@ struct Cupcake: View {
                 let base = Self.color(frosting)
                 ForEach(0..<3, id: \.self) { tier in
                     let width = size * [0.86, 0.68, 0.44][tier], height = size * [0.26, 0.22, 0.2][tier]
+                    let grown = min(1, max(0, spread * 3 - CGFloat(tier)))
                     Capsule().fill(base)
                         .overlay(Capsule().fill(LinearGradient(colors: [.clear, .black.opacity(0.16)], startPoint: .center, endPoint: .bottom)))
                         .overlay(Capsule().strokeBorder(Color.outline, lineWidth: line))
                         .frame(width: width, height: height)
+                        .scaleEffect(grown, anchor: .bottom)
+                        .opacity(grown > 0 ? 1 : 0)
                         .offset(y: size * [0.08, -0.08, -0.22][tier])
                 }
                 .transition(.scale(scale: 0.6, anchor: .bottom).combined(with: .opacity))

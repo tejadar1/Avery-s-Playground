@@ -504,6 +504,7 @@ Down! So cute!
 Drag Coco
 Drag Coco to where she should hide
 Drag each piece to where it goes in the picture!
+Drag it onto the cupcake!
 Drag the hose to spray Mochi.
 Drag to spray Mochi
 Drink of water
@@ -546,6 +547,7 @@ Fox
 Fox ends with X!
 Free play
 Free play!
+Frosting first!
 Fruit or animals?
 G
 G sharp
@@ -1081,6 +1083,7 @@ Peekaboo! Stars found me!
 Penguin
 Perfect! Just how she wanted it!
 Pick a crayon. Tap a part to fill it, or color with your finger!
+Pick a frosting color first!
 Pick a leaf and tap it to hop! Follow the beans!
 Pick a red apple!
 Pick a yellow banana!
@@ -1183,6 +1186,7 @@ Sleep
 Sleepy. Time for a cozy rest.
 Slide the floss over the bits of food between the teeth.
 Slide!
+Smooth! Now add the toppings!
 Snap snap! I filled my card! Good game! Want to play again?
 Snap snap! I love it!
 Snap snap! I'm Coco, the silliest crocodile!
@@ -1240,6 +1244,8 @@ Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
 Spin
 Spot the difference! Pick easy, medium or hard.
+Spread it on with the knife!
+Spread more frosting!
 Squeak squeak!
 Squeaky clean!
 Squeaky clean! Shake shake shake!
@@ -1675,6 +1681,7 @@ avery
 avocado
 b
 backpack
+bake
 ball
 ball and apple!
 ball and ball!
@@ -3870,6 +3877,7 @@ sound:ʌ
 sound:ʌm
 sparkle
 sparkles
+spatula
 spi
 spout
 spout.

@@ -152,9 +152,17 @@ final class ScreenshotTests: XCTestCase {
             ("Sound Spy", {}),
             ("Clap It", { self.tap(self.find("Clap")) }),
             ("Bake Shop", {
+                // Pink frosting, spread on with the knife in swipes back and forth, then a strawberry dragged on.
                 self.tap(self.app.buttons["Pink frosting"])
-                self.tap(self.app.buttons["Add a strawberry"])
-                self.tap(self.app.buttons["Add a strawberry"])
+                let cake = self.find("Cupcake")
+                for _ in 0..<5 {
+                    cake.coordinate(withNormalizedOffset: CGVector(dx: 0.25, dy: 0.4))
+                        .press(forDuration: 0.05, thenDragTo: cake.coordinate(withNormalizedOffset: CGVector(dx: 0.75, dy: 0.45)))
+                    cake.coordinate(withNormalizedOffset: CGVector(dx: 0.75, dy: 0.35))
+                        .press(forDuration: 0.05, thenDragTo: cake.coordinate(withNormalizedOffset: CGVector(dx: 0.25, dy: 0.4)))
+                }
+                self.find("Add a strawberry").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+                    .press(forDuration: 0.1, thenDragTo: cake.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4)))
             }),
             ("Go Fishing", {}),
             ("Fruit Picking", {

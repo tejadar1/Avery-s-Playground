@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- An icing knife: a round-ended metal blade on a wooden handle, lying on a slant, blade at the bottom left -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M118 82 L176 24 C184 16 196 28 188 36 L130 94Z" fill="#C98A4B"/>
+    <path d="M150 54 L158 62" fill="none" stroke="#A86F3A" stroke-width="5"/>
+    <path d="M110 74 L126 90 L120 96 L104 80Z" fill="#AEB4BE"/>
+    <clipPath id="blade"><path d="M104 80 L120 96 L46 170 C34 182 18 166 30 154Z"/></clipPath>
+    <path d="M104 80 L120 96 L46 170 C34 182 18 166 30 154Z" fill="#DDE2EA"/>
+  </g>
+  <g clip-path="url(#blade)"><path d="M110 92 L40 162 L60 180 L130 110Z" fill="#AEB4BE"/></g>
+  <path d="M104 80 L120 96 L46 170 C34 182 18 166 30 154Z" fill="none" stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M96 94 L50 140" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+</svg>

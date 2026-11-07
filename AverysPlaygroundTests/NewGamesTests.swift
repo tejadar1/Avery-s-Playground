@@ -8,6 +8,7 @@ final class NewGamesTests: XCTestCase {
         let order = CupcakeOrder(frosting: .pink, topping: .strawberry, count: 2)
         XCTAssertEqual(order.check(frosting: nil, toppings: []), .frosting, "frosting first")
         XCTAssertEqual(order.check(frosting: .blue, toppings: [.strawberry, .strawberry]), .frosting)
+        XCTAssertEqual(order.check(frosting: .pink, spread: 0.6, toppings: [.strawberry, .strawberry]), .spread, "frosting spread all the way")
         XCTAssertEqual(order.check(frosting: .pink, toppings: [.strawberry]), .toppings, "one too few")
         XCTAssertEqual(order.check(frosting: .pink, toppings: [.strawberry, .star]), .toppings, "the wrong kind")
         XCTAssertNil(order.check(frosting: .pink, toppings: [.strawberry, .strawberry]))
