@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A round blueberry with its little star-shaped crown -->
+  <clipPath id="berry"><circle cx="100" cy="106" r="58"/></clipPath>
+  <circle cx="100" cy="106" r="58" fill="#5E7FD8"/>
+  <g clip-path="url(#berry)"><ellipse cx="110" cy="182" rx="90" ry="50" fill="#3F5BB0"/><ellipse cx="76" cy="84" rx="14" ry="18" fill="#fff" opacity=".45"/></g>
+  <circle cx="100" cy="106" r="58" fill="none" stroke="#4A2C2A" stroke-width="7"/>
+  <path d="M100 62 L106 74 L118 72 L110 82 L114 94 L100 88 L86 94 L90 82 L82 72 L94 74Z" fill="#33467F" stroke="#4A2C2A" stroke-width="4" stroke-linejoin="round"/>
+</svg>

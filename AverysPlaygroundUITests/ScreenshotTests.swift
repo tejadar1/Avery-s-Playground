@@ -163,6 +163,8 @@ final class ScreenshotTests: XCTestCase {
                 }
                 self.find("Add a strawberry").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
                     .press(forDuration: 0.1, thenDragTo: cake.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4)))
+                self.find("Sprinkles").coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+                    .press(forDuration: 0.1, thenDragTo: cake.coordinate(withNormalizedOffset: CGVector(dx: 0.4, dy: 0.45)))
             }),
             ("Go Fishing", {}),
             ("Fruit Picking", {

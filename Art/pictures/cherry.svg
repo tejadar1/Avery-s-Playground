@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A shiny red cherry with its stem and a leaf, for the top of a cupcake -->
+  <path d="M100 96 Q104 56 132 30" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linecap="round"/>
+  <path d="M120 44 C132 26 158 26 166 36 C152 50 132 54 120 44Z" fill="#62B866" stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round"/>
+  <clipPath id="cherry"><circle cx="100" cy="128" r="50"/></clipPath>
+  <circle cx="100" cy="128" r="50" fill="#E9464F"/>
+  <g clip-path="url(#cherry)"><ellipse cx="108" cy="196" rx="80" ry="44" fill="#B8323C"/><ellipse cx="80" cy="108" rx="12" ry="16" fill="#fff" opacity=".5"/></g>
+  <circle cx="100" cy="128" r="50" fill="none" stroke="#4A2C2A" stroke-width="7"/>
+</svg>

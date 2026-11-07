@@ -22,7 +22,6 @@ A kind old shoemaker made shoes all day, but he was very tired.
 A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
 A match! Go again!
-A new order!
 A night sky!
 A purple fish!
 A red fish!
@@ -33,6 +32,7 @@ A woodcutter chased the wolf away, and they all had a big hug.
 A yellow fish!
 A! /a/! A is for apple!
 ABC
+Add sprinkles
 All clean!
 All done with the bath!
 All done! Sweet dreams!
@@ -460,6 +460,7 @@ Coco has 6 strawberries. Mochi eats 2. How many are left?
 Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
+Coco wants a cupcake!
 Color anywhere you like!
 Coloring anywhere
 Coloring inside the lines
@@ -949,6 +950,7 @@ Meow meow!
 Mer
 Mia
 Mia's turn
+Mmm, yummy! Thank you!
 Mochi
 Mochi does a wiggly dance!
 Mochi does a wiggly dance! How would you feel?
@@ -1015,6 +1017,7 @@ No more food stuck! Yay!
 No, said the hen. My chicks and I will eat it!
 Nom nom nom! Yummy!
 Nom nom! More please!
+Nom, nom, nom!
 Not yet! Tap the one that's bouncing.
 Not yet, said the ant. First I work, then I play.
 Nothing
@@ -1246,6 +1249,7 @@ Spin
 Spot the difference! Pick easy, medium or hard.
 Spread it on with the knife!
 Spread more frosting!
+Sprinkles
 Squeak squeak!
 Squeaky clean!
 Squeaky clean! Shake shake shake!
@@ -1597,7 +1601,6 @@ Your friend has to go home. How would you feel?
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
 Your turn!
-Yum yum! Thank you!
 Yum yum, breakfast!
 Z
 Zebra
@@ -1637,14 +1640,17 @@ an animal that says meow
 an animal that says woof
 an orange
 and
-and one heart!
-and one star!
+and one blueberry!
+and one cherry!
+and one chocolate chip!
 and one strawberry!
-and three hearts!
-and three stars!
+and three blueberries!
+and three cherries!
+and three chocolate chips!
 and three strawberries!
-and two hearts!
-and two stars!
+and two blueberries!
+and two cherries!
+and two chocolate chips!
 and two strawberries!
 animals
 ant
@@ -2797,6 +2803,7 @@ chalksun
 checkmark
 cheese
 chick
+chocolate chip
 choresOrder
 climbed
 clock
@@ -3765,6 +3772,7 @@ satpinmdgockeurhbfljvwxyz
 scared
 school
 scissors
+shaker
 shampoo
 sheep
 shelfball

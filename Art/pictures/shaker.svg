@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A sprinkle shaker: a glass jar full of rainbow sprinkles, with a holey lid -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round">
+    <rect x="58" y="62" width="84" height="116" rx="22" fill="#EAF6FF"/>
+    <rect x="52" y="30" width="96" height="38" rx="12" fill="#F28FB0"/>
+  </g>
+  <g fill="#4A2C2A"><circle cx="76" cy="49" r="5"/><circle cx="100" cy="49" r="5"/><circle cx="124" cy="49" r="5"/></g>
+  <g stroke-width="8" stroke-linecap="round">
+    <path d="M76 110 l12 -6" stroke="#E9646E"/><path d="M104 96 l10 8" stroke="#5B9BD5"/><path d="M120 120 l12 -4" stroke="#F6C945"/>
+    <path d="M80 140 l8 10" stroke="#62B866"/><path d="M104 132 l14 2" stroke="#A98BE0"/><path d="M122 154 l8 -10" stroke="#E9646E"/>
+    <path d="M86 162 l12 -2" stroke="#F6C945"/><path d="M110 156 l-4 10" stroke="#5B9BD5"/><path d="M78 88 l10 4" stroke="#A98BE0"/>
+  </g>
+  <rect x="58" y="62" width="84" height="116" rx="22" fill="none" stroke="#4A2C2A" stroke-width="6"/>
+  <path d="M70 80 L70 150" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+</svg>

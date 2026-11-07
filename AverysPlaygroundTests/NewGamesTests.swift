@@ -10,7 +10,7 @@ final class NewGamesTests: XCTestCase {
         XCTAssertEqual(order.check(frosting: .blue, toppings: [.strawberry, .strawberry]), .frosting)
         XCTAssertEqual(order.check(frosting: .pink, spread: 0.6, toppings: [.strawberry, .strawberry]), .spread, "frosting spread all the way")
         XCTAssertEqual(order.check(frosting: .pink, toppings: [.strawberry]), .toppings, "one too few")
-        XCTAssertEqual(order.check(frosting: .pink, toppings: [.strawberry, .star]), .toppings, "the wrong kind")
+        XCTAssertEqual(order.check(frosting: .pink, toppings: [.strawberry, .cherry]), .toppings, "the wrong kind")
         XCTAssertNil(order.check(frosting: .pink, toppings: [.strawberry, .strawberry]))
         for _ in 0..<20 { XCTAssertNotEqual(CupcakeOrder.random(after: order), order, "never the same order twice in a row") }
     }

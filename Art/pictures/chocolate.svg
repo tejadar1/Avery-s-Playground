@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A chocolate chip: a little brown drop with a curl on top -->
+  <clipPath id="chip"><path d="M100 36 C108 62 150 96 150 128 C150 160 126 170 100 170 C74 170 50 160 50 128 C50 96 92 62 100 36Z"/></clipPath>
+  <path d="M100 36 C108 62 150 96 150 128 C150 160 126 170 100 170 C74 170 50 160 50 128 C50 96 92 62 100 36Z" fill="#7A4A2E"/>
+  <g clip-path="url(#chip)"><ellipse cx="110" cy="196" rx="90" ry="50" fill="#57321E"/><ellipse cx="80" cy="112" rx="10" ry="18" fill="#fff" opacity=".35"/></g>
+  <path d="M100 36 C108 62 150 96 150 128 C150 160 126 170 100 170 C74 170 50 160 50 128 C50 96 92 62 100 36Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+</svg>
