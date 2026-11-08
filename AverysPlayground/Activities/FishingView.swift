@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Go Fishing, after the turning fishing-pond board game: fish swim round a pond opening and closing their mouths,
-/// and on your turn you tap one with its mouth open to catch it. Stars and Hearts take turns until the pond is
+/// and on your turn you drag the fishing line's bobber over one and let go while its mouth is open to catch it. Stars and Hearts take turns until the pond is
 /// empty; whoever caught more fish wins. Timing, turn-taking and counting.
 struct GoFishing {
     static let colors = ["red", "orange", "yellow", "green", "blue", "purple"]
@@ -54,6 +54,8 @@ struct FishingView: View {
     @State private var cheerCount = 0
     @State private var oops = 0
     @State private var wins = 0
+    /// The bobber at the end of the fishing line, while she drags it over the pond; nil when it hangs at the rod.
+    @State private var hookAt: CGPoint?
 
     private var turnLine: String { game.turn == .star ? "Stars, catch a fish!" : "Hearts, catch a fish!" }
 
@@ -69,37 +71,71 @@ struct FishingView: View {
 
             GeometryReader { geo in
                 let side = min(geo.size.width, geo.size.height)
+                let tip = CGPoint(x: side * 0.82, y: side * 0.8), resting = CGPoint(x: side * 0.82, y: side * 0.93)
                 TimelineView(.animation) { context in
                     let time = context.date.timeIntervalSince(start)
                     ZStack {
                         // The pond: water with a darker rim, ripples, and the fish going round
-                        Circle().fill(Color(red: 0.55, green: 0.8, blue: 0.95))
-                            .overlay(Circle().strokeBorder(Color(red: 0.33, green: 0.6, blue: 0.82), lineWidth: side * 0.04))
-                            .overlay(Circle().strokeBorder(Color.outline, lineWidth: 4 * uiScale))
-                        ForEach([0.55, 0.3], id: \.self) { ripple in
-                            Circle().stroke(Color.white.opacity(0.45), lineWidth: 3 * uiScale).frame(width: side * ripple, height: side * ripple)
-                        }
-                        ForEach(Array(game.pond.enumerated()), id: \.element.id) { index, fish in
-                            let angle = 2 * .pi * Double(fish.id) / 8 + time * 0.3
-                            let open = GoFishing.isOpen(fish, at: time)
-                            Button { cast(at: fish, open: open) } label: {
-                                FishDrawing(color: Self.color(fish.color), mouthOpen: open)
-                                    .frame(width: side * 0.2, height: side * 0.13)
-                                    .rotationEffect(.radians(angle + .pi))  // nose first, going clockwise
+                        Group {
+                            Circle().fill(Color(red: 0.55, green: 0.8, blue: 0.95))
+                                .overlay(Circle().strokeBorder(Color(red: 0.33, green: 0.6, blue: 0.82), lineWidth: side * 0.035))
+                                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 4 * uiScale))
+                                .frame(width: side * 0.84, height: side * 0.84)
+                            ForEach([0.46, 0.25], id: \.self) { ripple in
+                                Circle().stroke(Color.white.opacity(0.45), lineWidth: 3 * uiScale).frame(width: side * ripple, height: side * ripple)
                             }
-                            .buttonStyle(.plain)
-                            .disabled(landed != nil || game.isOver)
-                            .position(x: side / 2 + cos(angle) * side * 0.34, y: side / 2 + sin(angle) * side * 0.34)
-                            .accessibilityLabel("\(fish.color) fish, mouth \(open ? "open" : "closed")")
-                            .accessibilityIdentifier("Fish \(index + 1)")
                         }
+                        .position(Self.pondCenter(side))
+                        ForEach(Array(game.pond.enumerated()), id: \.element.id) { index, fish in
+                            let open = GoFishing.isOpen(fish, at: time)
+                            FishDrawing(color: Self.color(fish.color), mouthOpen: open)
+                                .frame(width: side * 0.17, height: side * 0.11)
+                                .rotationEffect(.radians(Self.angle(fish, at: time) + .pi))  // nose first, going clockwise
+                                .position(Self.place(fish, at: time, side: side))
+                                .accessibilityElement(children: .ignore)
+                                .accessibilityLabel("\(fish.color) fish, mouth \(open ? "open" : "closed")")
+                                .accessibilityIdentifier("Fish \(index + 1)")
+                                .accessibilityAddTraits(.isButton)
+                                .accessibilityAction { cast(at: fish, open: GoFishing.isOpen(fish, at: Date.now.timeIntervalSince(start))) }
+                        }
+                        // The fishing rod in the corner, its line, and the red-and-white bobber on the end
+                        Path { path in
+                            path.move(to: CGPoint(x: side * 0.99, y: side * 1.0))
+                            path.addLine(to: tip)
+                        }
+                        .stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.03 + 6, lineCap: .round))
+                        .overlay(Path { path in
+                            path.move(to: CGPoint(x: side * 0.99, y: side * 1.0))
+                            path.addLine(to: tip)
+                        }.stroke(Color(red: 0.78, green: 0.53, blue: 0.3), style: StrokeStyle(lineWidth: side * 0.03, lineCap: .round)))
+                        Circle().fill(Color(red: 0.85, green: 0.86, blue: 0.9))
+                            .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3))
+                            .frame(width: side * 0.07, height: side * 0.07)
+                            .position(x: side * 0.93, y: side * 0.93)
+                        let hook = hookAt ?? resting
+                        Path { path in
+                            path.move(to: tip)
+                            path.addQuadCurve(to: hook, control: CGPoint(x: (tip.x + hook.x) / 2, y: max(tip.y, hook.y) + side * 0.05))
+                        }
+                        .stroke(Color.outline.opacity(0.8), lineWidth: 2)
+                        Bobber(size: side * 0.07).position(hook)
                         if let landed {
                             FishDrawing(color: Self.color(landed), mouthOpen: true)
                                 .frame(width: side * 0.36, height: side * 0.24)
+                                .position(Self.pondCenter(side))
                                 .transition(.scale(scale: 0.3).combined(with: .opacity))
                         }
                     }
                     .frame(width: side, height: side)
+                    .contentShape(Rectangle())
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                guard landed == nil, !game.isOver else { return }
+                                hookAt = CGPoint(x: min(max(value.location.x, 0), side), y: min(max(value.location.y, 0), side))
+                            }
+                            .onEnded { value in drop(at: value.location, side: side) }
+                    )
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -119,7 +155,10 @@ struct FishingView: View {
         .padding([.horizontal, .bottom])
         .background(Scenery(.outdoors).ignoresSafeArea())
         .celebration(wins)
-        .onAppear { say(turnLine) }
+        .onAppear {
+            show("Drag the hook to a fish with its mouth open! \(turnLine)")
+            Speaker.shared.say("Drag the hook to a fish with its mouth open!", then: turnLine)
+        }
     }
 
     static func color(_ name: String) -> Color {
@@ -131,6 +170,31 @@ struct FishingView: View {
         case "blue": Color(red: 0.4, green: 0.62, blue: 0.95)
         default: Color(red: 0.66, green: 0.5, blue: 0.9)
         }
+    }
+
+    static func pondCenter(_ side: CGFloat) -> CGPoint { CGPoint(x: side * 0.5, y: side * 0.44) }
+
+    /// Where a fish is on its way round the pond, `time` seconds in.
+    static func angle(_ fish: GoFishing.Fish, at time: Double) -> Double { 2 * .pi * Double(fish.id) / 8 + time * 0.3 }
+
+    static func place(_ fish: GoFishing.Fish, at time: Double, side: CGFloat) -> CGPoint {
+        let center = pondCenter(side), angle = angle(fish, at: time)
+        return CGPoint(x: center.x + cos(angle) * side * 0.29, y: center.y + sin(angle) * side * 0.29)
+    }
+
+    /// The bobber let go: on a fish, it's a cast at that fish (caught if its mouth is open right now); in open water
+    /// it just swings back to the rod to try again.
+    private func drop(at point: CGPoint, side: CGFloat) {
+        guard hookAt != nil else { return }
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) { hookAt = nil }
+        let time = Date.now.timeIntervalSince(start)
+        let near = game.pond.min { hypot(Self.place($0, at: time, side: side).x - point.x, Self.place($0, at: time, side: side).y - point.y)
+            < hypot(Self.place($1, at: time, side: side).x - point.x, Self.place($1, at: time, side: side).y - point.y) }
+        guard let fish = near, hypot(Self.place(fish, at: time, side: side).x - point.x, Self.place(fish, at: time, side: side).y - point.y) < side * 0.1 else {
+            say("Drop the hook on a fish!")
+            return
+        }
+        cast(at: fish, open: GoFishing.isOpen(fish, at: time))
     }
 
     private func cast(at fish: GoFishing.Fish, open: Bool) {
@@ -185,6 +249,21 @@ struct FishingView: View {
     private func show(_ text: String) {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }
         cheerCount += 1
+    }
+}
+
+/// A fishing bobber: red on top, white underneath, with a little ring for the line.
+private struct Bobber: View {
+    let size: CGFloat
+
+    var body: some View {
+        ZStack {
+            Circle().fill(.white)
+            Circle().trim(from: 0.5, to: 1).fill(Color(red: 0.93, green: 0.33, blue: 0.36))
+            Circle().strokeBorder(Color.outline, lineWidth: max(2, size * 0.08))
+            Circle().strokeBorder(Color.outline, lineWidth: 2).frame(width: size * 0.3, height: size * 0.3).offset(y: -size * 0.6)
+        }
+        .frame(width: size, height: size)
     }
 }
 
