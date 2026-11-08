@@ -35,7 +35,8 @@ enum Phonics {
         "e": ("ɛ", "eh"), "m": ("m", "mmm"), "f": ("f", "fff"), "g": ("ɡ", "guh"), "h": ("h", "huh"),
         "i": ("ɪ", "ih"), "n": ("n", "nnn"), "o": ("ɑ", "ah"), "p": ("p", "puh"),
         "s": ("s", "sss"), "t": ("t", "tuh"), "u": ("ʌ", "uh"), "v": ("v", "vvv"),
-        "w": ("w", "wuh"), "x": ("ks", "ks"),
+        "w": ("w", "wuh"), "x": ("ks", "ks"), "k": ("k", "kuh"), "l": ("l", "lll"), "r": ("ɹ", "rrr"),
+        "j": ("dʒ", "juh"), "y": ("j", "yuh"), "z": ("z", "zzz"), "q": ("kw", "kwuh"),
     ]
 
     /// The answer plus two other words, in random order.

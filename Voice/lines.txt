@@ -490,6 +490,7 @@ Curly! So cute!
 Cut along the dotted line.
 D
 D sharp
+Dad
 Dance mode!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
@@ -516,6 +517,7 @@ Eagle eyes!
 Easy
 Easy peasy, lemon squeezy!
 Elephant
+Erase
 Eraser
 Eraser! Rub out any oopsies!
 Every night, the little elves came back to help.
@@ -550,6 +552,7 @@ Fox
 Fox ends with X!
 Free play
 Free play!
+Free spelling
 Frosting first!
 Fruit or animals?
 G
@@ -843,6 +846,7 @@ Hiya!
 Hiya, Avery!
 Hmm, look again! What's different?
 Holy guacamole!
+Holy guacamole! A new level is open! Tap it up top!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
 Holy guacamole, I love it!
@@ -977,6 +981,7 @@ MochiLegFarFront
 MochiLegFront
 MochiRoom
 MochiTail
+Mom
 Mom brought some yummy greens, and Dad brought bread to dip.
 Mommy gives you a big hug.
 Mommy gives you a big hug. How would you feel?
@@ -987,6 +992,7 @@ Mouth
 Mustard
 My name
 My tail is so long, sometimes I forget it's mine! Hello, tail!
+My words
 N
 Nail
 Nail idea
@@ -1023,6 +1029,7 @@ Nom, nom, nom!
 Not yet! Tap the one that's bouncing.
 Not yet, said the ant. First I work, then I play.
 Nothing
+Nothing yet
 Nothing! Fashion show time!
 Nothing! Holy guacamole, I love it!
 Nothing! Ooh la la!
@@ -1134,6 +1141,7 @@ Quick look
 Quick look! Don't count!
 R
 Rainbow
+Read it
 Ready for school! Have a great day!
 Ready, set, snap!
 Red
@@ -1549,6 +1557,7 @@ Wowza! You colored the whole coral reef!
 Wowza! You colored the whole farm!
 Wowza! You colored the whole garden!
 Wowza! You colored the whole night sky!
+Write anything! Tap the speaker and I'll read it. Snap snap!
 X
 Y
 Yellow
@@ -1630,6 +1639,7 @@ a toy that says quack
 a toy with long ears
 a whale
 abc
+abcdefghijklmnopqrstuvwxyz
 aeiou
 ah
 ahh
@@ -1910,6 +1920,8 @@ book:And
 book:Animals
 book:At
 book:At the top was a giant's castle. Fee, fi, fo, fum!
+book:Avery
+book:Avery! You spelled it!
 book:B is for Bear!
 book:B!
 book:Black! Like a hat.
@@ -1933,8 +1945,10 @@ book:C!
 book:Calm. Nice and cozy, like a quiet story.
 book:Clothes
 book:Cloud
+book:Coco
 book:Coco has fewer!
 book:Coco has more!
+book:Coco! You spelled it!
 book:Colors
 book:Comb
 book:Come
@@ -1944,6 +1958,7 @@ book:Curly
 book:D is for Dog!
 book:D!
 book:Dad
+book:Dad! You spelled it!
 book:Designs
 book:Do you want mangú?
 book:Down
@@ -2035,10 +2050,13 @@ book:M is for Moon!
 book:M!
 book:Mad. Take a big breath, and blow it out slowly.
 book:Mary Had a Little Lamb!
+book:Mochi
 book:Mochi has fewer!
 book:Mochi has more!
+book:Mochi! You spelled it!
 book:Mom
 book:Mom brought some yummy greens, and Dad brought bread to dip.
+book:Mom! You spelled it!
 book:Mustard
 book:My
 book:My brother
@@ -2195,6 +2213,7 @@ book:Yellow! Like a banana.
 book:Yes, Dad
 book:Yes, Mom
 book:You
+book:You spelled it!
 book:Yummy!
 book:Z is for Zebra!
 book:Z!
@@ -2208,6 +2227,7 @@ book:animals!
 book:ant
 book:apple
 book:apple!
+book:apple! You spelled it!
 book:are
 book:as
 book:asked
@@ -2290,6 +2310,7 @@ book:butterfly!
 book:by
 book:cake
 book:cake!
+book:cake! You spelled it!
 book:came
 book:can
 book:can't
@@ -2344,6 +2365,7 @@ book:dog! You spelled it!
 book:down
 book:duck
 book:duck!
+book:duck! You spelled it!
 book:eat
 book:egg!
 book:eggs
@@ -2362,7 +2384,10 @@ book:filled
 book:first
 book:fish
 book:fish!
+book:fish! You spelled it!
 book:five
+book:flag
+book:flag! You spelled it!
 book:flower
 book:flower!
 book:flowers
@@ -2384,6 +2409,7 @@ book:friends
 book:frog
 book:frog and dog rhyme!
 book:frog!
+book:frog! You spelled it!
 book:fruit!
 book:fum
 book:fun
@@ -2404,6 +2430,8 @@ book:green
 book:greens
 book:grew
 book:had
+book:hand
+book:hand! You spelled it!
 book:hard
 book:hat
 book:hat and bat rhyme!
@@ -2455,6 +2483,7 @@ book:kept
 book:kind
 book:kite
 book:kite!
+book:kite! You spelled it!
 book:ladybug
 book:ladybug!
 book:laid
@@ -2462,6 +2491,7 @@ book:learned
 book:let
 book:lion
 book:lion!
+book:lion! You spelled it!
 book:little
 book:made
 book:magic
@@ -2471,10 +2501,12 @@ book:mango!
 book:mashed plantains
 book:me
 book:milk
+book:milk! You spelled it!
 book:mom
 book:moon
 book:moon and balloon rhyme!
 book:moon!
+book:moon! You spelled it!
 book:morning
 book:mouse
 book:mouse and house rhyme!
@@ -2486,7 +2518,9 @@ book:music
 book:my
 book:nap
 book:needs
+book:nest
 book:nest!
+book:nest! You spelled it!
 book:net
 book:new
 book:night
@@ -2522,6 +2556,7 @@ book:pigs
 book:pink
 book:pizza
 book:pizza!
+book:pizza! You spelled it!
 book:plant
 book:plantain
 book:planted
@@ -2575,6 +2610,7 @@ book:soup
 book:star
 book:star and car rhyme!
 book:star!
+book:star! You spelled it!
 book:steady
 book:stew
 book:stick
@@ -2605,6 +2641,8 @@ book:they
 book:third
 book:three
 book:through
+book:tiger
+book:tiger! You spelled it!
 book:tiny
 book:tired
 book:to
@@ -2657,6 +2695,8 @@ book:wheat
 book:white
 book:wife
 book:will
+book:wind
+book:wind! You spelled it!
 book:wins
 book:winter
 book:with
@@ -2673,6 +2713,7 @@ book:yet
 book:you
 book:yummy
 book:zebra
+book:zebra! You spelled it!
 books
 boots
 bove
@@ -2856,6 +2897,7 @@ curtains
 cushion1
 cushion2
 d
+dad
 der
 desk1
 desk2
@@ -2934,6 +2976,7 @@ duck and sun!
 duck and tree!
 duh
 dy!
+dʒ
 e
 egg
 egg and apple!
@@ -3623,6 +3666,7 @@ it
 it-sy
 its
 j
+juh
 juice
 k
 kidball
@@ -3630,6 +3674,8 @@ kite
 kle
 ks
 kuh
+kw
+kwuh
 l
 la
 ladybug
@@ -3642,6 +3688,7 @@ like
 lion
 lit
 living
+lll
 loved
 ly
 ly,
@@ -3651,6 +3698,7 @@ mango
 mazeLevel
 mazeUnlocked
 mer
+milk
 mmm
 mochi
 mom
@@ -3764,6 +3812,7 @@ round,
 round.
 row
 row,
+rrr
 rug
 ry
 s
@@ -3836,18 +3885,22 @@ sound:d
 sound:di
 sound:doʊ
 sound:dɔɡ
+sound:dʒ
 sound:f
 sound:flaɪ
 sound:flaʊ
 sound:fənt
 sound:fɪʃ
 sound:h
+sound:j
 sound:k
 sound:kaɪt
 sound:keɪk
 sound:ks
+sound:kw
 sound:kɑ
 sound:kʌp
+sound:l
 sound:leɪ
 sound:lə
 sound:m
@@ -3871,6 +3924,7 @@ sound:tɝ
 sound:v
 sound:və
 sound:w
+sound:z
 sound:zi
 sound:æ
 sound:ɑ
@@ -3880,6 +3934,7 @@ sound:ɛ
 sound:ɡ
 sound:ɡwɪn
 sound:ɪ
+sound:ɹ
 sound:ɹeɪn
 sound:ɹi
 sound:ɹæ
@@ -3888,6 +3943,10 @@ sound:ʌm
 sparkle
 sparkles
 spatula
+spellLevel
+spellStars
+spellToward
+spellUnlocked
 spi
 spout
 spout.
@@ -3968,6 +4027,7 @@ tennis
 ter
 the
 through
+tiger
 tle
 toilet
 toothbrush
@@ -4047,5 +4107,7 @@ yellow
 you
 your
 yoyo
+yuh
 z
 zebra
+zzz

@@ -89,7 +89,10 @@ final class ScreenshotTests: XCTestCase {
                         .press(forDuration: 0.05, thenDragTo: board.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
             }),
-            ("Spell", {}),
+            ("Spell", {
+                self.tap(self.app.buttons["Free spelling"])
+                for letter in "cat" { self.tap(self.app.buttons["Letter \(letter)"]) }
+            }),
             ("Rhyme Time", {}),
             ("What's Next?", {}),
             ("Sort It", {

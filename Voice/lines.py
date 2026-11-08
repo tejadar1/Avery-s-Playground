@@ -84,6 +84,11 @@ for letter, word, phrase in re.findall(r'Letter\(letter: "(\w)", word: "([^"]+)"
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
     lines.update({f"book:{word}! You read it!", f"Hee hee, that's a {word}!", f"book:{word}! You spelled it!", "book:" + word})
 
+# Spell's other levels and her own words; a name other than Avery's says just "You spelled it!" (Kid.unnamed)
+for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["SpellView.swift"]) + ["Avery"]:
+    lines.update({f"book:{word}! You spelled it!", "book:" + word})
+lines.add("book:You spelled it!")
+
 # Rhyme Time: Coco asks, Bella says the answer
 rhyme = src["RhymeView.swift"]
 groups = [re.findall(r'text: "(\w+)"', g) for g in re.findall(r'\[(\.init\(text: [^\]]+)\]', rhyme.split("static let starts")[0])]
