@@ -86,7 +86,8 @@ struct BakeView: View {
             layout {
             // As big as the room left, up to a size that suits the screen. Dragging over it spreads the frosting.
             GeometryReader { geo in
-                let side = min(geo.size.width, geo.size.height, biggest)
+                // The paper case hangs a little below the cupcake's square, so it gets 85% of the height.
+                let side = min(geo.size.width, geo.size.height * 0.85, biggest)
                 ZStack {
                     Cupcake(frosting: frosting, spread: spread, sprinkles: sprinkles, toppings: toppings, size: side)
                     if frosting != nil && spread < 1 || knifeAt != nil {
@@ -117,7 +118,7 @@ struct BakeView: View {
                 }
                 .onChange(of: geo.frame(in: .named("bake"))) { _, frame in
                     cupcakeFrame = frame
-                    cupcakeSide = min(frame.width, frame.height, biggest)
+                    cupcakeSide = min(frame.width, frame.height * 0.85, biggest)
                 }
             }
                 .accessibilityElement(children: .ignore)

@@ -1,6 +1,2 @@
-- Bake Shop: the first topping sits on the frosting instead of floating above it.
-- What's Next: the pattern always fits on one line, and its pictures are bigger on iPad.
-- Clap It: the clap button no longer gets cut off on an iPad held sideways.
-- Puzzles: the picture is bigger on iPhone, with the pieces above and below it.
-- Bake Shop on iPad held sideways: the frosting, toppings and Serve button sit beside a much bigger cupcake.
-- Home screen on a big iPad held sideways: taller tiles that fill more of the screen.
+- Bake Shop on iPad held sideways: the cupcake fits on the screen (it was cut off at the bottom).
+- Clap It on iPad: the beats show in full instead of being cut short, like "str…".

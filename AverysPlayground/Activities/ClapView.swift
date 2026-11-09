@@ -90,6 +90,7 @@ struct ClapView: View {
                     }
                     Text(word.spelled[index])
                         .font(.kid(34))
+                        .fixedSize()  // never "str…": the whole beat, always
                         .foregroundStyle(lit ? .white : Color.outline.opacity(0.35))
                         .padding(.horizontal, 16 * uiScale)
                         .frame(minWidth: 58 * uiScale, minHeight: 64 * uiScale)
