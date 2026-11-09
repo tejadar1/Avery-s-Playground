@@ -13,6 +13,12 @@ final class TracingTests: XCTestCase {
         }
     }
 
+    func testEveryPictureWordCanBeTracedInLowercase() {
+        for word in Phonics.words {
+            XCTAssertEqual(word.text.map { TraceLetter.named(String($0)).letter }.joined(), word.text)
+        }
+    }
+
     func testEveryLowercaseLetterCanBeTraced() {
         XCTAssertEqual(Set(TraceLetter.lowercase.map(\.letter)), Set("abcdefghijklmnopqrstuvwxyz".map(String.init)))
         for letter in TraceLetter.lowercase {

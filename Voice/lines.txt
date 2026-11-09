@@ -1434,6 +1434,7 @@ Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Toys all tidy! Snap snap!
 Trace board
+Trace each letter.
 Trace the A with your finger!
 Trace the gray lines with your finger.
 Treat
@@ -1550,6 +1551,7 @@ Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
 Woof woof!
+Words
 Worried. Tell a grown-up what's on your mind.
 Wowza bowza!
 Wowza! You colored the whole beach!
@@ -2252,6 +2254,7 @@ book:bat and hat rhyme!
 book:bat!
 book:bat! You read it!
 book:bat! You spelled it!
+book:bat! You wrote it!
 book:be
 book:beanie!
 book:beans
@@ -2262,8 +2265,10 @@ book:bear!
 book:bears
 book:beautiful
 book:bed
+book:bed!
 book:bed! You read it!
 book:bed! You spelled it!
+book:bed! You wrote it!
 book:beds
 book:bee
 book:bee and tree rhyme!
@@ -2287,6 +2292,7 @@ book:box and fox rhyme!
 book:box!
 book:box! You read it!
 book:box! You spelled it!
+book:box! You wrote it!
 book:boy
 book:bread
 book:bread!
@@ -2294,8 +2300,10 @@ book:brick
 book:bricks
 book:brought
 book:bug
+book:bug!
 book:bug! You read it!
 book:bug! You spelled it!
+book:bug! You wrote it!
 book:build
 book:built
 book:bun and sun rhyme!
@@ -2304,6 +2312,7 @@ book:bus
 book:bus!
 book:bus! You read it!
 book:bus! You spelled it!
+book:bus! You wrote it!
 book:but
 book:butterfly
 book:butterfly!
@@ -2325,6 +2334,7 @@ book:cat and hat rhyme!
 book:cat!
 book:cat! You read it!
 book:cat! You spelled it!
+book:cat! You wrote it!
 book:catch
 book:chair and bear rhyme!
 book:chair!
@@ -2350,8 +2360,10 @@ book:cried
 book:crocodile
 book:crown
 book:cup
+book:cup!
 book:cup! You read it!
 book:cup! You spelled it!
+book:cup! You wrote it!
 book:cupcake
 book:danced
 book:day
@@ -2362,6 +2374,7 @@ book:dog and frog rhyme!
 book:dog!
 book:dog! You read it!
 book:dog! You spelled it!
+book:dog! You wrote it!
 book:down
 book:duck
 book:duck!
@@ -2402,6 +2415,7 @@ book:fox and box rhyme!
 book:fox!
 book:fox! You read it!
 book:fox! You spelled it!
+book:fox! You wrote it!
 book:free
 book:fried cheese
 book:fried plantains
@@ -2439,6 +2453,7 @@ book:hat and cat rhyme!
 book:hat!
 book:hat! You read it!
 book:hat! You spelled it!
+book:hat! You wrote it!
 book:have
 book:he
 book:heart
@@ -2451,6 +2466,7 @@ book:hen and pen rhyme!
 book:hen!
 book:hen! You read it!
 book:hen! You spelled it!
+book:hen! You wrote it!
 book:her
 book:herself
 book:hid
@@ -2512,8 +2528,10 @@ book:mouse
 book:mouse and house rhyme!
 book:mouse!
 book:mud
+book:mud!
 book:mud! You read it!
 book:mud! You spelled it!
+book:mud! You wrote it!
 book:music
 book:my
 book:nap
@@ -2546,12 +2564,14 @@ book:pen and hen rhyme!
 book:pen!
 book:pen! You read it!
 book:pen! You spelled it!
+book:pen! You wrote it!
 book:penguin
 book:picked
 book:pig
 book:pig!
 book:pig! You read it!
 book:pig! You spelled it!
+book:pig! You wrote it!
 book:pigs
 book:pink
 book:pizza
@@ -2626,6 +2646,7 @@ book:sun and bun rhyme!
 book:sun!
 book:sun! You read it!
 book:sun! You spelled it!
+book:sun! You wrote it!
 book:sunhat!
 book:tall
 book:tell
@@ -2671,6 +2692,7 @@ book:van
 book:van!
 book:van! You read it!
 book:van! You spelled it!
+book:van! You wrote it!
 book:very
 book:visit
 book:walk
@@ -2686,6 +2708,7 @@ book:web
 book:web!
 book:web! You read it!
 book:web! You spelled it!
+book:web! You wrote it!
 book:went
 book:were
 book:whale

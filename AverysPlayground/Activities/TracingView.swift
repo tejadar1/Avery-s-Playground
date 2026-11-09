@@ -14,7 +14,7 @@ struct TraceLetter {
     }
 
     static func named(_ letter: String) -> TraceLetter {
-        alphabet.first { $0.letter == letter }!
+        (alphabet + lowercase).first { $0.letter == letter }!
     }
 
     static func resample(_ points: [CGPoint], every gap: CGFloat) -> [CGPoint] {
@@ -152,7 +152,7 @@ struct Tracing {
 
 struct TracingView: View {
     @Environment(\.isWide) private var isWide
-    private enum Mode { case abc, lower, name }
+    private enum Mode { case abc, lower, name, word }
 
     private static let inks: [Color] = [
         Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.38, green: 0.72, blue: 0.4),
@@ -161,6 +161,8 @@ struct TracingView: View {
 
     @State private var mode = Mode.abc
     @State private var index = 0
+    /// The picture word she's writing in Words, like cat.
+    @State private var word = Phonics.words.randomElement()!
     @State private var tracing = Tracing(letter: TraceLetter.alphabet[0])
     @State private var ink: [[CGPoint]] = []
     @State private var isDrawing = false
@@ -173,6 +175,7 @@ struct TracingView: View {
         case .abc: TraceLetter.alphabet
         case .lower: TraceLetter.lowercase
         case .name: Kid.letters().map { TraceLetter.named(String($0)) }
+        case .word: word.text.map { TraceLetter.named(String($0)) }
         }
     }
     private var color: Color { Self.inks[index % Self.inks.count] }
@@ -183,10 +186,17 @@ struct TracingView: View {
 
             // On a wide screen the mode buttons go beside the board, so it can be taller.
             (isWide ? AnyLayout(HStackLayout(spacing: 16 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))) {
-                ToolLine(spacing: 12 * uiScale) {
-                    modeButton("ABC", .abc)
-                    modeButton("abc", .lower)
-                    modeButton("My name", .name, picture: "avery")
+                // Four buttons don't fit across a phone: two rows there.
+                if isWide {
+                    VStack(spacing: 12 * uiScale) { letterModes; wordModes }
+                } else {
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 12 * uiScale) { letterModes; wordModes }
+                        VStack(spacing: 10 * uiScale) {
+                            HStack(spacing: 12 * uiScale) { letterModes }
+                            HStack(spacing: 12 * uiScale) { wordModes }
+                        }
+                    }
                 }
 
                 GeometryReader { geo in
@@ -203,6 +213,16 @@ struct TracingView: View {
         .padding(.bottom, 8 * uiScale)
         .background(Scenery(.classroom).ignoresSafeArea())
         .celebration(wins)
+    }
+
+    @ViewBuilder private var letterModes: some View {
+        modeButton("ABC", .abc)
+        modeButton("abc", .lower)
+    }
+
+    @ViewBuilder private var wordModes: some View {
+        modeButton("My name", .name, picture: "avery")
+        modeButton("Words", .word, picture: word.picture)
     }
 
     private func board(side: CGFloat) -> some View {
@@ -271,7 +291,7 @@ struct TracingView: View {
                                 .font(.kid(24))
                                 .foregroundStyle(number == index ? .white : Color.outline)
                                 .frame(width: 48 * uiScale, height: 48 * uiScale)
-                                .cartoonCard(number == index ? color : mode == .name && number < index ? Color(red: 0.8, green: 0.93, blue: 0.78) : .white,
+                                .cartoonCard(number == index ? color : mode != .abc && mode != .lower && number < index ? Color(red: 0.8, green: 0.93, blue: 0.78) : .white,
                                              cornerRadius: 24 * uiScale)
                         }
                         .buttonStyle(SquishyButtonStyle())
@@ -309,16 +329,20 @@ struct TracingView: View {
         tracing = Tracing(letter: letters[number])
         ink = []
         isDrawing = false
-        say("\(tracing.letter.letter.uppercased())!", hint: "Trace the gray lines with your finger.", voice: Speaker.book)
+        if mode == .word && number == 0 {
+            say("\(word.text)!", hint: "Trace each letter.", voice: Speaker.book)
+        } else {
+            say("\(tracing.letter.letter.uppercased())!", hint: "Trace the gray lines with your finger.", voice: Speaker.book)
+        }
     }
 
     private func finishLetter() {
         let letter = tracing.letter.letter.uppercased()  // Bella's recordings say the letter's name, the same either case
         let isLast = index == letters.count - 1
-        if mode == .name {
+        if mode == .name || mode == .word {
             if isLast {
                 wins += 1
-                say("\(Kid.name)! You wrote your name!")
+                if mode == .word { say("\(word.text)! You wrote it!", voice: Speaker.book) } else { say("\(Kid.name)! You wrote your name!") }
             } else {
                 Sounds.shared.play(.sparkle)
                 say("\(letter)!", voice: Speaker.book)
@@ -332,8 +356,12 @@ struct TracingView: View {
         }
         Task {
             // Two seconds to enjoy the letter, and never cutting Coco off mid-cheer
-            try? await Task.sleep(for: .seconds(isLast && mode == .name ? 3 : 2))
+            try? await Task.sleep(for: .seconds(isLast && mode != .abc && mode != .lower ? 3 : 2))
             await Speaker.shared.finishSpeaking()
+            if isLast && mode == .word {
+                let done = word
+                withAnimation(.spring) { word = Phonics.words.filter { $0 != done }.randomElement()! }
+            }
             start(isLast ? 0 : index + 1)
         }
     }

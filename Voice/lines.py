@@ -88,6 +88,8 @@ for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["SpellView.swift"]) + ["Avery"]:
     lines.update({f"book:{word}! You spelled it!", "book:" + word})
 lines.add("book:You spelled it!")
+# Trace's Words
+lines.update(f"book:{w}{end}" for w in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]) for end in ["!", "! You wrote it!"])
 
 # Rhyme Time: Coco asks, Bella says the answer
 rhyme = src["RhymeView.swift"]
