@@ -31,11 +31,14 @@ struct HomeView: View {
                     let columns = uiScale > 1 ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: sideways ? HomeSection.allCases.count + 1 : 3)
                         : [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)]
                     let iconHeight = (uiScale > 1 ? sideways ? 70 : 80 : 110) * uiScale
+                    // Sideways, the row of tiles grows into the room below it on a big iPad (half the screen), and
+                    // stays short enough to fit without scrolling on a smaller one.
+                    let tileHeight = sideways ? max(homeTileHeight * 1.3, screen.size.height * 0.5) : homeTileHeight
                     LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         // A section whose games are all hidden doesn't show.
                         ForEach(HomeSection.allCases.filter { !$0.shown(hiding: hiddenGames).isEmpty }) { section in
                             NavigationLink(value: section) {
-                                SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: iconHeight)
+                                SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: tileHeight, iconHeight: iconHeight)
                             }
                             .buttonStyle(SquishyButtonStyle())
                         }
@@ -44,7 +47,7 @@ struct HomeView: View {
                                 .navigationTitle("Stickers")
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            StickerTile(stickers: stickers, height: sideways ? homeTileHeight * 1.3 : homeTileHeight, iconHeight: iconHeight)
+                            StickerTile(stickers: stickers, height: tileHeight, iconHeight: iconHeight)
                         }
                         .buttonStyle(SquishyButtonStyle())
                     }

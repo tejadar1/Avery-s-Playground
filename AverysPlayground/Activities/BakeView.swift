@@ -71,6 +71,9 @@ struct BakeView: View {
     @State private var cheerCount = 0
     @State private var oops = 0
     @State private var wins = 0
+    @Environment(\.isWide) private var isWide
+    /// The biggest the cupcake gets: bigger on an iPad held sideways, where the tools go beside it.
+    private var biggest: CGFloat { 300 * uiScale * (isWide ? 1.35 : 1) }
 
     var body: some View {
         VStack(spacing: 12 * uiScale) {
@@ -78,9 +81,12 @@ struct BakeView: View {
 
             orderCard
 
+            // On a wide screen the frosting, toppings and Serve go beside the cupcake, so it can be taller.
+            let layout = isWide ? AnyLayout(HStackLayout(spacing: 24 * uiScale)) : AnyLayout(VStackLayout(spacing: 12 * uiScale))
+            layout {
             // As big as the room left, up to a size that suits the screen. Dragging over it spreads the frosting.
             GeometryReader { geo in
-                let side = min(geo.size.width, geo.size.height, 300 * uiScale)
+                let side = min(geo.size.width, geo.size.height, biggest)
                 ZStack {
                     Cupcake(frosting: frosting, spread: spread, sprinkles: sprinkles, toppings: toppings, size: side)
                     if frosting != nil && spread < 1 || knifeAt != nil {
@@ -111,7 +117,7 @@ struct BakeView: View {
                 }
                 .onChange(of: geo.frame(in: .named("bake"))) { _, frame in
                     cupcakeFrame = frame
-                    cupcakeSide = min(frame.width, frame.height, 300 * uiScale)
+                    cupcakeSide = min(frame.width, frame.height, biggest)
                 }
             }
                 .accessibilityElement(children: .ignore)
@@ -119,6 +125,7 @@ struct BakeView: View {
                 .accessibilityIdentifier("Cupcake")
 
             // Frosting colors, then toppings, then serve.
+            VStack(spacing: 12 * uiScale) {
             HStack(spacing: 10 * uiScale) {
                 ForEach(CupcakeOrder.Frosting.allCases, id: \.self) { kind in
                     Button { pick(kind) } label: {
@@ -185,6 +192,8 @@ struct BakeView: View {
                 }
                 .buttonStyle(SquishyButtonStyle())
                 .disabled(happy)
+            }
+            }
             }
         }
         .padding([.horizontal, .bottom])
