@@ -849,6 +849,7 @@ Holy guacamole!
 Holy guacamole! A new level is open! Tap it up top!
 Holy guacamole! I sat on a banana! Squish!
 Holy guacamole! You found every sticker!
+Holy guacamole! You're ready for something new! Snap snap!
 Holy guacamole, I love it!
 Holy guacamole, it sparkles!
 Holy guacamole, look at that color!
@@ -4058,6 +4059,9 @@ tophat
 town!
 toybox
 toyduck
+traceMode
+traceToward
+traceUnlocked
 trash
 tree
 tree and apple!

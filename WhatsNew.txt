@@ -3,4 +3,4 @@
 - Spell has "My words" (the heart): her name, Mom, Dad, Coco and Mochi.
 - Spell has free spelling (the keyboard): each letter says its sound, and the speaker reads back what she wrote, even made-up words.
 - Every letter now has a sound, including k, l, r, j, y, z and q, in Spell and ABC.
-- Trace has Words: trace a picture word like cat or sun, one lowercase letter at a time, then a new word comes up.
+- Trace grows with her: capital letters first, then lowercase, then picture words like cat and sun. Each opens after 10 traced letters, and she moves up to it on her own. My name is always open.

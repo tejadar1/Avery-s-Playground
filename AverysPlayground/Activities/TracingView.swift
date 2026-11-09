@@ -152,14 +152,19 @@ struct Tracing {
 
 struct TracingView: View {
     @Environment(\.isWide) private var isWide
-    private enum Mode { case abc, lower, name, word }
+    /// ABC, then abc, then Words, each opening after `toOpen` letters on the one before. My name is always open.
+    private enum Mode: Int { case abc = 1, lower, word, name }
+    private static let toOpen = 10
 
     private static let inks: [Color] = [
         Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.38, green: 0.72, blue: 0.4),
         Color(red: 0.36, green: 0.61, blue: 0.84), Color(red: 0.66, green: 0.5, blue: 0.85), Color(red: 0.95, green: 0.47, blue: 0.6),
     ]
 
-    @State private var mode = Mode.abc
+    @AppStorage("traceMode") private var mode = Mode.abc
+    /// The highest of ABC, abc and Words she's reached, and letters traced toward the next.
+    @AppStorage("traceUnlocked") private var unlocked = 1
+    @AppStorage("traceToward") private var toward = 0
     @State private var index = 0
     /// The picture word she's writing in Words, like cat.
     @State private var word = Phonics.words.randomElement()!
@@ -213,6 +218,7 @@ struct TracingView: View {
         .padding(.bottom, 8 * uiScale)
         .background(Scenery(.classroom).ignoresSafeArea())
         .celebration(wins)
+        .onAppear { start(0) }
     }
 
     @ViewBuilder private var letterModes: some View {
@@ -221,8 +227,8 @@ struct TracingView: View {
     }
 
     @ViewBuilder private var wordModes: some View {
-        modeButton("My name", .name, picture: "avery")
         modeButton("Words", .word, picture: word.picture)
+        modeButton("My name", .name, picture: "avery")
     }
 
     private func board(side: CGFloat) -> some View {
@@ -306,7 +312,8 @@ struct TracingView: View {
     }
 
     private func modeButton(_ title: String, _ value: Mode, picture: String? = nil) -> some View {
-        Button {
+        let open = value == .name || value.rawValue <= unlocked
+        return Button {
             Haptics.tap()
             mode = value
             start(0)
@@ -320,8 +327,17 @@ struct TracingView: View {
                 .padding(.horizontal, 18 * uiScale)
                 .frame(height: 46 * uiScale)
                 .cartoonCard(mode == value ? Color(red: 0.36, green: 0.61, blue: 0.84) : .white, cornerRadius: 23 * uiScale)
+                .opacity(open ? 1 : 0.45)
+                .overlay(alignment: .topTrailing) {
+                    if !open {
+                        Image(systemName: "lock.fill").font(.system(size: 16 * uiScale, weight: .bold)).foregroundStyle(Color.outline).offset(x: 4, y: -6)
+                    }
+                }
         }
         .buttonStyle(SquishyButtonStyle())
+        .disabled(!open)
+        .accessibilityValue(open ? "" : "Locked")
+        .animation(.spring, value: open)
     }
 
     private func start(_ number: Int) {
@@ -339,6 +355,16 @@ struct TracingView: View {
     private func finishLetter() {
         let letter = tracing.letter.letter.uppercased()  // Bella's recordings say the letter's name, the same either case
         let isLast = index == letters.count - 1
+        // Letters on the newest level open the next one, and she moves up to it.
+        var opened = false
+        if mode.rawValue == unlocked && unlocked < Mode.word.rawValue {
+            toward += 1
+            if toward >= Self.toOpen {
+                toward = 0
+                unlocked += 1
+                opened = true
+            }
+        }
         if mode == .name || mode == .word {
             if isLast {
                 wins += 1
@@ -358,6 +384,13 @@ struct TracingView: View {
             // Two seconds to enjoy the letter, and never cutting Coco off mid-cheer
             try? await Task.sleep(for: .seconds(isLast && mode != .abc && mode != .lower ? 3 : 2))
             await Speaker.shared.finishSpeaking()
+            if opened {
+                say("Holy guacamole! You're ready for something new! Snap snap!")
+                await Speaker.shared.finishSpeaking()
+                withAnimation(.spring) { mode = Mode(rawValue: unlocked)! }
+                start(0)
+                return
+            }
             if isLast && mode == .word {
                 let done = word
                 withAnimation(.spring) { word = Phonics.words.filter { $0 != done }.randomElement()! }
