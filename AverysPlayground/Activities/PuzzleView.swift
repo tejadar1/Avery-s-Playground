@@ -130,7 +130,8 @@ struct PuzzleView: View {
                 // The picture in the middle, leaving room around it for the pieces.
                 // Bigger on an iPad, which has room around it for the pieces too.
                 let share: CGFloat = uiScale > 1 ? 0.66 : 0.55
-                let width = min(area.width * share, area.height * share * 4 / 3)
+                // On a tall screen (a phone) the picture goes nearly edge to edge, with the pieces above and below it.
+                let width = min(area.width * (area.height > area.width * 1.3 ? 0.88 : share), area.height * share * 4 / 3)
                 let height = width * 3 / 4
                 let board = CGRect(x: (area.width - width) / 2, y: (area.height - height) / 2, width: width, height: height)
                 let cell = CGSize(width: width / CGFloat(puzzle.columns), height: height / CGFloat(puzzle.rows))

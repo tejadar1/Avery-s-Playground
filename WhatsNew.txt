@@ -1,1 +1,4 @@
 - Bake Shop: the first topping sits on the frosting instead of floating above it.
+- What's Next: the pattern always fits on one line, and its pictures are bigger on iPad.
+- Clap It: the clap button no longer gets cut off on an iPad held sideways.
+- Puzzles: the picture is bigger on iPhone, with the pieces above and below it.

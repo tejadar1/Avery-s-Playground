@@ -41,6 +41,16 @@ struct PatternView: View {
     @State private var cheer = ""
     @State private var cheerCount = 0
     @State private var wins = 0
+    /// How wide the screen is inside its margins, to fit the pattern in one row.
+    @State private var width: CGFloat = 0
+
+    /// Each picture in the pattern: as big as fits the whole row on one line (a pattern split over two lines is
+    /// hard to see), up to a size that suits an iPad.
+    private var size: CGFloat {
+        let n = CGFloat(round.shown.count + 1)
+        let fit = (width - 40 * uiScale - 8 * uiScale * (n - 1)) / n / 1.125 * 0.98
+        return max(30 * uiScale, min(120 * uiScale, fit))
+    }
 
     var body: some View {
         VStack(spacing: 20 * uiScale) {
@@ -56,22 +66,21 @@ struct PatternView: View {
 
             Spacer()
 
-            FlowLayout(spacing: 10 * uiScale, lineSpacing: 10 * uiScale) {
+            FlowLayout(spacing: 8 * uiScale, lineSpacing: 10 * uiScale) {
                 ForEach(Array(round.shown.enumerated()), id: \.offset) { _, thing in
-                    Picture(thing.picture, size: 64 * uiScale * roomy(isWide))
+                    Picture(thing.picture, size: size)
                 }
                 Group {
                     if isSolved {
-                        Picture(round.answer.picture, size: 64 * uiScale * roomy(isWide)).transition(.scale)
+                        Picture(round.answer.picture, size: size).transition(.scale)
                     } else {
-                        Text("?").font(.kid(48)).foregroundStyle(.white)
+                        Text("?").font(.kid(size * 0.75 / uiScale)).foregroundStyle(.white)
                     }
                 }
-                .frame(width: 72 * uiScale * roomy(isWide), height: 72 * uiScale * roomy(isWide))
+                .frame(width: size * 1.125, height: size * 1.125)
                 .cartoonCard(isSolved ? .green : Color(red: 0.62, green: 0.55, blue: 0.9), cornerRadius: 16 * uiScale)
             }
             .padding(20 * uiScale)
-            .frame(maxWidth: 720 * uiScale)
             .cartoonCard(Color(red: 1.0, green: 0.96, blue: 0.88), cornerRadius: 28 * uiScale)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("Pattern")
@@ -95,6 +104,7 @@ struct PatternView: View {
 
             Spacer()
         }
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
         .padding(.horizontal)
         .background(Scenery(.classroom).ignoresSafeArea())
         .celebration(wins)
