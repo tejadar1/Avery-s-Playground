@@ -481,7 +481,7 @@ struct Cupcake: View {
     }
 
     /// Where toppings sit on the frosting, as fractions of the cupcake, front ones lower.
-    private static let spots: [CGPoint] = [CGPoint(x: 0.5, y: 0.1), CGPoint(x: 0.3, y: 0.3), CGPoint(x: 0.7, y: 0.3),
+    private static let spots: [CGPoint] = [CGPoint(x: 0.5, y: 0.17), CGPoint(x: 0.3, y: 0.3), CGPoint(x: 0.7, y: 0.3),
                                            CGPoint(x: 0.4, y: 0.45), CGPoint(x: 0.62, y: 0.47)]
 
     var body: some View {

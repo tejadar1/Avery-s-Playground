@@ -1,6 +1,1 @@
-- Go Fishing: fish with a fishing rod. Drag the red-and-white bobber over a fish and let go while its mouth is open to catch it. Letting go over open water lets you try again.
-- Spell has levels: three-letter words, then four letters like frog and milk, then longer words like pizza and zebra. Five spelled words open the next level, and stars add up at the top.
-- Spell has "My words" (the heart): her name, Mom, Dad, Coco and Mochi.
-- Spell has free spelling (the keyboard): each letter says its sound, and the speaker reads back what she wrote, even made-up words.
-- Every letter now has a sound, including k, l, r, j, y, z and q, in Spell and ABC.
-- Trace grows with her: capital letters first, then lowercase, then picture words like cat and sun. Each opens after 10 traced letters, and she moves up to it on her own. My name is always open.
+- Bake Shop: the first topping sits on the frosting instead of floating above it.
