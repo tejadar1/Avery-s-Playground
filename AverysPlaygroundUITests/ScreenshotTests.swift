@@ -26,8 +26,10 @@ final class ScreenshotTests: XCTestCase {
 
         let games: [(title: String, play: () -> Void)] = [
             ("Nail Salon", {
-                self.tap(self.app.buttons["Nail 3"])
-                sleep(1)
+                // The first tap after launch is sometimes missed on iPad: tap again until the big nail opens.
+                for _ in 0..<3 where !self.app.descendants(matching: .any)["Big nail"].waitForExistence(timeout: 3) {
+                    self.tap(self.app.buttons["Nail 3"])
+                }
                 let nail = self.find("Big nail")
                 for (from, to) in [((0.2, 0.05), (0.25, 0.95)), ((0.5, 0.05), (0.5, 0.95)), ((0.8, 0.05), (0.7, 0.9))] {
                     nail.coordinate(withNormalizedOffset: CGVector(dx: from.0, dy: from.1))
