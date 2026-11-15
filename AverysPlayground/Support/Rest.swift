@@ -111,7 +111,7 @@ private struct RestScreen: View {
                     .onLongPressGesture(minimumDuration: 3, perform: wake)
                     .accessibilityLabel("Grown-ups: hold for 3 seconds to play again")
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityAction(perform: wake)
+                    .accessibilityAction { wake() }
                 Text("Grown-ups: hold the moon to play again")
                     .font(.kid(14))
                     .foregroundStyle(.white.opacity(0.5))
