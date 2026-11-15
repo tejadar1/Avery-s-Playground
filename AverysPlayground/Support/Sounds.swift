@@ -2,12 +2,12 @@ import AVFoundation
 
 /// Sound effects made on the fly, like the piano notes, so the app needs no sound files.
 enum Sound: CaseIterable {
-    case dryer, water, bubbles, snip, pop, sparkle, shutter
+    case dryer, water, bubbles, snip, pop, sparkle, shutter, click, ding, clunk
 
     static let rate = 44_100.0
 
     /// Sounds that keep going while a finger is down, until `Sounds.stop()`.
-    var loops: Bool { self != .pop && self != .sparkle && self != .shutter }
+    var loops: Bool { [.dryer, .water, .bubbles, .snip].contains(self) }
 
     /// Mono samples in -1...1. Looping sounds join up without a click.
     var samples: [Float] {
@@ -73,6 +73,25 @@ enum Sound: CaseIterable {
                 Self.add(&s, at: start, seconds: 0.03) { u in loud * Self.noise() * exp(-u * 220) }
             }
             return Self.scaled(s, peak: 0.6)
+        case .click:
+            // A soft switch click: a tiny knock with a little wood in it.
+            return Self.make(seconds: 0.05, peak: 0.35) { t in
+                (0.6 * Self.noise() + sin(2 * .pi * 1800 * t)) * exp(-t / 0.006)
+            }
+        case .ding:
+            // A gentle doorbell: ding (E) then dong (C), each ringing out.
+            var s = [Float](repeating: 0, count: Int(Self.rate * 1.3))
+            for (start, f) in [(0.0, 659.25), (0.4, 523.25)] {
+                Self.add(&s, at: start, seconds: 0.9) { u in
+                    (sin(2 * .pi * f * u) + 0.25 * sin(6 * .pi * f * u)) * min(1, u / 0.004) * exp(-u / 0.35)
+                }
+            }
+            return Self.scaled(s, peak: 0.35)
+        case .clunk:
+            // A wooden block set down: a low thump with a short knock on top.
+            return Self.make(seconds: 0.18, peak: 0.5) { t in
+                Self.chirp(t, from: 220, to: 110, over: 0.18) * exp(-t / 0.04) + 0.3 * Self.noise() * exp(-t / 0.005)
+            }
         }
     }
 

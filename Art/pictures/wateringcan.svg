@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- A watering can for the Garden: a round green can with a long spout to the left and a handle on top -->
+  <g stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M70 108 L22 70 L14 78 L30 86 L66 126Z" fill="#7CC36E"/>
+    <path d="M12 66 L30 70 L24 88 Z" fill="#62A85A"/>
+    <path d="M96 66 C96 40 150 40 150 66" fill="none"/>
+    <clipPath id="can"><path d="M64 70 H164 L156 168 H72Z"/></clipPath>
+    <path d="M64 70 H164 L156 168 H72Z" fill="#7CC36E"/>
+    <g clip-path="url(#can)" stroke="none"><ellipse cx="140" cy="190" rx="90" ry="60" fill="#5FA653"/><ellipse cx="86" cy="96" rx="10" ry="18" fill="#fff" opacity=".4"/></g>
+    <path d="M64 70 H164 L156 168 H72Z" fill="none"/>
+    <path d="M164 84 C192 84 192 136 160 136" fill="none"/>
+  </g>
+</svg>

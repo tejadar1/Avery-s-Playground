@@ -170,7 +170,8 @@ patients = re.findall(r'case \.(?:lion|bear|bunny|kitty): "(\w+)"', src["Dentist
 lines.update(f"Hi {name}!" for name in friends + patients + ["Avery"])
 
 # The child's name (Kid.swift): lines with it are recorded for Avery, and also without it, for any other name
-lines.update({"es:Me llamo Avery", "book:My name is Avery", "All done! Sweet dreams, Avery!", "Avery! You wrote your name!"})
+lines.update({"es:Me llamo Avery", "book:My name is Avery", "All done! Sweet dreams, Avery!", "Avery! You wrote your name!",
+              "Yawn! Time to rest. Goodnight, Avery!", "Yawn! Time to rest. Goodnight!"})
 
 
 def unnamed(line, name="Avery"):

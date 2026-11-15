@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Busy Board: a wooden board with a big red button, a light switch and a little lamp -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="16" y="30" width="168" height="140" rx="22" fill="#F4D9A8"/>
+    <rect x="16" y="140" width="168" height="30" rx="14" fill="#E3C08A" stroke="none"/>
+    <rect x="16" y="30" width="168" height="140" rx="22" fill="none"/>
+    <circle cx="70" cy="100" r="36" fill="#DDD"/>
+    <circle cx="70" cy="100" r="26" fill="#E9646E"/>
+    <path d="M56 88 Q66 80 78 84" fill="none" stroke="#fff" stroke-width="5" opacity=".7"/>
+    <rect x="122" y="96" width="34" height="50" rx="8" fill="#F2F2F5"/>
+    <rect x="132" y="102" width="14" height="22" rx="7" fill="#5B9BD5"/>
+    <circle cx="139" cy="64" r="18" fill="#FFD84D"/>
+  </g>
+  <g stroke="#FFC02E" stroke-width="5" stroke-linecap="round"><path d="M139 36 V28 M164 50 L170 44 M114 50 L108 44"/></g>
+</svg>

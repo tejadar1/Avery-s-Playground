@@ -183,12 +183,25 @@ final class ScreenshotTests: XCTestCase {
             ("Helper", {
                 for step in ["Make your bed", "Put toys away"] { self.tap(self.button(step)) }
             }),
+            ("Busy Board", {
+                for part in ["Light switch", "Door", "Big button"] { self.tap(self.button(part)) }
+            }),
+            ("Blocks", {
+                // A square, then a plank on top of it, then a roof.
+                let middle = self.app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45))
+                for block in ["Block 1", "Block 2", "Block 5"] {
+                    self.find(block).coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 0.1, thenDragTo: middle)
+                }
+            }),
+            ("Garden", {
+                for spot in ["Spot 1", "Spot 3", "Spot 5"] { self.tap(self.find(spot)) }
+            }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"]
+        let learn = ["Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"]
         for (index, game) in games.enumerated() {
-            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : "Play"
+            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : calm.contains(game.title) ? "Calm" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
             tap(section)
             sleep(1)

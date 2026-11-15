@@ -12,8 +12,10 @@ A big box, just for you! How would you feel?
 A big lion was sleeping in the sun.
 A blue fish!
 A boy watched the sheep on a hill.
+A bud
 A coral reef!
 A farm!
+A flower
 A fresh page!
 A garden!
 A green fish!
@@ -25,13 +27,16 @@ A match! Go again!
 A night sky!
 A purple fish!
 A red fish!
+A seed
 A sharp
+A sprout
 A sticker to find
 A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
 A yellow fish!
 A! /a/! A is for apple!
 ABC
+Add a block
 Add sprinkles
 All clean!
 All done with the bath!
@@ -62,8 +67,10 @@ Ballet flats! Holy guacamole, I love it!
 Ballet flats! Ooh la la!
 Ballet flats! So stylish!
 Ballet flats! Wowza bowza!
+Bare soil
 Bath
 Bath time!
+Beads
 Beanie
 Beanie! Fashion show time!
 Beanie! Holy guacamole, I love it!
@@ -76,6 +83,7 @@ Bedtime
 Beep beep!
 Bella
 Belly rubs are the best!
+Big button
 Big hug!
 Big nail
 Big or small?
@@ -462,6 +470,7 @@ Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
 Coco wants a cupcake!
 Color anywhere you like!
+Color knob
 Coloring anywhere
 Coloring inside the lines
 Colors
@@ -500,6 +509,7 @@ Doll-
 Don
 Done
 Done!
+Door
 Dots and stripes, oh my!
 Down
 Down! So cute!
@@ -927,6 +937,7 @@ Let's say thank you! said his wife. She sewed them tiny clothes.
 Let's wash your hair! Rub on the shampoo.
 Level up! The maze gets bigger!
 Levels
+Light switch
 Lights out
 Lily
 Lion
@@ -971,6 +982,7 @@ Mochi loved it! Woof!
 Mochi loves you!
 Mochi rolled in the mud! Time for a bath.
 Mochi rolled over! Rub her tummy!
+Mochi says hello
 Mochi says thank you! Lick lick!
 Mochi wants hugs! Rub her with your finger.
 MochiBody
@@ -1045,6 +1057,7 @@ Now the scissors!
 O
 O!
 Octopus
+Off
 Oh biscuits!
 Oh crumbs!
 Oh crumbs! Too far!
@@ -1054,6 +1067,7 @@ Okay!
 Okey dokey, artichokey!
 Old
 Old MacDonald
+On
 On the plate
 One
 One night, two tiny elves came in and made shoes for him!
@@ -1323,6 +1337,7 @@ Stars, catch a fish!
 Stars, hide Coco! Drag her to a hiding spot. Hearts, close your eyes!
 Stars, spin!
 Start
+Start a new garden
 Start over
 Start this picture over?
 Stick it anywhere!
@@ -1351,6 +1366,7 @@ Sunglasses! Wowza bowza!
 Super duper pooper scooper!
 Surprised! Tell someone what you saw.
 Sweep sweep! Sparkly floor!
+Sweep the blocks away
 Sweep the floor
 Swish swish! Minty fresh! What a great smile!
 Swish swish, paint paint!
@@ -1562,7 +1578,10 @@ Wowza! You colored the whole garden!
 Wowza! You colored the whole night sky!
 Write anything! Tap the speaker and I'll read it. Snap snap!
 X
+Xylophone
 Y
+Yawn! Time to rest. Goodnight!
+Yawn! Time to rest. Goodnight, Avery!
 Yellow
 Yellow frosting,
 Yes yes yes, that's the best!
@@ -4010,6 +4029,7 @@ stone
 strawberries
 strawberry
 stream.
+str…
 sum
 sun
 sun and apple!
@@ -4111,6 +4131,7 @@ wand
 was
 washed
 water
+wateringcan
 waveform
 web
 went

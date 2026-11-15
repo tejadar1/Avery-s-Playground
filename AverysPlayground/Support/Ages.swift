@@ -204,6 +204,7 @@ struct GrownUpSettings: View {
                 Text("For grown-ups").font(.kid(30)).foregroundStyle(Color.outline)
                 NavigationLink { NameEntry() } label: { row("Change name", symbol: "pencil") }
                 NavigationLink { AgeEntry() } label: { row("Age and games", symbol: "checklist") }
+                NavigationLink { RestEntry() } label: { row("Time to rest", symbol: "moon.zzz") }
             }
             .padding(30 * uiScale)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

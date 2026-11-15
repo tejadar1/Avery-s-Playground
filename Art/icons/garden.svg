@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Garden: a pink flower and a sprout growing in a mound of soil -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="94" y="72" width="10" height="94" rx="5" fill="#62AE5C"/>
+    <ellipse cx="78" cy="122" rx="20" ry="10" fill="#7CC36E" transform="rotate(30 78 122)"/>
+    <ellipse cx="120" cy="134" rx="20" ry="10" fill="#7CC36E" transform="rotate(-30 120 134)"/>
+    <g fill="#F48FB1">
+      <circle cx="99" cy="44" r="18"/><circle cx="126" cy="64" r="18"/><circle cx="116" cy="94" r="18"/>
+      <circle cx="82" cy="94" r="18"/><circle cx="72" cy="64" r="18"/>
+    </g>
+    <circle cx="99" cy="72" r="14" fill="#FFD84D"/>
+    <path d="M150 166 V146 M150 152 C140 140 132 146 134 150 M150 148 C160 136 168 142 166 146" fill="#7CC36E"/>
+    <path d="M20 182 C40 150 160 150 180 182Z" fill="#9A6B4C"/>
+  </g>
+</svg>

@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores
+    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden
 
     var id: String { rawValue }
 
@@ -43,6 +43,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .fishing: "Go Fishing"
         case .routines: "Day & Night"
         case .chores: "Helper"
+        case .busy: "Busy Board"
+        case .blocks: "Blocks"
+        case .garden: "Garden"
         }
     }
 
@@ -52,13 +55,15 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing: .play
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing: .teamUp
         case .routines, .chores: .myDay
+        case .busy, .blocks, .garden: .calm
         }
     }
 
-    /// The background tune. The piano makes its own music, and games about hearing words and letter sounds stay quiet.
+    /// The background tune. The piano makes its own music, games about hearing words and letter sounds stay quiet,
+    /// and so do the calm toys.
     var tune: Tune? {
         switch self {
-        case .piano, .spelling, .reading, .rhyme, .sounds, .clap, .abc: nil
+        case .piano, .spelling, .reading, .rhyme, .sounds, .clap, .abc, .busy, .blocks, .garden: nil
         case .nails, .hair, .dressup, .dentist, .bake: .salon
         case .pet, .hop, .maze, .spot, .puzzle: .pet
         case .colors, .drawing: .art
@@ -108,6 +113,9 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .fishing: Color(red: 0.36, green: 0.66, blue: 0.88)
         case .routines: Color(red: 0.42, green: 0.5, blue: 0.85)
         case .chores: Color(red: 0.45, green: 0.72, blue: 0.42)
+        case .busy: Color(red: 0.95, green: 0.62, blue: 0.3)
+        case .blocks: Color(red: 0.36, green: 0.61, blue: 0.84)
+        case .garden: Color(red: 0.45, green: 0.72, blue: 0.42)
         }
     }
 
@@ -150,13 +158,16 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .fishing: FishingView()
         case .routines: RoutinesView()
         case .chores: RoutinesView(kinds: [.chores])
+        case .busy: BusyBoardView()
+        case .blocks: BlocksView()
+        case .garden: GardenView()
         }
     }
 }
 
 /// The choices on the home screen; each opens a page of its games.
 enum HomeSection: String, CaseIterable, Identifiable, Hashable {
-    case learn, play, teamUp, myDay
+    case learn, play, teamUp, myDay, calm
 
     var id: String { rawValue }
 
@@ -166,6 +177,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .play: "Play"
         case .teamUp: "Team Up"
         case .myDay: "My Day"
+        case .calm: "Calm"
         }
     }
 
@@ -175,6 +187,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .play: "Pretend, dress up and make art"
         case .teamUp: "Play with your grown-up"
         case .myDay: "Morning, bedtime and helping out"
+        case .calm: "Quiet toys, nothing to win"
         }
     }
 
@@ -184,6 +197,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .play: Color(red: 0.95, green: 0.47, blue: 0.6)
         case .teamUp: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .myDay: Color(red: 0.42, green: 0.55, blue: 0.88)
+        case .calm: Color(red: 0.36, green: 0.72, blue: 0.66)
         }
     }
 

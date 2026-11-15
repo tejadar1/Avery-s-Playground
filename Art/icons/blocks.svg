@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Blocks: a little tower of wooden blocks, an arch, a square and a roof -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round">
+    <path d="M30 176 V128 H170 V176 H128 A28 28 0 0 0 72 176Z" fill="#E9646E"/>
+    <rect x="68" y="78" width="64" height="50" rx="5" fill="#5B9BD5"/>
+    <rect x="68" y="108" width="64" height="20" fill="#4A82BC" stroke="none"/>
+    <rect x="68" y="78" width="64" height="50" rx="5" fill="none"/>
+    <path d="M100 24 L140 78 H60Z" fill="#FFC74D"/>
+    <circle cx="160" cy="108" r="18" fill="#7CC36E"/>
+  </g>
+</svg>
