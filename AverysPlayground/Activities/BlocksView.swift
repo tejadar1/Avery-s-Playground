@@ -41,8 +41,8 @@ struct BlocksView: View {
 
     var body: some View {
         GeometryReader { geo in
-            // Block units: the floor is about nine squares wide, so a few blocks make a tall tower.
-            let unit = min(geo.size.width / 9, geo.size.height / 7)
+            // Block units: the floor is six squares wide (fewer if the screen is short), so blocks are big on a phone.
+            let unit = min(geo.size.width / 6, geo.size.height / 7)
             let shelfHeight = unit * 1.6
             let floorY = geo.size.height - shelfHeight - 10 * uiScale
             ZStack(alignment: .topLeading) {
@@ -82,11 +82,11 @@ struct BlocksView: View {
 
     /// The shelf of shapes to drag out: one of each, always there.
     private func shelf(unit: CGFloat, floorY: CGFloat, width: CGFloat) -> some View {
-        HStack(spacing: unit * 0.3) {
+        HStack(spacing: unit * 0.1) {
             ForEach(Array(Block.Shape.allCases.enumerated()), id: \.offset) { index, shape in
                 let sample = Block(id: -1, shape: shape, color: index, x: 0, y: 0)
-                BlockShape(block: sample, unit: unit * 0.7, color: Self.colors[index])
-                    .frame(width: unit * 1.5, height: unit * 1.2)
+                BlockShape(block: sample, unit: unit * 0.5, color: Self.colors[index])
+                    .frame(width: unit * 1.1, height: unit * 1.2)
                     .contentShape(Rectangle())
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .named("blocks"))

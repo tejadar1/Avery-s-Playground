@@ -260,7 +260,7 @@ private struct StickerTile: View {
             Text("Stickers")
                 .font(.kid(40))
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.5)  // six narrow tiles across an iPad held sideways
                 .foregroundStyle(.white)
                 .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
             Text("\(stickers.count) of \(StickerBook.all.count) found")
@@ -302,7 +302,7 @@ private struct SectionTile: View {
             Text(section.title)
                 .font(.kid(40))
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
+                .minimumScaleFactor(0.5)  // six narrow tiles across an iPad held sideways
                 .foregroundStyle(.white)
                 .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
             Text(section.subtitle)
