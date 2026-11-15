@@ -29,9 +29,17 @@ struct GardenView: View {
 
     var body: some View {
         GeometryReader { geo in
-            let soilTop = geo.size.height * 0.72
-            let spacing = geo.size.width / CGFloat(Garden.spots)
-            let plantHeight = min(geo.size.height * 0.5, spacing * 1.6)
+            // On a tall screen (a phone) the plants go in two rows, three behind and two in front, so each is bigger.
+            let tall = geo.size.height > geo.size.width * 1.2
+            let soilTop = geo.size.height * (tall ? 0.48 : 0.72)
+            let spacing = geo.size.width / (tall ? 3 : CGFloat(Garden.spots))
+            let plantHeight = min(geo.size.height * (tall ? 0.36 : 0.5), spacing * 1.6)
+            let ground = { (spot: Int) -> CGPoint in
+                guard tall else { return CGPoint(x: spacing * (CGFloat(spot) + 0.5), y: soilTop) }
+                let front = spot >= 3, place = CGFloat(front ? spot - 3 : spot)
+                let across = geo.size.width / (front ? 2 : 3)
+                return CGPoint(x: across * (place + 0.5), y: geo.size.height * (front ? 0.92 : 0.6))
+            }
             ZStack(alignment: .topLeading) {
                 // The soil bed
                 RoundedRectangle(cornerRadius: 30 * uiScale)
@@ -40,10 +48,10 @@ struct GardenView: View {
                     .frame(width: geo.size.width, height: geo.size.height - soilTop + 40 * uiScale)
                     .offset(y: soilTop)
                 ForEach(0..<Garden.spots, id: \.self) { spot in
-                    let x = spacing * (CGFloat(spot) + 0.5)
+                    let at = ground(spot)
                     Plant(stage: stages[spot], color: Garden.colors[spot], height: plantHeight)
                         .frame(width: spacing, height: plantHeight)
-                        .position(x: x, y: soilTop - plantHeight / 2 + plantHeight * 0.08)
+                        .position(x: at.x, y: at.y - plantHeight / 2 + plantHeight * 0.08)
                         .onTapGesture { plant(spot) }
                         .accessibilityElement(children: .ignore)
                         .accessibilityLabel(["Bare soil", "A seed", "A sprout", "A bud", "A flower"][stages[spot]])
@@ -58,7 +66,7 @@ struct GardenView: View {
                             content.offset(x: phase * plantHeight * 0.15, y: -phase * plantHeight * 0.08)
                                 .rotationEffect(.degrees(phase * 12))
                         } animation: { _ in .easeInOut(duration: 1.6) }
-                        .position(x: spacing * (CGFloat(flower) + 0.5) + plantHeight * 0.12, y: soilTop - plantHeight * 0.95)
+                        .position(x: ground(flower).x + plantHeight * 0.12, y: ground(flower).y - plantHeight * 0.95)
                         .allowsHitTesting(false)
                         .transition(.opacity)
                 }
@@ -68,9 +76,11 @@ struct GardenView: View {
                         DragGesture(minimumDistance: 0, coordinateSpace: .named("garden"))
                             .onChanged { drag in
                                 canAt = drag.location
-                                // The spout pours just left of and below the can.
-                                let spot = Int((drag.location.x - plantHeight * 0.2) / spacing)
-                                guard (0..<Garden.spots).contains(spot), stages[spot] > 0 else { Sounds.shared.stop(); return }
+                                // The spout pours just left of and below the can: the plant nearest there gets the water.
+                                let spout = CGPoint(x: drag.location.x - plantHeight * 0.2, y: drag.location.y + plantHeight * 0.2)
+                                let near = { (spot: Int) in hypot(ground(spot).x - spout.x, ground(spot).y - plantHeight * 0.4 - spout.y) }
+                                let spot = (0..<Garden.spots).min { near($0) < near($1) }!
+                                guard near(spot) < plantHeight * 0.6, stages[spot] > 0 else { Sounds.shared.stop(); return }
                                 Sounds.shared.play(.water)
                                 if Date.now.timeIntervalSince(lastGrow) > 0.8 { water(spot) }
                             }

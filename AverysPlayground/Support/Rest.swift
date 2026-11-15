@@ -142,7 +142,8 @@ struct RestEntry: View {
                 .foregroundStyle(Color.outline.opacity(0.8))
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: 520 * uiScale)
-            HStack(spacing: 10 * uiScale) {
+            // Wraps to a second line on a phone
+            FlowLayout(spacing: 10 * uiScale, lineSpacing: 10 * uiScale) {
                 ForEach(Rest.choices, id: \.self) { choice in
                     Button {
                         minutes = choice
