@@ -3,12 +3,14 @@ import SwiftUI
 struct HomeView: View {
     @State private var stickers: [String] = []
     @State private var isNaming = false
+    /// The pages opened from home: a section, then a game (or the sticker book).
+    @State private var path = NavigationPath()
     @AppStorage(Kid.key) private var kidName = ""
     @AppStorage(Ages.hiddenKey) private var hiddenGames = ""
     private var name: String { kidName.isEmpty ? "Avery" : kidName }
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             GeometryReader { screen in
             ScrollView {
                 VStack(spacing: 24 * uiScale) {
@@ -37,19 +39,13 @@ struct HomeView: View {
                     LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                         // A section whose games are all hidden doesn't show.
                         ForEach(HomeSection.allCases.filter { !$0.shown(hiding: hiddenGames).isEmpty }) { section in
-                            NavigationLink(value: section) {
+                            TileButton { path.append(section) } label: {
                                 SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: tileHeight, iconHeight: iconHeight)
                             }
-                            .buttonStyle(SquishyButtonStyle())
                         }
-                        NavigationLink {
-                            StickerBookView()
-                                .navigationTitle("Stickers")
-                                .navigationBarTitleDisplayMode(.inline)
-                        } label: {
+                        TileButton { path.append(StickerBookPage()) } label: {
                             StickerTile(stickers: stickers, height: tileHeight, iconHeight: iconHeight)
                         }
-                        .buttonStyle(SquishyButtonStyle())
                     }
                 }
                 .padding(20 * uiScale)
@@ -61,8 +57,13 @@ struct HomeView: View {
                 Speaker.shared.noGameOpen()
                 stickers = StickerBook.earned()
             }
+            .navigationDestination(for: StickerBookPage.self) { _ in
+                StickerBookView()
+                    .navigationTitle("Stickers")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
             .navigationDestination(for: HomeSection.self) { section in
-                SectionView(section: section)
+                SectionView(section: section) { path.append($0) }
                     .navigationTitle(section.title)
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
@@ -142,9 +143,42 @@ private struct MusicButton: View {
     }
 }
 
+/// The sticker book, as a page on the home screen's path.
+private struct StickerBookPage: Hashable {}
+
+/// A home or menu tile: it squishes and buzzes first, then its page opens a moment later, so the press shows
+/// (a link opens its page at once, sliding it over the tile before the squish can be seen).
+private struct TileButton<Label: View>: View {
+    let open: () -> Void
+    @ViewBuilder let label: Label
+    @State private var taps = 0
+    @State private var opening = false
+
+    var body: some View {
+        Button {
+            guard !opening else { return }  // a second quick tap doesn't open the page twice
+            opening = true
+            taps += 1
+            Haptics.tap()
+            Task {
+                try? await Task.sleep(for: .milliseconds(180))
+                open()
+                opening = false
+            }
+        } label: {
+            // A little bounce on every tap, even one too quick for the pressed look to show
+            label.phaseAnimator([CGFloat(1), 0.92, 1], trigger: taps) { content, scale in
+                content.scaleEffect(scale)
+            } animation: { _ in .spring(response: 0.14, dampingFraction: 0.6) }
+        }
+        .buttonStyle(SquishyButtonStyle())
+    }
+}
+
 /// One section's games.
 private struct SectionView: View {
     let section: HomeSection
+    let open: (Activity) -> Void
     @AppStorage(Ages.hiddenKey) private var hiddenGames = ""
     private let columns = [GridItem(.adaptive(minimum: 150 * uiScale), spacing: 20 * uiScale)]
 
@@ -152,10 +186,9 @@ private struct SectionView: View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 20 * uiScale) {
                 ForEach(section.shown(hiding: hiddenGames)) { activity in
-                    NavigationLink(value: activity) {
+                    TileButton { open(activity) } label: {
                         ActivityTile(activity: activity)
                     }
-                    .buttonStyle(SquishyButtonStyle())
                 }
             }
             .padding(20 * uiScale)
