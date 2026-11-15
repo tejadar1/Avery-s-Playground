@@ -250,7 +250,9 @@ final class ScreenshotTests: XCTestCase {
             goHome()
         }
 
-        // By now the games have earned some stickers.
+        // By now the games have earned some stickers. On a phone the tile is below the others, and the grid only
+        // makes tiles as they come into view.
+        for _ in 0..<4 where !button("Stickers").exists { app.swipeUp() }
         tap(button("Stickers"))
         sleep(1)
         try snap("19-Stickers", device, dir)
