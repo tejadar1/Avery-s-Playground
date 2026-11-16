@@ -171,6 +171,10 @@ struct TracingView: View {
     @State private var tracing = Tracing(letter: TraceLetter.alphabet[0])
     @State private var ink: [[CGPoint]] = []
     @State private var isDrawing = false
+    /// The "watch me" demo at the start of each letter: how far the glowing finger has traced, in strokes
+    /// (1.5 is halfway along the second), or nil once it's her turn.
+    @State private var demo: Double?
+    @State private var demoTask: Task<Void, Never>?
     @State private var cheer = "Trace the A with your finger!"
     @State private var cheerCount = 0
     @State private var wins = 0
@@ -219,6 +223,7 @@ struct TracingView: View {
         .background(Scenery(.classroom).ignoresSafeArea())
         .celebration(wins)
         .onAppear { start(0) }
+        .onDisappear { demoTask?.cancel() }
     }
 
     @ViewBuilder private var letterModes: some View {
@@ -255,6 +260,21 @@ struct TracingView: View {
                     context.stroke(shape, with: .color(Color(white: 0.6)), style: StrokeStyle(lineWidth: side * 0.012, lineCap: .round, dash: [side * 0.02, side * 0.03]))
                 }
             }
+            // The demo: each stroke lights up in order, from where it starts, with a glowing fingertip at the front.
+            if let demo {
+                for (number, stroke) in tracing.letter.strokes.enumerated() where Double(number) < demo {
+                    let points = TraceLetter.resample(stroke, every: 0.01)
+                    let done = min(1, demo - Double(number))
+                    let shown = Array(points.prefix(max(1, Int((Double(points.count) * done).rounded()))))
+                    context.stroke(path(shown), with: .color(Color(red: 1.0, green: 0.82, blue: 0.3).opacity(0.8)), style: pen(side * 0.09))
+                    if done < 1, let tip = shown.last?.applying(scale) {
+                        let finger = CGRect(x: tip.x - side * 0.045, y: tip.y - side * 0.045, width: side * 0.09, height: side * 0.09)
+                        context.fill(Path(ellipseIn: finger.insetBy(dx: -side * 0.02, dy: -side * 0.02)), with: .color(Color(red: 1.0, green: 0.7, blue: 0.3).opacity(0.35)))
+                        context.fill(Path(ellipseIn: finger), with: .color(Color(red: 1.0, green: 0.6, blue: 0.25)))
+                        context.stroke(Path(ellipseIn: finger), with: .color(.outline), lineWidth: side * 0.008)
+                    }
+                }
+            }
             for line in ink {
                 context.stroke(path(line), with: .color(color.opacity(0.85)), style: pen(side * 0.055))
             }
@@ -269,9 +289,26 @@ struct TracingView: View {
         .background(.white, in: RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
         .contentShape(Rectangle())
+        .overlay(alignment: .topTrailing) {
+            // Watch the letter being traced again
+            Button(action: showHow) {
+                Image(systemName: "hand.point.up.left.fill")
+                    .font(.system(size: 22 * uiScale, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 50 * uiScale, height: 50 * uiScale)
+                    .cartoonCard(Color(red: 1.0, green: 0.6, blue: 0.25), cornerRadius: 25 * uiScale)
+            }
+            .buttonStyle(SquishyButtonStyle())
+            .padding(10 * uiScale)
+            .accessibilityLabel("Show me")
+        }
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { value in
+                    if demo != nil {  // her turn: the demo steps aside as soon as she touches
+                        demoTask?.cancel()
+                        demo = nil
+                    }
                     let point = CGPoint(x: value.location.x / side, y: value.location.y / side)
                     if isDrawing { ink[ink.count - 1].append(point) } else { ink.append([point]) }
                     isDrawing = true
@@ -346,9 +383,35 @@ struct TracingView: View {
         ink = []
         isDrawing = false
         if mode == .word && number == 0 {
-            say("\(word.text)!", hint: "Trace each letter.", voice: Speaker.book)
+            say("\(word.text)!", hint: "Watch, then trace each letter.", voice: Speaker.book)
         } else {
-            say("\(tracing.letter.letter.uppercased())!", hint: "Trace the gray lines with your finger.", voice: Speaker.book)
+            say("\(tracing.letter.letter.uppercased())!", hint: "Watch how, then trace it with your finger.", voice: Speaker.book)
+        }
+        showHow()
+    }
+
+    /// Traces the letter with a glowing fingertip, stroke by stroke in the order it's written, so she sees where
+    /// each line starts and which way it goes before she tries.
+    private func showHow() {
+        demoTask?.cancel()
+        demo = nil
+        let strokes = tracing.letter.strokes.count
+        demoTask = Task {
+            try? await Task.sleep(for: .seconds(0.5))
+            for stroke in 0..<strokes {
+                var done = 0.0
+                while done < 1 {
+                    guard !Task.isCancelled else { return }
+                    demo = Double(stroke) + done
+                    try? await Task.sleep(for: .milliseconds(16))
+                    done += 0.016 / 1.1  // a stroke takes about a second
+                }
+                demo = Double(stroke + 1)
+                try? await Task.sleep(for: .seconds(0.35))
+            }
+            try? await Task.sleep(for: .seconds(0.8))
+            guard !Task.isCancelled else { return }
+            withAnimation(.easeOut(duration: 0.4)) { demo = nil }
         }
     }
 

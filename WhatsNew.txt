@@ -1,6 +1,3 @@
-- New "Calm" section with three quiet toys: no music, no stars, nothing to win.
-- Busy Board: flip a light switch, push the big button, turn the color knob, play the xylophone, ring the doorbell to find Mochi, and slide the beads.
-- Blocks: drag wooden blocks off the shelf and stack them. The wind button sweeps them away.
-- Garden: tap the soil to plant a seed, drag the watering can over it and watch it grow into a flower. The garden is still there next time.
-- Time to rest (For grown-ups, pencil button): pick 15 to 60 minutes. When time's up, Coco says goodnight and the games close. Hold the moon for 3 seconds to open them again.
-- The home and menu tiles squish and buzz when tapped, before the page opens.
+- Home: Stickers is a small button under the greeting now, so the category tiles fit across an iPad held sideways.
+- Trace: each letter starts with a demo. A glowing finger traces every stroke in order, showing where it starts and which way it goes. Touch the board to take a turn, or tap the orange hand to watch again.
+- Stickers says "1 sticker", not "1 stickers".

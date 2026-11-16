@@ -1206,6 +1206,7 @@ Shh! Mochi is sleeping.
 Shoes
 Shoes on
 Shoes on, ready to go!
+Show me
 Silly! Make a funny face back!
 Sit, Mochi! Good girl! Here's your treat!
 Skin color
@@ -1451,9 +1452,7 @@ Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Toys all tidy! Snap snap!
 Trace board
-Trace each letter.
 Trace the A with your finger!
-Trace the gray lines with your finger.
 Treat
 Treat time! Good girl, Mochi!
 Tummy
@@ -1488,7 +1487,9 @@ Wand! Ooh la la!
 Wand! So stylish!
 Wand! Wowza bowza!
 Wash
+Watch how, then trace it with your finger.
 Watch the keys.
+Watch, then trace each letter.
 Water the plants
 We picked all the fruit! Holy guacamole, we beat the crow!
 Whale
@@ -4130,6 +4131,7 @@ wa
 wand
 was
 washed
+watch me
 water
 wateringcan
 waveform

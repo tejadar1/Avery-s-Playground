@@ -30,7 +30,7 @@ struct HomeView: View {
                     // All five in one row on an iPad held sideways, and three across upright, so the menu fits without
                     // scrolling; a phone scrolls.
                     let sideways = uiScale > 1 && screen.size.width > screen.size.height
-                    let columns = uiScale > 1 ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: sideways ? HomeSection.allCases.count + 1 : 3)
+                    let columns = uiScale > 1 ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: sideways ? HomeSection.allCases.count : 3)
                         : [GridItem(.adaptive(minimum: 220 * uiScale), spacing: 20 * uiScale)]
                     let iconHeight = (uiScale > 1 ? sideways ? 70 : 80 : 110) * uiScale
                     // Sideways, the row of tiles grows into the room below it on a big iPad (half the screen), and
@@ -42,9 +42,6 @@ struct HomeView: View {
                             TileButton { path.append(section) } label: {
                                 SectionTile(section: section, games: section.shown(hiding: hiddenGames), height: tileHeight, iconHeight: iconHeight)
                             }
-                        }
-                        TileButton { path.append(StickerBookPage()) } label: {
-                            StickerTile(stickers: stickers, height: tileHeight, iconHeight: iconHeight)
                         }
                     }
                 }
@@ -231,47 +228,45 @@ private extension HomeView {
                 }
                 .accessibilityLabel("For grown-ups")
             }
+            // The sticker book: a small button here, so the categories have the row of tiles to themselves.
+            TileButton { path.append(StickerBookPage()) } label: { StickerButton(stickers: stickers) }
+                .padding(.top, 8 * uiScale)
         }
         .multilineTextAlignment(.center)
     }
 }
 
-/// The sticker book on the home screen, with her newest stickers fanned out and how many she has.
-private struct StickerTile: View {
+/// The sticker book on the home screen: her newest stickers fanned out and how many she has, in a little pill.
+private struct StickerButton: View {
     let stickers: [String]
-    let height: CGFloat
-    let iconHeight: CGFloat
 
     var body: some View {
         let shown = stickers.isEmpty ? ["star", "heart", "crown"] : Array(stickers.suffix(3))
-        VStack(spacing: 6 * uiScale) {
-            HStack(spacing: -16 * uiScale) {
+        HStack(spacing: 10 * uiScale) {
+            HStack(spacing: -12 * uiScale) {
                 ForEach(Array(shown.enumerated()), id: \.offset) { index, name in
-                    Picture(name, size: iconHeight * 0.56)
-                        .padding(iconHeight * 0.09)
+                    Picture(name, size: 30 * uiScale)
+                        .padding(5 * uiScale)
                         .background(Circle().fill(.white))
-                        .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+                        .overlay(Circle().strokeBorder(Color.outline, lineWidth: 2 * uiScale))
                         .rotationEffect(.degrees(Double(index - 1) * 12))
                         .opacity(stickers.isEmpty ? 0.5 : 1)
                 }
             }
-            .padding(.top, 14 * uiScale)
             .accessibilityHidden(true)
             Text("Stickers")
-                .font(.kid(40))
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)  // six narrow tiles across an iPad held sideways
-                .foregroundStyle(.white)
-                .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
-            Text("\(stickers.count) of \(StickerBook.all.count) found")
+                .font(.kid(22))
+            Text("\(stickers.count)")
                 .font(.kid(18))
-                .foregroundStyle(.white.opacity(0.95))
+                .padding(.horizontal, 8 * uiScale)
+                .background(Capsule().fill(.white.opacity(0.3)))
         }
-        .padding(.horizontal, 12 * uiScale)
-        .padding(.bottom, 16 * uiScale)
-        .frame(maxWidth: .infinity, minHeight: height)
-        .cartoonCard(Color(red: 0.62, green: 0.5, blue: 0.88))
-        .accessibilityElement(children: .combine)
+        .foregroundStyle(.white)
+        .padding(.horizontal, 14 * uiScale)
+        .frame(height: 56 * uiScale)
+        .cartoonCard(Color(red: 0.62, green: 0.5, blue: 0.88), cornerRadius: 28 * uiScale)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Stickers, \(stickers.count) of \(StickerBook.all.count) found")
     }
 }
 
@@ -302,7 +297,7 @@ private struct SectionTile: View {
             Text(section.title)
                 .font(.kid(40))
                 .lineLimit(1)
-                .minimumScaleFactor(0.5)  // six narrow tiles across an iPad held sideways
+                .minimumScaleFactor(0.5)  // narrow tiles across an iPad held sideways
                 .foregroundStyle(.white)
                 .shadow(color: Color.outline.opacity(0.5), radius: 0, x: 2, y: 2)
             Text(section.subtitle)

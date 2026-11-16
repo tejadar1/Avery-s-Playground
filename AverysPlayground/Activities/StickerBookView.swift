@@ -47,7 +47,7 @@ struct StickerBookView: View {
             VStack(spacing: 14 * uiScale) {
                 CocoSays(text: earned.count == StickerBook.all.count
                          ? "Holy guacamole! You found every sticker!"
-                         : "You have \(earned.count) stickers! Win games to find more.", hops: cheerCount)
+                         : "You have \(earned.count) \(earned.count == 1 ? "sticker" : "stickers")! Win games to find more.", hops: cheerCount)
 
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100 * uiScale), spacing: 14 * uiScale)], spacing: 16 * uiScale) {
                     ForEach(Array(StickerBook.all.enumerated()), id: \.offset) { index, name in
