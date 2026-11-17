@@ -55,15 +55,16 @@ struct GardenView: View {
                 RoundedRectangle(cornerRadius: 30 * uiScale)
                     .fill(Color(red: 0.6, green: 0.42, blue: 0.3))
                     .overlay {
-                        VStack(spacing: plantHeight * 0.25) {
-                            ForEach(0..<6, id: \.self) { _ in
-                                Capsule().fill(Color(red: 0.5, green: 0.34, blue: 0.24)).frame(height: max(2, plantHeight * 0.02))
+                        // Furrows across the soil, drawn inside it so none can stray above
+                        Canvas { context, size in
+                            var y = size.height * 0.2
+                            while y < size.height - 20 {
+                                context.stroke(Path { $0.move(to: CGPoint(x: 30, y: y)); $0.addLine(to: CGPoint(x: size.width - 30, y: y)) },
+                                               with: .color(Color(red: 0.5, green: 0.34, blue: 0.24)),
+                                               style: StrokeStyle(lineWidth: max(2, plantHeight * 0.02), lineCap: .round))
+                                y += max(30, plantHeight * 0.25)
                             }
                         }
-                        .padding(.horizontal, 30 * uiScale)
-                        .padding(.top, plantHeight * 0.2)
-                        .frame(maxHeight: .infinity, alignment: .top)
-                        .clipped()
                     }
                     .overlay(alignment: .top) {
                         Capsule().fill(Color(red: 0.45, green: 0.76, blue: 0.4))

@@ -1,2 +1,1 @@
-- Calm toys look and feel richer: a wooden busy board with screwed-on plates, a playroom for Blocks, and a garden with a smiling sun and a picket fence.
-- Every touch in the Calm toys shows something: a ring where the finger lands, stars from the big button, rays from the light, music notes from the xylophone, hearts when Mochi opens the door, bouncing beads, a dust puff and squash when a block lands, and wiggles, dirt puffs and sparkles in the garden.
+- Garden: no stray soil line across the fence on an iPad held sideways.
