@@ -1,3 +1,5 @@
 - Home: Stickers is a small button under the greeting now, so the category tiles fit across an iPad held sideways.
 - Trace: each letter starts with a demo. A glowing finger traces every stroke in order, showing where it starts and which way it goes. Touch the board to take a turn, or tap the orange hand to watch again.
 - Stickers says "1 sticker", not "1 stickers".
+- Calm toys look and feel richer: a wooden busy board with screwed-on plates, a playroom for Blocks, and a garden with a smiling sun and a picket fence.
+- Every touch in the Calm toys shows something: a ring where the finger lands, stars from the big button, rays from the light, music notes from the xylophone, hearts when Mochi opens the door, bouncing beads, a dust puff and squash when a block lands, and wiggles, dirt puffs and sparkles in the garden.
