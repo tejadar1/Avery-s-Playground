@@ -224,10 +224,14 @@ private struct Playroom: View {
     var body: some View {
         GeometryReader { geo in
             let w = geo.size.width, h = geo.size.height
+            // Counts of stripes and planks; none on the first layout pass, when the size can still be zero
+            // (dividing by a zero unit would crash).
+            let stripes = unit > 0 ? Int(w / unit) + 1 : 0
+            let planks = unit > 0 ? max(1, Int(max(0, h - floorY) / (unit * 0.5)) + 1) : 0
             ZStack(alignment: .topLeading) {
                 // Wallpaper stripes
                 HStack(spacing: unit * 0.5) {
-                    ForEach(0..<Int(w / (unit * 1)) + 1, id: \.self) { _ in
+                    ForEach(0..<stripes, id: \.self) { _ in
                         Rectangle().fill(.white.opacity(0.35)).frame(width: unit * 0.5)
                     }
                 }
@@ -251,13 +255,13 @@ private struct Playroom: View {
                     .frame(width: w, height: unit * 0.25)
                     .offset(y: floorY - unit * 0.25)
                 VStack(spacing: 0) {
-                    ForEach(0..<max(1, Int((h - floorY) / (unit * 0.5)) + 1), id: \.self) { n in
+                    ForEach(0..<planks, id: \.self) { n in
                         Rectangle().fill(n % 2 == 0 ? Color(red: 0.87, green: 0.68, blue: 0.47) : Color(red: 0.84, green: 0.64, blue: 0.43))
                             .overlay(alignment: .bottom) { Rectangle().fill(Color(red: 0.62, green: 0.44, blue: 0.29).opacity(0.5)).frame(height: 1.5) }
                             .frame(height: unit * 0.5)
                     }
                 }
-                .frame(width: w, height: h - floorY, alignment: .top)
+                .frame(width: w, height: max(0, h - floorY), alignment: .top)
                 .clipped()
                 .offset(y: floorY)
             }
