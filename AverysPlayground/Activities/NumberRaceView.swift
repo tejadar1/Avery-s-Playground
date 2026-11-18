@@ -104,7 +104,9 @@ struct NumberRaceView: View {
         GeometryReader { geo in
             let gap = 4 * uiScale
             // On an upright iPad the board runs up like on a phone: a row across left the screen mostly empty.
-            let fit = Self.squares(in: geo.size, gap: gap, preferUp: uiScale > 1 && !isWide)
+            // (Less the path's edge around the stones)
+            let room = CGSize(width: max(0, geo.size.width - gap * 5), height: max(0, geo.size.height - gap * 5))
+            let fit = Self.squares(in: room, gap: gap, preferUp: uiScale > 1 && !isWide)
             let up = fit.up, width = fit.width, height = fit.height
             let size = min(width, height)
             let line = up ? AnyLayout(VStackLayout(spacing: gap)) : AnyLayout(HStackLayout(spacing: gap))
@@ -117,24 +119,32 @@ struct NumberRaceView: View {
                             Text(square == 0 ? "Go" : "\(square)")
                                 .font(.system(size: size * (up ? 0.6 : 0.42) * (square == 0 ? Self.start : 1), weight: .heavy, design: .rounded))
                                 .foregroundStyle(square == 0 ? Color.outline : .white)
-                            HStack(spacing: 0) {
+                            // The players: Coco for Stars and Mochi for Hearts, each with their team's badge,
+                            // landing on the stone with a little bounce.
+                            HStack(spacing: -size * 0.1) {
                                 ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
                                     if race.spot[piece] == square {
-                                        Image(systemName: piece == .star ? "star.fill" : "heart.fill")
-                                            .foregroundStyle(piece == .star ? Color(red: 0.98, green: 0.78, blue: 0.25) : Color(red: 0.93, green: 0.36, blue: 0.48))
-                                            .shadow(color: Color.outline.opacity(0.7), radius: 0, x: 1, y: 1)
+                                        Picture(piece == .star ? "crocodile" : "dog", size: size * (up ? 0.72 : 0.5))
+                                            .overlay(alignment: .bottomTrailing) {
+                                                Image(systemName: piece == .star ? "star.fill" : "heart.fill")
+                                                    .font(.system(size: size * (up ? 0.24 : 0.17), weight: .bold))
+                                                    .foregroundStyle(piece == .star ? Color(red: 0.98, green: 0.78, blue: 0.25) : Color(red: 0.93, green: 0.36, blue: 0.48))
+                                                    .shadow(color: Color.outline.opacity(0.7), radius: 0, x: 1, y: 1)
+                                            }
+                                            .shadow(color: Color.outline.opacity(0.25), radius: 2, y: 2)
+                                            .transition(.asymmetric(insertion: .scale(scale: 0.4).combined(with: .offset(y: -size * 0.4)), removal: .opacity))
                                     }
                                 }
                             }
-                            .font(.system(size: size * (up ? 0.55 : 0.3), weight: .bold))
                         }
                         // Go is a thin strip, so the numbered squares get the room.
                         .frame(width: square == 0 && !up ? width * Self.start : width, height: square == 0 && up ? height * Self.start : height)
-                        .cartoonCard(square == 0 ? .white : Self.colors[square - 1], cornerRadius: size * 0.2)
+                        // Rounded stepping stones
+                        .cartoonCard(square == 0 ? .white : Self.colors[square - 1], cornerRadius: size * 0.42)
                         .scaleEffect(isNext ? 1.08 : 1)
                         .overlay {
                             if isNext {
-                                RoundedRectangle(cornerRadius: size * 0.2).strokeBorder(.white, lineWidth: 4 * uiScale)
+                                RoundedRectangle(cornerRadius: size * 0.42).strokeBorder(.white, lineWidth: 4 * uiScale)
                                     .scaleEffect(1.08)
                             }
                         }
@@ -144,6 +154,9 @@ struct NumberRaceView: View {
                     .accessibilityLabel(square == 0 ? "Start" : "Square \(square)")
                 }
             }
+            // The dirt path the stones sit on
+            .padding(gap * 2.5)
+            .background(Capsule().fill(Color(red: 0.86, green: 0.72, blue: 0.52)).overlay(Capsule().strokeBorder(Color.outline.opacity(0.35), lineWidth: 2 * uiScale)))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding(.horizontal)
