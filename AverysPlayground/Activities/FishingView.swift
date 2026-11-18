@@ -75,17 +75,8 @@ struct FishingView: View {
                 TimelineView(.animation) { context in
                     let time = context.date.timeIntervalSince(start)
                     ZStack {
-                        // The pond: water with a darker rim, ripples, and the fish going round
-                        Group {
-                            Circle().fill(Color(red: 0.55, green: 0.8, blue: 0.95))
-                                .overlay(Circle().strokeBorder(Color(red: 0.33, green: 0.6, blue: 0.82), lineWidth: side * 0.035))
-                                .overlay(Circle().strokeBorder(Color.outline, lineWidth: 4 * uiScale))
-                                .frame(width: side * 0.84, height: side * 0.84)
-                            ForEach([0.46, 0.25], id: \.self) { ripple in
-                                Circle().stroke(Color.white.opacity(0.45), lineWidth: 3 * uiScale).frame(width: side * ripple, height: side * ripple)
-                            }
-                        }
-                        .position(Self.pondCenter(side))
+                        // The pond, with its bank, lily pads, reeds and dock, and the fish swimming round
+                        Pond(side: side, center: Self.pondCenter(side))
                         ForEach(Array(game.pond.enumerated()), id: \.element.id) { index, fish in
                             let open = GoFishing.isOpen(fish, at: time)
                             FishDrawing(color: Self.color(fish.color), mouthOpen: open)
@@ -103,11 +94,11 @@ struct FishingView: View {
                             path.move(to: CGPoint(x: side * 0.99, y: side * 1.0))
                             path.addLine(to: tip)
                         }
-                        .stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.03 + 6, lineCap: .round))
+                        .stroke(Color.outline, style: StrokeStyle(lineWidth: side * 0.045 + 6, lineCap: .round))
                         .overlay(Path { path in
                             path.move(to: CGPoint(x: side * 0.99, y: side * 1.0))
                             path.addLine(to: tip)
-                        }.stroke(Color(red: 0.78, green: 0.53, blue: 0.3), style: StrokeStyle(lineWidth: side * 0.03, lineCap: .round)))
+                        }.stroke(Color(red: 0.78, green: 0.53, blue: 0.3), style: StrokeStyle(lineWidth: side * 0.045, lineCap: .round)))
                         Circle().fill(Color(red: 0.85, green: 0.86, blue: 0.9))
                             .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3))
                             .frame(width: side * 0.07, height: side * 0.07)
@@ -172,6 +163,93 @@ struct FishingView: View {
         }
     }
 
+    /// The pond: a wobbly-edged pool on a sandy, grassy bank, with ripples, lily pads and a water lily, reeds and
+    /// cattails along the back, and a little wooden dock in the front corner where the rod rests.
+    private struct Pond: View {
+        let side: CGFloat
+        let center: CGPoint
+
+        var body: some View {
+            Canvas { context, _ in
+                let line = max(2, side * 0.008)
+                /// The pond's wobbly edge, `grow` times its size
+                func edge(_ grow: CGFloat) -> Path {
+                    var path = Path()
+                    let points = (0..<24).map { k -> CGPoint in
+                        let a = Double(k) / 24 * 2 * .pi
+                        let r = side * 0.43 * grow * (1 + 0.05 * sin(3 * a) + 0.03 * cos(5 * a))
+                        return CGPoint(x: center.x + cos(a) * r, y: center.y + sin(a) * r * 0.96)
+                    }
+                    path.move(to: CGPoint(x: (points[23].x + points[0].x) / 2, y: (points[23].y + points[0].y) / 2))
+                    for k in 0..<24 {
+                        let next = points[(k + 1) % 24]
+                        path.addQuadCurve(to: CGPoint(x: (points[k].x + next.x) / 2, y: (points[k].y + next.y) / 2), control: points[k])
+                    }
+                    path.closeSubpath()
+                    return path
+                }
+                // The bank: grass, then a ring of sand
+                context.fill(edge(1.14), with: .color(Color(red: 0.55, green: 0.78, blue: 0.42)))
+                context.stroke(edge(1.14), with: .color(.outline), lineWidth: line)
+                context.fill(edge(1.05), with: .color(Color(red: 0.95, green: 0.86, blue: 0.62)))
+                // The water, darker toward its edge, with ripples
+                context.fill(edge(1), with: .radialGradient(Gradient(colors: [Color(red: 0.62, green: 0.85, blue: 0.97), Color(red: 0.4, green: 0.7, blue: 0.9)]),
+                                                            center: center, startRadius: 0, endRadius: side * 0.45))
+                context.stroke(edge(1), with: .color(.outline), lineWidth: line)
+                for ripple in [0.12, 0.22] {
+                    context.stroke(Path(ellipseIn: CGRect(x: center.x - side * ripple, y: center.y - side * ripple * 0.5, width: side * ripple * 2, height: side * ripple)),
+                                   with: .color(.white.opacity(0.4)), lineWidth: line)
+                }
+                // Lily pads near the edge, each with a notch, one with a pink water lily
+                for (a, size) in [(2.3, 0.075), (3.6, 0.06), (5.5, 0.07)] {
+                    let at = CGPoint(x: center.x + cos(a) * side * 0.39, y: center.y + sin(a) * side * 0.39)
+                    var pad = Path()
+                    pad.addArc(center: at, radius: side * size, startAngle: .radians(a + 0.35), endAngle: .radians(a - 0.35 + 2 * .pi), clockwise: false)
+                    pad.addLine(to: at)
+                    pad.closeSubpath()
+                    context.fill(pad, with: .color(Color(red: 0.45, green: 0.75, blue: 0.4)))
+                    context.stroke(pad, with: .color(.outline), lineWidth: line)
+                    if a == 2.3 {
+                        for k in 0..<6 {
+                            let petal = CGPoint(x: at.x + cos(Double(k) * .pi / 3) * side * 0.022, y: at.y + sin(Double(k) * .pi / 3) * side * 0.022)
+                            let rect = CGRect(x: petal.x - side * 0.02, y: petal.y - side * 0.02, width: side * 0.04, height: side * 0.04)
+                            context.fill(Path(ellipseIn: rect), with: .color(Color(red: 0.98, green: 0.7, blue: 0.8)))
+                            context.stroke(Path(ellipseIn: rect), with: .color(.outline), lineWidth: line * 0.6)
+                        }
+                        let middle = CGRect(x: at.x - side * 0.015, y: at.y - side * 0.015, width: side * 0.03, height: side * 0.03)
+                        context.fill(Path(ellipseIn: middle), with: .color(Color(red: 1.0, green: 0.84, blue: 0.3)))
+                    }
+                }
+                // Reeds and cattails along the back left
+                for (k, x) in [0.1, 0.15, 0.2, 0.25].enumerated() {
+                    let base = CGPoint(x: side * x, y: center.y - side * (0.2 - Double(k) * 0.04))
+                    let top = CGPoint(x: base.x + side * 0.01 * Double(k % 2 == 0 ? -1 : 1), y: base.y - side * (0.16 + 0.02 * Double(k % 3)))
+                    var reed = Path()
+                    reed.move(to: base)
+                    reed.addLine(to: top)
+                    context.stroke(reed, with: .color(.outline), style: StrokeStyle(lineWidth: line * 2.6, lineCap: .round))
+                    context.stroke(reed, with: .color(Color(red: 0.45, green: 0.7, blue: 0.35)), style: StrokeStyle(lineWidth: line * 1.4, lineCap: .round))
+                    if k % 2 == 0 {
+                        let tail = Path(roundedRect: CGRect(x: top.x - side * 0.014, y: top.y, width: side * 0.028, height: side * 0.06), cornerRadius: side * 0.014)
+                        context.fill(tail, with: .color(Color(red: 0.55, green: 0.35, blue: 0.22)))
+                        context.stroke(tail, with: .color(.outline), lineWidth: line * 0.8)
+                    }
+                }
+                // The dock in the front corner, where the rod rests
+                let dock = Path(roundedRect: CGRect(x: side * 0.76, y: side * 0.86, width: side * 0.26, height: side * 0.16), cornerRadius: side * 0.02)
+                context.fill(dock, with: .color(Color(red: 0.8, green: 0.6, blue: 0.4)))
+                for plank in 1..<4 {
+                    var gap = Path()
+                    gap.move(to: CGPoint(x: side * (0.76 + 0.065 * Double(plank)), y: side * 0.86))
+                    gap.addLine(to: CGPoint(x: side * (0.76 + 0.065 * Double(plank)), y: side * 1.02))
+                    context.stroke(gap, with: .color(Color(red: 0.6, green: 0.42, blue: 0.27)), lineWidth: line)
+                }
+                context.stroke(dock, with: .color(.outline), lineWidth: line)
+            }
+            .allowsHitTesting(false)
+        }
+    }
+
     static func pondCenter(_ side: CGFloat) -> CGPoint { CGPoint(x: side * 0.5, y: side * 0.44) }
 
     /// Where a fish is on its way round the pond, `time` seconds in.
@@ -179,7 +257,9 @@ struct FishingView: View {
 
     static func place(_ fish: GoFishing.Fish, at time: Double, side: CGFloat) -> CGPoint {
         let center = pondCenter(side), angle = angle(fish, at: time)
-        return CGPoint(x: center.x + cos(angle) * side * 0.29, y: center.y + sin(angle) * side * 0.29)
+        // Round the pond, drifting a little in and out, so they look like they're swimming
+        let reach = side * (0.29 + 0.03 * sin(time * 0.9 + Double(fish.id) * 1.7))
+        return CGPoint(x: center.x + cos(angle) * reach, y: center.y + sin(angle) * reach)
     }
 
     /// The bobber let go: on a fish, it's a cast at that fish (caught if its mouth is open right now); in open water
