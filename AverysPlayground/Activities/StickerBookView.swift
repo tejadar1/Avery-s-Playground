@@ -36,56 +36,143 @@ enum StickerBook {
     }
 }
 
-/// A page of every sticker: the ones she has, bright and a little crooked like real stickers,
-/// and dotted outlines for the ones still to find.
+/// Her sticker picture: a sunny outdoor scene she decorates. Stickers she's earned wait in a tray along the bottom;
+/// a tap sticks one onto the picture, and she can drag it anywhere. Where each one is, is kept on the iPad.
 struct StickerBookView: View {
-    @State private var earned: Set<String> = []
+    private static let spotsKey = "stickerSpots"
+
+    @State private var earned: [String] = []
+    /// Where each stuck sticker is, as fractions of the picture.
+    @State private var spots: [String: CGPoint] = [:]
     @State private var cheerCount = 0
+    /// A count for each sticker, so it wiggles when it's touched.
+    @State private var wiggles: [String: Int] = [:]
 
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 14 * uiScale) {
-                CocoSays(text: earned.count == StickerBook.all.count
-                         ? "Holy guacamole! You found every sticker!"
-                         : "You have \(earned.count) \(earned.count == 1 ? "sticker" : "stickers")! Win games to find more.", hops: cheerCount)
+    private var placed: [String] { earned.filter { spots[$0] != nil } }
+    private var waiting: [String] { earned.filter { spots[$0] == nil } }
+    private var toFind: Int { StickerBook.all.count - earned.count }
 
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100 * uiScale), spacing: 14 * uiScale)], spacing: 16 * uiScale) {
-                    ForEach(Array(StickerBook.all.enumerated()), id: \.offset) { index, name in
-                        sticker(name, tilt: Double((index * 37) % 17) - 8)
-                    }
-                }
-                .padding(20 * uiScale)
-                .cartoonCard(Color(red: 1.0, green: 0.97, blue: 0.9), cornerRadius: 28 * uiScale)
-                .padding(.horizontal)
-            }
-            .padding(.bottom, 20 * uiScale)
-        }
-        .background(Scenery(.studio).ignoresSafeArea())
-        .onAppear { earned = Set(StickerBook.earned()) }
+    private var line: String {
+        if earned.isEmpty { return "Win games to find stickers for your picture!" }
+        if toFind == 0 { return "Holy guacamole! You found every sticker!" }
+        return waiting.isEmpty ? "Drag your stickers anywhere you like!" : "Tap a sticker to stick it on your picture!"
     }
 
-    private func sticker(_ name: String, tilt: Double) -> some View {
-        let have = earned.contains(name)
-        return Button {
-            Haptics.tap()
-            Sounds.shared.play(.pop)
-            cheerCount += 1
-            Speaker.shared.say(Speaker.book + name)
-        } label: {
-            Picture(name, size: 66 * uiScale)
-                .opacity(have ? 1 : 0)
-                .padding(12 * uiScale)
-                .background(Circle().fill(.white.opacity(have ? 1 : 0.5)))
-                .overlay(
-                    Circle().strokeBorder(Color.outline.opacity(have ? 1 : 0.3),
-                                          style: StrokeStyle(lineWidth: (have ? 3 : 2.5) * uiScale, dash: have ? [] : [7 * uiScale, 6 * uiScale]))
-                )
-                .shadow(color: .black.opacity(have ? 0.18 : 0), radius: 0, x: 2 * uiScale, y: 3 * uiScale)
-                .rotationEffect(.degrees(have ? tilt : 0))
+    var body: some View {
+        VStack(spacing: 12 * uiScale) {
+            CocoSays(text: line, hops: cheerCount)
+
+            GeometryReader { geo in
+                let size = min(geo.size.width, geo.size.height) * 0.16
+                ZStack {
+                    Scenery(.outdoors)
+                    ForEach(placed, id: \.self) { name in
+                        let at = spots[name] ?? CGPoint(x: 0.5, y: 0.5)
+                        sticker(name, size: size)
+                            .wiggle(wiggles[name] ?? 0)
+                            .position(x: at.x * geo.size.width, y: at.y * geo.size.height)
+                            .onTapGesture { touch(name) }
+                            .gesture(
+                                DragGesture(minimumDistance: 4, coordinateSpace: .named("picture"))
+                                    .onChanged { drag in
+                                        spots[name] = CGPoint(x: min(max(drag.location.x / geo.size.width, 0.05), 0.95),
+                                                              y: min(max(drag.location.y / geo.size.height, 0.05), 0.95))
+                                    }
+                                    .onEnded { _ in
+                                        Sounds.shared.play(.pop)
+                                        Haptics.tap()
+                                        save()
+                                    }
+                            )
+                            .accessibilityLabel(name)
+                    }
+                }
+                .coordinateSpace(.named("picture"))
+                .clipShape(RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous))
+                .overlay(RoundedRectangle(cornerRadius: 28 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+            }
+            .padding(.horizontal)
+
+            tray
         }
-        .buttonStyle(SquishyButtonStyle())
-        .disabled(!have)
-        .accessibilityLabel(have ? name : "A sticker to find")
+        .padding(.bottom, 12 * uiScale)
+        .background(Scenery(.studio).ignoresSafeArea())
+        .onAppear(perform: load)
+    }
+
+    /// The stickers waiting to be stuck on, and how many are still to find.
+    private var tray: some View {
+        HStack(spacing: 12 * uiScale) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10 * uiScale) {
+                    ForEach(waiting, id: \.self) { name in
+                        Button { stick(name) } label: { sticker(name, size: 60 * uiScale) }
+                            .buttonStyle(SquishyButtonStyle())
+                            .accessibilityLabel("Stick on the \(name)")
+                    }
+                    if waiting.isEmpty {
+                        Text(earned.isEmpty ? "Your stickers go here" : "All stuck on!")
+                            .font(.kid(20))
+                            .foregroundStyle(Color.outline.opacity(0.6))
+                            .padding(.horizontal, 12 * uiScale)
+                    }
+                }
+                .padding(.vertical, 8 * uiScale)
+                .padding(.horizontal, 12 * uiScale)
+            }
+            if toFind > 0 {
+                VStack(spacing: 2 * uiScale) {
+                    Text("\(toFind)").font(.kid(26))
+                    Text("to find").font(.kid(13))
+                }
+                .foregroundStyle(Color.outline)
+                .padding(.horizontal, 12 * uiScale)
+                .accessibilityElement(children: .combine)
+            }
+        }
+        .frame(height: 96 * uiScale)
+        .cartoonCard(Color(red: 1.0, green: 0.97, blue: 0.9), cornerRadius: 24 * uiScale)
+        .padding(.horizontal)
+    }
+
+    /// A sticker: the picture on a white round with a crisp edge and a little shadow, a bit crooked like a real one.
+    private func sticker(_ name: String, size: CGFloat) -> some View {
+        let tilt = Double((StickerBook.all.firstIndex(of: name) ?? 0) * 37 % 17) - 8
+        return Picture(name, size: size * 0.72)
+            .padding(size * 0.14)
+            .background(Circle().fill(.white))
+            .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3 * uiScale))
+            .shadow(color: .black.opacity(0.18), radius: 0, x: 2 * uiScale, y: 3 * uiScale)
+            .rotationEffect(.degrees(tilt))
+    }
+
+    private func stick(_ name: String) {
+        Haptics.tap()
+        Sounds.shared.play(.pop)
+        Speaker.shared.say(Speaker.book + name)
+        // Somewhere on the picture, spread out from the others
+        let tries = (0..<20).map { _ in CGPoint(x: .random(in: 0.12...0.88), y: .random(in: 0.15...0.85)) }
+        let room = { (p: CGPoint) in spots.values.map { hypot($0.x - p.x, $0.y - p.y) }.min() ?? 1 }
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) { spots[name] = tries.max { room($0) < room($1) } }
+        cheerCount += 1
+        save()
+    }
+
+    private func touch(_ name: String) {
+        Haptics.tap()
+        Sounds.shared.play(.pop)
+        Speaker.shared.say(Speaker.book + name)
+        wiggles[name, default: 0] += 1
+    }
+
+    private func load() {
+        earned = StickerBook.earned()
+        let saved = UserDefaults.standard.dictionary(forKey: Self.spotsKey) as? [String: [Double]] ?? [:]
+        spots = saved.compactMapValues { $0.count == 2 ? CGPoint(x: $0[0], y: $0[1]) : nil }
+    }
+
+    private func save() {
+        UserDefaults.standard.set(spots.mapValues { [Double($0.x), Double($0.y)] }, forKey: Self.spotsKey)
     }
 }
 

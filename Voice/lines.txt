@@ -5,6 +5,8 @@
 -under
 5 and 2
 A
+A Coco!
+A Mochi!
 A beach!
 A big bad wolf saw her. Where are you going? he asked.
 A big box, just for you!
@@ -14,6 +16,7 @@ A blue fish!
 A boy watched the sheep on a hill.
 A bud
 A coral reef!
+A cupcake!
 A farm!
 A flower
 A fresh page!
@@ -30,7 +33,6 @@ A red fish!
 A seed
 A sharp
 A sprout
-A sticker to find
 A treat! Mochi does a happy dance!
 A woodcutter chased the wolf away, and they all had a big hug.
 A yellow fish!
@@ -47,6 +49,7 @@ All fixed! Holy guacamole!
 All nails
 All rinsed!
 All sorted!
+All stuck on!
 All summer, the little ant worked hard, carrying food to her home.
 All the chores are done! What a big helper! Holy guacamole!
 An orange fish!
@@ -469,6 +472,9 @@ Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
 Coco wants a cupcake!
+CocoCheer
+CocoGiggle
+CocoThink
 Color anywhere you like!
 Color knob
 Coloring anywhere
@@ -520,6 +526,7 @@ Drag it onto the cupcake!
 Drag the hook to a fish with its mouth open!
 Drag the hose to spray Mochi.
 Drag to spray Mochi
+Drag your stickers anywhere you like!
 Drink of water
 Drop the hook on a fish!
 E
@@ -1386,6 +1393,7 @@ Ta-da! Your nails look amazing!
 Take a picture
 Take vitamins
 Tap a nail to paint it!
+Tap a sticker to stick it on your picture!
 Tap any key.
 Tap each letter to hear its sound!
 Tap each letter!
@@ -1565,6 +1573,7 @@ Whoop whoop, crocodile scoop!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
+Win games to find stickers for your picture!
 Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
@@ -1572,8 +1581,11 @@ Woof woof!
 Words
 Worried. Tell a grown-up what's on your mind.
 Wowza bowza!
+Wowza! You colored the whole Coco!
+Wowza! You colored the whole Mochi!
 Wowza! You colored the whole beach!
 Wowza! You colored the whole coral reef!
+Wowza! You colored the whole cupcake!
 Wowza! You colored the whole farm!
 Wowza! You colored the whole garden!
 Wowza! You colored the whole night sky!
@@ -1634,6 +1646,7 @@ Your friend has to go home.
 Your friend has to go home. How would you feel?
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
+Your stickers go here
 Your turn!
 Yum yum, breakfast!
 Z
@@ -3802,6 +3815,7 @@ party
 pen
 pencil
 penguin
+picture
 pig
 pig and apple!
 pig and ball!
@@ -4023,6 +4037,7 @@ star and sun!
 star and tree!
 star,
 stars
+stickerSpots
 stickerWins
 stickers
 sticks
@@ -4074,6 +4089,7 @@ the
 through
 tiger
 tle
+to find
 toilet
 toothbrush
 tophat
