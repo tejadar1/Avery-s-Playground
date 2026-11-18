@@ -86,9 +86,24 @@ struct SpeechBubble: Shape {
     }
 }
 
+/// Coco's poses (Art/coco*.svg): waving is the usual one.
+enum CocoPose {
+    case wave, cheer, think, giggle
+
+    var image: String {
+        switch self {
+        case .wave: "Coco"
+        case .cheer: "CocoCheer"
+        case .think: "CocoThink"
+        case .giggle: "CocoGiggle"
+        }
+    }
+}
+
 /// Coco's picture. She blinks every few seconds, so she looks alive.
 struct CocoFigure: View {
     let height: CGFloat
+    var pose = CocoPose.wave
     @State private var isBlinking = false
 
     /// Coco's eyes in coco.svg (420 × 440): center, size, and the green of the head around each.
@@ -98,12 +113,13 @@ struct CocoFigure: View {
     ]
 
     var body: some View {
-        Image("Coco")
+        Image(pose.image)
             .resizable()
             .scaledToFit()
             .frame(height: height)
             .overlay {
-                if isBlinking {
+                // Her eyes are already shut happily when she cheers or giggles
+                if isBlinking && (pose == .wave || pose == .think) {
                     Canvas { context, size in
                         let s = size.width / 420
                         for eye in Self.eyes {
@@ -219,10 +235,17 @@ struct CocoSays: View {
     @Environment(\.isWide) private var isWide
     @State private var joke: String?
     @State private var spins = 0
+    /// She cheers for a win, thinks for an oops and giggles when tapped, then goes back to waving.
+    @State private var pose = CocoPose.wave
+    @State private var poseTask: Task<Void, Never>?
 
     var body: some View {
         HStack(alignment: .center, spacing: 4 * uiScale) {
-            CocoFigure(height: (isWide ? 66 : 100) * uiScale)
+            CocoFigure(height: (isWide ? 66 : 100) * uiScale, pose: pose)
+                // Breathing gently while she waits
+                .phaseAnimator([CGFloat(1), 1.03]) { content, breath in
+                    content.scaleEffect(x: 1, y: reduceMotion ? 1 : breath, anchor: .bottom)
+                } animation: { _ in .easeInOut(duration: 1.6) }
                 .phaseAnimator([CGFloat(0), -14], trigger: hops) { content, lift in
                     content.offset(y: lift)
                 } animation: { _ in
@@ -265,10 +288,24 @@ struct CocoSays: View {
         .padding(.horizontal)
         .padding(.top, 8 * uiScale)
         .onChange(of: text) { joke = nil }
+        .onChange(of: cheers) { strike(.cheer, for: 2.2) }
+        .onChange(of: oops) { strike(.think, for: 1.6) }
+    }
+
+    /// Holds a pose for a moment, then back to waving.
+    private func strike(_ new: CocoPose, for seconds: Double) {
+        poseTask?.cancel()
+        pose = new
+        poseTask = Task {
+            try? await Task.sleep(for: .seconds(seconds))
+            guard !Task.isCancelled else { return }
+            pose = .wave
+        }
     }
 
     private func beSilly() {
         Haptics.tap()
+        strike(.giggle, for: 2.5)
         spins += 1
         let line = Self.sillyLines.filter { $0 != joke }.randomElement()!
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { joke = line }

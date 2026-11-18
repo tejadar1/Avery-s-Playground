@@ -8,6 +8,10 @@ const assets = path.join(__dirname, '../AverysPlayground/Assets.xcassets');
 // name in the asset catalog → [svg file, pixel width, parts to hide, scale]; game icons are named Icon-<Activity rawValue>.
 const images = {
   Coco: ['coco.svg', 1200],
+  // Coco's other poses, swapped in as she talks (CocoFigure)
+  CocoCheer: ['coco-cheer.svg', 1200],
+  CocoThink: ['coco-think.svg', 1200],
+  CocoGiggle: ['coco-giggle.svg', 1200],
   Avery: ['avery.svg', 900],
   // The launch screen shows images at their natural size, 3x: 600px is 200 points. LaunchCoco (Coco on her
   // scene) is made below; GettingReady shows LaunchScene with Coco on top in the same spot, so she can move.
