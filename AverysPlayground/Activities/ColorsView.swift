@@ -14,7 +14,84 @@ struct ColoringPage {
         regions.indices.last { regions[$0].contains(point) }
     }
 
-    static let all: [ColoringPage] = [garden, farm, beach, reef, night]
+    /// New pages go at the end, so a saved coloring stays on its page.
+    static let all: [ColoringPage] = [garden, farm, beach, reef, night, coco, mochi, cupcakes]
+
+    /// Coco on a sunny day, holding a balloon.
+    static let coco = ColoringPage(
+        name: "Coco",
+        regions: [
+            box(0, 0, 1, 1),
+            round(0.1, 0.14, 0.06),
+            cloud(0.58, 0.12, 0.045),
+            hill(from: 0.84, peak: (0.5, 0.74), to: 0.84),
+            shape([(0.33, 0.78), (0.2, 0.86), (0.06, 0.84), (0.16, 0.8), (0.3, 0.7)]),
+            oval(0.42, 0.66, 0.26, 0.38),
+            oval(0.45, 0.69, 0.14, 0.26),
+            oval(0.36, 0.86, 0.09, 0.07), oval(0.5, 0.86, 0.09, 0.07),
+            oval(0.58, 0.58, 0.12, 0.05, degrees: -40),
+            round(0.4, 0.38, 0.11),
+            box(0.42, 0.32, 0.3, 0.13, corner: 0.05),
+            round(0.36, 0.29, 0.03), round(0.45, 0.26, 0.035),
+            petals(0.33, 0.2), round(0.33, 0.2, 0.017),
+            oval(0.82, 0.2, 0.12, 0.17),
+            shape([(0.81, 0.285), (0.83, 0.285), (0.825, 0.31), (0.815, 0.31)]),
+        ],
+        details: rays(0.1, 0.14, 0.06)
+            + lines([[(0.82, 0.31), (0.72, 0.45), (0.62, 0.56)], [(0.46, 0.41), (0.7, 0.4)]])
+            + round(0.37, 0.3, 0.01) + round(0.46, 0.27, 0.012) + round(0.69, 0.35, 0.008)
+            + lines([[(0.41, 0.6), (0.49, 0.6)], [(0.4, 0.68), (0.5, 0.68)], [(0.41, 0.76), (0.49, 0.76)]])
+    )
+
+    /// Mochi sitting in the grass with her ball and her bone.
+    static let mochi = ColoringPage(
+        name: "Mochi",
+        regions: [
+            box(0, 0, 1, 1),
+            round(0.12, 0.15, 0.065),
+            cloud(0.62, 0.12, 0.05),
+            hill(from: 0.7, peak: (0.5, 0.6), to: 0.72),
+            oval(0.67, 0.6, 0.09, 0.16, degrees: 35),
+            oval(0.5, 0.68, 0.3, 0.32),
+            oval(0.5, 0.71, 0.14, 0.2),
+            oval(0.42, 0.85, 0.08, 0.08), oval(0.58, 0.85, 0.08, 0.08),
+            shape([(0.39, 0.36), (0.4, 0.17), (0.47, 0.3)]), shape([(0.61, 0.36), (0.6, 0.17), (0.53, 0.3)]),
+            round(0.5, 0.4, 0.13),
+            oval(0.5, 0.47, 0.13, 0.1),
+            round(0.5, 0.44, 0.018),
+            round(0.45, 0.37, 0.016), round(0.55, 0.37, 0.016),
+            round(0.17, 0.85, 0.055),
+            box(0.74, 0.86, 0.14, 0.035, corner: 0.015), round(0.745, 0.862, 0.02), round(0.745, 0.893, 0.02), round(0.875, 0.862, 0.02), round(0.875, 0.893, 0.02),
+            petals(0.88, 0.72), round(0.88, 0.72, 0.017),
+        ],
+        details: rays(0.12, 0.15, 0.065)
+            + arc(0.475, 0.49, 0.025, from: 20, to: 160) + arc(0.525, 0.49, 0.025, from: 20, to: 160)
+            + lines([[(0.12, 0.82), (0.22, 0.88)], [(0.88, 0.75), (0.88, 0.84)]])
+    )
+
+    /// A cupcake shop counter: a big cupcake with a cherry, a little one, and bunting.
+    static let cupcakes = ColoringPage(
+        name: "cupcake",
+        regions: [
+            box(0, 0, 1, 1),
+            shape([(0, 0.08), (0.12, 0.08), (0.06, 0.2)]), shape([(0.24, 0.1), (0.36, 0.1), (0.3, 0.22)]),
+            shape([(0.64, 0.1), (0.76, 0.1), (0.7, 0.22)]), shape([(0.88, 0.08), (1, 0.08), (0.94, 0.2)]),
+            box(0, 0.78, 1, 0.22),
+            shape([(0.3, 0.52), (0.62, 0.52), (0.58, 0.8), (0.34, 0.8)]),
+            oval(0.46, 0.5, 0.4, 0.13),
+            oval(0.46, 0.41, 0.31, 0.12),
+            oval(0.46, 0.33, 0.2, 0.11),
+            round(0.46, 0.24, 0.035),
+            shape([(0.7, 0.66), (0.86, 0.66), (0.84, 0.8), (0.72, 0.8)]),
+            oval(0.78, 0.64, 0.2, 0.09),
+            round(0.78, 0.57, 0.025),
+            star(0.15, 0.55, 0.06),
+        ],
+        details: lines([[(0, 0.08), (0.12, 0.08), (0.24, 0.1), (0.36, 0.1), (0.64, 0.1), (0.76, 0.1), (0.88, 0.08), (1, 0.08)],
+                        [(0.4, 0.54), (0.41, 0.78)], [(0.46, 0.54), (0.46, 0.78)], [(0.52, 0.54), (0.51, 0.78)],
+                        [(0.46, 0.2), (0.48, 0.15), (0.51, 0.13)], [(0.76, 0.68), (0.76, 0.78)], [(0.8, 0.68), (0.8, 0.78)]])
+            + lines([[(0.38, 0.46), (0.4, 0.47)], [(0.5, 0.45), (0.52, 0.46)], [(0.43, 0.36), (0.45, 0.37)], [(0.53, 0.38), (0.55, 0.39)]])
+    )
 
     static let garden = ColoringPage(
         name: "garden",
@@ -254,7 +331,8 @@ struct ColorsView: View {
     private static let eraser = NamedColor(name: "Eraser", color: .white, exampleName: "")
 
     @State private var selected = ColorsView.palette[0]
-    @State private var pageIndex = 0
+    /// Starts on Coco's page, the newest.
+    @State private var pageIndex = ColoringPage.all.firstIndex { $0.name == "Coco" } ?? 0
     @State private var fills = ColoringPage.all.map { Array(repeating: Color.white, count: $0.regions.count) }
     @State private var strokes = ColoringPage.all.map { _ in [ColorStroke]() }
     @State private var current: ColorStroke?
@@ -390,7 +468,8 @@ struct ColorsView: View {
         let toView = CGAffineTransform(scaleX: size.width, y: size.height)
         let marks = strokes[pageIndex] + (current.map { [$0] } ?? [])
         return Canvas { context, _ in
-            let line = StrokeStyle(lineWidth: size.width * 0.005, lineCap: .round, lineJoin: .round)
+            // Bold, rounded outlines, like a real coloring book's
+            let line = StrokeStyle(lineWidth: size.width * 0.008, lineCap: .round, lineJoin: .round)
             let crayon = StrokeStyle(lineWidth: size.width * 0.035, lineCap: .round, lineJoin: .round)
             for (index, region) in page.regions.enumerated() {
                 let shape = region.applying(toView)
@@ -562,10 +641,15 @@ struct ColorsView: View {
 
     private func load() {
         guard let data = UserDefaults.standard.data(forKey: "coloring"),
-              let saved = try? JSONDecoder().decode(Saved.self, from: data),
-              saved.fills.map(\.count) == fills.map(\.count), saved.strokes.count == strokes.count else { return }
-        fills = saved.fills.map { $0.map { Self.palette[$0].color } }
-        strokes = saved.strokes.map { $0.map { ColorStroke(region: $0.region, color: Self.palette[$0.crayon].color, points: $0.points) } }
+              let saved = try? JSONDecoder().decode(Saved.self, from: data) else { return }
+        // Page by page, so new pages added since don't throw away the ones she colored
+        let color = { (crayon: Int) in Self.palette.indices.contains(crayon) ? Self.palette[crayon].color : .white }
+        for page in fills.indices where page < saved.fills.count && saved.fills[page].count == fills[page].count {
+            fills[page] = saved.fills[page].map(color)
+            if page < saved.strokes.count {
+                strokes[page] = saved.strokes[page].map { ColorStroke(region: $0.region, color: color($0.crayon), points: $0.points) }
+            }
+        }
     }
 
     private func clearPage() {
