@@ -20,6 +20,18 @@ struct Block: Identifiable, Equatable {
         }
     }
 
+    /// Which way a resting block tips, if its middle hangs past the blocks holding it up: -1 left, 1 right, nil if
+    /// it's steady (on the floor, or balanced).
+    static func tipping(_ block: Block, on others: [Block]) -> Int? {
+        guard block.y > 0.01 else { return nil }
+        let half = block.size.width / 2
+        let under = others.filter {
+            $0.id != block.id && abs($0.y + $0.size.height - block.y) < 0.01 && abs($0.x - block.x) < half + $0.size.width / 2 - 0.1
+        }
+        guard let left = under.map({ $0.x - $0.size.width / 2 }).min(), let right = under.map({ $0.x + $0.size.width / 2 }).max() else { return nil }
+        return block.x < left ? -1 : block.x > right ? 1 : nil
+    }
+
     /// Where a block let go at `x` comes to rest: on the floor, or on top of the highest block under it.
     static func landing(_ block: Block, on others: [Block]) -> Double {
         let half = block.size.width / 2
@@ -38,6 +50,8 @@ struct BlocksView: View {
     @State private var nextID = 0
     /// The block under her finger (new off the shelf, or picked up), and where it is in points.
     @State private var dragging: (block: Block, at: CGPoint)?
+    /// How many times each block has tumbled off an edge, for its spin as it falls.
+    @State private var tumbles: [Int: Int] = [:]
     /// How many times each block has landed, for its squash; and the last landing, for a puff of dust.
     @State private var bumps: [Int: Int] = [:]
     @State private var dust = (at: CGPoint.zero, count: 0)
@@ -53,6 +67,9 @@ struct BlocksView: View {
                 ForEach(blocks) { block in
                     BlockShape(block: block, unit: unit, color: Self.colors[block.color])
                         .boing(bumps[block.id] ?? 0)
+                        .keyframeAnimator(initialValue: 0.0, trigger: tumbles[block.id] ?? 0) { content, turn in
+                            content.rotationEffect(.degrees(turn))
+                        } keyframes: { _ in LinearKeyframe(360, duration: 0.45) }
                         .position(x: block.x * unit, y: floorY - (block.y + block.size.height / 2) * unit)
                         .opacity(dragging?.block.id == block.id ? 0 : 1)
                         .gesture(drag(block, unit: unit, floorY: floorY, width: geo.size.width))
@@ -139,7 +156,7 @@ struct BlocksView: View {
         dragging = nil
         blocks.removeAll { $0.id == block.id }
         guard point.y < floorY + unit else {  // let go back on the shelf: put away
-            settle()
+            settle(width: Double(width / unit))
             return
         }
         let half = block.size.width / 2
@@ -147,7 +164,7 @@ struct BlocksView: View {
         block.y = max(0, Double((floorY - point.y) / unit) - block.size.height / 2)
         blocks.append(block)
         if blocks.count > 40 { blocks.removeFirst() }
-        settle()
+        settle(width: Double(width / unit))
         Sounds.shared.play(.clunk)
         Haptics.tap()
         // A squash as it lands, and a puff of dust where it lands
@@ -158,14 +175,31 @@ struct BlocksView: View {
     }
 
     /// Everything falls until it rests on something, lowest first.
-    private func settle() {
+    /// Everything falls until it rests on something, lowest first. A block hanging too far over an edge tips off,
+    /// tumbling down beside it (and anything stacked on it follows).
+    private func settle(width: Double) {
+        var toppled = 0
         withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
             var settled: [Block] = []
             for var block in blocks.sorted(by: { $0.y < $1.y }) {
                 block.y = Block.landing(block, on: settled)
+                if let side = Block.tipping(block, on: settled) {
+                    let half = block.size.width / 2
+                    block.x = min(max(block.x + Double(side) * block.size.width, half), width - half)
+                    block.y = Block.landing(block, on: settled)
+                    tumbles[block.id, default: 0] += 1
+                    toppled += 1
+                }
                 settled.append(block)
             }
             blocks = settled
+        }
+        if toppled > 0 {
+            Task {
+                try? await Task.sleep(for: .seconds(0.3))
+                Sounds.shared.play(.clunk)
+                Haptics.tap()
+            }
         }
     }
 

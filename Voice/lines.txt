@@ -489,6 +489,7 @@ Coral
 Count
 Count the toppings!
 Cozy pajamas!
+Crayon
 Croc-tacular!
 Crocodile-tastic!
 Crown
@@ -967,6 +968,7 @@ Ma
 Mac
 Mad. Take a big breath, and blow it out slowly.
 Make your bed
+Marker
 Mary Had a Little Lamb
 Maze board
 Maze. Drag Mochi to the bone.
@@ -1274,6 +1276,7 @@ So stylish!
 Someone knocked down your tower!
 Someone knocked down your tower! How would you feel?
 Sounds
+Sparkle pen
 Sparkle sparkle!
 Sparkly teeth!
 Sparkly teeth! Snap snap!
@@ -1287,6 +1290,7 @@ Squeak squeak!
 Squeaky clean!
 Squeaky clean! Shake shake shake!
 Squeaky clean! Start again!
+Stamp
 Stars
 Stars caught the most fish!
 Stars found it! 

@@ -13,6 +13,16 @@ final class CalmTests: XCTestCase {
         XCTAssertEqual(Block.landing(Block(id: 3, shape: .ball, color: 3, x: 2, y: 9), on: [floor, arch]), 2, "on the highest one")
     }
 
+    func testABlockHangingPastItsSupportTipsOff() {
+        let square = Block(id: 0, shape: .square, color: 0, x: 2, y: 0)
+        XCTAssertNil(Block.tipping(Block(id: 1, shape: .square, color: 1, x: 2.2, y: 1), on: [square]), "a little off-center is fine")
+        XCTAssertEqual(Block.tipping(Block(id: 2, shape: .plank, color: 1, x: 2.9, y: 1), on: [square]), 1, "its middle past the right edge")
+        XCTAssertEqual(Block.tipping(Block(id: 3, shape: .plank, color: 1, x: 1.1, y: 1), on: [square]), -1, "past the left edge")
+        XCTAssertNil(Block.tipping(Block(id: 4, shape: .square, color: 1, x: 7, y: 0), on: [square]), "on the floor it's steady")
+        let other = Block(id: 5, shape: .square, color: 0, x: 4, y: 0)
+        XCTAssertNil(Block.tipping(Block(id: 6, shape: .plank, color: 1, x: 3, y: 1), on: [square, other]), "a bridge over two blocks")
+    }
+
     func testTheGardenIsSavedAndReadBack() {
         XCTAssertEqual(Garden.stages(""), [0, 0, 0, 0, 0], "a new garden is bare soil")
         XCTAssertEqual(Garden.stages(Garden.store([1, 4, 0, 2, 3])), [1, 4, 0, 2, 3])
