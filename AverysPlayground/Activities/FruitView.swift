@@ -162,8 +162,16 @@ struct FruitView: View {
                 }
             }
             .frame(width: width, height: width / 0.85)
-            .background(canPick ? Color(red: 1.0, green: 0.92, blue: 0.55).opacity(0.7) : .clear, in: RoundedRectangle(cornerRadius: 20 * uiScale))
-            .scaleEffect(canPick ? 1.04 : 1)
+            // A tree she can pick from glows softly from behind and sways, instead of sitting in a box
+            .background(
+                Circle().fill(RadialGradient(colors: [Color(red: 1.0, green: 0.92, blue: 0.5).opacity(canPick ? 0.85 : 0), .clear],
+                                             center: .center, startRadius: 0, endRadius: width * 0.6))
+                    .frame(width: width * 1.2, height: width * 1.2)
+            )
+            .phaseAnimator([0.0, 3, -3], trigger: canPick) { content, angle in
+                content.rotationEffect(.degrees(canPick ? angle : 0), anchor: .bottom)
+            } animation: { _ in .easeInOut(duration: 0.25) }
+            .scaleEffect(canPick ? 1.05 : 1)
             .animation(.spring(response: 0.3, dampingFraction: 0.5), value: canPick)
         }
         .buttonStyle(SquishyButtonStyle())
