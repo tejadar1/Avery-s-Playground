@@ -72,13 +72,12 @@ jobs:
 
   test:
     if: inputs.voice == 'none'
-    runs-on: macos-latest
+    runs-on: xcode-27  # GitHub's Xcode 27 machines (macOS 27, iOS 27 SDK), which App Store Connect requires from April 2027
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      # The newest Xcode on the runner (not a beta), so the app is built with the newest iOS SDK, as App Store
-      # Connect requires (the iOS 27 SDK from April 2027). Prints which one it picked.
+      # The newest Xcode on the machine (not a beta), and print which one, so the log shows the SDK it built with.
       - run: sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | grep -iv beta | sort -V | tail -1)" && xcodebuild -version
       - run: brew install xcodegen && xcodegen
       - name: Build and run tests
@@ -106,7 +105,7 @@ jobs:
 
   testflight:
     needs: test
-    runs-on: macos-latest
+    runs-on: xcode-27  # GitHub's Xcode 27 machines (macOS 27, iOS 27 SDK), which App Store Connect requires from April 2027
     # Only the .p8 key is a secret; the IDs just say which account and key to use.
     env:
       KEY_ID: LRDVNT6QAA
@@ -118,8 +117,7 @@ jobs:
         run: echo "The APP_STORE_CONNECT_KEY secret isn't set, so nothing is uploaded. See README > TestFlight."
       - if: env.KEY != ''
         uses: actions/checkout@v4
-      # The newest Xcode on the runner (not a beta), so the app is built with the newest iOS SDK, as App Store
-      # Connect requires (the iOS 27 SDK from April 2027). Prints which one it picked.
+      # The newest Xcode on the machine (not a beta), and print which one, so the log shows the SDK it built with.
       - if: env.KEY != ''
         run: sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | grep -iv beta | sort -V | tail -1)" && xcodebuild -version
       - if: env.KEY != ''
