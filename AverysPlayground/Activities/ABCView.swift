@@ -41,7 +41,12 @@ struct ABCView: View {
         Letter(letter: "Z", word: "Zebra", picture: "zebra"),
     ]
 
-    private static let tileColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .pink]
+    /// The app's soft colors, not the bright system ones.
+    private static let tileColors: [Color] = [
+        Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 0.95, green: 0.62, blue: 0.3), Color(red: 0.98, green: 0.78, blue: 0.3),
+        Color(red: 0.45, green: 0.72, blue: 0.42), Color(red: 0.36, green: 0.61, blue: 0.84), Color(red: 0.62, green: 0.5, blue: 0.85),
+        Color(red: 0.95, green: 0.5, blue: 0.68),
+    ]
 
     @State private var selected = ABCView.letters[0]
     @State private var bounceCount = 0
@@ -56,7 +61,8 @@ struct ABCView: View {
                     Text(selected.letter.lowercased())
                 }
                 .font(.kid(88))
-                .foregroundStyle(.red)
+                .foregroundStyle(Color(red: 0.91, green: 0.4, blue: 0.43))
+                .shadow(color: Color.outline.opacity(0.35), radius: 0, x: 2, y: 3)
 
                 Picture(selected.picture, size: 100 * uiScale * roomy(isWide))
                     .phaseAnimator([CGFloat(1), 1.3], trigger: bounceCount) { content, scale in
@@ -67,25 +73,29 @@ struct ABCView: View {
 
                 Text(selected.word)
                     .font(.kid(32))
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Color.outline)
             }
             .frame(maxWidth: .infinity)
             .padding()
-            .background(.white, in: RoundedRectangle(cornerRadius: 32 * uiScale, style: .continuous))
+            .cartoonCard(.white, cornerRadius: 32 * uiScale)
             .onTapGesture { choose(selected) }
 
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 12 * uiScale) {
                     ForEach(Array(Self.letters.enumerated()), id: \.element.id) { index, item in
                         Button { choose(item) } label: {
-                            Text(item.letter)
-                                .font(.kid(36 * roomy(isWide)))
-                                .foregroundStyle(.white)
-                                .frame(maxWidth: .infinity, minHeight: 64 * uiScale * roomy(isWide))
-                                .background(
-                                    Self.tileColors[index % Self.tileColors.count].gradient,
-                                    in: RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
-                                )
+                            // A soft two-tone tile with the letter and a little picture of its word
+                            VStack(spacing: 0) {
+                                Text(item.letter)
+                                    .font(.kid(32 * roomy(isWide)))
+                                    .foregroundStyle(.white)
+                                    .shadow(color: Color.outline.opacity(0.4), radius: 0, x: 1, y: 2)
+                                Picture(item.picture, size: 26 * uiScale * roomy(isWide))
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 84 * uiScale * roomy(isWide))
+                            .cartoonCard(Self.tileColors[index % Self.tileColors.count], cornerRadius: 18 * uiScale)
+                            .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous)
+                                .strokeBorder(.white, lineWidth: item.id == selected.id ? 4 * uiScale : 0))
                         }
                         .buttonStyle(SquishyButtonStyle())
                     }
