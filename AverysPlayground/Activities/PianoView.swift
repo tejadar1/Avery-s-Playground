@@ -114,20 +114,27 @@ final class PianoSound {
     private let engine = AVAudioEngine()
     /// Two voices per key, so tapping a key again lets the last note ring on instead of cutting it off with a click.
     private var players: [AVAudioPlayerNode] = []
-    private var buffers: [AVAudioPCMBuffer] = []
+    private var buffers: [AVAudioPCMBuffer?] = Array(repeating: nil, count: frequencies.count)
     private var nextVoice: [Int] = Array(repeating: 0, count: frequencies.count)
+    private let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
 
     private init() {
         _ = Speaker.shared  // sets up the audio session, so notes play even with the silent switch on
-        let format = AVAudioFormat(standardFormatWithSampleRate: 44_100, channels: 1)!
-        for frequency in Self.frequencies {
-            for _ in 0..<2 {
-                let player = AVAudioPlayerNode()
-                engine.attach(player)
-                engine.connect(player, to: engine.mainMixerNode, format: format)
-                players.append(player)
-            }
-            buffers.append(Self.tone(frequency, format: format))
+        for _ in 0..<Self.frequencies.count * 2 {
+            let player = AVAudioPlayerNode()
+            engine.attach(player)
+            engine.connect(player, to: engine.mainMixerNode, format: format)
+            players.append(player)
+        }
+    }
+
+    /// Makes every note off the main thread, so opening the piano or the busy board doesn't stall. Called while the
+    /// app opens.
+    func prepare() {
+        let frequencies = Self.frequencies, format = self.format
+        Task {
+            let made = await Task.detached(priority: .utility) { frequencies.map { Self.tone($0, format: format) } }.value
+            for (key, buffer) in made.enumerated() where buffers[key] == nil { buffers[key] = buffer }
         }
     }
 
@@ -142,7 +149,9 @@ final class PianoSound {
         warmUp()
         let voice = nextVoice[key]
         nextVoice[key] = 1 - voice
-        players[key * 2 + voice].scheduleBuffer(buffers[key], at: nil, options: .interrupts)
+        let buffer = buffers[key] ?? Self.tone(Self.frequencies[key], format: format)  // made now if not ready yet
+        buffers[key] = buffer
+        players[key * 2 + voice].scheduleBuffer(buffer, at: nil, options: .interrupts)
     }
 
     /// A piano-like note: six overtones, the higher ones quieter and fading sooner, tuned a hair sharp the way a

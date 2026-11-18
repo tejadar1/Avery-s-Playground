@@ -45,6 +45,9 @@ struct GettingReady: View {
         .accessibilityLabel("Coco is getting ready")
         .accessibilityIdentifier("Getting ready")
         .task {
+            // Make the sound effects and piano notes while Coco gets ready, so no game waits for them later.
+            Sounds.shared.prepare()
+            PianoSound.shared.prepare()
             for _ in Self.steps {
                 try? await Task.sleep(for: .seconds(0.45))
                 guard !Task.isCancelled else { return }

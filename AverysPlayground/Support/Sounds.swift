@@ -126,27 +126,41 @@ final class Sounds {
     private let engine = AVAudioEngine()
     private var players: [Sound: AVAudioPlayerNode] = [:]
     private var buffers: [Sound: AVAudioPCMBuffer] = [:]
+    private let format = AVAudioFormat(standardFormatWithSampleRate: Sound.rate, channels: 1)!
 
     private init() {
         _ = Speaker.shared  // sets up the audio session, so sounds play even with the silent switch on
-        let format = AVAudioFormat(standardFormatWithSampleRate: Sound.rate, channels: 1)!
         for sound in Sound.allCases {
             let player = AVAudioPlayerNode()
             engine.attach(player)
             engine.connect(player, to: engine.mainMixerNode, format: format)
             players[sound] = player
-            let samples = sound.samples
-            let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(samples.count))!
-            buffer.frameLength = buffer.frameCapacity
-            for (i, sample) in samples.enumerated() { buffer.floatChannelData![0][i] = sample }
-            buffers[sound] = buffer
         }
+    }
+
+    /// Makes every sound off the main thread and keeps it, so the first tap that plays one doesn't stall.
+    /// Called while the app opens.
+    func prepare() {
+        Task {
+            let made = await Task.detached(priority: .utility) { Sound.allCases.map { ($0, $0.samples) } }.value
+            for (sound, samples) in made where buffers[sound] == nil { buffers[sound] = buffer(samples) }
+        }
+    }
+
+    private func buffer(_ samples: [Float]) -> AVAudioPCMBuffer {
+        let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(samples.count))!
+        buffer.frameLength = buffer.frameCapacity
+        samples.withUnsafeBufferPointer { buffer.floatChannelData![0].update(from: $0.baseAddress!, count: samples.count) }
+        return buffer
     }
 
     /// Plays a sound once, or starts it looping if it loops (a no-op if it's already going).
     func play(_ sound: Sound) {
         if !engine.isRunning { try? engine.start() }
-        guard let player = players[sound], let buffer = buffers[sound] else { return }
+        guard let player = players[sound] else { return }
+        // Made now if it wasn't ready yet
+        let buffer = buffers[sound] ?? buffer(sound.samples)
+        buffers[sound] = buffer
         if sound.loops && player.isPlaying { return }
         player.scheduleBuffer(buffer, at: nil, options: sound.loops ? .loops : .interrupts)
         player.play()

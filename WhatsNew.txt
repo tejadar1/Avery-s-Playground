@@ -1,1 +1,2 @@
 - Garden: no stray soil line across the fence on an iPad held sideways.
+- Smoother first taps: sound effects and piano notes are made while Coco gets ready, so no game pauses the first time it plays a sound.
