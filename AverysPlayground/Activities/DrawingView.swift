@@ -1,10 +1,18 @@
 import SwiftUI
 
 struct DrawingView: View {
+    /// The crayon, a thick marker, a sparkle pen, and stamps of Coco's friends.
+    private enum Tool: CaseIterable { case crayon, marker, sparkle, stamp }
+
     private struct Stroke {
         var points: [CGPoint]
         let color: Color
+        var tool = Tool.crayon
+        /// The stamp's picture, for a stamp
+        var stamp: String?
     }
+
+    private static let stamps = ["crocodile", "dog", "star", "heart", "flower", "butterfly"]
 
     /// Soft crayon colors, two to a row in the side panel (six to a row along the bottom on iPhone).
     private static let crayons: [(name: String, color: Color)] = [
@@ -19,6 +27,8 @@ struct DrawingView: View {
     @State private var strokes: [Stroke] = []
     @State private var current: Stroke?
     @State private var color = DrawingView.crayons[7].color
+    @State private var tool = Tool.crayon
+    @State private var stamp = 0
     @State private var pageSize = CGSize(width: 1, height: 1)
     @State private var photo: Image?
     @State private var flashes = 0
@@ -31,9 +41,12 @@ struct DrawingView: View {
             if widthClass == .compact && heightClass == .regular {
                 VStack(spacing: 12) {
                     page
-                    HStack(spacing: 10) {
-                        crayons(columns: 6, size: 44, spacing: 0)  // full-size taps that still fit the narrowest iPhone
-                        VStack(spacing: 8) { undoButton; clearButton; photoButton }
+                    VStack(spacing: 8) {
+                        HStack(spacing: 10) { tools }
+                        HStack(spacing: 10) {
+                            crayons(columns: 6, size: 44, spacing: 0)  // full-size taps that still fit the narrowest iPhone
+                            VStack(spacing: 8) { undoButton; clearButton; photoButton }
+                        }
                     }
                     .padding(10)
                     .background(.white, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
@@ -65,7 +78,13 @@ struct DrawingView: View {
             DragGesture(minimumDistance: 0)
                 .onChanged { value in
                     if current == nil {
-                        current = Stroke(points: [value.location], color: color)
+                        current = Stroke(points: [value.location], color: color, tool: tool, stamp: tool == .stamp ? Self.stamps[stamp] : nil)
+                        if tool == .stamp {
+                            Sounds.shared.play(.pop)
+                            Haptics.tap()
+                        }
+                    } else if tool == .stamp {
+                        current?.points = [value.location]  // a stamp follows the finger until it's let go
                     } else {
                         current?.points.append(value.location)
                     }
@@ -80,6 +99,10 @@ struct DrawingView: View {
 
     private var panel: some View {
         VStack(spacing: 14 * uiScale) {
+            LazyVGrid(columns: Array(repeating: GridItem(.fixed(44 * uiScale), spacing: 12 * uiScale), count: 2), spacing: 12 * uiScale) { tools }
+
+            Divider()
+
             crayons(columns: 2, size: 44 * uiScale, spacing: 12 * uiScale)
 
             Divider()
@@ -114,6 +137,32 @@ struct DrawingView: View {
                 .buttonStyle(SquishyButtonStyle())
                 .accessibilityLabel(crayon.name)
             }
+        }
+    }
+
+    /// The tool buttons; the chosen one is ringed. Tapping the stamp again picks the next stamp.
+    @ViewBuilder private var tools: some View {
+        ForEach(Tool.allCases, id: \.self) { kind in
+            Button {
+                Haptics.tap()
+                if kind == .stamp && tool == .stamp { stamp = (stamp + 1) % Self.stamps.count }
+                tool = kind
+            } label: {
+                Group {
+                    switch kind {
+                    case .crayon: Image(systemName: "pencil.tip").foregroundStyle(color == .white ? Color.outline : color)
+                    case .marker: Image(systemName: "paintbrush.pointed.fill").foregroundStyle(color == .white ? Color.outline : color)
+                    case .sparkle: Image(systemName: "sparkles").foregroundStyle(Color(red: 0.98, green: 0.75, blue: 0.2))
+                    case .stamp: Picture(Self.stamps[stamp], size: 30 * uiScale)
+                    }
+                }
+                .font(.system(size: 20 * uiScale, weight: .bold))
+                .frame(width: 44 * uiScale, height: 44 * uiScale)
+                .background(Color(red: 0.95, green: 0.95, blue: 0.95), in: Circle())
+                .overlay(Circle().strokeBorder(tool == kind ? Color.outline.opacity(0.7) : .clear, lineWidth: 3 * uiScale))
+            }
+            .buttonStyle(SquishyButtonStyle())
+            .accessibilityLabel(["Crayon", "Marker", "Sparkle pen", "Stamp"][Tool.allCases.firstIndex(of: kind)!])
         }
     }
 
@@ -165,10 +214,39 @@ struct DrawingView: View {
     }
 
     private func draw(_ stroke: Stroke, in context: inout GraphicsContext) {
-        let width = 16 * uiScale
         var path = Path()
         path.addLines(stroke.points)
         if stroke.points.count == 1, let dot = path.currentPoint { path.addLine(to: dot) }
+        switch stroke.tool {
+        case .stamp:
+            guard let name = stroke.stamp, let at = stroke.points.first else { return }
+            let size = 80 * uiScale
+            context.draw(context.resolve(Image("Picture-" + name)), in: CGRect(x: at.x - size / 2, y: at.y - size / 2, width: size, height: size))
+            return
+        case .marker:
+            // Thick, smooth and bold
+            context.stroke(path, with: .color(stroke.color), style: StrokeStyle(lineWidth: 34 * uiScale, lineCap: .round, lineJoin: .round))
+            return
+        case .sparkle:
+            // A thin line with little twinkles all along it
+            context.stroke(path, with: .color(stroke.color), style: StrokeStyle(lineWidth: 9 * uiScale, lineCap: .round, lineJoin: .round))
+            var twinkles = Path()
+            for (n, point) in Self.samples(along: stroke.points, every: 18 * uiScale).enumerated() {
+                let r = 5 * uiScale * (0.6 + Self.noise(Double(n) * 2.3))
+                let at = CGPoint(x: point.x + (Self.noise(Double(n) * 5.1) - 0.5) * 22 * uiScale, y: point.y + (Self.noise(Double(n) * 3.7) - 0.5) * 22 * uiScale)
+                twinkles.move(to: CGPoint(x: at.x, y: at.y - r))
+                twinkles.addQuadCurve(to: CGPoint(x: at.x + r, y: at.y), control: at)
+                twinkles.addQuadCurve(to: CGPoint(x: at.x, y: at.y + r), control: at)
+                twinkles.addQuadCurve(to: CGPoint(x: at.x - r, y: at.y), control: at)
+                twinkles.addQuadCurve(to: CGPoint(x: at.x, y: at.y - r), control: at)
+            }
+            context.fill(twinkles, with: .color(Color(red: 1.0, green: 0.85, blue: 0.3)))
+            context.stroke(twinkles, with: .color(.white), lineWidth: 1)
+            return
+        case .crayon:
+            break
+        }
+        let width = 16 * uiScale
 
         // Three slightly offset, see-through passes give the soft, uneven edge of a crayon.
         for (dx, dy) in [(0, 0), (0.1, -0.07), (-0.08, 0.09)] as [(CGFloat, CGFloat)] {
