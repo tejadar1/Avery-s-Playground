@@ -1,6 +1,6 @@
 - Garden: no stray soil line across the fence on an iPad held sideways.
 - Smoother first taps: sound effects and piano notes are made while Coco gets ready, so no game pauses the first time it plays a sound.
-- Coco has new poses: she cheers when you win, thinks when something goes wrong, giggles when you tap her, and breathes gently while she waits.
+- Coco has new poses: she cheers when you win, thinks when something goes wrong, and giggles when you tap her.
 - Coloring: three new pages (Coco with a balloon, Mochi with her ball and bone, a cupcake shop) and bolder outlines. It opens on Coco's page.
 - Number Race: the squares are stepping stones on a path, and the players are Coco (Stars) and Mochi (Hearts).
 - Go Fishing: a real pond with a grassy bank, lily pads, reeds and a little dock, and fish that swim in and out.

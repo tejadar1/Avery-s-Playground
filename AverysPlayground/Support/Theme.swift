@@ -241,11 +241,9 @@ struct CocoSays: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 4 * uiScale) {
+            // No endless idle animation here: Coco is on every game, and a screen that never settles slows
+            // everything down (and stalls the screenshot test). Her poses and blinks keep her lively.
             CocoFigure(height: (isWide ? 66 : 100) * uiScale, pose: pose)
-                // Breathing gently while she waits
-                .phaseAnimator([CGFloat(1), 1.03]) { content, breath in
-                    content.scaleEffect(x: 1, y: reduceMotion ? 1 : breath, anchor: .bottom)
-                } animation: { _ in .easeInOut(duration: 1.6) }
                 .phaseAnimator([CGFloat(0), -14], trigger: hops) { content, lift in
                     content.offset(y: lift)
                 } animation: { _ in
