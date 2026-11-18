@@ -77,6 +77,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      # The newest Xcode on the runner (not a beta), so the app is built with the newest iOS SDK, as App Store
+      # Connect requires (the iOS 27 SDK from April 2027). Prints which one it picked.
+      - run: sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | grep -iv beta | sort -V | tail -1)" && xcodebuild -version
       - run: brew install xcodegen && xcodegen
       - name: Build and run tests
         run: |
@@ -115,6 +118,10 @@ jobs:
         run: echo "The APP_STORE_CONNECT_KEY secret isn't set, so nothing is uploaded. See README > TestFlight."
       - if: env.KEY != ''
         uses: actions/checkout@v4
+      # The newest Xcode on the runner (not a beta), so the app is built with the newest iOS SDK, as App Store
+      # Connect requires (the iOS 27 SDK from April 2027). Prints which one it picked.
+      - if: env.KEY != ''
+        run: sudo xcode-select -s "$(ls -d /Applications/Xcode_*.app | grep -iv beta | sort -V | tail -1)" && xcodebuild -version
       - if: env.KEY != ''
         run: brew install xcodegen && xcodegen
       # Archive unsigned; the export step signs with Apple's cloud-managed certificate, so no certificates live in this repo.
