@@ -124,10 +124,11 @@ struct NumberRaceView: View {
                             HStack(spacing: -size * 0.1) {
                                 ForEach([TicTacToe.Piece.star, .heart], id: \.self) { piece in
                                     if race.spot[piece] == square {
-                                        Picture(piece == .star ? "crocodile" : "dog", size: size * (up ? 0.72 : 0.5))
+                                        // As big as the stone's short side allows, so the pieces read at a glance
+                                        Picture(piece == .star ? "crocodile" : "dog", size: size * 0.9)
                                             .overlay(alignment: .bottomTrailing) {
                                                 Image(systemName: piece == .star ? "star.fill" : "heart.fill")
-                                                    .font(.system(size: size * (up ? 0.24 : 0.17), weight: .bold))
+                                                    .font(.system(size: size * 0.28, weight: .bold))
                                                     .foregroundStyle(piece == .star ? Color(red: 0.98, green: 0.78, blue: 0.25) : Color(red: 0.93, green: 0.36, blue: 0.48))
                                                     .shadow(color: Color.outline.opacity(0.7), radius: 0, x: 1, y: 1)
                                             }

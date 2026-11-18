@@ -98,12 +98,13 @@ struct DrawingView: View {
     }
 
     private var panel: some View {
-        VStack(spacing: 14 * uiScale) {
-            LazyVGrid(columns: Array(repeating: GridItem(.fixed(44 * uiScale), spacing: 12 * uiScale), count: 2), spacing: 12 * uiScale) { tools }
+        // Tighter spacing than before the tools came, so it all fits an iPad held sideways
+        VStack(spacing: 10 * uiScale) {
+            LazyVGrid(columns: Array(repeating: GridItem(.fixed(44 * uiScale), spacing: 8 * uiScale), count: 2), spacing: 8 * uiScale) { tools }
 
             Divider()
 
-            crayons(columns: 2, size: 44 * uiScale, spacing: 12 * uiScale)
+            crayons(columns: 2, size: 44 * uiScale, spacing: 8 * uiScale)
 
             Divider()
 
