@@ -15,11 +15,9 @@ A big lion was sleeping in the sun.
 A blue fish!
 A boy watched the sheep on a hill.
 A bud
-A bug is on a cup.
 A coral reef!
 A cupcake!
 A farm!
-A fish can swim fast.
 A flower
 A fresh page!
 A garden!
@@ -30,7 +28,6 @@ A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
 A match! Go again!
 A night sky!
-A pig is in the mud.
 A purple fish!
 A red fish!
 A seed
@@ -583,12 +580,14 @@ Glitter
 Glitter makes everything better!
 Glug glug! Happy plants!
 Go
+Go to bed.
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good eye!
 Good morning! Let's get ready for school.
 Good morning, sunshine!
 Good night!
+Good night, moon.
 Gown
 Gown! Fashion show time!
 Gown! Holy guacamole, I love it!
@@ -845,6 +844,7 @@ Hee hee, the tree isn't on your card.
 Hee hee, try the other one!
 Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
+Here is my dog.
 Hi Avery!
 Hi Bella!
 Hi Bobo!
@@ -893,9 +893,14 @@ How would you feel?
 Hugs and kisses
 Hurry
 I
+I am happy.
 I ate a crayon once. It tasted purple!
+I can hop.
 I can see my face in it! Hee hee!
 I have lots and lots of teeth, and I brush every one!
+I like the sun.
+I love you.
+I see a cat.
 I spy something that
 /// tells the time
 I tried to tickle a fish, but it was too slippery! Wiggle wiggle!
@@ -962,6 +967,7 @@ Locked
 Lon
 London Bridge
 Look again!
+Look at me!
 Look at that shine!
 Look at the frosting color!
 Looking good!
@@ -1433,27 +1439,19 @@ The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
 The basket! Pick any two fruits!
-The bat is up at the top.
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
 The boy learned to always tell the truth.
-The cat is on a mat.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 The crow got here first! Let's try again!
 The crow hops closer!
-The dog can dig.
-The duck is wet.
 The elves put on their new clothes and danced. Thank you, thank you!
 The first pig built a house of straw.
-The fox is in a box.
-The frog can hop and jump.
 The grasshopper played music all day. Come and play! he said.
-The hen sat on an egg.
 The kind ant shared her food. Come inside and get warm!
 The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
 The second pig built a house of sticks.
-The sun is hot.
 The table's ready! Let's eat!
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
@@ -1517,6 +1515,7 @@ Watch how, then trace it with your finger.
 Watch the keys.
 Watch, then trace each letter.
 Water the plants
+We like to play.
 We picked all the fruit! Holy guacamole, we beat the crow!
 Whale
 What a design!
@@ -1526,6 +1525,7 @@ What did Jack trade for the magic beans?
 What did the boy watch on the hill?
 What did the traveler put in the pot first?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
+What is this? A box!
 Wheels on the Bus
 Which house did the wolf not blow down?
 Which one feels calm?
@@ -1961,14 +1961,11 @@ book:A
 book:A big bad wolf saw her. Where are you going? he asked.
 book:A big lion was sleeping in the sun.
 book:A boy watched the sheep on a hill.
-book:A bug is on a cup.
-book:A fish can swim fast.
 book:A hungry traveler came to a little town. Nobody wanted to share their food.
 book:A is for Apple!
 book:A kind old shoemaker made shoes all day, but he was very tired.
 book:A little mouse ran over his nose and woke him up!
 book:A little old woman baked a gingerbread man.
-book:A pig is in the mud.
 book:A woodcutter chased the wolf away, and they all had a big hug.
 book:A!
 book:All
@@ -2041,12 +2038,14 @@ book:Fox ends with X!
 book:G is for Grapes!
 book:G!
 book:Give me a hug
+book:Go to bed.
 book:God bless you
 book:Goldilocks
 book:Goldilocks and the Three Bears
 book:Goldilocks went for a walk in the woods.
 book:Good morning
 book:Good night
+book:Good night, moon.
 book:Goodbye
 book:Grandma
 book:Grandma, what big eyes you have! All the better to see you with!
@@ -2068,13 +2067,19 @@ book:He jumped up and ran away! Run, run, as fast as you can!
 book:He planted the beans, and they grew up into the sky overnight!
 book:Hello
 book:Hello!
+book:Here is my dog.
 book:Hood
 book:Hot Cross Buns!
 book:How are you?
 book:How cool!
 book:I
+book:I am happy.
+book:I can hop.
 book:I is for Ice cream!
+book:I like the sun.
 book:I love you so much
+book:I love you.
+book:I see a cat.
 book:I!
 book:I'm
 book:I'm hungry
@@ -2102,6 +2107,7 @@ book:Little
 book:Little Red Riding Hood
 book:Little Red Riding Hood went to visit her grandma.
 book:London Bridge!
+book:Look at me!
 book:Loved. Say I love you too!
 book:M is for Moon!
 book:M!
@@ -2201,26 +2207,18 @@ book:The Lion and the Mouse
 book:The Little Red Hen
 book:The Three Little Pigs
 book:The Tortoise and the Hare
-book:The bat is up at the top.
 book:The big bad wolf huffed and puffed and blew the straw and stick houses down!
 book:The boy learned to always tell the truth.
-book:The cat is on a mat.
 book:The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
-book:The dog can dig.
-book:The duck is wet.
 book:The elves put on their new clothes and danced. Thank you, thank you!
 book:The end!
 book:The first pig built a house of straw.
-book:The fox is in a box.
-book:The frog can hop and jump.
 book:The grasshopper played music all day. Come and play! he said.
-book:The hen sat on an egg.
 book:The kind ant shared her food. Come inside and get warm!
 book:The lion was free! Little friends can be big helpers.
 book:The little mouse chewed and chewed the ropes.
 book:The little red hen found some wheat.
 book:The second pig built a house of sticks.
-book:The sun is hot.
 book:The third pig built a house of bricks.
 book:The three bears came home! Goldilocks woke up and ran all the way home.
 book:The wolf ran to grandma's house and hid in her bed.
@@ -2245,10 +2243,12 @@ book:Very good
 book:W is for Whale!
 book:W!
 book:Wash
+book:We like to play.
 book:What
 book:What did Jack trade for the magic beans?
 book:What did the boy watch on the hill?
 book:What did the traveler put in the pot first?
+book:What is this? A box!
 book:Wheels on the Bus!
 book:When
 book:Where
@@ -2288,7 +2288,7 @@ book:again
 book:ahead
 book:all
 book:always
-book:an
+book:am
 book:and
 book:animals!
 book:ant
@@ -2434,7 +2434,6 @@ book:dad
 book:danced
 book:day
 book:did
-book:dig
 book:dip
 book:dog
 book:dog and frog rhyme!
@@ -2447,7 +2446,6 @@ book:duck
 book:duck!
 book:duck! You spelled it!
 book:eat
-book:egg
 book:egg!
 book:eggs
 book:eight
@@ -2502,6 +2500,7 @@ book:gingerbread
 book:go
 book:going
 book:golden
+book:good
 book:got
 book:grandma
 book:grandma's
@@ -2514,6 +2513,7 @@ book:grew
 book:had
 book:hand
 book:hand! You spelled it!
+book:happy
 book:hard
 book:hat
 book:hat and bat rhyme!
@@ -2536,6 +2536,7 @@ book:hen! You read it!
 book:hen! You spelled it!
 book:hen! You wrote it!
 book:her
+book:here
 book:herself
 book:hid
 book:hiding
@@ -2546,7 +2547,6 @@ book:home
 book:hop
 book:horse
 book:horse!
-book:hot
 book:house
 book:house and mouse rhyme!
 book:house!
@@ -2555,6 +2555,7 @@ book:huffed
 book:hug
 book:hungry
 book:hunter's
+book:i
 book:ice cream
 book:ice cream!
 book:in
@@ -2562,7 +2563,6 @@ book:inside
 book:into
 book:is
 book:it
-book:jump
 book:jumped
 book:just
 book:kept
@@ -2575,17 +2575,19 @@ book:ladybug!
 book:laid
 book:learned
 book:let
+book:like
 book:lion
 book:lion!
 book:lion! You spelled it!
 book:little
+book:look
+book:love
 book:made
 book:magic
 book:man
 book:mango
 book:mango!
 book:mashed plantains
-book:mat
 book:me
 book:milk
 book:milk! You spelled it!
@@ -2674,7 +2676,6 @@ book:running
 book:safe
 book:said
 book:salami
-book:sat
 book:saw
 book:say
 book:second
@@ -2720,7 +2721,6 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:sun! You wrote it!
 book:sunhat!
-book:swim
 book:tall
 book:tell
 book:ten
@@ -2733,6 +2733,7 @@ book:then
 book:there
 book:they
 book:third
+book:this
 book:three
 book:through
 book:tiger
@@ -2777,6 +2778,7 @@ book:watch
 book:watched
 book:water
 book:way
+book:we
 book:web
 book:web!
 book:web! You read it!
@@ -2784,7 +2786,6 @@ book:web! You spelled it!
 book:web! You wrote it!
 book:went
 book:were
-book:wet
 book:whale
 book:whale!
 book:what
@@ -3652,6 +3653,7 @@ gingerbread
 girl
 globe
 go
+good
 goodbye
 gown
 grandma
@@ -3720,6 +3722,7 @@ heart and sun!
 heart and tree!
 heels
 hen
+here
 high,
 horse
 hot
@@ -3790,6 +3793,8 @@ lit
 living
 ll
 lll
+look
+love
 loved
 ly
 ly,
@@ -3839,6 +3844,7 @@ n
 necklace
 nest
 ng
+night
 night sky
 nnn
 none
@@ -3846,7 +3852,6 @@ note
 ny,
 o
 octopus
-of
 on
 oopsie
 orange
@@ -3892,6 +3897,7 @@ pillow
 pizza
 plant
 plantain
+play
 polish
 puh
 purple
@@ -3930,6 +3936,7 @@ satpinmdgockeurhbfljvwxyz
 scared
 school
 scissors
+see
 sh
 shaker
 shampoo
@@ -4209,6 +4216,7 @@ watch me
 water
 wateringcan
 waveform
+we
 web
 went
 whale

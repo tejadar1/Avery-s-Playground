@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Read to Coco: she reads a short sentence aloud herself, word by word. A bar sits under each word and a little Coco
+/// Read to Coco: she reads a short everyday phrase aloud herself ("I see a cat."), word by word. A bar sits under each word and a little Coco
 /// tab sits under the word she's on; she reads it, then taps or slides the tab on. Dots under the letters are sound
 /// buttons (a dash under two letters that make one sound, like sh), and a heart marks words to know by heart, like
 /// "the". Stuck on a word? Tap it to hear it. At the end the picture is revealed and Bella reads the whole sentence.
@@ -12,24 +12,26 @@ enum ReadAlong {
         var words: [String] { text.split(separator: " ").map(String.init) }
     }
 
-    /// Easy to sound out, getting harder: short-vowel words first, then blends and digraphs.
+    /// Everyday phrases built from the first words children learn to read (I, see, like, look, my, go, love...),
+    /// with an easy word or two to sound out, each with a picture to find at the end.
     static let sentences = [
-        Sentence(text: "The cat is on a mat.", picture: "cat"),
-        Sentence(text: "A pig is in the mud.", picture: "pig"),
-        Sentence(text: "The sun is hot.", picture: "sun"),
-        Sentence(text: "The dog can dig.", picture: "dog"),
-        Sentence(text: "The hen sat on an egg.", picture: "hen"),
-        Sentence(text: "The fox is in a box.", picture: "fox"),
-        Sentence(text: "A bug is on a cup.", picture: "caterpillar"),
-        Sentence(text: "The bat is up at the top.", picture: "bat"),
+        Sentence(text: "I see a cat.", picture: "cat"),
+        Sentence(text: "Look at me!", picture: "crocodile"),
+        Sentence(text: "I like the sun.", picture: "sun"),
+        Sentence(text: "I can hop.", picture: "frog"),
+        Sentence(text: "Here is my dog.", picture: "dog"),
+        Sentence(text: "We like to play.", picture: "ball"),
+        Sentence(text: "I love you.", picture: "heart"),
+        Sentence(text: "What is this? A box!", picture: "box"),
+        Sentence(text: "Go to bed.", picture: "bed"),
+        Sentence(text: "I am happy.", picture: "face-happy"),
         Sentence(text: "Mom and Dad hug me.", picture: "hug"),
-        Sentence(text: "The frog can hop and jump.", picture: "frog"),
-        Sentence(text: "The duck is wet.", picture: "duck"),
-        Sentence(text: "A fish can swim fast.", picture: "fish"),
+        Sentence(text: "Good night, moon.", picture: "moon"),
     ]
 
-    /// Words to know by heart: they don't sound out letter by letter.
-    static let heartWords: Set<String> = ["the", "a", "is", "me", "to", "i", "of"]
+    /// Words to know by heart: the common ones that don't sound out letter by letter.
+    static let heartWords: Set<String> = ["the", "a", "i", "is", "see", "like", "to", "look", "me", "my", "we", "play", "here",
+                                         "go", "you", "love", "what", "good", "night", "moon", "happy"]
     /// Two letters that make one sound, and that sound (IPA, recorded as "sound:" lines like the letters').
     static let digraphs: [String: String] = ["sh": "ʃ", "ch": "tʃ", "th": "θ", "ck": "k", "ll": "l", "ss": "s", "ff": "f", "ng": "ŋ"]
 
