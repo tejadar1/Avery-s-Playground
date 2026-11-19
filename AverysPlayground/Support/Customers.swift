@@ -9,11 +9,11 @@ struct Friend: Hashable {
     /// A princess arrives in her crown (and, in dress up, her gown).
     var princess = false
 
-    /// The princesses are Coco's own friends: Mango from the Dominican Republic (merengue and the Bayahíbe rose), Luna with her starry night, Pearl
+    /// The princesses are Coco's own friends: Marisol from the Dominican Republic (merengue and the Bayahíbe rose), Luna with her starry night, Pearl
     /// from under the sea, and Ruby who builds things. The last friend is the child herself, by her name.
     static var all: [Friend] { [
         Friend(name: "Mia", skin: Color(red: 0.86, green: 0.63, blue: 0.46), hair: Color(red: 0.45, green: 0.28, blue: 0.15), eyes: Color(red: 0.55, green: 0.36, blue: 0.2)),
-        Friend(name: "Princess Mango", skin: Color(red: 0.72, green: 0.48, blue: 0.32), hair: Color(red: 0.25, green: 0.16, blue: 0.1), eyes: Color(red: 0.4, green: 0.25, blue: 0.14), princess: true),
+        Friend(name: "Princess Marisol", skin: Color(red: 0.72, green: 0.48, blue: 0.32), hair: Color(red: 0.25, green: 0.16, blue: 0.1), eyes: Color(red: 0.4, green: 0.25, blue: 0.14), princess: true),
         Friend(name: "Lily", skin: Color(red: 0.99, green: 0.84, blue: 0.72), hair: Color(red: 0.98, green: 0.82, blue: 0.4), eyes: Color(red: 0.3, green: 0.55, blue: 0.85)),
         Friend(name: "Princess Luna", skin: Color(red: 0.99, green: 0.86, blue: 0.78), hair: Color(red: 0.78, green: 0.7, blue: 0.92), eyes: Color(red: 0.36, green: 0.42, blue: 0.75), princess: true),
         Friend(name: "Zoe", skin: Color(red: 0.6, green: 0.4, blue: 0.27), hair: Color(red: 0.2, green: 0.14, blue: 0.13), eyes: Color(red: 0.35, green: 0.22, blue: 0.14)),

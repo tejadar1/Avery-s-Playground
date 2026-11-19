@@ -473,7 +473,7 @@ Coco has 6 strawberries. Mochi eats 2. How many are left?
 Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
-Coco said, Do not worry, Princess Mango! We will find it!
+Coco said, Do not worry, Princess Marisol! We will find it!
 Coco wants a cupcake!
 Coco's Dangerous Book
 CocoCheer
@@ -858,7 +858,7 @@ Hi Leo!
 Hi Lily!
 Hi Mia!
 Hi Princess Luna!
-Hi Princess Mango!
+Hi Princess Marisol!
 Hi Princess Pearl!
 Hi Princess Ruby!
 Hi Rosa!
@@ -1171,9 +1171,9 @@ Pretty pretty pretty!
 Previous picture
 Princess Luna
 Princess Luna looked up at the stars. I see something shiny in that tree!
-Princess Mango
-Princess Mango lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
-Princess Mango's Crown
+Princess Marisol
+Princess Marisol lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
+Princess Marisol's Crown
 Princess Pearl
 Princess Ruby
 Psst! Look near the sparkles!
@@ -2034,7 +2034,7 @@ book:Coco
 book:Coco climbed up, up, up and... BOING! He got the crown!
 book:Coco has fewer!
 book:Coco has more!
-book:Coco said, Do not worry, Princess Mango! We will find it!
+book:Coco said, Do not worry, Princess Marisol! We will find it!
 book:Coco! You spelled it!
 book:Coco's Dangerous Book
 book:Colors
@@ -2156,7 +2156,7 @@ book:Luna
 book:M is for Moon!
 book:M!
 book:Mad. Take a big breath, and blow it out slowly.
-book:Mango
+book:Marisol
 book:Mary Had a Little Lamb!
 book:Mochi
 book:Mochi has fewer!
@@ -2204,8 +2204,8 @@ book:Please let me go, said the mouse. One day I will help you.
 book:Ponytail
 book:Princess
 book:Princess Luna looked up at the stars. I see something shiny in that tree!
-book:Princess Mango lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
-book:Princess Mango's Crown
+book:Princess Marisol lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
+book:Princess Marisol's Crown
 book:Puff
 book:Purple! Like grapes.
 book:Put on your flip-flops
@@ -2929,7 +2929,7 @@ book:you
 book:yummy
 book:zebra
 book:zebra! You spelled it!
-book:¡Gracias, Coco! said Princess Mango. Then all the princesses danced merengue at a big party. YAY!
+book:¡Gracias, Coco! said Princess Marisol. Then all the princesses danced merengue at a big party. YAY!
 books
 boots
 bove
@@ -4363,4 +4363,4 @@ yuh
 z
 zebra
 zzz
-¡Gracias, Coco! said Princess Mango. Then all the princesses danced merengue at a big party. YAY!
+¡Gracias, Coco! said Princess Marisol. Then all the princesses danced merengue at a big party. YAY!
