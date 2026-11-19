@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Read to Coco: a sentence card with a word read (dark), one being read, bars under them, and Coco's green tab -->
+  <g stroke="#4A2C2A" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="14" y="34" width="172" height="120" rx="22" fill="#FFF8EC"/>
+    <path d="M126 74 h36 M126 88 h28" fill="none" stroke="#C9BBAF" stroke-width="8"/>
+    <text x="34" y="98" font-size="40" fill="#4A2C2A" stroke="none">cat</text>
+    <rect x="34" y="106" width="44" height="10" rx="5" fill="#5C66BF" stroke="none"/>
+    <rect x="84" y="106" width="34" height="10" rx="5" fill="#FFBF4D" stroke="none"/>
+    <rect x="126" y="106" width="40" height="10" rx="5" fill="#E7E1DA" stroke="none"/>
+    <rect x="76" y="128" width="50" height="40" rx="14" fill="#7CC26C"/>
+    <circle cx="92" cy="146" r="3.5" fill="#4A2C2A" stroke="none"/><circle cx="110" cy="146" r="3.5" fill="#4A2C2A" stroke="none"/>
+    <path d="M94 156 q7 6 14 0" fill="none" stroke-width="4"/>
+  </g>
+  <path d="M145 30 c-6 -10 -20 -4 -14 6 l14 13 l14 -13 c6 -10 -8 -16 -14 -6Z" fill="#F2789A" stroke="#4A2C2A" stroke-width="5" stroke-linejoin="round"/>
+</svg>

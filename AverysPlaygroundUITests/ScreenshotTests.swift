@@ -91,6 +91,9 @@ final class ScreenshotTests: XCTestCase {
                         .press(forDuration: 0.05, thenDragTo: board.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
             }),
+            ("Read to Coco", {
+                for _ in 0..<3 { self.tap(self.app.buttons["Next word"]) }
+            }),
             ("Spell", {
                 self.tap(self.app.buttons["Free spelling"])
                 for letter in "cat" { self.tap(self.app.buttons["Letter \(letter)"]) }
@@ -199,7 +202,7 @@ final class ScreenshotTests: XCTestCase {
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"]
+        let learn = ["Read", "Read to Coco", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : calm.contains(game.title) ? "Calm" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch

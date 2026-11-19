@@ -88,6 +88,13 @@ for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["SpellView.swift"]) + ["Avery"]:
     lines.update({f"book:{word}! You spelled it!", "book:" + word})
 lines.add("book:You spelled it!")
+# Read to Coco: Bella reads each sentence and each word (tapped for help), and the two-letter sounds like sh
+read_along = src["ReadAlongView.swift"]
+for text in re.findall(r'Sentence\(text: "([^"]+)"', read_along):
+    lines.add("book:" + text)
+    lines.update("book:" + re.sub(r"[^a-z]", "", w.lower()) for w in text.split())
+lines.update("sound:" + ipa for ipa in re.findall(r'"\w\w": "([^"]+)"', read_along))
+
 # Trace's Words
 lines.update(f"book:{w}{end}" for w in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]) for end in ["!", "! You wrote it!"])
 

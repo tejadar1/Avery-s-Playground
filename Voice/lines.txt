@@ -15,9 +15,11 @@ A big lion was sleeping in the sun.
 A blue fish!
 A boy watched the sheep on a hill.
 A bud
+A bug is on a cup.
 A coral reef!
 A cupcake!
 A farm!
+A fish can swim fast.
 A flower
 A fresh page!
 A garden!
@@ -28,6 +30,7 @@ A little mouse ran over his nose and woke him up!
 A little old woman baked a gingerbread man.
 A match! Go again!
 A night sky!
+A pig is in the mud.
 A purple fish!
 A red fish!
 A seed
@@ -1004,6 +1007,7 @@ MochiLegFront
 MochiRoom
 MochiTail
 Mom
+Mom and Dad hug me.
 Mom brought some yummy greens, and Dad brought bread to dip.
 Mommy gives you a big hug.
 Mommy gives you a big hug. How would you feel?
@@ -1034,6 +1038,7 @@ New sticker!
 Next leaf
 Next picture
 Next summer, they worked together, and then they played music together!
+Next word
 Night night, Mochi. Shh!
 No bean there! Look for the beans!
 No hat
@@ -1166,6 +1171,7 @@ Quick look! Don't count!
 R
 Rainbow
 Read it
+Read it to me! Slide my tab along as you read.
 Ready for school! Have a great day!
 Ready, set, snap!
 Red
@@ -1427,19 +1433,27 @@ The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
 The basket! Pick any two fruits!
+The bat is up at the top.
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
 The boy learned to always tell the truth.
+The cat is on a mat.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 The crow got here first! Let's try again!
 The crow hops closer!
+The dog can dig.
+The duck is wet.
 The elves put on their new clothes and danced. Thank you, thank you!
 The first pig built a house of straw.
+The fox is in a box.
+The frog can hop and jump.
 The grasshopper played music all day. Come and play! he said.
+The hen sat on an egg.
 The kind ant shared her food. Come inside and get warm!
 The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
 The second pig built a house of sticks.
+The sun is hot.
 The table's ready! Let's eat!
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
@@ -1947,11 +1961,14 @@ book:A
 book:A big bad wolf saw her. Where are you going? he asked.
 book:A big lion was sleeping in the sun.
 book:A boy watched the sheep on a hill.
+book:A bug is on a cup.
+book:A fish can swim fast.
 book:A hungry traveler came to a little town. Nobody wanted to share their food.
 book:A is for Apple!
 book:A kind old shoemaker made shoes all day, but he was very tired.
 book:A little mouse ran over his nose and woke him up!
 book:A little old woman baked a gingerbread man.
+book:A pig is in the mud.
 book:A woodcutter chased the wolf away, and they all had a big hug.
 book:A!
 book:All
@@ -2095,6 +2112,7 @@ book:Mochi has fewer!
 book:Mochi has more!
 book:Mochi! You spelled it!
 book:Mom
+book:Mom and Dad hug me.
 book:Mom brought some yummy greens, and Dad brought bread to dip.
 book:Mom! You spelled it!
 book:Mustard
@@ -2183,18 +2201,26 @@ book:The Lion and the Mouse
 book:The Little Red Hen
 book:The Three Little Pigs
 book:The Tortoise and the Hare
+book:The bat is up at the top.
 book:The big bad wolf huffed and puffed and blew the straw and stick houses down!
 book:The boy learned to always tell the truth.
+book:The cat is on a mat.
 book:The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
+book:The dog can dig.
+book:The duck is wet.
 book:The elves put on their new clothes and danced. Thank you, thank you!
 book:The end!
 book:The first pig built a house of straw.
+book:The fox is in a box.
+book:The frog can hop and jump.
 book:The grasshopper played music all day. Come and play! he said.
+book:The hen sat on an egg.
 book:The kind ant shared her food. Come inside and get warm!
 book:The lion was free! Little friends can be big helpers.
 book:The little mouse chewed and chewed the ropes.
 book:The little red hen found some wheat.
 book:The second pig built a house of sticks.
+book:The sun is hot.
 book:The third pig built a house of bricks.
 book:The three bears came home! Goldilocks woke up and ran all the way home.
 book:The wolf ran to grandma's house and hid in her bed.
@@ -2262,6 +2288,7 @@ book:again
 book:ahead
 book:all
 book:always
+book:an
 book:and
 book:animals!
 book:ant
@@ -2403,9 +2430,11 @@ book:cup! You read it!
 book:cup! You spelled it!
 book:cup! You wrote it!
 book:cupcake
+book:dad
 book:danced
 book:day
 book:did
+book:dig
 book:dip
 book:dog
 book:dog and frog rhyme!
@@ -2418,6 +2447,7 @@ book:duck
 book:duck!
 book:duck! You spelled it!
 book:eat
+book:egg
 book:egg!
 book:eggs
 book:eight
@@ -2516,6 +2546,7 @@ book:home
 book:hop
 book:horse
 book:horse!
+book:hot
 book:house
 book:house and mouse rhyme!
 book:house!
@@ -2531,6 +2562,7 @@ book:inside
 book:into
 book:is
 book:it
+book:jump
 book:jumped
 book:just
 book:kept
@@ -2553,6 +2585,7 @@ book:man
 book:mango
 book:mango!
 book:mashed plantains
+book:mat
 book:me
 book:milk
 book:milk! You spelled it!
@@ -2641,6 +2674,7 @@ book:running
 book:safe
 book:said
 book:salami
+book:sat
 book:saw
 book:say
 book:second
@@ -2686,6 +2720,7 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:sun! You wrote it!
 book:sunhat!
+book:swim
 book:tall
 book:tell
 book:ten
@@ -2749,6 +2784,7 @@ book:web! You spelled it!
 book:web! You wrote it!
 book:went
 book:were
+book:wet
 book:whale
 book:whale!
 book:what
@@ -2900,6 +2936,7 @@ cat and star!
 cat and sun!
 cat and tree!
 caterpillar
+ch
 chair
 chair1
 chalkhouse
@@ -2909,6 +2946,7 @@ cheese
 chick
 chocolate chip
 choresOrder
+ck
 climbed
 clock
 clothes
@@ -3515,6 +3553,7 @@ fair
 fall
 farm
 farm,
+ff
 fff
 fire
 fish
@@ -3749,6 +3788,7 @@ like
 lion
 lit
 living
+ll
 lll
 loved
 ly
@@ -3758,6 +3798,7 @@ mad
 mango
 mazeLevel
 mazeUnlocked
+me
 mer
 milk
 mmm
@@ -3797,6 +3838,7 @@ my
 n
 necklace
 nest
+ng
 night sky
 nnn
 none
@@ -3804,6 +3846,7 @@ note
 ny,
 o
 octopus
+of
 on
 oopsie
 orange
@@ -3855,11 +3898,13 @@ purple
 purse
 q
 queen
+questionmark
 r
 rabbit
 rain
 rain,
 rainbow
+readAlongNext
 readingRead
 readingUnlocked
 red
@@ -3885,6 +3930,7 @@ satpinmdgockeurhbfljvwxyz
 scared
 school
 scissors
+sh
 shaker
 shampoo
 sheep
@@ -3983,12 +4029,14 @@ sound:tə
 sound:təl
 sound:tɚ
 sound:tɝ
+sound:tʃ
 sound:v
 sound:və
 sound:w
 sound:z
 sound:zi
 sound:æ
+sound:ŋ
 sound:ɑ
 sound:ɑk
 sound:ɚ
@@ -4000,8 +4048,10 @@ sound:ɹ
 sound:ɹeɪn
 sound:ɹi
 sound:ɹæ
+sound:ʃ
 sound:ʌ
 sound:ʌm
+sound:θ
 sparkle
 sparkles
 spatula
@@ -4013,6 +4063,7 @@ spi
 spout
 spout.
 sprout
+ss
 sss
 star
 star and apple!
@@ -4089,10 +4140,12 @@ table
 teddy
 tennis
 ter
+th
 the
 through
 tiger
 tle
+to
 to find
 toilet
 toothbrush
@@ -4136,6 +4189,7 @@ turtle
 tutu
 twin
 two
+tʃ
 u
 uh
 umbrella

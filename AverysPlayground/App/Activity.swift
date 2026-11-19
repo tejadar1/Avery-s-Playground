@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden
+    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden, readalong
 
     var id: String { rawValue }
 
@@ -46,12 +46,13 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .busy: "Busy Board"
         case .blocks: "Blocks"
         case .garden: "Garden"
+        case .readalong: "Read to Coco"
         }
     }
 
     var section: HomeSection {
         switch self {
-        case .reading, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .sounds, .clap, .math, .spanish, .piano: .learn
+        case .reading, .readalong, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .sounds, .clap, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing: .play
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing: .teamUp
         case .routines, .chores: .myDay
@@ -63,7 +64,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
     /// and so do the calm toys.
     var tune: Tune? {
         switch self {
-        case .piano, .spelling, .reading, .rhyme, .sounds, .clap, .abc, .busy, .blocks, .garden: nil
+        case .piano, .spelling, .reading, .readalong, .rhyme, .sounds, .clap, .abc, .busy, .blocks, .garden: nil
         case .nails, .hair, .dressup, .dentist, .bake: .salon
         case .pet, .hop, .maze, .spot, .puzzle: .pet
         case .colors, .drawing: .art
@@ -116,6 +117,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .busy: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .blocks: Color(red: 0.36, green: 0.61, blue: 0.84)
         case .garden: Color(red: 0.45, green: 0.72, blue: 0.42)
+        case .readalong: Color(red: 0.36, green: 0.4, blue: 0.75)
         }
     }
 
@@ -161,6 +163,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .busy: BusyBoardView()
         case .blocks: BlocksView()
         case .garden: GardenView()
+        case .readalong: ReadAlongView()
         }
     }
 }
