@@ -18,6 +18,8 @@ A boy watched the sheep on a hill.
 A bud
 A coral reef!
 A cupcake!
+A dino to find
+A dinosaur bone! Keep brushing!
 A farm!
 A flower
 A fresh page!
@@ -53,6 +55,7 @@ All sorted!
 All stuck on!
 All summer, the little ant worked hard, carrying food to her home.
 All the chores are done! What a big helper! Holy guacamole!
+An egg! A dinosaur egg! Keep brushing!
 An orange fish!
 Another sticker! Yay!
 Anywhere
@@ -85,6 +88,7 @@ Bear
 Bed all made! So neat!
 Bedtime
 Beep beep!
+Beep beep! So shiny! Snap snap!
 Bella
 Belly rubs are the best!
 Big button
@@ -475,6 +479,7 @@ Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
 Coco said, Do not worry, Princess Marisol! We will find it!
 Coco wants a cupcake!
+Coco's Christmas Countdown
 Coco's Dangerous Book
 CocoCheer
 CocoGiggle
@@ -493,6 +498,8 @@ Coral
 Count
 Count the toppings!
 Cozy pajamas!
+Crack crack! One more!
+Crack! Tap it again!
 Crayon
 Croc-tacular!
 Crocodile-tastic!
@@ -514,6 +521,8 @@ Dad
 Dance mode!
 Designs
 Did you know crocodiles can't stick out their tongues? Blehhh!
+Dig again
+Dig pit
 Dog
 Doll
 Doll-
@@ -538,6 +547,7 @@ E
 Eagle eyes!
 Easy
 Easy peasy, lemon squeezy!
+Egg, tap to hatch it
 Elephant
 Erase
 Eraser
@@ -548,6 +558,8 @@ Excited! Do a happy dance!
 Extras
 F
 F sharp
+FIVE more sleeps to Christmas! Coco and Mochi put up a big green tree. Twinkle, twinkle!
+FOUR more sleeps! They bake gingerbread cookies. Coco eats one... then two... CRUNCH! Oops!
 Fashion show time!
 Feed
 Feed the pet
@@ -557,6 +569,7 @@ Fiddlesticks!
 Find 3 differences!
 Find 5 differences!
 Find 7 differences! Look closely!
+Fire Truck
 First picture
 Fish
 Fix
@@ -922,6 +935,7 @@ In the lines
 In the morning, he found beautiful new shoes. Wow!
 In the sky or in the water?
 It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!
+It is Christmas morning! Presents under the tree! Coco shouts, HO HO HOLY GUACAMOLE!
 It's a tie! Everybody wins a hug!
 It's a tie! Everyone wins!
 It's your birthday party!
@@ -976,6 +990,7 @@ Little Red Riding Hood went to visit her grandma.
 Locked
 Lon
 London Bridge
+Long-Neck
 Look again!
 Look at me!
 Look at that shine!
@@ -1027,6 +1042,7 @@ Mom and Dad hug me.
 Mom brought some yummy greens, and Dad brought bread to dip.
 Mommy gives you a big hug.
 Mommy gives you a big hug. How would you feel?
+Monster Truck
 Moo moo!
 Moon
 Morning
@@ -1065,6 +1081,7 @@ No hat! So stylish!
 No hat! Wowza bowza!
 No job is too big, no croc is too small!
 No more food stuck! Yay!
+No more mud! Holy guacamole!
 No, said the hen. My chicks and I will eat it!
 Nom nom nom! Yummy!
 Nom nom! More please!
@@ -1083,9 +1100,12 @@ Now comb it.
 Now pick a style.
 Now rinse it with water.
 Now tap Rinse to swish!
+Now tap the hose and spray off the bubbles.
+Now tap the towel and dry it off.
 Now the scissors!
 O
 O!
+ONE more sleep! Coco leaves cookies and milk for Santa and goes to bed. Shh!
 Octopus
 Off
 Oh biscuits!
@@ -1150,6 +1170,7 @@ Pick an orange! It's orange!
 Pick another nail!
 Pick easy, medium or hard.
 Pick some purple grapes!
+Pick the sponge and scrub off the mud.
 Picture
 Pictures
 Pigtails
@@ -1194,12 +1215,16 @@ Queen
 Quick look
 Quick look! Don't count!
 R
+ROAR! It's a baby Long-Neck! Hello, little dino!
+ROAR! It's a baby T-Rex! Hello, little dino!
+ROAR! It's a baby Triceratops! Hello, little dino!
 Rainbow
 Read it
 Read it to me! Slide my tab along as you read.
 Ready for school! Have a great day!
 Ready, set, snap!
 Red
+Red Car
 Remover
 Reset
 Ribbit ribbit!
@@ -1220,11 +1245,14 @@ Sandals! Holy guacamole, I love it!
 Sandals! Ooh la la!
 Sandals! So stylish!
 Sandals! Wowza bowza!
+Sandpit
 Save
 Say cheese! Snap snap!
 Say it slowly
 Scared. Hold a grown-up's hand.
+School Bus
 Scissors
+Scrub scrub! Rub off all the mud.
 Scrub the teeth until they shine.
 Second picture
 See you later, alligator!
@@ -1313,7 +1341,10 @@ Sparkly teeth!
 Sparkly teeth! Snap snap!
 Spell the word! Tap the letters in order. Tap the picture to hear it.
 Spin
+Splish splash! All rinsed!
+Sponge
 Spot the difference! Pick easy, medium or hard.
+Spray off all the bubbles.
 Spread it on with the knife!
 Spread more frosting!
 Sprinkles
@@ -1415,12 +1446,15 @@ Swish swish! Minty fresh! What a great smile!
 Swish swish, paint paint!
 Swish! Clothes in the hamper!
 T
+T-Rex
 T-shirt
 T-shirt! Fashion show time!
 T-shirt! Holy guacamole, I love it!
 T-shirt! Ooh la la!
 T-shirt! So stylish!
 T-shirt! Wowza bowza!
+THREE more sleeps! Snow falls. Coco and Mochi make a snowman with a carrot nose. Brrr!
+TWO more sleeps! Coco hangs up a stocking for everyone. Even one for Mochi! WOOF!
 Ta-da! Fashion show! She looks amazing!
 Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! You're a superstar!
@@ -1458,6 +1492,7 @@ The Little Red Hen
 The Three Little Pigs
 The Tortoise and the Hare
 The basket! Pick any two fruits!
+The best present of all is being together. Merry Christmas! ¡Feliz Navidad!
 The big bad wolf huffed and puffed and blew the straw and stick houses down!
 The boy learned to always tell the truth.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
@@ -1479,6 +1514,7 @@ The wolf ran to grandma's house and hid in her bed.
 Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
 Then the lion got stuck in a hunter's net.
 Then winter came. It was cold, and the grasshopper had no food.
+There's something buried in the sand! Brush it away with your finger.
 They all ate together. When everyone shares, there is enough for all!
 They looked by the sea. Princess Pearl popped up from a wave. SPLASH! Not here!
 Three hearts in a row! Hearts win! Snap snap!
@@ -1495,11 +1531,13 @@ Too easy!
 Too far! Whoopsie daisy, boing!
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
+Towel
 Toys all tidy! Snap snap!
 Trace board
 Trace the A with your finger!
 Treat
 Treat time! Good girl, Mochi!
+Triceratops
 Tummy
 Tummy tickles! Hee hee!
 Turtle
@@ -1515,6 +1553,7 @@ Twinkle Twinkle
 Twinkle twinkle, little nail!
 U
 Uh oh! This book is DANGEROUS. Coco says, do not turn the page!
+Uh oh, it's muddy! Pick the sponge and scrub off the mud.
 Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!
 Umbrella
 Undo
@@ -1522,8 +1561,13 @@ Up
 Up next
 Use the restroom
 V
+Vehicle
 Violin
 Vitamins, yum! Strong and healthy!
+Vroom vroom! Here comes a muddy Fire Truck!
+Vroom vroom! Here comes a muddy Monster Truck!
+Vroom vroom! Here comes a muddy Red Car!
+Vroom vroom! Here comes a muddy School Bus!
 W
 Wake up
 Wand
@@ -1543,6 +1587,7 @@ Whale
 What a design!
 What color should it be?
 What comes next?
+What did Coco and Mochi make in the snow?
 What did Jack trade for the magic beans?
 What did the boy watch on the hill?
 What did the traveler put in the pot first?
@@ -1616,6 +1661,7 @@ Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
 Win games to find stickers for your picture!
+Wipe away the drips.
 Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
@@ -1648,6 +1694,7 @@ You can't find your favorite toy.
 You can't find your favorite toy. How would you feel?
 You did it! Holy guacamole, what a puzzle!
 You did it, you silly goose!
+You found an egg! Something is moving inside! Tap the egg!
 You found everything! Holy guacamole!
 You found one!
 You found them all! Holy guacamole, eagle eyes!
@@ -2020,6 +2067,7 @@ book:Blue! Like a whale.
 book:Bows
 book:Brown
 book:Brown! Like a bear.
+book:Brrr
 book:Brush!
 book:Buns
 book:But
@@ -2027,7 +2075,9 @@ book:But he could not blow down the brick house. The three pigs were safe!
 book:But the gingerbread man jumped to the other side and ran all the way home!
 book:C is for Cat!
 book:C!
+book:CRUNCH
 book:Calm. Nice and cozy, like a quiet story.
+book:Christmas
 book:Clothes
 book:Cloud
 book:Coco
@@ -2036,6 +2086,7 @@ book:Coco has fewer!
 book:Coco has more!
 book:Coco said, Do not worry, Princess Marisol! We will find it!
 book:Coco! You spelled it!
+book:Coco's Christmas Countdown
 book:Coco's Dangerous Book
 book:Colors
 book:Comb
@@ -2056,6 +2107,7 @@ book:Down
 book:E is for Elephant!
 book:E!
 book:Enjoy your meal
+book:Even
 book:Every
 book:Every night, the little elves came back to help.
 book:Everyone
@@ -2065,8 +2117,13 @@ book:Excuse me
 book:Extras
 book:F is for Fish!
 book:F!
+book:FIVE
+book:FIVE more sleeps to Christmas! Coco and Mochi put up a big green tree. Twinkle, twinkle!
+book:FOUR
+book:FOUR more sleeps! They bake gingerbread cookies. Coco eats one... then two... CRUNCH! Oops!
 book:Family
 book:Fee
+book:Feliz
 book:First
 book:Fix!
 book:Floss!
@@ -2074,6 +2131,7 @@ book:Food
 book:Fox ends with X!
 book:G is for Grapes!
 book:G!
+book:GUACAMOLE
 book:Give me a hug
 book:Go to bed.
 book:God bless you
@@ -2092,6 +2150,8 @@ book:Green
 book:Green! Like a frog.
 book:H is for Horse!
 book:H!
+book:HO
+book:HOLY
 book:Happy! Share your smile with someone.
 book:Hare
 book:Hare ran far ahead and took a nap under a tree.
@@ -2111,6 +2171,7 @@ book:Here comes a big wave. SPLASH! Now the book is all wet!
 book:Here is my dog.
 book:Hold
 book:Hood
+book:Hose!
 book:Hot Cross Buns!
 book:How are you?
 book:How cool!
@@ -2130,6 +2191,7 @@ book:In a little bit
 book:In the morning, he found beautiful new shoes. Wow!
 book:It
 book:It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!
+book:It is Christmas morning! Presents under the tree! Coco shouts, HO HO HOLY GUACAMOLE!
 book:Itsy Bitsy Spider!
 book:J is for Juice!
 book:J!
@@ -2158,6 +2220,7 @@ book:M!
 book:Mad. Take a big breath, and blow it out slowly.
 book:Marisol
 book:Mary Had a Little Lamb!
+book:Merry
 book:Mochi
 book:Mochi has fewer!
 book:Mochi has more!
@@ -2173,6 +2236,7 @@ book:My name is Avery
 book:My sister
 book:N is for Nest!
 book:N!
+book:Navidad
 book:Navy
 book:Next
 book:Next summer, they worked together, and then they played music together!
@@ -2185,10 +2249,13 @@ book:Now
 book:Numbers
 book:O is for Octopus!
 book:O!
+book:ONE
+book:ONE more sleep! Coco leaves cookies and milk for Santa and goes to bed. Shh!
 book:Old MacDonald!
 book:One
 book:One night, two tiny elves came in and made shoes for him!
 book:One windy day, WHOOSH! The wind blew her crown away!
+book:Oops
 book:Orange! Like an orange.
 book:P is for Penguin!
 book:P!
@@ -2202,6 +2269,7 @@ book:Pink! Like a flower.
 book:Please
 book:Please let me go, said the mouse. One day I will help you.
 book:Ponytail
+book:Presents
 book:Princess
 book:Princess Luna looked up at the stars. I see something shiny in that tree!
 book:Princess Marisol lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
@@ -2226,6 +2294,7 @@ book:S is for Sun!
 book:S!
 book:SPLASH
 book:Sad. A big hug can help.
+book:Santa
 book:Scared. Hold a grown-up's hand.
 book:Scissors
 book:Shampoo
@@ -2236,14 +2305,17 @@ book:She tried three beds and fell fast asleep.
 book:She tried three bowls of porridge. This one is just right!
 book:She tried three chairs. This one is just right!
 book:She walked through the woods and picked flowers.
+book:Shh
 book:Shoes
 book:Silly! Make a funny face back!
 book:Sky
 book:Sleepy. Time for a cozy rest.
 book:Slow
+book:Snow
 book:So
 book:So he filled a big pot with water and put in a stone. Stone soup! he said.
 book:So she planted it all by herself. The wheat grew tall.
+book:Sponge!
 book:Stickers
 book:Stone
 book:Stone Soup
@@ -2252,6 +2324,10 @@ book:Styles
 book:Surprised! Tell someone what you saw.
 book:T is for Turtle!
 book:T!
+book:THREE
+book:THREE more sleeps! Snow falls. Coco and Mochi make a snowman with a carrot nose. Brrr!
+book:TWO
+book:TWO more sleeps! Coco hangs up a stocking for everyone. Even one for Mochi! WOOF!
 book:Teal
 book:Thank
 book:Thank you
@@ -2265,6 +2341,7 @@ book:The Lion and the Mouse
 book:The Little Red Hen
 book:The Three Little Pigs
 book:The Tortoise and the Hare
+book:The best present of all is being together. Merry Christmas! ¡Feliz Navidad!
 book:The big bad wolf huffed and puffed and blew the straw and stick houses down!
 book:The boy learned to always tell the truth.
 book:The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
@@ -2294,6 +2371,8 @@ book:Three little pigs went out to build three little houses.
 book:Tortoise
 book:Tortoise kept going, slow and steady.
 book:Tortoise won the race! Slow and steady wins.
+book:Towel!
+book:Twinkle
 book:Twinkle Twinkle!
 book:U is for Umbrella!
 book:U!
@@ -2305,10 +2384,12 @@ book:Very good
 book:W is for Whale!
 book:W!
 book:WHOOSH
+book:WOOF
 book:Wash
 book:We
 book:We like to play.
 book:What
+book:What did Coco and Mochi make in the snow?
 book:What did Jack trade for the magic beans?
 book:What did the boy watch on the hill?
 book:What did the traveler put in the pot first?
@@ -2374,6 +2455,7 @@ book:avocado!
 book:away
 book:back
 book:bad
+book:bake
 book:baked
 book:ball!
 book:balloon
@@ -2407,6 +2489,8 @@ book:bee
 book:bee and tree rhyme!
 book:bee!
 book:behind
+book:being
+book:best
 book:better
 book:big
 book:big!
@@ -2467,6 +2551,7 @@ book:can't
 book:car
 book:car and star rhyme!
 book:car!
+book:carrot
 book:carrying
 book:castle
 book:cat
@@ -2495,12 +2580,14 @@ book:cold
 book:comes
 book:cookie
 book:cookie!
+book:cookies
 book:could
 book:cow
 book:cow!
 book:cried
 book:crocodile
 book:crown
+book:crunch!
 book:cup
 book:cup!
 book:cup! You read it!
@@ -2526,6 +2613,7 @@ book:duck
 book:duck!
 book:duck! You spelled it!
 book:eat
+book:eats
 book:egg!
 book:eggs
 book:eight
@@ -2535,6 +2623,7 @@ book:elves
 book:enough
 book:everyone
 book:eyes
+book:falls
 book:far
 book:fast
 book:fell
@@ -2546,6 +2635,7 @@ book:fish
 book:fish!
 book:fish! You spelled it!
 book:five
+book:five!
 book:flag
 book:flag! You spelled it!
 book:flashes
@@ -2558,6 +2648,7 @@ book:food!
 book:for
 book:found
 book:four
+book:four!
 book:fox
 book:fox and box rhyme!
 book:fox!
@@ -2596,9 +2687,11 @@ book:grasshopper
 book:green
 book:greens
 book:grew
+book:guacamole!
 book:had
 book:hand
 book:hand! You spelled it!
+book:hangs
 book:happy
 book:hard
 book:hat
@@ -2631,6 +2724,8 @@ book:hiding
 book:hill
 book:him
 book:his
+book:ho!
+book:holy!
 book:home
 book:hop
 book:horse
@@ -2662,6 +2757,7 @@ book:ladybug
 book:ladybug!
 book:laid
 book:learned
+book:leaves
 book:let
 book:like
 book:lion
@@ -2674,6 +2770,7 @@ book:looked
 book:love
 book:made
 book:magic
+book:make
 book:man
 book:mango
 book:mango!
@@ -2687,6 +2784,7 @@ book:moon
 book:moon and balloon rhyme!
 book:moon!
 book:moon! You spelled it!
+book:more
 book:morning
 book:mouse
 book:mouse and house rhyme!
@@ -2718,6 +2816,7 @@ book:oh
 book:old
 book:on
 book:one
+book:one!
 book:orange
 book:other
 book:out
@@ -2753,6 +2852,7 @@ book:pop!
 book:popped
 book:porridge
 book:pot
+book:present
 book:puffed
 book:purple
 book:put
@@ -2791,14 +2891,19 @@ book:shiny
 book:shoemaker
 book:shoes
 book:shouted
+book:shouts
 book:side
 book:six
 book:sky
+book:sleep
 book:sleeping
+book:sleeps
 book:slow
 book:sly
 book:small!
 book:sneakers!
+book:snow
+book:snowman
 book:so
 book:some
 book:something
@@ -2815,6 +2920,7 @@ book:stew
 book:stick
 book:sticks
 book:still
+book:stocking
 book:stone
 book:straw
 book:strawberry
@@ -2842,6 +2948,7 @@ book:they
 book:third
 book:this
 book:three
+book:three!
 book:through
 book:tiger
 book:tiger! You spelled it!
@@ -2866,7 +2973,9 @@ book:turn
 book:turned
 book:turtle
 book:turtle!
+book:twinkle
 book:two
+book:two!
 book:umbrella
 book:umbrella!
 book:under
@@ -2919,6 +3028,7 @@ book:woman
 book:won
 book:woodcutter
 book:woods
+book:woof!
 book:work
 book:worked
 book:worry
@@ -3121,6 +3231,9 @@ der
 desk1
 desk2
 dia
+dino-egg
+dinoDigNext
+dinosFound
 dog
 dog and apple!
 dog and ball!
@@ -3676,6 +3789,7 @@ farm,
 ff
 fff
 fire
+firetruck
 fish
 fish and apple!
 fish and ball!
@@ -3931,6 +4045,7 @@ mmm
 mochi
 mom
 mond
+monstertruck
 moon
 moon and apple!
 moon and ball!
@@ -4020,6 +4135,7 @@ plant
 plantain
 play
 polish
+present
 puh
 purple
 purse
@@ -4079,6 +4195,7 @@ slippers
 small
 sneakers
 snow.
+snowman
 so
 soap
 sock
@@ -4225,6 +4342,7 @@ stickerSpots
 stickerWins
 stickers
 sticks
+stocking
 stone
 strawberries
 strawberry
@@ -4356,6 +4474,7 @@ wow
 wuh
 x
 xmark
+xmas-tree
 y
 yellow
 you

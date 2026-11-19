@@ -56,7 +56,7 @@ final class ScreenshotTests: XCTestCase {
                 maze.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.1))
                     .press(forDuration: 0.05, thenDragTo: maze.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.6)))
             }),
-            ("Read", {
+            ("Stories", {
                 self.tap(self.button("Three Little Pigs"))
                 sleep(1)
                 let words = self.find("Words")
@@ -91,7 +91,7 @@ final class ScreenshotTests: XCTestCase {
                         .press(forDuration: 0.05, thenDragTo: board.coordinate(withNormalizedOffset: CGVector(dx: to.0, dy: to.1)))
                 }
             }),
-            ("Read to Coco", {
+            ("Read", {
                 for _ in 0..<3 { self.tap(self.app.buttons["Next word"]) }
             }),
             ("Spell", {
@@ -196,19 +196,35 @@ final class ScreenshotTests: XCTestCase {
                     self.find(block).coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 0.1, thenDragTo: middle)
                 }
             }),
+            ("Car Wash", {
+                let car = self.find("Vehicle")
+                for y in [0.45, 0.6, 0.7] {
+                    car.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: y))
+                        .press(forDuration: 0.05, thenDragTo: car.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: y)))
+                }
+            }),
+            ("Dino Dig", {
+                let pit = self.find("Dig pit")
+                for y in [0.2, 0.3, 0.4] {
+                    pit.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: y))
+                        .press(forDuration: 0.05, thenDragTo: pit.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: y)))
+                }
+            }),
             ("Garden", {
                 for spot in ["Spot 1", "Spot 3", "Spot 5"] { self.tap(self.find(spot)) }
             }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Read", "Read to Coco", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"]
+        let learn = ["Stories", "Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"]
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : calm.contains(game.title) ? "Calm" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
             tap(section)
             sleep(1)
             let tile = button(game.title)
+            // The grid only makes tiles as they come into view: scroll down to the later ones
+            for _ in 0..<4 where !tile.waitForExistence(timeout: 1) { app.swipeUp() }
             // A tap during the trip home can be missed (it was once, on iPad landscape): go home and open the section again.
             for _ in 0..<2 where !tile.waitForExistence(timeout: 3) {
                 goHome()
@@ -216,13 +232,13 @@ final class ScreenshotTests: XCTestCase {
                 sleep(1)
             }
             tap(tile)
-            // A tap can be missed (the Read tile once didn't open on iPad): tap again if the game isn't showing.
+            // A tap can be missed (the Stories tile once didn't open on iPad): tap again if the game isn't showing.
             if !app.navigationBars[game.title].waitForExistence(timeout: 3), tile.exists { tap(tile) }
             sleep(1)
             game.play()
             sleep(1)
             try snap(String(format: "%02d-%@", index + 1, game.title), device, dir)
-            if game.title == "Read" {
+            if game.title == "Stories" {
                 app.navigationBars.buttons.element(boundBy: 0).tap()
                 // The Spanish shelf is further down, and the shelf only makes books as they come into view
                 for _ in 0..<4 where !button("Cucarachita").exists { app.swipeUp() }
@@ -231,7 +247,7 @@ final class ScreenshotTests: XCTestCase {
                 let words = find("Words")
                 words.coordinate(withNormalizedOffset: CGVector(dx: 0.02, dy: 0.3))
                     .press(forDuration: 0.05, thenDragTo: words.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.3)))
-                try snap(String(format: "%02db-Read en español", index + 1), device, dir)
+                try snap(String(format: "%02db-Stories en español", index + 1), device, dir)
             }
             if game.title == "Hair Salon" {
                 tap(app.buttons["Styles"])

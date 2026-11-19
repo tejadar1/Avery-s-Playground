@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Read to Coco: she reads a short everyday phrase aloud herself ("I see a cat."), word by word. A bar sits under each word and a little Coco
+/// Read (Read to Coco): she reads a short everyday phrase aloud herself ("I see a cat."), word by word. A bar sits under each word and a little Coco
 /// tab sits under the word she's on; she reads it, then taps or slides the tab on. Dots under the letters are sound
 /// buttons (a dash under two letters that make one sound, like sh), and a heart marks words to know by heart, like
 /// "the". Stuck on a word? Tap it to hear it. At the end the picture is revealed and Bella reads the whole sentence.

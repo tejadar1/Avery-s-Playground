@@ -3,7 +3,7 @@ import SwiftUI
 struct Story: Hashable {
     struct Page: Hashable {
         /// Where the page's picture takes place.
-        enum Setting { case meadow, home, night }
+        enum Setting { case meadow, home, night, snow }
 
         let pictures: [String]
         let text: String
@@ -26,6 +26,16 @@ struct Story: Hashable {
     }
 
     static let all = [
+        // An original Christmas countdown with Coco and Mochi; the counting words are loud words that zoom.
+        Story(title: "Coco's Christmas Countdown", cover: "xmas-tree", color: Color(red: 0.36, green: 0.66, blue: 0.4), pages: [
+            Page(pictures: ["xmas-tree", "crocodile"], text: "FIVE more sleeps to Christmas! Coco and Mochi put up a big green tree. Twinkle, twinkle!", setting: .home),
+            Page(pictures: ["gingerbread", "cookie"], text: "FOUR more sleeps! They bake gingerbread cookies. Coco eats one... then two... CRUNCH! Oops!", setting: .home),
+            Page(pictures: ["snowman", "dog"], text: "THREE more sleeps! Snow falls. Coco and Mochi make a snowman with a carrot nose. Brrr!", setting: .snow),
+            Page(pictures: ["stocking", "dog"], text: "TWO more sleeps! Coco hangs up a stocking for everyone. Even one for Mochi! WOOF!", setting: .home),
+            Page(pictures: ["cookie", "milk", "sleep"], text: "ONE more sleep! Coco leaves cookies and milk for Santa and goes to bed. Shh!", setting: .night),
+            Page(pictures: ["present", "xmas-tree"], text: "It is Christmas morning! Presents under the tree! Coco shouts, HO HO HOLY GUACAMOLE!", setting: .home),
+            Page(pictures: ["crocodile", "heart"], text: "The best present of all is being together. Merry Christmas! ¡Feliz Navidad!", setting: .home),
+        ], question: .init(text: "What did Coco and Mochi make in the snow?", answer: "snowman", others: ["present", "cookie"])),
         // Coco's own princess friends (Customers.swift), in an original fairy tale with loud words to read.
         Story(title: "Princess Marisol's Crown", cover: "marisol", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
             Page(pictures: ["marisol", "flag-dr"], text: "Princess Marisol lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose."),
@@ -361,6 +371,7 @@ private struct StoryScene: View {
         switch page.setting {
         case .meadow: Scenery(.outdoors)
         case .night: Scenery(.night)
+        case .snow: Scenery(.snow)
         case .home: Image("MochiRoom").resizable().scaledToFill()
         }
     }

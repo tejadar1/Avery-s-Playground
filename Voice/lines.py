@@ -90,7 +90,7 @@ for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["ReadingView.swift"]):
 for word in re.findall(r'ReadingWord\(text: "(\w+)"', src["SpellView.swift"]) + ["Avery"]:
     lines.update({f"book:{word}! You spelled it!", "book:" + word})
 lines.add("book:You spelled it!")
-# Read to Coco: Bella reads each sentence and each word (tapped for help), and the two-letter sounds like sh
+# Read (Read to Coco): Bella reads each sentence and each word (tapped for help), and the two-letter sounds like sh
 read_along = src["ReadAlongView.swift"]
 for text in re.findall(r'Sentence\(text: "([^"]+)"', read_along):
     lines.add("book:" + text)
@@ -193,6 +193,15 @@ for line in [l for l in lines if "Avery" in l]:
         lines.add(unnamed(line))
 tools = re.search(r'enum DentistTool.*?\n(.*?)\n', src["DentistView.swift"]).group(1)
 lines.update(f"book:{name}!" for name in re.findall(r'= "(\w+)"', tools))
+
+# Car Wash and Dino Dig: Bella names the wash tools; Coco greets each vehicle and each dino that hatches
+wash = src["CarWashView.swift"]
+lines.update(f"book:{name}!" for name in re.findall(r'= "(\w+)"', re.search(r'enum WashTool.*?\n(.*?)\n', wash).group(1)))
+for name in re.findall(r'case \.\w+: "([^"]+)"', wash.split("var name")[1].split("var picture")[0]):
+    lines.add(f"Vroom vroom! Here comes a muddy {name}!")
+dig = src["DinoDigView.swift"]
+for name in re.findall(r'case \.\w+: "([^"]+)"', dig.split("var name")[1].split("}")[0] + "}"):
+    lines.add(f"ROAR! It's a baby {name}! Hello, little dino!")
 
 # Bella names things: the trays and tools in the salons and Dress Up, the crayons in Draw, and the stickers
 for name in ["HairSalonView.swift", "NailSalonView.swift", "DressUpView.swift"]:

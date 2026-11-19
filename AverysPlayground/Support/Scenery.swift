@@ -4,7 +4,7 @@ import SwiftUI
 /// Kept low-contrast at the top and middle so cards and text stay easy to read.
 struct Scenery: View {
     enum Place {
-        case outdoors, night, library, stage, picnic, fiesta, classroom, studio, salon
+        case outdoors, night, snow, library, stage, picnic, fiesta, classroom, studio, salon
     }
 
     let place: Place
@@ -111,6 +111,16 @@ struct Scenery: View {
                 context.fill(Path(ellipseIn: star), with: .color(.white.opacity(0.85)))
             }
             hills(h * 0.8, Color(red: 0.3, green: 0.46, blue: 0.44), Color(red: 0.23, green: 0.38, blue: 0.37))
+        case .snow:
+            gradient(Color(red: 0.72, green: 0.84, blue: 0.96), Color(red: 0.92, green: 0.95, blue: 1.0))
+            cloud(w * 0.2, h * 0.14, 5)
+            cloud(w * 0.78, h * 0.1, 6)
+            hills(h * 0.78, Color(red: 0.93, green: 0.96, blue: 1.0), Color(red: 0.99, green: 0.99, blue: 1.0))
+            // Falling snowflakes
+            for i in 0..<34 {
+                let r = (0.6 + 0.8 * speck(i + 80)) * unit
+                context.fill(Path(ellipseIn: CGRect(x: speck(i) * w, y: speck(i + 40) * h * 0.9, width: 2 * r, height: 2 * r)), with: .color(.white))
+            }
         case .library:
             gradient(Color(red: 0.9, green: 0.94, blue: 1.0), Color(red: 0.95, green: 0.93, blue: 1.0))
             // A shelf of books along the top
