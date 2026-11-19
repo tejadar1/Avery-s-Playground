@@ -75,7 +75,7 @@ struct Wash: Equatable {
     mutating func scrub(at point: CGPoint) -> Bool {
         change(near: point) { spot in
             guard spot.mud > 0 else { return false }
-            spot.mud = max(0, spot.mud - 0.2)
+            spot.mud = spot.mud > 0.21 ? spot.mud - 0.2 : 0  // five rubs, without a sliver left over from rounding
             spot.suds = true
             return true
         }
