@@ -27,14 +27,14 @@ struct Story: Hashable {
 
     static let all = [
         // Coco's own princess friends (Customers.swift), in an original fairy tale with loud words to read.
-        Story(title: "Princess Marisol's Crown", cover: "crown", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
-            Page(pictures: ["queen", "crown"], text: "Princess Marisol lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose."),
+        Story(title: "Princess Marisol's Crown", cover: "marisol", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
+            Page(pictures: ["marisol", "flag-dr"], text: "Princess Marisol lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose."),
             Page(pictures: ["crown", "wind"], text: "One windy day, WHOOSH! The wind blew her crown away!"),
-            Page(pictures: ["crocodile", "queen"], text: "Coco said, Do not worry, Princess Marisol! We will find it!"),
-            Page(pictures: ["gem", "wave"], text: "They looked by the sea. Princess Pearl popped up from a wave. SPLASH! Not here!"),
+            Page(pictures: ["crocodile", "marisol"], text: "Coco said, Do not worry, Princess Marisol! We will find it!"),
+            Page(pictures: ["gem", "sea"], text: "They looked by the sea. Princess Pearl popped up from a wave. SPLASH! Not here!"),
             Page(pictures: ["moon", "star"], text: "Princess Luna looked up at the stars. I see something shiny in that tree!", setting: .night),
-            Page(pictures: ["tree", "crown"], text: "Coco climbed up, up, up and... BOING! He got the crown!"),
-            Page(pictures: ["party", "cake"], text: "¡Gracias, Coco! said Princess Marisol. Then all the princesses danced merengue at a big party. YAY!"),
+            Page(pictures: ["tree", "crown"], text: "Coco climbed up, up, up and... BOING! She got the crown!"),
+            Page(pictures: ["marisol", "cake", "balloon"], text: "¡Gracias, Coco! said Princess Marisol. Then Marisol, Luna, Pearl and Ruby danced merengue at a big party. YAY!"),
         ], question: .init(text: "What did the wind blow away?", answer: "crown", others: ["cake", "star"])),
         // An original silly book where the book itself is "dangerous", full of big fun sound words to read
         // (BOOM! BOO! POP!); words in capitals are loud words that zoom and wobble when her finger reaches them.
@@ -44,7 +44,7 @@ struct Story: Hashable {
             Page(pictures: ["bee", "face-shock"], text: "A bee! BUZZ! BUZZ! Hold still. It just wants to say hi."),
             Page(pictures: ["lightning", "wind"], text: "The wind blows, WHOOSH! The sky flashes, BOOM!"),
             Page(pictures: ["moon", "crocodile"], text: "It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!", setting: .night),
-            Page(pictures: ["wave", "fish"], text: "Here comes a big wave. SPLASH! Now the book is all wet!"),
+            Page(pictures: ["sea", "fish"], text: "Here comes a big wave. SPLASH! Now the book is all wet!"),
             Page(pictures: ["crocodile", "heart"], text: "Phew! You were so brave. Do you want to read the DANGEROUS book again?"),
         ], question: .init(text: "What went POP?", answer: "balloon", others: ["bee", "moon"])),
         Story(title: "The Three Little Pigs", cover: "pig", color: .pink, pages: [
@@ -206,7 +206,7 @@ struct Story: Hashable {
         Story(title: "Los zapaticos de rosa", cover: "flats", color: Color(red: 0.96, green: 0.6, blue: 0.72), pages: [
             Page(pictures: ["girl", "sunhat", "sun"], text: "Hay sol bueno y mar de espuma. Pilar quiere ir a la playa con su sombrero nuevo."),
             Page(pictures: ["flats", "heart"], text: "Y lleva sus zapaticos de rosa, ¡los más lindos que tiene!"),
-            Page(pictures: ["girl", "wave"], text: "En la playa, Pilar juega con la arena y el mar."),
+            Page(pictures: ["girl", "sea"], text: "En la playa, Pilar juega con la arena y el mar."),
             Page(pictures: ["girl", "sleep"], text: "Allí ve a una niña enferma que no tiene zapatos."),
             Page(pictures: ["girl", "flats", "heart"], text: "Pilar le da sus zapaticos de rosa. ¡Para que no tengas frío en los pies!"),
             Page(pictures: ["mom", "girl", "heart"], text: "Su mamá la abraza. Dar con cariño es lo más lindo que hay.", setting: .home),

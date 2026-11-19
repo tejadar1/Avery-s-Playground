@@ -61,6 +61,8 @@ struct ReadAlongView: View {
     @State private var cheer = "Read it to me! Slide my tab along as you read."
     @State private var cheerCount = 0
     @State private var wins = 0
+    /// Taps on each word and each sound button, so the one she touched bounces.
+    @State private var pokes: [String: Int] = [:]
 
     private var done: Bool { at >= sentence.words.count }
 
@@ -74,9 +76,15 @@ struct ReadAlongView: View {
                     Picture(sentence.picture, size: 150 * uiScale * roomy(isWide))
                         .transition(.scale(scale: 0.3).combined(with: .opacity))
                 } else {
-                    Image(systemName: "questionmark")
-                        .font(.system(size: 60 * uiScale, weight: .heavy))
-                        .foregroundStyle(Color.outline.opacity(0.25))
+                    // Its shadow, to guess at
+                    Picture(sentence.picture, size: 150 * uiScale * roomy(isWide))
+                        .colorMultiply(.black)
+                        .opacity(0.12)
+                        .overlay {
+                            Image(systemName: "questionmark")
+                                .font(.system(size: 60 * uiScale, weight: .heavy))
+                                .foregroundStyle(Color.outline.opacity(0.35))
+                        }
                 }
             }
             .frame(width: 190 * uiScale * roomy(isWide), height: 170 * uiScale * roomy(isWide))
@@ -113,7 +121,7 @@ struct ReadAlongView: View {
                 .foregroundStyle(Color(red: 0.95, green: 0.47, blue: 0.6))
                 .opacity(isHeart ? 1 : 0)
             HStack(alignment: .top, spacing: 0) {
-                ForEach(Array(ReadAlong.sounds(of: word).enumerated()), id: \.offset) { _, sound in
+                ForEach(Array(ReadAlong.sounds(of: word).enumerated()), id: \.offset) { part, sound in
                     VStack(spacing: 2 * uiScale) {
                         Text(sound).font(.kid(40)).foregroundStyle(ink)
                         // Sound buttons: a dot for one letter, a dash for two letters making one sound
@@ -123,17 +131,19 @@ struct ReadAlongView: View {
                                 .frame(width: sound.count > 1 ? 26 * uiScale : 8 * uiScale, height: 8 * uiScale)
                                 .padding(6 * uiScale)
                                 .contentShape(Rectangle())
-                                .onTapGesture { sayLetter(sound) }
+                                .onTapGesture { poke("\(index).\(part)"); sayLetter(sound) }
                         } else {
                             Color.clear.frame(height: 20 * uiScale)
                         }
                     }
+                    .boing(pokes["\(index).\(part)", default: 0])  // the sound's letters bounce with it
                 }
                 // The full stop or exclamation mark, if any
                 Text(word.filter { !$0.isLetter }).font(.kid(40)).foregroundStyle(ink)
             }
             .contentShape(Rectangle())
-            .onTapGesture { help(with: word) }
+            .onTapGesture { poke("\(index)"); help(with: word) }
+            .boing(pokes["\(index)", default: 0])
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(word)
             .accessibilityAddTraits(.isButton)
@@ -205,6 +215,8 @@ struct ReadAlongView: View {
             Speaker.shared.say(sound.lowercased(), ipa: ipa)  // the pair's one sound, like sh
         }
     }
+
+    private func poke(_ key: String) { pokes[key, default: 0] += 1 }
 
     private func show(_ text: String) {
         withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) { cheer = text }

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<clipPath id="w"><path d="M14 170 C30 120 50 70 104 52 C150 38 186 62 182 100 C178 128 148 134 138 116 C130 102 142 88 154 94 C150 76 120 72 100 90 C76 112 80 150 112 170Z"/></clipPath>
+<path d="M14 170 C30 120 50 70 104 52 C150 38 186 62 182 100 C178 128 148 134 138 116 C130 102 142 88 154 94 C150 76 120 72 100 90 C76 112 80 150 112 170Z" fill="#6FB6E8"/>
+<g clip-path="url(#w)"><ellipse cx="60" cy="190" rx="110" ry="60" fill="#4A92CC"/><path d="M60 140 C70 110 90 80 120 70" fill="none" stroke="#A9DAF7" stroke-width="8" stroke-linecap="round"/></g>
+<path d="M14 170 C30 120 50 70 104 52 C150 38 186 62 182 100 C178 128 148 134 138 116 C130 102 142 88 154 94 C150 76 120 72 100 90 C76 112 80 150 112 170Z" fill="none" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<path d="M8 172 Q30 160 52 172 T96 172 T140 172 T190 172 L190 186 L8 186Z" fill="#4A92CC" stroke="#4A2C2A" stroke-width="7" stroke-linejoin="round"/>
+<g fill="#fff" stroke="#4A2C2A" stroke-width="4"><circle cx="168" cy="44" r="8"/><circle cx="186" cy="62" r="6"/><circle cx="150" cy="30" r="5"/></g>
+</svg>

@@ -142,7 +142,7 @@ Clothes in the hamper
 Cloud
 Cock-a-doodle-doo!
 Coco
-Coco climbed up, up, up and... BOING! He got the crown!
+Coco climbed up, up, up and... BOING! She got the crown!
 Coco has 1 apple. Mochi brings 1 more. How many now?
 Coco has 1 apple. Mochi brings 2 more. How many now?
 Coco has 1 apple. Mochi brings 3 more. How many now?
@@ -2031,7 +2031,7 @@ book:Calm. Nice and cozy, like a quiet story.
 book:Clothes
 book:Cloud
 book:Coco
-book:Coco climbed up, up, up and... BOING! He got the crown!
+book:Coco climbed up, up, up and... BOING! She got the crown!
 book:Coco has fewer!
 book:Coco has more!
 book:Coco said, Do not worry, Princess Marisol! We will find it!
@@ -2220,6 +2220,7 @@ book:Riding
 book:Rinse
 book:Rinse!
 book:Row Your Boat!
+book:Ruby
 book:Run
 book:S is for Sun!
 book:S!
@@ -2752,7 +2753,6 @@ book:pop!
 book:popped
 book:porridge
 book:pot
-book:princesses
 book:puffed
 book:purple
 book:put
@@ -2929,7 +2929,7 @@ book:you
 book:yummy
 book:zebra
 book:zebra! You spelled it!
-book:¡Gracias, Coco! said Princess Marisol. Then all the princesses danced merengue at a big party. YAY!
+book:¡Gracias, Coco! said Princess Marisol. Then Marisol, Luna, Pearl and Ruby danced merengue at a big party. YAY!
 books
 boots
 bove
@@ -3702,6 +3702,7 @@ fish and star!
 fish and sun!
 fish and tree!
 flag
+flag-dr
 flats
 fleece
 floss
@@ -3920,6 +3921,7 @@ ly,
 m
 mad
 mango
+marisol
 mazeLevel
 mazeUnlocked
 me
@@ -4055,6 +4057,7 @@ satpinmdgockeurhbfljvwxyz
 scared
 school
 scissors
+sea
 see
 sh
 shaker
@@ -4334,7 +4337,6 @@ washed
 watch me
 water
 wateringcan
-wave
 waveform
 we
 web
@@ -4363,4 +4365,4 @@ yuh
 z
 zebra
 zzz
-¡Gracias, Coco! said Princess Marisol. Then all the princesses danced merengue at a big party. YAY!
+¡Gracias, Coco! said Princess Marisol. Then Marisol, Luna, Pearl and Ruby danced merengue at a big party. YAY!

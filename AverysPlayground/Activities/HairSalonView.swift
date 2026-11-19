@@ -271,7 +271,7 @@ struct HairSalonView: View {
             UpNext(count: Friend.all.count, current: customer) { index in
                 let waiting = Friend.all[index]
                 Canvas { context, size in
-                    HairArt.draw(Hairdo(color: waiting.hair), skin: waiting.skin, eyes: waiting.eyes, in: &context, size: size)
+                    HairArt.draw(Hairdo(color: waiting.hair, accessory: waiting.princess ? "crown" : nil), skin: waiting.skin, eyes: waiting.eyes, in: &context, size: size)
                 }
                 .scaleEffect(1.6)
                 .offset(y: 4 * uiScale)
@@ -663,7 +663,9 @@ private enum HairArt {
         }
 
         if let accessory = hair.accessory {
-            context.draw(Image("Picture-\(accessory)"), in: CGRect(x: 0.6 * s, y: 0.14 * s, width: 0.16 * s, height: 0.16 * s))
+            // A crown sits on top of her head; bows and clips go at the side
+            let spot = accessory == "crown" ? CGRect(x: 0.38, y: 0.03, width: 0.24, height: 0.24) : CGRect(x: 0.6, y: 0.14, width: 0.16, height: 0.16)
+            context.draw(Image("Picture-\(accessory)"), in: CGRect(x: spot.minX * s, y: spot.minY * s, width: spot.width * s, height: spot.height * s))
         }
     }
 }
