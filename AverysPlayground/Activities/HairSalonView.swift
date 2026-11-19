@@ -456,6 +456,7 @@ struct HairSalonView: View {
             hair = Hairdo(
                 lengths: (0..<Hairdo.strandCount).map { _ in .random(in: 0.85...1) },
                 color: friend.hair,
+                accessory: friend.princess ? "crown" : nil,  // a princess comes in her crown
                 goal: Haircut.allCases.randomElement()
             )
             photo = nil

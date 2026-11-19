@@ -26,6 +26,16 @@ struct Story: Hashable {
     }
 
     static let all = [
+        // Coco's own princess friends (Customers.swift), in an original fairy tale with loud words to read.
+        Story(title: "Princess Mango's Crown", cover: "crown", color: Color(red: 0.95, green: 0.62, blue: 0.3), pages: [
+            Page(pictures: ["queen", "crown"], text: "Princess Mango lived on a sunny island. She had a sparkly gold crown."),
+            Page(pictures: ["crown", "wind"], text: "One windy day, WHOOSH! The wind blew her crown away!"),
+            Page(pictures: ["crocodile", "queen"], text: "Coco said, Do not worry, Princess Mango! We will find it!"),
+            Page(pictures: ["gem", "wave"], text: "They looked by the sea. Princess Pearl popped up from a wave. SPLASH! Not here!"),
+            Page(pictures: ["moon", "star"], text: "Princess Luna looked up at the stars. I see something shiny in that tree!", setting: .night),
+            Page(pictures: ["tree", "crown"], text: "Coco climbed up, up, up and... BOING! He got the crown!"),
+            Page(pictures: ["party", "cake"], text: "Princess Mango gave Coco a big hug. Then all the princesses had a party. YAY!"),
+        ], question: .init(text: "What did the wind blow away?", answer: "crown", others: ["cake", "star"])),
         // An original silly book where the book itself is "dangerous", full of big fun sound words to read
         // (BOOM! BOO! POP!); words in capitals are loud words that zoom and wobble when her finger reaches them.
         Story(title: "Coco's Dangerous Book", cover: "crocodile", color: Color(red: 0.91, green: 0.4, blue: 0.43), pages: [

@@ -142,6 +142,7 @@ Clothes in the hamper
 Cloud
 Cock-a-doodle-doo!
 Coco
+Coco climbed up, up, up and... BOING! He got the crown!
 Coco has 1 apple. Mochi brings 1 more. How many now?
 Coco has 1 apple. Mochi brings 2 more. How many now?
 Coco has 1 apple. Mochi brings 3 more. How many now?
@@ -472,6 +473,7 @@ Coco has 6 strawberries. Mochi eats 2. How many are left?
 Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
+Coco said, Do not worry, Princess Mango! We will find it!
 Coco wants a cupcake!
 Coco's Dangerous Book
 CocoCheer
@@ -855,6 +857,10 @@ Hi Kiki!
 Hi Leo!
 Hi Lily!
 Hi Mia!
+Hi Princess Luna!
+Hi Princess Mango!
+Hi Princess Pearl!
+Hi Princess Ruby!
 Hi Rosa!
 Hi Zoe!
 Hi!
@@ -1095,6 +1101,7 @@ On
 On the plate
 One
 One night, two tiny elves came in and made shoes for him!
+One windy day, WHOOSH! The wind blew her crown away!
 Ooh la la!
 Ooh la la, fancy!
 Ooh, fancy pattern!
@@ -1162,6 +1169,14 @@ Press the key with the star.
 Pretty hair!
 Pretty pretty pretty!
 Previous picture
+Princess Luna
+Princess Luna looked up at the stars. I see something shiny in that tree!
+Princess Mango
+Princess Mango gave Coco a big hug. Then all the princesses had a party. YAY!
+Princess Mango lived on a sunny island. She had a sparkly gold crown.
+Princess Mango's Crown
+Princess Pearl
+Princess Ruby
 Psst! Look near the sparkles!
 Puff
 Puff! So cute!
@@ -1466,6 +1481,7 @@ Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
 Then the lion got stuck in a hunter's net.
 Then winter came. It was cold, and the grasshopper had no food.
 They all ate together. When everyone shares, there is enough for all!
+They looked by the sea. Princess Pearl popped up from a wave. SPLASH! Not here!
 Three hearts in a row! Hearts win! Snap snap!
 Three little pigs went out to build three little houses.
 Three stars in a row! Stars win! Holy guacamole!
@@ -1531,6 +1547,7 @@ What comes next?
 What did Jack trade for the magic beans?
 What did the boy watch on the hill?
 What did the traveler put in the pot first?
+What did the wind blow away?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 What is this? A box!
 What went POP?
@@ -1988,6 +2005,7 @@ book:Avery
 book:Avery! You spelled it!
 book:B is for Bear!
 book:B!
+book:BOING
 book:BOO
 book:BOOM
 book:BUZZ
@@ -2013,8 +2031,10 @@ book:Calm. Nice and cozy, like a quiet story.
 book:Clothes
 book:Cloud
 book:Coco
+book:Coco climbed up, up, up and... BOING! He got the crown!
 book:Coco has fewer!
 book:Coco has more!
+book:Coco said, Do not worry, Princess Mango! We will find it!
 book:Coco! You spelled it!
 book:Coco's Dangerous Book
 book:Colors
@@ -2130,9 +2150,11 @@ book:Little Red Riding Hood went to visit her grandma.
 book:London Bridge!
 book:Look at me!
 book:Loved. Say I love you too!
+book:Luna
 book:M is for Moon!
 book:M!
 book:Mad. Take a big breath, and blow it out slowly.
+book:Mango
 book:Mary Had a Little Lamb!
 book:Mochi
 book:Mochi has fewer!
@@ -2164,10 +2186,12 @@ book:O!
 book:Old MacDonald!
 book:One
 book:One night, two tiny elves came in and made shoes for him!
+book:One windy day, WHOOSH! The wind blew her crown away!
 book:Orange! Like an orange.
 book:P is for Penguin!
 book:P!
 book:POP
+book:Pearl
 book:Phew
 book:Phew! You were so brave. Do you want to read the DANGEROUS book again?
 book:Pigtails
@@ -2176,6 +2200,11 @@ book:Pink! Like a flower.
 book:Please
 book:Please let me go, said the mouse. One day I will help you.
 book:Ponytail
+book:Princess
+book:Princess Luna looked up at the stars. I see something shiny in that tree!
+book:Princess Mango gave Coco a big hug. Then all the princesses had a party. YAY!
+book:Princess Mango lived on a sunny island. She had a sparkly gold crown.
+book:Princess Mango's Crown
 book:Puff
 book:Purple! Like grapes.
 book:Put on your flip-flops
@@ -2255,6 +2284,7 @@ book:Then the lion got stuck in a hunter's net.
 book:Then winter came. It was cold, and the grasshopper had no food.
 book:They
 book:They all ate together. When everyone shares, there is enough for all!
+book:They looked by the sea. Princess Pearl popped up from a wave. SPLASH! Not here!
 book:This
 book:Three
 book:Three little pigs went out to build three little houses.
@@ -2273,11 +2303,13 @@ book:W is for Whale!
 book:W!
 book:WHOOSH
 book:Wash
+book:We
 book:We like to play.
 book:What
 book:What did Jack trade for the magic beans?
 book:What did the boy watch on the hill?
 book:What did the traveler put in the pot first?
+book:What did the wind blow away?
 book:What is this? A box!
 book:What went POP?
 book:Wheels on the Bus!
@@ -2305,6 +2337,7 @@ book:Wow
 book:X!
 book:Y is for Yo-yo!
 book:Y!
+book:YAY
 book:Yellow
 book:Yellow! Like a banana.
 book:Yes, Dad
@@ -2384,6 +2417,7 @@ book:blows
 book:blue
 book:boat
 book:boat!
+book:boing!
 book:boo!
 book:book
 book:boom!
@@ -2503,6 +2537,7 @@ book:fast
 book:fell
 book:fi
 book:filled
+book:find
 book:first
 book:fish
 book:fish!
@@ -2534,9 +2569,11 @@ book:frog
 book:frog and dog rhyme!
 book:frog!
 book:frog! You spelled it!
+book:from
 book:fruit!
 book:fum
 book:fun
+book:gave
 book:gem
 book:get
 book:gets
@@ -2545,6 +2582,7 @@ book:gingerbread
 book:go
 book:goes
 book:going
+book:gold
 book:golden
 book:good
 book:got
@@ -2610,6 +2648,7 @@ book:in
 book:inside
 book:into
 book:is
+book:island
 book:it
 book:jumped
 book:just
@@ -2628,7 +2667,9 @@ book:lion
 book:lion!
 book:lion! You spelled it!
 book:little
+book:lived
 book:look
+book:looked
 book:love
 book:made
 book:magic
@@ -2682,6 +2723,7 @@ book:over
 book:overnight
 book:page
 book:pajamas!
+book:party
 book:pen
 book:pen and hen rhyme!
 book:pen!
@@ -2706,8 +2748,10 @@ book:planted
 book:play
 book:played
 book:pop!
+book:popped
 book:porridge
 book:pot
+book:princesses
 book:puffed
 book:purple
 book:put
@@ -2731,6 +2775,7 @@ book:salami
 book:saw
 book:say
 book:says
+book:sea
 book:second
 book:see
 book:seven
@@ -2740,6 +2785,7 @@ book:shared
 book:shares
 book:she
 book:sheep
+book:shiny
 book:shoemaker
 book:shoes
 book:shouted
@@ -2753,12 +2799,15 @@ book:small!
 book:sneakers!
 book:so
 book:some
+book:something
 book:soup
+book:sparkly
 book:splash!
 book:star
 book:star and car rhyme!
 book:star!
 book:star! You spelled it!
+book:stars
 book:steady
 book:stew
 book:stick
@@ -2777,6 +2826,7 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:sun! You wrote it!
 book:sunhat!
+book:sunny
 book:tall
 book:tell
 book:ten
@@ -2858,6 +2908,7 @@ book:wife
 book:will
 book:wind
 book:wind! You spelled it!
+book:windy
 book:wins
 book:winter
 book:with
@@ -2869,6 +2920,8 @@ book:woodcutter
 book:woods
 book:work
 book:worked
+book:worry
+book:yay!
 book:yellow
 book:yet
 book:you

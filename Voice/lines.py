@@ -174,7 +174,7 @@ for a in bingo:
     lines.update(f"{a} and {b}!" for b in bingo)
 
 # Coco says hi to each customer by name: the friends at the salon and in dress up, and the dentist's animals
-friends = re.findall(r'Friend\(name: "(\w+)"', (app / "Support" / "Customers.swift").read_text())
+friends = re.findall(r'Friend\(name: "([\w ]+)"', (app / "Support" / "Customers.swift").read_text())
 patients = re.findall(r'case \.(?:lion|bear|bunny|kitty): "(\w+)"', src["DentistView.swift"])
 lines.update(f"Hi {name}!" for name in friends + patients + ["Avery"])
 

@@ -11,6 +11,9 @@ struct Outfit: Equatable {
     var shoes = Shoes.heels
     var hat = Hat.none
     var extra = Extra.none
+
+    /// What a princess arrives in: her gown and crown.
+    static let princess = Outfit(clothes: .gown, hat: .crown)
 }
 
 struct DressUpView: View {
@@ -76,7 +79,7 @@ struct DressUpView: View {
                     UpNext(count: Friend.all.count, current: model) { index in
                         // Just her face: the whole doll, zoomed in on the head
                         let width = 150 * uiScale
-                        Doll(friend: Friend.all[index])
+                        Doll(outfit: Friend.all[index].princess ? .princess : Outfit(), friend: Friend.all[index])
                             .frame(width: width, height: width * Doll.height)
                             .offset(y: width * (Doll.height / 2 - 0.165))
                     }
@@ -213,7 +216,7 @@ struct DressUpView: View {
 
     private func newDoll() {
         withAnimation(.spring) {
-            outfit = Outfit()
+            outfit = friend.princess ? .princess : Outfit()
             tray = .clothes
             isShowingOff = false
             photo = nil

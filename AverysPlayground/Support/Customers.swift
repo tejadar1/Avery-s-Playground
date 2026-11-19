@@ -1,18 +1,25 @@
 import SwiftUI
 
-/// The friends who take turns at the hair salon and in dress up.
+/// The friends who take turns at the hair salon and in dress up, princesses among them.
 struct Friend: Hashable {
     let name: String
     let skin: Color
     let hair: Color
     let eyes: Color
+    /// A princess arrives in her crown (and, in dress up, her gown).
+    var princess = false
 
-    /// The fifth friend is the child herself, by her name.
+    /// The princesses are Coco's own friends: Mango from a sunny Caribbean island, Luna with her starry night, Pearl
+    /// from under the sea, and Ruby who builds things. The last friend is the child herself, by her name.
     static var all: [Friend] { [
         Friend(name: "Mia", skin: Color(red: 0.86, green: 0.63, blue: 0.46), hair: Color(red: 0.45, green: 0.28, blue: 0.15), eyes: Color(red: 0.55, green: 0.36, blue: 0.2)),
+        Friend(name: "Princess Mango", skin: Color(red: 0.72, green: 0.48, blue: 0.32), hair: Color(red: 0.25, green: 0.16, blue: 0.1), eyes: Color(red: 0.4, green: 0.25, blue: 0.14), princess: true),
         Friend(name: "Lily", skin: Color(red: 0.99, green: 0.84, blue: 0.72), hair: Color(red: 0.98, green: 0.82, blue: 0.4), eyes: Color(red: 0.3, green: 0.55, blue: 0.85)),
+        Friend(name: "Princess Luna", skin: Color(red: 0.99, green: 0.86, blue: 0.78), hair: Color(red: 0.78, green: 0.7, blue: 0.92), eyes: Color(red: 0.36, green: 0.42, blue: 0.75), princess: true),
         Friend(name: "Zoe", skin: Color(red: 0.6, green: 0.4, blue: 0.27), hair: Color(red: 0.2, green: 0.14, blue: 0.13), eyes: Color(red: 0.35, green: 0.22, blue: 0.14)),
+        Friend(name: "Princess Pearl", skin: Color(red: 0.95, green: 0.76, blue: 0.6), hair: Color(red: 0.3, green: 0.7, blue: 0.72), eyes: Color(red: 0.3, green: 0.6, blue: 0.45), princess: true),
         Friend(name: "Rosa", skin: Color(red: 0.92, green: 0.72, blue: 0.58), hair: Color(red: 0.75, green: 0.32, blue: 0.18), eyes: Color(red: 0.36, green: 0.6, blue: 0.38)),
+        Friend(name: "Princess Ruby", skin: Color(red: 0.45, green: 0.3, blue: 0.22), hair: Color(red: 0.13, green: 0.1, blue: 0.1), eyes: Color(red: 0.3, green: 0.2, blue: 0.14), princess: true),
         Friend(name: Kid.name, skin: Color(red: 0.98, green: 0.85, blue: 0.75), hair: Color(red: 0.79, green: 0.58, blue: 0.38), eyes: Color(red: 0.42, green: 0.28, blue: 0.18)),
     ] }
 }
@@ -42,7 +49,7 @@ struct UpNext<Face: View>: View {
                 .font(.kid(14))
                 .foregroundStyle(Color.outline.opacity(0.75))
             HStack(spacing: -10 * uiScale) {
-                ForEach(1..<count, id: \.self) { step in
+                ForEach(1..<min(count, 5), id: \.self) { step in
                     face((current + step) % count)
                         .frame(width: 46 * uiScale, height: 46 * uiScale)
                         .clipShape(Circle())
