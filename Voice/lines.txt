@@ -8,6 +8,7 @@ A
 A Coco!
 A Mochi!
 A beach!
+A bee! BUZZ! BUZZ! Hold still. It just wants to say hi.
 A big bad wolf saw her. Where are you going? he asked.
 A big box, just for you!
 A big box, just for you! How would you feel?
@@ -472,6 +473,7 @@ Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
 Coco wants a cupcake!
+Coco's Dangerous Book
 CocoCheer
 CocoGiggle
 CocoThink
@@ -844,6 +846,7 @@ Hee hee, the tree isn't on your card.
 Hee hee, try the other one!
 Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
+Here comes a big wave. SPLASH! Now the book is all wet!
 Here is my dog.
 Hi Avery!
 Hi Bella!
@@ -912,6 +915,7 @@ In the box
 In the lines
 In the morning, he found beautiful new shoes. Wow!
 In the sky or in the water?
+It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!
 It's a tie! Everybody wins a hug!
 It's a tie! Everyone wins!
 It's your birthday party!
@@ -1129,6 +1133,7 @@ Peekaboo! Hearts found me!
 Peekaboo! Stars found me!
 Penguin
 Perfect! Just how she wanted it!
+Phew! You were so brave. Do you want to read the DANGEROUS book again?
 Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick a frosting color first!
 Pick a leaf and tap it to hop! Follow the beans!
@@ -1455,6 +1460,7 @@ The second pig built a house of sticks.
 The table's ready! Let's eat!
 The third pig built a house of bricks.
 The three bears came home! Goldilocks woke up and ran all the way home.
+The wind blows, WHOOSH! The sky flashes, BOOM!
 The wolf ran to grandma's house and hid in her bed.
 Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
 Then the lion got stuck in a hunter's net.
@@ -1493,6 +1499,7 @@ Twin
 Twinkle Twinkle
 Twinkle twinkle, little nail!
 U
+Uh oh! This book is DANGEROUS. Coco says, do not turn the page!
 Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!
 Umbrella
 Undo
@@ -1526,6 +1533,7 @@ What did the boy watch on the hill?
 What did the traveler put in the pot first?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 What is this? A box!
+What went POP?
 Wheels on the Bus
 Which house did the wolf not blow down?
 Which one feels calm?
@@ -1653,6 +1661,7 @@ You shared your snack with a friend. How would you feel?
 You spun 1! Hop 1 square.
 You spun 2! Hop 2 squares.
 You spun 3! Hop 3 squares.
+You turned the page! A big red balloon goes up, up, up... POP!
 You wrote your name!
 You're a nail artist!
 You're a superstar, for real life!
@@ -1958,6 +1967,7 @@ book:7
 book:8
 book:9
 book:A
+book:A bee! BUZZ! BUZZ! Hold still. It just wants to say hi.
 book:A big bad wolf saw her. Where are you going? he asked.
 book:A big lion was sleeping in the sun.
 book:A boy watched the sheep on a hill.
@@ -1978,6 +1988,9 @@ book:Avery
 book:Avery! You spelled it!
 book:B is for Bear!
 book:B!
+book:BOO
+book:BOOM
+book:BUZZ
 book:Black! Like a hat.
 book:Bless me, Dad
 book:Bless me, Grandma
@@ -2003,6 +2016,7 @@ book:Coco
 book:Coco has fewer!
 book:Coco has more!
 book:Coco! You spelled it!
+book:Coco's Dangerous Book
 book:Colors
 book:Comb
 book:Come
@@ -2011,9 +2025,11 @@ book:Coral
 book:Curly
 book:D is for Dog!
 book:D!
+book:DANGEROUS
 book:Dad
 book:Dad! You spelled it!
 book:Designs
+book:Do
 book:Do you want mangú?
 book:Down
 book:E is for Elephant!
@@ -2065,9 +2081,13 @@ book:He climbed down fast and took the hen home to his mom.
 book:He did it again. Everyone came running. No wolf!
 book:He jumped up and ran away! Run, run, as fast as you can!
 book:He planted the beans, and they grew up into the sky overnight!
+book:Hee
 book:Hello
 book:Hello!
+book:Here
+book:Here comes a big wave. SPLASH! Now the book is all wet!
 book:Here is my dog.
+book:Hold
 book:Hood
 book:Hot Cross Buns!
 book:How are you?
@@ -2087,6 +2107,7 @@ book:In
 book:In a little bit
 book:In the morning, he found beautiful new shoes. Wow!
 book:It
+book:It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!
 book:Itsy Bitsy Spider!
 book:J is for Juice!
 book:J!
@@ -2136,6 +2157,7 @@ book:No, said the hen. My chicks and I will eat it!
 book:Nobody
 book:Not
 book:Not yet, said the ant. First I work, then I play.
+book:Now
 book:Numbers
 book:O is for Octopus!
 book:O!
@@ -2145,6 +2167,9 @@ book:One night, two tiny elves came in and made shoes for him!
 book:Orange! Like an orange.
 book:P is for Penguin!
 book:P!
+book:POP
+book:Phew
+book:Phew! You were so brave. Do you want to read the DANGEROUS book again?
 book:Pigtails
 book:Pink
 book:Pink! Like a flower.
@@ -2167,6 +2192,7 @@ book:Row Your Boat!
 book:Run
 book:S is for Sun!
 book:S!
+book:SPLASH
 book:Sad. A big hug can help.
 book:Scared. Hold a grown-up's hand.
 book:Scissors
@@ -2221,6 +2247,7 @@ book:The little red hen found some wheat.
 book:The second pig built a house of sticks.
 book:The third pig built a house of bricks.
 book:The three bears came home! Goldilocks woke up and ran all the way home.
+book:The wind blows, WHOOSH! The sky flashes, BOOM!
 book:The wolf ran to grandma's house and hid in her bed.
 book:Then
 book:Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
@@ -2237,11 +2264,14 @@ book:Tortoise won the race! Slow and steady wins.
 book:Twinkle Twinkle!
 book:U is for Umbrella!
 book:U!
+book:Uh
+book:Uh oh! This book is DANGEROUS. Coco says, do not turn the page!
 book:V is for Violin!
 book:V!
 book:Very good
 book:W is for Whale!
 book:W!
+book:WHOOSH
 book:Wash
 book:We like to play.
 book:What
@@ -2249,6 +2279,7 @@ book:What did Jack trade for the magic beans?
 book:What did the boy watch on the hill?
 book:What did the traveler put in the pot first?
 book:What is this? A box!
+book:What went POP?
 book:Wheels on the Bus!
 book:When
 book:Where
@@ -2280,6 +2311,7 @@ book:Yes, Dad
 book:Yes, Mom
 book:You
 book:You spelled it!
+book:You turned the page! A big red balloon goes up, up, up... POP!
 book:Yummy!
 book:Z is for Zebra!
 book:Z!
@@ -2338,6 +2370,7 @@ book:beds
 book:bee
 book:bee and tree rhyme!
 book:bee!
+book:behind
 book:better
 book:big
 book:big!
@@ -2347,9 +2380,13 @@ book:bird!
 book:black
 book:blew
 book:blow
+book:blows
 book:blue
 book:boat
 book:boat!
+book:boo!
+book:book
+book:boom!
 book:boots!
 book:bowls
 book:box
@@ -2359,6 +2396,7 @@ book:box! You read it!
 book:box! You spelled it!
 book:box! You wrote it!
 book:boy
+book:brave
 book:bread
 book:bread!
 book:brick
@@ -2381,6 +2419,7 @@ book:bus! You wrote it!
 book:but
 book:butterfly
 book:butterfly!
+book:buzz!
 book:by
 book:cake
 book:cake!
@@ -2416,6 +2455,7 @@ book:climbed
 book:clothes
 book:clothes!
 book:cold
+book:comes
 book:cookie
 book:cookie!
 book:could
@@ -2432,9 +2472,12 @@ book:cup! You wrote it!
 book:cupcake
 book:dad
 book:danced
+book:dangerous!
+book:dark
 book:day
 book:did
 book:dip
+book:do
 book:dog
 book:dog and frog rhyme!
 book:dog!
@@ -2467,6 +2510,7 @@ book:fish! You spelled it!
 book:five
 book:flag
 book:flag! You spelled it!
+book:flashes
 book:flower
 book:flower!
 book:flowers
@@ -2495,9 +2539,11 @@ book:fum
 book:fun
 book:gem
 book:get
+book:gets
 book:giant's
 book:gingerbread
 book:go
+book:goes
 book:going
 book:golden
 book:good
@@ -2526,6 +2572,7 @@ book:have
 book:he
 book:heart
 book:heart!
+book:hee
 book:help
 book:helped
 book:helpers
@@ -2538,6 +2585,7 @@ book:hen! You wrote it!
 book:her
 book:here
 book:herself
+book:hi
 book:hid
 book:hiding
 book:hill
@@ -2623,6 +2671,7 @@ book:not
 book:octopus
 book:octopus!
 book:of
+book:oh
 book:old
 book:on
 book:one
@@ -2631,6 +2680,7 @@ book:other
 book:out
 book:over
 book:overnight
+book:page
 book:pajamas!
 book:pen
 book:pen and hen rhyme!
@@ -2655,6 +2705,7 @@ book:plantain
 book:planted
 book:play
 book:played
+book:pop!
 book:porridge
 book:pot
 book:puffed
@@ -2665,6 +2716,7 @@ book:rabbit!
 book:race
 book:rainbow
 book:ran
+book:read
 book:real
 book:red
 book:rice and beans
@@ -2678,6 +2730,7 @@ book:said
 book:salami
 book:saw
 book:say
+book:says
 book:second
 book:see
 book:seven
@@ -2698,8 +2751,10 @@ book:slow
 book:sly
 book:small!
 book:sneakers!
+book:so
 book:some
 book:soup
+book:splash!
 book:star
 book:star and car rhyme!
 book:star!
@@ -2708,6 +2763,7 @@ book:steady
 book:stew
 book:stick
 book:sticks
+book:still
 book:stone
 book:straw
 book:strawberry
@@ -2755,6 +2811,8 @@ book:tried
 book:trophy
 book:truth
 book:tshirt!
+book:turn
+book:turned
 book:turtle
 book:turtle!
 book:two
@@ -2771,12 +2829,15 @@ book:very
 book:visit
 book:walk
 book:walked
+book:want
 book:wanted
+book:wants
 book:warm
 book:was
 book:watch
 book:watched
 book:water
+book:wave
 book:way
 book:we
 book:web
@@ -2786,11 +2847,13 @@ book:web! You spelled it!
 book:web! You wrote it!
 book:went
 book:were
+book:wet
 book:whale
 book:whale!
 book:what
 book:wheat
 book:white
+book:whoosh!
 book:wife
 book:will
 book:wind
@@ -2998,6 +3061,7 @@ cushion1
 cushion2
 d
 dad
+dangerous
 der
 desk1
 desk2
@@ -4215,6 +4279,7 @@ washed
 watch me
 water
 wateringcan
+wave
 waveform
 we
 web

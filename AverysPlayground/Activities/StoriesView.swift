@@ -26,6 +26,17 @@ struct Story: Hashable {
     }
 
     static let all = [
+        // An original silly book where the book itself is "dangerous", full of big fun sound words to read
+        // (BOOM! BOO! POP!); words in capitals are loud words that zoom and wobble when her finger reaches them.
+        Story(title: "Coco's Dangerous Book", cover: "crocodile", color: Color(red: 0.91, green: 0.4, blue: 0.43), pages: [
+            Page(pictures: ["crocodile", "book"], text: "Uh oh! This book is DANGEROUS. Coco says, do not turn the page!"),
+            Page(pictures: ["balloon", "sparkles"], text: "You turned the page! A big red balloon goes up, up, up... POP!"),
+            Page(pictures: ["bee", "face-shock"], text: "A bee! BUZZ! BUZZ! Hold still. It just wants to say hi."),
+            Page(pictures: ["lightning", "wind"], text: "The wind blows, WHOOSH! The sky flashes, BOOM!"),
+            Page(pictures: ["moon", "crocodile"], text: "It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!", setting: .night),
+            Page(pictures: ["wave", "fish"], text: "Here comes a big wave. SPLASH! Now the book is all wet!"),
+            Page(pictures: ["crocodile", "heart"], text: "Phew! You were so brave. Do you want to read the DANGEROUS book again?"),
+        ], question: .init(text: "What went POP?", answer: "balloon", others: ["bee", "moon"])),
         Story(title: "The Three Little Pigs", cover: "pig", color: .pink, pages: [
             Page(pictures: ["pig", "pig", "pig"], text: "Three little pigs went out to build three little houses."),
             Page(pictures: ["wheat", "house"], text: "The first pig built a house of straw."),
@@ -462,14 +473,21 @@ private struct StoryReader: View {
         VStack(alignment: .leading, spacing: 20 * uiScale) {
             FlowLayout(spacing: FlowLayout.wordSpacing, lineSpacing: FlowLayout.lineSpacing) {
                 ForEach(Array(words.enumerated()), id: \.offset) { index, word in
+                    let loud = Self.isLoud(word)
                     Text(word)
-                        .font(.system(size: 34 * uiScale, weight: .bold, design: .rounded))
-                        .foregroundStyle(index == current ? .white : Color.outline)
+                        .font(.system(size: (loud ? 46 : 34) * uiScale, weight: loud ? .heavy : .bold, design: .rounded))
+                        .foregroundStyle(index == current ? .white : loud ? story.color : Color.outline)
                         .padding(.horizontal, 4 * uiScale)
                         .background(index == current ? story.color : .clear, in: RoundedRectangle(cornerRadius: 8 * uiScale))
                         .background(GeometryReader { geo in
                             Color.clear.preference(key: WordFrames.self, value: [index: geo.frame(in: .named("words"))])
                         })
+                        // A loud word zooms and wobbles when her finger reaches it
+                        .keyframeAnimator(initialValue: 0.0, trigger: loud && index == current) { content, t in
+                            content
+                                .scaleEffect(1 + 0.35 * sin(t * .pi))
+                                .rotationEffect(.degrees(8 * sin(t * 4 * .pi)))
+                        } keyframes: { _ in LinearKeyframe(1.0, duration: 0.5) }
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -616,7 +634,21 @@ private struct StoryReader: View {
         isSwiping = true
         current = index
         Haptics.tap()
-        read(words[index].trimmingCharacters(in: .punctuationCharacters))
+        let word = words[index].trimmingCharacters(in: .punctuationCharacters)
+        if Self.isLoud(word) {
+            // BOOM! said with gusto, a pop and a buzz
+            Sounds.shared.play(.pop)
+            Haptics.success()
+            read(word.lowercased() + "!")
+        } else {
+            read(word)
+        }
+    }
+
+    /// A loud word, written in capitals: BOOM, BOO, POP.
+    static func isLoud(_ word: String) -> Bool {
+        let letters = word.filter(\.isLetter)
+        return letters.count >= 2 && letters == letters.uppercased()
     }
 
     /// The storyteller reads the English books; Dora reads the Spanish ones.
