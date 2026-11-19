@@ -9,7 +9,7 @@ struct Friend: Hashable {
     /// A princess arrives in her crown (and, in dress up, her gown).
     var princess = false
 
-    /// The princesses are Coco's own friends: Mango from a sunny Caribbean island, Luna with her starry night, Pearl
+    /// The princesses are Coco's own friends: Mango from the Dominican Republic (merengue and the Bayahíbe rose), Luna with her starry night, Pearl
     /// from under the sea, and Ruby who builds things. The last friend is the child herself, by her name.
     static var all: [Friend] { [
         Friend(name: "Mia", skin: Color(red: 0.86, green: 0.63, blue: 0.46), hair: Color(red: 0.45, green: 0.28, blue: 0.15), eyes: Color(red: 0.55, green: 0.36, blue: 0.2)),

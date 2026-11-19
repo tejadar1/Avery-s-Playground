@@ -1172,8 +1172,7 @@ Previous picture
 Princess Luna
 Princess Luna looked up at the stars. I see something shiny in that tree!
 Princess Mango
-Princess Mango gave Coco a big hug. Then all the princesses had a party. YAY!
-Princess Mango lived on a sunny island. She had a sparkly gold crown.
+Princess Mango lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
 Princess Mango's Crown
 Princess Pearl
 Princess Ruby
@@ -2009,6 +2008,7 @@ book:BOING
 book:BOO
 book:BOOM
 book:BUZZ
+book:Bayahíbe
 book:Black! Like a hat.
 book:Bless me, Dad
 book:Bless me, Grandma
@@ -2051,6 +2051,7 @@ book:Dad! You spelled it!
 book:Designs
 book:Do
 book:Do you want mangú?
+book:Dominican
 book:Down
 book:E is for Elephant!
 book:E!
@@ -2083,6 +2084,7 @@ book:Good morning
 book:Good night
 book:Good night, moon.
 book:Goodbye
+book:Gracias
 book:Grandma
 book:Grandma, what big eyes you have! All the better to see you with!
 book:Grandpa
@@ -2202,8 +2204,7 @@ book:Please let me go, said the mouse. One day I will help you.
 book:Ponytail
 book:Princess
 book:Princess Luna looked up at the stars. I see something shiny in that tree!
-book:Princess Mango gave Coco a big hug. Then all the princesses had a party. YAY!
-book:Princess Mango lived on a sunny island. She had a sparkly gold crown.
+book:Princess Mango lived in the Dominican Republic, by the sea. She had a sparkly gold crown with a Bayahíbe rose.
 book:Princess Mango's Crown
 book:Puff
 book:Purple! Like grapes.
@@ -2214,6 +2215,7 @@ book:R is for Rainbow!
 book:R!
 book:Red
 book:Red! Like a strawberry.
+book:Republic
 book:Riding
 book:Rinse
 book:Rinse!
@@ -2573,7 +2575,6 @@ book:from
 book:fruit!
 book:fum
 book:fun
-book:gave
 book:gem
 book:get
 book:gets
@@ -2648,7 +2649,6 @@ book:in
 book:inside
 book:into
 book:is
-book:island
 book:it
 book:jumped
 book:just
@@ -2678,6 +2678,7 @@ book:mango
 book:mango!
 book:mashed plantains
 book:me
+book:merengue
 book:milk
 book:milk! You spelled it!
 book:mom
@@ -2767,6 +2768,7 @@ book:rice and beans
 book:right
 book:river
 book:ropes
+book:rose
 book:run
 book:running
 book:safe
@@ -2826,7 +2828,6 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:sun! You wrote it!
 book:sunhat!
-book:sunny
 book:tall
 book:tell
 book:ten
@@ -2928,6 +2929,7 @@ book:you
 book:yummy
 book:zebra
 book:zebra! You spelled it!
+book:¡Gracias, Coco! said Princess Mango. Then all the princesses danced merengue at a big party. YAY!
 books
 boots
 bove
@@ -4361,3 +4363,4 @@ yuh
 z
 zebra
 zzz
+¡Gracias, Coco! said Princess Mango. Then all the princesses danced merengue at a big party. YAY!
