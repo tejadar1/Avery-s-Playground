@@ -153,7 +153,7 @@ struct ReadAlongView: View {
                 .fill(read ? Color(red: 0.36, green: 0.4, blue: 0.75) : here ? Color(red: 1.0, green: 0.75, blue: 0.3) : Color.outline.opacity(0.12))
                 .frame(height: 10 * uiScale)
             // Coco's tab under the word she's on: tap it or slide it on
-            tab.opacity(here ? 1 : 0).allowsHitTesting(here).accessibilityHidden(!here)
+            if here { tab } else { tab.hidden() }  // keeps its space; hidden ones aren't buttons, even to VoiceOver
         }
         .fixedSize()
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: at)
