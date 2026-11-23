@@ -282,6 +282,8 @@ final class ScreenshotTests: XCTestCase {
         sleep(1)
         try snap("31-For grown-ups", device, dir)
         tap(button("Age and games"))
+        // The tap can land while the page is still sliding in: tap again if the age page didn't open
+        if !app.buttons["Age 2"].waitForExistence(timeout: 3) { tap(button("Age and games")) }
         tap(app.buttons["Age 2"])
         sleep(1)
         try snap("32-Age and games", device, dir)
