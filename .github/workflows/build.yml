@@ -72,7 +72,7 @@ jobs:
 
   test:
     if: inputs.voice == 'none'
-    runs-on: xcode-27  # GitHub's Xcode 27 machines (macOS 27, iOS 27 SDK), which App Store Connect requires from April 2027
+    runs-on: macos-latest  # shortcut: the xcode-27 machines kept dying mid-run (Nov 2026); App Store Connect needs the iOS 27 SDK from April 2027, so move back once they are steady
     permissions:
       contents: write
     steps:
@@ -105,7 +105,7 @@ jobs:
 
   testflight:
     needs: test
-    runs-on: xcode-27  # GitHub's Xcode 27 machines (macOS 27, iOS 27 SDK), which App Store Connect requires from April 2027
+    runs-on: macos-latest  # shortcut: the xcode-27 machines kept dying mid-run (Nov 2026); App Store Connect needs the iOS 27 SDK from April 2027, so move back once they are steady
     # Only the .p8 key is a secret; the IDs just say which account and key to use.
     env:
       KEY_ID: LRDVNT6QAA
