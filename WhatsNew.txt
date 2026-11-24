@@ -1,1 +1,2 @@
 - Garden: Coco now explains what to do in her speech bubble, so it's clear even with the sound off: tap the dirt to plant a seed, then drag the watering can over a plant to help it grow.
+- Blocks: real physics. Blocks fall, stack, slide and tip over when they hang too far, the ball rolls and bounces, and a block let go while moving gets thrown.

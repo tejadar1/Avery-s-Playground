@@ -2,25 +2,20 @@ import XCTest
 @testable import AverysPlayground
 
 final class CalmTests: XCTestCase {
-    func testABlockLandsOnTheFloorOrOnTheBlockUnderIt() {
-        let floor = Block(id: 0, shape: .square, color: 0, x: 2, y: 0)
-        var plank = Block(id: 1, shape: .plank, color: 1, x: 2.5, y: 5)
-        XCTAssertEqual(Block.landing(plank, on: []), 0, "nothing under it: the floor")
-        XCTAssertEqual(Block.landing(plank, on: [floor]), 1, "on top of the square")
-        plank.x = 5
-        XCTAssertEqual(Block.landing(plank, on: [floor]), 0, "beside the square, not on it")
-        let arch = Block(id: 2, shape: .arch, color: 2, x: 2, y: 1)
-        XCTAssertEqual(Block.landing(Block(id: 3, shape: .ball, color: 3, x: 2, y: 9), on: [floor, arch]), 2, "on the highest one")
-    }
-
-    func testABlockHangingPastItsSupportTipsOff() {
-        let square = Block(id: 0, shape: .square, color: 0, x: 2, y: 0)
-        XCTAssertNil(Block.tipping(Block(id: 1, shape: .square, color: 1, x: 2.2, y: 1), on: [square]), "a little off-center is fine")
-        XCTAssertEqual(Block.tipping(Block(id: 2, shape: .plank, color: 1, x: 2.9, y: 1), on: [square]), 1, "its middle past the right edge")
-        XCTAssertEqual(Block.tipping(Block(id: 3, shape: .plank, color: 1, x: 1.1, y: 1), on: [square]), -1, "past the left edge")
-        XCTAssertNil(Block.tipping(Block(id: 4, shape: .square, color: 1, x: 7, y: 0), on: [square]), "on the floor it's steady")
-        let other = Block(id: 5, shape: .square, color: 0, x: 4, y: 0)
-        XCTAssertNil(Block.tipping(Block(id: 6, shape: .plank, color: 1, x: 3, y: 1), on: [square, other]), "a bridge over two blocks")
+    @MainActor
+    func testEveryBlockShapeIsASolidThingInTheWorld() {
+        let scene = BlocksScene()
+        scene.lay(size: CGSize(width: 600, height: 800), unit: 100, floor: 150)
+        XCTAssertNotNil(scene.physicsBody, "a floor and walls to stop the blocks")
+        for (index, shape) in Block.Shape.allCases.enumerated() {
+            let body = scene.add(shape, color: .red, colorIndex: index, at: CGPoint(x: 300, y: 600)).physicsBody
+            XCTAssertNotNil(body, "\(shape)")
+            XCTAssertEqual(body?.isDynamic, true, "\(shape) falls and tips")
+            XCTAssertEqual(body?.affectedByGravity, true, "\(shape)")
+        }
+        XCTAssertEqual(scene.blockCount, Block.Shape.allCases.count)
+        for n in 0..<50 { scene.add(.square, color: .red, colorIndex: 0, at: CGPoint(x: 300, y: 600 + CGFloat(n))) }
+        XCTAssertEqual(scene.blockCount, 40, "the oldest go once there are too many")
     }
 
     func testTheGardenIsSavedAndReadBack() {

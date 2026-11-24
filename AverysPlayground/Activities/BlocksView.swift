@@ -1,17 +1,15 @@
+import SpriteKit
 import SwiftUI
 
-/// Blocks: drag chunky wooden shapes off the shelf and stack them. A block let go falls straight down onto the floor
-/// or the block under it, with a soft clunk. Nothing to finish; the broom sweeps them away to start again.
-struct Block: Identifiable, Equatable {
+/// Blocks: drag chunky wooden shapes off the shelf and build. Real physics (SpriteKit): blocks fall, stack, tip over
+/// when they hang too far, slide, and the ball rolls. Pick one up to move it; let go while moving and it's thrown.
+/// Nothing to finish; the broom sweeps them away to start again.
+struct Block {
     enum Shape: CaseIterable { case square, plank, arch, ball, roof }
 
-    let id: Int
     let shape: Shape
-    let color: Int
-    /// The middle of its bottom edge, in block units (one square block is 1 × 1), from the floor's left end.
-    var x: Double
-    var y: Double
 
+    /// In block units: one square block is 1 × 1.
     var size: (width: Double, height: Double) {
         switch shape {
         case .square, .ball, .roof: (1, 1)
@@ -19,26 +17,147 @@ struct Block: Identifiable, Equatable {
         case .arch: (2, 1)
         }
     }
+}
 
-    /// Which way a resting block tips, if its middle hangs past the blocks holding it up: -1 left, 1 right, nil if
-    /// it's steady (on the floor, or balanced).
-    static func tipping(_ block: Block, on others: [Block]) -> Int? {
-        guard block.y > 0.01 else { return nil }
-        let half = block.size.width / 2
-        let under = others.filter {
-            $0.id != block.id && abs($0.y + $0.size.height - block.y) < 0.01 && abs($0.x - block.x) < half + $0.size.width / 2 - 0.1
-        }
-        guard let left = under.map({ $0.x - $0.size.width / 2 }).min(), let right = under.map({ $0.x + $0.size.width / 2 }).max() else { return nil }
-        return block.x < left ? -1 : block.x > right ? 1 : nil
+/// The physics world the blocks live in: gravity, a floor and side walls, wood that grips, a ball that bounces.
+/// Points match the SwiftUI view's, but y goes up from the bottom.
+final class BlocksScene: SKScene, SKPhysicsContactDelegate {
+    private var unit: CGFloat = 60
+    private var held: (node: SKNode, offset: CGVector)?
+    private var target = CGPoint.zero
+    private var lastClunk: TimeInterval = 0
+    private var textures: [String: SKTexture] = [:]
+
+    var blockCount: Int { children.filter { $0.name == "block" }.count }
+
+    /// Fits the world to the view: the floor `floor` points up from the bottom, walls at the screen's sides, and a
+    /// ceiling well above the top so a block thrown high comes back down.
+    func lay(size: CGSize, unit: CGFloat, floor: CGFloat) {
+        self.size = size
+        self.unit = unit
+        scaleMode = .resizeFill
+        backgroundColor = .clear
+        physicsWorld.contactDelegate = self
+        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: floor, width: size.width, height: size.height * 3))
+        physicsBody?.friction = 0.8
     }
 
-    /// Where a block let go at `x` comes to rest: on the floor, or on top of the highest block under it.
-    static func landing(_ block: Block, on others: [Block]) -> Double {
-        let half = block.size.width / 2
-        return others
-            .filter { $0.id != block.id && abs($0.x - block.x) < half + $0.size.width / 2 - 0.1 }
-            .map { $0.y + $0.size.height }
-            .max() ?? 0
+    /// A new block, dropped at `point`.
+    @discardableResult
+    func add(_ shape: Block.Shape, color: Color, colorIndex: Int, at point: CGPoint) -> SKNode {
+        let w = Block(shape: shape).size.width * unit, h = Block(shape: shape).size.height * unit
+        let key = "\(shape)-\(colorIndex)-\(Int(unit))"
+        let texture = textures[key] ?? Self.texture(shape, color: color, unit: unit)
+        textures[key] = texture
+        let node = SKSpriteNode(texture: texture, size: CGSize(width: w, height: h))
+        node.name = "block"
+        node.position = point
+        let body: SKPhysicsBody
+        switch shape {
+        case .square, .plank:
+            body = SKPhysicsBody(rectangleOf: node.size)
+        case .ball:
+            body = SKPhysicsBody(circleOfRadius: w / 2)
+        case .roof:
+            let triangle = CGMutablePath()
+            triangle.addLines(between: [CGPoint(x: -w / 2, y: -h / 2), CGPoint(x: w / 2, y: -h / 2), CGPoint(x: 0, y: h / 2)])
+            triangle.closeSubpath()
+            body = SKPhysicsBody(polygonFrom: triangle)
+        case .arch:
+            // Two legs and the top, leaving the round hole underneath open (ArchShape: the hole is a quarter of the width)
+            let leg = w * 0.25, top = h - w * 0.25
+            body = SKPhysicsBody(bodies: [
+                SKPhysicsBody(rectangleOf: CGSize(width: w, height: top), center: CGPoint(x: 0, y: h / 2 - top / 2)),
+                SKPhysicsBody(rectangleOf: CGSize(width: leg, height: h - top), center: CGPoint(x: -w / 2 + leg / 2, y: -h / 2 + (h - top) / 2)),
+                SKPhysicsBody(rectangleOf: CGSize(width: leg, height: h - top), center: CGPoint(x: w / 2 - leg / 2, y: -h / 2 + (h - top) / 2)),
+            ])
+        }
+        body.friction = 0.7  // wood grips wood, so towers can stand
+        body.restitution = shape == .ball ? 0.45 : 0.08
+        body.linearDamping = 0.1
+        body.angularDamping = 0.4
+        body.contactTestBitMask = 1
+        node.physicsBody = body
+        addChild(node)
+        // Plenty for a 3-year-old's tower; the oldest goes when there are too many to keep the iPad smooth
+        let blocks = children.filter { $0.name == "block" }
+        if blocks.count > 40 { blocks.first?.removeFromParent() }
+        return node
+    }
+
+    func sweep() {
+        for node in children where node.name == "block" {
+            node.name = nil
+            node.run(.sequence([.group([.fadeOut(withDuration: 0.35), .moveBy(x: 0, y: -unit, duration: 0.35)]), .removeFromParent()]))
+        }
+    }
+
+    // Picking a block up: it follows the finger (still bumping into others), and keeps its speed when let go.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let point = touches.first?.location(in: self),
+              let node = nodes(at: point).first(where: { $0.name == "block" }) else { return }
+        held = (node, CGVector(dx: node.position.x - point.x, dy: node.position.y - point.y))
+        target = point
+        node.physicsBody?.affectedByGravity = false
+        DispatchQueue.main.async { Haptics.tap() }
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let point = touches.first?.location(in: self) { target = point }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) { letGo() }
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) { letGo() }
+
+    private func letGo() {
+        held?.node.physicsBody?.affectedByGravity = true
+        held = nil
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        guard let held, let body = held.node.physicsBody else { return }
+        // Pulled toward the finger like on a spring, so it pushes other blocks instead of passing through them
+        let goal = CGPoint(x: target.x + held.offset.dx, y: target.y + held.offset.dy)
+        var velocity = CGVector(dx: (goal.x - held.node.position.x) * 14, dy: (goal.y - held.node.position.y) * 14)
+        let speed = hypot(velocity.dx, velocity.dy), limit = unit * 40
+        if speed > limit { velocity = CGVector(dx: velocity.dx * limit / speed, dy: velocity.dy * limit / speed) }
+        body.velocity = velocity
+        body.angularVelocity *= 0.9
+    }
+
+    /// A clunk, a buzz and a puff of dust when blocks land or bump hard (not for every tiny touch of a settling stack).
+    func didBegin(_ contact: SKPhysicsContact) {
+        let now = CACurrentMediaTime()
+        guard contact.collisionImpulse > 0.02, now - lastClunk > 0.12 else { return }
+        lastClunk = now
+        dust(at: contact.contactPoint)
+        DispatchQueue.main.async {
+            Sounds.shared.play(.clunk)
+            Haptics.tap()
+        }
+    }
+
+    private func dust(at point: CGPoint) {
+        for n in 0..<6 {
+            let puff = SKShapeNode(circleOfRadius: unit * 0.07)
+            puff.fillColor = UIColor(red: 0.93, green: 0.85, blue: 0.72, alpha: 1)
+            puff.strokeColor = .clear
+            puff.position = point
+            puff.zPosition = 10
+            addChild(puff)
+            let angle = Double(n) / 6 * .pi + .pi / 12  // up and out to the sides
+            puff.run(.sequence([
+                .group([.moveBy(x: cos(angle) * unit * 0.5, y: sin(angle) * unit * 0.3, duration: 0.45), .fadeOut(withDuration: 0.45), .scale(to: 1.6, duration: 0.45)]),
+                .removeFromParent(),
+            ]))
+        }
+    }
+
+    /// The block drawn in the app's style, as a picture for the physics world.
+    @MainActor private static func texture(_ shape: Block.Shape, color: Color, unit: CGFloat) -> SKTexture {
+        let renderer = ImageRenderer(content: BlockShape(block: Block(shape: shape), unit: unit, color: color))
+        renderer.scale = 3
+        return SKTexture(image: renderer.uiImage ?? UIImage())
     }
 }
 
@@ -46,15 +165,10 @@ struct BlocksView: View {
     private static let colors: [Color] = [Color(red: 0.91, green: 0.4, blue: 0.43), Color(red: 1.0, green: 0.78, blue: 0.3),
                                           Color(red: 0.38, green: 0.72, blue: 0.4), Color(red: 0.36, green: 0.61, blue: 0.84),
                                           Color(red: 0.66, green: 0.5, blue: 0.85)]
-    @State private var blocks: [Block] = []
-    @State private var nextID = 0
-    /// The block under her finger (new off the shelf, or picked up), and where it is in points.
-    @State private var dragging: (block: Block, at: CGPoint)?
-    /// How many times each block has tumbled off an edge, for its spin as it falls.
-    @State private var tumbles: [Int: Int] = [:]
-    /// How many times each block has landed, for its squash; and the last landing, for a puff of dust.
-    @State private var bumps: [Int: Int] = [:]
-    @State private var dust = (at: CGPoint.zero, count: 0)
+    @State private var scene = BlocksScene()
+    @State private var count = 0
+    /// A new block off the shelf, under her finger until she lets go.
+    @State private var dragging: (shape: Block.Shape, color: Int, at: CGPoint)?
 
     var body: some View {
         GeometryReader { geo in
@@ -64,25 +178,16 @@ struct BlocksView: View {
             let floorY = geo.size.height - shelfHeight - 10 * uiScale
             ZStack(alignment: .topLeading) {
                 Playroom(floorY: floorY, unit: unit)
-                ForEach(blocks) { block in
-                    BlockShape(block: block, unit: unit, color: Self.colors[block.color])
-                        .boing(bumps[block.id] ?? 0)
-                        .keyframeAnimator(initialValue: 0.0, trigger: tumbles[block.id] ?? 0) { content, turn in
-                            content.rotationEffect(.degrees(turn))
-                        } keyframes: { _ in LinearKeyframe(360, duration: 0.45) }
-                        .position(x: block.x * unit, y: floorY - (block.y + block.size.height / 2) * unit)
-                        .opacity(dragging?.block.id == block.id ? 0 : 1)
-                        .gesture(drag(block, unit: unit, floorY: floorY, width: geo.size.width))
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-                shelf(unit: unit, floorY: floorY, width: geo.size.width)
+                SpriteView(scene: scene, options: [.allowsTransparency])
+                    .frame(width: geo.size.width, height: geo.size.height)
+                    .accessibilityElement()
+                    .accessibilityLabel(count == 0 ? "Empty floor" : "\(count) blocks")
+                shelf(unit: unit, floorY: floorY, size: geo.size)
                     .frame(width: geo.size.width, height: shelfHeight)
                     .offset(y: geo.size.height - shelfHeight)
-                Burst(trigger: dust.count, symbol: "circle.fill", color: Color(red: 0.93, green: 0.85, blue: 0.72), count: 7, distance: unit * 0.7)
-                    .position(dust.at)
                 if let dragging {
-                    // Lifted: a little bigger, with a shadow on the floor below
-                    BlockShape(block: dragging.block, unit: unit, color: Self.colors[dragging.block.color])
+                    // Lifted: a little bigger, with a shadow below
+                    BlockShape(block: Block(shape: dragging.shape), unit: unit, color: Self.colors[dragging.color])
                         .scaleEffect(1.1)
                         .shadow(color: Color.outline.opacity(0.3), radius: 8, y: 10)
                         .position(dragging.at)
@@ -90,7 +195,8 @@ struct BlocksView: View {
                 }
             }
             .coordinateSpace(.named("blocks"))
-            .accessibilityElement(children: .contain)
+            .onAppear { scene.lay(size: geo.size, unit: unit, floor: geo.size.height - floorY) }
+            .onChange(of: geo.size) { scene.lay(size: geo.size, unit: unit, floor: geo.size.height - floorY) }
         }
         .background(Color(red: 0.93, green: 0.9, blue: 1.0).ignoresSafeArea())
         .touchRipples()
@@ -98,38 +204,32 @@ struct BlocksView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button(action: sweep) { Image(systemName: "wind").font(.title2) }
                     .accessibilityLabel("Sweep the blocks away")
-                    .disabled(blocks.isEmpty)
+                    .disabled(count == 0)
             }
         }
     }
 
     /// The shelf of shapes to drag out: one of each, always there.
-    private func shelf(unit: CGFloat, floorY: CGFloat, width: CGFloat) -> some View {
+    private func shelf(unit: CGFloat, floorY: CGFloat, size: CGSize) -> some View {
         HStack(spacing: unit * 0.1) {
             ForEach(Array(Block.Shape.allCases.enumerated()), id: \.offset) { index, shape in
-                let sample = Block(id: -1, shape: shape, color: index, x: 0, y: 0)
-                BlockShape(block: sample, unit: unit * 0.5, color: Self.colors[index])
+                BlockShape(block: Block(shape: shape), unit: unit * 0.5, color: Self.colors[index])
                     .frame(width: unit, height: unit * 1.2)
                     .contentShape(Rectangle())
                     .gesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .named("blocks"))
                             .onChanged { drag in
-                                if dragging == nil {
-                                    Haptics.tap()
-                                    dragging = (Block(id: nextID, shape: shape, color: index, x: 0, y: 0), drag.location)
-                                    nextID += 1
-                                }
-                                dragging?.at = drag.location
+                                if dragging == nil { Haptics.tap() }
+                                dragging = (shape, index, drag.location)
                             }
-                            .onEnded { drag in drop(at: drag.location, unit: unit, floorY: floorY, width: width) }
+                            .onEnded { drag in drop(at: drag.location, unit: unit, floorY: floorY, size: size) }
                     )
                     .accessibilityLabel("Add a block")
                     .accessibilityIdentifier("Block \(index + 1)")
                     .accessibilityAddTraits(.isButton)
                     .accessibilityAction {
-                        dragging = (Block(id: nextID, shape: shape, color: index, x: 0, y: 0), .zero)
-                        nextID += 1
-                        drop(at: CGPoint(x: width / 2, y: floorY / 2), unit: unit, floorY: floorY, width: width)
+                        dragging = (shape, index, .zero)
+                        drop(at: CGPoint(x: size.width / 2, y: floorY / 2), unit: unit, floorY: floorY, size: size)
                     }
             }
         }
@@ -140,72 +240,21 @@ struct BlocksView: View {
         .frame(maxWidth: .infinity)
     }
 
-    /// Picking up a block that's already down, to move it.
-    private func drag(_ block: Block, unit: CGFloat, floorY: CGFloat, width: CGFloat) -> some Gesture {
-        DragGesture(minimumDistance: 4, coordinateSpace: .named("blocks"))
-            .onChanged { drag in
-                if dragging == nil { Haptics.tap() }
-                dragging = (block, drag.location)
-            }
-            .onEnded { drag in drop(at: drag.location, unit: unit, floorY: floorY, width: width) }
-    }
-
-    /// Lets go of the block: it falls onto the floor or the block under it. Blocks that were on it fall too.
-    private func drop(at point: CGPoint, unit: CGFloat, floorY: CGFloat, width: CGFloat) {
-        guard var block = dragging?.block else { return }
+    /// Lets go of a new block: it drops from there into the physics world. Let go back on the shelf, it's put away.
+    private func drop(at point: CGPoint, unit: CGFloat, floorY: CGFloat, size: CGSize) {
+        guard let new = dragging else { return }
         dragging = nil
-        blocks.removeAll { $0.id == block.id }
-        guard point.y < floorY + unit else {  // let go back on the shelf: put away
-            settle(width: Double(width / unit))
-            return
-        }
-        let half = block.size.width / 2
-        block.x = min(max(Double(point.x / unit), half), Double(width / unit) - half)
-        block.y = max(0, Double((floorY - point.y) / unit) - block.size.height / 2)
-        blocks.append(block)
-        if blocks.count > 40 { blocks.removeFirst() }
-        settle(width: Double(width / unit))
-        Sounds.shared.play(.clunk)
-        Haptics.tap()
-        // A squash as it lands, and a puff of dust where it lands
-        bumps[block.id, default: 0] += 1
-        if let landed = blocks.first(where: { $0.id == block.id }) {
-            dust = (CGPoint(x: landed.x * unit, y: floorY - landed.y * unit), dust.count + 1)
-        }
-    }
-
-    /// Everything falls until it rests on something, lowest first.
-    /// Everything falls until it rests on something, lowest first. A block hanging too far over an edge tips off,
-    /// tumbling down beside it (and anything stacked on it follows).
-    private func settle(width: Double) {
-        var toppled = 0
-        withAnimation(.spring(response: 0.35, dampingFraction: 0.75)) {
-            var settled: [Block] = []
-            for var block in blocks.sorted(by: { $0.y < $1.y }) {
-                block.y = Block.landing(block, on: settled)
-                if let side = Block.tipping(block, on: settled) {
-                    let half = block.size.width / 2
-                    block.x = min(max(block.x + Double(side) * block.size.width, half), width - half)
-                    block.y = Block.landing(block, on: settled)
-                    tumbles[block.id, default: 0] += 1
-                    toppled += 1
-                }
-                settled.append(block)
-            }
-            blocks = settled
-        }
-        if toppled > 0 {
-            Task {
-                try? await Task.sleep(for: .seconds(0.3))
-                Sounds.shared.play(.clunk)
-                Haptics.tap()
-            }
-        }
+        guard point.y < floorY - unit * 0.3 else { return }
+        let half = Block(shape: new.shape).size.width * unit / 2
+        let x = min(max(point.x, half), size.width - half)
+        scene.add(new.shape, color: Self.colors[new.color], colorIndex: new.color, at: CGPoint(x: x, y: size.height - point.y))
+        count = scene.blockCount
     }
 
     private func sweep() {
         Sounds.shared.play(.clunk)
-        withAnimation(.easeIn(duration: 0.4)) { blocks = [] }
+        scene.sweep()
+        count = 0
     }
 }
 

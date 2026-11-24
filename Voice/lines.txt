@@ -550,6 +550,7 @@ Easy
 Easy peasy, lemon squeezy!
 Egg, tap to hatch it
 Elephant
+Empty floor
 Erase
 Eraser
 Eraser! Rub out any oopsies!
@@ -1926,6 +1927,7 @@ bird and tree!
 birdhouse
 bit
 blanket
+block
 blocks
 blue
 boat
