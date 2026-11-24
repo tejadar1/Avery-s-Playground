@@ -29,10 +29,32 @@ struct GardenView: View {
     @State private var pokes = Array(repeating: 0, count: Garden.spots)
     @State private var dirt = Array(repeating: 0, count: Garden.spots)
     @State private var sparkles = Array(repeating: 0, count: Garden.spots)
+    @State private var hops = 0
 
     private var stages: [Int] { Garden.stages(saved) }
 
+    /// What to do next, written in Coco's bubble so it's clear with the sound off.
+    private var hint: String {
+        if stages.allSatisfy({ $0 == Garden.grown }) { return "Your garden is all grown! Tap a flower to make it spin." }
+        if stages.contains(where: { $0 > 0 && $0 < Garden.grown }) { return "Drag the watering can over a plant to help it grow." }
+        return "Tap the dirt to plant a seed."
+    }
+
     var body: some View {
+        VStack(spacing: 8 * uiScale) {
+            CocoSays(text: hint, hops: hops)
+                .padding(.horizontal)
+            garden
+        }
+        .background(Scenery(.outdoors).ignoresSafeArea())
+        .onAppear { Speaker.shared.say(hint) }
+        .onChange(of: hint) {
+            hops += 1
+            Speaker.shared.say(hint)
+        }
+    }
+
+    private var garden: some View {
         GeometryReader { geo in
             // On a tall screen (a phone) the plants go in two rows, three behind and two in front, so each is bigger.
             let tall = geo.size.height > geo.size.width * 1.2
@@ -134,7 +156,6 @@ struct GardenView: View {
             }
             .coordinateSpace(.named("garden"))
         }
-        .background(Scenery(.outdoors).ignoresSafeArea())
         .touchRipples(.white)
         .onDisappear { Sounds.shared.stop() }
         .toolbar {

@@ -1,8 +1,1 @@
-- New game in Learn: Read. Read everyday phrases out loud to Coco, like "I see a cat." and "I love you.", sliding her little tab along under each word. A heart marks the common words to know by heart, dots under letters play their sounds, and tapping a word says it. The picture's shadow is a hint, and when you finish the picture appears and Bella reads it back.
-- The books game is now called Stories.
-- New book in Stories: Coco's Dangerous Book, a silly story where the book won't behave, full of big fun words to read: POP! BUZZ! WHOOSH! BOOM! BOO! SPLASH! Slide a finger to a big word and it jumps and wobbles.
-- New book in Stories: Coco's Christmas Countdown. Five more sleeps! Coco and Mochi put up the tree, bake gingerbread, build a snowman and hang stockings.
-- Princesses! Coco's princess friends (Princess Marisol from the Dominican Republic, Luna, Pearl and Ruby) visit the Hair Salon in their crowns and Dress Up in their gowns, and star in a new book, Princess Marisol's Crown.
-- New game in Play: Car Wash. A muddy car, fire truck, monster truck and school bus come in. Scrub the mud with the sponge, spray the bubbles off with the hose, dry with the towel, and it honks and drives away shiny.
-- New game in Play: Dino Dig. Brush away the sand to find dinosaur bones and an egg, tap the egg to hatch a baby T-Rex, Triceratops or Long-Neck, and collect them all.
-- Books: the beach pages show a real ocean wave instead of a waving hand.
+- Garden: Coco now explains what to do in her speech bubble, so it's clear even with the sound off: tap the dirt to plant a seed, then drag the watering can over a plant to help it grow.

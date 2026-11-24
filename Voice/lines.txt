@@ -539,6 +539,7 @@ Drag each piece to where it goes in the picture!
 Drag it onto the cupcake!
 Drag the hook to a fish with its mouth open!
 Drag the hose to spray Mochi.
+Drag the watering can over a plant to help it grow.
 Drag to spray Mochi
 Drag your stickers anywhere you like!
 Drink of water
@@ -1468,6 +1469,7 @@ Tap each letter to hear its sound!
 Tap each letter!
 Tap each one.
 Tap each picture when you do it!
+Tap the dirt to plant a seed.
 Tap the keys to play! Or pick a song.
 Tap the nail!
 Tap the next square and say its number!
@@ -1734,6 +1736,7 @@ Your first day at a new school.
 Your first day at a new school. How would you feel?
 Your friend has to go home.
 Your friend has to go home. How would you feel?
+Your garden is all grown! Tap a flower to make it spin.
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
 Your stickers go here
