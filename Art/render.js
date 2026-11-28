@@ -47,6 +47,7 @@ for (const file of fs.readdirSync(path.join(__dirname, 'puzzles'))) {
 // Props drawn big on screen (Discover's scale, tank and table) get more pixels, so they stay sharp on an iPad
 for (const prop of ['scale-stand', 'scale-beam', 'scale-pan', 'tub', 'table']) images[`Picture-${prop}`] = [`pictures/${prop}.svg`, 1400];
 images['Picture-crocodile'] = ['coco.svg', 400];
+images['Picture-super-coco'] = ['super-coco.svg', 800];  // Super Coco flies big across her game
 images['Picture-avery'] = ['avery.svg', 400];
 const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');text{font-family:Nunito;font-weight:900}";
 

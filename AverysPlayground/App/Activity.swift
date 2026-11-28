@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden, readalong, carwash, dinodig, scale, sinkfloat, code, tower, lifecycle, ramp, positions
+    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden, readalong, carwash, dinodig, scale, sinkfloat, code, tower, lifecycle, ramp, positions, supercoco
 
     var id: String { rawValue }
 
@@ -56,13 +56,14 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .lifecycle: "Life Cycles"
         case .ramp: "Ramps"
         case .positions: "In, On, Under"
+        case .supercoco: "Super Coco"
         }
     }
 
     var section: HomeSection {
         switch self {
         case .reading, .readalong, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .sounds, .clap, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing, .carwash, .dinodig: .play
+        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing, .carwash, .dinodig, .supercoco: .play
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing: .teamUp
         case .routines, .chores: .myDay
         case .busy, .blocks, .garden: .calm
@@ -76,7 +77,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .piano, .spelling, .reading, .readalong, .rhyme, .sounds, .clap, .abc, .busy, .blocks, .garden: nil
         case .nails, .hair, .dressup, .dentist, .bake: .salon
-        case .pet, .hop, .maze, .spot, .puzzle, .carwash, .dinodig: .pet
+        case .pet, .hop, .maze, .spot, .puzzle, .carwash, .dinodig, .supercoco: .pet
         case .colors, .drawing: .art
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing, .routines, .chores: .teamUp
         case .patterns, .sorting, .feelings, .math, .spanish, .tracing, .counting: .learn
@@ -138,6 +139,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .lifecycle: Color(red: 0.43, green: 0.71, blue: 0.35)
         case .ramp: Color(red: 0.85, green: 0.57, blue: 0.35)
         case .positions: Color(red: 0.6, green: 0.48, blue: 0.82)
+        case .supercoco: Color(red: 0.36, green: 0.61, blue: 0.88)
         }
     }
 
@@ -193,6 +195,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .lifecycle: LifeCycleView()
         case .ramp: RampView()
         case .positions: PositionsView()
+        case .supercoco: SuperCocoView()
         }
     }
 }

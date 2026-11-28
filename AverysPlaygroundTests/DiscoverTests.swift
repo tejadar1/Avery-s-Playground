@@ -91,3 +91,14 @@ final class DiscoverTests: XCTestCase {
         for toy in Positions.toys { XCTAssertNotNil(UIImage(named: "Picture-" + toy), toy) }
     }
 }
+
+final class SuperCocoTests: XCTestCase {
+    func testEveryMissionHasItsPictureAndGoesSomewhereElse() {
+        XCTAssertNotNil(UIImage(named: "Picture-super-coco"))
+        for mission in SuperCoco.missions {
+            XCTAssertNotNil(UIImage(named: "Picture-" + mission.picture), mission.picture)
+            XCTAssertFalse(SuperCoco.near(mission.start, mission.home), "\(mission.picture) has somewhere to fly")
+        }
+        XCTAssertTrue(SuperCoco.near(CGPoint(x: 0.5, y: 0.5), CGPoint(x: 0.58, y: 0.55)))
+    }
+}

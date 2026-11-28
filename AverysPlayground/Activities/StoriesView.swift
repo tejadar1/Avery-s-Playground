@@ -26,6 +26,15 @@ struct Story: Hashable {
     }
 
     static let all = [
+        // Coco's own superhero, kind and helpful; the loud words zoom.
+        Story(title: "Super Coco Saves the Day", cover: "super-coco", color: Color(red: 0.91, green: 0.4, blue: 0.43), pages: [
+            Page(pictures: ["super-coco", "sun"], text: "Coco has a secret. When a friend needs help, she puts on her cape and mask. Ta-da! She is SUPER COCO!"),
+            Page(pictures: ["cat", "tree"], text: "Oh no! A little kitty is stuck in a tall tree. MEOW! MEOW!"),
+            Page(pictures: ["super-coco", "wind"], text: "Super Coco flies up, up, up. WHOOSH!"),
+            Page(pictures: ["cat", "house"], text: "She carries the kitty home, safe and sound. Purr, purr!"),
+            Page(pictures: ["balloon", "girl"], text: "Then a red balloon floats away. Super Coco zooms and catches it. ZOOM!"),
+            Page(pictures: ["super-coco", "heart"], text: "Being a hero means being kind and helping friends. You can be a helper too!"),
+        ], question: .init(text: "Who was stuck in the tree?", answer: "cat", others: ["dog", "duck"])),
         // An original Christmas countdown with Coco and Mochi; the counting words are loud words that zoom.
         Story(title: "Coco's Christmas Countdown", cover: "xmas-tree", color: Color(red: 0.36, green: 0.66, blue: 0.4), pages: [
             Page(pictures: ["xmas-tree", "crocodile"], text: "FIVE more sleeps to Christmas! Coco and Mochi put up a big green tree. Twinkle, twinkle!", setting: .home),

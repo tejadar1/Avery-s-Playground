@@ -4,8 +4,8 @@ import XCTest
 final class AgesTests: XCTestCase {
     func testEachAgeShowsTheGamesThatSuitIt() {
         let all = Activity.allCases.count
-        XCTAssertEqual(all - Ages.suggestedHidden(for: "2").count, 33)
-        XCTAssertEqual(all - Ages.suggestedHidden(for: "3").count, 45)
+        XCTAssertEqual(all - Ages.suggestedHidden(for: "2").count, 34)
+        XCTAssertEqual(all - Ages.suggestedHidden(for: "3").count, 46)
         XCTAssertTrue(Ages.suggestedHidden(for: "4").isEmpty)
         XCTAssertTrue(Ages.suggestedHidden(for: "5").isEmpty)
         XCTAssertTrue(Ages.suggestedHidden(for: "all").isEmpty, "two kids: every game")
@@ -13,7 +13,7 @@ final class AgesTests: XCTestCase {
         let two = Ages.suggestedHidden(for: "2")
         XCTAssertTrue(two.isSuperset(of: [.tracing, .maze, .race, .ispy, .rhyme, .patterns, .spelling, .math, .tictactoe]))
         XCTAssertFalse(two.contains(.memory), "Memory is for everyone")
-        XCTAssertEqual(Ages.suggestedHidden(for: "3"), [.spelling, .math, .tictactoe])
+        XCTAssertEqual(Ages.suggestedHidden(for: "3"), [.spelling, .math, .tictactoe, .code])
     }
 
     func testHiddenGamesAreSavedAndReadBack() {

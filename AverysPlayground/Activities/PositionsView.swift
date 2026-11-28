@@ -89,12 +89,12 @@ struct PositionsView: View {
                 }
                 .frame(width: w, height: h)
                 .coordinateSpace(.named("room"))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)  // the room's floor is the screen's floor
             }
             .padding(.horizontal)
         }
-        .padding(.bottom)
-        .background(Scenery(.classroom).ignoresSafeArea())
+        // A plain playroom wall: the room brings its own floor
+        .background(Color(red: 0.93, green: 0.9, blue: 1.0).ignoresSafeArea())
         .celebration(wins)
         .onAppear(perform: ask)
     }
@@ -108,8 +108,8 @@ struct PositionsView: View {
             }
         }
         .overlay(alignment: .top) { Rectangle().fill(Color.outline).frame(height: 3) }
-        .frame(width: w, height: h * 0.12)
-        .offset(y: h * 0.9)
+        .frame(width: w + 400, height: h * 0.1 + 200)  // runs past the room's sides and down off the screen
+        .offset(x: -200, y: h * 0.9)
         .allowsHitTesting(false)
     }
 

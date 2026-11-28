@@ -36,7 +36,7 @@ struct TowerView: View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             GeometryReader { geo in
-                let unit = min(geo.size.height / 4.8, geo.size.width / 6)  // tower (3.5 blocks tall) plus the floor row
+                let unit = min(geo.size.height / 4.9, geo.size.width / 5)  // tower (3.5 blocks tall) plus the floor row
                 VStack(spacing: 0) {
                     // The tower, biggest at the bottom
                     VStack(spacing: 0) {
@@ -56,7 +56,7 @@ struct TowerView: View {
                         }
                     HStack(alignment: .bottom, spacing: unit * 0.15) {
                         ForEach(floor.filter { $0 >= placed }, id: \.self) { block in
-                            cube(block, unit: unit * 0.75)
+                            cube(block, unit: unit * 0.9)
                                 .matchedGeometryEffect(id: block, in: space)
                                 .wiggle(wiggles[block])
                                 .onTapGesture { pick(block) }
@@ -65,7 +65,7 @@ struct TowerView: View {
                                 .accessibilityAction { pick(block) }
                         }
                     }
-                    .frame(height: unit * 0.85, alignment: .bottom)
+                    .frame(height: unit * 0.95, alignment: .bottom)
                     .padding(.top, 12 * uiScale)
                 }
             }

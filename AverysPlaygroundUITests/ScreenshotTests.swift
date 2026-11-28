@@ -240,6 +240,11 @@ final class ScreenshotTests: XCTestCase {
                 toy.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
                     .press(forDuration: 0.05, thenDragTo: self.app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.72)))
             }),
+            ("Super Coco", {
+                let sky = self.find("Super Coco sky")
+                sky.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.3))
+                    .press(forDuration: 0.05, thenDragTo: sky.coordinate(withNormalizedOffset: CGVector(dx: 0.25, dy: 0.45)))
+            }),
             ("Garden", {
                 for spot in ["Spot 1", "Spot 3", "Spot 5"] { self.tap(self.find(spot)) }
             }),
@@ -251,6 +256,8 @@ final class ScreenshotTests: XCTestCase {
         for (index, game) in games.enumerated() {
             let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : calm.contains(game.title) ? "Calm" : discover.contains(game.title) ? "Discover" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
+            // Back home first if the last game didn't let go (it happened once on a sideways iPad)
+            for _ in 0..<2 where !section.waitForExistence(timeout: 3) { goHome() }
             tap(section)
             sleep(1)
             let tile = button(game.title)

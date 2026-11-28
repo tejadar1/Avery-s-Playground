@@ -93,6 +93,7 @@ Bed all made! So neat!
 Bedtime
 Beep beep!
 Beep beep! So shiny! Snap snap!
+Being a hero means being kind and helping friends. You can be a helper too!
 Bella
 Belly rubs are the best!
 Big button
@@ -140,6 +141,7 @@ C sharp
 Calm. Nice and cozy, like a quiet story.
 Canvas
 Cat
+Caught it! Give the balloon back to the girl!
 Caw caw!
 Chocolate frosting,
 Chore time! Let's help at home.
@@ -484,6 +486,7 @@ Coco has 6 strawberries. Mochi eats 2. How many are left?
 Coco has 6 strawberries. Mochi eats 3. How many are left?
 Coco has 6 strawberries. Mochi eats 4. How many are left?
 Coco has 6 strawberries. Mochi eats 5. How many are left?
+Coco has a secret. When a friend needs help, she puts on her cape and mask. Ta-da! She is SUPER COCO!
 Coco said, Do not worry, Princess Marisol! We will find it!
 Coco wants a cupcake!
 Coco's Christmas Countdown
@@ -613,6 +616,7 @@ Frosting first!
 Fruit or animals?
 G
 G sharp
+Gently, gently! Fly the egg back up to its nest!
 Get dressed
 Glitter
 Glitter makes everything better!
@@ -627,6 +631,8 @@ Good morning! Let's get ready for school.
 Good morning, sunshine!
 Good night!
 Good night, moon.
+Got her! Now take the kitty home to her house!
+Got it! Take the ball back to the puppy!
 Gown
 Gown! Fashion show time!
 Gown! Holy guacamole, I love it!
@@ -929,6 +935,7 @@ Holy guacamole, so stylish!
 Holy guacamole, what a great haircut!
 Holy guacamole, you did it!
 Holy moly, guacamole!
+Hooray! Super Coco saved the balloon!
 Hooray! Wackadoo!
 Hooroo!
 Horse
@@ -1149,6 +1156,8 @@ Off
 Oh biscuits!
 Oh crumbs!
 Oh crumbs! Too far!
+Oh no! A little kitty is stuck in a tall tree. MEOW! MEOW!
+Oh no! The kitty is stuck in the tree! Fly up and get her!
 Oh, sticky gecko!
 Oink oink!
 Okay!
@@ -1166,6 +1175,7 @@ Ooh, fancy pattern!
 Ooh, shiny!
 Ooh, so close! One more try!
 Ooh, that's different!
+Oops! A balloon is floating away! Catch it!
 Oops, that's in the box! Try again.
 Oops, that's next to the box! Try again.
 Oops, that's on the table! Try again.
@@ -1328,6 +1338,7 @@ Serve!
 Set the table
 Shampoo
 She baked the wheat into bread.
+She carries the kitty home, safe and sound. Purr, purr!
 She found a little house. Nobody was home.
 She tried three beds and fell fast asleep.
 She tried three bowls of porridge. This one is just right!
@@ -1507,6 +1518,10 @@ Sunglasses! Holy guacamole, I love it!
 Sunglasses! Ooh la la!
 Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
+Super Coco Saves the Day
+Super Coco flies up, up, up. WHOOSH!
+Super Coco sky
+Super Coco to the rescue! The kitty is safe!
 Super duper pooper scooper!
 Surprise! It floats!
 Surprise! It sinks!
@@ -1573,6 +1588,7 @@ The boy learned to always tell the truth.
 The cow and the horse chased him. You can't catch me, I'm the gingerbread man!
 The crow got here first! Let's try again!
 The crow hops closer!
+The egg is safe and sound! Super Coco did it!
 The elves put on their new clothes and danced. Thank you, thank you!
 The first pig built a house of straw.
 The grasshopper played music all day. Come and play! he said.
@@ -1581,6 +1597,7 @@ The kind ant shared her food. Come inside and get warm!
 The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
 The little red hen found some wheat.
+The puppy's ball is stuck on the roof! Fly up and get it!
 The second pig built a house of sticks.
 The table's ready! Let's eat!
 The third pig built a house of bricks.
@@ -1588,6 +1605,7 @@ The three bears came home! Goldilocks woke up and ran all the way home.
 The wind blows, WHOOSH! The sky flashes, BOOM!
 The wolf ran to grandma's house and hid in her bed.
 Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
+Then a red balloon floats away. Super Coco zooms and catches it. ZOOM!
 Then the lion got stuck in a hunter's net.
 Then winter came. It was cold, and the grasshopper had no food.
 There's something buried in the sand! Brush it away with your finger.
@@ -1629,6 +1647,7 @@ Twin
 Twinkle Twinkle
 Twinkle twinkle, little nail!
 U
+Uh oh! An egg fell out of the nest! Pick it up gently!
 Uh oh! This book is DANGEROUS. Coco says, do not turn the page!
 Uh oh, it's muddy! Pick the sponge and scrub off the mud.
 Uh oh, the hurry timer is on! Quick, quick, before the sand runs out!
@@ -1729,6 +1748,7 @@ Who helped the shoemaker at night?
 Who planted the wheat?
 Who said hop on my back?
 Who was hiding in grandma's bed?
+Who was stuck in the tree?
 Who will help me eat it? I will, said the dog, the cat, and the duck.
 Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who won the race?
@@ -1746,6 +1766,7 @@ Wipe the table
 Wolf! Wolf! he shouted, just for fun. Everyone came running. No wolf!
 Woo hoo, kangaroo!
 Woof woof!
+Woof woof! Thank you, Super Coco!
 Words
 Worried. Tell a grown-up what's on your mind.
 Wowza bowza!
@@ -2161,6 +2182,8 @@ book:BOO
 book:BOOM
 book:BUZZ
 book:Bayahíbe
+book:Being
+book:Being a hero means being kind and helping friends. You can be a helper too!
 book:Black! Like a hat.
 book:Bless me, Dad
 book:Bless me, Grandma
@@ -2180,6 +2203,7 @@ book:But he could not blow down the brick house. The three pigs were safe!
 book:But the gingerbread man jumped to the other side and ran all the way home!
 book:C is for Cat!
 book:C!
+book:COCO
 book:CRUNCH
 book:Calm. Nice and cozy, like a quiet story.
 book:Christmas
@@ -2187,6 +2211,7 @@ book:Clothes
 book:Cloud
 book:Coco
 book:Coco climbed up, up, up and... BOING! She got the crown!
+book:Coco has a secret. When a friend needs help, she puts on her cape and mask. Ta-da! She is SUPER COCO!
 book:Coco has fewer!
 book:Coco has more!
 book:Coco said, Do not worry, Princess Marisol! We will find it!
@@ -2325,6 +2350,7 @@ book:Loved. Say I love you too!
 book:Luna
 book:M is for Moon!
 book:M!
+book:MEOW
 book:Mad. Take a big breath, and blow it out slowly.
 book:Marisol
 book:Mary Had a Little Lamb!
@@ -2359,6 +2385,8 @@ book:O is for Octopus!
 book:O!
 book:ONE
 book:ONE more sleep! Coco leaves cookies and milk for Santa and goes to bed. Shh!
+book:Oh
+book:Oh no! A little kitty is stuck in a tall tree. MEOW! MEOW!
 book:Old MacDonald!
 book:One
 book:One night, two tiny elves came in and made shoes for him!
@@ -2384,6 +2412,7 @@ book:Princess Marisol lived in the Dominican Republic, by the sea. She had a spa
 book:Princess Marisol's Crown
 book:Puff
 book:Purple! Like grapes.
+book:Purr
 book:Put on your flip-flops
 book:Q is for Queen!
 book:Q!
@@ -2401,6 +2430,7 @@ book:Run
 book:S is for Sun!
 book:S!
 book:SPLASH
+book:SUPER
 book:Sad. A big hug can help.
 book:Santa
 book:Scared. Hold a grown-up's hand.
@@ -2409,6 +2439,7 @@ book:Seed, sprout, flower! That's how a flower grows!
 book:Shampoo
 book:She
 book:She baked the wheat into bread.
+book:She carries the kitty home, safe and sound. Purr, purr!
 book:She found a little house. Nobody was home.
 book:She tried three beds and fell fast asleep.
 book:She tried three bowls of porridge. This one is just right!
@@ -2430,6 +2461,9 @@ book:Stone
 book:Stone Soup
 book:Stone soup? said Grandma. It needs a plantain! And she put one in.
 book:Styles
+book:Super
+book:Super Coco Saves the Day
+book:Super Coco flies up, up, up. WHOOSH!
 book:Surprised! Tell someone what you saw.
 book:T is for Turtle!
 book:T!
@@ -2437,6 +2471,7 @@ book:THREE
 book:THREE more sleeps! Snow falls. Coco and Mochi make a snowman with a carrot nose. Brrr!
 book:TWO
 book:TWO more sleeps! Coco hangs up a stocking for everyone. Even one for Mochi! WOOF!
+book:Ta-da
 book:Teal
 book:Thank
 book:Thank you
@@ -2469,6 +2504,7 @@ book:The wind blows, WHOOSH! The sky flashes, BOOM!
 book:The wolf ran to grandma's house and hid in her bed.
 book:Then
 book:Then a real wolf came. Wolf! Wolf! he cried. But nobody came.
+book:Then a red balloon floats away. Super Coco zooms and catches it. ZOOM!
 book:Then the lion got stuck in a hunter's net.
 book:Then winter came. It was cold, and the grasshopper had no food.
 book:They
@@ -2519,6 +2555,7 @@ book:Who helped the shoemaker at night?
 book:Who planted the wheat?
 book:Who said hop on my back?
 book:Who was hiding in grandma's bed?
+book:Who was stuck in the tree?
 book:Who will help me eat it? I will, said the dog, the cat, and the duck.
 book:Who will help me plant it? Not I, said the dog, the cat, and the duck.
 book:Who won the race?
@@ -2541,6 +2578,7 @@ book:You turned the page! A big red balloon goes up, up, up... POP!
 book:Yummy!
 book:Z is for Zebra!
 book:Z!
+book:ZOOM
 book:a
 book:again
 book:ahead
@@ -2657,9 +2695,11 @@ book:cake! You spelled it!
 book:came
 book:can
 book:can't
+book:cape
 book:car
 book:car and star rhyme!
 book:car!
+book:carries
 book:carrot
 book:carrying
 book:castle
@@ -2671,6 +2711,7 @@ book:cat! You read it!
 book:cat! You spelled it!
 book:cat! You wrote it!
 book:catch
+book:catches
 book:caterpillar
 book:chair and bear rhyme!
 book:chair!
@@ -2686,6 +2727,7 @@ book:chocolate
 book:climbed
 book:clothes
 book:clothes!
+book:coco!
 book:cocoon
 book:cold
 book:comes
@@ -2751,6 +2793,8 @@ book:five!
 book:flag
 book:flag! You spelled it!
 book:flashes
+book:flies
+book:floats
 book:flower
 book:flower!
 book:flowers
@@ -2770,6 +2814,7 @@ book:fox! You wrote it!
 book:free
 book:fried cheese
 book:fried plantains
+book:friend
 book:friends
 book:frog
 book:frog and dog rhyme!
@@ -2806,6 +2851,7 @@ book:hand! You spelled it!
 book:hangs
 book:happy
 book:hard
+book:has
 book:hat
 book:hat and bat rhyme!
 book:hat and cat rhyme!
@@ -2820,7 +2866,9 @@ book:heart!
 book:hee
 book:help
 book:helped
+book:helper
 book:helpers
+book:helping
 book:hen
 book:hen and pen rhyme!
 book:hen!
@@ -2829,6 +2877,7 @@ book:hen! You spelled it!
 book:hen! You wrote it!
 book:her
 book:here
+book:hero
 book:herself
 book:hi
 book:hid
@@ -2865,6 +2914,7 @@ book:kind
 book:kite
 book:kite!
 book:kite! You spelled it!
+book:kitty
 book:ladybug
 book:ladybug!
 book:laid
@@ -2887,7 +2937,10 @@ book:man
 book:mango
 book:mango!
 book:mashed plantains
+book:mask
 book:me
+book:means
+book:meow!
 book:merengue
 book:milk
 book:milk! You spelled it!
@@ -2967,7 +3020,9 @@ book:pot
 book:present
 book:puffed
 book:purple
+book:purr
 book:put
+book:puts
 book:rabbit
 book:rabbit!
 book:race
@@ -2991,6 +3046,7 @@ book:say
 book:says
 book:sea
 book:second
+book:secret
 book:see
 book:seed
 book:seven
@@ -3020,6 +3076,7 @@ book:snowman
 book:so
 book:some
 book:something
+book:sound
 book:soup
 book:sparkly
 book:splash!
@@ -3048,6 +3105,7 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:sun! You wrote it!
 book:sunhat!
+book:super!
 book:tadpole
 book:tall
 book:tell
@@ -3071,6 +3129,7 @@ book:tiny
 book:tired
 book:to
 book:together
+book:too
 book:took
 book:top
 book:town
@@ -3154,6 +3213,8 @@ book:you
 book:yummy
 book:zebra
 book:zebra! You spelled it!
+book:zoom!
+book:zooms
 book:¡Gracias, Coco! said Princess Marisol. Then Marisol, Luna, Pearl and Ruby danced merengue at a big party. YAY!
 books
 boots
@@ -4505,6 +4566,8 @@ sunHatBand
 sunglasses
 sunhat
 sunrise
+super-coco
+superCocoNext
 surprised
 swing
 sy
