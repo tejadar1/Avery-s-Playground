@@ -237,7 +237,8 @@ final class ScreenshotTests: XCTestCase {
             }),
             ("In, On, Under", {
                 let toy = self.find("Toy")
-                toy.press(forDuration: 0.05, thenDragTo: self.app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.72)))
+                toy.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+                    .press(forDuration: 0.05, thenDragTo: self.app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.72)))
             }),
             ("Garden", {
                 for spot in ["Spot 1", "Spot 3", "Spot 5"] { self.tap(self.find(spot)) }
