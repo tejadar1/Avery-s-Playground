@@ -12,3 +12,4 @@
 - Two new friends for Coco: Sprinkle the unicorn and Bolt the robot, each with a book in Stories (Coco and Sprinkle the Unicorn, Bolt Builds a Bridge).
 - Coloring: 13 new pages in real coloring-book line art: Sprinkle, Bolt, Princess Marisol, a mermaid, a butterfly, a T-Rex, a rainbow castle, an ice cream cone, a kitty, an owl, a rocket, a race car and a fairy. That makes 21 pages.
 - Coloring looks like real crayon now: a little paper shows through the color, and lines hidden behind something stay hidden.
+- The home screen has five choices instead of six: Day & Night and Helper moved into Team Up, next to the other things you do with a grown-up.

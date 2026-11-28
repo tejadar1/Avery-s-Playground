@@ -27,7 +27,7 @@ struct HomeView: View {
                     }
                     .padding(.top, 8 * uiScale)
 
-                    // All six in one row on an iPad held sideways, and three across upright, so the menu fits without
+                    // All five in one row on an iPad held sideways, and three across upright, so the menu fits without
                     // scrolling; a phone scrolls.
                     let sideways = uiScale > 1 && screen.size.width > screen.size.height
                     let columns = uiScale > 1 ? Array(repeating: GridItem(.flexible(), spacing: 16 * uiScale), count: sideways ? HomeSection.allCases.count : 3)

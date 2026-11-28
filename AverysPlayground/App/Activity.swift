@@ -64,8 +64,8 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .reading, .readalong, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .sounds, .clap, .math, .spanish, .piano: .learn
         case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing, .carwash, .dinodig, .supercoco: .play
-        case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing: .teamUp
-        case .routines, .chores: .myDay
+        // Morning and bedtime routines and chores run with a grown-up, so they live with the grown-up games
+        case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing, .routines, .chores: .teamUp
         case .busy, .blocks, .garden: .calm
         case .scale, .sinkfloat, .code, .tower, .lifecycle, .ramp, .positions: .discover
         }
@@ -202,7 +202,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
 /// The choices on the home screen; each opens a page of its games.
 enum HomeSection: String, CaseIterable, Identifiable, Hashable {
-    case learn, discover, play, teamUp, myDay, calm
+    case learn, discover, play, teamUp, calm
 
     var id: String { rawValue }
 
@@ -212,7 +212,6 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .discover: "Discover"
         case .play: "Play"
         case .teamUp: "Team Up"
-        case .myDay: "My Day"
         case .calm: "Calm"
         }
     }
@@ -222,8 +221,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .learn: "Letters, words, numbers and music"
         case .discover: "Science, building and coding"
         case .play: "Pretend, dress up and make art"
-        case .teamUp: "Play with your grown-up"
-        case .myDay: "Morning, bedtime and helping out"
+        case .teamUp: "Play and do routines with your grown-up"
         case .calm: "Quiet toys, nothing to win"
         }
     }
@@ -234,7 +232,6 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
         case .discover: Color(red: 0.43, green: 0.71, blue: 0.35)
         case .play: Color(red: 0.95, green: 0.47, blue: 0.6)
         case .teamUp: Color(red: 0.95, green: 0.62, blue: 0.3)
-        case .myDay: Color(red: 0.42, green: 0.55, blue: 0.88)
         case .calm: Color(red: 0.36, green: 0.72, blue: 0.66)
         }
     }
