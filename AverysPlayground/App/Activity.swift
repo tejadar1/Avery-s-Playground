@@ -62,12 +62,13 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
     var section: HomeSection {
         switch self {
-        case .reading, .readalong, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .sounds, .clap, .math, .spanish, .piano: .learn
-        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing, .carwash, .dinodig, .supercoco: .play
+        // Three choices, simple enough for a three-year-old: the science games learn, the quiet toys play
+        case .reading, .readalong, .rhyme, .patterns, .sorting, .feelings, .abc, .tracing, .spelling, .counting, .sounds, .clap, .math, .spanish, .piano,
+             .scale, .sinkfloat, .code, .tower, .lifecycle, .ramp, .positions: .learn
+        case .nails, .hair, .dressup, .dentist, .pet, .hop, .maze, .spot, .bake, .puzzle, .colors, .drawing, .carwash, .dinodig, .supercoco,
+             .busy, .blocks, .garden: .play
         // Morning and bedtime routines and chores run with a grown-up, so they live with the grown-up games
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing, .routines, .chores: .teamUp
-        case .busy, .blocks, .garden: .calm
-        case .scale, .sinkfloat, .code, .tower, .lifecycle, .ramp, .positions: .discover
         }
     }
 
@@ -202,37 +203,31 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
 
 /// The choices on the home screen; each opens a page of its games.
 enum HomeSection: String, CaseIterable, Identifiable, Hashable {
-    case learn, discover, play, teamUp, calm
+    case learn, play, teamUp
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
         case .learn: "Learn"
-        case .discover: "Discover"
         case .play: "Play"
         case .teamUp: "Team Up"
-        case .calm: "Calm"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .learn: "Letters, words, numbers and music"
-        case .discover: "Science, building and coding"
-        case .play: "Pretend, dress up and make art"
+        case .learn: "Letters, numbers, music and science"
+        case .play: "Pretend, make art and quiet toys"
         case .teamUp: "Play and do routines with your grown-up"
-        case .calm: "Quiet toys, nothing to win"
         }
     }
 
     var color: Color {
         switch self {
         case .learn: Color(red: 0.31, green: 0.67, blue: 0.75)
-        case .discover: Color(red: 0.43, green: 0.71, blue: 0.35)
         case .play: Color(red: 0.95, green: 0.47, blue: 0.6)
         case .teamUp: Color(red: 0.95, green: 0.62, blue: 0.3)
-        case .calm: Color(red: 0.36, green: 0.72, blue: 0.66)
         }
     }
 

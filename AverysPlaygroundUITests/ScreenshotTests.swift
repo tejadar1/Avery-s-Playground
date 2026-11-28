@@ -251,10 +251,9 @@ final class ScreenshotTests: XCTestCase {
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Stories", "Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing", "Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"],
-            discover = ["Balance Scale", "Sink or Float", "Coco Code", "Big to Small", "Life Cycles", "Ramps", "In, On, Under"]
+        let learn = ["Stories", "Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano", "Balance Scale", "Sink or Float", "Coco Code", "Big to Small", "Life Cycles", "Ramps", "In, On, Under"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing", "Day & Night", "Helper"]
         for (index, game) in games.enumerated() {
-            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : calm.contains(game.title) ? "Calm" : discover.contains(game.title) ? "Discover" : "Play"
+            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
             // Back home first if the last game didn't let go (it happened once on a sideways iPad)
             for _ in 0..<2 where !section.waitForExistence(timeout: 3) { goHome() }
@@ -262,7 +261,7 @@ final class ScreenshotTests: XCTestCase {
             sleep(1)
             let tile = button(game.title)
             // The grid only makes tiles as they come into view: scroll down to the later ones
-            for _ in 0..<4 where !tile.waitForExistence(timeout: 1) { app.swipeUp() }
+            for _ in 0..<7 where !tile.waitForExistence(timeout: 1) { app.swipeUp() }
             // A tap during the trip home can be missed (it was once, on iPad landscape): go home and open the section again.
             for _ in 0..<2 where !tile.waitForExistence(timeout: 3) {
                 goHome()

@@ -4,9 +4,8 @@ A colorful, offline iPhone and iPad app for little kids (about ages 2–6), buil
 
 ## Games
 
-The home screen has five big choices: **Learn** (letters, words, numbers and music), **Discover** (science, building and
-coding), **Play** (pretend, dress up and art), **Team Up** (games and morning and bedtime routines with a grown-up) and
-**Calm** (quiet toys).
+The home screen has three big choices: **Learn** (letters, words, numbers, music and science), **Play** (pretend, art
+and quiet toys) and **Team Up** (games and morning and bedtime routines with a grown-up).
 
 | | Game | What happens |
 |---|---|---|
