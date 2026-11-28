@@ -18,22 +18,26 @@ enum Positions {
         /// Where a toy put here rests, as a share of the room's width and height.
         var spot: CGPoint {
             switch self {
-            case .on: CGPoint(x: 0.33, y: 0.33)
-            case .under: CGPoint(x: 0.33, y: 0.76)
-            case .inBox: CGPoint(x: 0.74, y: 0.66)
-            case .nextTo: CGPoint(x: 0.93, y: 0.8)
+            case .on: CGPoint(x: 0.33, y: 0.47)
+            case .under: CGPoint(x: 0.33, y: 0.8)
+            case .inBox: CGPoint(x: 0.76, y: 0.68)
+            case .nextTo: CGPoint(x: 0.93, y: 0.82)
             }
         }
     }
 
     static let toys = ["bear", "ball", "cat", "duck", "dog"]
 
-    /// The table spans 0.08...0.58 across with its top at 0.42; the box spans 0.62...0.86 across, from 0.62 down.
+    /// The room is 4:3. The table (Art/pictures/table.svg) spans 0.04...0.62 across, its top at 0.58 down; the box
+    /// spans 0.64...0.88 across.
+    static let table = CGRect(x: 0.04, y: 0.92 - 0.58 * 0.6 / 0.75 * 112 / 120, width: 0.58, height: 0.58 * 0.6 / 0.75)
+    static let tableTop: CGFloat = 0.58
+
     static func place(at p: CGPoint) -> Place? {
-        if (0.08...0.58).contains(p.x), (0.05..<0.45).contains(p.y) { return .on }
-        if (0.08...0.58).contains(p.x), (0.45...1).contains(p.y) { return .under }
-        if (0.62...0.86).contains(p.x), (0.5...1).contains(p.y) { return .inBox }
-        if (0.86...1).contains(p.x) || (0.58..<0.62).contains(p.x), (0.55...1).contains(p.y) { return .nextTo }
+        if (0.04...0.62).contains(p.x), (0.05..<tableTop).contains(p.y) { return .on }
+        if (0.04...0.62).contains(p.x), (tableTop...1).contains(p.y) { return .under }
+        if (0.64...0.88).contains(p.x), (0.5...1).contains(p.y) { return .inBox }
+        if (0.88...1).contains(p.x) || (0.62..<0.64).contains(p.x), (0.55...1).contains(p.y) { return .nextTo }
         return nil
     }
 }
@@ -53,13 +57,14 @@ struct PositionsView: View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             GeometryReader { geo in
-                let w = geo.size.width, h = geo.size.height, unit = min(w, h * 1.4)
+                // A 4:3 room, so the table and box are never stretched
+                let w = min(geo.size.width, geo.size.height * 4 / 3), h = w * 0.75, unit = w
                 ZStack(alignment: .topLeading) {
-                    // The floor
-                    Rectangle().fill(Color(red: 0.87, green: 0.68, blue: 0.47))
-                        .frame(width: w, height: h * 0.1)
-                        .offset(y: h * 0.92)
-                    table(w: w, h: h)
+                    floor(w: w, h: h)
+                    Image("Picture-table").resizable().scaledToFit()
+                        .frame(width: Positions.table.width * w, height: Positions.table.height * h)
+                        .position(x: Positions.table.midX * w, y: Positions.table.midY * h)
+                        .allowsHitTesting(false)
                     // The toy, behind the box's front when it's in the box
                     Picture(toy, size: unit * 0.16)
                         .shadow(color: Color.outline.opacity(dragging == nil ? 0 : 0.3), radius: 8, y: 8)
@@ -77,12 +82,14 @@ struct PositionsView: View {
                         .accessibilityLabel(toy)
                         .accessibilityIdentifier("Toy")
                         .accessibilityAction { drop(at: goal.spot) }
-                    Picture("box", size: unit * 0.26)
-                        .position(x: 0.74 * w, y: 0.8 * h)
+                    Picture("box", size: unit * 0.24)
+                        .position(x: 0.76 * w, y: 0.8 * h)
                         .zIndex(2)
                         .allowsHitTesting(false)
                 }
+                .frame(width: w, height: h)
                 .coordinateSpace(.named("room"))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding(.horizontal)
         }
@@ -92,22 +99,17 @@ struct PositionsView: View {
         .onAppear(perform: ask)
     }
 
-    /// A wooden table with room under it.
-    private func table(w: CGFloat, h: CGFloat) -> some View {
-        let wood = Color(red: 0.8, green: 0.58, blue: 0.38)
-        return ZStack(alignment: .topLeading) {
-            ForEach([0.12, 0.5], id: \.self) { x in
-                RoundedRectangle(cornerRadius: 4).fill(wood)
-                    .overlay(RoundedRectangle(cornerRadius: 4).strokeBorder(Color.outline, lineWidth: 3))
-                    .frame(width: w * 0.04, height: h * 0.48)
-                    .offset(x: w * x, y: h * 0.44)
+    /// Wooden floorboards along the bottom of the room.
+    private func floor(w: CGFloat, h: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            ForEach(0..<3, id: \.self) { n in
+                Rectangle().fill(n % 2 == 0 ? Color(red: 0.87, green: 0.68, blue: 0.47) : Color(red: 0.83, green: 0.63, blue: 0.42))
+                    .overlay(alignment: .bottom) { Rectangle().fill(Color(red: 0.62, green: 0.44, blue: 0.29).opacity(0.5)).frame(height: 1.5) }
             }
-            RoundedRectangle(cornerRadius: 8).fill(wood)
-                .overlay(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.outline, lineWidth: 3))
-                .frame(width: w * 0.5, height: h * 0.06)
-                .offset(x: w * 0.08, y: h * 0.4)
         }
-        .zIndex(0)
+        .overlay(alignment: .top) { Rectangle().fill(Color.outline).frame(height: 3) }
+        .frame(width: w, height: h * 0.12)
+        .offset(y: h * 0.9)
         .allowsHitTesting(false)
     }
 

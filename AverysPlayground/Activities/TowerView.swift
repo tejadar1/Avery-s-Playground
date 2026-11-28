@@ -46,8 +46,14 @@ struct TowerView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     // The floor line, then the blocks still to place
-                    Capsule().fill(Color(red: 0.8, green: 0.6, blue: 0.42)).frame(height: 8 * uiScale)
-                        .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 2))
+                    // A wooden shelf under the tower, with its soft shadow
+                    RoundedRectangle(cornerRadius: 6 * uiScale)
+                        .fill(LinearGradient(colors: [Color(red: 0.87, green: 0.68, blue: 0.47), Color(red: 0.76, green: 0.55, blue: 0.35)], startPoint: .top, endPoint: .bottom))
+                        .overlay(RoundedRectangle(cornerRadius: 6 * uiScale).strokeBorder(Color.outline, lineWidth: 3))
+                        .frame(height: 16 * uiScale)
+                        .overlay(alignment: .top) {
+                            Ellipse().fill(Color.outline.opacity(0.15)).frame(width: unit * 1.3, height: 10 * uiScale).offset(y: -5 * uiScale)
+                        }
                     HStack(alignment: .bottom, spacing: unit * 0.15) {
                         ForEach(floor.filter { $0 >= placed }, id: \.self) { block in
                             cube(block, unit: unit * 0.75)

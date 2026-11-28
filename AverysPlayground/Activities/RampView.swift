@@ -53,38 +53,80 @@ final class RampScene: SKScene {
         // The floor and the walls at each side
         physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: floorY, width: size.width, height: size.height * 3))
         physicsBody?.friction = 0.5
-        let floor = SKShapeNode(rect: CGRect(x: -10, y: -10, width: size.width + 20, height: floorY + 10))
-        floor.fillColor = UIColor(red: 0.87, green: 0.68, blue: 0.47, alpha: 1)
-        floor.strokeColor = UIColor(red: 0.29, green: 0.17, blue: 0.16, alpha: 1)
-        floor.lineWidth = 3
-        addChild(floor)
-        // Numbers along the floor past the ramp, to count how far it went
+        let outline = UIColor(red: 0.29, green: 0.17, blue: 0.16, alpha: 1)
+        // Wooden floorboards, with a dark line along the top
+        let boards = 3, board = floorY / CGFloat(boards)
+        for n in 0..<boards {
+            let plank = SKShapeNode(rect: CGRect(x: -10, y: CGFloat(n) * board, width: size.width + 20, height: board))
+            plank.fillColor = n % 2 == 0 ? UIColor(red: 0.83, green: 0.63, blue: 0.42, alpha: 1) : UIColor(red: 0.87, green: 0.68, blue: 0.47, alpha: 1)
+            plank.strokeColor = UIColor(red: 0.62, green: 0.44, blue: 0.29, alpha: 0.5)
+            plank.lineWidth = 1.5
+            addChild(plank)
+        }
+        let edge = SKShapeNode(rect: CGRect(x: -10, y: floorY - 1.5, width: size.width + 20, height: 3))
+        edge.fillColor = outline
+        edge.strokeColor = .clear
+        addChild(edge)
+        // Numbers on round white badges along the floor past the ramp, to count how far it went
         let spacing = (size.width - rampEnd) / CGFloat(Ramp.marks)
+        let badge = min(22, floorY * 0.3)
         for n in 1...Ramp.marks {
+            let x = rampEnd + spacing * (CGFloat(n) - 0.5)
+            let disc = SKShapeNode(circleOfRadius: badge)
+            disc.fillColor = .white
+            disc.strokeColor = outline
+            disc.lineWidth = 2.5
+            disc.position = CGPoint(x: x, y: floorY * 0.5)
+            addChild(disc)
             let label = SKLabelNode(text: "\(n)")
             label.fontName = "AvenirNext-Heavy"
-            label.fontSize = min(40, floorY * 0.45)
-            label.fontColor = UIColor(red: 0.29, green: 0.17, blue: 0.16, alpha: 0.75)
-            label.position = CGPoint(x: rampEnd + spacing * (CGFloat(n) - 0.5), y: floorY * 0.35)
+            label.fontSize = badge * 1.2
+            label.fontColor = outline
+            label.verticalAlignmentMode = .center
+            label.position = disc.position
             addChild(label)
-            let tick = SKShapeNode(rect: CGRect(x: rampEnd + spacing * CGFloat(n) - 1.5, y: floorY - 12, width: 3, height: 12))
-            tick.fillColor = UIColor(red: 0.29, green: 0.17, blue: 0.16, alpha: 0.5)
+            let tick = SKShapeNode(rect: CGRect(x: rampEnd + spacing * CGFloat(n) - 1.5, y: floorY - 14, width: 3, height: 14))
+            tick.fillColor = outline.withAlphaComponent(0.6)
             tick.strokeColor = .clear
             addChild(tick)
         }
-        // The wooden ramp: a wedge from the top on the left down to the floor
+        // The wooden ramp: a wedge from the top on the left down to the floor, with a darker shaded underside,
+        // a shine along the slope and a little grain
         let top = floorY + size.height * height.share
         let wedge = CGMutablePath()
         wedge.addLines(between: [CGPoint(x: 0, y: floorY), CGPoint(x: 0, y: top), CGPoint(x: rampEnd, y: floorY)])
         wedge.closeSubpath()
         ramp = SKShapeNode(path: wedge)
-        ramp.fillColor = UIColor(red: 0.8, green: 0.58, blue: 0.38, alpha: 1)
-        ramp.strokeColor = UIColor(red: 0.29, green: 0.17, blue: 0.16, alpha: 1)
-        ramp.lineWidth = 3
+        ramp.fillColor = UIColor(red: 0.85, green: 0.64, blue: 0.42, alpha: 1)
+        ramp.strokeColor = .clear
         ramp.physicsBody = SKPhysicsBody(polygonFrom: wedge)
         ramp.physicsBody?.isDynamic = false
         ramp.physicsBody?.friction = 0.4
         addChild(ramp)
+        let shade = CGMutablePath()
+        shade.addLines(between: [CGPoint(x: 0, y: floorY), CGPoint(x: 0, y: floorY + (top - floorY) * 0.35), CGPoint(x: rampEnd * 0.65, y: floorY)])
+        shade.closeSubpath()
+        let underside = SKShapeNode(path: shade)
+        underside.fillColor = UIColor(red: 0.73, green: 0.51, blue: 0.3, alpha: 1)
+        underside.strokeColor = .clear
+        addChild(underside)
+        // Grain and shine run along the slope, a little inside it
+        for (inset, alpha, width) in [(0.12, 0.85, 3.0), (0.35, 0.18, 2.0), (0.55, 0.18, 2.0)] as [(CGFloat, CGFloat, CGFloat)] {
+            let line = CGMutablePath()
+            line.move(to: CGPoint(x: rampEnd * 0.06, y: top - (top - floorY) * (inset + 0.06)))
+            line.addLine(to: CGPoint(x: rampEnd * (0.94 - inset), y: floorY + (top - floorY) * 0.06))
+            let stroke = SKShapeNode(path: line)
+            stroke.strokeColor = inset < 0.2 ? UIColor(white: 1, alpha: alpha) : outline.withAlphaComponent(alpha)
+            stroke.lineWidth = width
+            stroke.lineCap = .round
+            addChild(stroke)
+        }
+        let rim = SKShapeNode(path: wedge)
+        rim.fillColor = .clear
+        rim.strokeColor = outline
+        rim.lineWidth = 3
+        rim.lineJoin = .round
+        addChild(rim)
     }
 
     /// Sets the thing at the top of the ramp and lets it go.

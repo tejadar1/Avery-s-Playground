@@ -32,19 +32,24 @@ struct SinkFloatView: View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
             GeometryReader { geo in
-                let w = min(geo.size.width, geo.size.height * 1.2), h = geo.size.height
-                let water = h * 0.42, bottom = h * 0.92, item = w * 0.18
+                // The tank (Art/pictures/tub.svg, 200 × 170) sits at the bottom, with room above to hold the next thing.
+                // In it, the water starts 66/170 down and things rest on the sand at 146/170.
+                let tubW = min(geo.size.width * 0.95, (geo.size.height * 0.78) * 200 / 170), tubH = tubW * 170 / 200
+                let left = (geo.size.width - tubW) / 2, top = geo.size.height - tubH
+                let water = top + tubH * 66 / 170, sand = top + tubH * 146 / 170, item = tubW * 0.22
                 ZStack(alignment: .topLeading) {
-                    tub(width: w, height: h, water: water)
-                        .position(x: geo.size.width / 2, y: h / 2)
+                    Image("Picture-tub").resizable().scaledToFit()
+                        .frame(width: tubW, height: tubH)
+                        .position(x: left + tubW / 2, y: top + tubH / 2)
+                        .accessibilityHidden(true)
                     // Things tried already: floaters bob at the top, sinkers rest on the bottom
                     ForEach(Array(inTub.enumerated()), id: \.offset) { index, thing in
-                        Picture(thing.picture, size: item * 0.7)
-                            .position(x: geo.size.width / 2 - w * 0.36 + CGFloat(index % 6) * w * 0.145,
-                                      y: thing.floats ? water + item * 0.05 : bottom - item * 0.4)
+                        Picture(thing.picture, size: item * 0.75)
+                            .position(x: left + tubW * (0.17 + CGFloat(index % 6) * 0.133),
+                                      y: thing.floats ? water + item * 0.05 : sand - item * 0.3)
                     }
                     if let current {
-                        let landed = dropping ? (current.floats ? water + item * 0.05 : bottom - item * 0.45) : h * 0.14
+                        let landed = dropping ? (current.floats ? water + item * 0.05 : sand - item * 0.4) : item * 0.6
                         Picture(current.picture, size: item)
                             .position(x: geo.size.width / 2, y: landed)
                             .id(inTub.count)  // a fresh one appears up top, instead of sliding up from the tub
@@ -66,42 +71,28 @@ struct SinkFloatView: View {
         }
     }
 
-    /// A clear tub of water with a wavy top.
-    private func tub(width: CGFloat, height: CGFloat, water: CGFloat) -> some View {
-        ZStack(alignment: .top) {
-            RoundedRectangle(cornerRadius: width * 0.06).fill(.white.opacity(0.35))
-            Rectangle()
-                .fill(LinearGradient(colors: [Color(red: 0.55, green: 0.8, blue: 0.98), Color(red: 0.3, green: 0.6, blue: 0.9)], startPoint: .top, endPoint: .bottom))
-                .frame(height: height * 0.95 - water)
-                .overlay(alignment: .top) {
-                    Capsule().fill(.white.opacity(0.6)).frame(height: 6 * uiScale).padding(.horizontal, width * 0.05)
-                }
-                .offset(y: water - height * 0.05)
-                .clipShape(RoundedRectangle(cornerRadius: width * 0.06))
-            RoundedRectangle(cornerRadius: width * 0.06).strokeBorder(Color.outline, lineWidth: 3.5)
-        }
-        .frame(width: width * 0.95, height: height * 0.9)
-        .offset(y: height * 0.05)
-        .accessibilityHidden(true)
-    }
-
     /// The two guesses, as big picture buttons.
     private var guesses: some View {
         HStack(spacing: 20 * uiScale) {
-            guessButton("Sink", symbol: "arrow.down.to.line", color: Color(red: 0.55, green: 0.5, blue: 0.75), floats: false)
-            guessButton("Float", symbol: "water.waves", color: Color(red: 0.36, green: 0.66, blue: 0.88), floats: true)
+            guessButton("Sink", picture: "stone", color: Color(red: 0.55, green: 0.5, blue: 0.75), floats: false)
+            guessButton("Float", picture: "boat", color: Color(red: 0.36, green: 0.66, blue: 0.88), floats: true)
         }
         .disabled(dropping || current == nil)
     }
 
-    private func guessButton(_ name: String, symbol: String, color: Color, floats: Bool) -> some View {
+    /// A guess with a picture of something that does it (a stone sinks, a boat floats), for before she can read.
+    private func guessButton(_ name: String, picture: String, color: Color, floats: Bool) -> some View {
         Button { guess(floats) } label: {
-            Label(name, systemImage: symbol)
-                .font(.kid(26))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 26 * uiScale)
-                .frame(height: 64 * uiScale)
-                .cartoonCard(color, cornerRadius: 32 * uiScale)
+            HStack(spacing: 10 * uiScale) {
+                Picture(picture, size: 44 * uiScale)
+                    .padding(4 * uiScale)
+                    .background(Circle().fill(.white.opacity(0.85)))
+                Text(name).font(.kid(26)).foregroundStyle(.white)
+            }
+            .padding(.leading, 10 * uiScale)
+            .padding(.trailing, 26 * uiScale)
+            .frame(height: 68 * uiScale)
+            .cartoonCard(color, cornerRadius: 34 * uiScale)
         }
         .buttonStyle(SquishyButtonStyle())
         .accessibilityLabel(name)

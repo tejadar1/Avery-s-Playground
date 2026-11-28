@@ -112,6 +112,12 @@ struct CodeView: View {
                 ForEach(Array(level.rocks), id: \.self) { rock in
                     Picture("stone", size: cell * 0.75).position(center(rock))
                 }
+                // Her snack, on a little plate
+                Ellipse().fill(.white)
+                    .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 2.5))
+                    .frame(width: cell * 0.78, height: cell * 0.3)
+                    .position(x: center(level.goal).x, y: center(level.goal).y + cell * 0.22)
+                    .opacity(coco == level.goal ? 0 : 1)
                 Picture("cookie", size: cell * 0.6)
                     .position(center(level.goal))
                     .opacity(coco == level.goal ? 0 : 1)

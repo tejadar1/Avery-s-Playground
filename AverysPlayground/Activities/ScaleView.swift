@@ -40,10 +40,11 @@ struct ScaleView: View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount)
             GeometryReader { geo in
-                let size = min(geo.size.width, geo.size.height * 1.3)
+                // The scale fills the room above the shelf of things to weigh
+                let shelf = 100 * uiScale, size = max(0, min(geo.size.width, geo.size.height - shelf))
                 ZStack {
                     scale(size: size)
-                        .position(x: geo.size.width / 2, y: geo.size.height * 0.5)
+                        .position(x: geo.size.width / 2, y: (geo.size.height - shelf) / 2)
                     if let dragging {
                         Picture(dragging.thing.picture, size: size * 0.16)
                             .scaleEffect(1.15)
@@ -67,32 +68,26 @@ struct ScaleView: View {
         }
     }
 
-    /// The stand, the beam tipped by the weights, and a pan hanging level from each end.
+    /// The stand, the beam tipped by the weights, and a pan hanging level from each end (all drawn in Art/pictures).
     private func scale(size: CGFloat) -> some View {
-        let arm = size * 0.36, angle = Angle.degrees(tilt)
-        let wood = Color(red: 0.8, green: 0.58, blue: 0.38), brass = Color(red: 0.96, green: 0.78, blue: 0.35)
-        return ZStack {
-            // The post and its foot
-            RoundedRectangle(cornerRadius: size * 0.02).fill(wood)
-                .overlay(RoundedRectangle(cornerRadius: size * 0.02).strokeBorder(Color.outline, lineWidth: 3))
-                .frame(width: size * 0.05, height: size * 0.4)
-                .offset(y: size * 0.2)
-            Capsule().fill(wood)
-                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 3))
-                .frame(width: size * 0.36, height: size * 0.06)
-                .offset(y: size * 0.4)
-            // The beam
-            Capsule().fill(brass)
-                .overlay(Capsule().strokeBorder(Color.outline, lineWidth: 3))
-                .frame(width: arm * 2 + size * 0.04, height: size * 0.035)
-                .rotationEffect(angle)
-            Circle().fill(Color(red: 0.9, green: 0.4, blue: 0.43)).overlay(Circle().strokeBorder(Color.outline, lineWidth: 3))
-                .frame(width: size * 0.06)
+        let angle = Angle.degrees(tilt)
+        // The knob the beam turns on, and the beam's end rings: 88/200 of its width out from the middle
+        let pivot = CGPoint(x: size / 2, y: size * 0.26), beam = size * 0.7, arm = beam * 0.44
+        let stand = size * 0.7, pan = size * 0.3
+        // Back to front: the pans, the beam, then the stand, whose knob covers the beam's middle
+        return ZStack(alignment: .topLeading) {
             ForEach([-1.0, 1.0], id: \.self) { side in
-                let end = CGPoint(x: CGFloat(side * cos(angle.radians)) * arm, y: CGFloat(side * sin(angle.radians)) * arm)
-                pan(side < 0 ? left : right, size: size)
-                    .offset(x: end.x, y: end.y + size * 0.13)
+                let ring = CGPoint(x: pivot.x + CGFloat(side * cos(angle.radians)) * arm, y: pivot.y + CGFloat(side * sin(angle.radians)) * arm)
+                panView(side < 0 ? left : right, size: pan)
+                    .position(x: ring.x, y: ring.y + pan * (0.5 - 10.0 / 200))
             }
+            Image("Picture-scale-beam").resizable().scaledToFit()
+                .frame(width: beam)
+                .rotationEffect(angle)
+                .position(pivot)
+            Image("Picture-scale-stand").resizable().scaledToFit()
+                .frame(width: stand, height: stand)
+                .position(x: pivot.x, y: pivot.y + stand * (0.5 - 34.0 / 200))
         }
         .frame(width: size, height: size)
         .animation(.spring(response: 0.7, dampingFraction: 0.45), value: tilt)  // a bouncy settle, like a real scale
@@ -101,40 +96,27 @@ struct ScaleView: View {
         .accessibilityIdentifier("Scale")
     }
 
-    /// A pan on strings, holding what's on it.
-    private func pan(_ things: [Balance.Thing], size: CGFloat) -> some View {
-        let width = size * 0.3
-        return ZStack(alignment: .bottom) {
-            // Strings up to the beam
-            Path { path in
-                path.move(to: CGPoint(x: width / 2, y: 0))
-                path.addLine(to: CGPoint(x: width * 0.08, y: size * 0.13))
-                path.move(to: CGPoint(x: width / 2, y: 0))
-                path.addLine(to: CGPoint(x: width * 0.92, y: size * 0.13))
-            }
-            .stroke(Color.outline.opacity(0.7), lineWidth: 2)
-            .frame(width: width, height: size * 0.13)
-            .offset(y: -size * 0.04)
-            HStack(spacing: -size * 0.03) {
+    /// A brass pan on its strings, with what's on it sitting in the bowl (its rim is 150/200 down the picture).
+    private func panView(_ things: [Balance.Thing], size: CGFloat) -> some View {
+        ZStack(alignment: .top) {
+            Image("Picture-scale-pan").resizable().scaledToFit()
+            HStack(spacing: -size * 0.12) {
                 ForEach(Array(things.enumerated()), id: \.offset) { _, thing in
-                    Picture(thing.picture, size: size * 0.12)
+                    Picture(thing.picture, size: size * 0.52)
                 }
             }
-            .offset(y: -size * 0.035)
+            .frame(height: size * 0.52, alignment: .bottom)
+            .offset(y: size * 0.75 - size * 0.52 + size * 0.06)
             .boing(thuds)
-            Ellipse().fill(Color(red: 0.96, green: 0.78, blue: 0.35))
-                .overlay(Ellipse().strokeBorder(Color.outline, lineWidth: 3))
-                .frame(width: width, height: size * 0.05)
         }
-        .frame(width: width, height: size * 0.3, alignment: .bottom)
-        .offset(y: -size * 0.04)
+        .frame(width: size, height: size)
     }
 
     /// Things to weigh, dragged up onto a pan.
     private func shelfRow(size: CGFloat, width: CGFloat) -> some View {
         HStack(spacing: 10 * uiScale) {
             ForEach(shelf, id: \.self) { thing in
-                Picture(thing.picture, size: min(size * 0.12, 64 * uiScale))
+                Picture(thing.picture, size: 56 * uiScale)
                     .padding(6 * uiScale)
                     .cartoonCard(.white, cornerRadius: 16 * uiScale)
                     .gesture(
