@@ -84,7 +84,7 @@ struct PetView: View {
     @State private var ballDrag: CGPoint?
     @State private var ballSpin = 0.0
     /// Counts throws, for the ball's arc through the air and its bounces.
-    @State private var throws = 0
+    @State private var ballThrows = 0
     @State private var ballInMouth = false
     @State private var treatInMouth = false
 
@@ -204,7 +204,7 @@ struct PetView: View {
                 Picture("tennis", size: ballW)
                     .rotationEffect(.degrees(ballSpin))
                     // Up in an arc, down, then two smaller bounces, like a real ball
-                    .keyframeAnimator(initialValue: 0.0, trigger: throws) { content, height in
+                    .keyframeAnimator(initialValue: 0.0, trigger: ballThrows) { content, height in
                         content.offset(y: -height * h)
                     } keyframes: { _ in
                         CubicKeyframe(0.3, duration: 0.35)
@@ -390,7 +390,7 @@ struct PetView: View {
         let landing = min(0.9, max(0.1, target))
         Haptics.tap()
         Sounds.shared.play(.pop)
-        throws += 1
+        ballThrows += 1
         withAnimation(.easeOut(duration: 1.1)) {
             ballX = landing
             ballDrag = nil
