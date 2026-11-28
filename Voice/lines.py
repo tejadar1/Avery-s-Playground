@@ -9,7 +9,8 @@ import re
 from pathlib import Path
 
 app = Path(__file__).resolve().parent.parent / "AverysPlayground"
-src = {p.name: p.read_text() for p in (app / "Activities").glob("*.swift")}
+# ColoringArt.swift is drawing data (SVG paths), not words
+src = {p.name: p.read_text() for p in (app / "Activities").glob("*.swift") if p.name != "ColoringArt.swift"}
 theme = (app / "Support" / "Theme.swift").read_text() + (app / "Support" / "Customers.swift").read_text()
 lines = set()
 
