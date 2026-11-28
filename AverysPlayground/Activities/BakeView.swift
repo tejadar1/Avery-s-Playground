@@ -89,7 +89,7 @@ struct BakeView: View {
                 // The paper case hangs a little below the cupcake's square, so it gets 85% of the height.
                 let side = min(geo.size.width, geo.size.height * 0.85, biggest)
                 ZStack {
-                    Cupcake(frosting: frosting, spread: spread, sprinkles: sprinkles, toppings: toppings, size: side)
+                    Cupcake(frosting: frosting, spread: spread, sprinkles: sprinkles, toppings: toppings, size: side, falling: true)
                     if frosting != nil && spread < 1 || knifeAt != nil {
                         // The icing knife: resting beside the cupcake and wiggling until she picks it up, then its
                         // blade follows her finger.
@@ -480,6 +480,8 @@ struct Cupcake: View {
     var sprinkles: [Sprinkle] = []
     let toppings: [CupcakeOrder.Topping]
     let size: CGFloat
+    /// New sprinkles fall onto the frosting as they're shaken on (off for the photo, which has no time to fall).
+    var falling = false
 
     static func color(_ frosting: CupcakeOrder.Frosting) -> Color {
         switch frosting {
@@ -518,10 +520,7 @@ struct Cupcake: View {
                 .transition(.scale(scale: 0.6, anchor: .bottom).combined(with: .opacity))
             }
             ForEach(Array(sprinkles.enumerated()), id: \.offset) { _, sprinkle in
-                Capsule()
-                    .fill(Sprinkle.colors[sprinkle.color])
-                    .frame(width: size * 0.05, height: size * 0.016)
-                    .rotationEffect(.degrees(sprinkle.angle))
+                SprinkleView(sprinkle: sprinkle, size: size, falling: falling)
                     .position(x: sprinkle.x * size, y: sprinkle.y * size)
             }
             // The paper case
@@ -539,6 +538,28 @@ struct Cupcake: View {
         }
         .frame(width: size, height: size)
         .shadow(color: Color.outline.opacity(0.18), radius: 6, y: 4)
+    }
+}
+
+/// One sprinkle; a new one drops from the shaker, tumbling, and lands with a little bounce.
+private struct SprinkleView: View {
+    let sprinkle: Sprinkle
+    let size: CGFloat
+    let falling: Bool
+    @State private var landed = false
+
+    var body: some View {
+        let down = landed || !falling
+        Capsule()
+            .fill(Sprinkle.colors[sprinkle.color])
+            .overlay(Capsule().strokeBorder(Color.outline.opacity(0.25), lineWidth: 0.5))
+            .frame(width: size * 0.05, height: size * 0.016)
+            .rotationEffect(.degrees(sprinkle.angle + (down ? 0 : 200)))
+            .offset(y: down ? 0 : -size * 0.16)
+            .onAppear {
+                guard falling else { return }
+                withAnimation(.interpolatingSpring(stiffness: 260, damping: 11)) { landed = true }
+            }
     }
 }
 

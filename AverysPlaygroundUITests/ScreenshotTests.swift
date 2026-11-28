@@ -210,15 +210,45 @@ final class ScreenshotTests: XCTestCase {
                         .press(forDuration: 0.05, thenDragTo: pit.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: y)))
                 }
             }),
+            ("Balance Scale", {
+                // A thing from each end of the shelf, so one lands on each pan
+                let things = self.app.buttons.matching(NSPredicate(format: "label IN %@", ["mouse", "balloon", "bee", "apple", "ball", "cat", "dog", "bricks", "bear", "elephant"]))
+                self.tap(things.element(boundBy: 0))
+                self.tap(things.element(boundBy: 5))
+            }),
+            ("Sink or Float", {
+                self.tap(self.app.buttons["Float"])
+                sleep(2)
+            }),
+            ("Coco Code", {
+                for arrow in ["Right", "Right", "Down"] { self.tap(self.app.buttons[arrow]) }
+                self.tap(self.app.buttons["Go"])
+                sleep(2)
+            }),
+            ("Big to Small", {
+                self.tap(self.button("Block 1 of 5"))
+                self.tap(self.button("Block 2 of 5"))
+            }),
+            ("Life Cycles", {}),
+            ("Ramps", {
+                self.tap(self.app.buttons["High Ramp"])
+                self.tap(self.app.buttons["Go"])
+                sleep(3)
+            }),
+            ("In, On, Under", {
+                let toy = self.find("Toy")
+                toy.press(forDuration: 0.05, thenDragTo: self.app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.72)))
+            }),
             ("Garden", {
                 for spot in ["Spot 1", "Spot 3", "Spot 5"] { self.tap(self.find(spot)) }
             }),
         ]
 
         // Which home-screen choice each game is under (Activity.section in the app).
-        let learn = ["Stories", "Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"]
+        let learn = ["Stories", "Read", "Rhyme Time", "What's Next?", "Sort It", "Feelings", "Math", "Español", "ABC", "Trace", "Spell", "1 2 3", "Sound Spy", "Clap It", "Piano"], teamUp = ["Bingo", "Number Race", "Fruit Picking", "Tic-Tac-Toe", "Memory", "Hide Coco", "I Spy", "Go Fishing"], myDay = ["Day & Night", "Helper"], calm = ["Busy Board", "Blocks", "Garden"],
+            discover = ["Balance Scale", "Sink or Float", "Coco Code", "Big to Small", "Life Cycles", "Ramps", "In, On, Under"]
         for (index, game) in games.enumerated() {
-            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : calm.contains(game.title) ? "Calm" : "Play"
+            let choice = learn.contains(game.title) ? "Learn" : teamUp.contains(game.title) ? "Team Up" : myDay.contains(game.title) ? "My Day" : calm.contains(game.title) ? "Calm" : discover.contains(game.title) ? "Discover" : "Play"
             let section = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", choice)).firstMatch
             tap(section)
             sleep(1)

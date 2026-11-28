@@ -203,6 +203,19 @@ dig = src["DinoDigView.swift"]
 for name in re.findall(r'case \.\w+: "([^"]+)"', dig.split("var name")[1].split("}")[0] + "}"):
     lines.add(f"ROAR! It's a baby {name}! Hello, little dino!")
 
+# Discover: In, On, Under asks for each toy and place; Ramps counts the floor; Bella names the life cycle stages
+positions = src["PositionsView.swift"]
+places = re.findall(r'case \.\w+: "([a-z ]+(?:table|box))"', positions)
+toys = re.findall(r'"(\w+)"', re.search(r"static let toys = \[([^\]]+)\]", positions).group(1))
+for toy in toys:
+    for place in places:
+        lines.update({f"Put the {toy} {place}.", f"Yes! The {toy} is {place}!"})
+lines.update(f"Oops, that's {place}! Try again." for place in places)
+lines.update(f"It went all the way to number {n}!" for n in range(1, 7))
+life = src["LifeCycleView.swift"]
+lines.update("book:" + name for name in re.findall(r'name: "(\w+)"', life))
+lines.update("book:" + song for song in re.findall(r'song: "([^"]+)"', life))
+
 # Bella names things: the trays and tools in the salons and Dress Up, the crayons in Draw, and the stickers
 for name in ["HairSalonView.swift", "NailSalonView.swift", "DressUpView.swift"]:
     for block in re.findall(r"var name: String \{(.*?)\n    \}", src[name], re.S):

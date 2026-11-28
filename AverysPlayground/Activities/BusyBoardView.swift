@@ -191,11 +191,21 @@ private struct BigButton: View {
 }
 
 /// A knob to turn round and round. The light above, and the whole panel, take on its color as it turns, and the
-/// dot by the pointer lights up with a click.
+/// dot by the pointer lights up with a click. Flicked, it keeps spinning and slows down, like a real spinner.
 private struct ColorKnob: View {
     let side: CGFloat
     @State private var angle = 0.0
     @State private var lastClick = 0.0
+    /// How fast it's turning, in degrees a second, measured from her finger; and the last finger reading.
+    @State private var spin = 0.0
+    @State private var last = (angle: 0.0, time: Date.now)
+    @State private var coasting: Task<Void, Never>?
+
+    /// The short way round from one angle to another: -180...180.
+    private static func turn(from a: Double, to b: Double) -> Double {
+        let d = (b - a).truncatingRemainder(dividingBy: 360)
+        return d > 180 ? d - 360 : d < -180 ? d + 360 : d
+    }
 
     private var color: Color { Color(hue: (angle / 360).truncatingRemainder(dividingBy: 1), saturation: 0.6, brightness: 0.97) }
 
@@ -231,24 +241,54 @@ private struct ColorKnob: View {
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { drag in
+                        coasting?.cancel()
                         // The angle from the knob's middle to her finger, 0 at the top, clockwise.
                         let middle = side * 0.31
                         let degrees = atan2(drag.location.x - middle, middle - drag.location.y) * 180 / .pi
-                        angle = degrees < 0 ? degrees + 360 : degrees
-                        if abs(angle - lastClick) > 30 {
-                            lastClick = angle
-                            Sounds.shared.play(.click)
-                            Haptics.tap()
+                        let now = Date.now, seconds = now.timeIntervalSince(last.time)
+                        if seconds > 0.005 {
+                            spin = spin * 0.4 + Self.turn(from: last.angle, to: degrees) / seconds * 0.6
+                            last = (degrees, now)
                         }
+                        turnTo(degrees)
                     }
+                    .onEnded { _ in coast() }
             )
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(color.opacity(0.25))
+        .onDisappear { coasting?.cancel() }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Color knob")
         .accessibilityAdjustableAction { direction in
             angle = (angle + (direction == .increment ? 30 : 330)).truncatingRemainder(dividingBy: 360)
+        }
+    }
+
+    /// Points the knob, with a click and a tap every 30 degrees it passes.
+    private func turnTo(_ degrees: Double) {
+        let wrapped = degrees.truncatingRemainder(dividingBy: 360)
+        angle = wrapped < 0 ? wrapped + 360 : wrapped
+        if abs(Self.turn(from: lastClick, to: angle)) > 30 {
+            lastClick = angle
+            Sounds.shared.play(.click)
+            Haptics.tap()
+        }
+    }
+
+    /// Let go mid-turn, it keeps spinning, slowing a little each moment, until it stops.
+    private func coast() {
+        let start = max(-1500, min(1500, spin))
+        spin = 0
+        last = (angle, .now)
+        guard abs(start) > 60 else { return }
+        coasting = Task {
+            var speed = start
+            while abs(speed) > 15, !Task.isCancelled {
+                turnTo(angle + speed / 60)
+                speed *= 0.97
+                try? await Task.sleep(for: .milliseconds(16))
+            }
         }
     }
 }

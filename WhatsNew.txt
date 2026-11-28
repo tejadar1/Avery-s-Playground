@@ -1,2 +1,9 @@
-- Garden: Coco now explains what to do in her speech bubble, so it's clear even with the sound off: tap the dirt to plant a seed, then drag the watering can over a plant to help it grow.
-- Blocks: real physics. Blocks fall, stack, slide and tip over when they hang too far, the ball rolls and bounces, and a block let go while moving gets thrown.
+- New section on the home screen: Discover, with seven science, building and coding games.
+- Balance Scale: drag things onto the two pans and watch the heavy side go down, or balance when they weigh the same.
+- Sink or Float: guess first, then drop it in the water and see. A wrong guess is a happy surprise.
+- Coco Code: line up arrow cards and press Go to walk Coco to her cookie, around rocks on later levels. Early coding, like the floor robots in preschool.
+- Big to Small: build a tower from the biggest block to the smallest, like the Montessori pink tower.
+- Life Cycles: put the stages in order: seed to flower, egg to hen, eggs to tadpole to frog, egg to caterpillar to cocoon to butterfly.
+- Ramps: pick a ramp and a ball, car or box, and see how far it rolls along the numbered floor. The box may get stuck on a low ramp.
+- In, On, Under: Coco asks you to put a toy on the table, under it, in the box or next to it.
+- More life in other games: the Busy Board knob keeps spinning when flicked, the fishing bobber swings on its line, sprinkles fall and bounce onto the cupcake, Mochi's ball arcs and bounces, and fruit drops into the basket with a squash.

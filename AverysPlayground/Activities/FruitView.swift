@@ -194,7 +194,8 @@ struct FruitView: View {
             ForEach(Array(game.basket.enumerated()), id: \.offset) { index, fruit in
                 Picture(fruit, size: size * 0.28)
                     .position(x: Self.pile[index].x * size, y: Self.pile[index].y * size)
-                    .transition(.offset(y: -size * 0.6).combined(with: .opacity))
+                    // Dropped in from above the basket, landing with a bounce (the spring in pick)
+                    .transition(.offset(y: -size * 1.1).combined(with: .scale(scale: 0.8)))
             }
             Picture("basket", size: size)
             Text("\(game.picked)")
@@ -204,9 +205,10 @@ struct FruitView: View {
                 .offset(y: size * 0.3)
         }
         .frame(width: size, height: size)
-        .phaseAnimator([CGFloat(1), 1.12, 1], trigger: game.picked) { content, scale in
-            content.scaleEffect(scale, anchor: .bottom)
-        } animation: { _ in .spring(response: 0.2, dampingFraction: 0.5) }
+        // The basket squashes as the fruit lands in it, then springs back
+        .phaseAnimator([CGFloat(1), 0.88, 1.06, 1], trigger: game.picked) { content, squash in
+            content.scaleEffect(x: 2 - squash, y: squash, anchor: .bottom)
+        } animation: { _ in .spring(response: 0.18, dampingFraction: 0.5) }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(game.picked) fruits in the basket")
     }
@@ -281,7 +283,7 @@ struct FruitView: View {
         }
         Haptics.tap()
         Sounds.shared.play(.pop)
-        _ = withAnimation(.spring(response: 0.35, dampingFraction: 0.6)) { game.pick(fruit) }
+        _ = withAnimation(.interpolatingSpring(stiffness: 180, damping: 11)) { game.pick(fruit) }
         if game.won {
             wins += 1
             say("We picked all the fruit! Holy guacamole, we beat the crow!", spoken: "We picked all the fruit! Holy guacamole, we beat the crow!")

@@ -103,13 +103,15 @@ struct FishingView: View {
                             .overlay(Circle().strokeBorder(Color.outline, lineWidth: 3))
                             .frame(width: side * 0.07, height: side * 0.07)
                             .position(x: side * 0.93, y: side * 0.93)
+                        // The bobber trails her finger on a spring, swinging a little and settling, and bounces
+                        // back to the rod when she lets go; the line follows it.
                         let hook = hookAt ?? resting
-                        Path { path in
-                            path.move(to: tip)
-                            path.addQuadCurve(to: hook, control: CGPoint(x: (tip.x + hook.x) / 2, y: max(tip.y, hook.y) + side * 0.05))
-                        }
-                        .stroke(Color.outline.opacity(0.8), lineWidth: 2)
+                        let swing = Animation.interpolatingSpring(stiffness: 140, damping: 9)
+                        FishingLine(tip: tip, hook: hook, sag: side * 0.05)
+                            .stroke(Color.outline.opacity(0.8), lineWidth: 2)
+                            .animation(swing, value: hook)
                         Bobber(size: side * 0.07).position(hook)
+                            .animation(swing, value: hook)
                         if let landed {
                             FishDrawing(color: Self.color(landed), mouthOpen: true)
                                 .frame(width: side * 0.36, height: side * 0.24)
@@ -392,4 +394,24 @@ struct FishDrawing: View {
 
 #Preview {
     NavigationStack { FishingView() }
+}
+
+/// The fishing line from the rod tip to the bobber, sagging a little; its end can be animated, so it swings along
+/// with the bobber.
+private struct FishingLine: Shape {
+    let tip: CGPoint
+    var hook: CGPoint
+    let sag: CGFloat
+
+    var animatableData: AnimatablePair<CGFloat, CGFloat> {
+        get { AnimatablePair(hook.x, hook.y) }
+        set { hook = CGPoint(x: newValue.first, y: newValue.second) }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.move(to: tip)
+            path.addQuadCurve(to: hook, control: CGPoint(x: (tip.x + hook.x) / 2, y: max(tip.y, hook.y) + sag))
+        }
+    }
 }

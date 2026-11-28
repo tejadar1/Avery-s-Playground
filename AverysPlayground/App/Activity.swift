@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Activity: String, CaseIterable, Identifiable, Hashable {
-    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden, readalong, carwash, dinodig
+    case nails, hair, dressup, dentist, pet, hop, maze, spot, bake, piano, reading, rhyme, patterns, sorting, feelings, math, spanish, abc, tracing, spelling, counting, sounds, clap, colors, drawing, bingo, race, fruit, tictactoe, memory, hide, ispy, fishing, puzzle, routines, chores, busy, blocks, garden, readalong, carwash, dinodig, scale, sinkfloat, code, tower, lifecycle, ramp, positions
 
     var id: String { rawValue }
 
@@ -49,6 +49,13 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .readalong: "Read"
         case .carwash: "Car Wash"
         case .dinodig: "Dino Dig"
+        case .scale: "Balance Scale"
+        case .sinkfloat: "Sink or Float"
+        case .code: "Coco Code"
+        case .tower: "Big to Small"
+        case .lifecycle: "Life Cycles"
+        case .ramp: "Ramps"
+        case .positions: "In, On, Under"
         }
     }
 
@@ -59,6 +66,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing: .teamUp
         case .routines, .chores: .myDay
         case .busy, .blocks, .garden: .calm
+        case .scale, .sinkfloat, .code, .tower, .lifecycle, .ramp, .positions: .discover
         }
     }
 
@@ -72,6 +80,7 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .colors, .drawing: .art
         case .bingo, .race, .fruit, .tictactoe, .memory, .hide, .ispy, .fishing, .routines, .chores: .teamUp
         case .patterns, .sorting, .feelings, .math, .spanish, .tracing, .counting: .learn
+        case .scale, .sinkfloat, .code, .tower, .lifecycle, .ramp, .positions: .learn
         }
     }
 
@@ -122,6 +131,13 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .readalong: Color(red: 0.36, green: 0.4, blue: 0.75)
         case .carwash: Color(red: 0.36, green: 0.66, blue: 0.88)
         case .dinodig: Color(red: 0.91, green: 0.63, blue: 0.31)
+        case .scale: Color(red: 0.91, green: 0.63, blue: 0.31)
+        case .sinkfloat: Color(red: 0.36, green: 0.66, blue: 0.88)
+        case .code: Color(red: 0.36, green: 0.4, blue: 0.75)
+        case .tower: Color(red: 0.56, green: 0.48, blue: 0.82)
+        case .lifecycle: Color(red: 0.43, green: 0.71, blue: 0.35)
+        case .ramp: Color(red: 0.85, green: 0.57, blue: 0.35)
+        case .positions: Color(red: 0.6, green: 0.48, blue: 0.82)
         }
     }
 
@@ -170,19 +186,27 @@ enum Activity: String, CaseIterable, Identifiable, Hashable {
         case .readalong: ReadAlongView()
         case .carwash: CarWashView()
         case .dinodig: DinoDigView()
+        case .scale: ScaleView()
+        case .sinkfloat: SinkFloatView()
+        case .code: CodeView()
+        case .tower: TowerView()
+        case .lifecycle: LifeCycleView()
+        case .ramp: RampView()
+        case .positions: PositionsView()
         }
     }
 }
 
 /// The choices on the home screen; each opens a page of its games.
 enum HomeSection: String, CaseIterable, Identifiable, Hashable {
-    case learn, play, teamUp, myDay, calm
+    case learn, discover, play, teamUp, myDay, calm
 
     var id: String { rawValue }
 
     var title: String {
         switch self {
         case .learn: "Learn"
+        case .discover: "Discover"
         case .play: "Play"
         case .teamUp: "Team Up"
         case .myDay: "My Day"
@@ -193,6 +217,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
     var subtitle: String {
         switch self {
         case .learn: "Letters, words, numbers and music"
+        case .discover: "Science, building and coding"
         case .play: "Pretend, dress up and make art"
         case .teamUp: "Play with your grown-up"
         case .myDay: "Morning, bedtime and helping out"
@@ -203,6 +228,7 @@ enum HomeSection: String, CaseIterable, Identifiable, Hashable {
     var color: Color {
         switch self {
         case .learn: Color(red: 0.31, green: 0.67, blue: 0.75)
+        case .discover: Color(red: 0.43, green: 0.71, blue: 0.35)
         case .play: Color(red: 0.95, green: 0.47, blue: 0.6)
         case .teamUp: Color(red: 0.95, green: 0.62, blue: 0.3)
         case .myDay: Color(red: 0.42, green: 0.55, blue: 0.88)

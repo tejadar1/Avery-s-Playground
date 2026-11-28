@@ -38,8 +38,8 @@ extension Activity {
     /// 4 needs letter sounds, adding or planning ahead.
     var fromAge: Int {
         switch self {
-        case .patterns, .rhyme, .tracing, .sounds, .clap, .maze, .race, .ispy, .readalong: 3
-        case .spelling, .math, .tictactoe: 4
+        case .patterns, .rhyme, .tracing, .sounds, .clap, .maze, .race, .ispy, .readalong, .lifecycle, .ramp, .positions: 3
+        case .spelling, .math, .tictactoe, .code: 4
         default: 2
         }
     }

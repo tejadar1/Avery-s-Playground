@@ -1,3 +1,4 @@
+ : block == Tower.count - 1 ? 
 %02d
 ) on the plate. How many are in the box?
 -alt
@@ -55,18 +56,21 @@ All sorted!
 All stuck on!
 All summer, the little ant worked hard, carrying food to her home.
 All the chores are done! What a big helper! Holy guacamole!
+Almost! I need more arrows to reach my snack.
 An egg! A dinosaur egg! Keep brushing!
 An orange fish!
 Another sticker! Yay!
 Anywhere
 Apple
 At the top was a giant's castle. Fee, fi, fo, fum!
+AvenirNext-Heavy
 Avery
 Avery! You wrote your name!
 B
 Baa baa!
 Backpack
 Backpack ready!
+Balanced
 Ball
 Ballet flats
 Ballet flats! Fashion show time!
@@ -95,6 +99,7 @@ Big button
 Big hug!
 Big nail
 Big or small?
+Biggest to smallest! What a tall tower!
 Bingo bango bongo!
 Bingo card
 Bingo! You filled your card! Holy guacamole!
@@ -103,6 +108,7 @@ Blow dryer
 Blue
 Blue frosting,
 Bobo
+Bonk! I bumped into something. Fix the arrows and try again!
 Boop! You booped my nose!
 Boots
 Boots! Fashion show time!
@@ -123,6 +129,7 @@ Brush
 Brush hair
 Brush teeth
 Bubble bath, all clean!
+Build a tower! Start with the biggest block.
 Buns
 Buns! So cute!
 But he could not blow down the brick house. The three pigs were safe!
@@ -481,9 +488,11 @@ Coco said, Do not worry, Princess Marisol! We will find it!
 Coco wants a cupcake!
 Coco's Christmas Countdown
 Coco's Dangerous Book
+Coco's grid
 CocoCheer
 CocoGiggle
 CocoThink
+Code board
 Color anywhere you like!
 Color knob
 Coloring anywhere
@@ -511,6 +520,7 @@ Crown! So stylish!
 Crown! Wowza bowza!
 Crunch crunch! Happy pet!
 Crunch crunch! Yummy!
+Crunch munch! You coded me to my snack!
 Cupcake
 Curly
 Curly! So cute!
@@ -532,11 +542,13 @@ Done!
 Door
 Dots and stripes, oh my!
 Down
+Down goes the heavy one!
 Down! So cute!
 Drag Coco
 Drag Coco to where she should hide
 Drag each piece to where it goes in the picture!
 Drag it onto the cupcake!
+Drag something onto each side. Which one is heavier?
 Drag the hook to a fish with its mouth open!
 Drag the hose to spray Mochi.
 Drag the watering can over a plant to help it grow.
@@ -548,9 +560,14 @@ E
 Eagle eyes!
 Easy
 Easy peasy, lemon squeezy!
+Egg, caterpillar, cocoon, butterfly! That's how a butterfly grows!
+Egg, chick, hen! That's how a chicken grows!
 Egg, tap to hatch it
+Eggs, tadpole, frog! That's how a frog grows!
 Elephant
 Empty floor
+Empty scale
+Empty the pans
 Erase
 Eraser
 Eraser! Rub out any oopsies!
@@ -571,10 +588,12 @@ Fiddlesticks!
 Find 3 differences!
 Find 5 differences!
 Find 7 differences! Look closely!
+Find the biggest one left!
 Fire Truck
 First picture
 Fish
 Fix
+Float
 Floss
 Flower crown
 Flower crown! Fashion show time!
@@ -600,6 +619,7 @@ Glitter makes everything better!
 Glug glug! Happy plants!
 Go
 Go to bed.
+Go!
 Goldilocks and the Three Bears
 Goldilocks went for a walk in the woods.
 Good eye!
@@ -863,8 +883,10 @@ Hee hee, the tree isn't on your card.
 Hee hee, try the other one!
 Hee hee, you're so silly! You did it!
 Help Mochi find her bone! Drag her along the path.
+Help me get my snack! Tap the arrows to plan my walk, then press Go.
 Here comes a big wave. SPLASH! Now the book is all wet!
 Here is my dog.
+Here's a new one! Plan my walk to the snack.
 Hi Avery!
 Hi Bella!
 Hi Bobo!
@@ -890,6 +912,9 @@ High heels! Wowza bowza!
 Hiya!
 Hiya, Avery!
 Hmm, look again! What's different?
+Hmm, that one's small. Find a bigger one!
+Hmm, what comes first?
+Hmm, what comes next?
 Holy guacamole!
 Holy guacamole! A new level is open! Tap it up top!
 Holy guacamole! I sat on a banana! Squish!
@@ -911,6 +936,7 @@ Hose
 Hot
 Hot Cross Buns
 Hot diggity dog!
+How does it grow? Tap what comes first!
 How many did you see?
 How many dots?
 How would you feel?
@@ -938,6 +964,13 @@ In the morning, he found beautiful new shoes. Wow!
 In the sky or in the water?
 It gets dark. Who is behind the moon? BOO! It is just Coco! Hee hee!
 It is Christmas morning! Presents under the tree! Coco shouts, HO HO HOLY GUACAMOLE!
+It stayed on the ramp! Try a higher ramp.
+It went all the way to number 1!
+It went all the way to number 2!
+It went all the way to number 3!
+It went all the way to number 4!
+It went all the way to number 5!
+It went all the way to number 6!
 It's a tie! Everybody wins a hug!
 It's a tie! Everyone wins!
 It's your birthday party!
@@ -958,7 +991,9 @@ Kiki
 Kite
 Knock knock! Who's there? Coco. Coco who? Coco-nut! Hee hee!
 L
+Left side is heavier
 Leo
+Let's build another one! Start with the biggest.
 Let's count to 1!
 Let's count to 10!
 Let's count to 2!
@@ -1100,6 +1135,7 @@ Nothing! Wowza bowza!
 Now blow dry it.
 Now comb it.
 Now pick a style.
+Now put something on the other side!
 Now rinse it with water.
 Now tap Rinse to swish!
 Now tap the hose and spray off the bubbles.
@@ -1130,6 +1166,10 @@ Ooh, fancy pattern!
 Ooh, shiny!
 Ooh, so close! One more try!
 Ooh, that's different!
+Oops, that's in the box! Try again.
+Oops, that's next to the box! Try again.
+Oops, that's on the table! Try again.
+Oops, that's under the table! Try again.
 Oopsie noodles!
 Open
 Open wide! Pick the toothbrush and brush the teeth.
@@ -1166,6 +1206,7 @@ Phew! You were so brave. Do you want to read the DANGEROUS book again?
 Pick a crayon. Tap a part to fill it, or color with your finger!
 Pick a frosting color first!
 Pick a leaf and tap it to hop! Follow the beans!
+Pick a ramp and something to roll, then press Go!
 Pick a red apple!
 Pick a yellow banana!
 Pick an orange! It's orange!
@@ -1210,6 +1251,26 @@ Purse! Holy guacamole, I love it!
 Purse! Ooh la la!
 Purse! So stylish!
 Purse! Wowza bowza!
+Put the ball in the box.
+Put the ball next to the box.
+Put the ball on the table.
+Put the ball under the table.
+Put the bear in the box.
+Put the bear next to the box.
+Put the bear on the table.
+Put the bear under the table.
+Put the cat in the box.
+Put the cat next to the box.
+Put the cat on the table.
+Put the cat under the table.
+Put the dog in the box.
+Put the dog next to the box.
+Put the dog on the table.
+Put the dog under the table.
+Put the duck in the box.
+Put the duck next to the box.
+Put the duck on the table.
+Put the duck under the table.
 Put toys away
 Q
 Quack quack!
@@ -1221,6 +1282,7 @@ ROAR! It's a baby Long-Neck! Hello, little dino!
 ROAR! It's a baby T-Rex! Hello, little dino!
 ROAR! It's a baby Triceratops! Hello, little dino!
 Rainbow
+Ramp
 Read it
 Read it to me! Slide my tab along as you read.
 Ready for school! Have a great day!
@@ -1230,6 +1292,7 @@ Red Car
 Remover
 Reset
 Ribbit ribbit!
+Right side is heavier
 Rinse
 Rinse off all the bubbles!
 Roooar!
@@ -1241,6 +1304,7 @@ Rub shampoo all over her hair!
 Russian math
 S
 Sad. A big hug can help.
+Same weight! It balances!
 Sandals
 Sandals! Fashion show time!
 Sandals! Holy guacamole, I love it!
@@ -1251,6 +1315,7 @@ Sandpit
 Save
 Say cheese! Snap snap!
 Say it slowly
+Scale
 Scared. Hold a grown-up's hand.
 School Bus
 Scissors
@@ -1258,6 +1323,7 @@ Scrub scrub! Rub off all the mud.
 Scrub the teeth until they shine.
 Second picture
 See you later, alligator!
+Seed, sprout, flower! That's how a flower grows!
 Serve!
 Set the table
 Shampoo
@@ -1278,6 +1344,8 @@ Shoes on
 Shoes on, ready to go!
 Show me
 Silly! Make a funny face back!
+Sink
+Sink or float? Guess!
 Sit, Mochi! Good girl! Here's your treat!
 Skin color
 Sky
@@ -1440,6 +1508,8 @@ Sunglasses! Ooh la la!
 Sunglasses! So stylish!
 Sunglasses! Wowza bowza!
 Super duper pooper scooper!
+Surprise! It floats!
+Surprise! It sinks!
 Surprised! Tell someone what you saw.
 Sweep sweep! Sparkly floor!
 Sweep the blocks away
@@ -1462,6 +1532,7 @@ Ta-da! She looks beautiful! Holy guacamole!
 Ta-da! You're a superstar!
 Ta-da! Your nails look amazing!
 Take a picture
+Take back
 Take vitamins
 Tap a nail to paint it!
 Tap a sticker to stick it on your picture!
@@ -1470,6 +1541,7 @@ Tap each letter to hear its sound!
 Tap each letter!
 Tap each one.
 Tap each picture when you do it!
+Tap the arrows first to plan my walk!
 Tap the dirt to plant a seed.
 Tap the keys to play! Or pick a song.
 Tap the nail!
@@ -1504,6 +1576,7 @@ The crow hops closer!
 The elves put on their new clothes and danced. Thank you, thank you!
 The first pig built a house of straw.
 The grasshopper played music all day. Come and play! he said.
+The heavy side goes down!
 The kind ant shared her food. Come inside and get warm!
 The lion was free! Little friends can be big helpers.
 The little mouse chewed and chewed the ropes.
@@ -1535,6 +1608,7 @@ Too far! Whoopsie daisy, boing!
 Tortoise kept going, slow and steady.
 Tortoise won the race! Slow and steady wins.
 Towel
+Toy
 Toys all tidy! Snap snap!
 Trace board
 Trace the A with your finger!
@@ -1598,6 +1672,7 @@ What did the wind blow away?
 What do you call a crocodile in a vest? An investi-gator! Hee hee!
 What is this? A box!
 What went POP?
+Wheee!
 Wheels on the Bus
 Which house did the wolf not blow down?
 Which one feels calm?
@@ -1659,10 +1734,12 @@ Who will help me plant it? Not I, said the dog, the cat, and the duck.
 Who won the race?
 Who worked hard all summer?
 Who's silly? You're silly! Snap snap!
+Whoa! That side is heavier!
 Whoop whoop, crocodile scoop!
 Why did the crocodile cross the road? To get to the snack-odile! Hee hee!
 Wiggle wiggle wiggle! That's my happy dance!
 Wiggle wiggle, happy puppy!
+Will it sink to the bottom, or float on top? Guess!
 Win games to find stickers for your picture!
 Wipe away the drips.
 Wipe the table
@@ -1690,6 +1767,26 @@ Yellow
 Yellow frosting,
 Yes yes yes, that's the best!
 Yes! Keep looking!
+Yes! The ball is in the box!
+Yes! The ball is next to the box!
+Yes! The ball is on the table!
+Yes! The ball is under the table!
+Yes! The bear is in the box!
+Yes! The bear is next to the box!
+Yes! The bear is on the table!
+Yes! The bear is under the table!
+Yes! The cat is in the box!
+Yes! The cat is next to the box!
+Yes! The cat is on the table!
+Yes! The cat is under the table!
+Yes! The dog is in the box!
+Yes! The dog is next to the box!
+Yes! The dog is on the table!
+Yes! The dog is under the table!
+Yes! The duck is in the box!
+Yes! The duck is next to the box!
+Yes! The duck is on the table!
+Yes! The duck is under the table!
 Yippee skippy!
 Yo-yo
 You beat the timer! Holy guacamole!
@@ -1711,6 +1808,8 @@ You got 6 beans! Snap snap, you climbed to the clouds!
 You got 7 beans! Snap snap, you climbed to the clouds!
 You got 8 beans! Snap snap, you climbed to the clouds!
 You got 9 beans! Snap snap, you climbed to the clouds!
+You guessed it! It floats!
+You guessed it! It sinks!
 You played Hot Cross Buns! Holy guacamole, what a song!
 You played Itsy Bitsy Spider! Holy guacamole, what a song!
 You played London Bridge! Holy guacamole, what a song!
@@ -1740,6 +1839,7 @@ Your friend has to go home. How would you feel?
 Your garden is all grown! Tap a flower to make it spin.
 Your ice cream fell on the floor!
 Your ice cream fell on the floor! How would you feel?
+Your plan goes here
 Your stickers go here
 Your turn!
 Yum yum, breakfast!
@@ -2111,6 +2211,9 @@ book:Dominican
 book:Down
 book:E is for Elephant!
 book:E!
+book:Egg, caterpillar, cocoon, butterfly! That's how a butterfly grows!
+book:Egg, chick, hen! That's how a chicken grows!
+book:Eggs, tadpole, frog! That's how a frog grows!
 book:Enjoy your meal
 book:Even
 book:Every
@@ -2302,6 +2405,7 @@ book:Sad. A big hug can help.
 book:Santa
 book:Scared. Hold a grown-up's hand.
 book:Scissors
+book:Seed, sprout, flower! That's how a flower grows!
 book:Shampoo
 book:She
 book:She baked the wheat into bread.
@@ -2567,6 +2671,7 @@ book:cat! You read it!
 book:cat! You spelled it!
 book:cat! You wrote it!
 book:catch
+book:caterpillar
 book:chair and bear rhyme!
 book:chair!
 book:chairs
@@ -2581,6 +2686,7 @@ book:chocolate
 book:climbed
 book:clothes
 book:clothes!
+book:cocoon
 book:cold
 book:comes
 book:cookie
@@ -2619,6 +2725,7 @@ book:duck!
 book:duck! You spelled it!
 book:eat
 book:eats
+book:egg
 book:egg!
 book:eggs
 book:eight
@@ -2885,6 +2992,7 @@ book:says
 book:sea
 book:second
 book:see
+book:seed
 book:seven
 book:sewed
 book:share
@@ -2915,6 +3023,7 @@ book:something
 book:soup
 book:sparkly
 book:splash!
+book:sprout
 book:star
 book:star and car rhyme!
 book:star!
@@ -2939,6 +3048,7 @@ book:sun! You read it!
 book:sun! You spelled it!
 book:sun! You wrote it!
 book:sunhat!
+book:tadpole
 book:tall
 book:tell
 book:ten
@@ -3186,6 +3296,9 @@ clock
 clothes
 cloud1
 cloud2
+cocoon
+codeLevel
+coin
 coloring
 coloringInLines
 comb
@@ -3340,6 +3453,7 @@ egg and pig!
 egg and star!
 egg and sun!
 egg and tree!
+eggs
 eh
 elephant
 elf
@@ -3881,6 +3995,7 @@ frog and pig!
 frog and star!
 frog and sun!
 frog and tree!
+frogeggs
 fruit
 g
 gain!
@@ -4000,6 +4115,7 @@ ice cream
 icecream
 ih
 in
+in the box
 in the sky
 in the water
 ing
@@ -4025,6 +4141,7 @@ lamb,
 lamb.
 lamp
 life
+lifeCycleNext
 lightning
 like
 lion
@@ -4084,6 +4201,7 @@ my
 n
 necklace
 nest
+next to the box
 ng
 night
 night sky
@@ -4094,6 +4212,7 @@ ny,
 o
 octopus
 on
+on the table
 oopsie
 orange
 out.
@@ -4175,11 +4294,13 @@ sad
 sancocho
 sandals
 satpinmdgockeurhbfljvwxyz
+scale
 scared
 school
 scissors
 sea
 see
+seed
 sh
 shaker
 shampoo
@@ -4389,6 +4510,7 @@ swing
 sy
 t
 table
+tadpole
 teddy
 tennis
 ter
@@ -4445,6 +4567,7 @@ tʃ
 u
 uh
 umbrella
+under the table
 up
 v
 van
