@@ -29,7 +29,7 @@ for (const file of fs.readdirSync(path.join(__dirname, 'icons'))) {
   images[`Icon-${path.basename(file, '.svg')}`] = [`icons/${file}`, 600];
 }
 // One image per layer: the Dress Up doll and the hair salon customer's face (doll.js writes both), and Spot It's rooms (spot.js).
-for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salon.svg', 800], ['Spot-living', 'spot-living.svg', 1200], ['Spot-bedroom', 'spot-bedroom.svg', 1200], ['Spot-park', 'spot-park.svg', 1200], ['Spot-school', 'spot-school.svg', 1200]]) {
+for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salon.svg', 1400], ['Spot-living', 'spot-living.svg', 1200], ['Spot-bedroom', 'spot-bedroom.svg', 1200], ['Spot-park', 'spot-park.svg', 1200], ['Spot-school', 'spot-school.svg', 1200]]) {
   const svg = fs.readFileSync(path.join(__dirname, file), 'utf8');
   const parts = [...svg.matchAll(/<g id="([\w-]+)" class="part">/g)].map((m) => m[1]);
   for (const part of parts) {
@@ -38,7 +38,8 @@ for (const [prefix, file, width] of [['Doll', 'doll.svg', 1000], ['Salon', 'salo
 }
 // The pictures in the games (Bingo tiles, ABC, stories...) are named Picture-<file name>.
 for (const file of fs.readdirSync(path.join(__dirname, 'pictures'))) {
-  images[`Picture-${path.basename(file, '.svg')}`] = [`pictures/${file}`, 400];
+  // 1200 px: sharp on an iPad, where pictures are shown up to about 600 points wide
+  images[`Picture-${path.basename(file, '.svg')}`] = [`pictures/${file}`, 1200];
 }
 // The Puzzles pictures (Art/puzzles.js writes them) are named Puzzle-<file name>.
 for (const file of fs.readdirSync(path.join(__dirname, 'puzzles'))) {
@@ -46,9 +47,9 @@ for (const file of fs.readdirSync(path.join(__dirname, 'puzzles'))) {
 }
 // Props drawn big on screen (Discover's scale, tank and table) get more pixels, so they stay sharp on an iPad
 for (const prop of ['scale-stand', 'scale-beam', 'scale-pan', 'tub', 'table']) images[`Picture-${prop}`] = [`pictures/${prop}.svg`, 1400];
-images['Picture-crocodile'] = ['coco.svg', 400];
-images['Picture-super-coco'] = ['super-coco.svg', 800];  // Super Coco flies big across her game
-images['Picture-avery'] = ['avery.svg', 400];
+images['Picture-crocodile'] = ['coco.svg', 1200];
+images['Picture-super-coco'] = ['super-coco.svg', 1200];
+images['Picture-avery'] = ['avery.svg', 1200];
 const font = "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');text{font-family:Nunito;font-weight:900}";
 
 (async () => {
