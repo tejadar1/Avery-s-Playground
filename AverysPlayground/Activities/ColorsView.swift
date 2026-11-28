@@ -14,8 +14,62 @@ struct ColoringPage {
         regions.indices.last { regions[$0].contains(point) }
     }
 
-    /// New pages go at the end, so a saved coloring stays on its page.
-    static let all: [ColoringPage] = [garden, farm, beach, reef, night, coco, mochi, cupcakes]
+    /// New pages go at the end, so a saved coloring stays on its page. The drawn ones are line art (ColoringArt.swift).
+    static let all: [ColoringPage] = [garden, farm, beach, reef, night, coco, mochi, cupcakes] + drawn
+
+    /// Reads SVG path data that uses absolute M, L, Q, C and Z (all Art/coloring.py writes), into page units.
+    static func path(svg d: String) -> Path {
+        // Split into commands and numbers: "M10 20 L-5.5 3" -> M, 10, 20, L, -5.5, 3
+        var tokens: [String] = [], number = ""
+        func endNumber() {
+            if !number.isEmpty { tokens.append(number) }
+            number = ""
+        }
+        for ch in d {
+            if ch.isLetter {
+                endNumber()
+                tokens.append(String(ch))
+            } else if ch == " " || ch == "," {
+                endNumber()
+            } else if ch == "-", !number.isEmpty {
+                endNumber()
+                number = "-"
+            } else {
+                number.append(ch)
+            }
+        }
+        endNumber()
+
+        var path = Path(), command = "M", i = 0
+        func point() -> CGPoint {
+            defer { i += 2 }
+            return CGPoint(x: CGFloat(Double(tokens[i]) ?? 0) / 400, y: CGFloat(Double(tokens[i + 1]) ?? 0) / 300)
+        }
+        while i < tokens.count {
+            if tokens[i].first?.isLetter == true {
+                command = tokens[i]
+                i += 1
+                if command == "Z" { path.closeSubpath() }
+                continue
+            }
+            switch command {
+            case "M":
+                path.move(to: point())
+                command = "L"  // more points after a move are lines
+            case "L":
+                path.addLine(to: point())
+            case "Q" where i + 3 < tokens.count:
+                let control = point()
+                path.addQuadCurve(to: point(), control: control)
+            case "C" where i + 5 < tokens.count:
+                let control1 = point(), control2 = point()
+                path.addCurve(to: point(), control1: control1, control2: control2)
+            default:
+                i = tokens.count  // something this reader doesn't know: stop rather than guess
+            }
+        }
+        return path
+    }
 
     /// Coco on a sunny day, holding a balloon.
     static let coco = ColoringPage(
@@ -289,6 +343,40 @@ struct ColoringPage {
     }
 }
 
+extension ColoringPage {
+    /// A line-art page from Art/coloring.py: each part and the detail lines as SVG path data on a 400 × 300 page.
+    /// (In an extension, so the plain initializer the shape-built pages use stays.)
+    init(name: String, svg parts: [String], details: [String] = []) {
+        self.init(name: name, regions: parts.map(Self.path(svg:)), details: details.map(Self.path(svg:)).reduce(Path(), +))
+    }
+}
+
+/// The texture of wax crayon on paper: short diagonal streaks where the crayon skipped over the paper's grain.
+/// Made once, the same every time (a fixed seed), so the color doesn't shimmer as she colors.
+enum Crayon {
+    static let grain: Image = {
+        let side: CGFloat = 96
+        let picture = UIGraphicsImageRenderer(size: CGSize(width: side, height: side)).image { renderer in
+            var seed: UInt64 = 7
+            func random() -> CGFloat {
+                seed = seed &* 6364136223846793005 &+ 1442695040888963407
+                return CGFloat(seed >> 33) / CGFloat(UInt32.max >> 1)
+            }
+            let cg = renderer.cgContext
+            cg.setLineCap(.round)
+            for _ in 0..<260 {
+                let x = random() * side, y = random() * side, length = 1.5 + random() * 4.5
+                cg.setStrokeColor(UIColor(white: 0, alpha: 0.35 + random() * 0.6).cgColor)
+                cg.setLineWidth(0.8 + random() * 0.9)
+                cg.move(to: CGPoint(x: x, y: y))
+                cg.addLine(to: CGPoint(x: x + length * 0.87, y: y - length * 0.5))  // about 30 degrees, like a hand coloring
+                cg.strokePath()
+            }
+        }
+        return Image(uiImage: picture)
+    }()
+}
+
 /// Crayon colored inside one region of a page, in page units.
 struct ColorStroke {
     /// The part it stays inside, or `free` when it can go anywhere.
@@ -331,8 +419,8 @@ struct ColorsView: View {
     private static let eraser = NamedColor(name: "Eraser", color: .white, exampleName: "")
 
     @State private var selected = ColorsView.palette[0]
-    /// Starts on Coco's page, the newest.
-    @State private var pageIndex = ColoringPage.all.firstIndex { $0.name == "Coco" } ?? 0
+    /// Starts on Sprinkle the unicorn, the newest.
+    @State private var pageIndex = ColoringPage.all.firstIndex { $0.name == "Sprinkle" } ?? 0
     @State private var fills = ColoringPage.all.map { Array(repeating: Color.white, count: $0.regions.count) }
     @State private var strokes = ColoringPage.all.map { _ in [ColorStroke]() }
     @State private var current: ColorStroke?
@@ -397,6 +485,7 @@ struct ColorsView: View {
             let size = CGSize(width: width, height: width / ColoringPage.aspect)
             canvas(size: size)
                 .frame(width: size.width, height: size.height)
+                .background(.white)  // the paper that shows through the crayon grain
                 .clipShape(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 18 * uiScale, style: .continuous).strokeBorder(Color.outline, lineWidth: 3 * uiScale))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -471,6 +560,8 @@ struct ColorsView: View {
             // Bold, rounded outlines, like a real coloring book's
             let line = StrokeStyle(lineWidth: size.width * 0.008, lineCap: .round, lineJoin: .round)
             let crayon = StrokeStyle(lineWidth: size.width * 0.035, lineCap: .round, lineJoin: .round)
+            // All the color goes on one layer, so the crayon grain can be rubbed out of it before the outlines go on
+            context.drawLayer { context in
             for (index, region) in page.regions.enumerated() {
                 let shape = region.applying(toView)
                 context.fill(shape, with: .color(fills[pageIndex][index]))
@@ -495,8 +586,21 @@ struct ColorsView: View {
                 path.addLines(mark.points.map { $0.applying(toView) })
                 context.stroke(path, with: .color(mark.color.opacity(0.9)), style: crayon)
             }
-            for region in page.regions {
-                context.stroke(region.applying(toView), with: .color(.outline), style: line)
+            // Crayon grain: little streaks of paper show through the color, like wax crayon on paper
+            context.blendMode = .destinationOut
+            context.fill(Path(CGRect(origin: .zero, size: size)), with: .tiledImage(Crayon.grain))
+            }
+            // Each part's outline, hidden where a part on top of it covers it (the rainbow behind the unicorn, her
+            // legs behind her body), like a real drawing
+            let shapes = page.regions.map { $0.applying(toView) }
+            for (index, shape) in shapes.enumerated() {
+                let box = shape.boundingRect.insetBy(dx: -line.lineWidth, dy: -line.lineWidth)
+                context.drawLayer { layer in
+                    for top in shapes[(index + 1)...] where top.boundingRect.intersects(box) {
+                        layer.clip(to: top, options: .inverse)
+                    }
+                    layer.stroke(shape, with: .color(.outline), style: line)
+                }
             }
             context.stroke(page.details.applying(toView), with: .color(.outline), style: line)
         }

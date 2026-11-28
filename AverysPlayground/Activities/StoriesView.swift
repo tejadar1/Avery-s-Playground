@@ -26,6 +26,23 @@ struct Story: Hashable {
     }
 
     static let all = [
+        // Coco's friends: Sprinkle the unicorn and Bolt the robot (drawn in Art/coloring.py)
+        Story(title: "Coco and Sprinkle the Unicorn", cover: "sprinkle", color: Color(red: 0.71, green: 0.48, blue: 0.88), pages: [
+            Page(pictures: ["crocodile", "rainbow"], text: "One day, Coco saw a rainbow. At the end of the rainbow was a little unicorn!"),
+            Page(pictures: ["sprinkle", "sparkles"], text: "Hi! I am Sprinkle! said the unicorn. Her horn went TWINKLE, TWINKLE!"),
+            Page(pictures: ["sprinkle", "face-sad"], text: "But Sprinkle was sad. I lost my sparkle! she said. Coco said, I will help you!"),
+            Page(pictures: ["crocodile", "star"], text: "They looked high and low. They found a shiny star. Is this your sparkle?"),
+            Page(pictures: ["sprinkle", "heart"], text: "No, said Sprinkle. But when you help me, I feel sparkly inside! WHOOSH! Her horn glowed again."),
+            Page(pictures: ["crocodile", "sprinkle"], text: "Now Coco and Sprinkle are best friends. And friends make everything sparkle!"),
+        ], question: .init(text: "Who did Coco find at the end of the rainbow?", answer: "sprinkle", others: ["bolt", "dog"])),
+        Story(title: "Bolt Builds a Bridge", cover: "bolt", color: Color(red: 0.36, green: 0.66, blue: 0.7), pages: [
+            Page(pictures: ["bolt", "sun"], text: "BEEP BOOP! This is Bolt the robot. Bolt loves to build things."),
+            Page(pictures: ["crocodile", "river"], text: "Coco wanted to cross the river, but there was no bridge. Oh no!"),
+            Page(pictures: ["bolt", "bricks"], text: "Bolt said, I can help! Let us make a plan. First the big blocks, then the long plank."),
+            Page(pictures: ["sticks", "bricks"], text: "CLANK! CLANK! Bolt and Coco built and built."),
+            Page(pictures: ["bolt", "crocodile"], text: "Ta-da! A bridge! Coco walked across. STOMP! STOMP!"),
+            Page(pictures: ["bolt", "heart"], text: "Thank you, Bolt! BEEP BOOP, said Bolt. Building is more fun with a friend!"),
+        ], question: .init(text: "Who loves to build things?", answer: "bolt", others: ["sprinkle", "cat"])),
         // Coco's own superhero, kind and helpful; the loud words zoom.
         Story(title: "Super Coco Saves the Day", cover: "super-coco", color: Color(red: 0.91, green: 0.4, blue: 0.43), pages: [
             Page(pictures: ["super-coco", "sun"], text: "Coco has a secret. When a friend needs help, she puts on her cape and mask. Ta-da! She is SUPER COCO!"),
