@@ -418,6 +418,9 @@ def colored_svg(p, crop=None, with_background=True):
     """The page in color, in the app's style: each part filled, a darker lower tone, a thin outline."""
     x, y, w, h = crop or (0, 0, 400, 300)
     out, n = [], 0
+    if not with_background:
+        # Like Coco: one thick outline round the whole character, then thinner lines inside
+        out += [f'<path d="{d}" fill="{O}" stroke="{O}" stroke-width="10" stroke-linejoin="round"/>' for d, _, _ in p.parts[p.background:]]
     for i, (d, fill, shade) in enumerate(p.parts):
         if not with_background and i < p.background:
             continue
@@ -429,7 +432,7 @@ def colored_svg(p, crop=None, with_background=True):
             xs, ys = nums[0::2], nums[1::2]
             bx, by, bw, bh = min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)
             out.append(f'<g clip-path="url(#k{n})"><ellipse cx="{f(bx + bw / 2)}" cy="{f(by + bh * 1.45)}" rx="{f(bw * 0.9)}" ry="{f(bh * 0.75)}" fill="{shade}"/></g>')
-        out.append(f'<path d="{d}" fill="none" stroke="{O}" stroke-width="3.5" stroke-linejoin="round"/>')
+        out.append(f'<path d="{d}" fill="none" stroke="{O}" stroke-width="{3 if not with_background else 3.5}" stroke-linejoin="round"/>')
     for d, width in p.details:
         out.append(f'<path d="{d}" fill="none" stroke="{O}" stroke-width="{width}" stroke-linecap="round" stroke-linejoin="round"/>')
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x} {y} {w} {h}">\n' + '\n'.join(out) + '\n</svg>\n'
