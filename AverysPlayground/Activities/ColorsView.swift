@@ -19,7 +19,7 @@ struct ColoringPage {
 
     /// Reads SVG path data that uses absolute M, L, Q, C and Z (all Art/coloring.py writes), into page units.
     static func path(svg d: String) -> Path {
-        // Split into commands and numbers: "M10 20 L-5.5 3" -> M, 10, 20, L, -5.5, 3
+        // Split into commands and numbers: M10 20 L-5.5 3 becomes M, 10, 20, L, -5.5, 3
         var tokens: [String] = [], number = ""
         func endNumber() {
             if !number.isEmpty { tokens.append(number) }
