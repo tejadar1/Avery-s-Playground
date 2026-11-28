@@ -157,8 +157,22 @@ struct CodeView: View {
         .padding(.horizontal)
     }
 
-    /// Four big arrows to add, a take-back button, and Go.
+    /// Four big arrows to add, a take-back button, and Go: one row, or two on a phone where they don't fit.
     private var controls: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 10 * uiScale) {
+                arrows
+                actions
+            }
+            VStack(spacing: 10 * uiScale) {
+                arrows
+                actions
+            }
+        }
+        .disabled(running != nil)
+    }
+
+    private var arrows: some View {
         HStack(spacing: 10 * uiScale) {
             ForEach(Code.Step.allCases, id: \.self) { step in
                 Button { add(step) } label: {
@@ -171,6 +185,11 @@ struct CodeView: View {
                 .buttonStyle(SquishyButtonStyle())
                 .accessibilityLabel(step.name)
             }
+        }
+    }
+
+    private var actions: some View {
+        HStack(spacing: 10 * uiScale) {
             Button(action: takeBack) {
                 Image(systemName: "delete.left.fill")
                     .font(.system(size: 24 * uiScale, weight: .bold))
@@ -190,7 +209,6 @@ struct CodeView: View {
             .buttonStyle(SquishyButtonStyle())
             .accessibilityLabel("Go")
         }
-        .disabled(running != nil)
     }
 
     private func add(_ step: Code.Step) {

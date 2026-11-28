@@ -206,56 +206,78 @@ struct RampView: View {
         .onAppear { Speaker.shared.say(cheer) }
     }
 
+    /// The ramp heights, the things to roll, and Go: one row, or two on a phone where they don't fit.
     private var controls: some View {
-        HStack(spacing: 14 * uiScale) {
-            HStack(spacing: 6 * uiScale) {
-                ForEach(Ramp.Height.allCases, id: \.self) { option in
-                    Button {
-                        Haptics.tap()
-                        height = option
-                    } label: {
-                        // A little wedge as tall as the ramp it picks
-                        Path { path in
-                            path.move(to: CGPoint(x: 0, y: 36))
-                            path.addLine(to: CGPoint(x: 0, y: 36 - 30 * option.share * 2))
-                            path.addLine(to: CGPoint(x: 40, y: 36))
-                            path.closeSubpath()
-                        }
-                        .fill(Color(red: 0.8, green: 0.58, blue: 0.38))
-                        .frame(width: 40, height: 36)
-                        .scaleEffect(uiScale)
-                        .frame(width: 58 * uiScale, height: 58 * uiScale)
-                        .cartoonCard(option == height ? Color(red: 1.0, green: 0.85, blue: 0.4) : .white, cornerRadius: 16 * uiScale)
-                    }
-                    .buttonStyle(SquishyButtonStyle())
-                    .accessibilityLabel("\(option) ramp".capitalized)
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 14 * uiScale) {
+                heights
+                things
+                goButton
+            }
+            VStack(spacing: 10 * uiScale) {
+                heights
+                HStack(spacing: 14 * uiScale) {
+                    things
+                    goButton
                 }
             }
-            HStack(spacing: 6 * uiScale) {
-                ForEach(Ramp.Thing.allCases, id: \.self) { option in
-                    Button {
-                        Haptics.tap()
-                        thing = option
-                    } label: {
-                        Picture(option.rawValue, size: 42 * uiScale)
-                            .frame(width: 58 * uiScale, height: 58 * uiScale)
-                            .cartoonCard(option == thing ? Color(red: 1.0, green: 0.85, blue: 0.4) : .white, cornerRadius: 16 * uiScale)
-                    }
-                    .buttonStyle(SquishyButtonStyle())
-                    .accessibilityLabel(option.rawValue.capitalized)
-                }
-            }
-            Button(action: go) {
-                Text("Go!")
-                    .font(.kid(26))
-                    .foregroundStyle(.white)
-                    .frame(width: 84 * uiScale, height: 58 * uiScale)
-                    .cartoonCard(Color(red: 0.38, green: 0.72, blue: 0.4), cornerRadius: 18 * uiScale)
-            }
-            .buttonStyle(SquishyButtonStyle())
-            .accessibilityLabel("Go")
         }
         .padding(.horizontal)
+    }
+
+    private var heights: some View {
+        HStack(spacing: 6 * uiScale) {
+            ForEach(Ramp.Height.allCases, id: \.self) { option in
+                Button {
+                    Haptics.tap()
+                    height = option
+                } label: {
+                    // A little wedge as tall as the ramp it picks
+                    Path { path in
+                        path.move(to: CGPoint(x: 0, y: 36))
+                        path.addLine(to: CGPoint(x: 0, y: 36 - 30 * option.share * 2))
+                        path.addLine(to: CGPoint(x: 40, y: 36))
+                        path.closeSubpath()
+                    }
+                    .fill(Color(red: 0.8, green: 0.58, blue: 0.38))
+                    .frame(width: 40, height: 36)
+                    .scaleEffect(uiScale)
+                    .frame(width: 58 * uiScale, height: 58 * uiScale)
+                    .cartoonCard(option == height ? Color(red: 1.0, green: 0.85, blue: 0.4) : .white, cornerRadius: 16 * uiScale)
+                }
+                .buttonStyle(SquishyButtonStyle())
+                .accessibilityLabel("\(option) ramp".capitalized)
+            }
+        }
+    }
+
+    private var things: some View {
+        HStack(spacing: 6 * uiScale) {
+            ForEach(Ramp.Thing.allCases, id: \.self) { option in
+                Button {
+                    Haptics.tap()
+                    thing = option
+                } label: {
+                    Picture(option.rawValue, size: 42 * uiScale)
+                        .frame(width: 58 * uiScale, height: 58 * uiScale)
+                        .cartoonCard(option == thing ? Color(red: 1.0, green: 0.85, blue: 0.4) : .white, cornerRadius: 16 * uiScale)
+                }
+                .buttonStyle(SquishyButtonStyle())
+                .accessibilityLabel(option.rawValue.capitalized)
+            }
+        }
+    }
+
+    private var goButton: some View {
+        Button(action: go) {
+            Text("Go!")
+                .font(.kid(26))
+                .foregroundStyle(.white)
+                .frame(width: 84 * uiScale, height: 58 * uiScale)
+                .cartoonCard(Color(red: 0.38, green: 0.72, blue: 0.4), cornerRadius: 18 * uiScale)
+        }
+        .buttonStyle(SquishyButtonStyle())
+        .accessibilityLabel("Go")
     }
 
     private func go() {

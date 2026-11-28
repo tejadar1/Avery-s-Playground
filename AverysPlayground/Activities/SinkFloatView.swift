@@ -31,36 +31,40 @@ struct SinkFloatView: View {
     var body: some View {
         VStack(spacing: 12 * uiScale) {
             CocoSays(text: cheer, hops: cheerCount, cheers: wins)
-            GeometryReader { geo in
-                // The tank (Art/pictures/tub.svg, 200 × 170) sits at the bottom, with room above to hold the next thing.
-                // In it, the water starts 66/170 down and things rest on the sand at 146/170.
-                let tubW = min(geo.size.width * 0.95, (geo.size.height * 0.78) * 200 / 170), tubH = tubW * 170 / 200
-                let left = (geo.size.width - tubW) / 2, top = geo.size.height - tubH
-                let water = top + tubH * 66 / 170, sand = top + tubH * 146 / 170, item = tubW * 0.22
-                ZStack(alignment: .topLeading) {
-                    Image("Picture-tub").resizable().scaledToFit()
-                        .frame(width: tubW, height: tubH)
-                        .position(x: left + tubW / 2, y: top + tubH / 2)
-                        .accessibilityHidden(true)
-                    // Things tried already: floaters bob at the top, sinkers rest on the bottom
-                    ForEach(Array(inTub.enumerated()), id: \.offset) { index, thing in
-                        Picture(thing.picture, size: item * 0.75)
-                            .position(x: left + tubW * (0.17 + CGFloat(index % 6) * 0.133),
-                                      y: thing.floats ? water + item * 0.05 : sand - item * 0.3)
-                    }
-                    if let current {
-                        let landed = dropping ? (current.floats ? water + item * 0.05 : sand - item * 0.4) : item * 0.6
-                        Picture(current.picture, size: item)
-                            .position(x: geo.size.width / 2, y: landed)
-                            .id(inTub.count)  // a fresh one appears up top, instead of sliding up from the tub
-                            .animation(current.floats ? .spring(response: 0.6, dampingFraction: 0.35) : .easeIn(duration: 1.1), value: dropping)
-                        Burst(trigger: splashes, symbol: "drop.fill", color: Color(red: 0.4, green: 0.7, blue: 0.95), count: 8, distance: item * 0.8)
-                            .position(x: geo.size.width / 2, y: water)
+            // The tank, with the guesses under it, or beside it on a wide screen so the tank gets the full height
+            SceneWithTools {
+                GeometryReader { geo in
+                    // The tank (Art/pictures/tub.svg, 200 × 170) sits at the bottom, with room above to hold the next thing.
+                    // In it, the water starts 66/170 down and things rest on the sand at 146/170.
+                    let tubW = min(geo.size.width * 0.95, (geo.size.height * 0.78) * 200 / 170), tubH = tubW * 170 / 200
+                    let left = (geo.size.width - tubW) / 2, top = geo.size.height - tubH
+                    let water = top + tubH * 66 / 170, sand = top + tubH * 146 / 170, item = tubW * 0.22
+                    ZStack(alignment: .topLeading) {
+                        Image("Picture-tub").resizable().scaledToFit()
+                            .frame(width: tubW, height: tubH)
+                            .position(x: left + tubW / 2, y: top + tubH / 2)
+                            .accessibilityHidden(true)
+                        // Things tried already: floaters bob at the top, sinkers rest on the bottom
+                        ForEach(Array(inTub.enumerated()), id: \.offset) { index, thing in
+                            Picture(thing.picture, size: item * 0.75)
+                                .position(x: left + tubW * (0.17 + CGFloat(index % 6) * 0.133),
+                                          y: thing.floats ? water + item * 0.05 : sand - item * 0.3)
+                        }
+                        if let current {
+                            let landed = dropping ? (current.floats ? water + item * 0.05 : sand - item * 0.4) : item * 0.6
+                            Picture(current.picture, size: item)
+                                .position(x: geo.size.width / 2, y: landed)
+                                .id(inTub.count)  // a fresh one appears up top, instead of sliding up from the tub
+                                .animation(current.floats ? .spring(response: 0.6, dampingFraction: 0.35) : .easeIn(duration: 1.1), value: dropping)
+                            Burst(trigger: splashes, symbol: "drop.fill", color: Color(red: 0.4, green: 0.7, blue: 0.95), count: 8, distance: item * 0.8)
+                                .position(x: geo.size.width / 2, y: water)
+                        }
                     }
                 }
+                .padding(.horizontal)
+            } tools: {
+                guesses.padding(.vertical, 8 * uiScale)
             }
-            .padding(.horizontal)
-            guesses
         }
         .padding(.bottom)
         .background(Scenery(.outdoors).ignoresSafeArea())
@@ -73,7 +77,7 @@ struct SinkFloatView: View {
 
     /// The two guesses, as big picture buttons.
     private var guesses: some View {
-        HStack(spacing: 20 * uiScale) {
+        ToolLine(spacing: 20 * uiScale) {
             guessButton("Sink", picture: "stone", color: Color(red: 0.55, green: 0.5, blue: 0.75), floats: false)
             guessButton("Float", picture: "boat", color: Color(red: 0.36, green: 0.66, blue: 0.88), floats: true)
         }

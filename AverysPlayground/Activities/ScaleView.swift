@@ -41,10 +41,15 @@ struct ScaleView: View {
             CocoSays(text: cheer, hops: cheerCount)
             GeometryReader { geo in
                 // The scale fills the room above the shelf of things to weigh
-                let shelf = 100 * uiScale, size = max(0, min(geo.size.width, geo.size.height - shelf))
+                // The shelf goes under the scale: six across on an upright iPad, two rows of three on a phone. On an
+                // iPad held sideways it stands beside the scale in two columns, so the scale can use the full height.
+                let across = isWide ? 2 : geo.size.width >= 6 * 80 * uiScale ? 6 : 3
+                let shelfW = isWide ? (2 * 68 + 10 + 20) * uiScale : 0, shelfH = isWide ? 0 : (across == 6 ? 100 : 170) * uiScale
+                let size = max(0, min(geo.size.width - shelfW, geo.size.height - shelfH))
+                let middle = CGPoint(x: (geo.size.width - shelfW) / 2, y: (geo.size.height - shelfH) / 2)
                 ZStack {
                     scale(size: size)
-                        .position(x: geo.size.width / 2, y: (geo.size.height - shelf) / 2)
+                        .position(middle)
                     if let dragging {
                         Picture(dragging.thing.picture, size: size * 0.16)
                             .scaleEffect(1.15)
@@ -54,7 +59,7 @@ struct ScaleView: View {
                     }
                 }
                 .coordinateSpace(.named("scale"))
-                .overlay(alignment: .bottom) { shelfRow(size: size, width: geo.size.width) }
+                .overlay(alignment: isWide ? .trailing : .bottom) { shelfRow(across: across, middle: middle.x) }
             }
             .padding(.horizontal)
         }
@@ -113,8 +118,9 @@ struct ScaleView: View {
     }
 
     /// Things to weigh, dragged up onto a pan.
-    private func shelfRow(size: CGFloat, width: CGFloat) -> some View {
-        HStack(spacing: 10 * uiScale) {
+    /// Things to weigh: let go left of the scale's middle and it goes on the left pan.
+    private func shelfRow(across: Int, middle: CGFloat) -> some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.fixed(68 * uiScale), spacing: 10 * uiScale), count: across), spacing: 10 * uiScale) {
             ForEach(shelf, id: \.self) { thing in
                 Picture(thing.picture, size: 56 * uiScale)
                     .padding(6 * uiScale)
@@ -125,7 +131,7 @@ struct ScaleView: View {
                                 if dragging == nil { Haptics.tap() }
                                 dragging = (thing, drag.location)
                             }
-                            .onEnded { drag in drop(thing, onLeft: drag.location.x < width / 2) }
+                            .onEnded { drag in drop(thing, onLeft: drag.location.x < middle) }
                     )
                     .accessibilityLabel(thing.picture)
                     .accessibilityAddTraits(.isButton)
